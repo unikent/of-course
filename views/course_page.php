@@ -41,9 +41,6 @@
 					<kentPageContent>
 						<!-- InstanceBeginEditable name="content" -->
 						<h1><?php echo $course->programme_title_1; ?> <?php echo $course->award_3; ?> - <?php echo $course->year; ?>	</h1>
-						<h3><?php echo $course->programme_overview_text_21; ?></h3>
-
-
 				
 						<div class="snippetBox">
 						  <div class="tabs">
@@ -77,31 +74,26 @@
 						          <div class="calloutContent">
 						            <h2>Key facts</h2>
 						            <ul>
-						              <li><strong> Subject area:</strong> Business and Accounting, Economics</li>
-						              <li><strong>Award:</strong> BA (Hons) </li>
-						              <li><strong>Honours type:</strong> Joint</li>
-						              <li><strong>Ucas code:</strong> N400 </li>
-						              <li><strong>Location:</strong> Canterbury </li>
+						              <li><strong> Subject area:</strong> <?php echo $course->subject_area_1_8;?></li>
+						              <li><strong>Award:</strong> <?php echo $course->award_3;?> </li>
+						              <li><strong>Honours type:</strong> <?php echo $course->honours_type_5;?> </li>
+						              <li><strong>Ucas code:</strong> <?php echo $course->ucas_code_10;?>  </li>
+						              <li><strong>Location:</strong> <?php echo $course->location_11;?>  </li>
 						              <li><strong>Mode of study:</strong> <br>
-					                    Full-time: <img src="file:///H|/applicants/images/schools/blue_tick (2).GIF" alt="tick" width="15" height="11"><br>
-					                    Part-time: <img src="file:///H|/applicants/images/schools/blue_tick (2).GIF" alt="yes" width="15" height="11"></li>
-						              <li>						                <strong>Duration:</strong> <br>
-				                        3 years full-time,<br>
-				                      6 years part-time</li>
-						              <li><strong>Start: </strong>29 September 2014 </li>
-						              <li><strong>Accredited by</strong>:   Institute of Chartered Accountants, Association of Chartered Certified Accountants.</li>
-						              <li><strong>Total Kent credits:</strong> 360</li>
-						              <li><strong>Total ECTS credits</strong>:180</li>
+					                  
+					                  	<?php echo $course->mode_of_study_12;?> 
+					                  </li>
+						              <li><strong>Duration:</strong> <br><?php echo $course->duration_15;?></li>
+						              <li><strong>Start: </strong> <?php echo $course->start_91;?> </li>
+						              <li><strong>Accredited by</strong>: <?php echo $course->accredited_by_16;?>  </li>
+						              <li><strong>Total Kent credits:</strong> <?php echo $course->total_kent_credits_awarded_on_completion_18;?></li>
+						              <li><strong>Total ECTS credits:</strong> <?php echo $course->total_ects_credits_awarded_on_completion_19;?></li>
 					                </ul>
 						          </div>
 					            </kentSnippetCallout>
 					          </div>
 								<h2>Overview</h2>
-								<h4><?php echo $course->programme_title_1; ?></h4>
-						      <p><?php echo $course->programme_abstract_20 ?></p>
-						      
-						      <h4>Why this degree?</h4>
-						      <p>We have designed our Accounting and Finance degrees to ensure that they respond to the needs and expectations of the modern accountancy profession. Taking this course jointly with Economics will enable you to develop a greater understanding of the economic environment in which accountants operate. Our supportive and flexible approach to teaching gives you the confidence and skills you need to follow the path that most interests you. </p>
+						      	<p><?php echo $course->programme_overview_text_21; ?></p>
 						      <p>&nbsp;</p>
 					        <a class="toTop" href="#topOfPage">back to top</a></div>
 						    <div class="tabContent" id="tab2">
@@ -119,9 +111,9 @@
 		</ul> 
         <div class="tabContent" id="tab6">
           <h3>Foundation year</h3>
-          <p>[This tab will only output if the course has a foundation year]</p>
-          <p>This course is for students who lack the qualifications needed for   direct entry onto Stage 1 of the degree programmes. The foundation year   is taught entirely on the Canterbury campus and caters for students with   a wide range of backgrounds and experience. Successful completion of   the foundation year guarantees entry onto any of the School's physics or   astronomy degree courses.</p>
-          <p>Find out more about the <a href="http://www.google.co.uk">benefits of a Foundation Year</a>. </p>
+
+          <p><?php echo $course->foundation_year_22; ?></p>
+
           <a class="toTop" href="#topOfPage">back to top</a> </div>
 <div class="tabContent" id="tab1">  
   <h3>Stage 1</h3>
@@ -696,8 +688,7 @@ style="overflow: hidden; border: 0px none transparent; width: 190px; height: 500
                             </div>
 						  </div>
 					    </div>
-						<h6>Disclaimer</h6>
-						<h6>The information on this page was incorrect when we made it up. Some of the information is based on nonsense from the programme pages. Please see another page for our full disclaimer.</h6>
+						
 						<!-- InstanceEndEditable -->					</kentPageContent>
 				</kentPageBodyRight>
 			</kentPageBody>
