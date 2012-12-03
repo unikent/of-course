@@ -20,7 +20,9 @@ $main = new CoursesFrontEnd();
 
 //define routes
 Flight::route('/@type/@year/', array($main,'list_programmes'));
-Flight::route('/@type/@year/@id/*', array($main,'view'));
+
+Flight::route('/@type/@year/@id', array($main,'view'));
+Flight::route('/@type/@year/@id/@slug', array($main,'view'));
 
 //run FLIGHT
 Flight::start();

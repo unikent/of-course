@@ -8,9 +8,10 @@ class CoursesFrontEnd {
 	 * @param string Type UG|PG
 	 * @param yyyy Year to show
 	 * @param int Id of programme
+	 * @param string Slug - programme name
 	 */
-	public function view($type, $year, $id){
-
+	public function view($type, $year, $id, $slug = ''){
+		
 		//Use webservices to get course data
 		$course_json = Cache::load(XCRI_WEBSERVICE.$year.'/'.$type.'/programme/'.$id, 5);//5 minute cache
 		$course = json_decode($course_json);
@@ -19,6 +20,12 @@ class CoursesFrontEnd {
 		if(isset($course->error)){
 			return Flight::render('missing_course.php');
 		}
+
+		if($course->slug_2 != $slug){
+			return Flight::redirect($type.'/'.$year.'/'.$id.'/'.$course->slug_2);
+		}
+
+
 		//debug option
 		if(isset($_GET['showdata'])){ print_r($course );die(); }
 		
