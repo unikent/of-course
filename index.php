@@ -10,13 +10,19 @@ require 'main/main.php';
 //Load Pantheon
 require PANTHEON_ENGINE . '/template.loader.php';
 
+//Hook pantheon to render method
+Flight::after("render", function(){
+	require PANTHEON_ENGINE . '/run.php';
+});
+
+//Setup main object
 $main = new CoursesFrontEnd();
 
+//define routes
 Flight::route('/@type/@year/', array($main,'list_programmes'));
 Flight::route('/@type/@year/@id/*', array($main,'view'));
 
+//run FLIGHT
 Flight::start();
 
-//Post proccess Results
-require PANTHEON_ENGINE . '/run.php';
 ?>
