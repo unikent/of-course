@@ -1,3 +1,3 @@
-# Of-Course
+# Of Course!
 
-A flight based frontend appliction for the Programmes_plant.
+A [Flight](http://flightphp.com/) based front-end application for the data produced by the [Programmes Plant](http://github.com/unikent/).
