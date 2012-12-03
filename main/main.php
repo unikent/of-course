@@ -16,19 +16,19 @@ class CoursesFrontEnd {
 		$course_json = Cache::load(XCRI_WEBSERVICE.$year.'/'.$type.'/programme/'.$id, 5);//5 minute cache
 		$course = json_decode($course_json);
 
+		//debug option
+		if(isset($_GET['showdata'])){ print_r($course );die(); }
+
 		//Check for errors
 		if(isset($course->error)){
 			return Flight::render('missing_course.php');
 		}
 
+		//auto correct wrong routes (ie slug is incorrect)
 		if($course->slug_2 != $slug){
 			return Flight::redirect($type.'/'.$year.'/'.$id.'/'.$course->slug_2);
 		}
 
-
-		//debug option
-		if(isset($_GET['showdata'])){ print_r($course );die(); }
-		
 		//Render full page
 		Flight::render('course_page.php', array('course'=>$course));
 		

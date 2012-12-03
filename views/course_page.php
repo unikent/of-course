@@ -403,15 +403,13 @@
 			<a class="toTop" href="#topOfPage">back to top</a>		</div>  
         <div class="tabContent" id="tab4">  
 			<h3>Year abroad</h3>
-			<p>[This tab will only output if the course has a year abroad]</p>
-			<p>You spend a year between Stages 2 and 3 taking courses in anthropology at a university in France, Germany, Italy or Spain (where the courses are taught in the language of that country); or the Netherlands, Japan, Finland or Denmark (where the courses are taught in English). </p>
-            <p>Please see the <a href="/goabroad/">Go abroad </a>webpages for further details.</p>  
+			
+
+			<p><?php echo $course->year_abroad_24; ?></p>
 			<a class="toTop" href="#topOfPage">back to top</a>		</div>
         <div class="tabContent" id="tab5">  
 			<h3>Year in industry</h3>
-			<p>[This tab will only output if the course has a year in industry]</p>
-			<p>Students on the Year in Industry spend a year working between Stages 2 and 3 – we have a Placement Officer who can give advice and guidance. Industrial placements provide very valuable practical experience which combines well with academic study and enhances the employment prospects of graduates.</p>
-            <p>Find out more about the <a href="http://www.kent.ac.uk/courses/undergrad/how/industry.html">benefits of a Year in Industry</a>. </p>  
+			<p><?php echo $course->year_in_industry_23; ?>..</p>
 			<a class="toTop" href="#topOfPage">back to top</a>		</div>
 	</div>
 </div>
@@ -421,31 +419,8 @@
 <p><a class="toTop" href="#topOfPage">back to top</a></div>
 						    <div class="tabContent" id="tab3">
 						      <h2>Teaching and assessment</h2>
-						
-						      <h4>Your Accounting and Finance modules</h4>
-						      <p>Some modules have a number of workshops or sessions in computer laboratories. Most of your modules involve individual study using Library resources. Most modules have an end-of-year examination that contributes either 70% or 80% to the final module mark: your coursework provides the remaining marks. Both Stage 2 and 3 marks count towards your final degree class.</p>
-						      <h4>Your Economics modules </h4>
-						      <p>All Economics modules are taught by a combination of lectures and small group sessions, which include seminars, computing practicals, problem sets, debates and role-play games. We put great emphasis on the development of transferable skills, including numeracy, analytical problem solving, data analysis, and written and oral communication, as well as subject-specific skills for further study at postgraduate level. The modules are assessed by continuous assessment of coursework throughout the year and an end-of-year exam in the final term. A number of modules at each stage are assessed solely through coursework.</p>
-						      <h2>Programme aims</h2>
-						      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet   purus est, eget dapibus mauris. Nam venenatis mattis quam eu lobortis.   Phasellus tincidunt leo in metus porttitor at sodales ipsum malesuada.   Phasellus nibh ligula, pulvinar eu vehicula et, malesuada id arcu. In   hac habitasse platea dictumst.</p>
-						      <ul>
-						        <li>Sed vestibulum, libero non facilisis blandit, neque augue tincidunt nunc. </li>
-						        <li>Sed vestibulum, libero non facilisis blandit, neque augue tincidunt nunc. </li>
-                                  <li>Sed vestibulum, libero non facilisis blandit, neque augue tincidunt nunc. </li>
-						        <li>Sed vestibulum, libero non facilisis blandit, neque augue tincidunt nunc. </li>
-                                  <li>Sed vestibulum, libero non facilisis blandit, neque augue tincidunt nunc. </li>
-						        <li>Sed vestibulum, libero non facilisis blandit, neque augue tincidunt nunc. </li>
-					          </ul>
-<h2>Learning outcomes</h2>
-						      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet   purus est, eget dapibus mauris. Nam venenatis mattis quam eu lobortis.   Phasellus tincidunt leo in metus porttitor at sodales ipsum malesuada.   Phasellus nibh ligula, pulvinar eu vehicula et, malesuada id arcu. In   hac habitasse platea dictumst.</p>
-                               <ul>
-						        <li>Sed vestibulum, libero non facilisis blandit, neque augue tincidunt nunc. </li>
-						        <li>Sed vestibulum, libero non facilisis blandit, neque augue tincidunt nunc. </li>
-                                  <li>Sed vestibulum, libero non facilisis blandit, neque augue tincidunt nunc. </li>
-						        <li>Sed vestibulum, libero non facilisis blandit, neque augue tincidunt nunc. </li>
-                                  <li>Sed vestibulum, libero non facilisis blandit, neque augue tincidunt nunc. </li>
-						        <li>Sed vestibulum, libero non facilisis blandit, neque augue tincidunt nunc. </li>
-					          </ul>
+								<p><?php echo $course->teaching_and_assessment_25; ?></p>
+						      	
                                <p>For more about the programme see the <a href="http://www.google.co.uk">full programme specification</a>. [TBC whether this link will be outputted and whether it would be placed here]</p>
 <p> <a class="toTop" href="#topOfPage">back to top</a></p>
 						    </div>
@@ -470,22 +445,24 @@
                                   </table>
                                   <div class="calloutContent"> 
                                     <h4>Did you know...</h4>
-                                    <p>Accounting and Finance at Kent was ranked 11th in the UK for overall student satisfaction in the National Student Survey 2011. </p>
+                                    <p>?? Accounting and Finance at Kent was ranked 11th in the UK for overall student satisfaction in the National Student Survey 2011. </p>
                                   </div>
                                 </kentSnippetCallout>
                               </div>
-						      <p>We equip you with the skills you need to build a successful career. Throughout your studies, you acquire communication skills, the ability to work in a team and independently, and the ability to express your options passionately and persuasively. The range of modules available on this programme gives you the opportunity to tailor your degree to support your particular career choice, giving you a competitive edge in he employment market. We also give you the opportunity to gain valuable work experience as part of your degree. Employers who have recruited graduates on Kent's Accounting and Finance and Economics programmes include KMPG, Ernst and Young, PricewaterhouseCoopers and the Financial Services Authority.						      </p>
+                              <p><?php echo $course->careers_overview_28; ?></p>
+
 						      <h4>Professional recognition</h4>
-						  
-						      <p>Full or partial exemption from the preliminary stage of professional accountancy examinations provided you choose the appropriate modules.</p>
+						  	 <p><?php echo $course->professional_recognition_29; ?></p>
 						     
 						      <p>For more information on the services Kent provides you to improve your career prospects visit <a href="http://www.kent.ac.uk/employability.">www.kent.ac.uk/employability.</a></p>
 					        <a class="toTop" href="#topOfPage">back to top</a></div>
                             <div class="tabContent" id="tab3">
 						      <h2>Entry requirements</h2>
-						      <p>[THE TEXT IN THE ENTRY PROFILE FIELD WILL OUTPUT HERE] Curabitur sit amet tellus leo, sit amet tincidunt augue. Curabitur   pretium, nisi et faucibus lobortis, odio odio lacinia odio, ac vulputate   lacus lectus ac lorem. Curabitur venenatis aliquam scelerisque. Donec   facilisis, massa id condimentum ultrices, tellus neque ullamcorper   tellus, quis tincidunt dui odio ac risus.</p>
+						      <p><?php echo $course->entry_requirements_overriding_text_44;?></p>
 						      <h3>Home/EU students </h3>
-						      <p>The University will consider applications from students offering a wide range of qualifications, typical requirements are listed below, students offering alternative qualifications should contact the Admissions Office for further advice. It is not possible to offer places to all students who meet this typical offer/minimum requirement.</p>
+						      <p><?php echo $course->homeeu_students_intro_text_31;?></p>
+
+
 						      <kentSnippetTable alternate="rows" snippetPack='Default' snippetVersion='1.0'>
 						        <table class="em">
 						          <tr>
@@ -546,37 +523,19 @@
 					        <a class="toTop" href="#topOfPage">back to top</a></div>
                             <div class="tabContent" id="tab4">
                               <h2>Fees and funding</h2>
-                      
+                      			
                               <h3>Tuition fees</h3>
-                              <p>The 2014 tuition fees have not yet been set. As a guide only the 2013 tuition fees are:</p>
-                              <ul>
-                                <li>UK/EU: £9,000 full-time; £4,500 part-time. </li>
-                                <li>International: £11,625 full-time, £5825 part-time. </li>
-                              </ul>
-                              <p>Exceptions may apply. See our <a href="/courses/funding/undergrad/">fees and funding</a> section for more information. </p>
+
+                              <p><?php echo $course->fees_content_3;?></p>
+
                               <h3>Funding </h3>
-                              <p>Kent offers generous financial support schemes to support eligible undergraduate students during their studies. Our 2013 financial support package includes a fee waiver and cash bursary, as well as additional funds on your Kent account to help with accommodation, food, books and other living costs. Find out more on our <a href="/courses/funding/undergraduate/fees/2013/index.html">fees and funding</a> page. </p>
-                              <h3>General scholarships</h3>
-                              <p>Scholarships are available for excellence in academic performance, sport and music and are awarded on merit. For further information on the range of awards available and to make an application see our <a href="/scholarships/">scholarships</a> website. </p>
-                              <h3>The Kent Scholarship for Academic Excellence</h3>
-                              <p>At Kent we recognise, encourage and reward excellence. We have created a new scholarship, The Kent Scholarship for Academic Excellence, which will be awarded to any applicant who achieves a minimum of AAA over three A levels, or the equivalent qualifications as specified on our <a href="/courses/funding/undergraduate/fees/2013/index.html">funding pages</a>. </p>
+
+                              <p><?php echo $course->funding_92;?></p>
+
                               <a class="toTop" href="#topOfPage">back to top</a></div>
 <div class="tabContent" id="tab3">
 <h2>How to apply</h2>
-
-<h3>Full-time applicants</h3>
-<p>Full-time applicants (including international applicants) should apply through the <a href="http://www.ucas.co.uk/students/apply/">Universities and Colleges Admissions Service (UCAS)</a> system. If you need help or advice on your application, you should speak with your careers advisor or call the UCAS Customer Service Unit on [check number] Mon-Fri 8.30am-6.00pm UK time. International applicants can  contact UCAS on [check number].</p>
-<p>The institution code number of the University of Kent is K24, and the code name is KENT. If you are applying for courses based at Medway, you should add the campus code K in Section 3(d). </p>
-<p>You can also write to UCAS at:</p>
-						      <p>UCAS Customer Service Unit, <br>
-PO Box 28,<br>
-Cheltenham<br>
-GL52 3LZ		      </p>
-						      <p>Find out more about applying to university in our '<a href="/courses/undergrad/apply/index.html">How to apply</a>' section. </p>
-						      <h3>Part-time applicants </h3>
-						      <p>Part-time students should apply directly to the University. There is no fixed closing date, but you should apply for your programme as early a possible. You can <a href="https://adm.kent.ac.uk/external/admissions/pt_application.php">apply online</a>. </p>
-						      <p>If you need more advice on making an application or choosing your programme, please contact the Recruitment and Admissions Office: T: 01227 827272 Freephone (UK only): 0800 975 3777 E: <a href="mailto:information@kent.ac.uk">information@kent.ac.uk</a></p>
-    
+<p><?php echo $course->how_to_apply_93;?>
 			            <a class="toTop" href="#topOfPage">back to top</a></div>
                             <div class="tabContent" id="tab3">
                               <h2>Further information</h2>
@@ -674,7 +633,7 @@ style="overflow: hidden; border: 0px none transparent; width: 190px; height: 500
                                       <div class="calloutContent">
                                         <h2>UNISTATS / KIS</h2>
                                         <h4>Key Information Sets</h4>
-                                        <p>The Key Information Set data [above] is compiled by UNISTATS. Some of the data is based on the most popular modules on the programme totalling 120 credits. Therefore there may be some variation between what the widget above says and what we say on this page. If you have any queries about this please contact XXXXX. </p>
+                                        <p><?php echo $course->kis_explanatory_text_95?></p>
                                       </div>
                                     </kentSnippetCallout>
                                   </div>
