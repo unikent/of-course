@@ -1,5 +1,8 @@
 <?php
 
+
+
+
 class CoursesFrontEnd {
 
 	public function view($type, $year, $id){
@@ -7,10 +10,12 @@ class CoursesFrontEnd {
 		//echo XCRI_WEBSERVICE.$year.'/'.$type.'/programme/'.$id;
 
 		$course_json = Cache::load(XCRI_WEBSERVICE.$year.'/'.$type.'/programme/'.$id, 5);//5 minute cache
+		$course = json_decode($course_json);
 
-
-	 	echo $course_json ;
-		die();
+		if(isset($_GET['data'])){ print_r($course );die(); }
+	
+		Flight::render('course_page.php',array('course'=>$course));
+		
 	}
 
 	public function list_programmes($type, $year){
