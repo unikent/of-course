@@ -41,7 +41,7 @@
 					<kentPageContent>
 						<!-- InstanceBeginEditable name="content" -->
 						<h1><?php echo $course->programme_title_1; ?> <?php echo $course->award_3; ?> - <?php echo $course->year; ?>	</h1>
-				
+					<p><?php echo  $course->programme_abstract_20; ?></p>
 						<div class="snippetBox">
 						  <div class="tabs">
 						    <ul class="tabsFallBackNav">
