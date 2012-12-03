@@ -1,7 +1,6 @@
-# Of-Course
+# Of Course!
 
-A flight based front-end application for the Programmes-plant. 
-This system is driven directly by the XCRI JSON webservices.
+A [Flight](http://flightphp.com/) based front-end application for the data produced by the [Programmes Plant](http://github.com/unikent/).
 
 ### Quick deploy.
 
