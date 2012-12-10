@@ -16,13 +16,13 @@ Flight::after("render", function(){
 //Setup main object
 $main = new CoursesFrontEnd();
 
-//define routes
+// Define routes
 Flight::route('/@type/@year/', array($main,'list_programmes'));
 
 Flight::route('/@type/@year/@id', array($main,'view'));
 Flight::route('/@type/@year/@id/@slug', array($main,'view'));
 
-//run FLIGHT
+// Run Flight!
 Flight::start();
 
 ?>
