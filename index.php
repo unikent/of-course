@@ -8,12 +8,19 @@ require dirname(__FILE__) . '/vendor/autoload.php';
 require dirname(__FILE__) . '/config/paths.php';
 require dirname(__FILE__) . '/main/main.php';
 
-//Hook pantheon to render method
-Flight::after("render", function(){
-	require PANTHEON_ENGINE . '/run.php';
-});
+// Load Pantheon
+if (defined(TEMPLATING_ENGINE))
+{
+	require TEMPLATING_ENGINE . '/template.loader.php';
 
-//Setup main object
+	//Hook pantheon to render method
+	Flight::after("render", function(){
+		require TEMPLATING_ENGINE . '/run.php';
+
+	});
+}
+
+// Setup main object
 $main = new CoursesFrontEnd();
 
 // Define routes
