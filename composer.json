@@ -1,9 +1,11 @@
 {
     "require": {
+    	"unikent/programmes-plant-api-php": "dev-master",
         "mikecao/flight": "dev-master"
     },
     
     "config": {
         "bin-dir": "bin/"
-    }
+    },
+    "minimum-stability": "dev"
 }
