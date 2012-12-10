@@ -2,13 +2,11 @@
 
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
-//Load flight
-require 'flight/Flight.php';
-require 'config/paths.php';
-require 'main/main.php';
+// Load Composer
+require dirname(__FILE__) . '/vendor/autoload.php';
 
-//Load Pantheon
-require PANTHEON_ENGINE . '/template.loader.php';
+require dirname(__FILE__) . '/config/paths.php';
+require dirname(__FILE__) . '/main/main.php';
 
 //Hook pantheon to render method
 Flight::after("render", function(){
