@@ -32,15 +32,15 @@ class CoursesFrontEnd {
 		}
 
 		// Debug option
-		if(isset($_GET['showdata'])){ print_r($course );die(); }
+		if (isset($_GET['showdata'])){ print_r($course );die(); }
 
 		// Check for errors
-		if(isset($course->error)){
+		if (isset($course->error)){
 			return Flight::render('missing_course.php');
 		}
 
 		// Auto correct wrong routes (ie slug is incorrect)
-		if($course->slug_2 != $slug){
+		if ($course->slug_2 != $slug){
 			return Flight::redirect($type.'/'.$year.'/'.$id.'/'.$course->slug_2);
 		}
 
