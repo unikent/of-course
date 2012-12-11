@@ -1,4 +1,7 @@
-
 /config/paths.php
 /config/config.php
-/menu
+/menubin/
+vendor/
+bin/
+composer.lock
+.DS_Store
