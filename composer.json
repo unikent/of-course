@@ -1,7 +1,7 @@
 {
     "require": {
     	"unikent/programmes-plant-api-php": "dev-master",
-        "mikecao/flight": "dev-master"
+        "unikent/flight": "dev-master"
     },
     
     "config": {
