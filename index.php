@@ -11,7 +11,7 @@ require 'main/main.php';
 require PANTHEON_ENGINE . '/template.loader.php';
 
 //Hook pantheon to render method
-Flight::after("render", function(){
+Flight::after("start", function(){
 	require PANTHEON_ENGINE . '/run.php';
 });
 
@@ -19,10 +19,13 @@ Flight::after("render", function(){
 $main = new CoursesFrontEnd();
 
 //define routes
-Flight::route('/@type/@year/', array($main,'list_programmes'));
-
-Flight::route('/@type/@year/@id', array($main,'view'));
+Flight::route('/@type/@year/search/alt', array($main,'search_alt'));
+Flight::route('/@type/@year/search', array($main,'search'));
+Flight::route('/@type/@year/@id/alt', array($main,'view_alt'));
 Flight::route('/@type/@year/@id/@slug', array($main,'view'));
+Flight::route('/@type/@year/@id', array($main,'view'));
+
+Flight::route('/@type/@year/', array($main,'list_programmes'));
 
 //run FLIGHT
 Flight::start();

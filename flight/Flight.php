@@ -386,7 +386,8 @@ class Flight {
      */
     public static function _render($file, $data = null, $key = null) {
         if ($key !== null) {
-            self::view()->set($key, self::view()->fetch($file, $data));
+            $blah = self::view()->fetch($file, $data);
+            self::view()->set($key, $blah);
         }
         else {
             self::view()->render($file, $data);
