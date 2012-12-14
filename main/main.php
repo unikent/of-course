@@ -44,7 +44,7 @@ class CoursesFrontEnd {
  			return Flight::redirect($type.'/'.$year.'/'.$id.'/'.$course->slug);
  		}
  		//Layout switcher
-		if($_GET['old']){
+		if(isset($_GET['old'])){
 			//Render full page
 			Flight::render('course_page_old', array('course'=>$course, 'type'=> $type));
 		}else{

@@ -15,7 +15,6 @@ if (defined("TEMPLATING_ENGINE"))
 	
 	//Hook pantheon to render method
 	Flight::after("start", function(){
-		echo "!!!!!!!!!!!!!!!!!!!!!!!!!!";
 		require TEMPLATING_ENGINE . '/run.php';
 	});
 }
