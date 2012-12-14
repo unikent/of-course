@@ -3,34 +3,48 @@
 class CoursesFrontEnd {
 
 	/**
-	 * View (alt) - View a "live" programme from the programmes plant
+	 * A Programmes Plant API Object.
+	 */
+	public $pp = false;
+
+	public function __construct()
+	{
+		$this->pp = new ProgrammesPlant\API(XCRI_WEBSERVICE);
+	}
+
+	/**
+	 * View - View a "live" programme from the programmes plant
 	 *
 	 * @param string Type UG|PG
 	 * @param yyyy Year to show
 	 * @param int Id of programme
 	 * @param string Slug - programme name
 	 */
-	public function view($type, $year, $id, $slug = ''){
-		
-		//Use webservices to get course data
-		$course_json = Cache::load(XCRI_WEBSERVICE.$year.'/'.$type.'/programme/'.$id, 5);//5 minute cache
-		$course = json_decode($course_json);
+	public function view($type, $year, $id, $slug = '')
+	{
+		// Use webservices to get course data
+		$course = $this->pp->get_programme($year, $type, $id);
+
+		// If we can't find the course give us a 404.
+		if (! $course)
+		{
+			Flight::notFound();
+		}
 
 		//debug option
 		if(isset($_GET['debug_performance'])){ inspect($course); }
 
-		//Check for errors
-		if(isset($course->error)){
+		// Check for errors
+		if (isset($course->error)){
 			return Flight::render('missing_course.php');
 		}
-
+		
 		//fix slug paths
 		if($course->slug != $slug){
  			return Flight::redirect($type.'/'.$year.'/'.$id.'/'.$course->slug);
  		}
-
- 		//Layout switcher
 		
+ 		//Layout switcher
 		if($_GET['old']){
 			//Render full page
 			Flight::render('course_page_old', array('course'=>$course, 'type'=> $type));
@@ -38,23 +52,20 @@ class CoursesFrontEnd {
 			//Render full page
 			Flight::render('course_page', array('course'=>$course, 'type'=> $type));
 		}
-		
-		
 	}
-
+	
 	/**
 	 * List programmes - Show a list of all programmes availble to the system.
 	 *
 	 * @param string Type UG|PG
 	 * @param yyyy Year to show
 	 */
-	public function list_programmes($type, $year){
-
-		$listing_json = Cache::load(XCRI_WEBSERVICE.$year.'/'.$type, 5);//5 minute cache
-
-		$listing = json_decode($listing_json);
+	public function list_programmes($type, $year)
+	{
+		$listing = $this->pp->get_programmes_index('2014', 'ug');
 
 		$base_url = BASE_URL;
+
 		foreach($listing as $course){
 			echo "<a href='{$base_url}{$type}/{$year}/{$course->id}/{$course->slug}'>{$course->name}</a><br/>";
 
@@ -106,6 +117,5 @@ class CoursesFrontEnd {
 		Flight::render('search_alt', array('programmes' => $programmes));
 		
 	}
-
 
 }

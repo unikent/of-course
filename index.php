@@ -2,35 +2,38 @@
 
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
-//Load flight
-require 'flight/Flight.php';
-require 'config/paths.php';
-require 'main/main.php';
+// Load Composer
+require dirname(__FILE__) . '/vendor/autoload.php';
 
-//Load Pantheon
-require PANTHEON_ENGINE . '/template.loader.php';
+require dirname(__FILE__) . '/config/paths.php';
+require dirname(__FILE__) . '/main/main.php';
 
-//Hook pantheon to render method
-Flight::after("start", function(){
-	require PANTHEON_ENGINE . '/run.php';
-});
+// Load Pantheon
+if (defined(TEMPLATING_ENGINE))
+{
+	require TEMPLATING_ENGINE . '/template.loader.php';
+	
+	//Hook pantheon to render method
+	Flight::after("start", function(){
+		require PANTHEON_ENGINE . '/run.php';
+	});
+}
 
-//Setup main object
+// Setup main object
 $main = new CoursesFrontEnd();
 
-//javascript WS
+// Define routes
+
+//javascript
 Flight::route('/searchajax/@type/@year/', array($main,'list_ajax'));
-
-//define routes
+//key pages
 Flight::route('/@type/@year/search', array($main,'search'));
-
+Flight::route('/@type/@year/', array($main,'list_programmes'));
+//courses
 Flight::route('/@type/@year/@id', array($main,'view'));
 Flight::route('/@type/@year/@id/@slug', array($main,'view'));
 
-
-
-
-//run FLIGHT
+// Run Flight!
 Flight::start();
 
 ?>
