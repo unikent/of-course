@@ -43,7 +43,6 @@ class CoursesFrontEnd {
 		if($course->slug != $slug){
  			return Flight::redirect($type.'/'.$year.'/'.$id.'/'.$course->slug);
  		}
-		
  		//Layout switcher
 		if($_GET['old']){
 			//Render full page

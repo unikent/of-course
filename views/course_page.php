@@ -169,7 +169,7 @@
             	
                     	<div class="container_16">
                             <div class="grid_10">
-                        <h1><?php echo $course->programme_title; ?> <?php echo $course->award; ?> - <?php echo $course->year; ?></h1>
+                        <h1><?php echo  $course->programme_title; ?> <?php echo $course->award->name; ?> - <?php echo $course->year; ?></h1>
                         <p><?php echo  $course->programme_abstract; ?></p>
                         <div class="snippetBox">
                             <div class="tabs">

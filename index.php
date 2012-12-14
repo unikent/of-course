@@ -9,13 +9,14 @@ require dirname(__FILE__) . '/config/paths.php';
 require dirname(__FILE__) . '/main/main.php';
 
 // Load Pantheon
-if (defined(TEMPLATING_ENGINE))
+if (defined("TEMPLATING_ENGINE"))
 {
 	require TEMPLATING_ENGINE . '/template.loader.php';
 	
 	//Hook pantheon to render method
 	Flight::after("start", function(){
-		require PANTHEON_ENGINE . '/run.php';
+		echo "!!!!!!!!!!!!!!!!!!!!!!!!!!";
+		require TEMPLATING_ENGINE . '/run.php';
 	});
 }
 
