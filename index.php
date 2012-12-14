@@ -18,6 +18,9 @@ Flight::after("start", function(){
 //Setup main object
 $main = new CoursesFrontEnd();
 
+//javascript WS
+Flight::route('/searchajax/@type/@year/', array($main,'list_ajax'));
+
 //define routes
 Flight::route('/@type/@year/search', array($main,'search'));
 
@@ -25,7 +28,7 @@ Flight::route('/@type/@year/@id', array($main,'view'));
 Flight::route('/@type/@year/@id/@slug', array($main,'view'));
 
 
-Flight::route('/ajax/@type/@year/', array($main,'list_programmes'));
+
 
 //run FLIGHT
 Flight::start();

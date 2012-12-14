@@ -21,7 +21,10 @@
         <kentIncludeJavascript />
         <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
         <script type='text/javascript' src='<?php echo BASE_URL ?>js/menu.js'></script>
-        <script type='text/javascript' src='<?php echo BASE_URL ?>js/quick-spot.js'></script>
+        <script type='text/javascript' src='<?php echo BASE_URL ?>js/quickspot.js'></script>
+        <script type='text/javascript'>
+            quickspot.attach({"url":"<?php echo BASE_URL ?>searchajax/<?php echo $type ?>/<?php echo $course->year ?>/", "target":"searchbox"});
+        </script>
         <!-- InstanceBeginEditable name="head" --><!-- InstanceEndEditable -->
     </head>
     <body>
@@ -40,7 +43,7 @@
                         <div class="container_16">
                         <div class="grid_16 search_bar">
                 			<div class="search_box">
-                            	<input type="text" name="search" placeholder="Search all courses..." autocomplete="off">
+                            	<input id='searchbox' type="text" name="search" placeholder="Search all courses..." autocomplete="off">
                             	<input type="image" src="<?php echo BASE_URL ?>/images/search.jpg">
                             </div>
                             

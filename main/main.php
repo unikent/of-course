@@ -33,10 +33,10 @@ class CoursesFrontEnd {
 		
 		if($_GET['old']){
 			//Render full page
-			Flight::render('course_page_old', array('course'=>$course));
+			Flight::render('course_page_old', array('course'=>$course, 'type'=> $type));
 		}else{
 			//Render full page
-			Flight::render('course_page', array('course'=>$course));
+			Flight::render('course_page', array('course'=>$course, 'type'=> $type));
 		}
 		
 		
@@ -62,6 +62,12 @@ class CoursesFrontEnd {
 		
 		die();
 
+	}
+	public function list_ajax($type, $year){
+		$out = array();
+		$js = json_decode(Cache::load(XCRI_WEBSERVICE.$year.'/'.$type, 5));
+		foreach($js as $j)$out[] = $j;
+		echo json_encode($out);
 	}
 	
 	
