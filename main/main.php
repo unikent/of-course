@@ -3,7 +3,7 @@
 class CoursesFrontEnd {
 
 	/**
-	 * View - View a "live" programme from the programmes plant
+	 * View (alt) - View a "live" programme from the programmes plant
 	 *
 	 * @param string Type UG|PG
 	 * @param yyyy Year to show
@@ -17,42 +17,28 @@ class CoursesFrontEnd {
 		$course = json_decode($course_json);
 
 		//debug option
-		if(isset($_GET['showdata'])){ print_r($course );die(); }
+		if(isset($_GET['debug_performance'])){ inspect($course); }
 
 		//Check for errors
 		if(isset($course->error)){
 			return Flight::render('missing_course.php');
 		}
-		
-		//Render full page
-		Flight::render('course_page', array('course'=>$course));
-		
-	}
-	
-	/**
-	 * View (alt) - View a "live" programme from the programmes plant
-	 *
-	 * @param string Type UG|PG
-	 * @param yyyy Year to show
-	 * @param int Id of programme
-	 * @param string Slug - programme name
-	 */
-	public function view_alt($type, $year, $id, $slug = ''){
-		
-		//Use webservices to get course data
-		$course_json = Cache::load(XCRI_WEBSERVICE.$year.'/'.$type.'/programme/'.$id, 5);//5 minute cache
-		$course = json_decode($course_json);
 
-		//debug option
-		if(isset($_GET['showdata'])){ print_r($course );die(); }
+		//fix slug paths
+		if($course->slug != $slug){
+ 			return Flight::redirect($type.'/'.$year.'/'.$id.'/'.$course->slug);
+ 		}
 
-		//Check for errors
-		if(isset($course->error)){
-			return Flight::render('missing_course.php');
+ 		//Layout switcher
+		
+		if($_GET['old']){
+			//Render full page
+			Flight::render('course_page_old', array('course'=>$course));
+		}else{
+			//Render full page
+			Flight::render('course_page', array('course'=>$course));
 		}
 		
-		//Render full page
-		Flight::render('course_page_alt', array('course'=>$course));
 		
 	}
 

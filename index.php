@@ -19,13 +19,13 @@ Flight::after("start", function(){
 $main = new CoursesFrontEnd();
 
 //define routes
-Flight::route('/@type/@year/search/alt', array($main,'search_alt'));
 Flight::route('/@type/@year/search', array($main,'search'));
-Flight::route('/@type/@year/@id/alt', array($main,'view_alt'));
-Flight::route('/@type/@year/@id/@slug', array($main,'view'));
-Flight::route('/@type/@year/@id', array($main,'view'));
 
-Flight::route('/@type/@year/', array($main,'list_programmes'));
+Flight::route('/@type/@year/@id', array($main,'view'));
+Flight::route('/@type/@year/@id/@slug', array($main,'view'));
+
+
+Flight::route('/ajax/@type/@year/', array($main,'list_programmes'));
 
 //run FLIGHT
 Flight::start();

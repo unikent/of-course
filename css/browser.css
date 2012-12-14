@@ -260,7 +260,7 @@ Styling for the maps application.
 	height: 29px;
 	line-height: 29px;
 	width: 250px;
-	background: url(/images/design/search-back.jpg);
+	background: url(../images/design/search-back.jpg);
 	padding-left: 4px;
 	padding-right: 27px;
 	font-size: 1.1em;
@@ -296,14 +296,14 @@ Styling for the maps application.
 	font-size: 1.2em;
 	padding: 2px 20px 2px 10px;
 	margin-right: 10px;
-	background: transparent url(/images/design/search-links-arrow.png) 100% 50% no-repeat;
+	background: transparent url(../images/design/search-links-arrow.png) 100% 50% no-repeat;
 	height: 52px;
 	line-height: 52px;
 }
 
 #content .maps .search_bar ul.search_links li.toplink:hover > a{
 	color: #4f4f4f;
-	background-image: url(/images/design/search-links-arrow-hover.png);
+	background-image: url(../images/design/search-links-arrow-hover.png);
 	text-decoration: none;
 }
 
