@@ -21,9 +21,8 @@
 
         <script type='text/javascript' src='<?php echo BASE_URL ?>js/menu.js'></script>
         <script type='text/javascript' src='<?php echo BASE_URL ?>js/quickspot.js'></script>
-
+      
         <script type='text/javascript'>
-        console.log("<?php echo BASE_URL ?>searchajax/<?php echo $type ?>/<?php echo $year ?>/");
             quickspot.attach({
                 "url":"<?php echo BASE_URL ?>searchajax/<?php echo $type ?>/<?php echo $year ?>/",
                 "target":"searchbox",

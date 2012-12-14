@@ -94,15 +94,8 @@ class CoursesFrontEnd {
 
 	    $programmes = $this->pp->get_programmes_index($year, $type);//5 minute cache
 		
-		//Layout switcher
-		if(isset($_GET['old'])){
-			//Render full page
-			Flight::layout('search_old', array('programmes' => $programmes));
-		}else{
-			//Render full page
-			Flight::layout('search', array('programmes' => $programmes));
-		}
-		
+		//Render full page
+		Flight::layout('search', array('programmes' => $programmes));	
 		
 	}
 
