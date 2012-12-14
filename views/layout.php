@@ -23,12 +23,13 @@
         <script type='text/javascript' src='<?php echo BASE_URL ?>js/quickspot.js'></script>
 
         <script type='text/javascript'>
+        console.log("<?php echo BASE_URL ?>searchajax/<?php echo $type ?>/<?php echo $year ?>/");
             quickspot.attach({
-                "url":"<?php echo BASE_URL ?>searchajax/<?php echo $type ?>/<?php echo $course->year ?>/",
+                "url":"<?php echo BASE_URL ?>searchajax/<?php echo $type ?>/<?php echo $year ?>/",
                 "target":"searchbox",
                 "clickhandler":function(itm){
                     //Send em to page
-                    document.location = '<?php echo BASE_URL.$type ?>/<?php echo $course->year ?>/'+itm.id+'/'+itm.slug;
+                    document.location = '<?php echo BASE_URL.$type ?>/<?php echo $year ?>/'+itm.id+'/'+itm.slug;
                 },
                 "displayhandler": function(itm){
                     return itm.name+' (ID: '+itm.id+')'; //Do somthing useful like showing award once we have it.

@@ -25,6 +25,8 @@ class CoursesFrontEnd {
 		// Use webservices to get course data
 		$course = $this->pp->get_programme($year, $type, $id);
 
+		Flight::view()->set('type', $type);
+		Flight::view()->set('year', $year);
 
 		//debug option
 		if(isset($_GET['debug_performance'])){ inspect($course); }
@@ -70,7 +72,7 @@ class CoursesFrontEnd {
 	}
 	public function list_ajax($type, $year){
 		$out = array();
-		$js = json_decode(Cache::load(XCRI_WEBSERVICE.$year.'/'.$type, 5));
+		$js = $this->pp->get_programmes_index($year, $type);
 		foreach($js as $j)$out[] = $j;
 		echo json_encode($out);
 	}
@@ -86,17 +88,19 @@ class CoursesFrontEnd {
 	 */
 	public function search($type, $year)
 	{
-	    $programmes_json = Cache::load(XCRI_WEBSERVICE.$year.'/'.$type, 5);//5 minute cache
 
-		$programmes = json_decode($programmes_json);
+		Flight::view()->set('type',$type);
+		Flight::view()->set('year',$year);
+
+	    $programmes = $this->pp->get_programmes_index($year, $type);//5 minute cache
 		
 		//Layout switcher
 		if(isset($_GET['old'])){
 			//Render full page
-			Flight::render('search', array('programmes' => $programmes));
+			Flight::layout('search_old', array('programmes' => $programmes));
 		}else{
 			//Render full page
-			Flight::render('search_old', array('programmes' => $programmes));
+			Flight::layout('search', array('programmes' => $programmes));
 		}
 		
 		
