@@ -21,7 +21,7 @@
 
         <script type='text/javascript' src='<?php echo BASE_URL ?>js/menu.js'></script>
         <script type='text/javascript' src='<?php echo BASE_URL ?>js/quickspot.js'></script>
-      
+
         <script type='text/javascript'>
             quickspot.attach({
                 "url":"<?php echo BASE_URL ?>searchajax/<?php echo $type ?>/<?php echo $year ?>/",
@@ -50,7 +50,7 @@
                             </div>
                             
                             <ul class="advsearch_links">
-                                <li class="first advsearchlink"><a href="/ug/2014/search/alt">Advanced search</a></li>
+                                <li class="first advsearchlink"><a href="<?php echo BASE_URL.$type ?>/<?php echo $year ?>/search">Advanced search</a></li>
                             </ul>
                                     
                             <ul class="search_links">
