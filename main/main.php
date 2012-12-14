@@ -64,7 +64,6 @@ class CoursesFrontEnd {
 
 		foreach($listing as $course){
 			echo "<a href='{$base_url}{$type}/{$year}/{$course->id}/{$course->slug}'>{$course->name}</a><br/>";
-
 		}
 		
 		die();
@@ -93,6 +92,8 @@ class CoursesFrontEnd {
 		Flight::view()->set('year',$year);
 
 	    $programmes = $this->pp->get_programmes_index($year, $type);//5 minute cache
+		//debug option
+		if(isset($_GET['debug_performance'])){ inspect($programmes); }
 		
 		//Render full page
 		Flight::layout('search', array('programmes' => $programmes));	
