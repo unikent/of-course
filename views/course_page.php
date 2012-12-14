@@ -22,8 +22,19 @@
         <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
         <script type='text/javascript' src='<?php echo BASE_URL ?>js/menu.js'></script>
         <script type='text/javascript' src='<?php echo BASE_URL ?>js/quickspot.js'></script>
+
         <script type='text/javascript'>
-            quickspot.attach({"url":"<?php echo BASE_URL ?>searchajax/<?php echo $type ?>/<?php echo $course->year ?>/", "target":"searchbox"});
+            quickspot.attach({
+                "url":"<?php echo BASE_URL ?>searchajax/<?php echo $type ?>/<?php echo $course->year ?>/",
+                "target":"searchbox",
+                "clickhandler":function(itm){
+                    //Send em to page
+                    document.location = '<?php echo BASE_URL.$type ?>/<?php echo $course->year ?>/'+itm.id+'/'+itm.slug;
+                },
+                "displayhandler": function(itm){
+                    return itm.name+' (ID: '+itm.id+')'; //Do somthing useful like showing award once we have it.
+                }
+            });
         </script>
         <!-- InstanceBeginEditable name="head" --><!-- InstanceEndEditable -->
     </head>
