@@ -25,17 +25,14 @@ class CoursesFrontEnd {
 		// Use webservices to get course data
 		$course = $this->pp->get_programme($year, $type, $id);
 
-		// If we can't find the course give us a 404.
-		if (! $course)
-		{
-			Flight::notFound();
-		}
+		Flight::view()->set('type', $type);
+		Flight::view()->set('year', $year);
 
 		//debug option
 		if(isset($_GET['debug_performance'])){ inspect($course); }
 
-		// Check for errors
-		if (isset($course->error)){
+		// Check for errors / 404 (so we can show custom 404 page)
+		if (! $course || isset($course->error)){
 			return Flight::render('missing_course.php');
 		}
 		
@@ -46,10 +43,10 @@ class CoursesFrontEnd {
  		//Layout switcher
 		if(isset($_GET['old'])){
 			//Render full page
-			Flight::render('course_page_old', array('course'=>$course, 'type'=> $type));
+			Flight::layout('course_page_old', array('course'=>$course, 'type'=> $type));
 		}else{
 			//Render full page
-			Flight::render('course_page', array('course'=>$course, 'type'=> $type));
+			Flight::layout('course_page', array('course'=>$course, 'type'=> $type));
 		}
 	}
 	
@@ -67,7 +64,6 @@ class CoursesFrontEnd {
 
 		foreach($listing as $course){
 			echo "<a href='{$base_url}{$type}/{$year}/{$course->id}/{$course->slug}'>{$course->name}</a><br/>";
-
 		}
 		
 		die();
@@ -75,7 +71,7 @@ class CoursesFrontEnd {
 	}
 	public function list_ajax($type, $year){
 		$out = array();
-		$js = json_decode(Cache::load(XCRI_WEBSERVICE.$year.'/'.$type, 5));
+		$js = $this->pp->get_programmes_index($year, $type);
 		foreach($js as $j)$out[] = $j;
 		echo json_encode($out);
 	}
@@ -91,29 +87,16 @@ class CoursesFrontEnd {
 	 */
 	public function search($type, $year)
 	{
-	    $programmes_json = Cache::load(XCRI_WEBSERVICE.$year.'/'.$type, 5);//5 minute cache
 
-		$programmes = json_decode($programmes_json);
-		
-		Flight::render('search', array('programmes' => $programmes));
-		
-	}
-	
-	/**
-	 * Search page
-	 *
-	 * @param string Type UG|PG
-	 * @param yyyy Year to show
-	 * @param int Id of programme
-	 * @param string Slug - programme name
-	 */
-	public function search_alt($type, $year)
-	{
-	    $programmes_json = Cache::load(XCRI_WEBSERVICE.$year.'/'.$type, 5);//5 minute cache
+		Flight::view()->set('type',$type);
+		Flight::view()->set('year',$year);
 
-		$programmes = json_decode($programmes_json);
+	    $programmes = $this->pp->get_programmes_index($year, $type);//5 minute cache
+		//debug option
+		if(isset($_GET['debug_performance'])){ inspect($programmes); }
 		
-		Flight::render('search_alt', array('programmes' => $programmes));
+		//Render full page
+		Flight::layout('search', array('programmes' => $programmes));	
 		
 	}
 

@@ -19,6 +19,11 @@ if (defined("TEMPLATING_ENGINE"))
 	});
 }
 
+Flight::map('layout', function($view, $params){
+	Flight::render($view, $params, 'content');
+	Flight::render('layout');
+});
+
 // Setup main object
 $main = new CoursesFrontEnd();
 
