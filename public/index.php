@@ -2,11 +2,10 @@
 
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
-// Load Composer
-require dirname(__FILE__) . '/vendor/autoload.php';
+require dirname(__FILE__) . '/../config/paths.php';
 
-require dirname(__FILE__) . '/config/paths.php';
-require dirname(__FILE__) . '/main/main.php';
+require APP_PATH . '/vendor/autoload.php';
+require APP_PATH . '/main/main.php';
 
 // Load Pantheon
 if (defined("TEMPLATING_ENGINE"))
@@ -18,6 +17,8 @@ if (defined("TEMPLATING_ENGINE"))
 		require TEMPLATING_ENGINE . '/run.php';
 	});
 }
+
+Flight::set('flight.views.path', APP_PATH . '/views');
 
 Flight::map('layout', function($view, $params){
 	Flight::render($view, $params, 'content');
