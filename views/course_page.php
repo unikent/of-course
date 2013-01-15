@@ -1,14 +1,5 @@
 <kentPageBody>
-    <kentPageBodyLeft>
-        <kentMenuGenerator name='left' maxDepth='3'>
-            <!-- InstanceBeginEditable name="menuParameters" -->
-            <param:menuGenerator name='buildAllMenus' value='true' />
-            <param:menuGenerator name='forceMenuHighlight' value='' />
-            <!-- InstanceEndEditable -->
-        </kentMenuGenerator>
-    </kentPageBodyLeft>
-    <kentPageBodyRight>
-        <kentUtilityBar/>
+     <kentPageBodyFull>
         <kentPageContent>
             <!-- InstanceBeginEditable name="content" -->
             <h1><?php echo $course->programme_title; ?> <?php echo $course->award; ?> - <?php echo $course->year; ?></h1>
@@ -39,5 +30,5 @@
             
             <!-- InstanceEndEditable -->
         </kentPageContent>
-    </kentPageBodyRight>
+     </kentPageBodyFull>
 </kentPageBody>
