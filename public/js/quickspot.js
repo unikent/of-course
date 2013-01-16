@@ -28,11 +28,12 @@
 	 	 * @param option.url url of JSON feed to search with
 		 *
 	 	 * Optional
-	 	 * @param option.displayname name of attribute to display in box (name used by default)
-	 	 * @param option.displayhandler overwrites defualt display method.
-	 	 * @param options.clickhandler Callback method, is passed the selected item.
-	 	 * @param options.searchwith, array of attributes to search on (will use all if not specified)
-	 	 *
+	 	 * @param option.key_value - attribute contining key bit of information (name used by default)
+	 	 * @param option.display_name - name of attribute to display in box (uses key_value by default)
+	 	 * @param option.display_handler - overwrites defualt display method.
+	 	 * @param options.click_handler - Callback method, is passed the selected item.
+	 	 * @param options.search_on - array of attributes to search on (will use all if not specified)
+	 	 * @param options.gen_score - callback to set custom score method. (higher number = higher in results order)
 	 	 */
 	 	this.attach = function(options){
 
@@ -41,23 +42,38 @@
 
  			//check we have a target!
 	 		if(!options.target){
-	 			console.log("Target not specified");
+	 			console.log("Error: Target not specified");
 	 			return;
 	 		}
 	 		//Get target
 	 		here.target = document.getElementById(options.target);
 	 		if(!here.target){
-	 			console.log("Target ID could not be found");
+	 			console.log("Error: Target ID could not be found");
 	 			return;
 	 		}
-
-	 		if(!options.displaname){
-	 			options.displaname = 'name';
+	 		//get key value
+	 		if(!options.key_value){
+	 			options.key_value = 'name';
 	 		}
 
-	 		//Load data
-	 		util.ajaxGet(options.url, methods.initialise_data);
 
+	 		if(!options.display_name){
+	 			options.display_name = options.key_value;
+	 		}
+
+	 		//find data
+	 		if(typeof options.url !== 'undefined'){
+	 			//Load data via ajax
+	 			util.ajaxGetJSON(options.url, methods.initialise_data);
+	 		}else if(typeof options.data !== 'undefined'){
+	 			//Import directly provided data
+	 			methods.initialise_data(options.data);
+	 		}else{
+	 			//Warn user if none is provided
+	 			console.log("Error: No datasource provided.");
+	 			return;
+	 		}
+	 		
 	 		//Setup basic Dom stuff
 	 		here.dom = document.createElement('div');
 	 		here.dom.className='quickspot-results';
@@ -92,6 +108,9 @@
  				return;
  			}
 
+ 			//Lower case search input
+ 			search = search.toLowerCase();
+
  			// Avoid searching if input hasn't changed.
  			// Just reshown what we have
 	 		if(here.lastValue==search){
@@ -99,15 +118,21 @@
 	 			return;
 	 		}
 
+	 		//event for quickspot start (doesnt start if no search is triggered)
+	 		util.triggerEvent(here.target,"quickspot:start");
+
 	 		//Update last searched value
 	 		here.lastValue=search;
 
 	 		//make selected index 0 again
 	 		this.selectedIndex = 0;
 
-	 		//Perform search & render the result
-	 		here.results = methods.findMatches(here.target.value);
+	 		//Perform search, order results & render them
+	 		here.results = methods.sortResults(methods.findMatches(search), search);
 			methods.render_results(here.results);
+
+			//event for quickspot end
+			util.triggerEvent(here.target,"quickspot:end");
 	
 	 	}
 
@@ -178,7 +203,11 @@
 	 	 * @param idx index of item to select
 	 	 */
 		methods.selectIndex = function(idx){
-			//ensure valid range
+
+			//deselect previously active item.
+			util.removeClass(here.dom.children[here.selectedIndex], 'selected');
+
+			//Ensure ranges are valid for new item (fix them if not)
 			if(idx >= here.results.length){
 				here.selectedIndex = here.results.length-1;
 			}else if(idx < 0){
@@ -186,9 +215,9 @@
 			}else{
 				here.selectedIndex = idx;
 			}
-			//Un select old value, select new value in UI.
-			util.removeClass(util.cssSelect(here.dom, '.quickspot-result.selected') ,'selected');
-			util.addClass(util.cssSelect(here.dom, '.quickspot-result-'+here.selectedIndex),'selected');
+
+			//Select new item
+			util.addClass(here.dom.children[here.selectedIndex], 'selected');
 		}
 
 		/**
@@ -201,6 +230,8 @@
 			//If no results, don't show result box.
 			if(results.length === 0){
 				here.dom.style.display = 'none';
+				//event for no results found
+				util.triggerEvent(here.target,"quickspot:noresults");
 				return;
 			}
 
@@ -213,10 +244,10 @@
 				//Create new a element
 				tmp = document.createElement('a');
 				//Set name/title
-				if(typeof here.options.displayhandler != 'undefined'){
-					tmp.innerHTML = here.options.displayhandler(result);
+				if(typeof here.options.display_handler != 'undefined'){
+					tmp.innerHTML = here.options.display_handler(result);
 				}else{
-					tmp.innerHTML = result[here.options.displaname];
+					tmp.innerHTML = result[here.options.display_name];
 				}
 				
 				//Apply classes
@@ -234,6 +265,9 @@
 				fragment.appendChild(tmp);
 			});
 
+			//event when results found
+			util.triggerEvent(here.target,"quickspot:resultsfound");
+
 			//clear old data from dom.
 			here.dom.innerHTML ='';
 			//Attach fragment
@@ -248,26 +282,25 @@
 		 * handleSelection handles action from click (or enter key press)
 		 * 
 		 * Depending on settings will either send user to url, update box this is attached to or
-		 * perform action specified in clickhandler if it is set.
+		 * perform action specified in click_handler if it is set.
 		 *
 		 * @param result object defining selected result
 		 *
 		 */
-		methods.handleSelection= function(result){
+		methods.handleSelection = function(result){
 			//If custom handler was provided
-			if(typeof here.options.clickhandler != 'undefined'){
-				here.options.clickhandler(result);
+			if(typeof here.options.click_handler != 'undefined'){
+				here.options.click_handler(result);
 			}else{
-				if(typeof result.url != 'undefined'){
+				if(typeof result.url !== 'undefined'){
 					//If url was provided, go there
 					window.location = url;
 				}else{
 					//else assume we are just a typeahead?
-					here.target.value = result[here.options.displaname];
+					here.target.value = result[here.options.display_name];
 					here.dom.style.display = 'none';
 				}
-			}
-			
+			}		
 		}
 
 		/**
@@ -282,13 +315,13 @@
 			var matches = [];
 			var itm;
 			//search is lowercased so match using a lowercased values
-			search = search.toLowerCase();
+			search = search;
 			//for each possible item
 			for(var i=0; i < here.data_store.length; i++){
 				//get item
 				itm = here.data_store[i];
 				//do really quick string search
-				if(itm._searchvalues.indexOf(search) !== -1){
+				if(itm.__searchvalues.indexOf(search) !== -1){
 					//add to matches if there was one
 					matches.push(itm);
 				}
@@ -298,31 +331,80 @@
 		}
 
 		/**
+		 * sort Results
+		 * Order results by the number of matches found in the search string.
+		 * Repeating certain phrases in json can be used to make certain results
+		 * appear higher than others if needed.
+		 *
+		 * @param results - array of items that match the search result
+		 * @param search - search string in use
+		 * @return orderd array of results
+		 */
+		methods.sortResults = function(results, search){
+	 		// Select either user defined score_handler, or default (built in) one
+	 		var score_handler = (typeof here.options.gen_score === 'undefined') ? methods.calculateScore : here.options.gen_score;
+
+	 		// Score each value (heigher==better match) for results sort
+	 		for(var i=0;i<results.length;i++){
+	 			results[i].__score = score_handler(results[i], search);
+	 		}
+	 			
+	 		// Sort results based on score (higher=better)
+	 		results.sort(function(a, b){
+	 			return (a.__score==b.__score) ? 0 : (a.__score < b.__score) ? 1 : -1;
+	 		})
+	 		// return them for rendering
+	 		return results;
+	 	}
+
+	 	/**
+	 	 * Calculate score
+	 	 *
+	 	 * @param result - A result to calculate a score for
+	 	 * @param search - Search value in use
+	 	 *
+	 	 * @return int - score (higher = better)
+	 	 */
+	 	methods.calculateScore = function(result, search){
+	 		var score = 0, idx;
+	 		// key value index
+ 			idx = result.__keyvalue.indexOf(search);
+
+ 			// Count occurences 
+ 			// This metric is less useful for 1 letter words so don't include it as with lots of
+ 			// results its kinda pricy (timewise)
+ 			if(search.length < 2) score += util.occurrences(result.__searchvalues, search);
+ 			// Boost score by 5 if match is start of word
+ 			score += (result.__searchvalues.indexOf(' '+search) !== -1) ? 5 : 0;
+			// In title, boost score by 5
+			score += (idx !== -1) ? 5 : 0;
+			// If perfect title match +10
+			score += (idx === 0) ? 10 : 0; 
+
+			return score;
+	 	}
+
+		/**
 		 * initialise data
 		 * Rather than repetedly proccessing data every search, do a little work now to ensure
 		 * everything is fully setup to allow simple string matching to be all that is needed.
 		 *
 		 * @param data raw json
 		 */
-
 		methods.initialise_data = function(data){
-			//turn JSON in to real JS object
-			var data = JSON.parse(data);
-
 			// Loop through searchable items, adding all values that will need to be searched upon in to a
-			// string stored as _searchvalues. Either add everything or just what the user specifies.
+			// string stored as __searchvalues. Either add everything or just what the user specifies.
 			var tmp, attrs;
 			for(var i=0; i < data.length; i++){
 				tmp = '';
-				//if searchwith exists use th as attributes list, else just use all of them
+				//if search_on exists use th as attributes list, else just use all of them
 
-				if(typeof here.options.searchwith != 'undefined'){
+				if(typeof here.options.search_on !== 'undefined'){
 					//grab only the attributes we want to search on
-					attrs = here.options.searchwith;
+					attrs = here.options.search_on;
 					for(var c=0; c<attrs.length;c++){
 						tmp += ' '+data[i][attrs[c]];
 					}
-
 				}else{
 					//just grab all the attribuites 
 					for(var a in data[i]){
@@ -330,10 +412,11 @@
 					}
 				}
 				//lower case everything
-				data[i]._searchvalues = tmp.toLowerCase();
+				data[i].__searchvalues = tmp.toLowerCase();
+				data[i].__keyvalue = data[i][here.options.key_value].toLowerCase();
 			}
 			//Store in memory
-			here.data_store = data
+			here.data_store = data;
 		}
  	}
  	
@@ -344,11 +427,12 @@
  	 */
  	var util = {};
  	// Perform an AJAX get of a provided url, and return the result to the specified callback.
-	util.ajaxGet = function(location, callback){
+	util.ajaxGetJSON = function(location, callback){
 		try {var xmlhttp = window.XMLHttpRequest?new XMLHttpRequest(): new ActiveXObject("Microsoft.XMLHTTP");}  catch (e) { }
 		xmlhttp.onreadystatechange = function(){
 			if ((xmlhttp.readyState == 4) && (xmlhttp.status == 200)) {
-				callback(xmlhttp.responseText);
+				//turn JSON in to real JS object & send it to the callback
+				callback(JSON.parse(xmlhttp.responseText));
 			}
 		}
 		xmlhttp.open("GET", location, true);
@@ -360,6 +444,19 @@
 	util.addListener = function(obj, event, callback){
 		//Proper way vs IE way
 		if(window.addEventListener){obj.addEventListener(event, callback, false);}else{obj.attachEvent('on'+event, callback);}
+	}
+	//Fire an Event
+	util.triggerEvent = function(obj, event_name){
+		if (document.createEvent) {
+			var evt = document.createEvent("HTMLEvents");
+    		evt.initEvent(event_name, true, true);
+    		obj.dispatchEvent(evt);
+		}else{
+			//IE 8/7 cannot fire custom events so this code is no help :(
+			//var evt = document.createEventObject();
+    		//evt.eventType = 'on'+event_name;
+    		//obj.fireEvent(evt.eventType, evt);
+		}
 	}
 	//Add a CSS class to a DOM element
 	util.addClass = function(node,nclass){
@@ -379,20 +476,22 @@
 		if(node==null) return;
 		return (node.className.match(new RegExp('(^|\\s)'+nclass+'(\\s|$)')) != null);
 	}
-	// cssSelect
-	util.cssSelect = function(node, selector){
-		if(document.querySelector){
-			//Fast and easy.
-			return node.querySelector(selector);
-		}else{
-			//Rather than boot an entire shim, why not ask jQuery if it can lend a hand here
-			if (typeof jQuery !== 'undefined'){
-				return $(node).find(selector)[0];
-			}else{
-				//TODO, possibly import sizzle?
-			}
-		}
+	// High speed occurrences function (amount of matches within a string)
+	// borrowed from stack overflow (benchmarked to be significantly faster than regexp)
+	// http://stackoverflow.com/questions/4009756/how-to-count-string-occurrence-in-string
+	util.occurrences = function(haystack, needle){
 
+	    haystack+=""; needle+="";
+	    if(needle.length<=0) return haystack.length+1;
+
+	    var n=0, pos=0;
+	    var step=needle.length;
+
+	    while(true){
+	        pos=haystack.indexOf(needle,pos);
+	        if(pos>=0){ n++; pos+=step; } else break;
+	    }
+	    return(n);
 	}
 
 	//Add ourselves to the outside world / global namespace
@@ -419,14 +518,14 @@ if (!('forEach' in Array.prototype)) {
 }
 
 //JSON shim (import cdn copy of json2 if JSON is missing)
-//Don't bother lerverging jquery as its version is sloooooowww (although apparenlty moving to json2)
-if(typeof JSON == 'undefined'){
+//Even if jQuery is avaiable it seems json2 is signifcantly faster, so importing it is worth the time.
+if(typeof JSON === 'undefined'){
 	var json2 = document.createElement('script');
 	json2.src = 'http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js';
 	document.getElementsByTagName('head')[0].appendChild(json2);
 }
 
 //suppress console for IE.
-if(typeof console == 'undefined'){
+if(typeof console === 'undefined'){
 	window.console = {"log":function(x){}};
 }
