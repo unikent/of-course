@@ -10,8 +10,8 @@
           <td><h3>Related schools</h3>
           <strong>TODO: We may want to change this because we only have admin and additional school, and no url for either.</strong>
               <ul>
-                <li><a href="/ug/2014/<?php echo $course->administrative_school->{1}->name ?>"><?php echo $course->additional_school->{1}->name ?></a></li>
-                <li><a href="/ug/2014/<?php echo $course->additional_school->{1}->name ?>"><?php echo $course->additional_school->{1}->name ?></a></li>
+                <li><a href="/ug/2014/<?php echo $course->administrative_school[0]->name ?>"><?php echo $course->additional_school[0]->name ?></a></li>
+                <li><a href="/ug/2014/<?php echo $course->additional_school[0]->name ?>"><?php echo $course->additional_school[0]->name ?></a></li>
               </ul></td>
         </tr>
         <tr>
@@ -27,8 +27,8 @@
           <td><h3>Subject leaflet</h3>
               <p>Our subject leaflets provide more detail about individual subjects areas. See:</p>
             <ul>
-                <li><a href="<?php echo $course->subject_leaflet->{1}->tracking_code ?>"><?php echo $course->subject_leaflet->{1}->name ?></a></li>
-                <li><a href="<?php echo $course->subject_leaflet_2->{1}->tracking_code ?>"><?php echo $course->subject_leaflet_2->{1}->name ?></a></li>
+                <li><a href="<?php echo $course->subject_leaflet[0]->tracking_code ?>"><?php echo $course->subject_leaflet[0]->name ?></a></li>
+                <li><a href="<?php echo $course->subject_leaflet_2[0]->tracking_code ?>"><?php echo $course->subject_leaflet_2[0]->name ?></a></li>
             </ul></td>
         </tr>
         <tr>

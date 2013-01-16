@@ -1,18 +1,11 @@
 <kentPageBody>
-    <kentPageBodyLeft>
-        <kentMenuGenerator name='left' maxDepth='3'>
-            <!-- InstanceBeginEditable name="menuParameters" -->
-            <param:menuGenerator name='buildAllMenus' value='true' />
-            <param:menuGenerator name='forceMenuHighlight' value='' />
-            <!-- InstanceEndEditable -->
-        </kentMenuGenerator>
-    </kentPageBodyLeft>
-    <kentPageBodyRight>
-        <kentUtilityBar/>
+     <kentPageBodyFull>
         <kentPageContent>
             <!-- InstanceBeginEditable name="content" -->
-            <h1><?php echo $course->programme_title; ?> <?php echo $course->award; ?> - <?php echo $course->year; ?></h1>
-            <p><?php echo  $course->programme_abstract; ?></p>
+            <h1 style='font-size:2.4em;padding:10px 0;'>
+                <?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?> - <?php echo $course->year; ?>
+                <?php if($course->subject_to_approval == 'true'){ echo "<span>(Subject to approval)</span>";} ?>
+            </h1>
             
             <div class="snippetBox">
                 <div class="tabs">
@@ -39,5 +32,5 @@
             
             <!-- InstanceEndEditable -->
         </kentPageContent>
-    </kentPageBodyRight>
+     </kentPageBodyFull>
 </kentPageBody>
