@@ -2,7 +2,10 @@
      <kentPageBodyFull>
         <kentPageContent>
             <!-- InstanceBeginEditable name="content" -->
-            <h1 style='font-size:2.4em;padding:10px 0;'><?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?> - <?php echo $course->year; ?></h1>
+            <h1 style='font-size:2.4em;padding:10px 0;'>
+                <?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?> - <?php echo $course->year; ?>
+                <?php if($course->subject_to_approval == 'true'){ echo "<span>(Subject to approval)</span>";} ?>
+            </h1>
             
             <div class="snippetBox">
                 <div class="tabs">
