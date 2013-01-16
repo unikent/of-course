@@ -22,7 +22,7 @@
               <li><strong>Award:</strong> <?php echo $course->award[0]->name;?> </li>
               <li><strong>Honours type:</strong> <?php echo $course->honours_type;?> </li>
               <li><strong>Ucas code:</strong> <?php echo $course->ucas_code;?>  </li>
-              <li><strong>Location:</strong> <a href="http://www.kent.ac.uk/locations/<?php echo strtolower($course->location[0]->name);?>/"><?php echo $course->location[0]->name;?></a>  </li>
+              <li><strong>Location:</strong> <a href="<?php echo $course->location[0]->url;?>"><?php echo $course->location[0]->name;?></a>  </li>
               <li><strong>Mode of study:</strong> <br>
               
               	<?php echo $course->mode_of_study;?> 
