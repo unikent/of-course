@@ -3,7 +3,6 @@
         <kentPageContent>
             <!-- InstanceBeginEditable name="content" -->
             <h1 style='font-size:2.4em;padding:10px 0;'><?php echo $course->programme_title; ?> <?php echo $course->award; ?> - <?php echo $course->year; ?></h1>
-            <p><?php echo  $course->programme_abstract; ?></p>
             
             <div class="snippetBox">
                 <div class="tabs">

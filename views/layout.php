@@ -26,7 +26,7 @@
             quickspot.attach({
                 "url":"<?php echo BASE_URL ?>searchajax/<?php echo $type ?>/<?php echo $year ?>/",
                 "target":"searchbox",
-                "search_on": ["name","award", "subject", "main_school", "ucas_code"],
+                "search_on": ["name", "award", "subject", "main_school", "ucas_code", "search_keywords"],
                 "click_handler":function(itm){
                     //Send em to page
                     document.location = '<?php echo BASE_URL.$type ?>/<?php echo $year ?>/'+itm.id+'/'+itm.slug;
