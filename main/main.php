@@ -22,13 +22,14 @@ class CoursesFrontEnd {
 	 */
 	public function view($type, $year, $id, $slug = '')
 	{
-		// Use webservices to get course data
+		// Use webservices to get course data & subject data
 		$course = $this->pp->get_programme($year, $type, $id);
+		$subjects = $this->pp->get_subject_index($year, $type);
 
 		Flight::view()->set('type', $type);
 		Flight::view()->set('year', $year);
 
-		//debug option
+		// Debug option
 		if(isset($_GET['debug_performance'])){ inspect($course); }
 
 		// Check for errors / 404 (so we can show custom 404 page)
@@ -36,18 +37,12 @@ class CoursesFrontEnd {
 			return Flight::render('missing_course.php');
 		}
 		
-		//fix slug paths
+		// Fix slug paths
 		if($course->slug != $slug){
  			return Flight::redirect($type.'/'.$year.'/'.$id.'/'.$course->slug);
  		}
- 		//Layout switcher
-		if(isset($_GET['old'])){
-			//Render full page
-			Flight::layout('course_page_old', array('course'=>$course, 'type'=> $type));
-		}else{
-			//Render full page
-			Flight::layout('course_page', array('course'=>$course, 'type'=> $type));
-		}
+
+ 		Flight::layout('course_page', array('course'=>$course, 'type'=> $type, 'subjects'=> $subjects));
 	}
 	
 	/**
@@ -65,10 +60,13 @@ class CoursesFrontEnd {
 		foreach($listing as $course){
 			echo "<a href='{$base_url}{$type}/{$year}/{$course->id}/{$course->slug}'>{$course->name}</a><br/>";
 		}
-		
 		die();
-
 	}
+
+	/**
+	 *
+	 *
+	 */
 	public function list_ajax($type, $year){
 		$out = array();
 		$js = $this->pp->get_programmes_index($year, $type);
