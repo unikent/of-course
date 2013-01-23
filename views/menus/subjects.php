@@ -1,5 +1,5 @@
 
-<a href="" id="campuses_and_centres_anchor">Subjects</a>
+<a href="<?php echo Flight::url("{$type}/{$year}/subjects"); ?>" id="campuses_and_centres_anchor">Subjects</a>
 
  <div id="campuses_and_centres_links" class="megamenu" style="display: none; ">
     <div class="maps_megacontentarea">
