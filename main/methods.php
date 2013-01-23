@@ -12,6 +12,13 @@
 		Flight::render('layout');
 	});
 
+	/**
+	 * URL: generate url with base path appended.
+	 *
+	 * @param $path path to link to
+	 * @param $use_base use base URL
+	 * @return string absoulte URL
+	 */
 	Flight::map('url', function($path, $use_base = true){
 		return ($use_base) ? BASE_URL.$path : $path;
 	});
