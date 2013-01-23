@@ -6,6 +6,10 @@ require dirname(__FILE__) . '/../config/paths.php';
 
 require APP_PATH . '/vendor/autoload.php';
 require APP_PATH . '/main/main.php';
+require APP_PATH . '/main/methods.php';
+
+// Set view path
+Flight::set('flight.views.path', APP_PATH . '/views');
 
 // Load Pantheon
 if (defined("TEMPLATING_ENGINE"))
@@ -18,24 +22,21 @@ if (defined("TEMPLATING_ENGINE"))
 	});
 }
 
-Flight::set('flight.views.path', APP_PATH . '/views');
-
-Flight::map('layout', function($view, $params){
-	Flight::render($view, $params, 'content');
-	Flight::render('layout');
-});
-
 // Setup main object
 $main = new CoursesFrontEnd();
 
 // Define routes
 
-//javascript
-Flight::route('/searchajax/@type/@year/', array($main,'list_ajax'));
-//key pages
+// AJAX
+Flight::route('/ajax/@type/@year/', array($main,'list_ajax'));
+// key pages
 Flight::route('/@type/@year/search', array($main,'search'));
 Flight::route('/@type/@year/', array($main,'list_programmes'));
-//courses
+// Subjects
+Flight::route('/@type/@year/subjects', array($main,'subjects'));
+Flight::route('/@type/@year/subjects/@id/@slug', array($main,'subject_view'));
+
+// courses
 Flight::route('/@type/@year/@id', array($main,'view'));
 Flight::route('/@type/@year/@id/@slug', array($main,'view'));
 
