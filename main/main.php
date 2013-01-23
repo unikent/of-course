@@ -34,7 +34,7 @@ class CoursesFrontEnd {
 
 		// Check for errors / 404 (so we can show custom 404 page)
 		if (! $course || isset($course->error)){
-			return Flight::render('missing_course.php');
+			return Flight::layout('missing_course');
 		}
 		
 		// Fix slug paths
@@ -44,6 +44,18 @@ class CoursesFrontEnd {
 
  		Flight::layout('course_page', array('course'=>$course, 'type'=> $type, 'subjects'=> $subjects));
 	}
+
+	public function subjects($type, $year)
+	{
+		// Get feed
+		$subjects = $this->pp->get_subject_index($year, $type);	
+		Flight::view()->set('type', $type);
+		Flight::view()->set('year', $year);
+
+		Flight::layout('subjects', array('subjects'=> $subjects));
+	}
+
+
 	
 	/**
 	 * List programmes - Show a list of all programmes availble to the system.
