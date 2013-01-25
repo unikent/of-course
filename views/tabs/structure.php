@@ -12,7 +12,7 @@
               <?php foreach ($cluster->modules->module as $module): ?>
               <?php if ($module->credit_amount > 0): ?>
               <li><a href="http://www.kent.ac.uk/courses/modulecatalogue/modules/<?php echo $module->module_code ?>"><?php echo $module->module_code ?> - <?php echo $module->module_title ?></a> - <?php echo $module->credit_amount ?> credits (<?php echo $module->ects_credit ?> ECTS) <span id="module-more-info-<?php echo $module->module_code ?>"><a href="#">summary</a></span>
-              <div class="module-synopsis"><?php //echo $module->synopsis ?></div>
+              <div class="module-synopsis"><?php echo $module->synopsis ?></div>
               </li>
               <?php endif; ?>
               <?php endforeach; ?>
@@ -32,7 +32,7 @@
               <?php foreach ($cluster->modules->module as $module): ?>
               <?php if ($module->credit_amount > 0): ?>
               <li><a href="http://www.kent.ac.uk/courses/modulecatalogue/modules/<?php echo $module->module_code ?>"><?php echo $module->module_code ?> - <?php echo $module->module_title ?></a> - <?php echo $module->credit_amount ?> credits (<?php echo $module->ects_credit ?> ECTS) <span id="module-more-info-<?php echo $module->module_code ?>"><a href="#">summary</a></span>
-              <div class="module-synopsis"><?php //echo $module->synopsis ?></div>
+              <div class="module-synopsis"><?php echo $module->synopsis ?></div>
               </li>
               <?php endif; ?>
               <?php endforeach; ?>
