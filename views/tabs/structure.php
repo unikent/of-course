@@ -1,22 +1,13 @@
 <div class="tabContent" id="tab2">
   <h2>Course structure</h2>
     <div class="tabs"> 
-        <ul class="tabsFallBackNav">    
-            
-            <li><a href="#tab1">Stage 1</a></li>
-            <li><a href="#tab2">Stage 2</a></li>
-            <li><a href="#tab3">Stage 3</a></li>
-            <li><a href="#tab4">Year Abroad</a></li>
-            <li><a href="#tab5">Year in Industry</a></li>
-            <li><a href="#tab6">Foundation Year</a></li>
-        </ul>
-               
-        <div class="tabContent" id="tab1">  
-          <h3>Stage 1</h3>
-          
-          
+        
+        <?php foreach ($course->modules->stages as $index => $stage): ?>
+        <div class="tabContent" id="tab<?php echo $index ?>">
+          <h3><?php echo $stage->name ?></h3>
+          <?php if ($stage->clusters->compulsory != null): ?>
           <h4>Compulsory modules</h4>
-          <?php foreach ($course->modules->clusters->compulsory as $cluster): ?>
+          <?php foreach ($stage->clusters->compulsory as $cluster): ?>
           <ul>
               <?php foreach ($cluster->modules->module as $module): ?>
               <?php if ($module->credit_amount > 0): ?>
@@ -27,11 +18,13 @@
               <?php endforeach; ?>
           </ul>
           <?php endforeach; ?>
+          <?php endif; ?>
           
+          <?php if ($stage->clusters->optional != null): ?>
           <h4>Optional modules</h4>
-          <?php foreach ($course->modules->clusters->optional as $cluster): ?>
-          <?php if ( $cluster->modules_required >= $cluster->modules_required ): ?>
-              <p>You must take between <?php echo $cluster->modules_required ?> and <?php echo $cluster->modules_required ?> credits from the following modules.</p>
+          <?php foreach ($stage->clusters->optional as $cluster): ?>
+          <?php if ( $cluster->maximum_modules_required > $cluster->modules_required ): ?>
+              <p>You must take between <?php echo $cluster->modules_required ?> and <?php echo $cluster->maximum_modules_required ?> credits from the following modules.</p>
           <?php else: ?>
               <p>You must take a total of <?php echo $cluster->modules_required ?> credits from the following modules.</p>
           <?php endif; ?>
@@ -45,17 +38,21 @@
               <?php endforeach; ?>
           </ul>
           <?php endforeach; ?>
+          <?php endif; ?>
           
+          <?php if ($stage->clusters->wildcard != null): ?>
           <h4>Wildcard modules</h4>
-          <?php foreach ($course->modules->clusters->optional as $cluster): ?>
-          <?php if ( $cluster->modules_required >= $cluster->modules_required ): ?>
-              <p>You must take between <?php echo $cluster->modules_required ?> and <?php echo $cluster->modules_required ?> credits from wildcard modules.</p>
+          <?php foreach ($stage->clusters->wildcard as $cluster): ?>
+          <?php if ( $cluster->maximum_modules_required > $cluster->modules_required ): ?>
+              <p>You must take between <?php echo $cluster->modules_required ?> and <?php echo $cluster->maximum_modules_required ?> credits from wildcard modules.</p>
           <?php else: ?>
               <p>You must take a total of <?php echo $cluster->modules_required ?> credits from wildcard modules.</p>
           <?php endif; ?>
           <?php endforeach; ?>
-          
+          <?php endif; ?>
         </div>
+        
+        <?php endforeach; ?>
         
     </div><!--/tabs-->
 </div><!--/tab2-->
