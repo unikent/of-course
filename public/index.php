@@ -2,9 +2,9 @@
 
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
-require dirname(__FILE__) . '/../config/paths.php';
+require dirname(__FILE__) . '/config/paths.php';
 
-require APP_PATH . '/vendor/autoload.php';
+require VENDOR_PATH . '/autoload.php';
 require APP_PATH . '/main/main.php';
 require APP_PATH . '/main/methods.php';
 
