@@ -1,4 +1,4 @@
-/config/paths.php
+/public/config/paths.php
 /config/config.php
 /menubin/
 vendor/
