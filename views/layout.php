@@ -128,6 +128,13 @@
             
                         </div>
 
+                        <?php if(isset($preview) && $preview == trye):?>
+                            <meta name="robots" content="noindex, nofollow">
+                            <div style='color: #b94a48;background-color: #f2dede;border: 1px solid #eed3d7;margin:20px 15px 5px; font-size:12px;padding:6px;'>
+                                This webpage is a preview ONLY and is not representive of any live courses offered by the univesity of kent.
+                            </div>
+                        <?php endif;?>
+
                         <?php echo $content; ?>
                     
 
