@@ -45,6 +45,21 @@ class CoursesFrontEnd {
  		Flight::layout('course_page', array('course'=>$course, 'type'=> $type, 'subjects'=> $subjects));
 	}
 
+
+	public function preview($hash){
+
+		$course = $this->pp->get_preview_programme($hash);	
+		$subjects = $this->pp->get_subject_index($preview->year, 'ug');
+
+		Flight::view()->set('type', 'ug');
+		Flight::view()->set('year', $preview->year);
+
+		// Debug option
+		if(isset($_GET['debug_performance'])){ inspect($course); }
+
+		Flight::layout('course_page', array('course'=>$course, 'type'=> 'ug', 'subjects'=> $subjects));
+	}
+	
 	public function subjects($type, $year)
 	{
 		// Get feed
