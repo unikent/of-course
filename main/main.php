@@ -56,7 +56,7 @@ class CoursesFrontEnd {
 		$subjects = $this->pp->get_subject_index($preview->year, 'ug');
 
 		Flight::view()->set('type', 'ug');
-		Flight::view()->set('year', $preview->year);
+		Flight::view()->set('year', $course->year);
 		Flight::view()->set('preview', true);
 
 		// Debug option
