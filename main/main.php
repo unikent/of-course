@@ -53,6 +53,12 @@ class CoursesFrontEnd {
 	public function preview($hash){
 
 		$course = $this->pp->get_preview_programme($hash);	
+
+		// Check for errors / 404 (so we can show custom 404 page)
+		if (! $course || isset($course->error)){
+			return Flight::layout('missing_course');
+		}
+
 		$subjects = $this->pp->get_subject_index($preview->year, 'ug');
 
 		Flight::view()->set('type', 'ug');
