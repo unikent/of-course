@@ -3,10 +3,10 @@
 	
 <h3>Tuition fees</h3>
 
-<p><?php echo $course->tuition_fees;?></p>
+<?php echo $course->tuition_fees;?>
 
 <h3>Funding </h3>
 
-<p><?php echo $course->funding;?></p>
+<?php echo $course->funding;?>
 
 </div>

@@ -45,6 +45,38 @@ class CoursesFrontEnd {
  		Flight::layout('course_page', array('course'=>$course, 'type'=> $type, 'subjects'=> $subjects));
 	}
 
+	/**
+	 * Display a preview page
+	 *
+	 * @param string $hash of preview
+	 */
+	public function preview($hash){
+
+		$course = $this->pp->get_preview_programme($hash);	
+
+		// Check for errors / 404 (so we can show custom 404 page)
+		if (! $course || isset($course->error)){
+			return Flight::layout('missing_course');
+		}
+
+		$subjects = $this->pp->get_subject_index($preview->year, 'ug');
+
+		Flight::view()->set('type', 'ug');
+		Flight::view()->set('year', $course->year);
+		Flight::view()->set('preview', true);
+
+		// Debug option
+		if(isset($_GET['debug_performance'])){ inspect($course); }
+
+		Flight::layout('course_page', array('course'=>$course, 'type'=> 'ug', 'subjects'=> $subjects));
+	}
+
+	/**
+	 * Display subjects page
+	 *
+	 * @param string Type UG|PG
+	 * @param yyyy Year to show
+	 */
 	public function subjects($type, $year)
 	{
 		// Get feed
@@ -54,8 +86,6 @@ class CoursesFrontEnd {
 
 		Flight::layout('subjects', array('subjects'=> $subjects));
 	}
-
-
 	
 	/**
 	 * List programmes - Show a list of all programmes availble to the system.
