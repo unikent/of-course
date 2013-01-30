@@ -4,13 +4,33 @@
     <div class="tabs"> 
         <ul class="tabsFallBackNav">    
             
+            <?php if(is_int(strpos($course->programme_type, 'foundation year')) && !empty($course->foundation_year)): ?>
+            <li><a href="#tab6">Foundation Year</a></li>
+            <?php endif; ?>
+
             <li><a href="#tab1">Stage 1</a></li>
             <li><a href="#tab2">Stage 2</a></li>
             <li><a href="#tab3">Stage 3</a></li>
+
+            <?php if(is_int(strpos($course->programme_type, 'year abroad')) && !empty($course->year_abroad)): ?>
             <li><a href="#tab4">Year Abroad</a></li>
+            <?php endif; ?>
+
+            <?php if(is_int(strpos($course->programme_type, 'year in industry')) && !empty($course->year_in_industry)): ?>
             <li><a href="#tab5">Year in Industry</a></li>
-            <li><a href="#tab6">Foundation Year</a></li>
+            <?php endif; ?>
+
         </ul>
+        
+        <?php if(is_int(strpos($course->programme_type, 'foundation year')) && !empty($course->foundation_year)): ?>      
+        <div class="tabContent" id="tab6">
+          <h3>Foundation year</h3>
+          <p><?php echo $course->foundation_year; ?></p>
+          <?php if(!empty($course->globals->foundation_year)): ?>
+          <p><?php echo $course->globals->foundation_year; ?></p>
+          <?php endif; ?>
+        </div>
+        <?php endif; ?>
                
         <div class="tabContent" id="tab1">  
           <h3>Stage 1</h3>
@@ -109,19 +129,25 @@
           <?php echo $course->module_disclaimer ?>
         </div>
         
+        <?php if(is_int(strpos($course->programme_type, 'year abroad')) && !empty($course->year_abroad)): ?>
         <div class="tabContent" id="tab4">  
-            <h3>Year abroad</h3>
-            <p><?php echo $course->year_abroad; ?></p>
+          <h3>Year abroad</h3>
+          <p><?php echo $course->year_abroad; ?></p>
+          <?php if(!empty($course->globals->year_abroad)): ?>
+          <p><?php echo $course->globals->year_abroad; ?></p>
+          <?php endif; ?>
         </div>
+        <?php endif; ?>
+
+        <?php if(is_int(strpos($course->programme_type, 'year in industry')) && !empty($course->year_in_industry)): ?>
         <div class="tabContent" id="tab5">  
-            <h3>Year in industry</h3>
-            <p><?php echo $course->year_in_industry; ?></p>
+          <h3>Year in industry</h3>
+          <p><?php echo $course->year_in_industry; ?></p>
+          <?php if(!empty($course->globals->year_in_industry)): ?>
+          <p><?php echo $course->globals->year_in_industry; ?></p>
+          <?php endif; ?>
         </div>
-                    
-        <div class="tabContent" id="tab6">
-          <h3>Foundation year</h3>
-          <p><?php echo $course->foundation_year; ?></p>
-        </div>
+        <?php endif; ?>
         
     </div><!--/tabs-->
 </div><!--/tab2-->

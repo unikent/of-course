@@ -1,6 +1,7 @@
-/config/paths.php
-/config/config.php
+/public/config/paths.php
+/public/config/config.php
 /menubin/
+menu/
 vendor/
 bin/
 composer.lock

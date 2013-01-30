@@ -27,4 +27,8 @@
   <h4>Professional recognition</h4>
   <p><?php echo $course->professional_recognition; ?></p>
   <p>For more information on the services Kent provides you to improve your career prospects visit <a href="http://www.kent.ac.uk/employability.">www.kent.ac.uk/employability.</a></p>
+
+  <?php if(!empty($course->careersemployability_text)): ?>
+  <p><?php echo $course->careersemployability_text; ?></p>
+  <?php endif; ?>
 </div>
