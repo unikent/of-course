@@ -29,16 +29,18 @@ $main = new CoursesFrontEnd();
 
 // AJAX
 Flight::route('/ajax/@type/@year/', array($main,'list_ajax'));
+// Preview
+Flight::route('/preview/@hash', array($main,'preview'));
 // key pages
 Flight::route('/@type/@year/search', array($main,'search'));
 Flight::route('/@type/@year/', array($main,'list_programmes'));
 // Subjects
 Flight::route('/@type/@year/subjects', array($main,'subjects'));
 Flight::route('/@type/@year/subjects/@id/@slug', array($main,'subject_view'));
-
 // courses
 Flight::route('/@type/@year/@id', array($main,'view'));
 Flight::route('/@type/@year/@id/@slug', array($main,'view'));
+
 
 // Run Flight!
 Flight::start();
