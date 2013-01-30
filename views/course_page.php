@@ -33,7 +33,12 @@
                     </div>
                 </div>
             <?php endif;?>
-            
+
+            <?php if (!empty($course->globals->general_disclaimer)): ?>
+            <div class="general_disclaimer">
+                <?php echo $course->globals->general_disclaimer; ?>
+            </div>
+            <?php endif;?>
             <!-- InstanceEndEditable -->
         </kentPageContent>
      </kentPageBodyFull>

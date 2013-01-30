@@ -8,10 +8,11 @@
         </tr>
         <tr>
           <td><h3>Related schools</h3>
-          <strong>TODO: We may want to change this because we only have admin and additional school, and no url for either.</strong>
               <ul>
-                <li><a href="/ug/2014/<?php echo $course->administrative_school[0]->name ?>"><?php echo $course->additional_school[0]->name ?></a></li>
-                <li><a href="/ug/2014/<?php echo $course->additional_school[0]->name ?>"><?php echo $course->additional_school[0]->name ?></a></li>
+                <li><a href="<?php echo $course->url_for_administrative_school ?>"><?php echo $course->administrative_school[0]->name ?></a></li>
+                <?php if(!empty($course->additional_school[0])): ?>
+                <li><a href="<?php echo $course->url_for_additional_school ?>"><?php echo $course->additional_school[0]->name ?></a></li>
+                <?php endif; ?>
               </ul></td>
         </tr>
         <tr>
@@ -24,31 +25,33 @@
           <th scope="col"><span class="showHideTitle">Resources</span></th>
         </tr>
         <tr>
-          <td><h3>Subject leaflet</h3>
+          <td><h3>Download a subject leaflet (pdf)</h3>
               <p>Our subject leaflets provide more detail about individual subjects areas. See:</p>
             <ul>
                 <li><a href="<?php echo $course->subject_leaflet[0]->tracking_code ?>"><?php echo $course->subject_leaflet[0]->name ?></a></li>
+                <?php if(!empty($course->subject_leaflet_2[0])): ?>
                 <li><a href="<?php echo $course->subject_leaflet_2[0]->tracking_code ?>"><?php echo $course->subject_leaflet_2[0]->name ?></a></li>
+                <?php endif; ?>
             </ul></td>
         </tr>
         <tr>
           <td><h3>Read our student profiles </h3>
-          <strong>TODO: This will need fixing because we have no student names.</strong>
               <ul>
-                <li><a href="<?php echo $course->student_profile_2 ?>">Student profile 1</a></li>
-                <li><a href="<?php echo $course->student_profile_2 ?>">Student profile 2</a></li>
+                <li><a href="<?php echo $course->student_profile ?>"><?php echo $course->student_profile_1_link_text ?></a></li>
+                <?php if(!empty($course->student_profile_2)): ?>
+                <li><a href="<?php echo $course->student_profile_2 ?>"><?php echo $course->student_profile_2_link_text ?></a></li>
+                <?php endif; ?>
               </ul></td>
         </tr>
+
+        <?php if(!empty($course->open_days)): ?>
         <tr>
           <td><h3>Open days</h3>
-              <p><strong>TODO: We don't have any such field? [This will be a global field that applies to all pages]</strong></p>
-            <p>Our general open days will give you a flavour of what it is like to be an undergraduate, postgraduate or part-time student at Kent. They include a programme of talks for undergraduate students, with subject lectures and demonstrations, plus self-guided walking tours of the campus and a study bedroom. </p>
-            <p>Our next open day are:</p>
-            <ul>
-                <li>Canterbury - Saturday 6 July 2013</li>
-              <li>Medway - Saturday 22 June 2013</li>
-            </ul></td>
+              <?php echo $course->open_days ?>
+          </td>
         </tr>
+        <?php endif; ?>
+
       </table>
       <table class="em">
         <tr>
@@ -67,11 +70,6 @@
       </table>
       <p>&nbsp;</p>
       
-      <div>
-          <h3>KIS explanatory text</h3>
-          <?php echo $course->kis_explanatory_textarea ?>
-      </div>
-      
     </div>
 
 
@@ -81,7 +79,7 @@
         <iframe id="unistats-widget-frame2"
     title="Unistats KIS Widget" src="http://widget.unistats.ac.uk/Widget/<?php echo $course->ukprn ?>/<?php echo $course->kiscourseid ?>/vertical/small/en-GB"
     scrolling="no"
-    style="overflow: hidden; border: 0px none transparent; width: 190px; height: 500px;"> </iframe>
+    style="overflow: hidden; border: 0px none transparent; width: 190px; height: 400px;"> </iframe>
       </p>
       <div class="snippetBox ncright">
         <kentSnippetCallout snippetPack='Chronos' snippetVersion='1.0'>
@@ -102,7 +100,7 @@
           <div class="calloutContent">
             <h2>UNISTATS / KIS</h2>
             <h4>Key Information Sets</h4>
-            <p><?php echo $course->kis_explanatory_text?></p>
+            <p><?php echo $course->kis_explanatory_textarea ?></p>
           </div>
         </kentSnippetCallout>
       </div>
