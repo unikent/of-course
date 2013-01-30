@@ -24,7 +24,7 @@ class CoursesFrontEnd {
 	{
 		// Use webservices to get course data & subject data
 		$course = $this->pp->get_programme($year, $type, $id);
-		$subjects = $this->pp->get_subject_index($year, $type);
+		//$subjects = $this->pp->get_subject_index($year, $type);
 
 		Flight::view()->set('type', $type);
 		Flight::view()->set('year', $year);
