@@ -1,25 +1,14 @@
-<!DOCTYPE html>
-<html><!-- InstanceBegin template="/Templates/chronos_v1.dwt" codeOutsideHTMLIsLocked="false" -->
-<!-- TEMPLATE_VERSION="Chronos v1.0" -->
-    <head>
-        <!-- InstanceBeginEditable name="doctitle" -->
-        <title></title>
-        <!-- InstanceEndEditable -->
-        <kentIncludeMeta>
-        <!-- InstanceBeginEditable name="metadata" -->
-            <!--<meta name="keywords" content="" />-->
-            <!--<meta name="description" content="" />-->
-        <!-- InstanceEndEditable -->
-        </kentIncludeMeta>
-        <kentIncludeCSS />
-           <link rel='stylesheet' href='<?php echo BASE_URL ?>css/import.css' />
-        <kentHideInBrowser>
-            <!--#include virtual="Templates/dreamweaver-styles.shtml" -->
-            <!--#include virtual="/Templates/dreamweaver-styles.shtml" -->
-        </kentHideInBrowser>
-        <kentIncludeJavascript />
+<!-- InstanceBegin template="/Templates/daedalus_v1.dwt" codeOutsideHTMLIsLocked="false" -->
+<!-- TEMPLATE_VERSION="Daedalus v1.0" -->
+<kentWrapper type="standard">
 
-        <script type='text/javascript' src='<?php echo BASE_URL ?>js/menu.js'></script>
+	<kentMeta>
+		<!-- InstanceBeginEditable name="metadata" -->
+		<title>Test</title>
+	
+	
+		<link rel='stylesheet' href='<?php echo BASE_URL ?>css/import.css' />
+		<script type='text/javascript' src='<?php echo BASE_URL ?>js/menu.js'></script>
         <script type='text/javascript' src='<?php echo BASE_URL ?>js/quickspot.js'></script>
 
         <script type='text/javascript'>
@@ -36,15 +25,14 @@
                 }
             });
         </script>
-        <!-- InstanceBeginEditable name="head" --><!-- InstanceEndEditable -->
-    </head>
-    <body>
-        <kentPage>
-            <kentPageHeader>
-                <kentGlobalHeader/>
-                <kentDepartmentHeader hideBanner='true'/>
-            </kentPageHeader>
-             <div class="search_bar">
+		
+		
+		<!-- InstanceEndEditable -->
+	</kentMeta>
+	<kentContent menu="false">
+		<!-- InstanceBeginEditable name="content" -->
+
+			<div class="search_bar">
                             <div class="search_box">
                                 <input id='searchbox' type="text" name="search" placeholder="Search all courses..." autocomplete="off">
                                 <input type="image" src="<?php echo BASE_URL ?>/images/search.jpg">
@@ -136,13 +124,9 @@
                         <?php endif;?>
 
                         <?php echo $content; ?>
-                    
 
-            <kentPageFooter>
-                <kentDepartmentFooter/>
-                <kentGlobalFooter/>
-            </kentPageFooter>
-        </kentPage>
-    </body>
+		<!-- InstanceEndEditable -->
+	</kentContent>
+
+</kentWrapper>	
 <!-- InstanceEnd -->
-</html>
