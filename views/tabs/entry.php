@@ -1,4 +1,4 @@
-<div class="tabContent" id="tab3">
+
   <h2>Entry requirements</h2>
   <p><?php echo $course->entry_profile;?></p>
   <!-- <p><?php echo $course->entry_requirements_overriding_text;?></p> -->
@@ -6,12 +6,15 @@
   <h3>Home/EU students </h3>
   <p><?php echo $course->homeeu_students_intro_text;?></p>
   
-  <kentSnippetTable alternate="rows" snippetPack='Default' snippetVersion='1.0'>
-    <table class="em">
-      <tr>
-        <th width="45%">Qualification</th>
-        <th width="55%">Typical offer/minimum requirement</th>
-      </tr>
+
+    <table class="table table-striped">
+    	<thead>
+	      <tr>
+	        <th>Qualification</th>
+	        <th>Typical offer/minimum requirement</th>
+	      </tr>
+    	</thead>
+    	<tbody>
 
       <?php if(!empty($course->a_level)): ?>
       <tr>
@@ -75,11 +78,15 @@
         <td><?php echo $course->irish_leaving_certificate ?></td>
       </tr>
       <?php endif; ?>
+    	</tbody>
     </table>
 
     <h3>International students<a href="/courses/undergrad/apply/entry.html"></a></h3>
     <p><?php echo $course->international_students_intro_text ?></p>
-    <table class="em">
+    <table class="table table-striped">
+    <thead>
+    </thead>
+    <tbody>
       <tr>
         <td>Kent International Foundation Programme</td>
         <td><?php echo $course->kent_international_foundation_programme ?></td>
@@ -88,7 +95,7 @@
         <td>English Language Requirements</td>
         <td><?php echo $course->english_language_requirements ?></td>
       </tr>
+    </tbody>
     </table>
     <p><?php echo $course->general_entry_requirements_link ?></p>
-  </kentSnippetTable>
-</div>
+

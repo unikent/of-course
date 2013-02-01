@@ -7,9 +7,7 @@
 		<title>Test</title>
 	
 	
-		<link rel='stylesheet' href='<?php echo BASE_URL ?>css/import.css' />
-		<script type='text/javascript' src='<?php echo BASE_URL ?>js/menu.js'></script>
-        <script type='text/javascript' src='<?php echo BASE_URL ?>js/quickspot.js'></script>
+		
 
         <script type='text/javascript'>
             quickspot.attach({
