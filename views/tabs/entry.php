@@ -7,7 +7,7 @@
   <p><?php echo $course->homeeu_students_intro_text;?></p>
   
 
-    <table class="table table-striped">
+    <table class="table">
     	<thead>
 	      <tr>
 	        <th>Qualification</th>
@@ -83,9 +83,13 @@
 
     <h3>International students<a href="/courses/undergrad/apply/entry.html"></a></h3>
     <p><?php echo $course->international_students_intro_text ?></p>
-    <table class="table table-striped">
-    <thead>
-    </thead>
+    <table class="table">
+	<thead>
+      <tr>
+        <th>Qualification</th>
+        <th>Typical offer/minimum requirement</th>
+      </tr>
+	</thead>
     <tbody>
       <tr>
         <td>Kent International Foundation Programme</td>
@@ -99,3 +103,6 @@
     </table>
     <p><?php echo $course->general_entry_requirements_link ?></p>
 
+
+<h2>How to apply</h2>
+<p><?php echo $course->how_to_apply;?>

@@ -2,52 +2,64 @@
   <h2>Course structure</h2> 
         
         <?php foreach ($course->modules->stages as $index => $stage): ?>
-
-
+        	<?php $compulsory_modules_present = false; ?>
+         <div class="info-section">
           <h3><?php echo $stage->name ?></h3>
-          <?php if ($stage->clusters->compulsory != null): ?>
-          <h4>Compulsory modules</h4>
-          <?php foreach ($stage->clusters->compulsory as $cluster): ?>
-          <ul>
-              <?php foreach ($cluster->modules->module as $module): ?>
-              <?php if ($module->credit_amount > 0): ?>
-              <li>
-              		<a data-toggle="collapse" data-target="#module-more-info-<?php echo $module->module_code ?>"><?php echo $module->module_code ?> - <?php echo $module->module_title ?></a>
-              		
-              		<div id="module-more-info-<?php echo $module->module_code ?>" class="collapse module-synopsis"><?php echo $module->synopsis ?>
-              			<p><strong>Credits:</strong> <?php echo $module->credit_amount ?> credits (<?php echo $module->ects_credit ?> ECTS credits).</p>
-              			<a href="http://www.kent.ac.uk/courses/modulecatalogue/modules/<?php echo $module->module_code ?>">Find out more</a>
-              		</div>
-              </li>
-              <?php endif; ?>
-              <?php endforeach; ?>
-          </ul>
-          <?php endforeach; ?>
+          <?php if (! empty($stage->clusters->compulsory) ): ?>
+          <div class="info-subsection">
+          	  <h4>Compulsory modules</h4>
+	          <?php foreach ($stage->clusters->compulsory as $cluster): ?>
+	          <ul class="unstyled">
+	              <?php foreach ($cluster->modules->module as $module): ?>
+		              <?php if ($module->credit_amount > 0): ?>
+		              <?php $compulsory_modules_present = true; ?>
+		              <li>
+		              		<span class="btn btn-link module-collapse" data-toggle="collapse" data-target="#module-more-info-<?php echo $module->module_code ?>"><i class="icon-plus-sign"></i> <?php echo $module->module_code ?> - <?php echo $module->module_title ?></span>
+		              		
+		              		<div id="module-more-info-<?php echo $module->module_code ?>" class="collapse module-synopsis"><p><?php echo $module->synopsis ?></p>
+		              			<p><strong>Credits:</strong> <?php echo $module->credit_amount ?> credits (<?php echo $module->ects_credit ?> ECTS credits).</p>
+		              			<p class="module-read-more"><a href="http://www.kent.ac.uk/courses/modulecatalogue/modules/<?php echo $module->module_code ?>">Read more <i class="icon-arrow-right"></i></a></p>
+		              		</div>
+		              </li>
+		              <?php endif; ?>
+	              <?php endforeach; ?>
+	              <?php if (! $compulsory_modules_present): ?>
+	              <li>No compulsory modules.</li>
+	              <?php endif; ?>
+	          </ul>
+	          <?php endforeach; ?>
+          </div>
           <?php endif; ?>
           
           <?php if ($stage->clusters->optional != null): ?>
-          <h4>Optional modules</h4>
-          <?php foreach ($stage->clusters->optional as $cluster): ?>
-          <?php if ( $cluster->maximum_modules_required > $cluster->modules_required ): ?>
-              <p>You must take between <?php echo $cluster->modules_required ?> and <?php echo $cluster->maximum_modules_required ?> credits from the following modules.</p>
-          <?php else: ?>
-              <p>You must take a total of <?php echo $cluster->modules_required ?> credits from the following modules.</p>
-          <?php endif; ?>
-          <ul>
-              <?php foreach ($cluster->modules->module as $module): ?>
-              <?php if ($module->credit_amount > 0): ?>
-              <li>
-              		<a data-toggle="collapse" data-target="#module-more-info-<?php echo $module->module_code ?>"><?php echo $module->module_code ?> - <?php echo $module->module_title ?></a>
-              		
-              		<div id="module-more-info-<?php echo $module->module_code ?>" class="collapse module-synopsis"><?php echo $module->synopsis ?>
-              			<p><strong>Credits:</strong> <?php echo $module->credit_amount ?> credits (<?php echo $module->ects_credit ?> ECTS credits).</p>
-              			<a href="http://www.kent.ac.uk/courses/modulecatalogue/modules/<?php echo $module->module_code ?>">Find out more</a>
-              		</div>
-              </li>
-              <?php endif; ?>
-              <?php endforeach; ?>
-          </ul>
-          <?php endforeach; ?>
+          <div class="info-subsection">
+	          <h4>Optional modules</h4>
+	          <?php foreach ($stage->clusters->optional as $cluster): ?>
+	          <?php if ( $cluster->maximum_modules_required > $cluster->modules_required ): ?>
+	              <p>You must take between <?php echo $cluster->modules_required ?> and <?php echo $cluster->maximum_modules_required ?> credits from the following optional modules.</p>
+	          <?php else: ?>
+	              <p>You must take a total of <?php echo $cluster->modules_required ?> credits from the following optional modules.</p>
+	          <?php endif; ?>
+	          <ul class="unstyled">
+	              <?php foreach ($cluster->modules->module as $module): ?>
+	              <?php if ($module->credit_amount > 0): ?>
+	              <?php $optional_modules_present = true; ?>
+	              <li>
+	              		<span class="btn btn-link" data-toggle="collapse" data-target="#module-more-info-<?php echo $module->module_code ?>"><?php echo $module->module_code ?> - <?php echo $module->module_title ?></span>
+	              		
+	              		<div id="module-more-info-<?php echo $module->module_code ?>" class="collapse module-synopsis"><p><?php echo $module->synopsis ?></p>
+	              			<p><strong>Credits:</strong> <?php echo $module->credit_amount ?> credits (<?php echo $module->ects_credit ?> ECTS credits).</p>
+	              			<p class="module-read-more"><a href="http://www.kent.ac.uk/courses/modulecatalogue/modules/<?php echo $module->module_code ?>">Read more <i class="icon-arrow-right"></i></a></p>
+	              		</div>
+	              </li>
+	              <?php endif; ?>
+	              <?php endforeach; ?>
+	              <?php if (! $optional_modules_present): ?>
+	              <li>No optional modules.</li>
+	              <?php endif; ?>
+	          </ul>
+	          <?php endforeach; ?>
+          </div>
           <?php endif; ?>
           
           <?php if ($stage->clusters->wildcard != null): ?>
@@ -61,5 +73,22 @@
           <?php endforeach; ?>
           <?php endif; ?>
           
-        
+         </div>
         <?php endforeach; ?>
+
+
+
+    <div class="tabContent" id="tab3">
+        <h2>Teaching and assessment</h2>
+        <p><?php echo $course->teaching_and_assessment; ?></p>
+
+        <?php if(!empty($course->programme_aims)): ?>
+        <h2>Programme aims</h2>
+        <p><?php echo $course->programme_aims; ?></p>
+        <?php endif; ?>
+
+		<?php if(!empty($course->learning_outcomes)): ?>
+        <h2>Learning outcomes</h2>
+        <p><?php echo $course->learning_outcomes; ?></p>
+        <?php endif; ?>
+    </div>
