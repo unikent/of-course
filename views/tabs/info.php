@@ -40,10 +40,10 @@
 		</ul>
 	</div>
 	<?php endif; ?>
-	<?php if(!empty($course->open_days)): ?>
+	<?php if(!empty($course->globals->open_days)): ?>
 	<div class="info-subsection">
 	    <h4>Open days</h4>
-	    <?php echo $course->open_days ?>
+	    <?php echo $course->globals->open_days ?>
 	</div>
 	<?php endif; ?>
 </div>

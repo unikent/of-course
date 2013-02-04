@@ -12,10 +12,12 @@
 			<ul class="nav nav-tabs">
 				<li class="active"><a href="#overview" data-toggle="tab">Overview</a></li>
 				<li><a href="#structure" data-toggle="tab">Course structure</a></li>
+				<li><a href="#teaching" data-toggle="tab">Teaching &amp; assessment</a></li>
+				<li><a href="#careers" data-toggle="tab">Careers</a></li>
 				<li><a href="#entry" data-toggle="tab">Entry requirements</a></li>
-				<li><a href="#careers" data-toggle="tab">Careers and employability</a></li>
-				<li><a href="#fees" data-toggle="tab">Fees and funding</a></li>
-				<li><a href="#info" data-toggle="tab">Further information</a></li>
+				<li><a href="#fees" data-toggle="tab">Fees &amp; funding</a></li>
+				<li><a href="#apply" data-toggle="tab">Apply</a></li>
+				<li><a href="#info" data-toggle="tab">Further info</a></li>
 			</ul>
 		</div><!-- /span -->
 	</div><!-- /row -->
@@ -25,9 +27,11 @@
 			<div class="tab-content">
 				<section class="tab-pane active fade in" id="overview"><?php Flight::render('tabs/overview', array('course'=>$course)); ?></section>
 				<section class="tab-pane fade" id="structure"><?php Flight::render('tabs/structure', array('course'=>$course)); ?></section>
-				<section class="tab-pane fade" id="entry"><?php Flight::render('tabs/entry', array('course'=>$course)); ?></section>
+				<section class="tab-pane fade" id="teaching"><?php Flight::render('tabs/teaching', array('course'=>$course)); ?></section>
 				<section class="tab-pane fade" id="careers"><?php Flight::render('tabs/careers', array('course'=>$course)); ?></section>	
+				<section class="tab-pane fade" id="entry"><?php Flight::render('tabs/entry', array('course'=>$course)); ?></section>
 				<section class="tab-pane fade" id="fees"><?php Flight::render('tabs/fees', array('course'=>$course)); ?></section>
+				<section class="tab-pane fade" id="apply"><?php Flight::render('tabs/apply', array('course'=>$course)); ?></section>
 				<section class="tab-pane fade" id="info"><?php Flight::render('tabs/info', array('course'=>$course)); ?></section>
 			</div>
 		</div><!-- /span -->
@@ -46,10 +50,10 @@
 					
 						<li><strong>Location:</strong> <a href="<?php echo $course->location[0]->url;?>"><?php echo $course->location[0]->name;?></a>	</li>
 					
-						<li><strong>Mode of study:</strong> <br><?php echo $course->mode_of_study;?></li>
+						<li><strong>Mode of study:</strong> <?php echo $course->mode_of_study;?></li>
 					
 						<?php if(!empty($course->duration)): ?>
-						<li><strong>Duration:</strong> <br><?php echo $course->duration;?></li>
+						<li><strong>Duration:</strong> <?php echo $course->duration;?></li>
 						<?php endif; ?>
 					
 						<?php if(!empty($course->start)): ?>

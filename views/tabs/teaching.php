@@ -1,5 +1,5 @@
     <div class="tabContent" id="tab3">
-        <h2>Teaching and assessment</h2>
+        <h2>Teaching &amp; assessment</h2>
         <p><?php echo $course->teaching_and_assessment; ?></p>
 
         <?php if(!empty($course->programme_aims)): ?>

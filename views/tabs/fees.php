@@ -1,4 +1,4 @@
-<h2>Fees and funding</h2>
+<h2>Fees &amp; funding</h2>
 	
 <h3>Tuition fees</h3>
 
