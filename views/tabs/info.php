@@ -66,7 +66,7 @@
 <div class="well">
 	<h3>UNISTATS / KIS</h3>
 	<h4>Key Information Sets</h4>
-	<p><?php echo $course->kis_explanatory_textarea ?></p>
+	<?php echo $course->kis_explanatory_textarea ?>
 </div>
 </div>
 <div class="span5">
