@@ -21,6 +21,9 @@
 
 		<!-- InstanceEndEditable -->
 	</kentContent>
+	<kentScripts>
 
+
+	</kentScripts>	
 </kentWrapper>	
 <!-- InstanceEnd -->
