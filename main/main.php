@@ -59,7 +59,7 @@ class CoursesFrontEnd {
 			return Flight::layout('missing_course');
 		}
 
-		$subjects = $this->pp->get_subject_index($preview->year, 'ug');
+		$subjects = $this->pp->get_subject_index($course->year, 'ug');
 
 		Flight::view()->set('type', 'ug');
 		Flight::view()->set('year', $course->year);
