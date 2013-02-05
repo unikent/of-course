@@ -12,10 +12,10 @@
 			<ul class="nav nav-tabs">
 				<li class="active"><a href="#overview" data-toggle="tab">Overview</a></li>
 				<li><a href="#structure" data-toggle="tab">Course structure</a></li>
-				<li><a href="#teaching" data-toggle="tab">Teaching &amp; assessment</a></li>
+				<li><a href="#teaching" data-toggle="tab">Teaching &amp; Assessment</a></li>
 				<li><a href="#careers" data-toggle="tab">Careers</a></li>
 				<li><a href="#entry" data-toggle="tab">Entry requirements</a></li>
-				<li><a href="#fees" data-toggle="tab">Fees &amp; funding</a></li>
+				<li><a href="#fees" data-toggle="tab">Fees &amp; Funding</a></li>
 				<li><a href="#apply" data-toggle="tab">Apply</a></li>
 				<li><a href="#info" data-toggle="tab">Further info</a></li>
 			</ul>
@@ -76,6 +76,45 @@
 			</aside>
 		</div><!-- /span -->
 	</div><!-- /row -->
+	
+	<section>
+		<h3>Related to this course</h3>
+
+	</section>
+	
+	<div id="myCarousel" class="carousel slide">
+  <!-- Carousel items -->
+  <div class="carousel-inner">
+  <?php $count = 0; ?>
+  <?php for( $i = 0; $i < ( intval( count($course->related_courses) / 4 ) ) + 1; $i++ ): ?>
+  <?php $related_courses = array_slice($course->related_courses, $i*4) ?>
+	<div class="<?php if ($count == 0) echo 'active ' ?>item">
+		<div class="row">
+			<?php foreach($related_courses as $related_course): ?>
+			<a href="../<?php echo $related_course->id ?>/<?php echo $related_course->slug ?>">
+				<div class="span3 related-course alert alert-info">
+	              <h4><?php echo $related_course->name ?></h4>
+	              <p></p>
+	              <p><?php echo $related_course->award ?> <?php echo $related_course->mode_of_study ?></p>
+	              <p><?php echo $related_course->campus ?> campus</p>
+	              <p><?php echo $related_course->subject ?> subject area</p>
+	              <p>UCAS code <?php echo $related_course->ucas_code ?></p>
+				</div>
+			</a>
+			<?php $count++; if ($count%4 == 0) break; ?>
+			<?php endforeach; ?>
+		</div>
+	</div>
+	<?php endfor; ?>
+  </div>
+  <!-- Carousel nav -->
+  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+</div>
+
+
+	
+<!-- 	 [id] => 235 [name] => Accounting and Finance [slug] => accounting-and-finance [award] => BA (Hons) [subject] => Accounting & Finance [main_school] => Kent Business School [secondary_school] => [campus] => Canterbury [new_programme] => [subject_to_approval] => [mode_of_study] => Full-time only [ucas_code] => N400 [search_keywords] => accounting and finance,ba,hons, business [campus_id] => 1 [pos_code] => ACCF:BA ) -->
 	
 	<?php if (!empty($course->globals->general_disclaimer)): ?>
 	<footer class="general_disclaimer">
