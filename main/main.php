@@ -10,6 +10,7 @@ class CoursesFrontEnd {
 	public function __construct()
 	{
 		$this->pp = new ProgrammesPlant\API(XCRI_WEBSERVICE);
+		$this->pp->no_ssl_verification();
 	}
 
 	/**

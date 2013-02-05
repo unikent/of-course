@@ -4,7 +4,7 @@
 
 	<kentMeta>
 		<!-- InstanceBeginEditable name="metadata" -->
-		<title>Test</title>
+		<title></title>
 		<!-- InstanceEndEditable -->
 	</kentMeta>
 	<kentContent>
