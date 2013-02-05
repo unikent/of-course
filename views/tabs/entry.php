@@ -1,10 +1,10 @@
 
   <h2>Entry requirements</h2>
-  <p><?php echo $course->entry_profile;?></p>
-  <!-- <p><?php echo $course->entry_requirements_overriding_text;?></p> -->
+  <?php echo $course->entry_profile;?>
+  <!-- <?php echo $course->entry_requirements_overriding_text;?> -->
   
   <h3>Home/EU students </h3>
-  <p><?php echo $course->homeeu_students_intro_text;?></p>
+  <?php echo $course->homeeu_students_intro_text;?>
   
 
     <table class="table">
@@ -82,7 +82,7 @@
     </table>
 
     <h3>International students<a href="/courses/undergrad/apply/entry.html"></a></h3>
-    <p><?php echo $course->international_students_intro_text ?></p>
+    <?php echo $course->international_students_intro_text ?>
     <table class="table">
 	<thead>
       <tr>
@@ -101,8 +101,8 @@
       </tr>
     </tbody>
     </table>
-    <p><?php echo $course->general_entry_requirements_link ?></p>
+   <?php echo $course->general_entry_requirements_link ?>
 
 
 <h2>How to apply</h2>
-<p><?php echo $course->how_to_apply;?>
+<?php echo $course->how_to_apply;?>
