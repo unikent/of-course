@@ -1,7 +1,4 @@
-            <kentPageBody>
-                <kentPageBodyFull>
-
-                    <kentPageContent>                        
+                     
                         <div style='padding:30px;'>
 
                         <h1>Advanced Course search</h1>
@@ -41,11 +38,7 @@
 
                         
                     </div>
-                    
-
-                    </kentPageContent>
-                </kentPageBodyFull>
-            </kentPageBody>
+                   
             
  <script type="text/javascript" charset="utf8" src="//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.1/jquery.dataTables.min.js"></script>
  <script type="text/javascript" charset="utf-8" language="javascript" src="<?php echo BASE_URL ?>js/DT_bootstrap.js"></script>

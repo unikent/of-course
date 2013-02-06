@@ -1,14 +1,16 @@
-    <div class="tabContent" id="tab3">
-        <h2>Teaching and assessment</h2>
-        <p><?php echo $course->teaching_and_assessment; ?></p>
+<h2>Teaching &amp; Assessment</h2>
+<?php echo $course->teaching_and_assessment; ?>
 
-        <?php if(!empty($course->programme_aims)): ?>
-        <h2>Programme aims</h2>
-        <p><?php echo $course->programme_aims; ?></p>
-        <?php endif; ?>
+<?php if(!empty($course->programme_aims)): ?>
+<section class="info-section">
+	<h3>Programme aims</h3>
+	<?php echo $course->programme_aims; ?>
+</section>
+<?php endif; ?>
 
-		<?php if(!empty($course->learning_outcomes)): ?>
-        <h2>Learning outcomes</h2>
-        <p><?php echo $course->learning_outcomes; ?></p>
-        <?php endif; ?>
-    </div>
+<?php if(!empty($course->learning_outcomes)): ?>
+<section class="info-section">
+	<h3>Learning outcomes</h3>
+	<?php echo $course->learning_outcomes; ?>
+</section>
+<?php endif; ?>

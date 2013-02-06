@@ -10,6 +10,7 @@ class CoursesFrontEnd {
 	public function __construct()
 	{
 		$this->pp = new ProgrammesPlant\API(XCRI_WEBSERVICE);
+		$this->pp->no_ssl_verification();
 	}
 
 	/**
@@ -24,7 +25,6 @@ class CoursesFrontEnd {
 	{
 		// Use webservices to get course data & subject data
 		$course = $this->pp->get_programme($year, $type, $id);
-		//$subjects = $this->pp->get_subject_index($year, $type);
 
 		Flight::view()->set('type', $type);
 		Flight::view()->set('year', $year);
@@ -59,7 +59,7 @@ class CoursesFrontEnd {
 			return Flight::layout('missing_course');
 		}
 
-		$subjects = $this->pp->get_subject_index($preview->year, 'ug');
+		$subjects = $this->pp->get_subject_index($course->year, 'ug');
 
 		Flight::view()->set('type', 'ug');
 		Flight::view()->set('year', $course->year);
@@ -106,15 +106,27 @@ class CoursesFrontEnd {
 	}
 
 	/**
-	 *
+	 * Data formatted for searching by quickspot
 	 *
 	 */
-	public function list_ajax($type, $year){
+	public function ajax_search_data($type, $year){
 		$out = array();
 		$js = $this->pp->get_programmes_index($year, $type);
 		foreach($js as $j)$out[] = $j;
 		echo json_encode($out);
 	}
+	/**
+	 * Subjects Page
+	 *
+	 */
+	public function ajax_subjects_page(){
+
+		$subjects = $this->pp->get_subjectcategories();
+
+		return Flight::render('menus/subjects', array('subjects'=> $subjects));
+	}
+
+
 	
 	
 	/**
