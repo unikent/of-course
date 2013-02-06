@@ -92,12 +92,11 @@
 			
 				<?php foreach($related_courses as $related_course): ?>
 				<div class="span3 related-course">
-	                <div class="view view-first">
+	                <div class="cell">
 	                <a href="../<?php echo $related_course->id ?>/<?php echo $related_course->slug ?>">
 	                    <div class="mask">
-	                        <h4><?php echo $related_course->name ?></h4>
+	                        <p><?php echo $related_course->name ?></p>
 	                        <p><?php echo $related_course->award ?></p>
-	                        <span class="info">Read More</span>
 	                    </div>
 	                </a>
 	                </div> 
