@@ -23,25 +23,31 @@ class CoursesFrontEnd {
 	 */
 	public function view($type, $year, $id, $slug = '')
 	{
-		// Use webservices to get course data & subject data
-		$course = $this->pp->get_programme($year, $type, $id);
 
 		Flight::view()->set('type', $type);
 		Flight::view()->set('year', $year);
 
-		// Debug option
-		if(isset($_GET['debug_performance'])){ inspect($course); }
-
-		// Check for errors / 404 (so we can show custom 404 page)
-		if (! $course || isset($course->error)){
+		// Use webservices to get course data for programme
+		try
+		{
+			$course = $this->pp->get_programme($year, $type, $id);
+		}
+		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
+		{
+			// 404? handle has missing/unknown course
+			Flight::response()->status(404);
 			return Flight::layout('missing_course');
 		}
+		
+		// Debug option
+		if(isset($_GET['debug_performance'])){ inspect($course); }
 		
 		// Fix slug paths
 		if($course->slug != $slug){
  			return Flight::redirect($type.'/'.$year.'/'.$id.'/'.$course->slug);
  		}
 
+ 		// Render programme page
  		Flight::layout('course_page', array('course'=>$course, 'type'=> $type, 'subjects'=> $subjects));
 	}
 
@@ -52,18 +58,31 @@ class CoursesFrontEnd {
 	 */
 	public function preview($hash){
 
-		$course = $this->pp->get_preview_programme($hash);	
-
-		// Check for errors / 404 (so we can show custom 404 page)
-		if (! $course || isset($course->error)){
-			return Flight::layout('missing_course');
-		}
-
-		$subjects = $this->pp->get_subject_index($course->year, 'ug');
-
+		//Set vars
 		Flight::view()->set('type', 'ug');
 		Flight::view()->set('year', $course->year);
 		Flight::view()->set('preview', true);
+
+		try
+		{
+			$course = $this->pp->get_preview_programme($hash);	
+		}
+		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
+		{
+			// 404? handle has missing/unknown course
+			Flight::response()->status(404);
+			return Flight::layout('missing_course');
+		}
+
+		try 
+		{
+			$subjects = $this->pp->get_subject_index($course->year, 'ug');
+		} 
+		catch(Exception $e)
+		{ 	
+			// If this fails, so be it. Move on.
+			$subjects = array();
+		}
 
 		// Debug option
 		if(isset($_GET['debug_performance'])){ inspect($course); }
