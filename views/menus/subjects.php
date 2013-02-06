@@ -1,12 +1,34 @@
 
-<a href="<?php echo Flight::url("{$type}/{$year}/subjects"); ?>" id="campuses_and_centres_anchor">Subjects</a>
+<?php
+// Divide our array in half so we can display it in two columns
+$subjects = (array)$subjects;
+$len = count($subjects);
+$quater =  $len / 4;
 
- <div id="campuses_and_centres_links" class="megamenu" style="display: none; ">
-    <div class="maps_megacontentarea">
-        <?php foreach($subjects as $subject): ?>
-            <div class="megacontentsection">
-               <a href='<?php echo Flight::url("{$type}/{$year}/subjects/{$subject->id}/{$subject->name}"); ?>'><?php echo $subject->name; ?></a>
-            </div>
-        <?php endforeach;?>
-    </div>
+$subjects_a = array_slice($subjects, 0, $quater );
+$subjects_b = array_slice($subjects, $quater, $quater );
+$subjects_c = array_slice($subjects, $quater*2, $quater);
+$subjects_d = array_slice($subjects, $quater*3, $quater);
+
+?>
+<div class='span3'>
+	<?php foreach($subjects_a as $subject): ?>
+
+	  <a href='<?php echo Flight::url("subjects/{$subject->id}/{$subject->name}"); ?>'><?php echo $subject->name; ?></a>
+	<?php endforeach;?>
+</div>
+<div class='span3'>
+	<?php foreach($subjects_b as $subject): ?>
+	  <a href='<?php echo Flight::url("subjects/{$subject->id}/{$subject->name}"); ?>'><?php echo $subject->name; ?></a>
+	<?php endforeach;?>
+</div>
+<div class='span3'>
+	<?php foreach($subjects_c as $subject): ?>
+	  <a href='<?php echo Flight::url("subjects/{$subject->id}/{$subject->name}"); ?>'><?php echo $subject->name; ?></a>
+	<?php endforeach;?>
+</div>
+<div class='span3'>
+	<?php foreach($subjects_d as $subject): ?>
+	  <a href='<?php echo Flight::url("subjects/{$subject->id}/{$subject->name}"); ?>'><?php echo $subject->name; ?></a>
+	<?php endforeach;?>
 </div>

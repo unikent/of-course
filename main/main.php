@@ -106,15 +106,27 @@ class CoursesFrontEnd {
 	}
 
 	/**
-	 *
+	 * Data formatted for searching by quickspot
 	 *
 	 */
-	public function list_ajax($type, $year){
+	public function ajax_search_data($type, $year){
 		$out = array();
 		$js = $this->pp->get_programmes_index($year, $type);
 		foreach($js as $j)$out[] = $j;
 		echo json_encode($out);
 	}
+	/**
+	 * Subjects Page
+	 *
+	 */
+	public function ajax_subjects_page(){
+
+		$subjects = $this->pp->get_subjectcategories();
+
+		return Flight::render('menus/subjects', array('subjects'=> $subjects));
+	}
+
+
 	
 	
 	/**
