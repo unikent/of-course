@@ -134,3 +134,17 @@
 	opacity: 0.6;
 }
 
+#subjects {
+	background-color: #f6f6f6;
+	padding:6px;
+}
+
+#subjects a {
+	display:block;
+	padding: 6px 2px;
+	text-decoration: none;
+}
+#subjects a:hover {
+	background-color:#eee;
+	color:inherit;
+|}

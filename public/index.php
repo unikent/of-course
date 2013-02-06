@@ -28,7 +28,8 @@ $main = new CoursesFrontEnd();
 // Define routes
 
 // AJAX
-Flight::route('/ajax/@type/@year/', array($main,'list_ajax'));
+Flight::route('/ajax/subjects/', array($main,'ajax_subjects_page'));
+Flight::route('/ajax/search/@type/@year/', array($main,'ajax_search_data'));
 // Preview
 Flight::route('/preview/@hash', array($main,'preview'));
 // key pages
