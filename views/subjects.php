@@ -1,7 +1,3 @@
-<kentPageBody>
-     <kentPageBodyFull>
-        <kentPageContent>
-            <!-- InstanceBeginEditable name="content" -->
 
             <h1> Courses by Subject </h1>
             
@@ -44,8 +40,3 @@
 			    </div>
 
 	        <div style='clear:both;'>&nbsp;</div>
-
-            <!-- InstanceEndEditable -->
-        </kentPageContent>
-     </kentPageBodyFull>
-</kentPageBody>

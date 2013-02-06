@@ -1,12 +1,11 @@
-<div class="tabContent" id="tab4">
-<h2>Fees and funding</h2>
-	
-<h3>Tuition fees</h3>
+<h2>Fees &amp; Funding</h2>
 
-<?php echo $course->tuition_fees;?>
+<section class="info-section">
+	<h3>Tuition fees</h3>
+	<?php echo $course->tuition_fees;?>
+</section>
 
-<h3>Funding </h3>
-
-<?php echo $course->funding;?>
-
-</div>
+<section class="info-section">
+	<h3>Funding </h3>
+	<?php echo $course->funding;?>
+</section>
