@@ -23,9 +23,7 @@ class CoursesFrontEnd {
 	 */
 	public function view($type, $year, $id, $slug = '')
 	{
-
-		Flight::view()->set('type', $type);
-		Flight::view()->set('year', $year);
+		Flight::setup($type, $year);
 
 		// Use webservices to get course data for programme
 		try
@@ -58,11 +56,6 @@ class CoursesFrontEnd {
 	 */
 	public function preview($hash){
 
-		//Set vars
-		Flight::view()->set('type', 'ug');
-		Flight::view()->set('preview', true);
-		Flight::view()->set('year', 'auto');
-
 		try
 		{
 			$course = $this->pp->get_preview_programme($hash);	
@@ -71,11 +64,11 @@ class CoursesFrontEnd {
 		{
 			// 404? handle has missing/unknown course
 			Flight::response()->status(404);
+			Flight::setup('auto', 'auto', true);
 			return Flight::layout('missing_course');
 		}
 
-		// Set year
-		Flight::view()->set('year', $course->year);
+		Flight::setup('auto', $course->year, true);
 
 		// Debug option
 		if(isset($_GET['debug_performance'])){ inspect($course); }
@@ -90,7 +83,9 @@ class CoursesFrontEnd {
 	 * @param yyyy Year to show
 	 */
 	public function subjects($type, $year)
-	{
+	{	
+
+		Flight::setup($type, $year);
 		// Get feed
 		try
 		{
@@ -100,9 +95,6 @@ class CoursesFrontEnd {
 		{
 			$subjects = array();	
 		}
-
-		Flight::view()->set('type', $type);
-		Flight::view()->set('year', $year);
 
 		Flight::layout('subjects', array('subjects'=> $subjects));
 	}
@@ -169,9 +161,7 @@ class CoursesFrontEnd {
 	 */
 	public function search($type, $year)
 	{
-
-		Flight::view()->set('type',$type);
-		Flight::view()->set('year',$year);
+		Flight::setup($type, $year);
 
 	    $programmes = $this->pp->get_programmes_index($year, $type);//5 minute cache
 		//debug option

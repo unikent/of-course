@@ -16,13 +16,13 @@
 		<div class='span7' >
 			<p><strong>It seems we couldn't find the programme you were attempting to view.</strong></p>
 			<p>Why not try using the search to find what your after or alterantly head back to the <a href='#'>courses index page</a>.</p>
-
-			<h3>Are any of these what you're looking for?</h3>
-				<ul>
-				<?php
-					$limit = 8;
-					$displayed = 0;
-					if(!empty($slug)){
+			<?php if(!empty($slug)): ?>
+				<h3>Are any of these what you're looking for?</h3>
+					<ul>
+					<?php
+						$limit = 8;
+						$displayed = 0;
+						
 						foreach($programmes as $programme){
 							if(strpos($programme->name, $slug) !==false || strpos($programme->slug, $slug) !==false){
 								$link = Flight::url("{$type}/{$year}/{$programme->id}/{$programme->slug}");
@@ -31,9 +31,9 @@
 							}
 							if($displayed > $limit)break;
 						}
-					}
-				?>
-				</ul>
+					?>
+					</ul>
+			<?php endif; ?>
 		</div>
 		<div class='span5'>
 			<div class='well'>
