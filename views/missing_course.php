@@ -15,7 +15,7 @@
 	<div class='row-fluid' style='min-height:300px;'>
 		<div class='span7' >
 			<p><strong>It seems we couldn't find the programme you were attempting to view.</strong></p>
-			<p>Why not try using the search to find what your after or alterantly head back to the <a href='#'>courses index page</a>.</p>
+			<p>Why not try using the search to find what your after or alterantly head back to the <a href='<?php echo BASE_URL; ?>'>courses index page</a>.</p>
 			<?php if(!empty($slug)): ?>
 				<h3>Are any of these what you're looking for?</h3>
 					<ul>
@@ -40,10 +40,10 @@
 				<h4>Not after a course?</h4>
 				<p>Maybe some of these links will be more helpful</p>
 				<ul>
-					<li><a href='#'>Go to the University of Kent homepage</a></li>
-					<li><a href='#'>View our Student Guide</a></li>
-					<li><a href='#'>Look at the campus maps</a></li>
-					<li><a href='#'>Contact us</a></li>
+					<li><a href='http://www.kent.ac.uk'>Go to the University of Kent homepage</a></li>
+					<li><a href='http://www.kent.ac.uk/student/'>Read the student guide</a></li>
+					<li><a href='http://www.kent.ac.uk/maps/'>View campus maps</a></li>
+					<li><a href='http://www.kent.ac.uk/contact/'>Contact us</a></li>
 				</li>
 			</div>
 		</div>
