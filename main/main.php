@@ -60,7 +60,6 @@ class CoursesFrontEnd {
 
 		//Set vars
 		Flight::view()->set('type', 'ug');
-		Flight::view()->set('year', $course->year);
 		Flight::view()->set('preview', true);
 
 		try
@@ -74,20 +73,13 @@ class CoursesFrontEnd {
 			return Flight::layout('missing_course');
 		}
 
-		try 
-		{
-			$subjects = $this->pp->get_subject_index($course->year, 'ug');
-		} 
-		catch(Exception $e)
-		{ 	
-			// If this fails, so be it. Move on.
-			$subjects = array();
-		}
+		// Set year
+		Flight::view()->set('year', $course->year);
 
 		// Debug option
 		if(isset($_GET['debug_performance'])){ inspect($course); }
-
-		Flight::layout('course_page', array('course'=>$course, 'type'=> 'ug', 'subjects'=> $subjects));
+		
+		Flight::layout('course_page', array('course'=> $course));
 	}
 
 	/**
@@ -99,7 +91,15 @@ class CoursesFrontEnd {
 	public function subjects($type, $year)
 	{
 		// Get feed
-		$subjects = $this->pp->get_subject_index($year, $type);	
+		try
+		{
+			$subjects = $this->pp->get_subject_index($year, $type);	
+		}
+		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
+		{
+			$subjects = array();	
+		}
+
 		Flight::view()->set('type', $type);
 		Flight::view()->set('year', $year);
 
@@ -136,18 +136,21 @@ class CoursesFrontEnd {
 	}
 	/**
 	 * Subjects Page
-	 *
 	 */
 	public function ajax_subjects_page(){
 
-		$subjects = $this->pp->get_subjectcategories();
+		try
+		{
+			$subjects = $this->pp->get_subjectcategories();
+		}
+		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
+		{
+			$subjects = array();	
+		}
 
 		return Flight::render('menus/subjects', array('subjects'=> $subjects));
 	}
 
-
-	
-	
 	/**
 	 * Search page
 	 *
