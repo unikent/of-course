@@ -1,13 +1,53 @@
-<article class="container">
-	<h1>
-		Unknown course?
-	</h1>
+<?php 
+	$slug = htmlspecialchars($slug); 
+	$id = (int) $id;
 
-	<p>
-		<h2>Did you mean</h2>
-		<ul>
-			<li>Example course 1</li>
-			<li>Example course 2</li>
-		</ul>
-	</p>
+	$year = (int) $id;
+	
+?>
+
+<article class="container">
+	<div class='row-fluid'>
+		<div class='span12'>
+			<h1>We were unable to find <?php echo (!empty($slug)) ? "'{$slug}' "  : " a course "; ?> with the id <?php echo $id;?> </h1>
+		</div>
+	</div>
+	<div class='row-fluid' style='min-height:300px;'>
+		<div class='span7' >
+			<p><strong>It seems we couldn't find the programme you were attempting to view.</strong></p>
+			<p>Why not try using the search to find what your after or alterantly head back to the <a href='#'>courses index page</a>.</p>
+
+			<h3>Are any of these what you're looking for?</h3>
+				<ul>
+				<?php
+					$limit = 8;
+					$displayed = 0;
+					if(!empty($slug)){
+						foreach($programmes as $programme){
+							if(strpos($programme->name, $slug) !==false || strpos($programme->slug, $slug) !==false){
+								$link = Flight::url("{$type}/{$year}/{$programme->id}/{$programme->slug}");
+								echo "<li><a href='{$link}'>{$programme->name}</a></li>";
+								$displayed++;
+							}
+							if($displayed > $limit)break;
+						}
+					}
+				?>
+				</ul>
+		</div>
+		<div class='span5'>
+			<div class='well'>
+				<h4>Not after a course?</h4>
+				<p>Maybe some of these links will be more helpful</p>
+				<ul>
+					<li><a href='#'>Go to the University of Kent homepage</a></li>
+					<li><a href='#'>View our Student Guide</a></li>
+					<li><a href='#'>Look at the campus maps</a></li>
+					<li><a href='#'>Contact us</a></li>
+				</li>
+			</div>
+		</div>
+
+	</div>
+
 </article>

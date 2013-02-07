@@ -36,7 +36,7 @@ class CoursesFrontEnd {
 		{
 			// 404? handle has missing/unknown course
 			Flight::response()->status(404);
-			return Flight::layout('missing_course');
+			return Flight::layout('missing_course', array('slug'=> $slug, 'id'=>$id, 'programmes'=> $this->get_programme_index($year, $type)));
 		}
 		
 		// Debug option
@@ -61,6 +61,7 @@ class CoursesFrontEnd {
 		//Set vars
 		Flight::view()->set('type', 'ug');
 		Flight::view()->set('preview', true);
+		Flight::view()->set('year', 'auto');
 
 		try
 		{
@@ -124,13 +125,20 @@ class CoursesFrontEnd {
 		die();
 	}
 
+
 	/**
 	 * Data formatted for searching by quickspot
 	 *
 	 */
 	public function ajax_search_data($type, $year){
 		$out = array();
-		$js = $this->pp->get_programmes_index($year, $type);
+		try{
+			$js = $this->pp->get_programmes_index($year, $type);
+		}
+		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
+		{
+			die("fatal erorr.");
+		}
 		foreach($js as $j)$out[] = $j;
 		echo json_encode($out);
 	}
@@ -172,6 +180,18 @@ class CoursesFrontEnd {
 		//Render full page
 		Flight::layout('search', array('programmes' => $programmes));	
 		
+	}
+
+
+	// Quietly grab index
+	private function get_programme_index($year, $type){
+		try{
+			return $this->pp->get_programmes_index($year, $type);
+		}
+		catch(Exception $e)
+		{
+			return array();
+		}
 	}
 
 }
