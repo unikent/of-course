@@ -1,9 +1,9 @@
                       
 
                         <h1>Advanced course search</h1>
-                        <div class="well">
-                            
-                            <input class="advanced_text_search input-large" type="text" placeholder="Search courses" />
+                        <div class="row-fluid">
+
+                            <input class="advanced_text_search input-xlarge" type="text" placeholder="Search courses" />
 
                             <select class="campus_search input-large">
                               <option value="">All campuses</option>
