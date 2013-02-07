@@ -132,11 +132,13 @@ class CoursesFrontEnd {
 		Flight::view()->set('year',$year);
 
 	    $programmes = $this->pp->get_programmes_index($year, $type);//5 minute cache
+	    $campuses = $this->pp->get_campuses();
+	    $subject_categories = $this->pp->get_subjectcategories();
 		//debug option
 		if(isset($_GET['debug_performance'])){ inspect($programmes); }
 		
 		//Render full page
-		Flight::layout('search', array('programmes' => $programmes));	
+		Flight::layout('search', array('programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories));	
 		
 	}
 

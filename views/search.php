@@ -1,15 +1,46 @@
-                     
-                        <div style='padding:30px;'>
+                      
 
-                        <h1>Advanced Course search</h1>
-                        
+                        <h1>Advanced course search</h1>
+                        <div class="well">
+                            
+                            <input class="advanced_text_search input-large" type="text" placeholder="Search courses" />
+
+                            <select class="campus_search input-large">
+                              <option value="">All campuses</option>
+                              <?php foreach($campuses as $c): ?>
+                              <option><?php echo $c->name ?></option>
+                              <?php endforeach; ?>
+                            </select>
+                          
+
+                            <select class="study_mode_search input-large">
+                              <option value="">All study modes</option>
+                              <option>Full-time only</option>
+                              <option>Part-time only</option>
+                              <option>Full-time or part-time</option>
+                            </select>
+                          
+
+                            <select class="subject_categories_search input-large">
+                              <option value="">All subject categories</option>
+                              <?php foreach($subject_categories as $sc): ?>
+                              <option><?php echo $sc->name ?></option>
+                              <?php endforeach; ?>
+                            </select>
+                          
+                        </div>
+
+                        <br />
+                               
                         <table id="programme-list" class="table table-striped table-bordered">
                             <thead>
                               <tr>
-                                <th>name</th>
-                                <th>ucas code</th>
-                                <th>campus</th>
-                                <th>full-time/part-time</th>
+                                <th>Name</th>
+                                <th>UCAS code</th>
+                                <th>Campus</th>
+                                <th>Full-time/Part-time</th>
+                                <th class="hide">Subject categories</th>
+                                <th class="hide">Search keywords</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -29,15 +60,20 @@
                                 <td>
                                     <?php echo $p->mode_of_study;?>
                                 </td>
+                                <td class="hide">
+                                    <?php foreach($p->subject_categories as $sc): ?>
+                                      <?php echo $sc;?> <br />
+                                    <?php endforeach; ?>
+                                </td>
+                                <td class="hide">
+                                      <?php echo $p->search_keywords;?>
+                                </td>
                               </tr>
                             <?php endforeach; ?>
           
 
                             </tbody>
                         </table>
-
-                        
-                    </div>
                    
 <kentScripts>
 
@@ -45,6 +81,54 @@
  <script type="text/javascript" charset="utf-8" language="javascript" src="<?php echo BASE_URL ?>js/DT_bootstrap.js"></script>
 
 <script type='text/javascript'>
+
+        //put our custom search items into variables
+    var advanced_text_search = $('input.advanced_text_search');
+    var campus_search = $('select.campus_search');
+    var study_mode_search = $('select.study_mode_search');
+    var subject_categories_search = $('select.subject_categories_search');
+
+
+/* Custom filtering function which will filter data using our advanced search fields */
+$.fn.dataTableExt.afnFiltering.push(
+  function( oSettings, aData, iDataIndex ) {
+
+    // get each column out
+    var name = $(aData[0]).html();
+    var ucas_code = aData[1];
+    var campus = aData[2];
+    var study_mode = aData[3];
+    var subject_categories = aData[4];
+    var search_keywords = aData[5];
+
+    if(advanced_text_search && campus_search && study_mode_search && subject_categories_search){
+
+      // search both the Name, USAC code and Search keywords fields if our search box is filled
+      var advanced_text_search_result = (advanced_text_search.val() == '') ? true : 
+          (
+            (name.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) || 
+            (search_keywords.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) || 
+            (ucas_code.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) 
+            ? true : false 
+          );
+      
+      // search the campus field if a campus is selected
+      var campus_search_result = (campus_search.val() == '') ? true : (( campus.toLowerCase().indexOf( campus_search.val().toLowerCase() ) !== -1 ) ? true : false );
+      
+      // search the study mode field if a study mode is selected
+      var study_mode_search_result = (study_mode_search.val() == '') ? true : (( study_mode.toLowerCase().indexOf( study_mode_search.val().toLowerCase() ) !== -1 ) ? true : false );
+      
+      // search the subject category field if a subject category is selected
+      var subject_categories_search_result = (subject_categories_search.val() == '') ? true : (( subject_categories.toLowerCase().indexOf( subject_categories_search.val().toLowerCase() ) !== -1 ) ? true : false );
+
+      // return our results
+      return advanced_text_search_result && campus_search_result && study_mode_search_result && subject_categories_search_result;
+    }
+
+    return true;
+  }
+);
+
 /**
   *
   * data tables for programme index page
@@ -52,7 +136,7 @@
   */
  $(document).ready(function(){
     var programme_list = $('#programme-list').dataTable({
-          "sDom": "<'navbar'<'navbar-inner'<'navbar-search pull-left'f>>r>t<'muted pull-right'i><'clearfix'>p",
+          "sDom": "", // no need for this since we're implementing our own search: "<'navbar'<'navbar-inner'<'navbar-search pull-left'f>>r>t<'muted pull-right'i><'clearfix'>p",
           "sPaginationType": "bootstrap",
           "iDisplayLength": 30,
           "oLanguage": {
@@ -62,63 +146,32 @@
             { "bSortable": true },
             { "bSortable": true },
             { "bSortable": true },
-            { "bSortable": true }
+            { "bSortable": true },
+            { "bSortable": false },
+            { "bSortable": false }
             ]
       });
-
-    var search_box = $('.dataTables_filter input');
-
-    //hide the default search box
-    search_box.hide();
-
-    //now add our custom search items
-    search_box.after(
-      '<input class="advanced_text_search" type="text" />' +
-      '&nbsp; <select class="campus_search"><option value="">Select campus</option><option>Canterbury</option><option>Medway</option></select>' +
-      '&nbsp; <select class="study_mode_search"><option value="">Select study mode</option><option>Full-time</option><option>Part-time</option></select>'
-      );
-
-    //put our custom search items into variables
-    var advanced_text_search = $('.dataTables_filter input.advanced_text_search');
-    var campus_search = $('.dataTables_filter select.campus_search');
-    var study_mode_search = $('.dataTables_filter select.study_mode_search');
 
     //now add appropriate event listeners to our custom search items
     if(advanced_text_search && campus_search && study_mode_search){
       
       advanced_text_search.keyup(function() {
-        update_search();
+        programme_list.fnDraw();
       });
 
       campus_search.change(function(){
-        update_search();
+        programme_list.fnDraw();
       });
 
       study_mode_search.change(function(){
-        update_search();
+        programme_list.fnDraw();
+      });
+
+      subject_categories_search.change(function(){
+        programme_list.fnDraw();
       });
 
     }
-
-    // populate the default search box with out custom search items
-    function update_search(){
-
-      var search_string = '';
-
-      search_string += (advanced_text_search.val() != '') ? advanced_text_search.val() : '';
-      search_string += (campus_search.val() != '') ? ' ' + campus_search.val() : '';
-      search_string += (study_mode_search.val() != '') ? ' ' + study_mode_search.val() : '';
-
-      search_box.val(search_string);
-
-      //fire keyup event
-      search_box.keyup();
-    }
-
-    //style and ass search button to our custom search box
-    advanced_text_search.attr("placeholder", "Search programmes").wrap($("<div class='input-prepend'></div>")).parent().prepend($('<span class="add-on"><i class="icon-search"></i></span>'));
-    
-
     
   });
 </script>
