@@ -132,6 +132,10 @@
 	opacity: 0.6;
 }
 
+.daedalus .related-course-section {
+	padding: 30px 0;
+}
+
 #subjects {
 	background-color: #f6f6f6;
 	padding:6px;

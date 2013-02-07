@@ -77,40 +77,40 @@
 		</div><!-- /span -->
 	</div><!-- /row -->
 	
-	<section>
+	<section class="related-course-section">
 		<h3>Related to this course</h3>
-
-	</section>
 	
-	<div id="myCarousel" class="carousel slide" data-interval="false">
-	  <!-- Carousel items -->
-	  <div class="carousel-inner">
-	  <?php $count = 0; ?>
-	  <?php for( $i = 0; $i < ( intval( count($course->related_courses) / 4 ) ) + 1; $i++ ): ?>
-	  <?php $related_courses = array_slice($course->related_courses, $i*4) ?>
-		<div class="<?php if ($count == 0) echo 'active ' ?>item">
-			
-				<?php foreach($related_courses as $related_course): ?>
-				<div class="span3 related-course">
-	                <div class="cell">
-	                <a href="../<?php echo $related_course->id ?>/<?php echo $related_course->slug ?>">
-	                    <div class="mask">
-	                        <p><?php echo $related_course->name ?></p>
-	                        <p><?php echo $related_course->award ?></p>
-	                    </div>
-	                </a>
-	                </div> 
-				</div>
-				<?php $count++; if ($count%4 == 0) break; ?>
-				<?php endforeach; ?>
-			
+		<div id="myCarousel" class="carousel slide" data-interval="false">
+		  <!-- Carousel items -->
+		  <div class="carousel-inner">
+		  <?php $count = 0; ?>
+		  <?php for( $i = 0; $i < ( intval( count($course->related_courses) / 4 ) ) + 1; $i++ ): ?>
+		  <?php $related_courses = array_slice($course->related_courses, $i*4) ?>
+			<div class="<?php if ($count == 0) echo 'active ' ?>item">
+				
+					<?php foreach($related_courses as $related_course): ?>
+					<div class="span3 related-course">
+		                <div class="cell">
+		                <a href="../<?php echo $related_course->id ?>/<?php echo $related_course->slug ?>">
+		                    <div class="mask">
+		                        <p><?php echo $related_course->name ?></p>
+		                        <p><?php echo $related_course->award ?></p>
+		                    </div>
+		                </a>
+		                </div> 
+					</div>
+					<?php $count++; if ($count%4 == 0) break; ?>
+					<?php endforeach; ?>
+				
+			</div>
+			<?php endfor; ?>
+		  </div>
+		  <!-- Carousel nav -->
+		  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+		  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
 		</div>
-		<?php endfor; ?>
-	  </div>
-	  <!-- Carousel nav -->
-	  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-	  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
-	</div>
+	
+	</section>
 	
 		
 	<?php if (!empty($course->globals->general_disclaimer)): ?>
