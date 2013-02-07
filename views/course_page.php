@@ -114,8 +114,8 @@
 	
 		
 	<?php if (!empty($course->globals->general_disclaimer)): ?>
-	<footer class="general_disclaimer">
-		<small><?php echo $course->globals->general_disclaimer; ?></small>
+	<footer class="general_disclaimer" style='font-size:0.8em;'>
+		<?php echo $course->globals->general_disclaimer; ?>
 	</footer>
 	<?php endif;?>
 				

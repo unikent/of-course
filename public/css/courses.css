@@ -6,7 +6,6 @@
 }
 
 .daedalus .well {
-	border: none;
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
 	box-shadow: none;
@@ -39,7 +38,6 @@
 }
 
 .daedalus .well {
-	height: 100px;
 	padding: 20px;
 }
 

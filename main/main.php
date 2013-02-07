@@ -23,9 +23,7 @@ class CoursesFrontEnd {
 	 */
 	public function view($type, $year, $id, $slug = '')
 	{
-
-		Flight::view()->set('type', $type);
-		Flight::view()->set('year', $year);
+		Flight::setup($type, $year);
 
 		// Use webservices to get course data for programme
 		try
@@ -36,7 +34,7 @@ class CoursesFrontEnd {
 		{
 			// 404? handle has missing/unknown course
 			Flight::response()->status(404);
-			return Flight::layout('missing_course');
+			return Flight::layout('missing_course', array('slug'=> $slug, 'id'=>$id, 'programmes'=> $this->get_programme_index($year, $type)));
 		}
 		
 		// Debug option
@@ -58,11 +56,6 @@ class CoursesFrontEnd {
 	 */
 	public function preview($hash){
 
-		//Set vars
-		Flight::view()->set('type', 'ug');
-		Flight::view()->set('year', $course->year);
-		Flight::view()->set('preview', true);
-
 		try
 		{
 			$course = $this->pp->get_preview_programme($hash);	
@@ -71,23 +64,16 @@ class CoursesFrontEnd {
 		{
 			// 404? handle has missing/unknown course
 			Flight::response()->status(404);
+			Flight::setup('auto', 'auto', true);
 			return Flight::layout('missing_course');
 		}
 
-		try 
-		{
-			$subjects = $this->pp->get_subject_index($course->year, 'ug');
-		} 
-		catch(Exception $e)
-		{ 	
-			// If this fails, so be it. Move on.
-			$subjects = array();
-		}
+		Flight::setup('auto', $course->year, true);
 
 		// Debug option
 		if(isset($_GET['debug_performance'])){ inspect($course); }
-
-		Flight::layout('course_page', array('course'=>$course, 'type'=> 'ug', 'subjects'=> $subjects));
+		
+		Flight::layout('course_page', array('course'=> $course));
 	}
 
 	/**
@@ -97,11 +83,18 @@ class CoursesFrontEnd {
 	 * @param yyyy Year to show
 	 */
 	public function subjects($type, $year)
-	{
+	{	
+
+		Flight::setup($type, $year);
 		// Get feed
-		$subjects = $this->pp->get_subject_index($year, $type);	
-		Flight::view()->set('type', $type);
-		Flight::view()->set('year', $year);
+		try
+		{
+			$subjects = $this->pp->get_subject_index($year, $type);	
+		}
+		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
+		{
+			$subjects = array();	
+		}
 
 		Flight::layout('subjects', array('subjects'=> $subjects));
 	}
@@ -124,30 +117,40 @@ class CoursesFrontEnd {
 		die();
 	}
 
+
 	/**
 	 * Data formatted for searching by quickspot
 	 *
 	 */
 	public function ajax_search_data($type, $year){
 		$out = array();
-		$js = $this->pp->get_programmes_index($year, $type);
+		try{
+			$js = $this->pp->get_programmes_index($year, $type);
+		}
+		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
+		{
+			die("fatal erorr.");
+		}
 		foreach($js as $j)$out[] = $j;
 		echo json_encode($out);
 	}
 	/**
 	 * Subjects Page
-	 *
 	 */
 	public function ajax_subjects_page(){
 
-		$subjects = $this->pp->get_subjectcategories();
+		try
+		{
+			$subjects = $this->pp->get_subjectcategories();
+		}
+		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
+		{
+			$subjects = array();	
+		}
 
 		return Flight::render('menus/subjects', array('subjects'=> $subjects));
 	}
 
-
-	
-	
 	/**
 	 * Search page
 	 *
@@ -158,9 +161,7 @@ class CoursesFrontEnd {
 	 */
 	public function search($type, $year)
 	{
-
-		Flight::view()->set('type',$type);
-		Flight::view()->set('year',$year);
+		Flight::setup($type, $year);
 
 	    $programmes = $this->pp->get_programmes_index($year, $type);//5 minute cache
 	    $campuses = $this->pp->get_campuses();
@@ -171,6 +172,18 @@ class CoursesFrontEnd {
 		//Render full page
 		Flight::layout('search', array('programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories));	
 		
+	}
+
+
+	// Quietly grab index
+	private function get_programme_index($year, $type){
+		try{
+			return $this->pp->get_programmes_index($year, $type);
+		}
+		catch(Exception $e)
+		{
+			return array();
+		}
 	}
 
 }

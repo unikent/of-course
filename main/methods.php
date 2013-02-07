@@ -22,3 +22,20 @@
 	Flight::map('url', function($path, $use_base = true){
 		return ($use_base) ? BASE_URL.$path : $path;
 	});
+
+	Flight::map('setup', function($year, $level, $preview=false){
+
+		// Ensure year is int and is valid
+		// @todo Add method to get correct year
+		if($year == 'auto' || $year == null || strlen($year) != 4) $year = 2014;
+		$year = (int) $year;
+		if($year == 0) $year = 2014;
+
+		// If $level isn't one of valid types, set as UG
+		if($level != 'undergraduate' && $level != 'postgraduate' && $level != 'pg' && $level != 'ug') $level = 'ug';
+		
+		// Set data to views
+		Flight::view()->set('type', $level);
+		Flight::view()->set('year', $year);
+		Flight::view()->set('preview', $preview);
+	});
