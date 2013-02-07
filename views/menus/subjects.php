@@ -1,4 +1,3 @@
-
 <?php
 // Divide our array in half so we can display it in two columns
 $subjects = (array)$subjects;
