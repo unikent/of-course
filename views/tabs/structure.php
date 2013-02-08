@@ -10,6 +10,14 @@
 	<?php isset($course->modules->stages->{0}) ? Flight::render('partials/stage', array('stage' => $course->modules->stages->{0})) : ''; ?>
 </section>
 <?php endif; ?>
+<?php if (isset($course->modules->stages->{0})): ?>
+	<?php if (empty($course->foundation_year)): ?>
+	<h3>Foundation year</h3>
+	<?php endif; ?>
+	<?php Flight::render('partials/stage', array('stage' => $course->modules->stages->{0})); ?>
+<?php endif; ?>
+
+
 
 <?php if (isset($course->modules->stages->{1})): ?>
 <section class="info-section">
@@ -46,6 +54,9 @@
 </section>
 <?php endif; ?>
 
+
+
+
 <?php if (! empty($course->year_abroad)): ?>
 <section class="info-section">
 	<h3>Year abroad</h3>
@@ -53,13 +64,24 @@
 		<?php echo $course->year_abroad ?>
 		<?php echo $course->globals->year_abroad ?>
 	</section>
-	<?php isset($course->modules->stages->{A}) ? Flight::render('partials/stage', array('stage' => $course->modules->stages->{A})) : ''; ?>
-	<h5>Year abroad</h5>
-	<?php isset($course->modules->stages->{A1}) ? Flight::render('partials/stage', array('stage' => $course->modules->stages->{A1})) : ''; ?>
-	<h5>Year abroad</h5>
-	<?php isset($course->modules->stages->{A2}) ? Flight::render('partials/stage', array('stage' => $course->modules->stages->{A2})) : ''; ?>
 </section>
 <?php endif; ?>
+<?php if (isset($course->modules->stages->{A})): ?>
+	<?php if (empty($course->year_abroad)): ?>
+	<h3>Year abroad</h3>
+	<?php endif; ?>
+	<?php Flight::render('partials/stage', array('stage' => $course->modules->stages->{A})); ?>
+<?php endif; ?>
+<?php if (isset($course->modules->stages->{A1})): ?>
+	<h3>1st year abroad</h3>
+	<?php Flight::render('partials/stage', array('stage' => $course->modules->stages->{A1})); ?>
+<?php endif; ?>
+<?php if (isset($course->modules->stages->{A2})): ?>
+	<h3>2nd year abroad</h3>
+	<?php Flight::render('partials/stage', array('stage' => $course->modules->stages->{A2})); ?>
+<?php endif; ?>
+
+
 
 <?php if (! empty($course->year_in_industry)): ?>
 <section class="info-section">
@@ -68,9 +90,16 @@
 		<?php echo $course->year_in_industry ?>
 		<?php echo $course->globals->year_in_industry ?>
 	</section>
-	<?php isset($course->modules->stages->{S}) ? Flight::render('partials/stage', array('stage' => $course->modules->stages->{S})) : ''; ?>
 </section>
 <?php endif; ?>
+
+<?php if (isset($course->modules->stages->{S})): ?>
+	<?php if (empty($course->year_in_industry)): ?>
+	<h3>Year in industry</h3>
+	<?php endif; ?>
+	<?php Flight::render('partials/stage', array('stage' => $course->modules->stages->{S})); ?>
+<?php endif; ?>
+
 
 
 
