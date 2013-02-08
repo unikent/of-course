@@ -10,6 +10,12 @@ class CoursesFrontEnd {
 	public function __construct()
 	{
 		$this->pp = new ProgrammesPlant\API(XCRI_WEBSERVICE);
+
+		if(defined('CACHE_DIRECTORY') && is_dir(CACHE_DIRECTORY))
+		{
+			$this->pp->with_cache('file')->directory(CACHE_DIRECTORY);
+		}
+
 		$this->pp->no_ssl_verification();
 	}
 
