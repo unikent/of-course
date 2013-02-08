@@ -16,6 +16,10 @@ if (defined("TEMPLATING_ENGINE"))
 {
 	require TEMPLATING_ENGINE . '/template.loader.php';
 	
+	// workaround for pantheon setting get and post to null if they're empty
+	if ($_GET === null) $_GET = array();
+	if ($_POST === null) $_POST = array();
+	
 	//Hook pantheon to render method
 	Flight::after("start", function(){
 		require TEMPLATING_ENGINE . '/run.php';
