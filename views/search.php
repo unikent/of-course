@@ -24,7 +24,7 @@
                             <select class="subject_categories_search input-large">
                               <option value="">All subject categories</option>
                               <?php foreach($subject_categories as $sc): ?>
-                              <option><?php echo $sc->name ?></option>
+                              <option <?php if(strcmp($search_type, 'subject_category')  == 0  && strcmp(urldecode($search_string), $sc->name)  == 0) echo 'selected'; ?>><?php echo $sc->name?></option>
                               <?php endforeach; ?>
                             </select>
                           
@@ -153,7 +153,7 @@ $.fn.dataTableExt.afnFiltering.push(
       });
 
     //now add appropriate event listeners to our custom search items
-    if(advanced_text_search && campus_search && study_mode_search){
+    if(advanced_text_search && campus_search && study_mode_search && subject_categories_search){
       
       advanced_text_search.keyup(function() {
         programme_list.fnDraw();

@@ -13,21 +13,21 @@ $subjects_d = array_slice($subjects, $quater*3, $quater);
 <div class='span3'>
 	<?php foreach($subjects_a as $subject): ?>
 
-	  <a href='<?php echo Flight::url("subjects/{$subject->id}/{$subject->name}"); ?>'><?php echo $subject->name; ?></a>
+	  <a href='<?php echo Flight::url("{$type}/{$year}/search/subject_category/{$subject->name}"); ?>'><?php echo $subject->name; ?></a>
 	<?php endforeach;?>
 </div>
 <div class='span3'>
 	<?php foreach($subjects_b as $subject): ?>
-	  <a href='<?php echo Flight::url("subjects/{$subject->id}/{$subject->name}"); ?>'><?php echo $subject->name; ?></a>
+	  <a href='<?php echo Flight::url("{$type}/{$year}/search/subject_category/{$subject->name}"); ?>'><?php echo $subject->name; ?></a>
 	<?php endforeach;?>
 </div>
 <div class='span3'>
 	<?php foreach($subjects_c as $subject): ?>
-	  <a href='<?php echo Flight::url("subjects/{$subject->id}/{$subject->name}"); ?>'><?php echo $subject->name; ?></a>
+	  <a href='<?php echo Flight::url("{$type}/{$year}/search/subject_category/{$subject->name}"); ?>'><?php echo $subject->name; ?></a>
 	<?php endforeach;?>
 </div>
 <div class='span3'>
 	<?php foreach($subjects_d as $subject): ?>
-	  <a href='<?php echo Flight::url("subjects/{$subject->id}/{$subject->name}"); ?>'><?php echo $subject->name; ?></a>
+	  <a href='<?php echo Flight::url("{$type}/{$year}/search/subject_category/{$subject->name}"); ?>'><?php echo $subject->name; ?></a>
 	<?php endforeach;?>
 </div>
