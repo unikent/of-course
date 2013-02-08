@@ -93,9 +93,21 @@
 	opacity: 0.9;
 }
 
+.daedalus .carousel {
+	margin-top: 20px;
+}
+
+.daedalus .carousel-inner {
+	margin-left:80px;
+}
+
+.daedalus .related-course {
+	margin-left:70px;
+}
+
 .daedalus .related-course .cell {
-	width: 220px;
-	height: 150px;
+	width: 160px;
+	height: 120px;
 	float: left;
 	overflow: hidden;
 	position: relative;
@@ -105,16 +117,14 @@
 
 .daedalus .related-course .cell p {
 	font-size: 14px;
-	font-weight: bold;
 	position: relative;
 	color: #000f42;
-	padding: 10px 0px 0 0px;
 	text-align: center;
 }
 
 .daedalus .related-course .mask {
-	padding: 10px;
-	width: 200px;
+	padding: 20px;
+	width: 120px;
 	height: 100px;
 	position: absolute;
 	overflow: hidden;

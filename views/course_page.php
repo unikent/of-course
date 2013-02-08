@@ -77,6 +77,7 @@
 		</div><!-- /span -->
 	</div><!-- /row -->
 	
+	<?php if ( ! empty($course->related_courses) ): ?>
 	<section class="related-course-section">
 		<h3>Related to this course</h3>
 	
@@ -89,7 +90,7 @@
 			<div class="<?php if ($count == 0) echo 'active ' ?>item">
 				
 					<?php foreach($related_courses as $related_course): ?>
-					<div class="span3 related-course">
+					<div class="span2 related-course">
 		                <div class="cell">
 		                <a href="../<?php echo $related_course->id ?>/<?php echo $related_course->slug ?>">
 		                    <div class="mask">
@@ -111,6 +112,7 @@
 		</div>
 	
 	</section>
+	<?php endif; ?>
 	
 		
 	<?php if (!empty($course->globals->general_disclaimer)): ?>
