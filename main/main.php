@@ -143,7 +143,7 @@ class CoursesFrontEnd {
 	/**
 	 * Subjects Page
 	 */
-	public function ajax_subjects_page(){
+	public function ajax_subjects_page($type, $year){
 
 		try
 		{
@@ -154,7 +154,7 @@ class CoursesFrontEnd {
 			$subjects = array();	
 		}
 
-		return Flight::render('menus/subjects', array('subjects'=> $subjects));
+		return Flight::render('menus/subjects', array('type' => $type, 'year' => $year, 'subjects'=> $subjects));
 	}
 
 	/**
@@ -165,7 +165,7 @@ class CoursesFrontEnd {
 	 * @param int Id of programme
 	 * @param string Slug - programme name
 	 */
-	public function search($type, $year)
+	public function search($type, $year, $search_type = '', $search_string = '')
 	{
 		Flight::setup($type, $year);
 
@@ -176,7 +176,7 @@ class CoursesFrontEnd {
 		if(isset($_GET['debug_performance'])){ inspect($programmes); }
 		
 		//Render full page
-		Flight::layout('search', array('programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories));	
+		Flight::layout('search', array('programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'search_type' => $search_type, 'search_string' => $search_string));	
 		
 	}
 
