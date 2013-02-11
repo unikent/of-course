@@ -118,7 +118,7 @@ class CoursesFrontEnd {
 		$base_url = BASE_URL;
 
 		foreach($listing as $course){
-			echo "<a href='{$base_url}{$type}/{$year}/{$course->id}/{$course->slug}'>{$course->name}</a><br/>";
+			echo "<a href='{$base_url}/{$type}/{$year}/{$course->id}/{$course->slug}'>{$course->name}</a><br/>";
 		}
 
 		Flight::stop();
