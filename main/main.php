@@ -48,7 +48,14 @@ class CoursesFrontEnd {
 		// Locate the corresponding ID if we have a slug and redirect there.
 		if (! is_numeric($id))
 		{
-			$programmes = $this->pp->get_programmes_index($year, $type);
+			try
+			{
+				$programmes = $this->pp->get_programmes_index($year, $type);
+			}
+			catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
+			{
+				Flight::halt(501, "Fatal error in getting programmes index.");
+			}
 
 			// Loop through, looking for the slug and redirecting when found.
 			foreach($programmes as $programme)
@@ -173,7 +180,7 @@ class CoursesFrontEnd {
 		{
 			Flight::halt(501, "Fatal error in getting programmes index.");
 		}
-		
+
 		foreach($js as $j)$out[] = $j;
 		echo json_encode($out);
 	}
