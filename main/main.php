@@ -11,7 +11,7 @@ class CoursesFrontEnd {
 	{
 		$this->pp = new ProgrammesPlant\API(XCRI_WEBSERVICE);
 
-		if(defined('CACHE_DIRECTORY') && is_dir(CACHE_DIRECTORY))
+		if (defined('CACHE_DIRECTORY') && is_dir(CACHE_DIRECTORY))
 		{
 			$this->pp->with_cache('file')->directory(CACHE_DIRECTORY);
 		}
@@ -22,16 +22,60 @@ class CoursesFrontEnd {
 	/**
 	 * View - View a "live" programme from the programmes plant
 	 *
-	 * @param string Type UG|PG
+	 * @param string $type undergraduate or postgraduate.
 	 * @param yyyy Year to show
 	 * @param int Id of programme
 	 * @param string Slug - programme name
 	 */
 	public function view($type, $year, $id, $slug = '')
 	{
+		// the type as used in the url and not in the api eg 'undergraduate'
+		$type_url = $type;
+		
+		// If at this point the type is our shortened version, redirect to the long version.
+		if ($type == 'ug')
+		{
+			Flight::redirect('/undergraduate' . '/' . $year . '/' . $id . '/' . $slug);
+		}
+		elseif ($type == 'pg') 
+		{
+			Flight::redirect('/postgraduate' . '/' . $year . '/' . $id . '/' . $slug);
+		}
+
+		// Clean up variables.
 		Flight::setup($type, $year);
 
-		// Use webservices to get course data for programme
+		$type = Flight::get('type');
+
+		// Check to see if they are passing something alpha-numeric - i.e. a slug, not a ID.
+		// Locate the corresponding ID if we have a slug and redirect there.
+		if (! is_numeric($id))
+		{
+			try
+			{
+				$programmes = $this->pp->get_programmes_index($year, $type);
+			}
+			catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
+			{
+				Flight::halt(501, "Fatal error in getting programmes index.");
+			}
+
+			// Loop through, looking for the slug and redirecting when found.
+			foreach($programmes as $programme)
+			{
+				if ($programme->slug == $id)
+				{
+					Flight::redirect('/undergraduate' . '/' . $year . '/' . $programme->id . '/' . $slug);
+				}
+			}
+
+			// If we've got this far without redirecting we have and unknown slug and therefore a 404.
+			Flight::response()->status(404);
+
+			return Flight::layout('missing_course', array('slug'=> $slug, 'id'=>$id, 'programmes'=> $this->get_programme_index($year, $type)));
+		}
+
+		// Use webservices to get course data for programme.
 		try
 		{
 			$course = $this->pp->get_programme($year, $type, $id);
@@ -47,12 +91,13 @@ class CoursesFrontEnd {
 		if(isset($_GET['debug_performance'])){ inspect($course); }
 		
 		// Fix slug paths
-		if($course->slug != $slug){
- 			return Flight::redirect($type.'/'.$year.'/'.$id.'/'.$course->slug);
+		if($course->slug != $slug)
+		{
+ 			return Flight::redirect('/' . $type . '/' . $year . '/' . $id . '/' . $course->slug);
  		}
 
  		// Render programme page
- 		Flight::layout('course_page', array('course'=>$course, 'type'=> $type, 'subjects'=> $subjects));
+ 		Flight::layout('course_page', array('course'=>$course, 'type'=> $type_url, 'year' => $year, 'subjects'=> $subjects));
 	}
 
 	/**
@@ -60,8 +105,8 @@ class CoursesFrontEnd {
 	 *
 	 * @param string $hash of preview
 	 */
-	public function preview($hash){
-
+	public function preview($hash)
+	{
 		try
 		{
 			$course = $this->pp->get_preview_programme($hash);	
@@ -90,8 +135,8 @@ class CoursesFrontEnd {
 	 */
 	public function subjects($type, $year)
 	{	
-
 		Flight::setup($type, $year);
+
 		// Get feed
 		try
 		{
@@ -118,33 +163,36 @@ class CoursesFrontEnd {
 		$base_url = BASE_URL;
 
 		foreach($listing as $course){
-			echo "<a href='{$base_url}{$type}/{$year}/{$course->id}/{$course->slug}'>{$course->name}</a><br/>";
+			echo "<a href='{$base_url}/{$type}/{$year}/{$course->id}/{$course->slug}'>{$course->name}</a><br/>";
 		}
-		die();
-	}
 
+		Flight::stop();
+	}
 
 	/**
 	 * Data formatted for searching by quickspot
 	 *
 	 */
-	public function ajax_search_data($type, $year){
+	public function ajax_search_data($type, $year)
+	{
 		$out = array();
 		try{
 			$js = $this->pp->get_programmes_index($year, $type);
 		}
 		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
 		{
-			die("fatal erorr.");
+			Flight::halt(501, "Fatal error in getting programmes index.");
 		}
+
 		foreach($js as $j)$out[] = $j;
 		echo json_encode($out);
 	}
+
 	/**
 	 * Subjects Page
 	 */
-	public function ajax_subjects_page($type, $year){
-
+	public function ajax_subjects_page($type, $year)
+	{
 		try
 		{
 			$subjects = $this->pp->get_subjectcategories();
@@ -167,23 +215,36 @@ class CoursesFrontEnd {
 	 */
 	public function search($type, $year, $search_type = '', $search_string = '')
 	{
+		$type_url = $type;
+		if ($type == 'undergraduate')
+		{
+			$type = 'ug';
+		}
+		elseif ($type == 'postgraduate') 
+		{
+			$type = 'pg';
+		}
+		
 		Flight::setup($type, $year);
 
 	    $programmes = $this->pp->get_programmes_index($year, $type);//5 minute cache
 	    $campuses = $this->pp->get_campuses();
 	    $subject_categories = $this->pp->get_subjectcategories();
+
 		//debug option
 		if(isset($_GET['debug_performance'])){ inspect($programmes); }
 		
 		//Render full page
-		Flight::layout('search', array('programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'search_type' => $search_type, 'search_string' => $search_string));	
+		Flight::layout('search', array('programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'search_type' => $search_type, 'search_string' => $search_string, 'type' => $type_url, 'year' => $year));	
 		
 	}
 
 
 	// Quietly grab index
-	private function get_programme_index($year, $type){
-		try{
+	private function get_programme_index($year, $type)
+	{
+		try
+		{
 			return $this->pp->get_programmes_index($year, $type);
 		}
 		catch(Exception $e)
