@@ -5,8 +5,8 @@
 
 // Paths
 const APP_PATH = '';            // Path to the root of the of-course app
-const VENDOR_PATH = '';         // Path to vendor folder
-const TEMPLATING_ENGINE = ''; 	// URL of templating engine
+const VENDOR_PATH = '';         // Path to vendor folder.
+const TEMPLATING_ENGINE = ''; 	// Path of templating engine.
 
 // URLs
 const BASE_URL = '';            // URL of this system
