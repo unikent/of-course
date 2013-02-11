@@ -81,8 +81,6 @@
 	<section class="related-course-section">
 		<h3>Related to this course</h3>
 		
-		<?php if (count($course->related_courses) > 4): ?>
-	
 		<div id="myCarousel" class="carousel slide" data-interval="false">
 		  <!-- Carousel items -->
 		  <div class="carousel-inner">
@@ -109,26 +107,11 @@
 			<?php endfor; ?>
 		  </div>
 		  <!-- Carousel nav -->
+		  <?php if (count($course->related_courses) > 4): ?>
 		  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
 		  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+		  <?php endif; ?>
 		</div>
-		
-		
-		<?php else: ?>
-			<?php foreach($related_courses as $related_course): ?>
-			<div class="span2 related-course">
-	            <div class="cell">
-	            <a href="/coursesbeta/ug/2014/<?php echo $related_course->id ?>/<?php echo $related_course->slug ?>">
-	                <div class="mask">
-	                    <p><?php echo $related_course->name ?></p>
-	                    <p><?php echo $related_course->award ?></p>
-	                </div>
-	            </a>
-	            </div> 
-			</div>
-			<?php endforeach; ?>
-		
-		<?php endif; ?>
 	
 	</section>
 	<?php endif; ?>
