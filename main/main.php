@@ -22,7 +22,7 @@ class CoursesFrontEnd {
 	/**
 	 * View - View a "live" programme from the programmes plant
 	 *
-	 * @param string Type UG|PG
+	 * @param string $type undergraduate or postgraduate.
 	 * @param yyyy Year to show
 	 * @param int Id of programme
 	 * @param string Slug - programme name
