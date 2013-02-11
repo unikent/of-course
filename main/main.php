@@ -120,7 +120,6 @@ class CoursesFrontEnd {
 		foreach($listing as $course){
 			echo "<a href='{$base_url}{$type}/{$year}/{$course->id}/{$course->slug}'>{$course->name}</a><br/>";
 		}
-	}
 
 		Flight::stop();
 	}
@@ -129,7 +128,8 @@ class CoursesFrontEnd {
 	 * Data formatted for searching by quickspot
 	 *
 	 */
-	public function ajax_search_data($type, $year){
+	public function ajax_search_data($type, $year)
+	{
 		$out = array();
 		try{
 			$js = $this->pp->get_programmes_index($year, $type);
@@ -141,10 +141,12 @@ class CoursesFrontEnd {
 		foreach($js as $j)$out[] = $j;
 		echo json_encode($out);
 	}
+
 	/**
 	 * Subjects Page
 	 */
-	public function ajax_subjects_page($type, $year){
+	public function ajax_subjects_page($type, $year)
+	{
 
 		try
 		{
@@ -173,6 +175,7 @@ class CoursesFrontEnd {
 	    $programmes = $this->pp->get_programmes_index($year, $type);//5 minute cache
 	    $campuses = $this->pp->get_campuses();
 	    $subject_categories = $this->pp->get_subjectcategories();
+	    
 		//debug option
 		if(isset($_GET['debug_performance'])){ inspect($programmes); }
 		
@@ -183,8 +186,10 @@ class CoursesFrontEnd {
 
 
 	// Quietly grab index
-	private function get_programme_index($year, $type){
-		try{
+	private function get_programme_index($year, $type)
+	{
+		try
+		{
 			return $this->pp->get_programmes_index($year, $type);
 		}
 		catch(Exception $e)
