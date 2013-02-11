@@ -80,6 +80,8 @@
 	<?php if ( ! empty($course->related_courses) ): ?>
 	<section class="related-course-section">
 		<h3>Related to this course</h3>
+		
+		<?php if (count($course->related_courses) > 4): ?>
 	
 		<div id="myCarousel" class="carousel slide" data-interval="false">
 		  <!-- Carousel items -->
@@ -92,7 +94,7 @@
 					<?php foreach($related_courses as $related_course): ?>
 					<div class="span2 related-course">
 		                <div class="cell">
-		                <a href="../<?php echo $related_course->id ?>/<?php echo $related_course->slug ?>">
+		                <a href="/coursesbeta/ug/2014/<?php echo $related_course->id ?>/<?php echo $related_course->slug ?>">
 		                    <div class="mask">
 		                        <p><?php echo $related_course->name ?></p>
 		                        <p><?php echo $related_course->award ?></p>
@@ -110,6 +112,25 @@
 		  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
 		  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
 		</div>
+		
+		
+		<?php else: ?>
+		<div class="<?php if ($count == 0) echo 'active ' ?>item">
+			<?php foreach($related_courses as $related_course): ?>
+			<div class="span2 related-course">
+	            <div class="cell">
+	            <a href="/coursesbeta/ug/2014/<?php echo $related_course->id ?>/<?php echo $related_course->slug ?>">
+	                <div class="mask">
+	                    <p><?php echo $related_course->name ?></p>
+	                    <p><?php echo $related_course->award ?></p>
+	                </div>
+	            </a>
+	            </div> 
+			</div>
+			<?php endforeach; ?>
+		</div>
+		
+		<?php endif; ?>
 	
 	</section>
 	<?php endif; ?>

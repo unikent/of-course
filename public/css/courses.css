@@ -148,7 +148,8 @@
 }
 
 #subjects {
-	background-color: #f6f6f6;
+	border-top: 1px solid #eee;
+	border-bottom: 1px solid #eee;
 	padding:6px;
 }
 
@@ -160,7 +161,7 @@
 #subjects a:hover {
 	background-color:#eee;
 	color:inherit;
-|}
+}
 
 .nav-tabs{
 	/*border-bottom-color: rgb(58, 135, 173);*/
