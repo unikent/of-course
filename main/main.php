@@ -120,9 +120,10 @@ class CoursesFrontEnd {
 		foreach($listing as $course){
 			echo "<a href='{$base_url}{$type}/{$year}/{$course->id}/{$course->slug}'>{$course->name}</a><br/>";
 		}
-		die();
 	}
 
+		Flight::stop();
+	}
 
 	/**
 	 * Data formatted for searching by quickspot
