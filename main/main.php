@@ -44,6 +44,27 @@ class CoursesFrontEnd {
 
 		$type = Flight::get('type');
 
+		// Check to see if they are passing something alpha-numeric - i.e. a slug, not a ID.
+		// Locate the corresponding ID if we have a slug and redirect there.
+		if (! is_numeric($id))
+		{
+			$programmes = $this->pp->get_programmes_index($year, $type);
+
+			// Loop through, looking for the slug and redirecting when found.
+			foreach($programmes as $programme)
+			{
+				if ($programme->slug == $id)
+				{
+					Flight::redirect('/undergraduate' . '/' . $year . '/' . $programme->id . '/' . $slug);
+				}
+			}
+
+			// If we've got this far without redirecting we have and unknown slug and therefore a 404.
+			Flight::response()->status(404);
+
+			return Flight::layout('missing_course', array('slug'=> $slug, 'id'=>$id, 'programmes'=> $this->get_programme_index($year, $type)));
+		}
+
 		// Use webservices to get course data for programme.
 		try
 		{
