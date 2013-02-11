@@ -115,7 +115,6 @@
 		
 		
 		<?php else: ?>
-		<div class="<?php if ($count == 0) echo 'active ' ?>item">
 			<?php foreach($related_courses as $related_course): ?>
 			<div class="span2 related-course">
 	            <div class="cell">
@@ -128,7 +127,6 @@
 	            </div> 
 			</div>
 			<?php endforeach; ?>
-		</div>
 		
 		<?php endif; ?>
 	
