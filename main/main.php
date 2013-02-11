@@ -60,8 +60,9 @@ class CoursesFrontEnd {
 		if(isset($_GET['debug_performance'])){ inspect($course); }
 		
 		// Fix slug paths
-		if($course->slug != $slug){
- 			return Flight::redirect($type.'/'.$year.'/'.$id.'/'.$course->slug);
+		if($course->slug != $slug)
+		{
+ 			return Flight::redirect('/' . $type . '/' . $year . '/' . $id . '/' . $course->slug);
  		}
 
  		// Render programme page
