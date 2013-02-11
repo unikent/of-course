@@ -29,9 +29,22 @@ class CoursesFrontEnd {
 	 */
 	public function view($type, $year, $id, $slug = '')
 	{
+		// If at this point the type is our shortened version, redirect to the long version.
+		if ($type == 'ug')
+		{
+			Flight::redirect('/undergraduate' . '/' . $year . '/' . $id . '/' . $slug);
+		}
+		elseif ($type == 'pg') 
+		{
+			Flight::redirect('/postgraduate' . '/' . $year . '/' . $id . '/' . $slug);
+		}
+
+		// Clean up variables.
 		Flight::setup($type, $year);
 
-		// Use webservices to get course data for programme
+		$type = Flight::get('type');
+
+		// Use webservices to get course data for programme.
 		try
 		{
 			$course = $this->pp->get_programme($year, $type, $id);
