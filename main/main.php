@@ -60,8 +60,8 @@ class CoursesFrontEnd {
 	 *
 	 * @param string $hash of preview
 	 */
-	public function preview($hash){
-
+	public function preview($hash)
+	{
 		try
 		{
 			$course = $this->pp->get_preview_programme($hash);	
@@ -90,8 +90,8 @@ class CoursesFrontEnd {
 	 */
 	public function subjects($type, $year)
 	{	
-
 		Flight::setup($type, $year);
+
 		// Get feed
 		try
 		{
@@ -147,7 +147,6 @@ class CoursesFrontEnd {
 	 */
 	public function ajax_subjects_page($type, $year)
 	{
-
 		try
 		{
 			$subjects = $this->pp->get_subjectcategories();
@@ -175,7 +174,7 @@ class CoursesFrontEnd {
 	    $programmes = $this->pp->get_programmes_index($year, $type);//5 minute cache
 	    $campuses = $this->pp->get_campuses();
 	    $subject_categories = $this->pp->get_subjectcategories();
-	    
+
 		//debug option
 		if(isset($_GET['debug_performance'])){ inspect($programmes); }
 		
