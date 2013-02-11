@@ -107,7 +107,7 @@
 
 .daedalus .related-course .cell {
 	width: 160px;
-	height: 120px;
+	height: 140px;
 	float: left;
 	overflow: hidden;
 	position: relative;
@@ -125,7 +125,7 @@
 .daedalus .related-course .mask {
 	padding: 20px;
 	width: 120px;
-	height: 100px;
+	height: 120px;
 	position: absolute;
 	overflow: hidden;
 	top: 0;
@@ -174,4 +174,33 @@
 .nav-tabs li.active a{
 	/*border-color: rgb(58, 135, 173);
 	border-bottom-color: white;*/
+}
+
+.daedalus .advanced-search {
+	margin-bottom: 120px;
+}
+
+.daedalus .advanced-search-boxes {
+	
+}
+
+.daedalus .advanced-search-table {
+	
+}
+
+.daedalus #programme-list {
+	border-radius: 0px;
+}
+
+.daedalus th, td {
+	border-radius: 0px !important;
+}
+
+.daedalus .advanced-text-search {
+	border-radius: 0px;
+	width: 303px;
+}
+
+.daedalus .advanced-search-boxes {
+	margin: 30px 0;
 }

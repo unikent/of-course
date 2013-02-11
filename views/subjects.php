@@ -1,5 +1,5 @@
 
-            <h1> Courses by Subject </h1>
+            <h1> Courses by subject </h1>
             
 
             	<?php
