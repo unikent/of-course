@@ -92,7 +92,7 @@
 					<?php foreach($related_courses as $related_course): ?>
 					<div class="span2 related-course">
 		                <div class="cell">
-		                <a href="/coursesbeta/ug/2014/<?php echo $related_course->id ?>/<?php echo $related_course->slug ?>">
+		                <a href="<?php echo BASE_URL; ?><?php echo $type ?>/<?php echo $year ?>/<?php echo $related_course->id ?>/<?php echo $related_course->slug ?>">
 		                    <div class="mask">
 		                        <p><?php echo $related_course->name ?></p>
 		                        <p><?php echo $related_course->award ?></p>

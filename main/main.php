@@ -29,6 +29,9 @@ class CoursesFrontEnd {
 	 */
 	public function view($type, $year, $id, $slug = '')
 	{
+		// the type as used in the url and not in the api eg 'undergraduate'
+		$type_url = $type;
+		
 		// If at this point the type is our shortened version, redirect to the long version.
 		if ($type == 'ug')
 		{
@@ -94,7 +97,7 @@ class CoursesFrontEnd {
  		}
 
  		// Render programme page
- 		Flight::layout('course_page', array('course'=>$course, 'type'=> $type, 'subjects'=> $subjects));
+ 		Flight::layout('course_page', array('course'=>$course, 'type'=> $type_url, 'year' => $year, 'subjects'=> $subjects));
 	}
 
 	/**
@@ -212,6 +215,16 @@ class CoursesFrontEnd {
 	 */
 	public function search($type, $year, $search_type = '', $search_string = '')
 	{
+		$type_url = $type;
+		if ($type == 'undergraduate')
+		{
+			$type = 'ug';
+		}
+		elseif ($type == 'postgraduate') 
+		{
+			$type = 'pg';
+		}
+		
 		Flight::setup($type, $year);
 
 	    $programmes = $this->pp->get_programmes_index($year, $type);//5 minute cache
@@ -222,7 +235,7 @@ class CoursesFrontEnd {
 		if(isset($_GET['debug_performance'])){ inspect($programmes); }
 		
 		//Render full page
-		Flight::layout('search', array('programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'search_type' => $search_type, 'search_string' => $search_string));	
+		Flight::layout('search', array('programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'search_type' => $search_type, 'search_string' => $search_string, 'type' => $type_url, 'year' => $year));	
 		
 	}
 
