@@ -204,3 +204,8 @@
 .daedalus .advanced-search-boxes {
 	margin: 30px 0;
 }
+
+.daedalus li > span .btn-link {
+	text-align: left;
+	vertical-align: left;
+}

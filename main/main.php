@@ -6,6 +6,7 @@ class CoursesFrontEnd {
 	 * A Programmes Plant API Object.
 	 */
 	public $pp = false;
+	public $current_year = '2014';
 
 	public function __construct()
 	{
@@ -18,7 +19,20 @@ class CoursesFrontEnd {
 
 		$this->pp->no_ssl_verification();
 	}
-
+	
+	/**
+	 * View - View a "live" programme from the programmes plant, but without any year
+	 *
+	 * @param string $type undergraduate or postgraduate.
+	 * @param yyyy Year to show
+	 * @param int Id of programme
+	 * @param string Slug - programme name
+	 */
+	public function view_noyear($type, $id, $slug = '')
+	{
+		$this->view($type, $this->current_year, $id, $slug);
+	}
+	
 	/**
 	 * View - View a "live" programme from the programmes plant
 	 *
@@ -32,14 +46,17 @@ class CoursesFrontEnd {
 		// the type as used in the url and not in the api eg 'undergraduate'
 		$type_url = $type;
 		
+		// the year in the url used in redirects could be blank (current year) or year + / for last year
+		$year_url = $year != $this->current_year ? $year . '/' : '';
+		
 		// If at this point the type is our shortened version, redirect to the long version.
 		if ($type == 'ug')
 		{
-			Flight::redirect('/undergraduate' . '/' . $year . '/' . $id . '/' . $slug);
+			Flight::redirect('/undergraduate' . '/' . $year_url . $id . '/' . $slug);
 		}
 		elseif ($type == 'pg') 
 		{
-			Flight::redirect('/postgraduate' . '/' . $year . '/' . $id . '/' . $slug);
+			Flight::redirect('/postgraduate' . '/' . $year_url . $id . '/' . $slug);
 		}
 
 		// Clean up variables.
@@ -66,7 +83,7 @@ class CoursesFrontEnd {
 			{
 				if ($programme->slug == $id)
 				{
-					Flight::redirect('/undergraduate' . '/' . $year . '/' . $programme->id . '/' . $slug);
+					Flight::redirect('/undergraduate' . '/' . $year_url . $programme->id . '/' . $slug);
 				}
 			}
 
@@ -94,7 +111,7 @@ class CoursesFrontEnd {
 		// Fix slug paths
 		if($course->slug != $slug)
 		{
- 			return Flight::redirect('/' . $type . '/' . $year . '/' . $id . '/' . $course->slug);
+ 			return Flight::redirect('/' . $type . '/' . $year_url . $id . '/' . $course->slug);
  		}
 
  		// Render programme page

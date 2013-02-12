@@ -41,7 +41,7 @@ Flight::route('/preview/@hash', array($main,'preview'));
 // Key Pages
 Flight::route('/@type/@year/search/@search_type/@search_string', array($main,'search'));
 Flight::route('/@type/@year/search', array($main,'search'));
-Flight::route('/@type/@year/', array($main,'list_programmes'));
+Flight::route('/@type', array($main,'list_programmes'));
 
 // Subjects
 Flight::route('/@type/@year/subjects/@id/@slug', array($main,'subject_view'));
@@ -54,8 +54,12 @@ Flight::route('/undergrad/subjects/[A-Za-z]+/@slug', function($slug){
 });
 
 // Courses
-Flight::route('/@type/@year/@id/@slug', array($main,'view'));
-Flight::route('/@type/@year/@id', array($main,'view'));
+Flight::route('/@type/@year:[0-9]+/@id:[0-9]+/@slug', array($main,'view'));
+Flight::route('/@type/@year:[0-9]+/@id:[0-9]+', array($main,'view'));
+Flight::route('/@type/@id:[0-9]+/@slug', array($main,'view_noyear'));
+Flight::route('/@type/@id:[0-9]+', array($main,'view_noyear'));
+
+
 
 // Run Flight!
 Flight::start();
