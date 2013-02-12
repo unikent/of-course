@@ -34,10 +34,10 @@
     <table id="programme-list" class="table table-striped table-bordered advanced-search-table">
         <thead>
           <tr>
-            <th>Name <i class="icon-resize-vertical"></th>
-            <th>UCAS code <i class="icon-resize-vertical"></th>
-            <th>Campus <i class="icon-resize-vertical"></th>
-            <th>Full-time/Part-time <i class="icon-resize-vertical"></th>
+            <th>Name <i class="icon-resize-vertical"></i></th>
+            <th style="width:100px">UCAS code <i class="icon-resize-vertical"></i></th>
+            <th style="width:80px">Campus <i class="icon-resize-vertical"></i></th>
+            <th style="width:150px">Full-time/Part-time <i class="icon-resize-vertical"></i></th>
             <th class="hide">Subject categories</th>
             <th class="hide">Search keywords</th>
           </tr>
