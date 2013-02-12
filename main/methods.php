@@ -50,6 +50,7 @@
 		
 		// Set data to views
 		Flight::set('type', $level);
+		Flight::set('year', $year);
 
 		Flight::view()->set('type', $level);
 		Flight::view()->set('year', $year);

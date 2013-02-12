@@ -43,10 +43,11 @@ class CoursesFrontEnd {
 		}
 
 		// Clean up variables.
+		// TODO - maybe try passing these by reference
 		Flight::setup($type, $year);
-
 		$type = Flight::get('type');
-
+		$year = Flight::get('year');
+		
 		// Check to see if they are passing something alpha-numeric - i.e. a slug, not a ID.
 		// Locate the corresponding ID if we have a slug and redirect there.
 		if (! is_numeric($id))
