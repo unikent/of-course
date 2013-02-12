@@ -177,6 +177,16 @@ class CoursesFrontEnd {
 	public function ajax_search_data($type, $year)
 	{
 		$out = array();
+
+		if ($type == 'undergraduate')
+		{
+			$type = 'ug';
+		}
+		elseif ($type == 'postgraduate') 
+		{
+			$type = 'pg';
+		}
+
 		try{
 			$js = $this->pp->get_programmes_index($year, $type);
 		}
