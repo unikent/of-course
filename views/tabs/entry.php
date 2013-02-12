@@ -51,13 +51,6 @@
 		    <td><?php echo $course->btec_level_3_extended_diploma_formerly_btec_national_diploma ?></td>
 		  </tr>
 		  <?php endif; ?>
-		  
-		  <?php if(!empty($course->cambridge_preu)): ?>
-		  <tr>
-		    <td>Cambridge Pre-U</td>
-		    <td><?php echo $course->cambridge_preu ?></td>
-		  </tr>
-		  <?php endif; ?>
 		
 		  <?php if(!empty($course->international_baccalaureate)): ?>
 		  <tr>
@@ -65,20 +58,7 @@
 		    <td><?php echo $course->international_baccalaureate ?></td>
 		  </tr>
 		  <?php endif; ?>
-		
-		  <?php if(!empty($course->scottish_qualifications)): ?>
-		  <tr>
-		    <td>Scottish Qualifications</td>
-		    <td><?php echo $course->scottish_qualifications ?></td>
-		  </tr>
-		  <?php endif; ?>
-		
-		  <?php if(!empty($course->irish_leaving_certificate)): ?>
-		  <tr>
-		    <td>Irish Leaving Certificate</td>
-		    <td><?php echo $course->irish_leaving_certificate ?></td>
-		  </tr>
-		  <?php endif; ?>
+
 			</tbody>
 		</table>
 	</section>
