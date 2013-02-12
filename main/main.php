@@ -221,8 +221,8 @@ class CoursesFrontEnd {
 	 *
 	 * @param string Type UG|PG
 	 * @param yyyy Year to show
-	 * @param int Id of programme
-	 * @param string Slug - programme name
+	 * @param string type of search
+	 * @param string string to search
 	 */
 	public function search($type, $year, $search_type = '', $search_string = '')
 	{
@@ -247,6 +247,36 @@ class CoursesFrontEnd {
 		
 		//Render full page
 		Flight::layout('search', array('programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'search_type' => $search_type, 'search_string' => $search_string, 'type' => $type_url, 'year' => $year));	
+		
+	}
+
+	/**
+	 * Subject leaflets page
+	 *
+	 * @param string Type UG|PG
+	 * @param yyyy Year to show
+	 */
+	public function leaflets($type, $year)
+	{
+		$type_url = $type;
+		if ($type == 'undergraduate')
+		{
+			$type = 'ug';
+		}
+		elseif ($type == 'postgraduate') 
+		{
+			$type = 'pg';
+		}
+		
+		Flight::setup($type, $year);
+
+	    $leaflets = $this->pp->get_subject_leaflets($year, $type);
+
+		//debug option
+		if(isset($_GET['debug_performance'])){ inspect($programmes); }
+		
+		//Render full page
+		Flight::layout('leaflets', array('leaflets' => $leaflets, 'type' => $type_url, 'year' => $year));	
 		
 	}
 

@@ -47,6 +47,9 @@ Flight::route('/@type/@year/', array($main,'list_programmes'));
 Flight::route('/@type/@year/subjects/@id/@slug', array($main,'subject_view'));
 Flight::route('/@type/@year/subjects', array($main,'subjects'));
 
+//Subject leaflets
+Flight::route('/@type/@year/leaflets', array($main,'leaflets'));
+
 // Legacy Courses
 // These URLS look like: /undergrad/subjects/<subject name>/<slug>
 Flight::route('/undergrad/subjects/[A-Za-z]+/@slug', function($slug){
