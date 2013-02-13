@@ -6,9 +6,8 @@
 
         <select class="campus-search input-large">
           <option value="">All campuses</option>
-          <?php foreach($campuses as $c): ?>
-          <option><?php echo $c->name ?></option>
-          <?php endforeach; ?>
+          <option>Canterbury</option>
+          <option>Medway</option>
         </select>
       
 
