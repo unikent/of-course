@@ -270,7 +270,13 @@ class CoursesFrontEnd {
 		
 		Flight::setup($type, $year);
 
-	    $leaflets = $this->pp->get_subject_leaflets($year, $type);
+	    $leaflets = (array) $this->pp->get_subject_leaflets($year, $type);
+
+	    // sort our leaflets
+	    usort($leaflets, function($a,$b)
+			{
+				return strcmp($a->name, $b->name);
+			});
 
 		//debug option
 		if(isset($_GET['debug_performance'])){ inspect($programmes); }
