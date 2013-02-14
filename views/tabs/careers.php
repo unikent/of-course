@@ -1,7 +1,9 @@
+<?php if( ! empty($course->did_you_know_fact_box) ): ?>
 <div class="alert alert-info">
 	<h4>Did you know...</h4>
 	<p><?php echo $course->did_you_know_fact_box ?></p>
 </div>
+<?php endif; ?>
 
 <h2>Careers</h2>
 <?php echo $course->careers_overview; ?>
