@@ -63,11 +63,11 @@ class CoursesFrontEnd {
 		// Fix slug paths
 		if($course->slug != $slug)
 		{
- 			return Flight::redirect('/' . $type . '/' . $year_url . $id . '/' . $course->slug);
+ 			return Flight::redirect('/' . $level . '/' . $year_url . $id . '/' . $course->slug);
  		}
 
  		// Render programme page
- 		Flight::setup($level, $year);
+ 		Flight::setup($year, $level);
  		Flight::layout('course_page', array('course'=>$course));
 	}
 

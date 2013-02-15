@@ -20,7 +20,7 @@
 	 * @return string absoulte URL
 	 */
 	Flight::map('url', function($path, $use_base = true){
-		return ($use_base) ? BASE_URL.$path : $path;
+		return ($use_base) ? BASE_URL.'/'.$path : $path;
 	});
 
 	/**
