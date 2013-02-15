@@ -66,19 +66,19 @@
 	</section>
 </section>
 <?php endif; ?>
-<?php if (isset($course->modules->stages->{A})): ?>
+<?php if (isset($course->modules->stages->{"A"})): ?>
 	<?php if (empty($course->year_abroad)): ?>
 	<h3>Year abroad</h3>
 	<?php endif; ?>
-	<?php Flight::render('partials/stage', array('stage' => $course->modules->stages->{A})); ?>
+	<?php Flight::render('partials/stage', array('stage' => $course->modules->stages->{"A"})); ?>
 <?php endif; ?>
-<?php if (isset($course->modules->stages->{A1})): ?>
+<?php if (isset($course->modules->stages->{"A1"})): ?>
 	<h3>1st year abroad</h3>
-	<?php Flight::render('partials/stage', array('stage' => $course->modules->stages->{A1})); ?>
+	<?php Flight::render('partials/stage', array('stage' => $course->modules->stages->{"A1"})); ?>
 <?php endif; ?>
-<?php if (isset($course->modules->stages->{A2})): ?>
+<?php if (isset($course->modules->stages->{"A2"})): ?>
 	<h3>2nd year abroad</h3>
-	<?php Flight::render('partials/stage', array('stage' => $course->modules->stages->{A2})); ?>
+	<?php Flight::render('partials/stage', array('stage' => $course->modules->stages->{"A2"})); ?>
 <?php endif; ?>
 
 
@@ -93,7 +93,7 @@
 </section>
 <?php endif; ?>
 
-<?php if (isset($course->modules->stages->{S})): ?>
+<?php if (isset($course->modules->stages->{"S"})): ?>
 	<?php if (empty($course->year_in_industry)): ?>
 	<h3>Year in industry</h3>
 	<?php endif; ?>
