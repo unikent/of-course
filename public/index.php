@@ -26,6 +26,14 @@ if (defined("TEMPLATING_ENGINE"))
 	});
 }
 
+
+Flight::map('notFound', function(){
+    Flight::response()->status(404);
+    Flight::setup(null,null);
+	return Flight::layout('missing_course');
+});
+
+
 // Setup main object
 $main = new CoursesFrontEnd();
 
@@ -57,10 +65,11 @@ Flight::route('/undergrad/subjects/[A-Za-z]+/@slug', function($slug){
 });
 
 // Courses
-Flight::route('/@type/@year:[0-9]+/@id:[0-9]+/@slug', array($main,'view'));
-Flight::route('/@type/@year:[0-9]+/@id:[0-9]+', array($main,'view'));
-Flight::route('/@type/@id:[0-9]+/@slug', array($main,'view_noyear'));
-Flight::route('/@type/@id:[0-9]+', array($main,'view_noyear'));
+Flight::route('/@type:(undergraduate|postgraduate)/@year:[0-9]+/@id:[0-9]+/@slug', array($main,'view'));
+Flight::route('/@type:(undergraduate|postgraduate)/@year:[0-9]+/@id:[0-9]+', array($main,'view'));
+Flight::route('/@type:(undergraduate|postgraduate)/@id:[0-9]+/@slug', array($main,'view_noyear'));
+Flight::route('/@type:(undergraduate|postgraduate)/@id:[0-9]+', array($main,'view_noyear'));
+
 
 
 
