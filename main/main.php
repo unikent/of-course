@@ -62,8 +62,13 @@ class CoursesFrontEnd {
 		
 		// Fix slug paths
 		if($course->slug != $slug)
-		{
- 			return Flight::redirect('/' . $level . '/' . $year_url . $id . '/' . $course->slug);
+		{	
+			// If current year, don't bother with "year" in URL
+			if($year == $this->current_year){
+				return Flight::redirect('/' . $level . '/' . $id . '/' . $course->slug);
+			}else{
+				return Flight::redirect('/' . $level . '/' . $year . '/' . $id . '/' . $course->slug);	
+			}
  		}
 
  		// Render programme page
@@ -188,6 +193,7 @@ class CoursesFrontEnd {
 		Flight::setup($year, $level);
 
 	    $programmes = $this->pp->get_programmes_index($year, $level);//5 minute cache
+
 	    $campuses = $this->pp->get_campuses();
 	    $subject_categories = $this->pp->get_subjectcategories();
 
