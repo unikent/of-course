@@ -43,27 +43,8 @@ class CoursesFrontEnd {
 	 */
 	public function view($type, $year, $id, $slug = '')
 	{
-		// the type as used in the url and not in the api eg 'undergraduate'
-		$type_url = $type;
-		
-		// the year in the url used in redirects could be blank (current year) or year + / for last year
-		$year_url = $year != $this->current_year ? $year . '/' : '';
-		
-		// If at this point the type is our shortened version, redirect to the long version.
-		if ($type == 'ug')
-		{
-			Flight::redirect('/undergraduate' . '/' . $year_url . $id . '/' . $slug);
-		}
-		elseif ($type == 'pg') 
-		{
-			Flight::redirect('/postgraduate' . '/' . $year_url . $id . '/' . $slug);
-		}
-
 		// Clean up variables.
-		// TODO - maybe try passing these by reference
 		Flight::setup($type, $year);
-		$type = Flight::get('type');
-		$year = Flight::get('year');
 		
 		// Check to see if they are passing something alpha-numeric - i.e. a slug, not a ID.
 		// Locate the corresponding ID if we have a slug and redirect there.

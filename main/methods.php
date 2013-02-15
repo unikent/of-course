@@ -23,6 +23,24 @@
 		return ($use_base) ? BASE_URL.$path : $path;
 	});
 
+
+	// 404 handler
+	Flight::map('notFound', function(){
+
+		// Attempt to resolve URL details, location, path and other stuff
+		// that will allow us to be more helpful.
+
+
+	  
+	    Flight::setup(null,null);
+	    // Output page with 404 header.
+	     Flight::response()->status(404);
+		return Flight::layout('missing_course');
+	});
+
+
+
+
 	Flight::map('setup', function($year, $level, $preview = false){
 
 		// Ensure year is int and is valid
