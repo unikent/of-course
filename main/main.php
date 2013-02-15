@@ -28,62 +28,33 @@ class CoursesFrontEnd {
 	 * @param int Id of programme
 	 * @param string Slug - programme name
 	 */
-	public function view_noyear($type, $id, $slug = '')
+	public function view_noyear($level, $id, $slug = '')
 	{
-		$this->view($type, $this->current_year, $id, $slug);
+		$this->view($level, $this->current_year, $id, $slug);
 	}
 	
 	/**
 	 * View - View a "live" programme from the programmes plant
 	 *
-	 * @param string $type undergraduate or postgraduate.
+	 * @param string $level undergraduate or postgraduate.
 	 * @param yyyy Year to show
 	 * @param int Id of programme
 	 * @param string Slug - programme name
 	 */
-	public function view($type, $year, $id, $slug = '')
+	public function view($level, $year, $id, $slug = '')
 	{
-		// Clean up variables.
-		Flight::setup($type, $year);
-		
-		// Check to see if they are passing something alpha-numeric - i.e. a slug, not a ID.
-		// Locate the corresponding ID if we have a slug and redirect there.
-		if (! is_numeric($id))
-		{
-			try
-			{
-				$programmes = $this->pp->get_programmes_index($year, $type);
-			}
-			catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
-			{
-				Flight::halt(501, "Fatal error in getting programmes index.");
-			}
-
-			// Loop through, looking for the slug and redirecting when found.
-			foreach($programmes as $programme)
-			{
-				if ($programme->slug == $id)
-				{
-					Flight::redirect('/undergraduate' . '/' . $year_url . $programme->id . '/' . $slug);
-				}
-			}
-
-			// If we've got this far without redirecting we have and unknown slug and therefore a 404.
-			Flight::response()->status(404);
-
-			return Flight::layout('missing_course', array('slug'=> $slug, 'id'=>$id, 'programmes'=> $this->get_programme_index($year, $type)));
-		}
-
+ 
 		// Use webservices to get course data for programme.
 		try
 		{
-			$course = $this->pp->get_programme($year, $type, $id);
+			$course = $this->pp->get_programme($year, $level, $id);
 		}
 		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
 		{
-			// 404? handle has missing/unknown course
-			Flight::response()->status(404);
-			return Flight::layout('missing_course', array('slug'=> $slug, 'id'=>$id, 'programmes'=> $this->get_programme_index($year, $type)));
+			// Not found?
+			// Do 404 action, sending any useful enviormental data we have so it can be as useful as possible
+			$data = array('slug' => $slug, 'id' => $id, 'year'=> $year, 'level' => $level);
+			Flight::notFound($data);
 		}
 		
 		// Debug option
@@ -96,7 +67,8 @@ class CoursesFrontEnd {
  		}
 
  		// Render programme page
- 		Flight::layout('course_page', array('course'=>$course, 'type'=> $type_url, 'year' => $year, 'subjects'=> $subjects));
+ 		Flight::setup($level, $year);
+ 		Flight::layout('course_page', array('course'=>$course));
 	}
 
 	/**
@@ -111,18 +83,15 @@ class CoursesFrontEnd {
 			$course = $this->pp->get_preview_programme($hash);	
 		}
 		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
-		{
-			// 404? handle has missing/unknown course
-			Flight::response()->status(404);
-			Flight::setup('auto', 'auto', true);
-			return Flight::layout('missing_course');
+		{	
+			// We dont know enough to help the 404 out really
+			Flight::notFound();
 		}
-
-		Flight::setup('auto', $course->year, true);
 
 		// Debug option
 		if(isset($_GET['debug_performance'])){ inspect($course); }
 		
+		Flight::setup($course->year, null, true);
 		Flight::layout('course_page', array('course'=> $course));
 	}
 
@@ -132,9 +101,9 @@ class CoursesFrontEnd {
 	 * @param string Type UG|PG
 	 * @param yyyy Year to show
 	 */
-	public function subjects($type, $year)
+	public function subjects($level, $year)
 	{	
-		Flight::setup($type, $year);
+		Flight::setup($year, $level);
 
 		// Get feed
 		try
@@ -155,14 +124,14 @@ class CoursesFrontEnd {
 	 * @param string Type UG|PG
 	 * @param yyyy Year to show
 	 */
-	public function list_programmes($type, $year)
+	public function list_programmes($level, $year)
 	{
-		$listing = $this->pp->get_programmes_index('2014', 'ug');
+		$listing = $this->pp->get_programmes_index($this->current_year, 'undergraduate');
 
 		$base_url = BASE_URL;
 
 		foreach($listing as $course){
-			echo "<a href='{$base_url}/{$type}/{$year}/{$course->id}/{$course->slug}'>{$course->name}</a><br/>";
+			echo "<a href='{$base_url}/{$level}/{$year}/{$course->id}/{$course->slug}'>{$course->name}</a><br/>";
 		}
 
 		Flight::stop();
@@ -172,35 +141,26 @@ class CoursesFrontEnd {
 	 * Data formatted for searching by quickspot
 	 *
 	 */
-	public function ajax_search_data($type, $year)
+	public function ajax_search_data($level, $year)
 	{
 		$out = array();
 
-		if ($type == 'undergraduate')
-		{
-			$type = 'ug';
-		}
-		elseif ($type == 'postgraduate') 
-		{
-			$type = 'pg';
-		}
-
 		try{
-			$js = $this->pp->get_programmes_index($year, $type);
+			$js = $this->pp->get_programmes_index($year, $level);
 		}
 		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
 		{
 			Flight::halt(501, "Fatal error in getting programmes index.");
 		}
 
-		foreach($js as $j)$out[] = $j;
-		echo json_encode($out);
+		//foreach($js as $j)$out[] = $j;
+		echo json_encode($js);
 	}
 
 	/**
 	 * Subjects Page
 	 */
-	public function ajax_subjects_page($type, $year)
+	public function ajax_subjects_page($level, $year)
 	{
 		try
 		{
@@ -211,7 +171,7 @@ class CoursesFrontEnd {
 			$subjects = array();	
 		}
 
-		return Flight::render('menus/subjects', array('type' => $type, 'year' => $year, 'subjects'=> $subjects));
+		return Flight::render('menus/subjects', array('type' => $level, 'year' => $year, 'subjects'=> $subjects));
 	}
 
 	/**
@@ -222,21 +182,12 @@ class CoursesFrontEnd {
 	 * @param string type of search
 	 * @param string string to search
 	 */
-	public function search($type, $year, $search_type = '', $search_string = '')
+	public function search($level, $year, $search_type = '', $search_string = '')
 	{
-		$type_url = $type;
-		if ($type == 'undergraduate')
-		{
-			$type = 'ug';
-		}
-		elseif ($type == 'postgraduate') 
-		{
-			$type = 'pg';
-		}
 		
-		Flight::setup($type, $year);
+		Flight::setup($year, $level);
 
-	    $programmes = $this->pp->get_programmes_index($year, $type);//5 minute cache
+	    $programmes = $this->pp->get_programmes_index($year, $level);//5 minute cache
 	    $campuses = $this->pp->get_campuses();
 	    $subject_categories = $this->pp->get_subjectcategories();
 
@@ -244,7 +195,7 @@ class CoursesFrontEnd {
 		if(isset($_GET['debug_performance'])){ inspect($programmes); }
 		
 		//Render full page
-		Flight::layout('search', array('programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'search_type' => $search_type, 'search_string' => $search_string, 'type' => $type_url, 'year' => $year));	
+		Flight::layout('search', array('programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'search_type' => $search_type, 'search_string' => $search_string));	
 		
 	}
 
@@ -254,43 +205,34 @@ class CoursesFrontEnd {
 	 * @param string Type UG|PG
 	 * @param yyyy Year to show
 	 */
-	public function leaflets($type, $year)
+	public function leaflets($level, $year)
 	{
-		$type_url = $type;
-		if ($type == 'undergraduate')
-		{
-			$type = 'ug';
-		}
-		elseif ($type == 'postgraduate') 
-		{
-			$type = 'pg';
-		}
 		
-		Flight::setup($type, $year);
+		Flight::setup($year, $level);
 
-	    $leaflets = (array) $this->pp->get_subject_leaflets($year, $type);
+	    $leaflets = (array) $this->pp->get_subject_leaflets($year, $level);
 
 	    // sort our leaflets
 	    usort($leaflets, function($a,$b)
 			{
 				return strcmp($a->name, $b->name);
-			});
+		});
 
 		//debug option
-		if(isset($_GET['debug_performance'])){ inspect($programmes); }
+		if(isset($_GET['debug_performance'])){ inspect($leaflets); }
 		
 		//Render full page
-		Flight::layout('leaflets', array('leaflets' => $leaflets, 'type' => $type_url, 'year' => $year));	
+		Flight::layout('leaflets', array('leaflets' => $leaflets, 'type' => $level));	
 		
 	}
 
 
 	// Quietly grab index
-	private function get_programme_index($year, $type)
+	private function get_programme_index($year, $level)
 	{
 		try
 		{
-			return $this->pp->get_programmes_index($year, $type);
+			return $this->pp->get_programmes_index($year, $level);
 		}
 		catch(Exception $e)
 		{
