@@ -42,16 +42,36 @@
 
 		// Use data to try and figure out best 404 info
 		// we can.
+
+		//$url = Flight::request()->url;
+		
+		if(!isset($data['level'])){
+			// Attempt to guess?
+			$data['level']= 'undergraduate';
+		}
+
+		if(!isset($data['year'])){
+			// Attempt to guess?
+			$data['year'] = '2014';
+		}
+
+		
 		echo '<pre>';print_r($data );
-		die("bang");
+		echo $url;
+
+		//die();
 
 		// Attempt to resolve URL details, location, path and other stuff
 		// that will allow us to be more helpful.
 	  
-	    //Flight::setup(null,null);
+	    //Flight::setup($data['year'], $data['level']);
+	    Flight::setup('2014', 'undergraduate');
 	    // Output page with 404 header.
-	     Flight::response()->status(404);
-		return Flight::layout('missing_course');
+	  	Flight::response()->status(404);
+	  	//Flight::request()->length = 9000;
+
+	    
+		return Flight::layout('missing_course', $data);
 	});
 
 

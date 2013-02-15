@@ -1,11 +1,3 @@
-<?php 
-	$slug = htmlspecialchars($slug); 
-	$id = (int) $id;
-
-	$year = (int) $id;
-	
-?>
-
 <article class="container">
 	<div class='row-fluid'>
 		<div class='span12'>
