@@ -1,3 +1,5 @@
+<?php $year_for_url = empty($year) ? '' : ((strcmp($year, CoursesFrontEnd::$current_year) == 0) ? '' : $year . '/'); ?>
+
 <article class="container">
 	<div class='row-fluid'>
 		<div class='span12'>
@@ -17,7 +19,7 @@
 						
 						foreach($programmes as $programme){
 							if(strpos($programme->name, $slug) !==false || strpos($programme->slug, $slug) !==false){
-								$link = Flight::url("{$type}/{$year}/{$programme->id}/{$programme->slug}");
+								$link = Flight::url("{$type}/{$year_for_url}{$programme->id}/{$programme->slug}");
 								echo "<li><a href='{$link}'>{$programme->name}</a></li>";
 								$displayed++;
 							}
