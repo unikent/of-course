@@ -209,10 +209,10 @@ class CoursesFrontEnd {
 	{
 		$listing = static::$pp->get_programmes_index(static::$current_year, 'undergraduate');
 
-		$base_url = BASE_URL;
+		$year_for_url = empty($year) ? '' : ((strcmp($year, static::$current_year) == 0) ? '' : $year . '/');
 
 		foreach($listing as $course){
-			echo "<a href='{$base_url}/{$level}/{$year}/{$course->id}/{$course->slug}'>{$course->name}</a><br/>";
+			echo "<a href='". Flight::url("{$level}/{$year_for_url}{$course->id}/{$course->slug}") . "'>{$course->name}</a><br/>";
 		}
 
 		Flight::stop();
