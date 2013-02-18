@@ -7,17 +7,21 @@
 	<?php if($course->programme_suspended == 'true' || $course->programme_withdrawn == 'true'): ?>
 		<?php echo $course->holding_message; ?>
 	<?php else: ?>
+
+
+	<div class="daedalus-tabs">
+	
 	<div class="row-fluid">
 		<div class="span12">
 			<ul class="nav nav-tabs">
-				<li class="active"><a href="#overview" data-toggle="tab">Overview</a></li>
-				<li><a href="#structure" data-toggle="tab">Course structure</a></li>
-				<li><a href="#teaching" data-toggle="tab">Teaching &amp; Assessment</a></li>
-				<li><a href="#careers" data-toggle="tab">Careers</a></li>
-				<li><a href="#entry" data-toggle="tab">Entry requirements</a></li>
-				<li><a href="#fees" data-toggle="tab">Fees &amp; Funding</a></li>
-				<li><a href="#apply" data-toggle="tab">Apply</a></li>
-				<li><a href="#info" data-toggle="tab">Further info</a></li>
+				<li><a href="#overview">Overview</a></li>
+				<li><a href="#structure">Course structure</a></li>
+				<li><a href="#teaching">Teaching &amp; Assessment</a></li>
+				<li><a href="#careers">Careers</a></li>
+				<li><a href="#entry">Entry requirements</a></li>
+				<li><a href="#fees">Fees &amp; Funding</a></li>
+				<li><a href="#apply">Apply</a></li>
+				<li><a href="#info">Further info</a></li>
 			</ul>
 		</div><!-- /span -->
 	</div><!-- /row -->
@@ -25,14 +29,14 @@
 	<div class="row-fluid">
 		<div class="span7">
 			<div class="tab-content">
-				<section class="tab-pane active fade in" id="overview"><?php Flight::render('tabs/overview', array('course'=>$course)); ?></section>
-				<section class="tab-pane fade" id="structure"><?php Flight::render('tabs/structure', array('course'=>$course)); ?></section>
-				<section class="tab-pane fade" id="teaching"><?php Flight::render('tabs/teaching', array('course'=>$course)); ?></section>
-				<section class="tab-pane fade" id="careers"><?php Flight::render('tabs/careers', array('course'=>$course)); ?></section>	
-				<section class="tab-pane fade" id="entry"><?php Flight::render('tabs/entry', array('course'=>$course)); ?></section>
-				<section class="tab-pane fade" id="fees"><?php Flight::render('tabs/fees', array('course'=>$course)); ?></section>
-				<section class="tab-pane fade" id="apply"><?php Flight::render('tabs/apply', array('course'=>$course)); ?></section>
-				<section class="tab-pane fade" id="info"><?php Flight::render('tabs/info', array('course'=>$course)); ?></section>
+				<section class="fade" id="overview"><?php Flight::render('tabs/overview', array('course'=>$course)); ?></section>
+				<section class="fade" id="structure"><?php Flight::render('tabs/structure', array('course'=>$course)); ?></section>
+				<section class="fade" id="teaching"><?php Flight::render('tabs/teaching', array('course'=>$course)); ?></section>
+				<section class="fade" id="careers"><?php Flight::render('tabs/careers', array('course'=>$course)); ?></section>	
+				<section class="fade" id="entry"><?php Flight::render('tabs/entry', array('course'=>$course)); ?></section>
+				<section class="fade" id="fees"><?php Flight::render('tabs/fees', array('course'=>$course)); ?></section>
+				<section class="fade" id="apply"><?php Flight::render('tabs/apply', array('course'=>$course)); ?></section>
+				<section class="fade" id="info"><?php Flight::render('tabs/info', array('course'=>$course)); ?></section>
 			</div>
 		</div><!-- /span -->
 		<div class="span5">
@@ -76,6 +80,8 @@
 			</aside>
 		</div><!-- /span -->
 	</div><!-- /row -->
+
+</div>
 	
 	<?php if ( ! empty($course->related_courses) ): ?>
 	<section class="related-course-section">
