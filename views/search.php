@@ -43,11 +43,11 @@
         </thead>
         <tbody>
         
-        <?php foreach($programmes as $p): ?>
+        <?php foreach($programmes as $p):?>
 
           <tr>
             <td>
-                <a href='<?php echo Flight::url("{$type}/{$year}/{$p->id}/{$p->slug}"); ?>'><?php echo $p->name;?> - <?php echo $p->award;?></a>
+                <a href='<?php echo Flight::url("{$level}/{$year}/{$p->id}/{$p->slug}"); ?>'><?php echo $p->name;?> - <?php echo $p->award;?></a>
             </td>
             <td>
                 <?php echo $p->ucas_code;?>
@@ -59,7 +59,7 @@
                 <?php echo $p->mode_of_study;?>
             </td>
             <td class="hide">
-                <?php foreach($p->subject_categories as $sc): ?>
+                <?php foreach((array)$p->subject_categories as $sc): ?>
                   <?php echo $sc;?> <br />
                 <?php endforeach; ?>
             </td>
@@ -79,7 +79,7 @@
 <kentScripts>
 
 <script type="text/javascript" charset="utf8" src="//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.1/jquery.dataTables.min.js"></script>
-<script type="text/javascript" charset="utf-8" language="javascript" src="<?php echo BASE_URL ?>js/DT_bootstrap.js"></script>
+<script type="text/javascript" charset="utf-8" language="javascript" src="<?php echo ASSET_URL ?>/js/DT_bootstrap.js"></script>
 
 <script type='text/javascript'>
 
@@ -182,5 +182,5 @@ if(advanced_text_search && campus_search && study_mode_search && subject_categor
 
 
 <style type='text/css'>
-@import url('<?php echo BASE_URL ?>css/DT_bootstrap.css');
+@import url('<?php echo ASSET_URL ?>/css/DT_bootstrap.css');
 </style>

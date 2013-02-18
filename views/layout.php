@@ -1,11 +1,11 @@
 <!-- InstanceBegin template="/Templates/daedalus_v1.dwt" codeOutsideHTMLIsLocked="false" -->
 <!-- TEMPLATE_VERSION="Daedalus v1.0" -->
-<kentWrapper type="courses" siteroot="<?php echo BASE_URL; ?>" mode="<?php echo $type;?>" year="<?php echo $year;?>">
+<kentWrapper type="courses" siteroot="<?php echo BASE_URL; ?>/" mode="<?php echo $level;?>" year="<?php echo $year;?>">
 
 	<kentMeta>
 		<!-- InstanceBeginEditable name="metadata" -->
 		<title></title>
-		<link href="<?php echo BASE_URL; ?>/css/import.css" type="text/css" rel="stylesheet">
+		<link href="<?php echo ASSET_URL; ?>/css/import.css" type="text/css" rel="stylesheet">
 		<!-- InstanceEndEditable -->
 	</kentMeta>
 	<kentContent>
@@ -21,10 +21,6 @@
               <?php echo $content; ?>
 
 		<!-- InstanceEndEditable -->
-	</kentContent>
-	<kentScripts>
-
-
-	</kentScripts>	
+	</kentContent>	
 </kentWrapper>	
 <!-- InstanceEnd -->

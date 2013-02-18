@@ -2,6 +2,8 @@
 
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
+
+
 require dirname(__FILE__) . '/config/paths.php';
 
 require VENDOR_PATH . '/autoload.php';
@@ -30,39 +32,43 @@ if (defined("TEMPLATING_ENGINE"))
 $main = new CoursesFrontEnd();
 
 // Define routes
-
 // AJAX
-Flight::route('/ajax/subjects/@type/@year', array($main,'ajax_subjects_page'));
-Flight::route('/ajax/search/@type/@year/', array($main,'ajax_search_data'));
+Flight::route('/ajax/subjects/@type:(undergraduate|postgraduate)/@year:[0-9]+', array($main,'ajax_subjects_page'));
+Flight::route('/ajax/search/@type:(undergraduate|postgraduate)/@year:[0-9]+/', array($main,'ajax_search_data'));
 
 // Preview
 Flight::route('/preview/@hash', array($main,'preview'));
 
+// Search
+Flight::route('/@type:(undergraduate|postgraduate)/@year:[0-9]+/search/@search_type/@search_string', array($main,'search'));
+Flight::route('/@type:(undergraduate|postgraduate)/search', array($main,'search_noyear'));
+Flight::route('/@type:(undergraduate|postgraduate)/@year:[0-9]+/search', array($main,'search'));
+
 // Key Pages
-Flight::route('/@type/@year/search/@search_type/@search_string', array($main,'search'));
-Flight::route('/@type/@year/search', array($main,'search'));
-Flight::route('/@type', array($main,'list_programmes'));
+Flight::route('/@type:(undergraduate|postgraduate)', array($main,'list_programmes'));
 
 // Subjects
-Flight::route('/@type/@year/subjects/@id/@slug', array($main,'subject_view'));
-Flight::route('/@type/@year/subjects', array($main,'subjects'));
+Flight::route('/@type:(undergraduate|postgraduate)/@year:[0-9]+/subjects/@id:[0-9]+/@slug', array($main,'subject_view'));
+Flight::route('/@type:(undergraduate|postgraduate)/@year:[0-9]+/subjects', array($main,'subjects'));
 
 //Subject leaflets
-Flight::route('/@type/@year/leaflets', array($main,'leaflets'));
+Flight::route('/@type:(undergraduate|postgraduate)/@year:[0-9]+/leaflets', array($main,'leaflets'));
+
+// Courses
+Flight::route('/@type:(undergraduate|postgraduate)/@year:[0-9]+/@id:[0-9]+/@slug', array($main,'view'));
+Flight::route('/@type:(undergraduate|postgraduate)/@year:[0-9]+/@id:[0-9]+', array($main,'view'));
+Flight::route('/@type:(undergraduate|postgraduate)/@id:[0-9]+/@slug', array($main,'view_noyear'));
+Flight::route('/@type:(undergraduate|postgraduate)/@id:[0-9]+', array($main,'view_noyear'));
 
 // Legacy Courses
 // These URLS look like: /undergrad/subjects/<subject name>/<slug>
-Flight::route('/undergrad/subjects/[A-Za-z]+/@slug', function($slug){
+Flight::route('/undergrad/subjects/[A-Za-z0-9\-_]+/@slug', function($slug){
 	Flight::redirect('/undergraduate/2014/' . $slug);
 });
 
-// Courses
-Flight::route('/@type/@year:[0-9]+/@id:[0-9]+/@slug', array($main,'view'));
-Flight::route('/@type/@year:[0-9]+/@id:[0-9]+', array($main,'view'));
-Flight::route('/@type/@id:[0-9]+/@slug', array($main,'view_noyear'));
-Flight::route('/@type/@id:[0-9]+', array($main,'view_noyear'));
-
-
+// Override base urls
+Flight::request()->base = BASE_URL;
+Flight::request()->url = substr(Flight::request()->url, strlen(Flight::request()->base));
 
 // Run Flight!
 Flight::start();
