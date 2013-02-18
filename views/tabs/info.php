@@ -54,7 +54,7 @@
     <section class="info-subsection">
 		<ul>
 		  <?php foreach ($course->related_courses as $course_obj): ?>
-		  <li><a href="<?php echo Flight::url("{$type}/{$year}/{$course_obj->id}/{$course_obj->slug}"); ?>"><?php echo $course_obj->name ?></a></li>
+		  <li><a href="<?php echo Flight::url("{$level}/{$year}/{$course_obj->id}/{$course_obj->slug}"); ?>"><?php echo $course_obj->name ?></a></li>
 		  <?php endforeach; ?>
 		</ul>
     </section>
