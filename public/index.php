@@ -62,7 +62,7 @@ Flight::route('/@type:(undergraduate|postgraduate)/@id:[0-9]+', array($main,'vie
 
 // Legacy Courses
 // These URLS look like: /undergrad/subjects/<subject name>/<slug>
-Flight::route('/undergrad/subjects/[A-Za-z]+/@slug', function($slug){
+Flight::route('/undergrad/subjects/[A-Za-z0-9\-_]+/@slug', function($slug){
 	Flight::redirect('/undergraduate/2014/' . $slug);
 });
 

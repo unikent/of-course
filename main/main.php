@@ -154,7 +154,6 @@ class CoursesFrontEnd {
 			return Flight::halt(501, "Fatal error in getting programmes index.");
 		}
 
-		//foreach($js as $j)$out[] = $j;
 		echo json_encode($js);
 	}
 
