@@ -60,7 +60,7 @@
                 <?php echo $p->mode_of_study;?>
             </td>
             <td class="hide">
-                <?php foreach($p->subject_categories as $sc): ?>
+                <?php foreach((array)$p->subject_categories as $sc): ?>
                   <?php echo $sc;?> <br />
                 <?php endforeach; ?>
             </td>
