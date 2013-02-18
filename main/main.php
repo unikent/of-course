@@ -5,19 +5,20 @@ class CoursesFrontEnd {
 	/**
 	 * A Programmes Plant API Object.
 	 */
-	public $pp = false;
-	public $current_year = '2014';
+	public static $pp = false;
+	public static $current_year = '2014';
 
+	// New frontend controller
 	public function __construct()
 	{
-		$this->pp = new ProgrammesPlant\API(XCRI_WEBSERVICE);
+		static::$pp = new ProgrammesPlant\API(XCRI_WEBSERVICE);
 
 		if (defined('CACHE_DIRECTORY') && is_dir(CACHE_DIRECTORY))
 		{
-			$this->pp->with_cache('file')->directory(CACHE_DIRECTORY);
+			static::$pp->with_cache('file')->directory(CACHE_DIRECTORY);
 		}
 
-		$this->pp->no_ssl_verification();
+		static::$pp->no_ssl_verification();
 	}
 	
 	/**
@@ -30,7 +31,7 @@ class CoursesFrontEnd {
 	 */
 	public function view_noyear($level, $id, $slug = '')
 	{
-		$this->view($level, $this->current_year, $id, $slug);
+		return $this->view($level, static::$current_year, $id, $slug);
 	}
 	
 	/**
@@ -47,14 +48,14 @@ class CoursesFrontEnd {
 		// Use webservices to get course data for programme.
 		try
 		{
-			$course = $this->pp->get_programme($year, $level, $id);
+			$course = static::$pp->get_programme($year, $level, $id);
 		}
 		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
 		{
 			// Not found?
 			// Do 404 action, sending any useful enviormental data we have so it can be as useful as possible
 			$data = array('slug' => $slug, 'id' => $id, 'year'=> $year, 'level' => $level);
-			Flight::notFound($data);
+			return Flight::notFound($data);
 		}
 		
 		// Debug option
@@ -64,7 +65,7 @@ class CoursesFrontEnd {
 		if($course->slug != $slug)
 		{	
 			// If current year, don't bother with "year" in URL
-			if($year == $this->current_year){
+			if($year == static::$current_year){
 				return Flight::redirect('/' . $level . '/' . $id . '/' . $course->slug);
 			}else{
 				return Flight::redirect('/' . $level . '/' . $year . '/' . $id . '/' . $course->slug);	
@@ -73,7 +74,7 @@ class CoursesFrontEnd {
 
  		// Render programme page
  		Flight::setup($year, $level);
- 		Flight::layout('course_page', array('course'=>$course));
+ 		return Flight::layout('course_page', array('course'=>$course));
 	}
 
 	/**
@@ -85,20 +86,92 @@ class CoursesFrontEnd {
 	{
 		try
 		{
-			$course = $this->pp->get_preview_programme($hash);	
+			$course = static::$pp->get_preview_programme($hash);	
 		}
 		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
 		{	
 			// We dont know enough to help the 404 out really
-			Flight::notFound();
+			return Flight::notFound();
 		}
 
 		// Debug option
 		if(isset($_GET['debug_performance'])){ inspect($course); }
 		
 		Flight::setup($course->year, null, true);
-		Flight::layout('course_page', array('course'=> $course));
+		return Flight::layout('course_page', array('course'=> $course));
 	}
+
+	/**
+	 * Search page
+	 *
+	 * @param string Type UG|PG
+	 * @param yyyy Year to show
+	 * @param string type of search
+	 * @param string string to search
+	 */
+	public function search($level, $year, $search_type = '', $search_string = '')
+	{
+
+		Flight::setup($year, $level);
+
+	    $programmes = static::$pp->get_programmes_index($year, $level);//5 minute cache
+
+	    $campuses = static::$pp->get_campuses();
+	    $subject_categories = static::$pp->get_subjectcategories();
+
+		//debug option
+		if(isset($_GET['debug_performance'])){ inspect($programmes); }
+		
+		//Render full page
+		return Flight::layout('search', array('programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'search_type' => $search_type, 'search_string' => $search_string));	
+		
+	}
+	/**
+	 * Search page (no year)
+	 */
+	public function search_noyear($level, $search_type = '', $search_string = '')
+	{
+		return $this->search($level, static::$current_year, $search_type, $search_string);
+	}
+
+	/**
+	 * Data formatted for searching by quickspot
+	 *
+	 */
+	public function ajax_search_data($level, $year)
+	{
+		$out = array();
+
+		try{
+			$js = static::$pp->get_programmes_index($year, $level);
+		}
+		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
+		{
+			return Flight::halt(501, "Fatal error in getting programmes index.");
+		}
+
+		//foreach($js as $j)$out[] = $j;
+		echo json_encode($js);
+	}
+
+	/**
+	 * Subjects Page
+	 */
+	public function ajax_subjects_page($level, $year)
+	{
+		try
+		{
+			$subjects = static::$pp->get_subjectcategories();
+		}
+		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
+		{
+			$subjects = array();	
+		}
+		Flight::setup($year, $level);
+		return Flight::render('menus/subjects', array('subjects'=> $subjects));
+	}
+
+
 
 	/**
 	 * Display subjects page
@@ -113,14 +186,14 @@ class CoursesFrontEnd {
 		// Get feed
 		try
 		{
-			$subjects = $this->pp->get_subject_index($year, $type);	
+			$subjects = static::$pp->get_subject_index($year, $type);	
 		}
 		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
 		{
 			$subjects = array();	
 		}
 
-		Flight::layout('subjects', array('subjects'=> $subjects));
+		return Flight::layout('subjects', array('subjects'=> $subjects));
 	}
 	
 	/**
@@ -131,7 +204,7 @@ class CoursesFrontEnd {
 	 */
 	public function list_programmes($level, $year)
 	{
-		$listing = $this->pp->get_programmes_index($this->current_year, 'undergraduate');
+		$listing = static::$pp->get_programmes_index(static::$current_year, 'undergraduate');
 
 		$base_url = BASE_URL;
 
@@ -142,68 +215,6 @@ class CoursesFrontEnd {
 		Flight::stop();
 	}
 
-	/**
-	 * Data formatted for searching by quickspot
-	 *
-	 */
-	public function ajax_search_data($level, $year)
-	{
-		$out = array();
-
-		try{
-			$js = $this->pp->get_programmes_index($year, $level);
-		}
-		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
-		{
-			Flight::halt(501, "Fatal error in getting programmes index.");
-		}
-
-		//foreach($js as $j)$out[] = $j;
-		echo json_encode($js);
-	}
-
-	/**
-	 * Subjects Page
-	 */
-	public function ajax_subjects_page($level, $year)
-	{
-		try
-		{
-			$subjects = $this->pp->get_subjectcategories();
-		}
-		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
-		{
-			$subjects = array();	
-		}
-
-		return Flight::render('menus/subjects', array('type' => $level, 'year' => $year, 'subjects'=> $subjects));
-	}
-
-	/**
-	 * Search page
-	 *
-	 * @param string Type UG|PG
-	 * @param yyyy Year to show
-	 * @param string type of search
-	 * @param string string to search
-	 */
-	public function search($level, $year, $search_type = '', $search_string = '')
-	{
-		
-		Flight::setup($year, $level);
-
-	    $programmes = $this->pp->get_programmes_index($year, $level);//5 minute cache
-
-	    $campuses = $this->pp->get_campuses();
-	    $subject_categories = $this->pp->get_subjectcategories();
-
-		//debug option
-		if(isset($_GET['debug_performance'])){ inspect($programmes); }
-		
-		//Render full page
-		Flight::layout('search', array('programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'search_type' => $search_type, 'search_string' => $search_string));	
-		
-	}
 
 	/**
 	 * Subject leaflets page
@@ -216,7 +227,7 @@ class CoursesFrontEnd {
 		
 		Flight::setup($year, $level);
 
-	    $leaflets = (array) $this->pp->get_subject_leaflets($year, $level);
+	    $leaflets = (array) static::$pp->get_subject_leaflets($year, $level);
 
 	    // sort our leaflets
 	    usort($leaflets, function($a,$b)
@@ -238,7 +249,7 @@ class CoursesFrontEnd {
 	{
 		try
 		{
-			return $this->pp->get_programmes_index($year, $level);
+			return static::$pp->get_programmes_index($year, $level);
 		}
 		catch(Exception $e)
 		{

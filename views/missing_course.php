@@ -1,7 +1,7 @@
 <article class="container">
 	<div class='row-fluid'>
 		<div class='span12'>
-			<h1>We were unable to find <?php echo (!empty($slug)) ? "'{$slug}' "  : " a course "; ?> with the id <?php echo $id;?> </h1>
+			<h1>We were unable to find <?php echo (!empty($slug)) ? "'{$slug}' "  : " a course "; ?><?php if(isset($id)): ?> with the id <?php echo $id;?> <?php endif; ?> </h1>
 		</div>
 	</div>
 	<div class='row-fluid' style='min-height:300px;'>

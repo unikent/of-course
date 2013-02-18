@@ -39,9 +39,12 @@ Flight::route('/ajax/search/@type:(undergraduate|postgraduate)/@year:[0-9]+/', a
 // Preview
 Flight::route('/preview/@hash', array($main,'preview'));
 
-// Key Pages
+// Search
 Flight::route('/@type:(undergraduate|postgraduate)/@year:[0-9]+/search/@search_type/@search_string', array($main,'search'));
+Flight::route('/@type:(undergraduate|postgraduate)/search', array($main,'search_noyear'));
 Flight::route('/@type:(undergraduate|postgraduate)/@year:[0-9]+/search', array($main,'search'));
+
+// Key Pages
 Flight::route('/@type:(undergraduate|postgraduate)', array($main,'list_programmes'));
 
 // Subjects

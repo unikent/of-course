@@ -38,39 +38,67 @@
 	});
 
 	// 404 handler
+	// Use data to try and figure out best 404 info
 	Flight::map('notFound', function($data = array()){
-
-		// Use data to try and figure out best 404 info
-		// we can.
-
-		//$url = Flight::request()->url;
-		
-		if(!isset($data['level'])){
-			// Attempt to guess?
-			$data['level']= 'undergraduate';
-		}
-
-		if(!isset($data['year'])){
-			// Attempt to guess?
-			$data['year'] = '2014';
-		}
-
-		
-		echo '<pre>';print_r($data );
-		echo $url;
-
-		//die();
 
 		// Attempt to resolve URL details, location, path and other stuff
 		// that will allow us to be more helpful.
-	  
-	    //Flight::setup($data['year'], $data['level']);
-	    Flight::setup('2014', 'undergraduate');
-	    // Output page with 404 header.
-	  	Flight::response()->status(404);
-	  	//Flight::request()->length = 9000;
 
-	    
+		$url_chunks = explode('/', Flight::request()->url);
+
+		// If we don't know level, try to work it out
+		if(!isset($data['level'])){
+
+			// First chunk should be level
+			$level = $url_chunks[1];
+
+			// If level is a known type
+			if($level == 'undergraduate' || $level == 'ug' || $level == 'undergrad' )
+			{
+				$data['level']= 'undergraduate';
+			}
+			elseif($level == 'postgraduate' || $level == 'pg' || $level == 'postgrad' )
+			{
+				$data['level']= 'postgraduate';
+			}
+			else
+			{
+				// Else just guess its ug
+				$data['level']= 'undergraduate';
+			}
+		}
+
+		// If we don't know year, guess that instead
+		if(!isset($data['year'])){
+
+			$year = $url_chunks[2];
+			// If this looks like a year. Try and use it
+			if(is_numeric($year) && strlen($year)==4)
+			{
+				$data['year'] = $year;
+			}
+			else
+			{
+				$data['year'] = CoursesFrontEnd::$current_year;
+			}
+			
+		}
+		// try and guess slug
+		if(!isset($data['slug'])){
+			$final_part = $url_chunks[sizeof($url_chunks)-1];
+			$data['slug'] = $final_part;
+		}
+
+		// Attempt to get programmes so we can make some suggestions
+		try {
+			$data['programmes'] = CoursesFrontEnd::$pp->get_programmes_index($data['year'], $data['level']);
+		}catch(Exception $e){
+			$data['programmes'] = array();
+		}	
+
+		// Set data & open views
+	  	Flight::setup($data['year'], $data['level']);
+	  	Flight::response()->status(404);
 		return Flight::layout('missing_course', $data);
 	});
 

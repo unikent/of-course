@@ -21,10 +21,6 @@
               <?php echo $content; ?>
 
 		<!-- InstanceEndEditable -->
-	</kentContent>
-	<kentScripts>
-
-
-	</kentScripts>	
+	</kentContent>	
 </kentWrapper>	
 <!-- InstanceEnd -->
