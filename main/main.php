@@ -56,6 +56,10 @@ class CoursesFrontEnd {
 			// Do 404 action, sending any useful enviormental data we have so it can be as useful as possible
 			$data = array('slug' => $slug, 'id' => $id, 'year'=> $year, 'level' => $level);
 			return Flight::notFound($data);
+		}catch(\Exception $e){
+			// Another error type?
+			$data = array('slug' => $slug, 'id' => $id, 'year'=> $year, 'level' => $level);
+			return Flight::notFound($data);
 		}
 		
 		// Debug option
