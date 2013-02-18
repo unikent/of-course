@@ -7,7 +7,7 @@
 	<div class='row-fluid' style='min-height:300px;'>
 		<div class='span7' >
 			<p><strong>It seems we couldn't find the programme you were attempting to view.</strong></p>
-			<p>Why not try using the search to find what your after or alterantly head back to the <a href='<?php echo BASE_URL; ?>'>courses index page</a>.</p>
+			<p>Why not try using the search to find what you're after or alternatively head back to the <a href='<?php echo BASE_URL; ?>'>courses index page</a>.</p>
 			<?php if(!empty($slug)): ?>
 				<h3>Are any of these what you're looking for?</h3>
 					<ul>
