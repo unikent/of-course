@@ -3,7 +3,7 @@
 <ul class="unstyled">        
     <?php foreach ($stage->clusters->compulsory as $cluster): ?>
         <?php foreach ($cluster->modules->module as $module): ?>
-            <?php if ( ! empty($module->module_code) && ! empty ($module->module_title != '') ): ?>
+            <?php if ( ! empty($module->module_code) && ! empty($module->module_title) ): ?>
                 <li>
                     <span class="btn btn-link module-collapse" data-toggle="collapse" data-target="#module-more-info-<?php echo $module->module_code ?>"><i class="icon-plus-sign"></i> <?php echo $module->module_code ?> - <?php echo $module->module_title ?></span>
                     
@@ -18,7 +18,7 @@
     
     <?php foreach ($stage->clusters->optional as $cluster): ?>
         <?php foreach ($cluster->modules->module as $module): ?>
-            <?php if ( ! empty($module->module_code) && ! empty ($module->module_title != '') ): ?>
+            <?php if ( ! empty($module->module_code) && ! empty($module->module_title) ): ?>
                 <li>
                     <span class="btn btn-link module-collapse" data-toggle="collapse" data-target="#module-more-info-<?php echo $module->module_code ?>"><i class="icon-plus-sign"></i> <?php echo $module->module_code ?> - <?php echo $module->module_title ?></span>
                     
