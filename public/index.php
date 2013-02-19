@@ -55,16 +55,31 @@ Flight::route('/@type:(undergraduate|postgraduate)/@year:[0-9]+/subjects', array
 Flight::route('/@type:(undergraduate|postgraduate)/@year:[0-9]+/leaflets', array($main,'leaflets'));
 
 // Courses
-Flight::route('/@type:(undergraduate|postgraduate)/@year:[0-9]+/@id:[0-9]+/@slug', array($main,'view'));
-Flight::route('/@type:(undergraduate|postgraduate)/@year:[0-9]+/@id:[0-9]+', array($main,'view'));
-Flight::route('/@type:(undergraduate|postgraduate)/@id:[0-9]+/@slug', array($main,'view_noyear'));
-Flight::route('/@type:(undergraduate|postgraduate)/@id:[0-9]+', array($main,'view_noyear'));
+Flight::route('/@type:(undergraduate|postgraduate)/@year:[0-9]+/@id:[0-9]+/@slug', array($main, 'view'));
+Flight::route('/@type:(undergraduate|postgraduate)/@year:[0-9]+/@id:[0-9]+', array($main, 'view'));
+Flight::route('/@type:(undergraduate|postgraduate)/@id:[0-9]+/@slug', array($main, 'view_noyear'));
+Flight::route('/@type:(undergraduate|postgraduate)/@id:[0-9]+', array($main, 'view_noyear'));
 
 // Legacy Courses
 // These URLS look like: /undergrad/subjects/<subject name>/<slug>
-Flight::route('/undergrad/subjects/[A-Za-z0-9\-_]+/@slug', function($slug){
-	Flight::redirect('/undergraduate/2014/' . $slug);
+Flight::route('/@type:(undergrad|postgrad)/subjects/[A-Za-z0-9\-_]+/@slug', function($level, $slug) use($main){
+	$main->redirect_handler($slug, $level);
+}); 
+// Malformed ug/pg levels for search
+Flight::route('/@level:(undergrad|postgrad|ug|pg)/@year:[0-9]+/search', function($level, $year) use($main){
+	$main->redirect_handler("search", $level, $year);
+}); 
+Flight::route('/@level:(undergrad|postgrad|ug|pg)/search', function($level, $year) use($main){
+	$main->redirect_handler("search", $level);
+}); 
+// Malformed ug/pg levels for programmes
+Flight::route('/@level:(undergrad|postgrad|ug|pg)/@id:[0-9]+/@slug', function($level, $id, $slug) use($main){
+	$main->redirect_handler($slug, $level, null, $id);
+}); 
+Flight::route('/@level:(undergrad|postgrad|ug|pg)/@year:[0-9]+/@id:[0-9]+/@slug', function($level, $year, $id, $slug) use($main){
+	$main->redirect_handler($slug, $level, $year, $id);
 });
+
 
 // Override base urls
 Flight::request()->base = BASE_URL;
