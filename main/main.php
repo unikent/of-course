@@ -246,6 +246,17 @@ class CoursesFrontEnd {
 		
 	}
 
+
+	/**
+	 * Give a set of parameters attempt to automatically work out what the correct URL should be
+	 *
+	 * @param string $slug
+	 * @param string $level UG|PG|Postgrad|UnderGrad
+	 * @param yyyy Year to show
+	 * @param INT ID
+	 *
+	 * will redirect or 404 depending on what it can guess accuratly.
+	 */
 	public function redirect_handler($slug, $level=null, $year=null, $id=null)
 	{
 		// Fill values if not provided
@@ -269,7 +280,7 @@ class CoursesFrontEnd {
 		if($slug=='search'){
 			return Flight::redirect("{$level}/{$year}/search");
 		}
-		
+
 		// If we have an id, try a direct redirect
 		if($id !== null){
 			// Auto fix
