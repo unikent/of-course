@@ -13,7 +13,6 @@
                     </div>
                 </li>
             <?php endif; ?>
-            <?php if ( ! empty($module->module_code) && ! empty ($module->module_title != '') ): ?>
         <?php endforeach; ?>
     <?php endforeach; ?>
     
