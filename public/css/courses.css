@@ -102,6 +102,10 @@
 	width: 750px;
 }
 
+.daedalus .carousel-inner-left {
+	width: 850px;
+}
+
 .daedalus .related-course {
 	margin-left:70px;
 }
@@ -117,13 +121,16 @@
 }
 
 .daedalus .related-course .cell p {
+/*
 	font-size: 14px;
 	position: relative;
 	color: #000f42;
 	text-align: center;
+*/
 }
 
 .daedalus .related-course .mask {
+/*
 	padding: 20px;
 	width: 120px;
 	height: 120px;
@@ -132,18 +139,11 @@
 	top: 0;
 	left: 0;
 	opacity: 1;
-/*
-	background-color: rgba(217, 237, 247, 0.5);
-	-webkit-transition: all 0.2s linear;
-	-moz-transition: all 0.2s linear;
-	-o-transition: all 0.2s linear;
-	-ms-transition: all 0.2s linear;
-	transition: all 0.2s linear;
 */
 }
 
 .daedalus .related-course .mask:hover {
-	opacity: 0.6;
+/* 	opacity: 0.6; */
 }
 
 .daedalus .related-course-section {

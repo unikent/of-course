@@ -67,8 +67,12 @@ Flight::route('/undergrad/subjects/[A-Za-z0-9\-_]+/@slug', function($slug){
 });
 
 // Override base urls
-Flight::request()->base = BASE_URL;
-Flight::request()->url = substr(Flight::request()->url, strlen(Flight::request()->base));
+if (BASE_URL != '/')
+{
+    Flight::request()->base = BASE_URL;
+    Flight::request()->url = substr(Flight::request()->url, strlen(Flight::request()->base));
+}
+
 
 // Run Flight!
 Flight::start();
