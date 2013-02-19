@@ -1,3 +1,4 @@
+<br />
 <p> Possible modules may include: </p>
 
 <ul class="unstyled">		
