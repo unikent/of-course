@@ -1,3 +1,5 @@
+<?php $year_for_url = empty($year) ? '' : ((strcmp($year, CoursesFrontEnd::$current_year) == 0) ? '' : $year . '/'); ?>
+
 <h2>Further information</h2>
 
 <section class="info-section">
@@ -54,7 +56,7 @@
     <section class="info-subsection">
 		<ul>
 		  <?php foreach ($course->related_courses as $course_obj): ?>
-		  <li><a href="<?php echo Flight::url("{$level}/{$year}/{$course_obj->id}/{$course_obj->slug}"); ?>"><?php echo $course_obj->name ?></a></li>
+		  <li><a href="<?php echo Flight::url("{$level}/{$year_for_url}{$course_obj->id}/{$course_obj->slug}"); ?>"><?php echo $course_obj->name ?></a></li>
 		  <?php endforeach; ?>
 		</ul>
     </section>

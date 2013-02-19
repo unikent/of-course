@@ -1,3 +1,5 @@
+<?php $year_for_url = empty($year) ? '' : ((strcmp($year, CoursesFrontEnd::$current_year) == 0) ? '' : $year . '/'); ?>
+
 <div class="advanced-search">
     <h1>Advanced course search</h1>
     <div class="row-fluid advanced-search-boxes">
@@ -44,10 +46,10 @@
         <tbody>
         
         <?php foreach($programmes as $p):?>
-
+          
           <tr>
             <td>
-                <a href='<?php echo Flight::url("{$level}/{$year}/{$p->id}/{$p->slug}"); ?>'><?php echo $p->name;?> - <?php echo $p->award;?></a>
+                <a href='<?php echo Flight::url("{$level}/{$year_for_url}{$p->id}/{$p->slug}"); ?>'><?php echo $p->name;?> - <?php echo $p->award;?></a>
             </td>
             <td>
                 <?php echo $p->ucas_code;?>

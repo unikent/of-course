@@ -1,4 +1,4 @@
-
+<?php $year_for_url = empty($year) ? '' : ((strcmp($year, CoursesFrontEnd::$current_year) == 0) ? '' : $year . '/'); ?>
             <h1> Courses by subject </h1>
             
 
@@ -20,7 +20,7 @@
 			            	<h3><?php echo $subject->name; ?></h3>
 			            	<ul>
 				            	<?php foreach($subject->courses as $course): ?>
-				            		<li><a href='<?php echo Flight::url("{$type}/{$year}/{$course->id}/{$course->slug}"); ?>'><?php echo $course->name; ?> - <?php echo $course->award; ?></a></li>
+				            		<li><a href='<?php echo Flight::url("{$type}/{$year_for_url}{$course->id}/{$course->slug}"); ?>'><?php echo $course->name; ?> - <?php echo $course->award; ?></a></li>
 				            	<?php endforeach; ?>
 				            </ul>
 			        	<?php endforeach; ?>
@@ -32,7 +32,7 @@
 			            	<h3><?php echo $subject->name; ?></h3>
 			            	<ul>
 				            	<?php foreach($subject->courses as $course): ?>
-				            		<li><a href='<?php echo Flight::url("{$type}/{$year}/{$course->id}/{$course->slug}"); ?>'><?php echo $course->name; ?> - <?php echo $course->award; ?></a></li>
+				            		<li><a href='<?php echo Flight::url("{$type}/{$year_for_url}{$course->id}/{$course->slug}"); ?>'><?php echo $course->name; ?> - <?php echo $course->award; ?></a></li>
 				            	<?php endforeach; ?>
 				            </ul>
 			        	<?php endforeach; ?>
