@@ -246,6 +246,66 @@ class CoursesFrontEnd {
 		
 	}
 
+	public function redirect_handler($slug, $level=null, $year=null, $id=null)
+	{
+		// Fill values if not provided
+		if($year===null) $year = static::$current_year;
+		if($level===null) $level = 'undergraduate';
+
+		// Fix know "old" url styles
+		if($level == 'undergrad' || $level == 'ug'){
+			$level = 'undergraduate';
+		}elseif($level == 'postgrad' || $level == 'pg'){
+			$level = 'postgraduate';
+		}
+
+		// If its not fixed, then just go with default
+		if($level != 'postgraduate' && $level != 'undergraduate')
+		{
+			$level = 'undergraduate';
+		}
+
+		// If we somehow hit a search url, fix it.
+		if($slug=='search'){
+			return Flight::redirect("{$level}/{$year}/search");
+		}
+		
+		// If we have an id, try a direct redirect
+		if($id !== null){
+			// Auto fix
+			$correct_url = Flight::url("{$level}/{$year}/{$id}/{$slug}", false);
+			return Flight::redirect($correct_url);
+		}
+
+		// Else attempt a fix
+		$programmes = $this->get_programme_index($year, $level);
+		$correct_url = false;
+
+		// look through the list and see if we recoginise that slug from anyware
+		foreach($programmes as $programme){
+
+			//echo $programme->name;
+			if(strpos($programme->name, $slug) !== false || strpos($programme->slug, $slug) !== false){
+
+				// If correct url IS NOT false, it means we have two results and cannot auto fix reliably.
+				// Go to 404 in this case
+				if($correct_url){
+					$data = array('slug' => $slug, 'year'=> $year, 'level' => $level);
+					return Flight::notFound($data);
+				}
+			
+				// Correct URL	
+				$correct_url = Flight::url("{$level}/{$year}/{$programme->id}/{$programme->slug}", false);
+				//die($correct_url);
+			}
+		}
+		// Only 1 matched result, send em on there wau
+		if($correct_url) return Flight::redirect($correct_url);
+
+		// Else 404, we cant help
+		$data = array('slug' => $slug, 'year'=> $year, 'level' => $level);
+		return Flight::notFound($data);
+	}
 
 	// Quietly grab index
 	private function get_programme_index($year, $level)
