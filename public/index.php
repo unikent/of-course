@@ -54,7 +54,7 @@ Flight::route('/@type:(undergraduate|postgraduate)/@year:[0-9]+/subjects/@id:[0-
 Flight::route('/@type:(undergraduate|postgraduate)/@year:[0-9]+/subjects', array($main,'subjects'));
 
 //Subject leaflets
-//Flight::route('/@type:(undergraduate|postgraduate)/@year:[0-9]+/leaflets', array($main,'leaflets'));
+Flight::route('/@type:(undergraduate|postgraduate)/@year:[0-9]+/leaflets', array($main,'leaflets'));
 
 // Courses
 Flight::route('/@type:(undergraduate|postgraduate)/@year:[0-9]+/@id:[0-9]+/@slug', array($main, 'view'));
