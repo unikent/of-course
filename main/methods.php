@@ -70,7 +70,7 @@
 		");
 
 		// Cache if we can
-		Flight::lastModified(strtotime($last_modified));
+		if($last_modified!==null) Flight::lastModified(strtotime($last_modified));
 
 	});
 

@@ -44,7 +44,16 @@
 				<h2>Key facts</h2>
 				<div class="key-facts">
 					<ul>
-						<li><strong>Subject area:</strong> <?php echo $course->subject_area_1[0]->name;?></li>
+						<?php
+							// If there a second subject area?
+							 $second_subject = (isset($course->subject_area_2[0]) && $course->subject_area_2[0] != null);
+						?>
+						<li><strong>Subject area<?php if($second_subject) echo 's'; ?>:</strong>
+							<?php 
+								echo $course->subject_area_1[0]->name; 
+								echo ($second_subject) ? ' | '.$course->subject_area_2[0]->name : '';
+							?>
+						</li>
 						<li><strong>Award:</strong> <?php echo $course->award[0]->name;?> </li>
 						<li><strong>Honours type:</strong> <?php echo $course->honours_type;?> </li>
 					
