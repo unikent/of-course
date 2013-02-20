@@ -83,7 +83,7 @@
 		if(!isset($data['level'])){
 
 			// First chunk should be level
-			$level = $url_chunks[1];
+			$level = isset($url_chunks[1]) ? $url_chunks[1] : '';
 
 			// If level is a known type
 			if($level == 'undergraduate' || $level == 'ug' || $level == 'undergrad' )
@@ -104,7 +104,7 @@
 		// If we don't know year, guess that instead
 		if(!isset($data['year'])){
 
-			$year = $url_chunks[2];
+			$year = isset($url_chunks[2]) ? $url_chunks[2] : '';
 			// If this looks like a year. Try and use it
 			if(is_numeric($year) && strlen($year)==4)
 			{
