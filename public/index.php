@@ -2,8 +2,6 @@
 
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
-
-
 require dirname(__FILE__) . '/config/paths.php';
 
 require VENDOR_PATH . '/autoload.php';
@@ -35,15 +33,16 @@ $main = new CoursesFrontEnd();
 // AJAX
 Flight::route('/ajax/subjects/@level:undergraduate|postgraduate/@year:[0-9]+', array($main,'ajax_subjects_page'));
 Flight::route('/ajax/search/@level:undergraduate|postgraduate/@year:[0-9]+', array($main,'ajax_search_data'));
+Flight::route('/ajax/leaflets/@level:undergraduate|postgraduate/@year:[0-9]+', array($main,'ajax_leaflets_data'));
 
 // Preview
 Flight::route('/preview/@hash', array($main,'preview'));
 
 // Search
 Flight::route('/@level:undergraduate|postgraduate/@year:[0-9]+/search/@search_type/@search_string', array($main,'search'));
+Flight::route('/@level:undergraduate|postgraduate/search/@search_type/@search_string', array($main,'search_noyear'));
 Flight::route('/@level:undergraduate|postgraduate/search', array($main,'search_noyear'));
 Flight::route('/@level:undergraduate|postgraduate/@year:[0-9]+/search', array($main,'search'));
-
 
 //Subject leaflets
 Flight::route('/@level:undergraduate|postgraduate/@year:[0-9]+/leaflets', array($main,'leaflets'));
@@ -76,8 +75,12 @@ Flight::route('/@level:undergrad|postgrad|ug|pg/@year:[0-9]+/@id:[0-9]+/@slug', 
 
 
 // Override base urls
-Flight::request()->base = BASE_URL;
-Flight::request()->url = substr(Flight::request()->url, strlen(Flight::request()->base));
+if (BASE_URL != '/')
+{
+    Flight::request()->base = BASE_URL;
+    Flight::request()->url = substr(Flight::request()->url, strlen(Flight::request()->base));
+}
+
 
 // Run Flight!
 Flight::start();

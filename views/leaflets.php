@@ -38,19 +38,6 @@ foreach(array_keys($leaflet_atoz) as $key => $letter){
 ?>
           <article class="container">
             <h1>Subject leaflets</h1>
-              
-            <p>These subject leaflets supplement the information contained in our paper   prospectus and the online subject pages. Though all are slightly different to   reflect the different nature of the subjects we offer, they typically   include:</p>
-            <ul>
-              <li>Why you should come to Kent to study that subject</li>
-              <li>What a degree in that subject will give you</li>
-              <li>More information about the degree programmes on offer</li>
-              <li>Example information on modules that are typically available each year</li>
-              <li>Teaching and assessment methods</li>
-              <li>Career opportunities and destinations of Kent graduate students</li>
-              <li>Alumni profiles and/or student quotes </li>
-            </ul>
-            
-            <h1>Download PDFs </h1>
             <p>Listed alphabetically by subject</p>
 
             <div class="row-fluid">
