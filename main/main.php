@@ -174,7 +174,24 @@ class CoursesFrontEnd {
 		return Flight::render('menus/subjects', array('subjects'=> $subjects));
 	}
 
+	/**
+	 * Get a json representation of the subject leaflets
+	 *
+	 */
+	public function ajax_leaflets_data($level, $year)
+	{
+		$out = array();
 
+		try{
+			$js = static::$pp->get_subject_leaflets($year, $level);
+		}
+		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
+		{
+			return Flight::halt(501, "Fatal error in getting subject leaflets.");
+		}
+
+		echo json_encode($js);
+	}
 
 	/**
 	 * Display subjects page

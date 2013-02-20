@@ -35,6 +35,7 @@ $main = new CoursesFrontEnd();
 // AJAX
 Flight::route('/ajax/subjects/@type:(undergraduate|postgraduate)/@year:[0-9]+', array($main,'ajax_subjects_page'));
 Flight::route('/ajax/search/@type:(undergraduate|postgraduate)/@year:[0-9]+/', array($main,'ajax_search_data'));
+Flight::route('/ajax/leaflets/@type:(undergraduate|postgraduate)/@year:[0-9]+', array($main,'ajax_leaflets_data'));
 
 // Preview
 Flight::route('/preview/@hash', array($main,'preview'));
@@ -52,7 +53,7 @@ Flight::route('/@type:(undergraduate|postgraduate)/@year:[0-9]+/subjects/@id:[0-
 Flight::route('/@type:(undergraduate|postgraduate)/@year:[0-9]+/subjects', array($main,'subjects'));
 
 //Subject leaflets
-Flight::route('/@type:(undergraduate|postgraduate)/@year:[0-9]+/leaflets', array($main,'leaflets'));
+//Flight::route('/@type:(undergraduate|postgraduate)/@year:[0-9]+/leaflets', array($main,'leaflets'));
 
 // Courses
 Flight::route('/@type:(undergraduate|postgraduate)/@year:[0-9]+/@id:[0-9]+/@slug', array($main, 'view'));
