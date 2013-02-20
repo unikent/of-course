@@ -6,9 +6,9 @@
 <?php endif; ?>
 
 <h2>Careers</h2>
-<?php echo $course->careers_overview; ?>
-	<?php if(!empty($course->careersemployability_text)): ?>
-	<?php echo $course->careersemployability_text; ?>
+	<?php echo $course->careers_overview; ?>
+	<?php if(!empty($course->globals->careersemployability_text)): ?>
+	<?php echo $course->globals->careersemployability_text; ?>
 	<?php endif; ?>
 	
 	<?php if(!empty($course->professional_recognition)): ?>

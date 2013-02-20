@@ -42,6 +42,7 @@ Flight::route('/preview/@hash', array($main,'preview'));
 
 // Search
 Flight::route('/@type:(undergraduate|postgraduate)/@year:[0-9]+/search/@search_type/@search_string', array($main,'search'));
+Flight::route('/@type:(undergraduate|postgraduate)/search/@search_type/@search_string', array($main,'search_noyear'));
 Flight::route('/@type:(undergraduate|postgraduate)/search', array($main,'search_noyear'));
 Flight::route('/@type:(undergraduate|postgraduate)/@year:[0-9]+/search', array($main,'search'));
 
@@ -83,8 +84,12 @@ Flight::route('/@level:(undergrad|postgrad|ug|pg)/@year:[0-9]+/@id:[0-9]+/@slug'
 
 
 // Override base urls
-Flight::request()->base = BASE_URL;
-Flight::request()->url = substr(Flight::request()->url, strlen(Flight::request()->base));
+if (BASE_URL != '/')
+{
+    Flight::request()->base = BASE_URL;
+    Flight::request()->url = substr(Flight::request()->url, strlen(Flight::request()->base));
+}
+
 
 // Run Flight!
 Flight::start();

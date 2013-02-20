@@ -89,7 +89,7 @@
 		
 		<div id="myCarousel" class="carousel slide" data-interval="false">
 		  <!-- Carousel items -->
-		  <div class="carousel-inner">
+		  <div class="<?php echo count($course->related_courses) > 4 ? 'carousel-inner' : 'carousel-inner-left'; ?>">
 		  <?php $count = 0; ?>
 		  <?php for( $i = 0; $i < ( intval( count($course->related_courses) / 4 ) ) + 1; $i++ ): ?>
 		  <?php $related_courses = array_slice($course->related_courses, $i*4) ?>
@@ -98,12 +98,13 @@
 					<?php foreach($related_courses as $related_course): ?>
 					<div class="span2 related-course">
 		                <div class="cell">
-		                <a href="<?php echo BASE_URL; ?><?php echo $level ?>/<?php echo $year ?>/<?php echo $related_course->id ?>/<?php echo $related_course->slug ?>">
 		                    <div class="mask">
+		                        <a href="<?php echo Flight::url("{$level}/{$related_course->id}/{$related_course->slug}"); ?>">
 		                        <p><?php echo $related_course->name ?></p>
 		                        <p><?php echo $related_course->award ?></p>
+		                        </a>
+		                        
 		                    </div>
-		                </a>
 		                </div> 
 					</div>
 					<?php $count++; if ($count%4 == 0) break; ?>
