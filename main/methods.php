@@ -37,6 +37,39 @@
 		Flight::view()->set('preview', $preview);
 	});
 
+	/**
+	 * Cache check. 
+	 * Use previous request responce data to find out if information from browser is still valid (and thus cacheable)
+	 * Additionally provides debug info on request.
+	 */
+	Flight::map("cachecheck", function(){
+		// Get last response.
+		$request = CoursesFrontEnd::$pp->request;
+		$response = $request->getResponse();
+		$last_modified = $response->getLastModified();
+
+		// Debug data if wanted.
+		debug("[Cache] ".(string)$request."<br/>
+			<br/>
+
+			Received headers:
+			<pre>
+			".implode("\n", $response->getHeaderLines())."
+			</pre>
+
+			Request Information:
+			<pre>
+			".print_r($response->getInfo(), true)."
+			</pre>
+			Last Modified: {$last_modified}
+
+		");
+
+		// Cache if we can
+		Flight::lastModified(strtotime($last_modified));
+
+	});
+
 	// 404 handler
 	// Use data to try and figure out best 404 info
 	Flight::map('notFound', function($data = array()){

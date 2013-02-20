@@ -54,14 +54,17 @@ class CoursesFrontEnd {
 		{
 			// Not found?
 			// Do 404 action, sending any useful enviormental data we have so it can be as useful as possible
-			$data = array('slug' => $slug, 'id' => $id, 'year'=> $year, 'level' => $level);
+			$data = array('slug' => $slug, 'id' => $id, 'year'=> $year, 'level' => $level, 'error'=> $e);
 			return Flight::notFound($data);
 		}catch(\Exception $e){
 			// Another error type?
-			$data = array('slug' => $slug, 'id' => $id, 'year'=> $year, 'level' => $level);
+			$data = array('slug' => $slug, 'id' => $id, 'year'=> $year, 'level' => $level, 'error'=> $e);
 			return Flight::notFound($data);
 		}
 		
+		// Attempt to cache responce with browser + debug some extra information.
+		Flight::cachecheck();
+
 		// Debug option
 		if(isset($_GET['debug_performance'])){ inspect($course); }
 		
@@ -95,7 +98,10 @@ class CoursesFrontEnd {
 		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
 		{	
 			// We dont know enough to help the 404 out really
-			return Flight::notFound();
+			return Flight::notFound(array('error'=> $e));
+		}catch(\Exception $e){
+			// Another error. Pretend it was a 404.
+			return Flight::notFound(array('error'=> $e));
 		}
 
 		// Debug option
@@ -301,7 +307,7 @@ class CoursesFrontEnd {
 				// If correct url IS NOT false, it means we have two results and cannot auto fix reliably.
 				// Go to 404 in this case
 				if($correct_url){
-					$data = array('slug' => $slug, 'year'=> $year, 'level' => $level);
+					$data = array('slug' => $slug, 'year'=> $year, 'level' => $level, 'error_msg' => "Multiple matches, unable to guess redirect.");
 					return Flight::notFound($data);
 				}
 			
@@ -314,7 +320,7 @@ class CoursesFrontEnd {
 		if($correct_url) return Flight::redirect($correct_url);
 
 		// Else 404, we cant help
-		$data = array('slug' => $slug, 'year'=> $year, 'level' => $level);
+		$data = array('slug' => $slug, 'year'=> $year, 'level' => $level,'error_msg' => "No matches found, unable to guess redirect.");
 		return Flight::notFound($data);
 	}
 
