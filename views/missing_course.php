@@ -45,3 +45,12 @@
 	</div>
 
 </article>
+
+<!--
+Debug Info:
+<?php
+	if(isset($error)) echo $error->getCode().': '.$error->getMessage();
+	if(isset($error_msg)) echo $error_msg;
+?>
+
+-->
