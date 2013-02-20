@@ -104,6 +104,8 @@ class CoursesFrontEnd {
 			return Flight::notFound(array('error'=> $e));
 		}
 
+		Flight::cachecheck();
+
 		// Debug option
 		if(isset($_GET['debug_performance'])){ inspect($course); }
 		
@@ -160,6 +162,9 @@ class CoursesFrontEnd {
 			return Flight::halt(501, "Fatal error in getting programmes index.");
 		}
 
+		// Try & cache
+		Flight::cachecheck();
+
 		echo json_encode($js);
 	}
 
@@ -176,6 +181,10 @@ class CoursesFrontEnd {
 		{
 			$subjects = array();	
 		}
+
+		// Try & cache
+		Flight::cachecheck();
+
 		Flight::setup($year, $level);
 		return Flight::render('menus/subjects', array('subjects'=> $subjects));
 	}
