@@ -81,7 +81,7 @@
 <kentScripts>
 
 <script type="text/javascript" charset="utf8" src="//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.1/jquery.dataTables.min.js"></script>
-<script type="text/javascript" charset="utf-8" language="javascript" src="<?php echo ASSET_URL ?>/js/DT_bootstrap.js"></script>
+<script type="text/javascript" charset="utf-8" language="javascript" src="<?php echo ASSET_URL ?>/js/build/of-course.min.js"></script>
 
 <script type='text/javascript'>
 
@@ -184,5 +184,5 @@ if(advanced_text_search && campus_search && study_mode_search && subject_categor
 
 
 <style type='text/css'>
-@import url('<?php echo ASSET_URL ?>/css/DT_bootstrap.css');
+@import url('<?php echo ASSET_URL ?>/css/build/of-course.min.css');
 </style>
