@@ -27,7 +27,7 @@
 	
 	<?php if(!empty($course->subjectspecific_skills_learning_outcomes)): ?>
 	<section class="info-subsection">
-		<h4>Subject specific skills</h4>
+		<h4>Subject-specific skills</h4>
 		<?php echo $course->subjectspecific_skills_learning_outcomes; ?>
 	</section>
 	<?php endif; ?>
