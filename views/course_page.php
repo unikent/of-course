@@ -91,7 +91,7 @@
 		  <!-- Carousel items -->
 		  <div class="<?php echo count($course->related_courses) > 4 ? 'carousel-inner' : 'carousel-inner-left'; ?>">
 		  <?php $count = 0; ?>
-		  <?php for( $i = 0; $i < ( intval( count($course->related_courses) / 4 ) ); $i++ ): ?>
+		  <?php for( $i = 0; $i < ( round( (count($course->related_courses) / 4) + 0.5, 0, PHP_ROUND_HALF_DOWN ) ); $i++ ): ?>
 		  <?php $related_courses = array_slice($course->related_courses, $i*4) ?>
 			<div class="<?php if ($count == 0) echo 'active ' ?>item">
 				
