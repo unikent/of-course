@@ -1,6 +1,8 @@
 
   <h2>Entry requirements</h2>
-  <?php echo $course->entry_profile;?>
+  <?php if(!empty($course->entry_profile)): ?>
+  	<?php echo $course->entry_profile;?>
+  <?php endif; ?>
   <!-- <?php echo $course->entry_requirements_overriding_text;?> -->
   
 	<section class="info-section">
