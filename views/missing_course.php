@@ -19,7 +19,7 @@
 						
 						foreach($programmes as $programme){
 							if(strpos($programme->name, $slug) !==false || strpos($programme->slug, $slug) !==false){
-								$link = Flight::url("{$type}/{$year_for_url}{$programme->id}/{$programme->slug}");
+								$link = Flight::url("{$level}/{$year_for_url}{$programme->id}/{$programme->slug}");
 								echo "<li><a href='{$link}'>{$programme->name}</a></li>";
 								$displayed++;
 							}
