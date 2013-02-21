@@ -11,6 +11,14 @@ Depends upon our [Programmes Plant API PHP library](https://github.com/unikent/p
 2. Place where you would like it to live and rename `paths.sample.php` to `paths.php`. Set the XCRI WS path, base path and templating engine paths inside. We are using our home grown (closed source) Pantheon engine. If you are using Pantheon, add a Pantheon config.php to the config folder & a Pantheon menu folder within the tree.
 4. Browse to the website to see the system up and running.
 
+## Creating A Build
+
+In order to compress the assets (CSS and JS) for a distribution. 
+
+1. Install Node.js - this now includes npm by default.
+2. Install Grunt. `npm install -g grunt`.
+3. Run Grunt - `grunt` from the root of this code.
+
 ## Licensing
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or any later version.
