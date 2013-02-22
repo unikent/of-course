@@ -58,8 +58,8 @@ class CoursesFrontEnd {
 			return Flight::notFound($data);
 		}catch(\Exception $e){
 			// Another error type?
-			$data = array('slug' => $slug, 'id' => $id, 'year'=> $year, 'level' => $level, 'error'=> $e);
-			return Flight::notFound($data);
+			$data = array('slug' => $slug, 'id' => $id, 'year'=> $year, 'level' => $level);
+			return Flight::error($e, $data);
 		}
 		
 		// Attempt to cache responce with browser + debug some extra information.
