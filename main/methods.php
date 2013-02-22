@@ -82,6 +82,13 @@
 		// that will allow us to be more helpful.
 		$data = validate_404_data($data);
 
+		// Attempt to get programmes so we can make some suggestions
+		try {
+			$data['programmes'] = CoursesFrontEnd::$pp->get_programmes_index($data['year'], $data['level']);
+		}catch(Exception $e){
+			$data['programmes'] = array();
+		}	
+
 		// Set data & open views
 	  	Flight::setup($data['year'], $data['level']);
 	  	Flight::response()->status(404);
@@ -177,13 +184,6 @@ Error data:
 			$final_part = $url_chunks[sizeof($url_chunks)-1];
 			$data['slug'] = $final_part;
 		}
-
-		// Attempt to get programmes so we can make some suggestions
-		try {
-			$data['programmes'] = CoursesFrontEnd::$pp->get_programmes_index($data['year'], $data['level']);
-		}catch(Exception $e){
-			$data['programmes'] = array();
-		}	
 
 		return $data;
 	}
