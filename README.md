@@ -13,7 +13,7 @@ Depends upon our [Programmes Plant API PHP library](https://github.com/unikent/p
 
 ## Creating A Build
 
-In order to compress the assets (CSS and JS) for a distribution. 
+In order to compress the assets (CSS and JS) for a distribution (images are already optimised).
 
 1. Install Node.js - this now includes npm by default.
 2. Install Grunt. `npm install -g grunt`.
