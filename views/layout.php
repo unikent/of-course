@@ -5,7 +5,7 @@
 	<kentMeta>
 		<!-- InstanceBeginEditable name="metadata" -->
 		<title></title>
-		<link href="<?php echo ASSET_URL; ?>/css/import.css" type="text/css" rel="stylesheet">
+		<link href="<?php echo ASSET_URL; ?>/css/build/of-course.min.css" type="text/css" rel="stylesheet">
 		<!-- InstanceEndEditable -->
 	</kentMeta>
 	<kentContent>
