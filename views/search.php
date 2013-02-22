@@ -85,7 +85,7 @@
 
 <script type='text/javascript'>
 
-    //put our custom search items into variables
+//put our custom search items into variables
 var advanced_text_search = $('input.advanced-text-search');
 var campus_search = $('select.campus-search');
 var study_mode_search = $('select.study-mode-search');
@@ -180,8 +180,6 @@ if(advanced_text_search && campus_search && study_mode_search && subject_categor
 </script>
 
 </kentScripts>
-
-
 
 <style type='text/css'>
 @import url('<?php echo ASSET_URL ?>/css/build/of-course.min.css');
