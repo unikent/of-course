@@ -8,23 +8,21 @@
 
         <select class="campus-search input-large">
           <option value="">All campuses</option>
-          <option>Canterbury</option>
-          <option>Medway</option>
+          <option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Canterbury'))  == 0) echo 'selected'; ?>>Canterbury</option>
+          <option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Medway'))  == 0) echo 'selected'; ?>>Medway</option>
         </select>
       
-
         <select class="study-mode-search input-large">
           <option value="">All study modes</option>
-          <option>Full-time only</option>
-          <option>Part-time only</option>
-          <option>Full-time or part-time</option>
+          <option <?php if(strcmp($search_type, 'study_mode')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Full-time only'))  == 0) echo 'selected'; ?>>Full-time only</option>
+          <option <?php if(strcmp($search_type, 'study_mode')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Part-time only'))  == 0) echo 'selected'; ?>>Part-time only</option>
+          <option <?php if(strcmp($search_type, 'study_mode')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Full-time or part-time'))  == 0) echo 'selected'; ?>>Full-time or part-time</option>
         </select>
       
-
         <select class="subject-categories-search input-large">
           <option value="">All subject categories</option>
           <?php foreach($subject_categories as $sc): ?>
-          <option <?php if(strcmp($search_type, 'subject_category')  == 0  && strcmp(urldecode($search_string), $sc->name)  == 0) echo 'selected'; ?>><?php echo $sc->name?></option>
+          <option <?php if(strcmp($search_type, 'subject_category')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower($sc->name))  == 0) echo 'selected'; ?>><?php echo $sc->name?></option>
           <?php endforeach; ?>
         </select>
       
