@@ -61,8 +61,14 @@
                 <?php echo $p->mode_of_study;?>
             </td>
             <td class="hide">
-                <?php foreach((array)$p->subject_categories as $sc): ?>
-                  <?php echo $sc;?> <br />
+                <?php foreach((array)$p->subject_categories as $key => $sc): ?>
+                  <?php 
+                    if(!empty($sc)){
+                      echo $sc;
+                      // dont echo a seperator if its the last subject category
+                      if($key !== count($p->subject_categories) - 1) echo ';';
+                    }
+                  ?>
                 <?php endforeach; ?>
             </td>
             <td class="hide">
@@ -121,8 +127,24 @@ if(advanced_text_search && campus_search && study_mode_search && subject_categor
   // search the study mode field if a study mode is selected
   var study_mode_search_result = (study_mode_search.val() == '') ? true : (( study_mode.toLowerCase().indexOf( study_mode_search.val().toLowerCase() ) !== -1 ) ? true : false );
   
-  // search the subject category field if a subject category is selected
-  var subject_categories_search_result = (subject_categories_search.val() == '') ? true : (( subject_categories.toLowerCase().indexOf( subject_categories_search.val().toLowerCase() ) !== -1 ) ? true : false );
+  // lets split subject categories up so we can search then individually
+  var subject_categories_vals = subject_categories.split(';');
+
+  // check to see if we find our searched subject category in the array
+  var subject_categories_search_result = false;
+  if (subject_categories_search.val() == ''){
+    subject_categories_search_result = true;
+  }
+  else{
+    for (var i = 0; i < subject_categories_vals.length; i++) {
+      subject_categories_vals[i] = $.trim(subject_categories_vals[i]);
+      if(subject_categories_search.val().toLowerCase() == subject_categories_vals[i].toLowerCase()){
+        subject_categories_search_result = true;
+        break;
+      }
+    }
+  }
+  
 
   // return our results
   return advanced_text_search_result && campus_search_result && study_mode_search_result && subject_categories_search_result;

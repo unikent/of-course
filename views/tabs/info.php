@@ -21,6 +21,8 @@
 
 <section class="info-section">
 	<h3>Resources</h3>
+
+	<?php if(!empty($course->subject_leaflet[0])): ?>
 	<section class="info-subsection">
 		<h4>Download a subject leaflet (pdf)</h4>
 		<p>Our subject leaflets provide more detail about individual subjects areas. See:</p>
@@ -31,6 +33,8 @@
 			<?php endif; ?>
 		</ul>
 	</section>
+	<?php endif; ?>
+
 	<?php if (! empty($course->student_profile) || ! empty($course->student_profile_2) ): ?>
 	<section class="info-subsection">
 		<h4>Read our student profiles</h4>
@@ -42,12 +46,14 @@
 		</ul>
 	</section>
 	<?php endif; ?>
+
 	<?php if(!empty($course->globals->open_days)): ?>
 	<section class="info-subsection">
 	    <h4>Open days</h4>
 	    <?php echo $course->globals->open_days ?>
 	</section>
 	<?php endif; ?>
+	
 </section>
 
 <?php if (!empty($course->related_courses)): ?>
