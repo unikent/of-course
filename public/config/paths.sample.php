@@ -17,3 +17,6 @@ const XCRI_WEBSERVICE = '';     // URL of Programmes Plant API - e.g. http://pp.
 
 // Caches
 const CACHE_DIRECTORY = '';     // Directory to store caches.
+
+// Email address to message on 500 error. (is not set, no email will be sent)
+const FAIL_ALERT_EMAIL = '';
