@@ -10,23 +10,24 @@
             <p>Try using the search above to find what you are looking for or alternatively go back to the <a href='<?php echo BASE_URL; ?>'>courses index page</a>.</p>
        
             <?php if(!empty($slug)): ?>
-                <h4>Are any of these what you're looking for?</h4>
-                <ul>
                 <?php
                     $limit = 6;
-                    $displayed = 0;
+                    $found = array();
                 
                     foreach($programmes as $programme){
                        if(strpos($programme->name, $slug) !==false || strpos($programme->slug, $slug) !==false){
                             $link = Flight::url("{$level}/{$year_for_url}{$programme->id}/{$programme->slug}");
-                            echo "<li><a href='{$link}'>{$programme->name}</a></li>";
-                            $displayed++;
+                            $found[] = "<li><a href='{$link}'>{$programme->name}</a></li>";
                         }
-                        if($displayed >= $limit)break;
-                    }
+                        if(sizeof($found) >= $limit)break;
+                    }  
                 ?>
-          
+                <?php if(sizeof($found) != 0): ?>
+                <h4>Are any of these what you're looking for?</h4>
+                <ul>
+                    <?php foreach($found as $link){ echo $link ;} ?>
                 </ul>
+                <?php endif; ?>
             <?php endif; ?>
 
         </div>
