@@ -1,6 +1,6 @@
 <!-- InstanceBegin template="/Templates/daedalus_v1.dwt" codeOutsideHTMLIsLocked="false" -->
 <!-- TEMPLATE_VERSION="Daedalus v1.0" -->
-<kentWrapper type="courses" siteroot="<?php echo BASE_URL != '/' ? BASE_URL : ''; ?>/" mode="<?php echo $level;?>" year="<?php echo $year;?>">
+<kentWrapper type="courses" siteroot="<?php echo BASE_URL != '/' ? BASE_URL : ''; ?>/" mode="<?php echo $level;?>" year="<?php echo $year;?>" currentyear="<?php echo CoursesFrontEnd::$current_year;?>">
 
 	<kentMeta>
 		<!-- InstanceBeginEditable name="metadata" -->
