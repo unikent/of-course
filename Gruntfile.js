@@ -12,7 +12,7 @@ module.exports = function(grunt) {
 		},
 		concat: {
 			build: {
-				src: ['public/css/DT_bootstrap.css', 'courses.css'],
+				src: ['public/css/DT_bootstrap.css', 'public/css/courses.css'],
 				dest: 'public/css/build/concat.css'
 			}
 		},
