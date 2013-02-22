@@ -85,11 +85,11 @@
 <kentScripts>
 
 <script type="text/javascript" charset="utf8" src="//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.1/jquery.dataTables.min.js"></script>
-<script type="text/javascript" charset="utf-8" language="javascript" src="<?php echo ASSET_URL ?>/js/DT_bootstrap.js"></script>
+<script type="text/javascript" charset="utf-8" language="javascript" src="<?php echo ASSET_URL ?>/js/build/of-course.min.js"></script>
 
 <script type='text/javascript'>
 
-    //put our custom search items into variables
+//put our custom search items into variables
 var advanced_text_search = $('input.advanced-text-search');
 var campus_search = $('select.campus-search');
 var study_mode_search = $('select.study-mode-search');
@@ -201,8 +201,6 @@ if(advanced_text_search && campus_search && study_mode_search && subject_categor
 
 </kentScripts>
 
-
-
 <style type='text/css'>
-@import url('<?php echo ASSET_URL ?>/css/DT_bootstrap.css');
+@import url('<?php echo ASSET_URL ?>/css/build/of-course.min.css');
 </style>
