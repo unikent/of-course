@@ -2,7 +2,7 @@
 // Divide our array in half so we can display it in two columns
 $subjects = (array)$subjects;
 $len = count($subjects);
-$quater =  $len / 4;
+$quater =  round($len / 4, 0, PHP_ROUND_HALF_UP);
 
 $subjects_a = array_slice($subjects, 0, $quater );
 $subjects_b = array_slice($subjects, $quater, $quater );
