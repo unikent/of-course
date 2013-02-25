@@ -11,6 +11,9 @@ require APP_PATH . '/main/methods.php';
 // Set view path
 Flight::set('flight.views.path', APP_PATH . '/views');
 
+// set the relative site root to get this to work nicely with pantheon
+define("RELATIVE_SITE_ROOT",Flight::request()->url."/");
+
 // Load Pantheon
 if (defined("TEMPLATING_ENGINE"))
 {
