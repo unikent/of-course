@@ -184,6 +184,8 @@ Error data:
 			$final_part = $url_chunks[sizeof($url_chunks)-1];
 			$data['slug'] = $final_part;
 		}
+		// Pretty up any weird code
+		$data['slug'] = htmlentities($data['slug']);
 
 		return $data;
 	}

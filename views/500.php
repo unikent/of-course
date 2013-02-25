@@ -1,7 +1,7 @@
 <article class="container">
     <div class='row-fluid'>
         <div class='span12'>
-            <h1>Looks like somthing went wrong!</h1>
+            <h1>Looks like something went wrong!</h1>
         </div>
     </div>
     <div class='row-fluid' style='min-height:300px;'>
