@@ -80,8 +80,67 @@
 
 		// Attempt to resolve URL details, location, path and other stuff
 		// that will allow us to be more helpful.
+		$data = validate_404_data($data);
 
-		$url_chunks = explode('/', Flight::request()->url);
+		// Attempt to get programmes so we can make some suggestions
+		try {
+			$data['programmes'] = CoursesFrontEnd::$pp->get_programmes_index($data['year'], $data['level']);
+		}catch(Exception $e){
+			$data['programmes'] = array();
+		}	
+
+		// Set data & open views
+	  	Flight::setup($data['year'], $data['level']);
+	  	Flight::response()->status(404);
+		return Flight::layout('404', $data);
+	});
+
+	// 500 error handler
+	Flight::map('error', function($error, $data = array()){
+
+		// Attempt to resolve URL details, location, path and other stuff
+		// that will allow us to be more helpful.
+		$data = validate_404_data($data);
+
+		// Fail mode action. Email for help?
+		if(defined("FAIL_ALERT_EMAIL") && trim(FAIL_ALERT_EMAIL) != ''){
+
+$message = "
+500 error generated from: {$data["url"]} 
+At: ".date(DATE_RFC822)."
+On server: ".$_SERVER["HTTP_HOST"]."
+
+Debug data:
+".print_r($data, true)."
+
+Error data:
+".print_r($error, true)."
+";
+
+			mail(FAIL_ALERT_EMAIL, "Of-Course: 500 error", $message);
+		}
+		
+		// Pass error message along
+		$data['error'] = $error;
+
+	    // Handle error
+	    Flight::response()->status(500);
+	    return Flight::layout('500', $data);
+	});
+
+	/**
+	 * Validate 404 data. Attempt to guess correct URLS and routes for 404 page.
+	 *
+	 * @param $data
+	 * @return $data
+	 */
+	function validate_404_data($data){
+
+		// Get url
+		$data['url'] = Flight::request()->url;
+
+		// chunks
+		$url_chunks = explode('/', $data['url']);
 
 		// If we don't know level, try to work it out
 		if(!isset($data['level'])){
@@ -126,18 +185,5 @@
 			$data['slug'] = $final_part;
 		}
 
-		// Attempt to get programmes so we can make some suggestions
-		try {
-			$data['programmes'] = CoursesFrontEnd::$pp->get_programmes_index($data['year'], $data['level']);
-		}catch(Exception $e){
-			$data['programmes'] = array();
-		}	
-
-		// Set data & open views
-	  	Flight::setup($data['year'], $data['level']);
-	  	Flight::response()->status(404);
-		return Flight::layout('missing_course', $data);
-	});
-
-
-
+		return $data;
+	}

@@ -24,7 +24,7 @@ if (defined("TEMPLATING_ENGINE"))
 	if ($_POST === null) $_POST = array();
 	
 	//Hook pantheon to render method
-	Flight::after("start", function(){
+	Flight::after("layout", function(){
 		require TEMPLATING_ENGINE . '/run.php';
 	});
 }
