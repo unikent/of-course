@@ -74,6 +74,17 @@
 
 	});
 
+	// Get last modified data from API (if possible, else null)
+	Flight::map("last_modified", function(){
+		$response = CoursesFrontEnd::$pp->request->getResponse();
+		$last_modified = $response->getLastModified();
+		if($last_modified === null){
+			return null;
+		}else{
+			return strtotime($last_modified);
+		}
+	});
+
 	// 404 handler
 	// Use data to try and figure out best 404 info
 	Flight::map('notFound', function($data = array()){
