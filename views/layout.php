@@ -10,6 +10,7 @@
 	</kentMeta>
 	<kentContent>
 		<!-- InstanceBeginEditable name="content" -->
+			<kentAttribute name='last_updated' default='<?php echo time(); ?>'><?php echo Flight::last_modified(); ?></kentAttribute>
 
                 <?php if(isset($preview) && $preview == true):?>
                     <meta name="robots" content="noindex, nofollow" />
