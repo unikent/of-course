@@ -56,10 +56,12 @@ class CoursesFrontEnd {
 			// Do 404 action, sending any useful enviormental data we have so it can be as useful as possible
 			$data = array('slug' => $slug, 'id' => $id, 'year'=> $year, 'level' => $level, 'error'=> $e);
 			return Flight::notFound($data);
-		}catch(\Exception $e){
+		}
+		catch(\Exception $e)
+		{
 			// Another error type?
-			$data = array('slug' => $slug, 'id' => $id, 'year'=> $year, 'level' => $level, 'error'=> $e);
-			return Flight::notFound($data);
+			$data = array('slug' => $slug, 'id' => $id, 'year'=> $year, 'level' => $level);
+			return Flight::error($e, $data);
 		}
 		
 		// Attempt to cache responce with browser + debug some extra information.
@@ -99,9 +101,11 @@ class CoursesFrontEnd {
 		{	
 			// We dont know enough to help the 404 out really
 			return Flight::notFound(array('error'=> $e));
-		}catch(\Exception $e){
+		}
+		catch(\Exception $e)
+		{
 			// Another error. Pretend it was a 404.
-			return Flight::notFound(array('error'=> $e));
+			return Flight::error($e);
 		}
 
 		Flight::cachecheck();
@@ -126,10 +130,16 @@ class CoursesFrontEnd {
 
 		Flight::setup($year, $level);
 
-	    $programmes = static::$pp->get_programmes_index($year, $level);//5 minute cache
-
-	    $campuses = static::$pp->get_campuses();
-	    $subject_categories = static::$pp->get_subjectcategories();
+		try {
+			$programmes = static::$pp->get_programmes_index($year, $level);//5 minute cache
+	    	$campuses = static::$pp->get_campuses();
+	    	$subject_categories = static::$pp->get_subjectcategories();
+		}
+		catch(\Exception $e)
+		{
+			// Another error.
+			return Flight::error($e);
+		}
 
 		//debug option
 		if(isset($_GET['debug_performance'])){ inspect($programmes); }
@@ -161,6 +171,11 @@ class CoursesFrontEnd {
 		{
 			return Flight::halt(501, "Fatal error in getting programmes index.");
 		}
+		catch(\Exception $e)
+		{
+			// Another error.
+			echo "{'error':'Unable to load data.'}";
+		}
 
 		// Try & cache
 		Flight::cachecheck();
@@ -177,7 +192,7 @@ class CoursesFrontEnd {
 		{
 			$subjects = static::$pp->get_subjectcategories();
 		}
-		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
+		catch(\Exception $e)
 		{
 			$subjects = array();	
 		}
@@ -200,7 +215,7 @@ class CoursesFrontEnd {
 		try{
 			$js = static::$pp->get_subject_leaflets($year, $level);
 		}
-		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
+		catch(\Exception $e)
 		{
 			return Flight::halt(501, "Fatal error in getting subject leaflets.");
 		}
@@ -223,7 +238,7 @@ class CoursesFrontEnd {
 		{
 			$subjects = static::$pp->get_subject_index($year, $type);	
 		}
-		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
+		catch(\Exception $e)
 		{
 			$subjects = array();	
 		}
@@ -234,6 +249,7 @@ class CoursesFrontEnd {
 	/**
 	 * List programmes - Show a list of all programmes availble to the system.
 	 *
+	 * @depricated
 	 * @param string Type UG|PG
 	 * @param yyyy Year to show
 	 */
@@ -243,7 +259,8 @@ class CoursesFrontEnd {
 
 		$year_for_url = empty($year) ? '' : ((strcmp($year, static::$current_year) == 0) ? '' : $year . '/');
 
-		foreach($listing as $course){
+		foreach($listing as $course)
+		{
 			echo "<a href='". Flight::url("{$level}/{$year_for_url}{$course->id}/{$course->slug}") . "'>{$course->name}</a><br/>";
 		}
 
@@ -357,7 +374,7 @@ class CoursesFrontEnd {
 		{
 			return static::$pp->get_programmes_index($year, $level);
 		}
-		catch(Exception $e)
+		catch(\Exception $e)
 		{
 			return array();
 		}
