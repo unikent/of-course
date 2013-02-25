@@ -10,14 +10,13 @@
 		<?php echo $course->foundation_year ?>
 		<?php echo $course->globals->foundation_year ?>
 	</section>
-	<?php isset($course->modules->stages->{0}) ? Flight::render('partials/stage', array('stage' => $course->modules->stages->{0})) : ''; ?>
 </section>
 <?php endif; ?>
-<?php if (isset($course->modules->stages->{0})): ?>
+<?php if (isset($course->modules->stages->{foundation})): ?>
 	<?php if (empty($course->foundation_year)): ?>
 	<h3>Foundation year</h3>
 	<?php endif; ?>
-	<?php Flight::render('partials/stage', array('stage' => $course->modules->stages->{0})); ?>
+	<?php Flight::render('partials/stage', array('stage' => $course->modules->stages->{foundation})); ?>
 <?php endif; ?>
 
 
