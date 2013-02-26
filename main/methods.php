@@ -89,6 +89,12 @@
 	// Use data to try and figure out best 404 info
 	Flight::map('notFound', function($data = array()){
 
+		$pantheon_config = Util::getConfig();
+		if($pantheon_config["theme"] != "Daedalus"){
+			// Avoid WSOD
+			Flight::halt('404', "Error 404: webpage could not be found.");
+		}
+		
 		// Attempt to resolve URL details, location, path and other stuff
 		// that will allow us to be more helpful.
 		$data = validate_404_data($data);
