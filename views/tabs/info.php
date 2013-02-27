@@ -69,7 +69,7 @@
 </section>
 <?php endif; ?>
 
-<div class="row-fluid">
+<div class="row-fluid kiss-widget-section">
 	<div class="span7">
 		<div class="well">
 			<h3>UNISTATS / KIS</h3>
