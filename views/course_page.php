@@ -30,7 +30,11 @@
 		<div class="span7">
 			<div class="tab-content">
 				<section class="fade" id="overview"><?php Flight::render('tabs/overview', array('course'=>$course)); ?></section>
+				<?php if ( empty($course->modules->stages) ) : ?>
+				<section class="fade" id="structure"><?php Flight::render('tabs/structure_empty', array('course'=>$course)); ?></section>
+				<?php else: ?>
 				<section class="fade" id="structure"><?php Flight::render('tabs/structure', array('course'=>$course)); ?></section>
+				<?php endif; ?>
 				<section class="fade" id="teaching"><?php Flight::render('tabs/teaching', array('course'=>$course)); ?></section>
 				<section class="fade" id="careers"><?php Flight::render('tabs/careers', array('course'=>$course)); ?></section>	
 				<section class="fade" id="entry"><?php Flight::render('tabs/entry', array('course'=>$course)); ?></section>
