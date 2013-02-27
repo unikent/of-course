@@ -1,3 +1,4 @@
+<?php if ( ! empty($stage->clusters->compulsory) || ! empty($stage->clusters->optional) ): ?> 
 <p>Possible modules may include: </p>
 
 <ul class="unstyled">        
@@ -30,4 +31,10 @@
             <?php endif; ?>
         <?php endforeach; ?>
     <?php endforeach; ?>
+    
 </ul>
+<?php endif; ?>
+
+<?php if ( ! empty($stage->clusters->wildcard) ): ?>
+    <p>You have the opportunity to select wild modules in this stage</p>
+<?php endif; ?>
