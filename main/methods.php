@@ -76,12 +76,22 @@
 
 	// Get last modified data from API (if possible, else null)
 	Flight::map("last_modified", function(){
-		$response = CoursesFrontEnd::$pp->request->getResponse();
-		$last_modified = $response->getLastModified();
-		if($last_modified === null){
+		// Try / Catch
+		try {
+			// Get request
+			$request = CoursesFrontEnd::$pp->request;
+			// If its okay, get responce
+			if($request !== null ){
+				$response = $request->getResponse();
+				// Grab last modified, and return it if its not invalid.
+				$last_modified = $response->getLastModified();
+				if($last_modified !== null) return strtotime($last_modified);
+			} 
 			return null;
-		}else{
-			return strtotime($last_modified);
+		} 
+		catch(Exception $e)
+		{
+			return null;
 		}
 	});
 
