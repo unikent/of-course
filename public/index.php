@@ -13,7 +13,7 @@ Flight::set('flight.views.path', APP_PATH . '/views');
 
 // set the relative site root to get this to work nicely with pantheon
 // we don't want this to happen if we're using file-based config locally though
-if ( defined("CONFIG_METHOD") &&  CONFIG_METHOD != 'file' )
+if ( ! defined("FILE_CONFIG") || ( defined("FILE_CONFIG") &&  ! FILE_CONFIG ) )
 {
     define("RELATIVE_SITE_ROOT", dirname(Flight::request()->url) . "/");
 }

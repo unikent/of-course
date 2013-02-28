@@ -20,3 +20,6 @@ const CACHE_DIRECTORY = '';     // Directory to store caches.
 
 // Email address to message on 500 error. (is not set, no email will be sent)
 const FAIL_ALERT_EMAIL = '';
+
+// file config should be set to true for local file-based config pantheon setups
+const FILE_CONFIG = false;
