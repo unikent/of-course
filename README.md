@@ -2,7 +2,7 @@
 
 A [Flight](http://flightphp.com/) based front-end application for the data produced by the [Programmes Plant](http://github.com/unikent/).
 
-![of-course sample course page screenshot](https://raw.github.com/unikent/of-course/master/screenshot.jpg "of-course sample course page screenshot")
+![of-course sample course page screenshot](https://raw.github.com/unikent/of-course/develop/screenshot.jpg "of-course sample course page screenshot")
 
 Depends upon our [Programmes Plant API PHP library](https://github.com/unikent/programmes-plant-api-php) which is installed using [Composer](http://getcomposer.org/).
 
