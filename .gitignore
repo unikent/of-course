@@ -1,7 +1,10 @@
-/config/paths.php
+/public/config/paths.php
+/public/config/config.php
 /config/config.php
 /menubin/
 vendor/
 bin/
 composer.lock
+composer.phar
 .DS_Store
+node_modules
