@@ -1,0 +1,140 @@
+/* general course page styles */
+.daedalus .general_disclaimer {
+	margin-top: 100px;
+	padding: 20px 0 20px 0;
+	border-top: 1px solid rgb(221, 221, 221);
+}
+
+.daedalus .info-section {
+	padding-bottom: 30px;
+}
+
+.daedalus .info-section h3 {
+	border-bottom: 1px solid rgb(58, 135, 173);
+	margin-bottom: 20px;
+}
+
+.daedalus .info-subsection {
+	padding: 5px 0;
+}
+
+
+/* key facts box */
+.daedalus .key-facts-container {
+	margin-left: 20px;
+}
+
+.daedalus .key-facts {
+	border-top: 1px solid rgb(58, 135, 173);
+	border-bottom: 1px solid rgb(58, 135, 173);
+	padding: 20px 0;
+}
+
+.daedalus .key-facts li {
+	padding: 4px 0;
+}
+
+
+/* module listings */
+.daedalus .module-read-more {
+	padding-bottom: 20px;
+}
+
+.daedalus .module-synopsis {
+	padding-left: 15px;
+}
+.daedalus li span.btn {
+	text-align: left;
+}
+
+
+/* related course carousel */
+.daedalus .carousel-control {
+	color: #fff;
+	text-decoration: none;
+	opacity: 0.7;
+	-webkit-transition: all 0.5s linear;
+	-moz-transition: all 0.5s linear;
+	-o-transition: all 0.5s linear;
+	-ms-transition: all 0.5s linear;
+	transition: all 0.5s linear;
+}
+
+.daedalus .carousel-control:hover {
+	color: #fff;
+	text-decoration: none;
+	opacity: 0.9;
+}
+
+.daedalus .carousel {
+	margin-top: 20px;
+	line-height: 20px;
+}
+
+.daedalus .carousel-inner {
+	margin-left:100px;
+	width: 750px;
+}
+
+.daedalus .carousel-inner-left {
+	width: 850px;
+}
+
+.daedalus .related-course {
+	margin-left:70px;
+}
+
+.daedalus .related-course .cell {
+	width: 160px;
+	height: 120px;
+	float: left;
+	overflow: hidden;
+	position: relative;
+	text-align: center;
+	cursor: default;
+}
+
+.daedalus .related-course .cell p {
+}
+
+.daedalus .related-course .mask {
+}
+
+.daedalus .related-course .mask:hover {
+}
+
+.daedalus .related-course-section {
+	padding: 30px 0;
+}
+
+
+/* courses advanced search page */
+.daedalus .advanced-search {
+	margin-bottom: 120px;
+}
+
+.daedalus .advanced-search-boxes {
+	
+}
+
+.daedalus .advanced-search-table {
+	
+}
+
+.daedalus #programme-list {
+	border-radius: 0px;
+}
+
+.daedalus th, td {
+	border-radius: 0px !important;
+}
+
+.daedalus .advanced-text-search {
+	border-radius: 0px;
+	width: 303px;
+}
+
+.daedalus .advanced-search-boxes {
+	margin: 30px 0;
+}
+
