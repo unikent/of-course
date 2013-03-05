@@ -143,7 +143,7 @@ class CoursesFrontEnd {
 		Flight::cachecheck();
 
 		// add appropriate content type header
-		header("Content-type: text/xml; charset=utf-8"); ?>
+		header("Content-type: text/xml; charset=utf-8");
 		
 		echo $xcri_cap;
 
