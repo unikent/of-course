@@ -145,7 +145,7 @@ class CoursesFrontEnd {
 		// add appropriate content type header
 		header("Content-type: text/xml; charset=utf-8");
 		
-		echo $xcri_cap;
+		echo Flight::gzip($xcri_cap);
 
 		Flight::stop();
 	}
