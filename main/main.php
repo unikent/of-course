@@ -116,6 +116,39 @@ class CoursesFrontEnd {
 		Flight::setup($course->year, null, true);
 		return Flight::layout('course_page', array('course'=> $course));
 	}
+	
+	/**
+	 * Get the XCRI feed
+	 *
+	 * @param $year
+	 * @param $level
+	 */
+	public function xcri_cap($level, $year)
+	{
+		try
+		{
+			$xcri_cap = static::$pp->get_xcri_cap($year, $level);
+		}
+		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
+		{	
+			// We dont know enough to help the 404 out really
+			return Flight::notFound(array('error'=> $e));
+		}
+		catch(\Exception $e)
+		{
+			// Another error. Pretend it was a 404.
+			return Flight::error($e);
+		}
+
+		Flight::cachecheck();
+
+		// add appropriate content type header
+		header("Content-type: text/xml; charset=utf-8");
+		
+		echo Flight::gzip($xcri_cap);
+
+		Flight::stop();
+	}
 
 	/**
 	 * Search page
