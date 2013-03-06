@@ -28,6 +28,36 @@
 	});
 
 	/**
+	 * gzip the content if the request can handle gzipped content
+	 *
+	 * @param $content The string to gzip
+	 * @return $content Hopefully gzipped
+	 */
+	Flight::map('gzip', function($content){
+
+		// what do we have in our Accept-Encoding headers
+		$HTTP_ACCEPT_ENCODING = isset($_SERVER["HTTP_ACCEPT_ENCODING"]) ? $_SERVER["HTTP_ACCEPT_ENCODING"] : ''; 
+	    
+		// set the right encoding
+		if( headers_sent() ) 
+	        $encoding = false; 
+	    else if( strpos($HTTP_ACCEPT_ENCODING, 'x-gzip') !== false ) 
+	        $encoding = 'x-gzip'; 
+	    else if( strpos($HTTP_ACCEPT_ENCODING,'gzip') !== false ) 
+	        $encoding = 'gzip'; 
+	    else 
+	        $encoding = false;
+		
+	    if($encoding){
+			// Add the appropriate encoding header and gzip our content
+	    	header('Content-Encoding: ' . $encoding);
+	    	$content = "\x1f\x8b\x08\x00\x00\x00\x00\x00" . gzcompress($content);
+	    }
+
+	    return $content;
+	});
+
+	/**
 	 * setup: Sets data for views
 	 *
 	 * @param $year Year to be displayed
