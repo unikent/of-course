@@ -4,7 +4,18 @@
 
 	<kentMeta>
 		<!-- InstanceBeginEditable name="metadata" -->
-		<title></title>
+		<?php if(isset($meta) && isset($meta['title'])): ?>
+		<title><?php echo $meta['title']; ?></title>
+		<?php endif; ?>
+
+		<?php if(isset($meta) && isset($meta['description'])): ?>
+		<meta name="description" content="<?php echo $meta['description']; ?>" /> 
+		<?php endif; ?>
+
+		<?php if(isset($meta) && isset($meta['canonical'])): ?>
+		<link rel="canonical" href="<?php echo $meta['canonical']; ?>" />
+		<?php endif; ?>
+
 		<link href="<?php echo ASSET_URL; ?>/css/build/of-course.min.css" type="text/css" rel="stylesheet">
 		<!-- InstanceEndEditable -->
 	</kentMeta>
