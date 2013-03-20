@@ -53,13 +53,13 @@ class CoursesFrontEnd {
 
 			$meta = array(
 				'title' => "{$course->programme_title} ($course->ucas_code) | Undergraduate Programmes | The University of Kent",
-				'canonical' => "/{$level}/{$id}/{$course->slug}",
+				'canonical' => Flight::url("{$level}/{$id}/{$course->slug}"),
 				'description' => strip_tags($course->programme_abstract),
 			);
 
 			if($year && ($year !== static::$current_year)){
 				$meta['title'] = "{$course->programme_title} ($course->ucas_code) | Undergraduate Programmes {$year} | The University of Kent";
-				$meta['canonical'] = "/{$level}/{$year}/{$id}/{$course->slug}";	
+				$meta['canonical'] =  Flight::url("{$level}/{$year}/{$id}/{$course->slug}");	
 			}
 		}
 
