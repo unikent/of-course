@@ -15,7 +15,7 @@ class CoursesFrontEnd {
 
 		if (defined('CACHE_DIRECTORY') && is_dir(CACHE_DIRECTORY))
 		{
-			static::$pp->with_cache('file')->directory(CACHE_DIRECTORY);
+		    static::$pp->with_cache('file')->directory(CACHE_DIRECTORY);
 		}
 
 		static::$pp->no_ssl_verification();
@@ -42,14 +42,27 @@ class CoursesFrontEnd {
 	 * @param int Id of programme
 	 * @param string Slug - programme name
 	 */
-	public function view($level, $year, $id, $slug = '')
-	{
+	public function view($level, $year, $id, $slug = ''){
+
+		$meta = array();
  
 		// Use webservices to get course data for programme.
 		try
 		{
 			$course = static::$pp->get_programme($year, $level, $id);
+
+			$meta = array(
+				'title' => "{$course->programme_title} ($course->ucas_code) | Undergraduate Programmes | The University of Kent",
+				'canonical' => "/{$level}/{$id}/{$course->slug}",
+				'description' => strip_tags($course->programme_abstract),
+			);
+
+			if($year && ($year !== static::$current_year)){
+				$meta['title'] = "{$course->programme_title} ($course->ucas_code) | Undergraduate Programmes {$year} | The University of Kent";
+				$meta['canonical'] = "/{$level}/{$year}/{$id}/{$course->slug}";	
+			}
 		}
+
 		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
 		{
 			// Not found?
@@ -83,7 +96,7 @@ class CoursesFrontEnd {
 
  		// Render programme page
  		Flight::setup($year, $level);
- 		return Flight::layout('course_page', array('course'=>$course));
+ 		return Flight::layout('course_page', array('meta' => $meta, 'course' => $course));
 	}
 
 	/**
@@ -116,6 +129,39 @@ class CoursesFrontEnd {
 		Flight::setup($course->year, null, true);
 		return Flight::layout('course_page', array('course'=> $course));
 	}
+	
+	/**
+	 * Get the XCRI feed
+	 *
+	 * @param $year
+	 * @param $level
+	 */
+	public function xcri_cap($level, $year)
+	{
+		try
+		{
+			$xcri_cap = static::$pp->get_xcri_cap($year, $level);
+		}
+		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
+		{	
+			// We dont know enough to help the 404 out really
+			return Flight::notFound(array('error'=> $e));
+		}
+		catch(\Exception $e)
+		{
+			// Another error. Pretend it was a 404.
+			return Flight::error($e);
+		}
+
+		Flight::cachecheck();
+
+		// add appropriate content type header
+		header("Content-type: text/xml; charset=utf-8");
+		
+		echo Flight::gzip($xcri_cap);
+
+		Flight::stop();
+	}
 
 	/**
 	 * Search page
@@ -127,6 +173,11 @@ class CoursesFrontEnd {
 	 */
 	public function search($level, $year, $search_type = '', $search_string = '')
 	{
+
+		$meta = array(
+			'title' => 'Advanced Course Search | Undergraduate Programmes | The University of Kent',
+			'description' => 'Search all of the undergraduate programmes offered by the University of Kent',
+		);
 
 		Flight::setup($year, $level);
 
@@ -145,7 +196,7 @@ class CoursesFrontEnd {
 		if(isset($_GET['debug_performance'])){ inspect($programmes); }
 		
 		//Render full page
-		return Flight::layout('search', array('programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'search_type' => $search_type, 'search_string' => $search_string));	
+		return Flight::layout('search', array('meta' => $meta, 'programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'search_type' => $search_type, 'search_string' => $search_string));	
 		
 	}
 	/**
