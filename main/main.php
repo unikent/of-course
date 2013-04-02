@@ -164,6 +164,17 @@ class CoursesFrontEnd {
 	}
 
 	/**
+	 * Get the XCRI feed withought a year
+	 *
+	 * @param $level
+	 */
+	public function xcri_cap_noyear($level)
+	{
+		$year = static::$current_year;
+		$this->xcri_cap($level, $year);
+	}
+
+	/**
 	 * Search page
 	 *
 	 * @param string Type UG|PG

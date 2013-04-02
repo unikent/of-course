@@ -47,6 +47,7 @@ Flight::route('/preview/@hash', array($main,'preview'));
 
 //XCRIP-CAP feed
 Flight::route('/@level:undergraduate|postgraduate/@year:[0-9]+/xcri-cap', array($main, 'xcri_cap'));
+Flight::route('/@level:undergraduate|postgraduate/xcri-cap', array($main, 'xcri_cap_noyear'));
 
 // Search
 Flight::route('/@level:undergraduate|postgraduate/@year:[0-9]+/search/@search_type/@search_string', array($main,'search'));
