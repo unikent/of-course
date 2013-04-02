@@ -13,10 +13,12 @@ class CoursesFrontEnd {
 	{
 		static::$pp = new ProgrammesPlant\API(XCRI_WEBSERVICE);
 
+/**
 		if (defined('CACHE_DIRECTORY') && is_dir(CACHE_DIRECTORY))
 		{
 		    static::$pp->with_cache('file')->directory(CACHE_DIRECTORY);
 		}
+**/
 
 		static::$pp->no_ssl_verification();
 	}
@@ -53,13 +55,13 @@ class CoursesFrontEnd {
 
 			$meta = array(
 				'title' => "{$course->programme_title} ($course->ucas_code) | Undergraduate Programmes | The University of Kent",
-				'canonical' => "/{$level}/{$id}/{$course->slug}",
+				'canonical' => Flight::url("{$level}/{$id}/{$course->slug}"),
 				'description' => strip_tags($course->programme_abstract),
 			);
 
 			if($year && ($year !== static::$current_year)){
 				$meta['title'] = "{$course->programme_title} ($course->ucas_code) | Undergraduate Programmes {$year} | The University of Kent";
-				$meta['canonical'] = "/{$level}/{$year}/{$id}/{$course->slug}";	
+				$meta['canonical'] =  Flight::url("{$level}/{$year}/{$id}/{$course->slug}");	
 			}
 		}
 
@@ -388,45 +390,49 @@ class CoursesFrontEnd {
 		}
 
 		// If we somehow hit a search url, fix it.
-		if($slug=='search'){
-			return Flight::redirect("{$level}/{$year}/search");
+		if($slug == 'search')
+		{
+			return Flight::redirect(Flight::url("{$level}/search"), 301);
 		}
 
 		// If we have an id, try a direct redirect
 		if($id !== null){
 			// Auto fix
-			$correct_url = Flight::url("{$level}/{$year}/{$id}/{$slug}", false);
-			return Flight::redirect($correct_url);
+			return Flight::redirect(Flight::url("{$level}/{$year}/{$id}/{$slug}"), 301);
 		}
 
 		// Else attempt a fix
 		$programmes = $this->get_programme_index($year, $level);
+
 		$correct_url = false;
+		$matches = 0;
 
 		// look through the list and see if we recoginise that slug from anyware
-		foreach($programmes as $programme){
-
-			//echo $programme->name;
-			if(strpos($programme->name, $slug) !== false || strpos($programme->slug, $slug) !== false){
-
-				// If correct url IS NOT false, it means we have two results and cannot auto fix reliably.
-				// Go to 404 in this case
-				if($correct_url){
-					$data = array('slug' => $slug, 'year'=> $year, 'level' => $level, 'error_msg' => "Multiple matches, unable to guess redirect.");
-					return Flight::notFound($data);
-				}
-			
-				// Correct URL	
-				$correct_url = Flight::url("{$level}/{$year}/{$programme->id}/{$programme->slug}", false);
-				//die($correct_url);
+		foreach($programmes as $programme)
+		{
+			if($programme->slug == $slug)
+			{
+				$correct_url = Flight::url("{$level}/{$year}/{$programme->id}/{$programme->slug}");
+			} 
+			elseif(strpos($programme->name, $slug) !== false || strpos($programme->slug, $slug) !== false)
+			{
+				$matches++;
 			}
 		}
-		// Only 1 matched result, send em on there wau
-		if($correct_url) return Flight::redirect($correct_url);
 
-		// Else 404, we cant help
-		$data = array('slug' => $slug, 'year'=> $year, 'level' => $level,'error_msg' => "No matches found, unable to guess redirect.");
-		return Flight::notFound($data);
+		if($correct_url) // If there is an exact match, 301 redirect to it.
+		{ 
+			return Flight::redirect($correct_url, 301);
+		} 
+		elseif($matches > 0) // If there are multiple, inexact matches 404 with suggestions.
+		{  
+			$data = array('slug' => $slug, 'year'=> $year, 'level' => $level, 'error_msg' => "Multiple matches, unable to guess redirect.");
+			return Flight::notFound($data);
+		} 
+		else // If there are no inexact matches, just 404.
+		{
+			return Flight::notFound();
+		}
 	}
 
 	// Quietly grab index
