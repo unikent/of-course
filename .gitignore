@@ -8,3 +8,4 @@ composer.lock
 composer.phar
 .DS_Store
 node_modules
+.htaccess

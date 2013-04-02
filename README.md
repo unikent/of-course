@@ -30,6 +30,9 @@ In order to compress the assets (CSS and JS) for a distribution (images are alre
 
 3. Run Grunt - `grunt` from the root of this code.
 
+## Notes.
+- Flight has been extended with some useful helper functions. You can find these in main/methods.php
+
 ## Licensing
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or any later version.
