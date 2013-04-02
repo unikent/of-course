@@ -177,6 +177,15 @@ class CoursesFrontEnd {
 	}
 
 	/**
+	 * Get the XCRI feed withought any parameters
+	 *
+	 */
+	public function xcri_cap_noparams()
+	{
+		$this->xcri_cap_noyear('undergraduate');
+	}
+
+	/**
 	 * Search page
 	 *
 	 * @param string Type UG|PG
