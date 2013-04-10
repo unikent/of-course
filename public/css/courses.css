@@ -1,6 +1,6 @@
 /* general course page styles */
 .daedalus .general_disclaimer {
-	margin-top: 100px;
+	margin-top: 0px;
 	padding: 20px 0 20px 0;
 	border-top: 1px solid rgb(221, 221, 221);
 }
@@ -78,6 +78,8 @@
 
 .daedalus .carousel-inner-left {
 	width: 850px;
+	position: relative;
+    overflow: hidden;
 }
 
 .daedalus .related-course {

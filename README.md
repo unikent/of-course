@@ -24,7 +24,7 @@ In order to compress the assets (CSS and JS) for a distribution (images are alre
 
 1. Install Node.js - this includes npm by default.
 
-2. Install Grunt globally - its quite useful! `npm install -g grunt`. 
+2. Install Grunt globally - its quite useful! `npm install -g grunt` or `npm install -g grunt-cli` for the cli version. 
 
 4. Install the dependencies of our Grunt task - `npm install` from directory.
 
