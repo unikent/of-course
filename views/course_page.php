@@ -29,18 +29,18 @@
 	<div class="row-fluid">
 		<div class="span7">
 			<div class="tab-content">
-				<section class="fade" id="overview"><?php Flight::render('tabs/overview', array('course'=>$course)); ?></section>
+				<section id="overview"><?php Flight::render('tabs/overview', array('course'=>$course)); ?></section>
 				<?php if ( empty($course->modules->stages) ) : ?>
-				<section class="fade" id="structure"><?php Flight::render('tabs/structure_empty', array('course'=>$course)); ?></section>
+				<section id="structure"><?php Flight::render('tabs/structure_empty', array('course'=>$course)); ?></section>
 				<?php else: ?>
-				<section class="fade" id="structure"><?php Flight::render('tabs/structure', array('course'=>$course)); ?></section>
+				<section id="structure"><?php Flight::render('tabs/structure', array('course'=>$course)); ?></section>
 				<?php endif; ?>
-				<section class="fade" id="teaching"><?php Flight::render('tabs/teaching', array('course'=>$course)); ?></section>
-				<section class="fade" id="careers"><?php Flight::render('tabs/careers', array('course'=>$course)); ?></section>	
-				<section class="fade" id="entry"><?php Flight::render('tabs/entry', array('course'=>$course)); ?></section>
-				<section class="fade" id="fees"><?php Flight::render('tabs/fees', array('course'=>$course)); ?></section>
-				<section class="fade" id="apply"><?php Flight::render('tabs/apply', array('course'=>$course)); ?></section>
-				<section class="fade" id="info"><?php Flight::render('tabs/info', array('course'=>$course)); ?></section>
+				<section id="teaching"><?php Flight::render('tabs/teaching', array('course'=>$course)); ?></section>
+				<section id="careers"><?php Flight::render('tabs/careers', array('course'=>$course)); ?></section>	
+				<section id="entry"><?php Flight::render('tabs/entry', array('course'=>$course)); ?></section>
+				<section id="fees"><?php Flight::render('tabs/fees', array('course'=>$course)); ?></section>
+				<section id="apply"><?php Flight::render('tabs/apply', array('course'=>$course)); ?></section>
+				<section id="info"><?php Flight::render('tabs/info', array('course'=>$course)); ?></section>
 			</div>
 		</div><!-- /span -->
 		<div class="span5">
