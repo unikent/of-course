@@ -29,18 +29,18 @@
 	<div class="row-fluid">
 		<div class="span7">
 			<div class="tab-content">
-				<section id="overview"><?php Flight::render('tabs/overview', array('course'=>$course)); ?></section>
+				<section id="overview"><?php Flight::render('ug_tabs/overview', array('course'=>$course)); ?></section>
 				<?php if ( empty($course->modules->stages) ) : ?>
-				<section id="structure"><?php Flight::render('tabs/structure_empty', array('course'=>$course)); ?></section>
+				<section id="structure"><?php Flight::render('ug_tabs/structure_empty', array('course'=>$course)); ?></section>
 				<?php else: ?>
-				<section id="structure"><?php Flight::render('tabs/structure', array('course'=>$course)); ?></section>
+				<section id="structure"><?php Flight::render('ug_tabs/structure', array('course'=>$course)); ?></section>
 				<?php endif; ?>
-				<section id="teaching"><?php Flight::render('tabs/teaching', array('course'=>$course)); ?></section>
-				<section id="careers"><?php Flight::render('tabs/careers', array('course'=>$course)); ?></section>	
-				<section id="entry"><?php Flight::render('tabs/entry', array('course'=>$course)); ?></section>
-				<section id="fees"><?php Flight::render('tabs/fees', array('course'=>$course)); ?></section>
-				<section id="apply"><?php Flight::render('tabs/apply', array('course'=>$course)); ?></section>
-				<section id="info"><?php Flight::render('tabs/info', array('course'=>$course)); ?></section>
+				<section id="teaching"><?php Flight::render('ug_tabs/teaching', array('course'=>$course)); ?></section>
+				<section id="careers"><?php Flight::render('ug_tabs/careers', array('course'=>$course)); ?></section>	
+				<section id="entry"><?php Flight::render('ug_tabs/entry', array('course'=>$course)); ?></section>
+				<section id="fees"><?php Flight::render('ug_tabs/fees', array('course'=>$course)); ?></section>
+				<section id="apply"><?php Flight::render('ug_tabs/apply', array('course'=>$course)); ?></section>
+				<section id="info"><?php Flight::render('ug_tabs/info', array('course'=>$course)); ?></section>
 			</div>
 		</div><!-- /span -->
 		<div class="span5">
