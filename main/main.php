@@ -211,10 +211,25 @@ class CoursesFrontEnd {
 	public function search($level, $year, $search_type = '', $search_string = '')
 	{
 
-		$meta = array(
-			'title' => 'Advanced Course Search | Undergraduate Programmes | The University of Kent',
-			'description' => 'Search all of the undergraduate programmes offered by the University of Kent',
-		);
+		switch($level){
+			case 'postgraduate':
+				$template = 'pg_search';
+				$meta = array(
+					'title' => 'Advanced Course Search | Undergraduate Programmes | The University of Kent',
+					'description' => 'Search all of the undergraduate programmes offered by the University of Kent',
+				);
+				break;
+
+			default:
+				$template = 'ug_search';
+				$meta = array(
+					'title' => 'Advanced Course Search | Postgraduate Programmes | The University of Kent',
+					'description' => 'Search all of the postgraduate programmes offered by the University of Kent',
+				);
+				break;
+		}
+
+
 
 		Flight::setup($year, $level);
 
@@ -233,7 +248,7 @@ class CoursesFrontEnd {
 		if(isset($_GET['debug_performance'])){ inspect($programmes); }
 		
 		//Render full page
-		return Flight::layout('search', array('meta' => $meta, 'programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'search_type' => $search_type, 'search_string' => $search_string));	
+		return Flight::layout($template, array('meta' => $meta, 'programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'search_type' => $search_type, 'search_string' => $search_string));	
 		
 	}
 	/**
