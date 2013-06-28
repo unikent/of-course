@@ -34,7 +34,6 @@
         <thead>
           <tr>
             <th>Name <i class="icon-resize-vertical"></i></th>
-            <th style="width:100px">UCAS code <i class="icon-resize-vertical"></i></th>
             <th style="width:80px">Campus <i class="icon-resize-vertical"></i></th>
             <th style="width:150px">Full-time/Part-time <i class="icon-resize-vertical"></i></th>
             <th class="hide">Subject categories</th>
@@ -48,9 +47,6 @@
           <tr>
             <td>
                 <a href='<?php echo Flight::url("{$level}/{$year_for_url}{$p->id}/{$p->slug}"); ?>'><?php echo $p->name;?> - <?php echo $p->award;?></a>
-            </td>
-            <td>
-                <?php echo $p->ucas_code;?>
             </td>
             <td>
                 <?php echo $p->campus;?>

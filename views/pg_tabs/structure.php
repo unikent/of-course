@@ -3,53 +3,10 @@
 <?php echo $course->globals->modules_intro; ?>
 
 
-<?php if (! empty($course->foundation_year)): ?>
-<section class="info-section">
-	<h3>Foundation year</h3>
-	<section class="info-subsection">
-		<?php echo $course->foundation_year ?>
-		<?php echo $course->globals->foundation_year ?>
-	</section>
-</section>
-<?php endif; ?>
-<?php if (isset($course->modules->stages->{foundation})): ?>
-	<?php if (empty($course->foundation_year)): ?>
-	<h3>Foundation year</h3>
-	<?php endif; ?>
-	<?php Flight::render('partials/stage', array('stage' => $course->modules->stages->{foundation}, 'stage_id' => '0')); ?>
-<?php endif; ?>
-
-
-
 <?php if (isset($course->modules->stages->{1})): ?>
 <section class="info-section">
-	<h3>Stage 1</h3>
+	<h3>Stage ?</h3>
 	<?php Flight::render('partials/stage', array('stage' => $course->modules->stages->{1}, 'stage_id' => '1')); ?>
-</section>
-<?php endif; ?>
-
-<?php if (isset($course->modules->stages->{2})): ?>
-<section class="info-section">
-	<h3>Stage 2</h3>
-	<?php Flight::render('partials/stage', array('stage' => $course->modules->stages->{2}, 'stage_id' => '2')); ?>
-</section>
-<?php endif; ?>
-
-
-<?php if (! empty($course->year_in_industry)): ?>
-<section class="info-section">
-	<h3>Year in industry</h3>
-	<section class="info-subsection">
-		<?php echo $course->year_in_industry ?>
-		<?php echo $course->globals->year_in_industry ?>
-	</section>
-
-	<?php if (isset($course->modules->stages->{"S"})): ?>
-	<?php if (empty($course->year_in_industry)): ?>
-	<h3>Year in industry</h3>
-	<?php endif; ?>
-	<?php Flight::render('partials/stage', array('stage' => $course->modules->stages->{S}, 'stage_id' => 's')); ?>
-<?php endif; ?>
 </section>
 <?php endif; ?>
 
