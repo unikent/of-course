@@ -98,11 +98,10 @@ function( oSettings, aData, iDataIndex ) {
 
 // get each column out
 var name = $(aData[0]).html();
-var ucas_code = aData[1];
-var campus = aData[2];
-var study_mode = aData[3];
-var subject_categories = aData[4];
-var search_keywords = aData[5];
+var campus = aData[1];
+var study_mode = aData[2];
+var subject_categories = aData[3];
+var search_keywords = aData[4];
 
 if(advanced_text_search && campus_search && study_mode_search && subject_categories_search){
 
@@ -110,8 +109,7 @@ if(advanced_text_search && campus_search && study_mode_search && subject_categor
   var advanced_text_search_result = (advanced_text_search.val() == '') ? true : 
       (
         (name.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) || 
-        (search_keywords.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) || 
-        (ucas_code.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) 
+        (search_keywords.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) 
         ? true : false 
       );
   
@@ -165,10 +163,9 @@ var programme_list = $('#programme-list').dataTable({
         { "bSortable": true },
         { "bSortable": true },
         { "bSortable": true },
-        { "bSortable": true },
         { "bSortable": false },
         { "bSortable": false }
-        ]
+      ]
   });
 
 //now add appropriate event listeners to our custom search items
