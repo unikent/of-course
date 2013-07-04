@@ -155,18 +155,17 @@
 
 		// Fail mode action. Email for help?
 		if(defined("FAIL_ALERT_EMAIL") && trim(FAIL_ALERT_EMAIL) != ''){
+			$message = "
+				500 error generated from: {$data["url"]} 
+				At: ".date(DATE_RFC822)."
+				On server: ".$_SERVER["HTTP_HOST"]."
 
-$message = "
-500 error generated from: {$data["url"]} 
-At: ".date(DATE_RFC822)."
-On server: ".$_SERVER["HTTP_HOST"]."
+				Debug data:
+				".print_r($data, true)."
 
-Debug data:
-".print_r($data, true)."
-
-Error data:
-".print_r($error, true)."
-";
+				Error data:
+				".print_r($error, true)."
+			";
 
 			mail(FAIL_ALERT_EMAIL, "Of-Course: 500 error", $message);
 		}
