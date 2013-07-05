@@ -1,17 +1,26 @@
 <?php
 
-$config['siteName']				=	'Undergraduate Courses';
+$config['siteName']				=	'Daedalus';
+$config['theme']				=	'Daedalus';
 
-$config['theme']				=	'Chronos';
 
+$config['headerType']  			=	'image';
+$config['headerImage']			=	'images/design/headerImageExtended.jpg';
+$config['keyText']				=	'Some sample text here';
+$config['keyTextColour']		=	'to display online';
+
+$config['footer'] = array(
+	'author' => 'The IS Web Development Team',
+	'contact' =>'The University of Kent, Canterbury, Kent, CT2 7NZ, T: +44 (0)1227 764000',
+	'additional' => ''
+);
 
 /**
  * If there is no key text, this header image should be the full 960px
  * wide as it will extend across the whole page.
  */
  
-$config['headerType']  			=	'image';
-$config['headerImage']			=	'config/images/header_undergrad12.jpg';
+
 
 /**
  * There are two properties for key text. The second will be coloured
@@ -20,8 +29,7 @@ $config['headerImage']			=	'config/images/header_undergrad12.jpg';
  * so trial and error is required to find something which works.
  */
 
-$config['keyText']				=	'Some sample text here';
-$config['keyTextColour']		=	'to display online';
+
 
 /**
  * There are three defined colours. As a general rule, the primary
@@ -65,7 +73,8 @@ $config['cssModules']			= 	array(
 											'secondaryTextColour' => $secondaryTextColour,
 											'gradientStartColour' => $gradientStartColour,
 											'gradientEndColour' => $gradientEndColour,
-										),										
+										),
+										
 										'Gradients' => array(
 											'headerBackground' => array(
 												'orientation' => 'vertical',
@@ -96,6 +105,7 @@ $config['cssModules']			= 	array(
 												'width' => 1,
 											),
 										),
+										
 										'Polygons',
 										'Images' => array(
 											
@@ -110,55 +120,12 @@ $config['cssModules']			= 	array(
 											'breadcrumbdividerhover.gif' => 'images/design/breadcrumbdividerhover.gif',
 											'breadcrumbdividerspanhover.gif' => 'images/design/breadcrumbdividerspanhover.gif',
 											'breadcrumbdividerlast.gif' => 'images/design/breadcrumbdividerlast.gif',
-											'breadcrumbdividerlasthover.gif' => 'images/design/breadcrumbdividerlasthover.gif',
-											'Bacchus/dreamweaver/defaultBackground.jpg' => 'images/dreamweaver/background.jpg'
+											'breadcrumbdividerlasthover.gif' => 'images/design/breadcrumbdividerlasthover.gif'
 										),
 										#'Gzip',
 									);
 									
 $config['modules']				=	array(
-										'InspectorOutput',
-									    'Layout/Head/IncludeMeta' => array(
-											'pageTitleTag' => 'h1', //h1, h2 etc  ... no gt/lt symbols
-											'globalSiteKeywords' => '',
-											'globalSiteDescription' => '',
-											'siteName' => $config['siteName']  
-									    ),  
-										'Chronos/DepartmentFooter' => array(
-											'author' => 'C&DO Web Content and Editorial Team - &copy; University of Kent',
-											'contact' => 'The University of Kent, Canterbury, Kent, CT2 7NZ, T: +44 (0)1227 764000',
-											'bannerInfo' => 'Birds feeding. &copy; 2010 Josie'
-										),
-										'Snippets/ModuleCatalogueModule',
-										'Snippets/ModuleCatalogueCollection',
-										'Snippets/ModuleCatalogueSchool',
-										'Snippets/ModuleCatalogueSubject',
-										'Snippets/PGProgrammesSubject',
-										'Snippets/PGProgrammesProgramme',
-										'Snippets/PGProgrammesSearch',
-										'Snippets/PGProgrammesList',
-										'Snippets/PGProgrammes',
-										'Snippets/UGProgrammesSubject',
-										'Snippets/UGProgrammesProgramme',
-										'Snippets/UGProgrammesSearch',
-										'Snippets/UGProgrammesList',
-										'Snippets/UGProgrammes',
-										'Snippets/tagCloud',
-										'Snippets/dataGrid',
-										'Snippets/Coverflow',
-										'Snippets/HorizontalRule',
-										'Layout/Body/Analytics' => array(
-											'accountNumber' => 'UA-25298482-1'
-										),
-										'Layout/Body/AddThis' => array(
-											'text' => 'Kent.ac.uk',
-											'onclickonly' => 'false',
-											'services' => "", 
-											'enabled' => 'true'
-										),
-										'Layout/Body/GlobalSearch' => array(
-											'bgColour' => $primaryColour,
-											//'imageUrl' => 'http://preview-www.kent.ac.uk/webteamtest/chronos-template/images/site/banner.jpg',
-										//	'searchText' => 'Search kent on the web',
-										)
-									);
+										'InspectorOutput'
+									);    
+									

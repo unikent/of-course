@@ -1,7 +1,7 @@
 module.exports = function(grunt) {
 
 	grunt.loadNpmTasks('grunt-contrib-uglify');
-	grunt.loadNpmTasks('grunt-css');
+	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 
@@ -42,5 +42,5 @@ module.exports = function(grunt) {
 	});
 
 	// Default task(s).
-	grunt.registerTask('default', ['clean','uglify', 'concat', 'cssmin', 'removeconcat']);
+	grunt.registerTask('default', ['clean', 'uglify', 'concat', 'cssmin', 'removeconcat' ]);
 };
