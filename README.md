@@ -14,7 +14,7 @@ Depends upon our [Programmes Plant API PHP library](https://github.com/unikent/p
 
 3. Place where you would like it to live and rename `public/config/paths.sample.php` to `public/config/paths.php`. Set the URI of the Programmes Plant API, base path and templating engine paths inside.
  
-4. We are using our home grown (closed source) Pantheon engine. If you are using Pantheon, add a Pantheon copy the `public/config/config.sample.php` to `public/config/config.php` and fill it in, then add a Pantheon menu folder within the tree.
+4. We are using our home grown (closed source) Pantheon engine. If you are using Pantheon, copy `public/config/config.sample.php` to `public/config/config.php`. This is a file which is specific to Pantheon, and sets up some basic configuration options like the theme to use. Then add a Pantheon menu folder within the tree to allow for a left-hand navigation menu.
 
 5. Browse to the website to see the system up and running.
 
