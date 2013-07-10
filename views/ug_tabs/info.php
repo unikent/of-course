@@ -47,10 +47,10 @@
 	</section>
 	<?php endif; ?>
 
-	<?php if(!empty($course->globals->open_days)): ?>
+	<?php if(!empty($course->globals->ug_open_days)): ?>
 	<section class="info-subsection">
 	    <h4>Open days</h4>
-	    <?php echo $course->globals->open_days ?>
+	    <?php echo $course->globals->ug_open_days ?>
 	</section>
 	<?php endif; ?>
 	
