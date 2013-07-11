@@ -46,15 +46,14 @@
 		</ul>
 	</section>
 	<?php endif; ?>
-
-	<?php if(!empty($course->globals->ug_open_days)): ?>
-	<section class="info-subsection">
-	    <h4>Open days</h4>
-	    <?php echo $course->globals->ug_open_days ?>
-	</section>
-	<?php endif; ?>
-	
 </section>
+
+<?php if(!empty($course->globals->ug_open_days)): ?>
+<section class="info-section">
+    <h3>Open days</h3>
+    <?php echo $course->globals->ug_open_days ?>
+</section>
+<?php endif; ?>
 
 <?php if (!empty($course->related_courses)): ?>
 <section class="info-section">
