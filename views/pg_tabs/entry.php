@@ -48,5 +48,5 @@
 	
 	<section class="info-section">
 		<h3>General entry requirements</h3>
-		<?php echo $course->pg_general_entry_requirements ?>
+		<?php echo $course->globals->pg_general_entry_requirements ?>
 	</section>

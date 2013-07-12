@@ -96,5 +96,5 @@
 	
 	<section class="info-section">
 		<h3>General entry requirements</h3>
-		<?php echo $course->ug_general_entry_requirements ?>
+		<?php echo $course->globals->ug_general_entry_requirements ?>
 	</section>
