@@ -121,11 +121,11 @@ class CoursesFrontEnd {
 	 *
 	 * @param string $hash of preview
 	 */
-	public function preview($hash)
+	public function preview($level, $hash)
 	{
 		try
 		{
-			$course = static::$pp->get_preview_programme($hash);	
+			$course = static::$pp->get_preview_programme($level, $hash);	
 		}
 		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
 		{	
@@ -144,7 +144,9 @@ class CoursesFrontEnd {
 		if(isset($_GET['debug_performance'])){ inspect($course); }
 		
 		Flight::setup($course->year, null, true);
-		return Flight::layout('course_page', array('course'=> $course));
+
+
+		return Flight::layout($course->programme_level.'_course_page', array('course'=> $course));
 	}
 	
 	/**
