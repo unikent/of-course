@@ -43,7 +43,7 @@ Flight::route('/ajax/search/@level:undergraduate|postgraduate/@year:[0-9]+', arr
 Flight::route('/ajax/leaflets/@level:undergraduate|postgraduate/@year:[0-9]+', array($main,'ajax_leaflets_data'));
 
 // Preview
-Flight::route('/preview/@hash', array($main,'preview'));
+Flight::route('/@level:undergraduate|postgraduate/preview/@hash', array($main,'preview'));
 
 //XCRIP-CAP feed
 Flight::route('/@level:undergraduate|postgraduate/@year:[0-9]+/xcri', array($main, 'xcri_cap'));
@@ -88,9 +88,9 @@ Flight::route('/@level:undergrad|postgrad|ug|pg/@year:[0-9]+/@id:[0-9]+/@slug', 
 
 // Override base urls
 if (BASE_URL != '/')
-{
-    Flight::request()->base = BASE_URL;
-    Flight::request()->url = substr(Flight::request()->url, strlen(Flight::request()->base));
+{	
+   Flight::request()->base = BASE_URL;
+   Flight::request()->url = substr(Flight::request()->url, strlen(Flight::request()->base));
 }
 
 
