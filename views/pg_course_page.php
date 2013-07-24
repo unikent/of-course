@@ -1,4 +1,4 @@
-<article class="container">
+<article class="container pg">
 	<h1>
 		<?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?>
 		<?php if($course->subject_to_approval == 'true'){ echo "<span>(Subject to approval)</span>";} ?>
@@ -15,13 +15,13 @@
 		<div class="span12">
 			<ul class="nav nav-tabs">
 				<li><a href="#overview">Overview</a></li>
-				<li><a href="#structure">Course structure</a></li>
-				<li><a href="#teaching">Teaching &amp; Assessment</a></li>
-				<li><a href="#careers">Careers</a></li>
-				<li><a href="#entry">Entry requirements</a></li>
-				<li><a href="#fees">Fees &amp; Funding</a></li>
+				<li><a href="#structure">Programme structure</a></li>
+				<li><a href="#study-support">Study support</a></li>
+				<li><a href="#entry-requirements">Entry requirements</a></li>
+				<li><a href="#research-areas">Research areas</a></li>
+				<li><a href="#staff-research">Staff research</a></li>
+				<li><a href="#enquiries">Enquiries</a></li>
 				<li><a href="#apply">Apply</a></li>
-				<li><a href="#info">Further info</a></li>
 			</ul>
 		</div><!-- /span -->
 	</div><!-- /row -->
@@ -35,15 +35,21 @@
 				<?php else: ?>
 				<section id="structure"><?php Flight::render('pg_tabs/structure', array('course'=>$course)); ?></section>
 				<?php endif; ?>
-				<section id="teaching"><?php Flight::render('pg_tabs/teaching', array('course'=>$course)); ?></section>
-				<section id="careers"><?php Flight::render('pg_tabs/careers', array('course'=>$course)); ?></section>	
-				<section id="entry"><?php Flight::render('pg_tabs/entry', array('course'=>$course)); ?></section>
-				<section id="fees"><?php Flight::render('pg_tabs/fees', array('course'=>$course)); ?></section>
+				<section id="study-support"><?php Flight::render('pg_tabs/study-support', array('course'=>$course)); ?></section>	
+				<section id="entry-requirements"><?php Flight::render('pg_tabs/entry-requirements', array('course'=>$course)); ?></section>
+				<section id="research-areas"><?php Flight::render('pg_tabs/research-areas', array('course'=>$course)); ?></section>
+				<section id="staff-research"><?php Flight::render('pg_tabs/staff-research', array('course'=>$course)); ?></section>
+				<section id="enquiries"><?php Flight::render('pg_tabs/enquiries', array('course'=>$course)); ?></section>
 				<section id="apply"><?php Flight::render('pg_tabs/apply', array('course'=>$course)); ?></section>
-				<section id="info"><?php Flight::render('pg_tabs/info', array('course'=>$course)); ?></section>
 			</div>
 		</div><!-- /span -->
 		<div class="span5">
+
+			<div class="side-panel affix" data-spy="affix" data-offset-top="600">
+			<div class="panel admission-links">
+				<a href="#apply" class="apply-adm-link">Apply</a>, <a href="#info" class="enquire-adm-link">enquire</a> or <a href="#info" class="pros-adm-link">order a prospectus</a>
+			</div>
+
 			<aside class="key-facts-container">
 				<h2>Key facts</h2>
 				<div class="key-facts">
@@ -59,8 +65,7 @@
 							?>
 						</li>
 						<li><strong>Award:</strong> <?php echo $course->award[0]->name;?> </li>
-						<li><strong>Honours type:</strong> <?php echo $course->honours_type;?> </li>
-					
+
 						<li><strong>Location:</strong> <a href="<?php echo $course->location[0]->url;?>"><?php echo $course->location[0]->name;?></a>	</li>
 					
 						<li><strong>Mode of study:</strong> <?php echo $course->mode_of_study;?></li>
@@ -84,9 +89,11 @@
 						<?php if(!empty($course->total_ects_credits_awarded_on_completion)): ?>
 						<li><strong>Total ECTS credits:</strong> <?php echo $course->total_ects_credits_awarded_on_completion;?></li>
 						<?php endif; ?>
+
 					</ul>
 				</div>
 			</aside>
+			</div>
 		</div><!-- /span -->
 	</div><!-- /row -->
 

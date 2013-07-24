@@ -4,6 +4,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
@@ -33,7 +34,16 @@ module.exports = function(grunt) {
 				src: 'public/css/build/concat.css',
 				dest: 'public/css/build/<%= pkg.name %>.min.css'
 			}
-		}
+		},
+		watch: {
+            scripts: {
+                files: ['./public/css/courses.css'],
+                tasks: ['clean', 'uglify', 'concat', 'cssmin', 'removeconcat' ],
+                options: {
+                    nospawn: true,
+                }
+            }
+        }
 	});
 
 	grunt.registerTask('removeconcat', 'Removes concatted files', function(){
