@@ -1,4 +1,4 @@
-<h2>Course structure</h2>
+<h2>Programme structure</h2>
 
 <?php echo $course->globals->modules_intro; ?>
 

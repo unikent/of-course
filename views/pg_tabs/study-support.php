@@ -1,11 +1,9 @@
-<h2>Fees &amp; Funding</h2>
+<h2>Study support</h2>
 
-<section class="info-section">
-	<h3>Tuition fees</h3>
-	<?php echo $course->tuition_fees;?>
-</section>
+<?php echo $course->careers_and_employability ?>
+<?php echo $course->professional_recognition ?>
 
-<section class="info-section">
-	<h3>Funding </h3>
-	<?php echo $course->funding;?>
-</section>
+<div class="panel content-highlight">
+	<h4>Did you know...</h4>
+	<?php echo $course->did_you_know_fact_box ?>
+</div>

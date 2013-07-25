@@ -217,7 +217,7 @@ class CoursesFrontEnd {
 			case 'postgraduate':
 				$template = 'pg_search';
 				$meta = array(
-					'title' => 'Advanced Course Search | Undergraduate Programmes | The University of Kent',
+					'title' => 'Course list | Undergraduate Programmes | The University of Kent',
 					'description' => 'Search all of the undergraduate programmes offered by the University of Kent',
 				);
 				break;
@@ -225,7 +225,7 @@ class CoursesFrontEnd {
 			default:
 				$template = 'ug_search';
 				$meta = array(
-					'title' => 'Advanced Course Search | Postgraduate Programmes | The University of Kent',
+					'title' => 'Course list | Postgraduate Programmes | The University of Kent',
 					'description' => 'Search all of the postgraduate programmes offered by the University of Kent',
 				);
 				break;

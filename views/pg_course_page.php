@@ -44,8 +44,8 @@
 			</div>
 		</div><!-- /span -->
 		<div class="span5">
-
-			<div class="side-panel affix" data-spy="affix" data-offset-top="600">
+<!-- <div class="side-panel affix" data-spy="affix" data-offset-top="600"> -->
+			<div class="side-panel">
 			<div class="panel admission-links">
 				<a href="#apply" class="apply-adm-link">Apply</a>, <a href="#info" class="enquire-adm-link">enquire</a> or <a href="#info" class="pros-adm-link">order a prospectus</a>
 			</div>
@@ -69,9 +69,17 @@
 						<li><strong>Location:</strong> <a href="<?php echo $course->location[0]->url;?>"><?php echo $course->location[0]->name;?></a>	</li>
 					
 						<li><strong>Mode of study:</strong> <?php echo $course->mode_of_study;?></li>
-					
-						<?php if(!empty($course->duration)): ?>
-						<li><strong>Duration:</strong> <?php echo $course->duration;?></li>
+
+						<?php if(!empty($course->attendance_mode)): ?>
+						<li><strong>Attendance mode:</strong> <?php echo $course->attendance_mode;?></li>
+						<?php endif; ?>
+
+						<?php if(!empty($course->attendance_pattern)): ?>
+						<li><strong>Attendance pattern:</strong> <?php echo $course->attendance_pattern;?></li>
+						<?php endif; ?>
+
+						<?php if(!empty($course->attendance_text)): ?>
+						<li><strong>Attendance text:</strong> <?php echo $course->attendance_text;?></li>
 						<?php endif; ?>
 					
 						<?php if(!empty($course->start)): ?>
@@ -90,6 +98,8 @@
 						<li><strong>Total ECTS credits:</strong> <?php echo $course->total_ects_credits_awarded_on_completion;?></li>
 						<?php endif; ?>
 
+						<li><strong>Fees and funding:</strong> <a href="http://www.kent.ac.uk/finance-student/fees/tuition/index.html#postgraduate">Tuition fees</a>, <a href="#">funding</a> and <a href="http://www.kent.ac.uk/finance-student/fees/tuition/index.html#postgraduate">scholarships</a></li>
+
 					</ul>
 				</div>
 			</aside>
@@ -101,7 +111,7 @@
 	
 	<?php if ( ! empty($course->related_courses) ): ?>
 	<section class="related-course-section">
-		<h3>Related to this course</h3>
+		<h2>Related to this course</h2>
 		
 		<div id="myCarousel" class="carousel slide" data-interval="false">
 		  <!-- Carousel items -->
@@ -116,10 +126,9 @@
 		                <div class="cell">
 		                    <div class="mask">
 		                        <a href="<?php echo Flight::url("{$level}/{$related_course->id}/{$related_course->slug}"); ?>">
-		                        <p><?php echo $related_course->name ?></p>
-		                        <p><?php echo $related_course->award ?></p>
+		                        	<span><?php echo $related_course->name ?></span>
+		                        	<span class="related-award"><?php echo $course->award[0]->name;?></span>
 		                        </a>
-		                        
 		                    </div>
 		                </div> 
 					</div>

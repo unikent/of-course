@@ -84,11 +84,14 @@
 		</ul>
 	</section>
 	<?php endif; ?>
+	
 
-	<?php if(!empty($course->globals->open_days)): ?>
+	<?php if(!empty($course->globals->pg_open_days)): ?>
 	<section class="info-subsection">
-	    <h4>Open days</h4>
-	    <?php echo $course->globals->open_days ?>
+	    <div class="panel content-highlight">
+			<h4>Open days</h4>
+			 <?php echo $course->globals->pg_open_days ?>
+		</div>
 	</section>
 	<?php endif; ?>
 	
