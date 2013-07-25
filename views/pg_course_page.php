@@ -1,7 +1,7 @@
 <article class="container pg">
 	<h1>
-		<?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?>
-		<?php if($course->subject_to_approval == 'true'){ echo "<span>(Subject to approval)</span>";} ?>
+		<?php echo $course->programme_title; ?> <?php echo $course->award_list; ?>
+		<?php if($course->subject_to_approval == 'true'){ echo "<span>(subject to approval)</span>";} ?>
 	</h1>
 	
 	<?php if($course->programme_suspended == 'true' || $course->programme_withdrawn == 'true'): ?>
@@ -54,6 +54,13 @@
 				<h2>Key facts</h2>
 				<div class="key-facts">
 					<ul>
+						<li>
+							<?php if(!empty($course->additional_school[0])): ?>
+							<strong>Schools:</strong> <a href="<?php echo $course->url_for_administrative_school ?>"><?php echo $course->administrative_school[0]->name ?></a> | <a href="<?php echo $course->url_for_additional_school ?>"><?php echo $course->additional_school[0]->name ?></a>
+							<?php else: ?>
+							<strong>School:</strong> <a href="<?php echo $course->url_for_administrative_school ?>"><?php echo $course->administrative_school[0]->name ?></a>
+							<?php endif; ?>
+						</li>
 						<?php
 							// If there a second subject area?
 							 $second_subject = (isset($course->subject_area_2[0]) && $course->subject_area_2[0] != null);
@@ -64,7 +71,7 @@
 								echo ($second_subject) ? ' | '.$course->subject_area_2[0]->name : '';
 							?>
 						</li>
-						<li><strong>Award:</strong> <?php echo $course->award[0]->name;?> </li>
+						<li><strong>Award:</strong> <?php echo $course->award_list;?></li>
 
 						<li><strong>Location:</strong> <a href="<?php echo $course->location[0]->url;?>"><?php echo $course->location[0]->name;?></a>	</li>
 					
@@ -74,14 +81,10 @@
 						<li><strong>Attendance mode:</strong> <?php echo $course->attendance_mode;?></li>
 						<?php endif; ?>
 
-						<?php if(!empty($course->attendance_pattern)): ?>
-						<li><strong>Attendance pattern:</strong> <?php echo $course->attendance_pattern;?></li>
-						<?php endif; ?>
-
 						<?php if(!empty($course->attendance_text)): ?>
-						<li><strong>Attendance text:</strong> <?php echo $course->attendance_text;?></li>
+						<li><strong>Duration:</strong> <?php echo $course->attendance_text;?></li>
 						<?php endif; ?>
-					
+						
 						<?php if(!empty($course->start)): ?>
 						<li><strong>Start: </strong> <?php echo $course->start;?> </li>
 						<?php endif; ?>
@@ -98,7 +101,8 @@
 						<li><strong>Total ECTS credits:</strong> <?php echo $course->total_ects_credits_awarded_on_completion;?></li>
 						<?php endif; ?>
 
-						<li><strong>Fees and funding:</strong> <a href="http://www.kent.ac.uk/finance-student/fees/tuition/index.html#postgraduate">Tuition fees</a>, <a href="#">funding</a> and <a href="http://www.kent.ac.uk/finance-student/fees/tuition/index.html#postgraduate">scholarships</a></li>
+						<li><strong><a href="http://www.kent.ac.uk/courses/funding/postgraduate/index.html">Postgraduate fees and funding information</a></strong></li>
+						
 
 					</ul>
 				</div>
@@ -127,7 +131,7 @@
 		                    <div class="mask">
 		                        <a href="<?php echo Flight::url("{$level}/{$related_course->id}/{$related_course->slug}"); ?>">
 		                        	<span><?php echo $related_course->name ?></span>
-		                        	<span class="related-award"><?php echo $course->award[0]->name;?></span>
+		                        	<span class="related-award"><?php echo $related_course->award;?></span>
 		                        </a>
 		                    </div>
 		                </div> 

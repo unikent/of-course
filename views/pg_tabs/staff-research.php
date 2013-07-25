@@ -4,8 +4,10 @@
 	<?php if ( $staff->hidden == 0 ): ?>
 	<h3><?php echo $staff->title != '' ? $staff->title . ' '  : '' ?><?php echo $staff->forename ?> <?php echo $staff->surname ?><?php echo $staff->role != '' ? ': ' . $staff->role : '' ?></h3>
 	<?php if ( ! empty ($staff->profile_url) ): ?>
-	<a href="//<?php echo $staff->profile_url ?>"><?php echo $staff->profile_url ?></a>
+	<div class="staff-profile">
+		<?php echo $staff->blurb ?>
+		<a href="//<?php echo $staff->profile_url ?>">Profile</a>
+	</div>
 	<?php endif; ?>
-	<?php echo $staff->blurb ?>
 	<?php endif; ?>
 <?php endforeach; ?>

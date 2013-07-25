@@ -36,24 +36,6 @@
 			</td>
 		</tr>
 		<tr>
-			<td>Cambridge Certificate in Proficiency in English</td>
-			<td>
-			??
-			</td>
-		</tr>
-		<tr>
-		<td>Cambridge Advanced Certificate in English</td>
-		<td>
-		??
-		</td>
-		</tr>
-		<tr>
-			<td>Cambridge Certificate in Proficiency in English</td>
-			<td>
-			??
-			</td>
-		</tr>
-		<tr>
 			<td>Pearson Test of English Academic (PTE academic)</td>
 			<td>
 				<?php echo $course->pearson_test_english_language_requirements ?>

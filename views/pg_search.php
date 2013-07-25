@@ -1,10 +1,10 @@
 <?php $year_for_url = empty($year) ? '' : ((strcmp($year, CoursesFrontEnd::$current_year) == 0) ? '' : $year . '/'); ?>
 
 <div class="advanced-search">
-    <h1>Course list</h1>
+    <h1>Advanced programme search</h1>
     <div class="row-fluid advanced-search-boxes">
 
-        <input class="advanced-text-search" type="text" placeholder="Search courses" />
+        <input class="advanced-text-search" type="text" placeholder="Search postgraduate programmes" />
 
         <select class="campus-search input-large">
           <option value="">All campuses</option>
@@ -195,5 +195,5 @@ if(advanced_text_search && campus_search && study_mode_search && subject_categor
 </kentScripts>
 
 <style type='text/css'>
-@import url('<?php echo ASSET_URL ?>/css/build/of-course.min.css');
+/*@import url('<?php echo ASSET_URL ?>/css/build/of-course.min.css');*/
 </style>

@@ -40,6 +40,25 @@
 
 <section class="info-section">
 	<h3>Contacts</h3>
+
+	<?php if(!empty($course->globals->enquiries)): ?>
+		<?php echo $course->globals->enquiries ?>
+	<?php endif; ?>
+	<?php if(!empty($course->enquiries)): ?>
+		<?php echo $course->enquiries ?>
+	<?php endif; ?>
+
+	<?php if( ! empty($course->enquiries) ): ?>
+	<section class="info-subsection">
+		<h4>Enquiries</h4>
+		<?php echo $course->enquiries ?>
+	</section>
+	<?php endif; ?>
+</section>
+
+<section class="info-section">
+	<h3>Resources</h3>
+
 	<section class="info-subsection">
 		<h4>Related schools</h4>
 		<ul>
@@ -48,17 +67,11 @@
 			<li><a href="<?php echo $course->url_for_additional_school ?>"><?php echo $course->additional_school[0]->name ?></a></li>
 			<?php endif; ?>
 		</ul>
+		<h4>Graduate school</h4>
+		<ul>
+			<li><a href="<?php echo trim(strip_tags($course->globals->graduate_school)) ?>"><?php echo trim(strip_tags($course->globals->graduate_school)) ?></a></li>
+		</ul>
 	</section>
-	<?php if( ! empty($course->enquiries) ): ?>
-	<section class="info-subsection">
-		<h4>Enquiries</h4>
-		<?php echo $course->enquiries ?>
-	</section>
-<?php endif; ?>
-</section>
-
-<section class="info-section">
-	<h3>Resources</h3>
 
 	<?php if(!empty($course->subject_leaflet[0])): ?>
 	<section class="info-subsection">
@@ -73,14 +86,11 @@
 	</section>
 	<?php endif; ?>
 
-	<?php if ( ! empty($course->student_profile) || ! empty($course->student_profile_2) ): ?>
+	<?php if ( ! empty($course->student_profile) ): ?>
 	<section class="info-subsection">
 		<h4>Read our student profiles</h4>
 		<ul>
-			<li><a href="<?php echo $course->student_profile ?>"><?php echo $course->student_profile ?></a></li>
-			<?php if(!empty($course->student_profile_2)): ?>
-			<li><a href="<?php echo $course->student_profile_2 ?>"><?php echo $course->student_profile_2 ?></a></li>
-			<?php endif; ?>
+			<li><a href="<?php echo $course->student_profile ?>"><?php echo $course->student_profile_name ?></a></li>
 		</ul>
 	</section>
 	<?php endif; ?>
@@ -109,3 +119,11 @@
     </section>
 </section>
 <?php endif; ?>
+
+
+
+
+
+
+
+
