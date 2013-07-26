@@ -5,6 +5,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-contrib-less');
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
@@ -35,10 +36,30 @@ module.exports = function(grunt) {
 				dest: 'public/css/build/<%= pkg.name %>.min.css'
 			}
 		},
+
+
+		less: {
+		  development: {
+		    files: {
+		      './public/css/courses.css': './public/css/courses.less'
+		    }
+		  },
+
+		  production: {
+		    options: {
+		      yuicompress: true
+		    },
+
+		    files: {
+		      './public/css/courses.css': './public/css/courses.less'
+		    }
+		  }
+		},
+
 		watch: {
-            scripts: {
-                files: ['./public/css/courses.css'],
-                tasks: ['clean', 'uglify', 'concat', 'cssmin', 'removeconcat' ],
+            less: {
+                files: ['./public/css/courses.less'],
+                tasks: ['clean', 'uglify', 'concat', 'less:development', 'removeconcat' ],
                 options: {
                     nospawn: true,
                 }
@@ -52,5 +73,7 @@ module.exports = function(grunt) {
 	});
 
 	// Default task(s).
-	grunt.registerTask('default', ['clean', 'uglify', 'concat', 'cssmin', 'removeconcat' ]);
+	grunt.registerTask('default', [ 'watch' ]);
+	grunt.registerTask('production', ['clean', 'uglify', 'concat', 'less:production', 'removeconcat' ] )
 };
+

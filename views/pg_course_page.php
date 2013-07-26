@@ -1,7 +1,7 @@
 <article class="container pg">
 	<h1>
 		<?php echo $course->programme_title; ?> <?php echo $course->award_list; ?>
-		<?php if($course->subject_to_approval == 'true'){ echo "<span>(subject to approval)</span>";} ?>
+		<?php if($course->subject_to_approval == 'true'){ echo "(subject to approval)";} ?>
 	</h1>
 	
 	<?php if($course->programme_suspended == 'true' || $course->programme_withdrawn == 'true'): ?>
@@ -56,7 +56,7 @@
 					<ul>
 						<li>
 							<?php if(!empty($course->additional_school[0])): ?>
-							<strong>Schools:</strong> <a href="<?php echo $course->url_for_administrative_school ?>"><?php echo $course->administrative_school[0]->name ?></a> | <a href="<?php echo $course->url_for_additional_school ?>"><?php echo $course->additional_school[0]->name ?></a>
+							<strong>Schools:</strong> <a href="<?php echo $course->url_for_administrative_school ?>"><?php echo $course->administrative_school[0]->name ?></a>, <a href="<?php echo $course->url_for_additional_school ?>"><?php echo $course->additional_school[0]->name ?></a>
 							<?php else: ?>
 							<strong>School:</strong> <a href="<?php echo $course->url_for_administrative_school ?>"><?php echo $course->administrative_school[0]->name ?></a>
 							<?php endif; ?>
@@ -68,7 +68,7 @@
 						<li><strong>Subject area<?php if($second_subject) echo 's'; ?>:</strong>
 							<?php 
 								echo $course->subject_area_1[0]->name; 
-								echo ($second_subject) ? ' | '.$course->subject_area_2[0]->name : '';
+								echo ($second_subject) ? ', '.$course->subject_area_2[0]->name : '';
 							?>
 						</li>
 						<li><strong>Award:</strong> <?php echo $course->award_list;?></li>
@@ -90,7 +90,7 @@
 						<?php endif; ?>
 						
 						<?php if(!empty($course->accredited_by)): ?>
-						<li><strong>Accredited by</strong>: <?php echo $course->accredited_by;?>	</li>
+						<li><strong>Accredited by</strong>: <?php echo $course->accredited_by ?></li>
 						<?php endif; ?>
 						
 						<?php if(!empty($course->total_kent_credits_awarded_on_completion)): ?>
@@ -115,7 +115,7 @@
 	
 	<?php if ( ! empty($course->related_courses) ): ?>
 	<section class="related-course-section">
-		<h2>Related to this course</h2>
+		<h2>Related to this programme</h2>
 		
 		<div id="myCarousel" class="carousel slide" data-interval="false">
 		  <!-- Carousel items -->

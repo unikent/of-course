@@ -88,7 +88,7 @@
 
 	<?php if ( ! empty($course->student_profile) ): ?>
 	<section class="info-subsection">
-		<h4>Read our student profiles</h4>
+		<h4>Read our student profile</h4>
 		<ul>
 			<li><a href="<?php echo $course->student_profile ?>"><?php echo $course->student_profile_name ?></a></li>
 		</ul>
@@ -109,11 +109,11 @@
 
 <?php if (!empty($course->related_courses)): ?>
 <section class="info-section">
-	<h3>Related courses</h3>
+	<h3>Related programmes</h3>
     <section class="info-subsection">
 		<ul>
 		  <?php foreach ($course->related_courses as $course_obj): ?>
-		  <li><a href="<?php echo Flight::url("{$level}/{$year_for_url}{$course_obj->id}/{$course_obj->slug}"); ?>"><?php echo $course_obj->name ?></a></li>
+		  <li><a href="<?php echo Flight::url("{$level}/{$year_for_url}{$course_obj->id}/{$course_obj->slug}"); ?>"><?php echo $course_obj->name ?> <?php echo $course_obj->award ?></a></li>
 		  <?php endforeach; ?>
 		</ul>
     </section>

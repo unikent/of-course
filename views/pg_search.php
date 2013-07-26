@@ -46,7 +46,7 @@
           
           <tr>
             <td>
-                <a href='<?php echo Flight::url("{$level}/{$year_for_url}{$p->id}/{$p->slug}"); ?>'><?php echo $p->name;?> - <?php echo $p->award;?></a>
+                <a href='<?php echo Flight::url("{$level}/{$year_for_url}{$p->id}/{$p->slug}"); ?>'><?php echo $p->name;?> <?php echo $p->award;?></a>
             </td>
             <td>
                 <?php echo $p->campus;?>
@@ -193,7 +193,3 @@ if(advanced_text_search && campus_search && study_mode_search && subject_categor
 </script>
 
 </kentScripts>
-
-<style type='text/css'>
-/*@import url('<?php echo ASSET_URL ?>/css/build/of-course.min.css');*/
-</style>

@@ -201,6 +201,3 @@ if(advanced_text_search && campus_search && study_mode_search && subject_categor
 
 </kentScripts>
 
-<style type='text/css'>
-/*@import url('<?php echo ASSET_URL ?>/css/build/of-course.min.css');*/
-</style>
