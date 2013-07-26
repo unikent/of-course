@@ -15,8 +15,7 @@
 		<?php if(isset($meta) && isset($meta['canonical'])): ?>
 		<link rel="canonical" href="<?php echo $meta['canonical']; ?>" />
 		<?php endif; ?>
-
-		<link href="<?php echo ASSET_URL; ?>/css/build/of-course.min.css" type="text/css" rel="stylesheet">
+		
 		<!-- InstanceEndEditable -->
 	</kentMeta>
 	<kentContent>
