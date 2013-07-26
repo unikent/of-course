@@ -85,6 +85,13 @@ class CoursesFrontEnd {
 			}
  		}
 
+ 		// pull out awards and combine into a comma separated list
+ 		$course->award_list = '';
+ 		foreach ($course->award as $award) {
+ 			if ( ! empty($award->name) ) $course->award_list .= $award->name . ', ';
+ 		}
+ 		$course->award_list = substr($course->award_list, 0, -2); // cuts off the final comma+space
+
  		// Render programme page
  		Flight::setup($year, $level);
 
@@ -217,16 +224,16 @@ class CoursesFrontEnd {
 			case 'postgraduate':
 				$template = 'pg_search';
 				$meta = array(
-					'title' => 'Advanced Course Search | Undergraduate Programmes | The University of Kent',
-					'description' => 'Search all of the undergraduate programmes offered by the University of Kent',
+					'title' => 'Advanced programme search | Postgraduate Programmes | The University of Kent',
+					'description' => 'Search all of the postgraduate programmes offered by the University of Kent',
 				);
 				break;
 
 			default:
 				$template = 'ug_search';
 				$meta = array(
-					'title' => 'Advanced Course Search | Postgraduate Programmes | The University of Kent',
-					'description' => 'Search all of the postgraduate programmes offered by the University of Kent',
+					'title' => 'Advanced course search | Undergraduate Courses | The University of Kent',
+					'description' => 'Search all of the undergraduate courses offered by the University of Kent',
 				);
 				break;
 		}
