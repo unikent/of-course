@@ -30,7 +30,7 @@
 		<div class="span7">
 			<div class="tab-content">
 				<section id="overview"><?php Flight::render('pg_tabs/overview', array('course'=>$course)); ?></section>
-				<?php if ( empty($course->modules->stages) ) : ?>
+				<?php if ( empty($course->modules[0]->stages) ) : ?>
 				<section id="structure"><?php Flight::render('pg_tabs/structure_empty', array('course'=>$course)); ?></section>
 				<?php else: ?>
 				<section id="structure"><?php Flight::render('pg_tabs/structure', array('course'=>$course)); ?></section>
