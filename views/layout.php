@@ -15,7 +15,10 @@
 		<?php if(isset($meta) && isset($meta['canonical'])): ?>
 		<link rel="canonical" href="<?php echo $meta['canonical']; ?>" />
 		<?php endif; ?>
-		
+
+
+		<link media='screen' type='text/css' rel='stylesheet' href='<?php echo ASSET_URL ?>/css/courses.css' />
+
 		<!-- InstanceEndEditable -->
 	</kentMeta>
 	<kentContent>
