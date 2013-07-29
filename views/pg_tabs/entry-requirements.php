@@ -14,7 +14,7 @@
 </section>
 <?php endif; ?>
 
-<table class="table table-striped">
+<table class="table table-striped pg-entry-requirements">
 	<thead>
 		<tr>
 			<th>Qualification</th>
