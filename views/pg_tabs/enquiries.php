@@ -44,9 +44,6 @@
 	<?php if(!empty($course->globals->enquiries)): ?>
 		<?php echo $course->globals->enquiries ?>
 	<?php endif; ?>
-	<?php if(!empty($course->enquiries)): ?>
-		<?php echo $course->enquiries ?>
-	<?php endif; ?>
 
 	<?php if( ! empty($course->enquiries) ): ?>
 	<section class="info-subsection">
@@ -54,6 +51,8 @@
 		<?php echo $course->enquiries ?>
 	</section>
 	<?php endif; ?>
+
+
 </section>
 
 <section class="info-section">
