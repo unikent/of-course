@@ -63,6 +63,13 @@ module.exports = function(grunt) {
                 options: {
                     nospawn: true,
                 }
+            },
+            scripts: {
+            	 files: ['public/js/*.js'],
+            	 tasks: ['clean', 'uglify'],
+            	 options: {
+                    nospawn: true,
+                }
             }
         }
 	});
