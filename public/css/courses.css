@@ -4,6 +4,9 @@
 .programme-scroll-menu {
   display: none;
 }
+.scroll-to-top {
+  display: none;
+}
 /* Course page tab responcive styles */
 @media (max-width: 990px) {
   .daedalus-courses .daedalus-tabs .nav-tabs {
@@ -39,5 +42,20 @@
   .daedalus-courses .daedalus-tabs .programme-scroll-menu {
     display: block;
     width: 100%;
+  }
+}
+@media (max-width: 480px) {
+  a.scroll-to-top {
+    display: block;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: #5c5c5c;
+    border: 0;
+    opacity: 0.8;
   }
 }
