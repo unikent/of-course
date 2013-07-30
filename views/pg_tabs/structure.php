@@ -41,10 +41,10 @@
         </li>
 	<?php endforeach; ?>
 	</ul>
-	
+
 	<?php if(sizeof($other_modules) != 0): ?>
 		<div class="daedalus-show-hide show-hide minimal">
-	      	<p class="show-hide-title"><i class="icon-chevron-down"></i>Show more...</p>
+	      	<p class="show-hide-title">Show more...</p>
 	      	<div class="show-hide-content">
 	      		<ul class="unstyled"> 
 	        	<?php foreach($other_modules as $module): ?>
