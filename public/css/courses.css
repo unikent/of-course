@@ -1,3 +1,43 @@
 .pg-entry-requirements td p {
   margin-bottom: 0px;
 }
+.programme-scroll-menu {
+  display: none;
+}
+/* Course page tab responcive styles */
+@media (max-width: 990px) {
+  .daedalus-courses .daedalus-tabs .nav-tabs {
+    border-bottom: 0;
+  }
+  .daedalus-courses .daedalus-tabs .nav-tabs li {
+    width: 25%;
+    border: 0;
+  }
+  .daedalus-courses .daedalus-tabs .nav-tabs li a {
+    border: solid 1px #eee;
+    margin-bottom: 3px;
+    padding-right: 0;
+    padding-left: 0;
+    text-align: center;
+  }
+  .daedalus-courses .daedalus-tabs .nav-tabs li.active a {
+    background-color: #eeeeee;
+  }
+}
+@media (max-width: 700px) {
+  .daedalus-courses .daedalus-tabs .nav-tabs li {
+    width: 33%;
+  }
+}
+@media (max-width: 480px) {
+  .daedalus-courses .daedalus-tabs .nav-tabs {
+    display: block;
+  }
+  .daedalus-courses .daedalus-tabs .nav-tabs li {
+    display: none;
+  }
+  .daedalus-courses .daedalus-tabs .programme-scroll-menu {
+    display: block;
+    width: 100%;
+  }
+}
