@@ -4,7 +4,7 @@
 
 <?php
 	// get modules from all deliveries as unique lists
-	$full_module_list = array(); 
+	$module_list = array(); 
 
 	foreach($course->modules as $delivery_modules){
 		foreach($delivery_modules->stages as $stage){
@@ -14,7 +14,7 @@
 						//skip blanks
 						if($module->module_code=='')continue;
 						// index on module code, so duplicates will just overwrite each other
-						$full_module_list[$module->module_code] = $module;
+						$module_list[$module->module_code] = $module;
 					}
 				}
 			}
@@ -24,8 +24,14 @@
 
 ?>
 
-	<ul class="unstyled">  
-	<?php foreach($full_module_list as $module): ?>
+	 
+	<?php 
+		$show_count = 10;
+		$first_modules = array_slice($module_list, 0, $show_count);
+		$other_modules = array_slice($module_list, $show_count);
+	?>
+	<ul class="unstyled"> 
+	<?php foreach($first_modules as $module): ?>
 		<li>
             <span class="btn btn-link module-collapse" data-toggle="collapse" data-target="#module-more-info-<?php echo $module->module_code ?>-<?php echo $stage_id ?>"><i class="icon-plus-sign"></i> <?php echo $module->module_code ?> - <?php echo $module->module_title ?></span>  
             <div id="module-more-info-<?php echo $module->module_code ?>-<?php echo $stage_id ?>" class="collapse module-synopsis"><p><?php echo $module->synopsis ?></p>
@@ -35,6 +41,28 @@
         </li>
 	<?php endforeach; ?>
 	</ul>
+	
+	<?php if(sizeof($other_modules) != 0): ?>
+		<div class="daedalus-show-hide show-hide minimal">
+	      	<p class="show-hide-title"><i class="icon-chevron-down"></i>Show more...</p>
+	      	<div class="show-hide-content">
+	      		<ul class="unstyled"> 
+	        	<?php foreach($other_modules as $module): ?>
+					<li>
+			            <span class="btn btn-link module-collapse" data-toggle="collapse" data-target="#module-more-info-<?php echo $module->module_code ?>-<?php echo $stage_id ?>"><i class="icon-plus-sign"></i> <?php echo $module->module_code ?> - <?php echo $module->module_title ?></span>  
+			            <div id="module-more-info-<?php echo $module->module_code ?>-<?php echo $stage_id ?>" class="collapse module-synopsis"><p><?php echo $module->synopsis ?></p>
+			            <p><strong>Credits:</strong> <?php echo $module->credit_amount ?> credits (<?php echo $module->ects_credit ?> ECTS credits).</p>
+			            <p class="module-read-more"><a href="http://www.kent.ac.uk/courses/modulecatalogue/modules/<?php echo $module->module_code ?>">Read more <i class="icon-arrow-right"></i></a></p>
+			            </div>
+			        </li>
+				<?php endforeach; ?>
+				</ul>
+	      	</div>
+	    </div>
+	<?php endif; ?>
+	
+	
+
 
 
 
