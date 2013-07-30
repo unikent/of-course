@@ -34,6 +34,11 @@
 
               <?php echo $content; ?>
 
+
+              <a href='#' onclick= "$('html, body').scrollTop();" class='scroll-to-top'>
+             	 <i class="icon-chevron-up icon-white"></i>
+              </a>
+
 		<!-- InstanceEndEditable -->
 	</kentContent>	
 	<kentScripts>
