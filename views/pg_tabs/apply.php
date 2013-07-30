@@ -1,5 +1,14 @@
 <div class="panel admissions">
 	<h2>Apply</h2>
+
+
+	<?php if(!empty($course->how_to_apply)):
+	// if how_to_apply (subject to approval) is set, show message instead of apply links
+	?>
+		<?php echo $course->how_to_apply; ?>
+		
+	<?php else: ?>
+
 	
 	<!-- <p>I would like to apply for Archaeology and Anthropology</p> -->
 	
@@ -33,5 +42,5 @@
 	-->
 	</form>
 	
-	
+	<?php endif; ?>
 </div>
