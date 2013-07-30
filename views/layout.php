@@ -36,5 +36,9 @@
 
 		<!-- InstanceEndEditable -->
 	</kentContent>	
+	<kentScripts>
+		<script type="text/javascript" charset="utf8" src="//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.1/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" charset="utf-8" language="javascript" src="<?php echo ASSET_URL ?>/js/build/of-course.min.js"></script>
+	</kentScripts>
 </kentWrapper>	
 <!-- InstanceEnd -->
