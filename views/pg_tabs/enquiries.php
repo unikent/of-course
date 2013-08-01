@@ -42,17 +42,14 @@
 	<h3>Contacts</h3>
 
 	<?php if(!empty($course->globals->enquiries)): ?>
+		<h4>Admissions enquiries</h4>
 		<?php echo $course->globals->enquiries ?>
 	<?php endif; ?>
 
 	<?php if( ! empty($course->enquiries) ): ?>
-	<section class="info-subsection">
-		<h4>Enquiries</h4>
+		<h4>Subject enquiries</h4>
 		<?php echo $course->enquiries ?>
-	</section>
 	<?php endif; ?>
-
-
 </section>
 
 <section class="info-section">
