@@ -245,7 +245,7 @@ class CoursesFrontEnd {
 		try {
 			$programmes = static::$pp->get_programmes_index($year, $level);//5 minute cache
 	    	$campuses = static::$pp->get_campuses();
-	    	$subject_categories = static::$pp->get_subjectcategories();
+	    	$subject_categories = static::$pp->get_subjectcategories($level);
 		}
 		catch(\Exception $e)
 		{
@@ -300,9 +300,10 @@ class CoursesFrontEnd {
 	 */
 	public function ajax_subjects_page($level, $year)
 	{
+
 		try
 		{
-			$subjects = static::$pp->get_subjectcategories();
+			$subjects = static::$pp->get_subjectcategories($level);
 		}
 		catch(\Exception $e)
 		{
