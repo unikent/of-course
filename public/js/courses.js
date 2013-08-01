@@ -15,4 +15,12 @@ $(document).ready(function(){
 	// Add class & add to page
 	select_tmp.addClass("programme-scroll-menu");
 	$(".daedalus-tabs .nav-tabs").append(select_tmp);
+
+	/**
+	 * Module showhide
+	 */
+	$('.module-collapse').click(function() {
+	  $(this).find('i').toggleClass('icon-plus-sign').toggleClass('icon-minus-sign');
+	});
 }); 
+
