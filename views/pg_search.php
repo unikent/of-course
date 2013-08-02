@@ -22,34 +22,34 @@
 
         <div class="advanced-search-filters">
 
-          <select class="campus-search input-medium">
+          <select class="campus-search input-medium <?php if(strcmp($search_type, 'campus')  == 0) echo 'highlighted'; ?>">
             <option value="">All campuses</option>
             <option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Canterbury'))  == 0) echo 'selected'; ?>>Canterbury</option>
             <option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Medway'))  == 0) echo 'selected'; ?>>Medway</option>
           </select>
         
-          <select class="study-mode-search input-medium">
+          <select class="study-mode-search input-medium <?php if(strcmp($search_type, 'study_mode')  == 0) echo 'highlighted'; ?>">
             <option value="">All study modes</option>
             <option <?php if(strcmp($search_type, 'study_mode')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Full-time only'))  == 0) echo 'selected'; ?>>Full-time only</option>
             <option <?php if(strcmp($search_type, 'study_mode')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Part-time only'))  == 0) echo 'selected'; ?>>Part-time only</option>
             <option <?php if(strcmp($search_type, 'study_mode')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Full-time or part-time'))  == 0) echo 'selected'; ?>>Full-time or part-time</option>
           </select>
         
-          <select class="subject-categories-search input-large">
+          <select class="subject-categories-search input-large <?php if(strcmp($search_type, 'subject_category')  == 0) echo 'highlighted'; ?>">
             <option value="">All subject categories</option>
             <?php foreach($subject_categories as $sc): ?>
             <option <?php if(strcmp($search_type, 'subject_category')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower($sc->name))  == 0) echo 'selected'; ?>><?php echo $sc->name?></option>
             <?php endforeach; ?>
           </select>
 
-          <select class="award-search input-medium">
+          <select class="award-search input-medium <?php if(strcmp($search_type, 'award')  == 0) echo 'highlighted'; ?>">
             <option value="">All awards</option>
             <?php foreach($awards as $award): ?>
             <option <?php if(strcmp($search_type, 'award')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower($award))  == 0) echo 'selected'; ?>><?php echo $award ?></option>
             <?php endforeach; ?>
           </select>
 
-          <select class="programme-type-search input-medium">
+          <select class="programme-type-search input-medium <?php if(strcmp($search_type, 'programme_type')  == 0) echo 'highlighted'; ?>">
             <option value="">All course types</option>
             <option <?php if(strcmp($search_type, 'programme_type') == 0  && strcmp(urldecode(strtolower($search_string)), 'research') == 0) echo 'selected'; ?>>Research</option>
             <option <?php if(strcmp($search_type, 'programme_type') == 0  && strcmp(urldecode(strtolower($search_string)), 'taught') == 0) echo 'selected'; ?>>Taught</option>
@@ -230,22 +230,27 @@ $(document).ready(function(){
 
       campus_search.change(function(){
         programme_list.fnDraw();
+        $(this).toggleClass("highlighted");
       });
 
       study_mode_search.change(function(){
         programme_list.fnDraw();
+        $(this).toggleClass("highlighted");
       });
 
       subject_categories_search.change(function(){
         programme_list.fnDraw();
+        $(this).toggleClass("highlighted");
       });
 
       award_search.change(function(){
         programme_list.fnDraw();
+        $(this).toggleClass("highlighted");
       });
 
       programme_type_search.change(function(){
         programme_list.fnDraw();
+        $(this).toggleClass("highlighted");
       });
 
     }
