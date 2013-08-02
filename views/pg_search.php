@@ -18,6 +18,8 @@
 
         <input class="advanced-text-search" type="text" placeholder="Filter by keyword" />
 
+        <div id="advanced-text-search-hint-box" class="visible-phone"><span id="advanced-text-search-hint" class="hide"><a href="#programme-list">Results filtered below...</a></span></div>
+
         <div class="advanced-search-filters">
 
           <select class="campus-search input-medium">
@@ -214,36 +216,53 @@ $(document).ready(function(){
         ]
     });
 
-  //now add appropriate event listeners to our custom search items
-  if(advanced_text_search && campus_search && study_mode_search && subject_categories_search && award_search && programme_type_search){
-    
-    advanced_text_search.keyup(function() {
-      programme_list.fnDraw();
-    });
+    //now add appropriate event listeners to our custom search items
+    if(advanced_text_search && campus_search && study_mode_search && subject_categories_search && award_search && programme_type_search){
+      
+      advanced_text_search.keyup(function() {
+        programme_list.fnDraw();
+        /* show/hide the search hint when the input box is empty */
+        $("#advanced-text-search-hint").show();
+        if( $(this).val().length == 0 ) {
+          $("#advanced-text-search-hint").hide();
+        }
+      });
 
-    campus_search.change(function(){
-      programme_list.fnDraw();
-    });
+      campus_search.change(function(){
+        programme_list.fnDraw();
+      });
 
-    study_mode_search.change(function(){
-      programme_list.fnDraw();
-    });
+      study_mode_search.change(function(){
+        programme_list.fnDraw();
+      });
 
-    subject_categories_search.change(function(){
-      programme_list.fnDraw();
-    });
+      subject_categories_search.change(function(){
+        programme_list.fnDraw();
+      });
 
-    award_search.change(function(){
-      programme_list.fnDraw();
-    });
+      award_search.change(function(){
+        programme_list.fnDraw();
+      });
 
-    programme_type_search.change(function(){
-      programme_list.fnDraw();
-    });
+      programme_type_search.change(function(){
+        programme_list.fnDraw();
+      });
 
-  }
+    }
+
+    /* fades the scroll to top button in and out as you scroll away from/near to the top of the page */
+    $(window).bind('scroll', function(){
+      if($(this).scrollTop() > 650) {
+          $(".scroll-to-top").fadeIn();
+      }
+      if($(this).scrollTop() < 650) {
+          $(".scroll-to-top").fadeOut();
+      }
+    });
 
   });
+
+
 });
 
 
