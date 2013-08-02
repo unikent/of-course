@@ -148,6 +148,19 @@
 		  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
 		  <?php endif; ?>
 		</div>
+
+		<ul class="related-course-list">
+		<?php foreach($course->related_courses as $related_course): ?>
+                    <li>
+                    <a href="<?php echo Flight::url("{$level}/{$related_course->id}/{$related_course->slug}"); ?>">
+                    	<span><?php echo $related_course->name ?></span>
+                    	<span class="related-award"><?php echo $related_course->award;?></span>
+                    </a>
+                    </li>
+		<?php endforeach; ?>
+		</ul>
+
+
 	
 	</section>
 	<?php endif; ?>
