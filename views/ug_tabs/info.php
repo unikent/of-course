@@ -77,6 +77,6 @@
 		</div>
 	</div>
 	<div class="span5">
-		<iframe id="unistats-widget-frame" title="Unistats KIS Widget" src="http://widget.unistats.ac.uk/Widget/<?php echo $course->globals->ukprn ?>/<?php echo str_replace(array('/', '|', ':', '&', '.', '>', '+', '#', ';', '?', '@', '='), '_', $course->kiscourseid); ?>/vertical/small/en-GB" style="overflow: hidden; border: 0px none transparent; width: 190px; height: 500px;"> </iframe>
+		<iframe id="unistats-widget-frame" title="Unistats KIS Widget" src="http://stg.unistats.eduserv.org.uk//Widget/<?php echo $course->globals->ukprn ?>/<?php echo str_replace(array('/', '|', ':', '&', '.', '>', '+', '#', ';', '?', '@', '='), '_', $course->kiscourseid); ?>/vertical/small/en-GB" scrolling="no" style="overflow: hidden; border: 0px none transparent; width: 190px; height: 500px;"> </iframe>
 	</div>
 </div>
