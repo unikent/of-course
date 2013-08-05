@@ -2,18 +2,11 @@
 	<h2>Apply</h2>
 
 
-	<?php if(!empty($course->how_to_apply)):
-	// if how_to_apply (subject to approval) is set, show message instead of apply links
-	?>
-		<?php echo $course->how_to_apply; ?>
-		
-	<?php else: ?>
-
-	
-	<!-- <p>I would like to apply for Archaeology and Anthropology</p> -->
-	
-  
-    
+	<?php if(!empty($course->how_to_apply)): ?>
+		<div class="apply-details">
+			<?php echo $course->how_to_apply; ?>
+		</div>
+	<?php endif; ?>
 	<form>
 	
 	<div class="form-row">	
@@ -36,11 +29,7 @@
 	
 
 	<a href="#" class="apply-link">Apply for <strong>Anthropology</strong> <span id="apply-award-link">MA</span> - <span id="apply-type-link">Full time</span></a>
-	
-	<!--
-	<input type="submit" value="Apply for Archaeology and Anthropology BA (Hons) - Full time"/>
-	-->
+
 	</form>
 	
-	<?php endif; ?>
 </div>

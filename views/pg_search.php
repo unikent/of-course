@@ -230,28 +230,38 @@ $(document).ready(function(){
 
       campus_search.change(function(){
         programme_list.fnDraw();
-        $(this).toggleClass("highlighted");
+        highlight($(this));
       });
 
       study_mode_search.change(function(){
         programme_list.fnDraw();
-        $(this).toggleClass("highlighted");
+        highlight($(this));
       });
 
       subject_categories_search.change(function(){
         programme_list.fnDraw();
-        $(this).toggleClass("highlighted");
+        highlight($(this));
       });
 
       award_search.change(function(){
         programme_list.fnDraw();
-        $(this).toggleClass("highlighted");
+        highlight($(this));
       });
 
       programme_type_search.change(function(){
         programme_list.fnDraw();
-        $(this).toggleClass("highlighted");
+        highlight($(this));
       });
+
+      function highlight(obj) {
+        if ( obj.children().first().text() != $("option:selected", obj).text() ) {
+           obj.addClass("highlighted");
+        }
+        else {
+          obj.removeClass("highlighted");
+        }
+        return true;
+      }
 
     }
 
@@ -269,14 +279,6 @@ $(document).ready(function(){
 
 
 });
-
-
-$('select').change(function() {
-    $('option').css('background', 'none');
-    $('option:selected').css('backgroundColor', 'red');
-    console.log('adsfadsf');
-}).change();
-
 
 </script>
 
