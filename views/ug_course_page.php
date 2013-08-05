@@ -44,6 +44,12 @@
 			</div>
 		</div><!-- /span -->
 		<div class="span5">
+
+			<div class="side-panel">
+			<div class="panel admission-links">
+				<a href="#" onclick="pantheon.show_tab('apply');" class="apply-adm-link">Apply</a>, <a href="#" onclick="pantheon.show_tab('enquiries');" class="enquire-adm-link">enquire</a> or <a href="#" onclick="pantheon.show_tab('enquiries');" class="pros-adm-link">order a prospectus</a>
+			</div>
+
 			<aside class="key-facts-container">
 				<h2>Key facts</h2>
 				<div class="key-facts">
@@ -91,6 +97,7 @@
 					</ul>
 				</div>
 			</aside>
+			</div>
 		</div><!-- /span -->
 	</div><!-- /row -->
 
@@ -98,7 +105,7 @@
 	
 	<?php if ( ! empty($course->related_courses) ): ?>
 	<section class="related-course-section">
-		<h3>Related to this course</h3>
+		<h2>Related to this course</h2>
 		
 		<div id="myCarousel" class="carousel slide" data-interval="false">
 		  <!-- Carousel items -->
@@ -113,10 +120,9 @@
 		                <div class="cell">
 		                    <div class="mask">
 		                        <a href="<?php echo Flight::url("{$level}/{$related_course->id}/{$related_course->slug}"); ?>">
-		                        <p><?php echo $related_course->name ?></p>
-		                        <p><?php echo $related_course->award ?></p>
+		                        	<span><?php echo $related_course->name ?></span>
+		                        	<span class="related-award"><?php echo $related_course->award;?></span>
 		                        </a>
-		                        
 		                    </div>
 		                </div> 
 					</div>
@@ -132,6 +138,17 @@
 		  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
 		  <?php endif; ?>
 		</div>
+
+		<ul class="related-course-list">
+		<?php foreach($course->related_courses as $related_course): ?>
+                    <li>
+                    <a href="<?php echo Flight::url("{$level}/{$related_course->id}/{$related_course->slug}"); ?>">
+                    	<span><?php echo $related_course->name ?></span>
+                    	<span class="related-award"><?php echo $related_course->award;?></span>
+                    </a>
+                    </li>
+		<?php endforeach; ?>
+		</ul>
 	
 	</section>
 	<?php endif; ?>

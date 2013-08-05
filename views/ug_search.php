@@ -205,21 +205,30 @@ $(document).ready(function(){
 
       campus_search.change(function(){
         programme_list.fnDraw();
-        $(this).toggleClass("highlighted");
+        highlight($(this));
       });
 
       study_mode_search.change(function(){
         programme_list.fnDraw();
-        $(this).toggleClass("highlighted");
+        highlight($(this));
       });
 
       subject_categories_search.change(function(){
         programme_list.fnDraw();
-        $(this).toggleClass("highlighted");
+        highlight($(this));
       });
 
-    }
+      function highlight(obj) {
+        if ( obj.children().first().text() != $("option:selected", obj).text() ) {
+           obj.addClass("highlighted");
+        }
+        else {
+          obj.removeClass("highlighted");
+        }
+        return true;
+      }
 
+    }
     /* fades the scroll to top button in and out as you scroll away from/near to the top of the page */
     $(window).bind('scroll', function(){
       if($(this).scrollTop() > 650) {
