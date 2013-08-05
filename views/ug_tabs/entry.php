@@ -1,5 +1,5 @@
 
-  <h2>Entry requirements</h2>
+ <h2>Entry requirements</h2>
   <?php if(!empty($course->entry_profile)): ?>
   	<?php echo $course->entry_profile;?>
   <?php endif; ?>
@@ -10,7 +10,7 @@
 		<?php echo $course->homeeu_students_intro_text;?>
 		
 		
-		<table class="table">
+		<table class="table table-striped ug-entry-requirements">
 			<thead>
 		      <tr>
 		        <th>Qualification</th>
@@ -68,7 +68,7 @@
 	<section class="info-section">
     <h3>International students<a href="/courses/undergrad/apply/entry.html"></a></h3>
     <?php echo $course->international_students_intro_text ?>
-    <table class="table">
+    <table class="table table-striped ug-entry-requirements">
 	<thead>
       <tr>
         <th>Qualification</th>
