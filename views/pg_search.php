@@ -80,7 +80,7 @@
           
           <tr>
             <td>
-                <div class="advanced-search-name-award"><a href='<?php echo Flight::url("{$level}/{$year_for_url}{$p->id}/{$p->slug}"); ?>'><?php echo $p->name;?></a><br /><span class="advanced-search-award"><?php echo $p->award;?></span></div>
+                <div class="advanced-search-name-award"><a href='<?php echo Flight::url("{$level}/{$year_for_url}{$p->id}/{$p->slug}"); ?>'><?php echo $p->name;?> <?php if($p->subject_to_approval == 'true'){ echo "(subject to approval)";} ?></a><br /><span class="advanced-search-award"><?php echo $p->award;?></span></div>
             </td>
             <td>
                 <?php echo ucwords($p->programme_type);?>
