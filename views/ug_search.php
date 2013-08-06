@@ -65,7 +65,7 @@
           
           <tr>
             <td>
-                <a href='<?php echo Flight::url("{$level}/{$year_for_url}{$p->id}/{$p->slug}"); ?>'><?php echo $p->name;?></a><br /><span class="advanced-search-award"><?php echo $p->award;?></span>
+                <a href='<?php echo Flight::url("{$level}/{$year_for_url}{$p->id}/{$p->slug}"); ?>'><?php echo $p->name;?> <?php if($p->subject_to_approval == 'true'){ echo "(subject to approval)";} ?></a><br /><span class="advanced-search-award"><?php echo $p->award;?></span>
             </td>
             <td>
                 <?php echo $p->ucas_code;?>
