@@ -80,13 +80,21 @@
           
           <tr>
             <td>
-                <div class="advanced-search-name-award"><a href='<?php echo Flight::url("{$level}/{$year_for_url}{$p->id}/{$p->slug}"); ?>'><?php echo $p->name;?></a><br /><span class="advanced-search-award"><?php echo $p->award;?></span></div>
+                <div class="advanced-search-name-award"><a href='<?php echo Flight::url("{$level}/{$year_for_url}{$p->id}/{$p->slug}"); ?>'><?php echo $p->name;?> <?php if($p->subject_to_approval == 'true'){ echo "(subject to approval)";} ?></a><br /><span class="advanced-search-award"><?php echo $p->award;?></span></div>
             </td>
             <td>
                 <?php echo ucwords($p->programme_type);?>
             </td>
             <td>
-                <?php echo $p->campus;?>
+                <?php if ($p->additional_locations != ''): ?>
+                  <?php if ( strstr($p->additional_locations, ',') ): ?>
+                    <?php echo $p->campus.', '.$p->additional_locations ?>
+                  <?php else: ?>
+                    <?php echo $p->campus.' and '.$p->additional_locations ?>
+                  <?php endif ?>
+                <?php else: ?>
+                  <?php echo $p->campus ?>
+                <?php endif ?>
             </td>
             <td>
                 <?php echo $p->mode_of_study;?>

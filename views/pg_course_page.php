@@ -74,7 +74,25 @@
 						</li>
 						<li><strong>Award:</strong> <?php echo $course->award_list;?></li>
 
-						<li><strong>Location:</strong> <a href="<?php echo $course->location[0]->url;?>"><?php echo $course->location[0]->name;?></a>	</li>
+						<li><strong>Location:</strong>
+
+						<?php
+							$locations = "<a href='$course->location[0]->url'>".$course->location[0]->name."</a>";
+							$additional_locations = '';
+
+							foreach ($course->additional_locations as $key=>$additional_location) {
+								if ($additional_location != '') {
+									if ( $key == (sizeof($course->additional_locations)-1) ) {
+										$additional_locations .= " and <a href='$additional_location->url'>$additional_location->name</a>";
+									}
+									else {
+										$additional_locations .= ", <a href='$additional_location->url'>$additional_location->name</a>";
+									}
+								}
+							}
+						?>
+						<?php echo $locations.$additional_locations ?>
+						</li>
 					
 						<li><strong>Mode of study:</strong> <?php echo $course->mode_of_study;?></li>
 
