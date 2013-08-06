@@ -1,7 +1,7 @@
 <h2>Staff research interests</h2>
 <?php echo $course->staff_research_interests_intro ?>
 
-<p>Full details of staff research interests can be found on the School's website.</p>
+<p>Full details of staff research interests can be found on the <a href='<?php echo $course->school_website; ?>'>School's website</a>.</p>
 
 <?php foreach ( $course->staff_research_interests as $staff ): ?>
 	<?php if ( $staff->hidden == 0 ): ?>
