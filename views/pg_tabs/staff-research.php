@@ -1,8 +1,8 @@
 <h2>Staff research interests</h2>
 <?php echo $course->staff_research_interests_intro ?>
 
-<?php if(!empty($course->school_website)): ?>
-	<p>Full details of staff research interests can be found on the <a href='<?php echo $course->school_website; ?>'>School's website</a>.</p>
+<?php if(!empty($course->staff_profiles)): ?>
+	<p>Full details of staff research interests can be found on the <a href='<?php echo $course->staff_profiles; ?>'>School's website</a>.</p>
 <?php endif; ?>
 
 <?php foreach ( $course->staff_research_interests as $staff ): ?>
