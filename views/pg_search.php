@@ -86,7 +86,15 @@
                 <?php echo ucwords($p->programme_type);?>
             </td>
             <td>
-                <?php echo $p->campus;?>
+                <?php if ($p->additional_locations != ''): ?>
+                  <?php if ( strstr($p->additional_locations, ',') ): ?>
+                    <?php echo $p->campus.', '.$p->additional_locations ?>
+                  <?php else: ?>
+                    <?php echo $p->campus.' and '.$p->additional_locations ?>
+                  <?php endif ?>
+                <?php else: ?>
+                  <?php echo $p->campus ?>
+                <?php endif ?>
             </td>
             <td>
                 <?php echo $p->mode_of_study;?>
