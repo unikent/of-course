@@ -21,5 +21,3 @@
 	<?php echo $course->did_you_know_fact_box ?>
 </div>
 
-<?php echo $course->globals->careersemployability_text ?>
-
