@@ -57,9 +57,9 @@
 					<ul>
 						<li>
 							<?php if(!empty($course->additional_school[0])): ?>
-							<strong>Schools:</strong> <a href="<?php echo $course->url_for_administrative_school ?>"><?php echo $course->administrative_school[0]->name ?></a>, <a href="<?php echo $course->url_for_additional_school ?>"><?php echo $course->additional_school[0]->name ?></a>
+							<strong>Schools:</strong> <a href="<?php echo $course->school_website ?>"><?php echo $course->administrative_school[0]->name ?></a>, <a href="<?php echo $course->url_for_additional_school ?>"><?php echo $course->additional_school[0]->name ?></a>
 							<?php else: ?>
-							<strong>School:</strong> <a href="<?php echo $course->url_for_administrative_school ?>"><?php echo $course->administrative_school[0]->name ?></a>
+							<strong>School:</strong> <a href="<?php echo $course->school_website ?>"><?php echo $course->administrative_school[0]->name ?></a>
 							<?php endif; ?>
 						</li>
 						<?php
