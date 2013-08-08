@@ -9,7 +9,7 @@
 
 <?php if(!empty($course->english_language_requirements_intro_text)): ?>
 <section class="info-section">
-	<h3>English entry requirements</h3>
+	<h3>English language entry requirements</h3>
 	<?php echo $course->english_language_requirements_intro_text ?>
 </section>
 <?php endif; ?>
