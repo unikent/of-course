@@ -1,6 +1,6 @@
 <h2>Programme structure</h2>
 
-<?php echo $course->globals->modules_intro; ?>
+<?php echo $course->modules_intro; ?>
 
 <?php
 	// get modules from all deliveries as unique lists
