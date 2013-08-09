@@ -131,6 +131,9 @@ $(document).ready(function(){
         (
           (name.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) || 
           (search_keywords.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) || 
+          (study_mode.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) || 
+          (campus.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) || 
+          (subject_categories.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) || 
           (ucas_code.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1)
           ? true : false 
         );
