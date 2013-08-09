@@ -281,25 +281,32 @@ class CoursesFrontEnd {
 	 */
 	public function ajax_search_data($level, $year)
 	{
-		$out = array();
+		// Cache json output for a minute or so (go faster!)
+		$output = Cache::get("courses-daedalus-search-json", function() use ($level, $year) {
 
-		try{
-			$js = static::$pp->get_programmes_index($year, $level);
-		}
-		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
-		{
-			return Flight::halt(501, "Fatal error in getting programmes index.");
-		}
-		catch(\Exception $e)
-		{
-			// Another error.
-			echo "{'error':'Unable to load data.'}";
-		}
+			try
+			{
+				$js = static::$pp->get_programmes_index($year, $level);
+			}
+			catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
+			{
+				return false; 
+			}
+			catch(\Exception $e)
+			{
+				// Another error.
+				return "{'error':'Unable to load data.'}";
+			}
+
+			return json_encode($js);
+
+		}, 2);
+
+		if($out === false) Flight::halt(501, "Fatal error in getting programmes index.");
 
 		// Try & cache
-		Flight::cachecheck();
 
-		echo json_encode($js);
+		echo $output;
 	}
 
 	/**
