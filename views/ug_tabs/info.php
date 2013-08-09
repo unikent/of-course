@@ -70,13 +70,14 @@
 
 <div class="row-fluid kiss-widget-section">
 	<div class="span7">
-		<div class="well">
+		<div class="panel kis-info">
 			<h3>UNISTATS / KIS</h3>
 			<h4>Key Information Sets</h4>
 			<?php echo $course->kis_explanatory_textarea ?>
 		</div>
 	</div>
 	<div class="span5">
-		<iframe id="unistats-widget-frame" title="Unistats KIS Widget" src="http://stg.unistats.eduserv.org.uk//Widget/<?php echo $course->globals->ukprn ?>/<?php echo str_replace(array('/', '|', ':', '&', '.', '>', '+', '#', ';', '?', '@', '='), '_', $course->kiscourseid); ?>/vertical/small/en-GB" scrolling="no" style="overflow: hidden; border: 0px none transparent; width: 190px; height: 500px;"> </iframe>
+		<?php $ukprn = (isset($course->kis_institution_id) && $course->kis_institution_id != '') ? $course->kis_institution_id : $course->globals->ukprn; ?>
+		<iframe class="pull-right" id="unistats-widget-frame" title="Unistats KIS Widget" src="http://stg.unistats.eduserv.org.uk/Widget/<?php echo $ukprn ?>/<?php echo str_replace(array('/', '|', ':', '&', '.', '>', '+', '#', ';', '?', '@', '='), '_', $course->kiscourseid); ?>/vertical/small/en-GB" scrolling="no" style="overflow: hidden; border: 0px none transparent; width: 190px; height: 500px;"> </iframe>
 	</div>
 </div>

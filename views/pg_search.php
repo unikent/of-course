@@ -26,6 +26,11 @@
             <option value="">All campuses</option>
             <option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Canterbury'))  == 0) echo 'selected'; ?>>Canterbury</option>
             <option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Medway'))  == 0) echo 'selected'; ?>>Medway</option>
+            <option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Paris'))  == 0) echo 'selected'; ?>>Paris</option>
+            <option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Rome'))  == 0) echo 'selected'; ?>>Rome</option>
+            <option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Brussels'))  == 0) echo 'selected'; ?>>Brussels</option>
+            <option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Athens'))  == 0) echo 'selected'; ?>>Athens</option>
+            <option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('KSS Dental Deanery'))  == 0) echo 'selected'; ?>>KSS Dental Deanery</option>
           </select>
         
           <select class="study-mode-search input-medium <?php if(strcmp($search_type, 'study_mode')  == 0) echo 'highlighted'; ?>">
@@ -80,13 +85,21 @@
           
           <tr>
             <td>
-                <div class="advanced-search-name-award"><a href='<?php echo Flight::url("{$level}/{$year_for_url}{$p->id}/{$p->slug}"); ?>'><?php echo $p->name;?></a><br /><span class="advanced-search-award"><?php echo $p->award;?></span></div>
+                <div class="advanced-search-name-award"><a href='<?php echo Flight::url("{$level}/{$year_for_url}{$p->id}/{$p->slug}"); ?>'><?php echo $p->name;?> <?php if($p->subject_to_approval == 'true'){ echo "(subject to approval)";} ?></a><br /><span class="advanced-search-award"><?php echo $p->award;?></span></div>
             </td>
             <td>
                 <?php echo ucwords($p->programme_type);?>
             </td>
             <td>
-                <?php echo $p->campus;?>
+                <?php if ($p->additional_locations != ''): ?>
+                  <?php if ( strstr($p->additional_locations, ',') ): ?>
+                    <?php echo $p->campus.', '.$p->additional_locations ?>
+                  <?php else: ?>
+                    <?php echo $p->campus.' and '.$p->additional_locations ?>
+                  <?php endif ?>
+                <?php else: ?>
+                  <?php echo $p->campus ?>
+                <?php endif ?>
             </td>
             <td>
                 <?php echo $p->mode_of_study;?>
@@ -149,7 +162,11 @@ $(document).ready(function(){
         (
           (name.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) || 
           (search_keywords.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) ||
-          (award.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) 
+          (award.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) ||
+          (programme_type.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) ||
+          (campus.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) ||
+          (study_mode.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) ||
+          (subject_categories.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1)
 
           ? true : false 
         );

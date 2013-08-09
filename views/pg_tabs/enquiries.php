@@ -69,15 +69,14 @@
 		</ul>
 	</section>
 
-	<?php if(!empty($course->subject_leaflet[0])): ?>
-	<section class="info-subsection">
-		<h4>Download a subject leaflet (pdf)</h4>
-		<p>Our subject leaflets provide more detail about individual subjects areas. See:</p>
-		<ul>
-			<li><a href="<?php echo $course->subject_leaflet[0]->tracking_code ?>"><?php echo $course->subject_leaflet[0]->name ?></a></li>
-			<?php if(!empty($course->subject_leaflet_2[0])): ?>
-			<li><a href="<?php echo $course->subject_leaflet_2[0]->tracking_code ?>"><?php echo $course->subject_leaflet_2[0]->name ?></a></li>
-			<?php endif; ?>
+	<?php if(!empty($course->programme_leaflet)): ?>
+ 	<section class="info-subsection">
+ 		<h4>Download a subject leaflet (pdf)</h4>
+ 		<p>Our subject leaflets provide more detail about individual subjects areas. See:</p>
+ 		<ul>
+			<?php foreach ($course->programme_leaflet as $leaflet): ?>
+				<li><a href="<?php echo $leaflet->tracking_code ?>"><?php echo $leaflet->name ?></a></li>
+			<?php endforeach; ?>
 		</ul>
 	</section>
 	<?php endif; ?>
