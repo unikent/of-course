@@ -14,7 +14,7 @@
 		<div class="span12">
 			<ul class="nav nav-tabs">
 				<li><a href="#overview">Overview</a></li>
-				<?php if(strpos($course->programme_type, 'taught') !== false): ?><li><a href="#structure">Programme structure</a></li><?php endif; ?>
+				<?php if(strpos($course->programme_type, 'taught') !== false): ?><li><a href="#structure">Course structure</a></li><?php endif; ?>
 				<li><a href="#study-support">Study support</a></li>
 				<li><a href="#entry-requirements">Entry requirements</a></li>
 				<li><a href="#research-areas">Research areas</a></li>
