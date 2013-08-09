@@ -131,8 +131,26 @@
 
 		$pantheon_config = Util::getConfig();
 		if($pantheon_config["theme"] != "Daedalus"){
+
+			$page404 = Cache::get("courses-daedalus-chronos-error-page", function(){
+				$ch = curl_init();
+				curl_setopt($ch, CURLOPT_URL, "http://kent.ac.uk/404.html");//url
+				curl_setopt($ch, CURLOPT_HEADER, 0);
+				curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+				curl_setopt($ch, CURLOPT_TIMEOUT, 2);
+
+				$data = curl_exec($ch);
+
+				curl_close($ch);
+
+				return $data;
+			}, 120);
+
+			$page404 .= '<!-- loaded via chronos -->';
+
 			// Avoid WSOD
-			Flight::halt('404', "Error 404: webpage could not be found.");
+			Flight::halt('404', $page404);
 		}
 		
 		// Attempt to resolve URL details, location, path and other stuff
