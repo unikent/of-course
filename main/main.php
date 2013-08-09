@@ -85,13 +85,6 @@ class CoursesFrontEnd {
 			}
  		}
 
- 		// pull out awards and combine into a comma separated list
- 		$course->award_list = '';
- 		foreach ($course->award as $award) {
- 			if ( ! empty($award->name) ) $course->award_list .= $award->name . ', ';
- 		}
- 		$course->award_list = substr($course->award_list, 0, -2); // cuts off the final comma+space
-
  		// Render programme page
  		Flight::setup($year, $level);
 
@@ -151,7 +144,6 @@ class CoursesFrontEnd {
 		if(isset($_GET['debug_performance'])){ inspect($course); }
 		
 		Flight::setup($course->year, null, true);
-
 
 		return Flight::layout($course->programme_level.'_course_page', array('course'=> $course));
 	}
