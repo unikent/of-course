@@ -1,3 +1,10 @@
+<?php
+	// pull out awards and combine into a comma separated list
+	$course->award_list = '';
+	foreach ($course->award as $award) if (!empty($award->name)) $course->award_list .= $award->name . ', ';
+	$course->award_list = substr($course->award_list, 0, -2); // cuts off the final comma+space
+?>
+
 <article class="container pg">
 	<h1>
 		<?php echo $course->programme_title; ?> <?php echo $course->award_list; ?>
