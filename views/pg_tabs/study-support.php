@@ -16,8 +16,9 @@
 </section>
 <?php endif; ?>
 
+<?php if( ! empty($course->did_you_know_fact_box) ): ?>
 <div class="panel content-highlight">
 	<h4>Did you know...</h4>
 	<?php echo $course->did_you_know_fact_box ?>
 </div>
-
+<?php endif; ?>
