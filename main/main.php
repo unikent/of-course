@@ -85,13 +85,6 @@ class CoursesFrontEnd {
 			}
  		}
 
- 		// pull out awards and combine into a comma separated list
- 		$course->award_list = '';
- 		foreach ($course->award as $award) {
- 			if ( ! empty($award->name) ) $course->award_list .= $award->name . ', ';
- 		}
- 		$course->award_list = substr($course->award_list, 0, -2); // cuts off the final comma+space
-
  		// Render programme page
  		Flight::setup($year, $level);
 
@@ -151,7 +144,6 @@ class CoursesFrontEnd {
 		if(isset($_GET['debug_performance'])){ inspect($course); }
 		
 		Flight::setup($course->year, null, true);
-
 
 		return Flight::layout($course->programme_level.'_course_page', array('course'=> $course));
 	}
@@ -281,25 +273,32 @@ class CoursesFrontEnd {
 	 */
 	public function ajax_search_data($level, $year)
 	{
-		$out = array();
+		// Cache json output for a minute or so (go faster!)
+		$output = Cache::get("courses-daedalus-search-json", function() use ($level, $year) {
 
-		try{
-			$js = static::$pp->get_programmes_index($year, $level);
-		}
-		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
-		{
-			return Flight::halt(501, "Fatal error in getting programmes index.");
-		}
-		catch(\Exception $e)
-		{
-			// Another error.
-			echo "{'error':'Unable to load data.'}";
-		}
+			try
+			{
+				$js = static::$pp->get_programmes_index($year, $level);
+			}
+			catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
+			{
+				return false; 
+			}
+			catch(\Exception $e)
+			{
+				// Another error.
+				return "{'error':'Unable to load data.'}";
+			}
+
+			return json_encode($js);
+
+		}, 2);
+
+		if($out === false) Flight::halt(501, "Fatal error in getting programmes index.");
 
 		// Try & cache
-		Flight::cachecheck();
 
-		echo json_encode($js);
+		echo $output;
 	}
 
 	/**
