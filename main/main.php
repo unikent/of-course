@@ -268,6 +268,60 @@ class CoursesFrontEnd {
 	}
 
 	/**
+	 * new courses list
+	 *
+	 * @param string Type UG|PG
+	 * @param yyyy Year to show
+	 */
+	public function new_courses($level, $year)
+	{
+		switch($level){
+			case 'postgraduate':
+				$template = 'new_courses';
+				$meta = array(
+					'title' => 'New Courses A-Z | Postgraduate Courses | The University of Kent',
+					'description' => 'Search all of the new postgraduate courses offered by the University of Kent',
+				);
+				break;
+
+			default:
+				$template = 'new_courses';
+				$meta = array(
+					'title' => 'New Courses A-Z | Undergraduate Courses | The University of Kent',
+					'description' => 'Search all of the new undergraduate courses offered by the University of Kent',
+				);
+				break;
+		}
+
+
+		Flight::setup($year, $level);
+
+		try {
+			$programmes = static::$pp->get_programmes_index($year, $level);//5 minute cache
+		}
+		catch(\Exception $e)
+		{
+			// Another error.
+			return Flight::error($e);
+		}
+
+		//debug option
+		if(isset($_GET['debug_performance'])){ inspect($programmes); }
+		
+		//Render full page
+		return Flight::layout($template, array('meta' => $meta, 'programmes' => $programmes, 'level' => $level));
+	}
+
+	/**
+	 * Search page (no year)
+	 */
+	public function new_courses_noyear($level)
+	{
+		return $this->new_courses($level, static::$current_year);
+	}
+
+
+	/**
 	 * Data formatted for searching by quickspot
 	 *
 	 */
