@@ -8,7 +8,7 @@
 <article class="container pg">
 	<h1>
 		<?php echo $course->programme_title; ?> <?php echo $course->award_list; ?>
-		<?php if($course->subject_to_approval == 'true'){ echo "(subject to approval)";} ?>
+		<?php if($course->subject_to_approval == 'true'){ echo " (subject to approval)";} ?>
 	</h1>
 	
 	<?php if($course->programme_suspended == 'true' || $course->programme_withdrawn == 'true'): ?>
@@ -21,7 +21,7 @@
 		<div class="span12">
 			<ul class="nav nav-tabs">
 				<li><a href="#overview">Overview</a></li>
-				<?php if(strpos($course->programme_type, 'taught') !== false): ?><li><a href="#structure">Programme structure</a></li><?php endif; ?>
+				<?php if(strpos($course->programme_type, 'taught') !== false): ?><li><a href="#structure">Course structure</a></li><?php endif; ?>
 				<li><a href="#study-support">Study support</a></li>
 				<li><a href="#entry-requirements">Entry requirements</a></li>
 				<li><a href="#research-areas">Research areas</a></li>
@@ -156,7 +156,7 @@
 		                <div class="cell">
 		                    <div class="mask">
 		                        <a href="<?php echo Flight::url("{$level}/{$related_course->id}/{$related_course->slug}"); ?>">
-		                        	<span><?php echo $related_course->name ?></span>
+		                        	<span><?php echo $related_course->name ?><?php if($related_course->subject_to_approval == 'true'){ echo " (subject to approval)";} ?></span>
 		                        	<span class="related-award"><?php echo $related_course->award;?></span>
 		                        </a>
 		                    </div>
@@ -179,7 +179,7 @@
 		<?php foreach($course->related_courses as $related_course): ?>
                     <li>
                     <a href="<?php echo Flight::url("{$level}/{$related_course->id}/{$related_course->slug}"); ?>">
-                    	<span><?php echo $related_course->name ?></span>
+                    	<span><?php echo $related_course->name ?><?php if($related_course->subject_to_approval == 'true'){ echo " (subject to approval)";} ?></span>
                     	<span class="related-award"><?php echo $related_course->award;?></span>
                     </a>
                     </li>
