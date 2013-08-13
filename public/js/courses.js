@@ -22,5 +22,11 @@ $(document).ready(function(){
 	$('.module-collapse').click(function() {
 	  $(this).find('i').toggleClass('icon-plus-sign').toggleClass('icon-minus-sign');
 	});
+
+	$('#apply-study-type').change(function () {
+		$('.apply-type-link').html($(this).val());
+	});
+
+	$('#apply-study-type').change();
 }); 
 
