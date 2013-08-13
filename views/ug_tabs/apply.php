@@ -8,28 +8,21 @@
 		</div>
   	<?php endif; ?>
     
-	<form>
+	<form id="ug_apply_form">
 	
-	<div class="form-row">	
-	<label for="apply-study-type">Type of study</label>
-	<select id="apply-study-type">
-		<option>Full time</option>
-		<option>Part time</option>
-	</select>
-    	</div>
-	
-	<div class="form-row">
-	<label for="apply-study-award">Award</label>
-	<select id="apply-study-award">
-		<option>MA</option>
-		<option>MSc</option>
-        <option>PhD</option>
-	</select>
-	</div>
+	<div class="form-row <?php echo strcmp($course->mode_of_study, 'Full-time or part-time') == 0 ? '' : 'hide'; ?>">	
+		<label for="apply-study-type">Type of study</label>
+		<select id="apply-study-type">
+			<?php if(strcmp($course->mode_of_study, 'Full-time only') == 0 || strcmp($course->mode_of_study, 'Full-time or part-time') == 0): ?><option>Full time</option><?php endif; ?>
+			<?php if(strcmp($course->mode_of_study, 'Part-time only') == 0 || strcmp($course->mode_of_study, 'Full-time or part-time') == 0): ?><option>Part time</option><?php endif; ?>
+		</select>
+    </div>
+
 	<br>
 	
-
-	<a href="#" class="apply-link">Apply for <strong>Anthropology</strong> <span id="apply-award-link">MA</span> - <span id="apply-type-link">Full time</span></a>
+	<a href="#" class="apply-link">Apply for <strong>Anthropology</strong> <span id="apply-award-link">MA</span> - <span class="apply-type-link">Full time</span></a>
+	<a href="#" class="apply-link">Enquire about <strong>Anthropology</strong> <span id="apply-award-link">MA</span> - <span class="apply-type-link">Full time</span></a>
+	<a href="#" class="apply-link">Order a prospectus for <strong>Anthropology</strong> <span id="apply-award-link">MA</span> - <span class="apply-type-link">Full time</span></a>
 	
 	</form>
 	
