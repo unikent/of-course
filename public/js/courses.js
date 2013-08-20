@@ -23,10 +23,24 @@ $(document).ready(function(){
 	  $(this).find('i').toggleClass('icon-plus-sign').toggleClass('icon-minus-sign');
 	});
 
+	$('#enquire-study-type').change(function () {
+		$('.courses-sits-ug-enquire-fulltime').toggle();
+		$('.courses-sits-ug-enquire-parttime').toggle();
+	});
 	$('#apply-study-type').change(function () {
-		$('.apply-type-link').html($(this).val());
+		$('.courses-sits-ug-apply-fulltime').toggle();
+		$('.courses-sits-ug-apply-parttime').toggle();
 	});
 
-	$('#apply-study-type').change();
+	$('#enquire').change(function () {
+		$('.enquire-link').toggle();
+		$('.prospectus-link').toggle();
+	});
+
+	$('#prospectus').change(function () {
+		$('.enquire-link').toggle();
+		$('.prospectus-link').toggle();
+	});
+
 }); 
 

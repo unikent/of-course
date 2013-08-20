@@ -6,20 +6,20 @@
 	
 	<form>
 		<div class="form-row enquiry-option">
-			<input type="radio" name="enquire" id="enquire" value="enquiry">
+			<input type="radio" name="enquire" id="enquire" value="enquiry" checked="checked">
 			<label for="enquire" id="enquire-lbl">Make an online enquiry</label>
 
 			<input type="radio" name="enquire" id="prospectus" value="prospectus">
 			<label for="prospectus" id="prospectus-lbl">Order a prospectus <span style="display: inline-block; font-size: 0.8em; font-family: arial;line-height: 0.5em; color:#333333">(<a href="#">Download PDF version - 2MB</a>)</span></label>
 		</div>
 
-		<div class="form-row">	
+		<div class="form-row<?php echo trim($course->mode_of_study) == 'Full-time or part-time' ? '' : ' hide'; ?>">	
 			<label for="enquire-study-type">Type of study</label>
 			<select id="enquire-study-type">
-				<option>Full time</option>
-				<option>Part time</option>
+				<option value="ft">Full-time</option>
+				<option value="pt">Part-time</option>
 			</select>
-		</div>
+	    </div>
 			
 		<div class="form-row">
 			<label for="enquire-study-award">Award</label>
@@ -29,10 +29,40 @@
 		        <option>PhD</option>
 			</select>
 		</div>
-		<br>
 		
-		<a href="#" class="apply-link"><span id="enquidry-link">Enquire about</span> <strong>Anthropology</strong> <span id="enquire-award-link">MA</span> - <span id="enquire-type-link">Full time</span></a>
-		
+
+
+
+		<?php $sits_url = 'https://esd.kent.ac.uk/aspx_shared/newuser.aspx?'; ?>
+		<?php if ( trim($course->mode_of_study) == 'Part-time only' || trim($course->mode_of_study) == 'Full-time or part-time'): ?>
+			<?php $text = 'Part time'; ?>
+			<?php if ( trim($course->mode_of_study) == 'Full-time or part-time'): ?>
+			<div class="courses-sits-ug-enquire-parttime hide">
+			<?php else: ?>
+			<div class="courses-sits-ug-enquire-parttime">
+			<?php endif; ?>
+		<?php endif; ?>
+
+		<?php if ( trim($course->mode_of_study) == 'Full-time only' || trim($course->mode_of_study) == 'Full-time or part-time'): ?>
+			<?php $text = 'Full time'; ?>
+			<div class="courses-sits-ug-enquire-fulltime">
+		<?php endif; ?>
+
+			<?php foreach ($course->deliveries as $delivery): ?>
+				<?php
+				$enquire = $sits_url . 'CCTC=KENT&UTYP=APP';
+				$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CCTC=KENT';
+				if ($delivery->mcr != '') {
+					$enquire = $sits_url . 'CourseCode=' . $delivery->mcr . '&CCTC=KENT&UTYP=APP&EnquiryCategoryCode=10';
+					$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CourseCode=' . $delivery->mcr . '&CCTC=KENT';
+				}
+				?>
+				<a href="<?php echo $enquire ?>" class="apply-link enquire-link award-link-<?php echo $delivery->award_name ?>">Enquire about <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?></strong> - <span class="apply-type-link"><?php echo $text ?></span></a>
+
+				<a href="<?php echo $prospectus ?>" class="apply-link prospectus-link award-link-<?php echo $delivery->award_name ?>" style="display:none;">Order a prospectus for <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?></strong> - <span class="apply-type-link"><?php echo $text ?></span></a>
+			<?php endforeach; ?>
+			</div>
+
 	</form>
 	
 </div><!-- /panel admissions -->

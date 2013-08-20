@@ -1,6 +1,56 @@
 <?php $year_for_url = empty($year) ? '' : ((strcmp($year, CoursesFrontEnd::$current_year) == 0) ? '' : $year . '/'); ?>
 
-<h2>Further information</h2>
+<h2>Enquiries</h2>
+
+<div class="panel admissions">
+	
+	<form id="ug_enquiries_form">
+		<div class="form-row<?php echo trim($course->mode_of_study) == 'Full-time or part-time' ? '' : ' hide'; ?>">	
+			<label for="enquire-study-type">Type of study</label>
+			<select id="enquire-study-type">
+				<option value="ft">Full-time</option>
+				<option value="pt">Part-time</option>
+			</select>
+	    </div>
+		
+		<?php $sits_url = 'https://esd.kent.ac.uk/aspx_shared/newuser.aspx?'; ?>
+		<?php if ( trim($course->mode_of_study) == 'Part-time only' || trim($course->mode_of_study) == 'Full-time or part-time'): ?>
+			<?php
+			$enquire = $sits_url . 'CCTC=KENT&UTYP=APP';
+			$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CCTC=KENT';
+			if ($course->parttime_mcr_code != '') {
+				$enquire = $sits_url . 'CourseCode=' . $course->parttime_mcr_code . '&CCTC=KENT&UTYP=APP&EnquiryCategoryCode=10';
+				$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CourseCode=' . $course->parttime_mcr_code . '&CCTC=KENT';
+			}
+			?>
+			<?php if ( trim($course->mode_of_study) == 'Full-time or part-time'): ?>
+			<div class="courses-sits-ug-enquire-parttime hide">
+			<?php else: ?>
+			<div class="courses-sits-ug-enquire-parttime">
+			<?php endif; ?>
+		<?php endif; ?>
+
+		<?php if ( trim($course->mode_of_study) == 'Full-time only' || trim($course->mode_of_study) == 'Full-time or part-time'): ?>
+			<?php
+				$enquire = $sits_url . 'CCTC=KENT&UTYP=APP';
+				$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CCTC=KENT';
+				if ($course->fulltime_mcr_code != '') {
+					$enquire = $sits_url . 'CourseCode=' . $course->fulltime_mcr_code . '&CCTC=KENT&UTYP=APP&EnquiryCategoryCode=10';
+					$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CourseCode=' . $course->fulltime_mcr_code . '&CCTC=KENT';
+				}
+			?>
+			<div class="courses-sits-ug-enquire-fulltime">
+		<?php endif; ?>
+
+				<a href="<?php echo $enquire ?>" class="apply-link">Enquire about <strong><?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?></strong> - <span class="apply-type-link"><?php echo $text ?></span></a>
+
+				<a href="<?php echo $prospectus ?>" class="apply-link">Order a prospectus for <strong><?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?></strong> - <span class="apply-type-link"><?php echo $text ?></span></a>
+			</div>
+		
+
+	</form>
+	
+</div><!-- /panel admissions -->
 
 <section class="info-section">
 	<h3>Contacts</h3>
