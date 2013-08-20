@@ -12,16 +12,6 @@
         </div><!-- /span -->
       </div><!-- /row -->
 
-    <div class="row advanced-search-boxes">
-
-        <h2>Filter course list</h2>
-
-        <input class="advanced-text-search" type="text" placeholder="Filter by keyword" />
-
-        <div id="advanced-text-search-hint-box" class="visible-phone"><span id="advanced-text-search-hint" class="hide"><a href="#programme-list">Results filtered below...</a></span></div>
-      
-    </div>
-
     
            
     <table id="programme-list" class="table table-striped-search advanced-search-table">
@@ -137,9 +127,9 @@ $(document).ready(function(){
   */
   $(document).ready(function(){
   var programme_list = $('#programme-list').dataTable({
-        "sDom": "t<'muted pull-right'i><'clearfix'>p",
+        "sDom": "t",
         "sPaginationType": "bootstrap",
-        "iDisplayLength": 50,
+        "iDisplayLength": 200,
         "oLanguage": {
             "sSearch": ""
         },
