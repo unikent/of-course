@@ -1,18 +1,13 @@
 <?php $year_for_url = empty($year) ? '' : ((strcmp($year, CoursesFrontEnd::$current_year) == 0) ? '' : $year . '/'); ?>
 
 <div class="advanced-search">
-    <h1>New Courses A-Z</h1>
-
-      <div class="row-fluid">
-        <div class="span12">
-          <ul class="nav nav-tabs">
-            <li<?php echo $level == 'undergraduate' ? ' class="active"' : ''; ?>><a href="<?php echo BASE_URL != '/' ? BASE_URL : ''; ?>/undergraduate/new">Undergraduate</a></li>
-            <li<?php echo $level == 'postgraduate' ? ' class="active"' : ''; ?>><a href="<?php echo BASE_URL != '/' ? BASE_URL : ''; ?>/postgraduate/new">Postgraduate</a></li>
-          </ul>
-        </div><!-- /span -->
-      </div><!-- /row -->
-
     
+
+      <?php if ($level == 'undergraduate'): ?>
+        <h1>New Undergraduate Courses A-Z</h1>
+      <?php elseif ($level == 'postgraduate'): ?>
+        <h1>New Postgraduate Courses A-Z</h1>
+      <?php endif; ?>
            
     <table id="programme-list" class="table table-striped-search advanced-search-table">
         <thead>
