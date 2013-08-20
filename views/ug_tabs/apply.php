@@ -20,9 +20,9 @@
 
 	<br>
 	
-	<a href="#" class="apply-link">Apply for <strong>Anthropology</strong> <span id="apply-award-link">MA</span> - <span class="apply-type-link">Full time</span></a>
-	<a href="#" class="apply-link">Enquire about <strong>Anthropology</strong> <span id="apply-award-link">MA</span> - <span class="apply-type-link">Full time</span></a>
-	<a href="#" class="apply-link">Order a prospectus for <strong>Anthropology</strong> <span id="apply-award-link">MA</span> - <span class="apply-type-link">Full time</span></a>
+	<a href="#" class="apply-link">Apply for <strong><?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?></strong> - <span class="apply-type-link">Full time</span></a>
+	<a href="#" class="apply-link">Enquire about <strong><?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?></strong> - <span class="apply-type-link">Full time</span></a>
+	<a href="#" class="apply-link">Order a prospectus for <strong><?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?></strong> - <span class="apply-type-link">Full time</span></a>
 	
 	</form>
 	

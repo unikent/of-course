@@ -332,7 +332,7 @@ class CoursesFrontEnd {
 
 			try
 			{
-				$js = static::$pp->get_programmes_index($year, $level);
+				$js = CoursesFrontEnd::$pp->get_programmes_index($year, $level);
 			}
 			catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
 			{
