@@ -10,48 +10,58 @@
 
 
 	<form id="ug_apply_form">
-		<div class="form-row<?php echo trim($course->mode_of_study) == 'Full-time or part-time' ? '' : ' hide'; ?>">	
+		<div class="form-row<?php echo trim($course->mode_of_study) != 'Full-time or part-time' ? ' form-row-study-type' : ''; ?>">
 			<label for="apply-study-type">Type of study</label>
 			<select id="apply-study-type">
 				<option value="ft">Full-time</option>
 				<option value="pt">Part-time</option>
 			</select>
 	    </div>
-
-	    <div class="form-row">
-		<label for="apply-study-award">Award</label>
-		<select id="apply-study-award">
-			<option>MA</option>
-			<option>MSc</option>
-	        <option>PhD</option>
-		</select>
+			
+		<div class="form-row">
+			<label for="apply-study-award">Award</label>
+			<select id="apply-study-award">
+				<option value="MA">MA</option>
+		        <option value="PDip">PDip</option>
+			</select>
 		</div>
 		
-		<?php $sits_url = 'https://esd.kent.ac.uk/aspx_shared/newuser.aspx?'; ?>
 		<?php if ( trim($course->mode_of_study) == 'Part-time only' || trim($course->mode_of_study) == 'Full-time or part-time'): ?>
-			<?php $text = 'Part time'; ?>
-			<?php if ( trim($course->mode_of_study) == 'Full-time or part-time'): ?>
-			<div class="courses-sits-ug-apply-parttime hide">
+			<?php if ( trim($course->mode_of_study) == 'Full-time or part-time' ): ?>
+			<div class="courses-sits-apply courses-sits-apply-parttime">
 			<?php else: ?>
-			<div class="courses-sits-ug-apply-parttime">
+			<div class="courses-sits-apply courses-sits-apply-parttime-only">
 			<?php endif; ?>
-		<?php endif; ?>
-		<?php if ( trim($course->mode_of_study) == 'Full-time only' || trim($course->mode_of_study) == 'Full-time or part-time'): ?>
-			<?php $text = 'Full time'; ?>
-			<div class="courses-sits-ug-apply-fulltime">
-		<?php endif; ?>
-
 			<?php foreach ($course->deliveries as $delivery): ?>
+				<?php if ($delivery->attendance_pattern == 'part-time'): ?>
 				<?php
 				$apply = 'https://evision.kent.ac.uk/ipp/';
 				if ($delivery->mcr != '') {
 					$apply = 'https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&code1=' . $delivery->mcr . '&code2=0001';
 				}
 				?>
-				<a href="<?php echo $apply ?>" class="apply-link">Apply for <strong><?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?></strong> - <span class="apply-type-link"><?php echo $text ?></span></a>
+				<a href="<?php echo $apply ?>" class="apply-link parttime-link award-link-<?php echo $delivery->award_name ?>">Apply for <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?></strong> - <span class="apply-type-link">Part time</span></a>
+				<?php endif; ?>
 			<?php endforeach; ?>
-
 			</div>
+		<?php endif; ?>
+		<?php if ( trim($course->mode_of_study) == 'Full-time only' || trim($course->mode_of_study) == 'Full-time or part-time'): ?>
+			<div class="courses-sits-apply courses-sits-apply-fulltime">
+			<?php foreach ($course->deliveries as $delivery): ?>
+				<?php if ($delivery->attendance_pattern == 'full-time'): ?>
+				<?php
+				$apply = 'https://evision.kent.ac.uk/ipp/';
+				if ($delivery->mcr != '') {
+					$apply = 'https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&code1=' . $delivery->mcr . '&code2=0001';
+				}
+				?>
+				<a href="<?php echo $apply ?>" class="apply-link fulltime-link award-link-<?php echo $delivery->award_name ?>">Apply for <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?></strong> - <span class="apply-type-link">Full time</span></a>
+				<?php endif; ?>
+			<?php endforeach; ?>
+			</div>
+		<?php endif; ?>
+
+			
 
 	</form>
 
