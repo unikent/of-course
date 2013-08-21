@@ -21,7 +21,7 @@
 		<div class="span12">
 			<ul class="nav nav-tabs">
 				<li><a href="#overview">Overview</a></li>
-				<?php if(strpos($course->programme_type, 'taught') !== false): ?><li><a href="#structure">Course structure</a></li><?php endif; ?>
+				<li><a href="#structure">Course structure</a></li>
 				<li><a href="#study-support">Study support</a></li>
 				<li><a href="#entry-requirements">Entry requirements</a></li>
 				<li><a href="#research-areas">Research areas</a></li>
@@ -37,13 +37,13 @@
 			<div class="tab-content">
 				<section id="overview"><?php Flight::render('pg_tabs/overview', array('course'=>$course)); ?></section>
 				
-				<?php if(strpos($course->programme_type, 'taught') !== false): ?>
-					<?php if ( empty($course->modules[0]->stages) ) : ?>
+				
+				<?php if ( empty($course->modules[0]->stages) ) : ?>
 					<section id="structure"><?php Flight::render('pg_tabs/structure_empty', array('course'=>$course)); ?></section>
-					<?php else: ?>
+				<?php else: ?>
 					<section id="structure"><?php Flight::render('pg_tabs/structure', array('course'=>$course)); ?></section>
-					<?php endif; ?>
 				<?php endif; ?>
+				
 				<section id="study-support"><?php Flight::render('pg_tabs/study-support', array('course'=>$course)); ?></section>	
 				<section id="entry-requirements"><?php Flight::render('pg_tabs/entry-requirements', array('course'=>$course)); ?></section>
 				<section id="research-areas"><?php Flight::render('pg_tabs/research-areas', array('course'=>$course)); ?></section>
@@ -84,7 +84,7 @@
 						<li><strong>Location:</strong>
 
 						<?php
-							$locations = "<a href='$course->location[0]->url'>".$course->location[0]->name."</a>";
+							$locations = "<a href='{$course->location[0]->url}'>".$course->location[0]->name."</a>";
 							$additional_locations = '';
 
 							foreach ($course->additional_locations as $key=>$additional_location) {

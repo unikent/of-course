@@ -64,9 +64,8 @@
 			<?php endif; ?>
 		</ul>
 		<h4>Graduate school</h4>
-		<ul>
-			<li><a href="<?php echo trim(strip_tags($course->globals->graduate_school)) ?>"><?php echo trim(strip_tags($course->globals->graduate_school)) ?></a></li>
-		</ul>
+		<?php echo $course->globals->graduate_school; ?>
+		
 	</section>
 
 	<?php if(!empty($course->programme_leaflet)): ?>
