@@ -39,11 +39,22 @@
 				
 				<?php if(strpos($course->programme_type, 'taught') === false): ?>
 					<section id="structure"><?php Flight::render('pg_tabs/structure_research', array('course'=>$course)); ?></section>
-				<?php elseif ( empty($course->modules[0]->stages) ) : ?>
-					<section id="structure"><?php Flight::render('pg_tabs/structure_empty', array('course'=>$course)); ?></section>
-				<?php else: ?>
-					<section id="structure"><?php Flight::render('pg_tabs/structure', array('course'=>$course)); ?></section>
-				<?php endif; ?>
+				
+				<?php else :?>
+					<?php
+					$stage_found = false;
+					foreach($course->modules as $module){
+						if (!empty($module->stages)){
+							$stage_found = true;
+							break;
+						}
+					}?>
+				 	<?php if( !$stage_found ) : ?>
+						<section id="structure"><?php Flight::render('pg_tabs/structure_empty', array('course'=>$course)); ?></section>
+					<?php else: ?>
+						<section id="structure"><?php Flight::render('pg_tabs/structure', array('course'=>$course)); ?></section>
+					<?php endif; ?>
+				<?php endif;?>
 				
 				<section id="study-support"><?php Flight::render('pg_tabs/study-support', array('course'=>$course)); ?></section>	
 				<section id="entry-requirements"><?php Flight::render('pg_tabs/entry-requirements', array('course'=>$course)); ?></section>
