@@ -50,8 +50,9 @@
 							break;
 						}
 					}?>
-				 	
-					
+				 	<?php
+					var_dump($course->programme_overview);exit();
+					?>
 					<?php if( (!$stage_found) && (!empty($course->programme_overview)) ) : ?>
 						<section id="structure"><?php Flight::render('pg_tabs/structure_research', array('course'=>$course)); ?></section>
 					<?elseif( (!$stage_found) && (empty($course->programme_overview))) :?>
