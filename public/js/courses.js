@@ -40,7 +40,10 @@ $(document).ready(function(){
 	* Apply tab
 	*/
 	// set up defaults for the first hit on the page
-	var applyawardlink = ".award-link-" + $('#apply-study-award option').first().val();
+	var applyawardlink = '';
+	if ($('#apply-study-award option').first().val() != undefined) {
+		applyawardlink = ".award-link-" + $('#apply-study-award option').first().val();
+	}
 	$('.courses-sits-apply > .apply-link').hide();
 	$('.courses-sits-apply > .fulltime-link' + applyawardlink).show();
 
@@ -51,7 +54,10 @@ $(document).ready(function(){
 		$('.courses-sits-apply > .apply-link').hide();
 
 		// award-link changes depending on the value of the award currently chosen
-		var applyawardlink = ".award-link-" + $('#apply-study-award').val();
+		var applyawardlink = '';
+		if ($('#apply-study-award').val() != undefined) {
+			applyawardlink = ".award-link-" + $('#apply-study-award').val();
+		}
 
 		// now show relevant links
 		if ($('#apply-study-type').val() == 'ft') {
@@ -67,7 +73,10 @@ $(document).ready(function(){
 	* Enquire tab
 	*/
 	// set up defaults for the first hit on the page
-	var awardlink = ".award-link-" + $('#enquire-study-award option').first().val();
+	var awardlink = '';
+	if ($('#apply-study-award option').first().val() != undefined) {
+		awardlink = ".award-link-" + $('#enquire-study-award option').first().val();
+	}
 	$('.courses-sits-enquire > .apply-link').hide();
 	$('.courses-sits-enquire > .fulltime-link.enquire-link' + awardlink).show();
 
@@ -77,15 +86,41 @@ $(document).ready(function(){
 	var fulltime = false;
 	var parttime = false;
 
-	// when things change...
-	$('#enquire,#prospectus,#enquire-study-type,#enquire-study-award').change(function () {
+	// when things change for the award, type, and enquire/prospectus changers
+	$('#enquire,#prospectus,#enquire-study-type,#enquire-study-award').change(enquiries_status_check);
+
+	// when people click on the apply, enquire, or prospectus links
+	// we show the appropriate tab, and for enquire and prospectus we show the appropriate radio button clicked
+	$('.apply-adm-link').click(function () {
+		pantheon.show_tab('apply', '#ug_apply_form');
+	});
+
+	$('.enquire-adm-link').click(function () {
+		pantheon.show_tab('enquiries', '#ug_enquiries_form');
+		$('#prospectus').prop('checked', false);
+		$('#enquire').prop('checked', true);
+		enquiries_status_check();
+	});
+
+	$('.pros-adm-link').click(function () {
+		pantheon.show_tab('enquiries', '#ug_enquiries_form');
+		$('#enquire').prop('checked', false);
+		$('#prospectus').prop('checked', true);
+		enquiries_status_check();
+	});
+
+	/**
+	* checks the currently selected enquiries/prospectus, award, and ft/pt options and shows the appropriate classes
+	*/
+	function enquiries_status_check() {
 
 		if ($('#enquire').is(':checked'))
 		{
 			enquire = true;
 			prospectus = false;
 		}
-		else {
+		else if ($('#prospectus').is(':checked'))
+		{
 			prospectus = true;
 			enquire = false;
 		}
@@ -104,7 +139,10 @@ $(document).ready(function(){
 		$('.courses-sits-enquire > .apply-link').hide();
 
 		// award-link changes depending on the value of the award currently chosen
-		var awardlink = ".award-link-" + $('#enquire-study-award').val();
+		var awardlink = '';
+		if ($('#enquire-study-award').val() != undefined) {
+			awardlink = ".award-link-" + $('#enquire-study-award').val();
+		}
 
 		// now show relevant links
 		if (prospectus && fulltime) {
@@ -120,9 +158,10 @@ $(document).ready(function(){
 		if (enquire && parttime) {
 			$('.courses-sits-enquire > .parttime-link.enquire-link' + awardlink).show();
 		}
+		return true;
 
-
-	});
+	}
+	
 
 }); 
 

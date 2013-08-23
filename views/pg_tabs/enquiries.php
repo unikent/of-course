@@ -4,13 +4,13 @@
 
 	<h2>I would like to...</h2>
 	
-	<form>
+	<form id="pg_enquiries_form">
 		<div class="form-row enquiry-option">
 			<input type="radio" name="enquire" id="enquire" value="enquiry" checked="checked">
 			<label for="enquire" id="enquire-lbl">Make an online enquiry</label>
 
 			<input type="radio" name="enquire" id="prospectus" value="prospectus">
-			<label for="prospectus" id="prospectus-lbl">Order a prospectus <span style="display: inline-block; font-size: 0.8em; font-family: arial;line-height: 0.5em; color:#333333">(<a href="#">Download PDF version - 2MB</a>)</span></label>
+			<label for="prospectus" id="prospectus-lbl">Order a prospectus <span>(<a href="#">PDF - 2MB</a>)</span></label>
 		</div>
 
 		<div class="form-row<?php echo trim($course->mode_of_study) != 'Full-time or part-time' ? ' form-row-study-type' : ''; ?>">

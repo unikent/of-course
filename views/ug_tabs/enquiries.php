@@ -5,6 +5,15 @@
 <div class="panel admissions">
 	
 	<form id="ug_enquiries_form">
+
+		<div class="form-row enquiry-option">
+			<input type="radio" name="enquire" id="enquire" value="enquiry" checked="checked">
+			<label for="enquire" id="enquire-lbl">Make an online enquiry</label>
+
+			<input type="radio" name="enquire" id="prospectus" value="prospectus">
+			<label for="prospectus" id="prospectus-lbl">Order a prospectus <span style="display: inline-block; font-size: 0.8em; font-family: arial;line-height: 0.5em; color:#333333">(<a href="#">Download PDF version - 2MB</a>)</span></label>
+		</div>
+
 		<div class="form-row<?php echo trim($course->mode_of_study) != 'Full-time or part-time' ? ' form-row-study-type' : ''; ?>">
 			<label for="enquire-study-type">Type of study</label>
 			<select id="enquire-study-type">
@@ -25,13 +34,13 @@
 			}
 			?>
 			<?php if ( trim($course->mode_of_study) == 'Full-time or part-time' ): ?>
-			<div class="courses-sits-enquire-parttime">
+			<div class="courses-sits-enquire courses-sits-enquire-parttime">
 			<?php else: ?>
-			<div class="courses-sits-enquire-parttime-only">
+			<div class="courses-sits-enquire courses-sits-enquire-parttime-only">
 			<?php endif; ?>
-				<a href="<?php echo $enquire ?>" class="apply-link">Enquire about <strong><?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?></strong> - <span class="apply-type-link"><?php echo $text ?></span></a>
+				<a href="<?php echo $enquire ?>" class="apply-link enquire-link parttime-link">Enquire about <strong><?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?></strong> - <span class="apply-type-link"><?php echo $text ?></span></a>
 
-				<a href="<?php echo $prospectus ?>" class="apply-link">Order a prospectus for <strong><?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?></strong> - <span class="apply-type-link"><?php echo $text ?></span></a>
+				<a href="<?php echo $prospectus ?>" class="apply-link prospectus-link parttime-link">Order a prospectus for <strong><?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?></strong> - <span class="apply-type-link"><?php echo $text ?></span></a>
 			</div>
 		<?php endif; ?>
 
@@ -45,10 +54,10 @@
 					$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CourseCode=' . $course->fulltime_mcr_code . '&CCTC=KENT';
 				}
 			?>
-			<div class="courses-sits-enquire-fulltime">
-				<a href="<?php echo $enquire ?>" class="apply-link">Enquire about <strong><?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?></strong> - <span class="apply-type-link"><?php echo $text ?></span></a>
+			<div class="courses-sits-enquire courses-sits-enquire-fulltime">
+				<a href="<?php echo $enquire ?>" class="apply-link enquire-link fulltime-link">Enquire about <strong><?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?></strong> - <span class="apply-type-link"><?php echo $text ?></span></a>
 
-				<a href="<?php echo $prospectus ?>" class="apply-link">Order a prospectus for <strong><?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?></strong> - <span class="apply-type-link"><?php echo $text ?></span></a>
+				<a href="<?php echo $prospectus ?>" class="apply-link prospectus-link fulltime-link">Order a prospectus for <strong><?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?></strong> - <span class="apply-type-link"><?php echo $text ?></span></a>
 			</div>
 		<?php endif; ?>
 
