@@ -41,6 +41,7 @@
 					<section id="structure"><?php Flight::render('pg_tabs/structure_research', array('course'=>$course)); ?></section>
 				
 				<?php else :?>
+					
 					<?php
 					$stage_found = false;
 					foreach($course->modules as $module){
@@ -49,8 +50,10 @@
 							break;
 						}
 					}?>
-				 	<?php if( !$stage_found ) : ?>
-						<section id="structure"><?php Flight::render('pg_tabs/structure_empty', array('course'=>$course)); ?></section>
+				 	<?php if( !$stage_found && empty($course->programme_overview)) : ?>
+					
+					<?php elseif( !$stage_found ) : ?>
+						<section id="structure"><?php Flight::render('pg_tabs/structure_research', array('course'=>$course)); ?></section>
 					<?php else: ?>
 						<section id="structure"><?php Flight::render('pg_tabs/structure', array('course'=>$course)); ?></section>
 					<?php endif; ?>

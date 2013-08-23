@@ -1,5 +1,11 @@
 <h2>Programme structure</h2>
 
+<?php if(!empty($course->programme_overview)):?>
+	<p><?php echo $course->programme_overview; ?></p>
+<?php endif;?>
+
+<h3>Modules</h3>
+
 <?php echo $course->modules_intro; ?>
 
 <?php
