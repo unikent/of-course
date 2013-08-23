@@ -52,13 +52,19 @@
 	<?php endif; ?>
 
 	<section class="info-subsection">
-		<h4>Related schools</h4>
+		
+		<?php if(!empty($course->additional_school[0])): ?>
+		<h4>School websites</h4>
 		<ul>
 			<li><a href="<?php echo $course->school_website ?>"><?php echo $course->administrative_school[0]->name ?></a></li>
-			<?php if(!empty($course->additional_school[0])): ?>
 			<li><a href="<?php echo $course->url_for_additional_school ?>"><?php echo $course->additional_school[0]->name ?></a></li>
-			<?php endif; ?>
-		</ul>
+			
+		<?php else: ?>
+		<h4>School website</h4>
+		<ul>
+			<li><a href="<?php echo $course->school_website ?>"><?php echo $course->administrative_school[0]->name ?></a></li>
+		<?php endif; ?>
+	
 		<h4>Graduate School</h4>
 		<?php echo $course->globals->graduate_school; ?>
 		
