@@ -54,7 +54,7 @@
 	<section class="info-subsection">
 		<h4>Related schools</h4>
 		<ul>
-			<li><a href="<?php echo $course->url_for_administrative_school ?>"><?php echo $course->administrative_school[0]->name ?></a></li>
+			<li><a href="<?php echo $course->school_website ?>"><?php echo $course->administrative_school[0]->name ?></a></li>
 			<?php if(!empty($course->additional_school[0])): ?>
 			<li><a href="<?php echo $course->url_for_additional_school ?>"><?php echo $course->additional_school[0]->name ?></a></li>
 			<?php endif; ?>
