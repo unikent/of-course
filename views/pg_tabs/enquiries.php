@@ -59,7 +59,7 @@
 			<li><a href="<?php echo $course->url_for_additional_school ?>"><?php echo $course->additional_school[0]->name ?></a></li>
 			<?php endif; ?>
 		</ul>
-		<h4>Graduate school</h4>
+		<h4>Graduate School</h4>
 		<?php echo $course->globals->graduate_school; ?>
 		
 	</section>
