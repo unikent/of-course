@@ -44,7 +44,7 @@
 					<?php
 					$stage_found = false;
 					foreach($course->modules as $module){
-						if !(empty($module->stages)){
+						if (!empty($module->stages)){
 							$stage_found = true;
 							break;
 						}
