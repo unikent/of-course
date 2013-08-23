@@ -42,23 +42,7 @@
 				
 				<?php else :?>
 					
-					<?php
-					$stage_found = false;
-					foreach($course->modules as $module){
-						if (!empty($module->stages)){
-							$stage_found = true;
-							break;
-						}
-					}?>
-				 	<?php
-					var_dump($course->programme_overview);exit();
-					?>
-					<?php if( (!$stage_found) && (!empty($course->programme_overview)) ) : ?>
-						<section id="structure"><?php Flight::render('pg_tabs/structure_research', array('course'=>$course)); ?></section>
-					<?elseif( (!$stage_found) && (empty($course->programme_overview))) :?>
-					<?php else: ?>
-						<section id="structure"><?php Flight::render('pg_tabs/structure', array('course'=>$course)); ?></section>
-					<?php endif; ?>
+					
 				<?php endif;?>
 				
 				<section id="study-support"><?php Flight::render('pg_tabs/study-support', array('course'=>$course)); ?></section>	
