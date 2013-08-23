@@ -50,7 +50,7 @@
 							break;
 						}
 					}?>
-				 	<?php if( !$stage_found && empty($course->programme_overview)) : ?>
+				 	<?php if((!$stage_found) && (empty($course->programme_overview))) : ?>
 						<p>***hello</p>
 					
 					<?php elseif( !$stage_found ) : ?>
