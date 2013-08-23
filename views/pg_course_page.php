@@ -21,7 +21,9 @@
 		<div class="span12">
 			<ul class="nav nav-tabs">
 				<li><a href="#overview">Overview</a></li>
-				<li><a href="#structure">Course structure</a></li>
+				<?php if((!empty($course->programme_overview)) || (strpos($course->programme_type, 'taught') !== false )):?>
+					<li><a href="#structure">Course structure</a></li>
+				<?php endif;?>
 				<li><a href="#study-support">Study support</a></li>
 				<li><a href="#entry-requirements">Entry requirements</a></li>
 				<li><a href="#research-areas">Research areas</a></li>
@@ -38,7 +40,9 @@
 				<section id="overview"><?php Flight::render('pg_tabs/overview', array('course'=>$course)); ?></section>
 				
 				<?php if(strpos($course->programme_type, 'taught') === false): ?>
-					<section id="structure"><?php Flight::render('pg_tabs/structure_research', array('course'=>$course)); ?></section>
+					<?php if(!empty($course->programme_overview)): ?>
+						<section id="structure"><?php Flight::render('pg_tabs/structure_research', array('course'=>$course)); ?></section>
+					<?php endif;?>
 				
 				<?php else :?>
 					<?php
@@ -49,7 +53,7 @@
 							break;
 						}
 					}?>
-				 	<?php if( !$stage_found ) : ?>
+				 	<?php if( (!$stage_found) && (empty($course->programme_overview)) ) : ?>
 						<section id="structure"><?php Flight::render('pg_tabs/structure_empty', array('course'=>$course)); ?></section>
 					<?php else: ?>
 						<section id="structure"><?php Flight::render('pg_tabs/structure', array('course'=>$course)); ?></section>
