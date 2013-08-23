@@ -94,44 +94,48 @@
 		<h4>Subject enquiries</h4>
 		<?php echo $course->enquiries ?>
 	<?php endif; ?>
-</section>
-
-<section class="info-section">
-	<h3>Resources</h3>
 
 	<section class="info-subsection">
 		<h4>Related schools</h4>
 		<ul>
-			<li><a href="<?php echo $course->url_for_administrative_school ?>"><?php echo $course->administrative_school[0]->name ?></a></li>
+			<li><a href="<?php echo $course->school_website ?>"><?php echo $course->administrative_school[0]->name ?></a></li>
 			<?php if(!empty($course->additional_school[0])): ?>
 			<li><a href="<?php echo $course->url_for_additional_school ?>"><?php echo $course->additional_school[0]->name ?></a></li>
 			<?php endif; ?>
 		</ul>
-		<h4>Graduate school</h4>
-		<ul>
-			<li><a href="<?php echo trim(strip_tags($course->globals->graduate_school)) ?>"><?php echo trim(strip_tags($course->globals->graduate_school)) ?></a></li>
-		</ul>
+		<h4>Graduate School</h4>
+		<?php echo $course->globals->graduate_school; ?>
+		
 	</section>
 
-	<?php if(!empty($course->programme_leaflet)): ?>
- 	<section class="info-subsection">
- 		<h4>Download a subject leaflet (pdf)</h4>
- 		<p>Our subject leaflets provide more detail about individual subjects areas. See:</p>
- 		<ul>
-			<?php foreach ($course->programme_leaflet as $leaflet): ?>
-				<li><a href="<?php echo $leaflet->tracking_code ?>"><?php echo $leaflet->name ?></a></li>
-			<?php endforeach; ?>
-		</ul>
-	</section>
-	<?php endif; ?>
+</section>
 
-	<?php if ( ! empty($course->student_profile) ): ?>
-	<section class="info-subsection">
-		<h4>Read our student profile</h4>
-		<ul>
-			<li><a href="<?php echo $course->student_profile ?>"><?php echo $course->student_profile_name ?></a></li>
-		</ul>
-	</section>
+<section class="info-section">
+
+	<?php if ( !empty($course->student_profile)  || !empty($course->programme_leaflet)): ?>
+		<h3>Resources</h3>
+
+		<?php if(!empty($course->programme_leaflet)): ?>
+	 	<section class="info-subsection">
+	 		<h4>Download a subject leaflet (pdf)</h4>
+	 		<p>Our subject leaflets provide more detail about individual subjects areas. See:</p>
+	 		<ul>
+				<?php foreach ($course->programme_leaflet as $leaflet): ?>
+					<li><a href="<?php echo $leaflet->tracking_code ?>"><?php echo $leaflet->name ?></a></li>
+				<?php endforeach; ?>
+			</ul>
+		</section>
+		<?php endif; ?>
+
+		<?php if ( ! empty($course->student_profile) ): ?>
+		<section class="info-subsection">
+			<h4>Read our student profile</h4>
+			<ul>
+				<li><a href="<?php echo $course->student_profile ?>"><?php echo $course->student_profile_name ?></a></li>
+			</ul>
+		</section>
+		<?php endif; ?>
+
 	<?php endif; ?>
 	
 
