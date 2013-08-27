@@ -8,7 +8,7 @@
 		</div>
 	<?php endif; ?>
 
-
+	<?php if ( !empty($course->deliveries) ): ?>
 	<form id="ug_apply_form">
 		<div class="form-row<?php echo trim($course->mode_of_study) != 'Full-time or part-time' ? ' form-row-study-type' : ''; ?>">
 			<label for="apply-study-type">Type of study</label>
@@ -17,15 +17,17 @@
 				<option value="pt">Part-time</option>
 			</select>
 	    </div>
-			
+
 		<div class="form-row">
 			<label for="apply-study-award">Award</label>
-			<select id="apply-study-award">
-				<option value="MA">MA</option>
-		        <option value="PDip">PDip</option>
+			<select class="input-medium apply-select" id="apply-study-award">
+				<?php foreach($course->award as $award): ?>
+				<option value="<?php echo $award->name ?>"><?php echo $award->name ?></option>
+				<?php endforeach; ?>
 			</select>
 		</div>
-		
+
+
 		<?php if ( trim($course->mode_of_study) == 'Part-time only' || trim($course->mode_of_study) == 'Full-time or part-time'): ?>
 			<?php if ( trim($course->mode_of_study) == 'Full-time or part-time' ): ?>
 			<div class="courses-sits-apply courses-sits-apply-parttime">
@@ -64,6 +66,6 @@
 			
 
 	</form>
-
+	<?php endif; ?>
 	
 </div>

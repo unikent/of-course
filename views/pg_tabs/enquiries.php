@@ -6,34 +6,37 @@
 	
 	<form id="pg_enquiries_form">
 		<div class="form-row enquiry-option">
-			<input type="radio" name="enquire" id="enquire" value="enquiry" checked="checked">
-			<label for="enquire" id="enquire-lbl">Make an online enquiry</label>
-
-			<input type="radio" name="enquire" id="prospectus" value="prospectus">
-			<label for="prospectus" id="prospectus-lbl">Order a prospectus <span>(<a href="#">PDF - 2MB</a>)</span></label>
+			<div class="enquiry-radio">
+				<input type="radio" name="enquire" id="enquire" value="enquiry" checked="checked">
+				<label for="enquire" id="enquire-lbl">Make an online enquiry</label>
+			</div>
+			<div class="prospectus-radio">
+				<input type="radio" name="enquire" id="prospectus" value="prospectus">
+				<label for="prospectus" id="prospectus-lbl">Order a prospectus <span>(<a href="#">PDF - 2MB</a>)</span></label>
+			</div>
 		</div>
 
-		<div class="form-row<?php echo trim($course->mode_of_study) != 'Full-time or part-time' ? ' form-row-study-type' : ''; ?>">
-			<label for="enquire-study-type">Type of study</label>
-			<select id="enquire-study-type">
-				<option value="ft">Full-time</option>
-				<option value="pt">Part-time</option>
-			</select>
-	    </div>
-			
-		<div class="form-row">
-			<label for="enquire-study-award">Award</label>
-			<select id="enquire-study-award">
-				<option value="MA">MA</option>
-		        <option value="PDip">PDip</option>
-			</select>
+		<div style="">
+			<div class="form-row<?php echo trim($course->mode_of_study) != 'Full-time or part-time' ? ' form-row-study-type' : ''; ?>">
+				<label for="enquire-study-type">Type of study</label>
+				<select class="input-medium enquiry-select" id="enquire-study-type">
+					<option value="ft">Full-time</option>
+					<option value="pt">Part-time</option>
+				</select>
+		    </div>
+				
+			<div class="form-row">
+				<label for="enquire-study-award">Award</label>
+				<select class="input-medium enquiry-select" id="enquire-study-award">
+					<?php foreach($course->award as $award): ?>
+					<option value="<?php echo $award->name ?>"><?php echo $award->name ?></option>
+					<?php endforeach; ?>
+				</select>
+			</div>
 		</div>
-		
-
-
 
 		<?php $sits_url = 'https://esd.kent.ac.uk/aspx_shared/newuser.aspx?'; ?>
-			<?php if ( trim($course->mode_of_study) == 'Part-time only' || trim($course->mode_of_study) == 'Full-time or part-time'): ?>
+			<?php /* part-time links */ if ( trim($course->mode_of_study) == 'Part-time only' || trim($course->mode_of_study) == 'Full-time or part-time'): ?>
 			<?php if ( trim($course->mode_of_study) == 'Full-time or part-time' ): ?>
 			<div class="courses-sits-enquire courses-sits-enquire-parttime">
 			<?php else: ?>
@@ -49,15 +52,25 @@
 					$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CourseCode=' . $delivery->mcr . '&CCTC=KENT';
 				}
 				?>
-				<a href="<?php echo $enquire ?>" class="apply-link apply-link enquire-link parttime-link award-link-<?php echo $delivery->award_name ?>">Enquire about <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?></strong> - <span class="apply-type-link">Part time</span></a>
+				<a href="<?php echo $enquire ?>" class="apply-link enquire-link parttime-link award-link-<?php echo $delivery->award_name ?>">Enquire about <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?><?php echo $delivery->description != '' ? ' - ' . $delivery->description : ''?> - <span class="apply-type-link">Part time</span></strong></a>
 
-				<a href="<?php echo $prospectus ?>" class="apply-link apply-link prospectus-link parttime-link award-link-<?php echo $delivery->award_name ?>">Order a prospectus for <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?></strong> - <span class="apply-type-link">Part time</span></a>
+				<a href="<?php echo $prospectus ?>" class="apply-link prospectus-link parttime-link award-link-<?php echo $delivery->award_name ?>">Order a prospectus for <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?><?php echo $delivery->description != '' ? ' - ' . $delivery->description : ''?> - <span class="apply-type-link">Part time</span></strong></a>
 				<?php endif; ?>
 			<?php endforeach; ?>
+
+			<?php /* in case there are no deliveries, just show a basic set of links */ if ( empty($course->deliveries) ): ?>
+				<?php $enquire = $sits_url . 'CCTC=KENT&UTYP=APP'; $prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CCTC=KENT';?>
+				<?php foreach($course->award as $award): ?>
+				<a href="<?php echo $enquire ?>" class="apply-link enquire-link parttime-link award-link-<?php echo $award->name; ?>">Enquire about <strong><?php echo $course->programme_title; ?> <?php echo $award->name; ?> - <span class="apply-type-link">Part time</span></strong></a>
+
+				<a href="<?php echo $prospectus ?>" class="apply-link prospectus-link parttime-link award-link-<?php echo $award->name; ?>">Order a prospectus for <strong><?php echo $course->programme_title; ?> <?php echo $award->name; ?> - <span class="apply-type-link">Part time</span></strong></a>
+				<?php endforeach; ?>
+			<?php endif; ?>
+
 			</div>
 			<?php endif; ?>
 
-			<?php if ( trim($course->mode_of_study) == 'Full-time only' || trim($course->mode_of_study) == 'Full-time or part-time'): ?>
+			<?php /* full-time links */ if ( trim($course->mode_of_study) == 'Full-time only' || trim($course->mode_of_study) == 'Full-time or part-time'): ?>
 			<div class="courses-sits-enquire courses-sits-enquire-fulltime">
 			<?php foreach ($course->deliveries as $delivery): ?>
 				<?php if ($delivery->attendance_pattern == 'full-time'): ?>
@@ -69,11 +82,21 @@
 					$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CourseCode=' . $delivery->mcr . '&CCTC=KENT';
 				}
 				?>
-				<a href="<?php echo $enquire ?>" class="apply-link enquire-link fulltime-link award-link-<?php echo $delivery->award_name ?>">Enquire about <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?></strong> - <span class="apply-type-link">Full time</span></a>
+				<a href="<?php echo $enquire ?>" class="apply-link enquire-link fulltime-link award-link-<?php echo $delivery->award_name ?>">Enquire about <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?><?php echo $delivery->description != '' ? ' - ' . $delivery->description : ''?> - <span class="apply-type-link">Full time</span></strong></a>
 
-				<a href="<?php echo $prospectus ?>" class="apply-link apply-link prospectus-link fulltime-link award-link-<?php echo $delivery->award_name ?>">Order a prospectus for <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?></strong> - <span class="apply-type-link">Full time</span></a>
+				<a href="<?php echo $prospectus ?>" class="apply-link prospectus-link fulltime-link award-link-<?php echo $delivery->award_name ?>">Order a prospectus for <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?><?php echo $delivery->description != '' ? ' - ' . $delivery->description : ''?> - <span class="apply-type-link">Full time</span></strong></a>
 				<?php endif; ?>
 			<?php endforeach; ?>
+
+			<?php /* in case there are no deliveries, just show a basic set of links */ if ( empty($course->deliveries) ): ?>
+				<?php $enquire = $sits_url . 'CCTC=KENT&UTYP=APP'; $prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CCTC=KENT';?>
+				<?php foreach($course->award as $award): ?>
+				<a href="<?php echo $enquire ?>" class="apply-link enquire-link fulltime-link award-link-<?php echo $award->name; ?>">Enquire about <strong><?php echo $course->programme_title; ?> <?php echo $award->name; ?> - <span class="apply-type-link">Full time</span></strong></a>
+
+				<a href="<?php echo $prospectus ?>" class="apply-link prospectus-link fulltime-link award-link-<?php echo $award->name; ?>">Order a prospectus for <strong><?php echo $course->programme_title; ?> <?php echo $award->name; ?> - <span class="apply-type-link">Full time</span></strong></a>
+				<?php endforeach; ?>
+			<?php endif; ?>
+
 			</div>
 			<?php endif; ?>
 
