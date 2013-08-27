@@ -68,9 +68,7 @@
 		<?php endif; ?>
 	
 		<h4>Graduate School</h4>
-		<ul>
-			<li><?php echo $course->globals->graduate_school; ?></li>
-		</ul>
+		<?php echo $course->globals->graduate_school; ?>
 		
 	</section>
 
