@@ -3,45 +3,31 @@
 
 	<?php if(!empty($course->how_to_apply)): ?>
 		<div class="apply-details">
+
+		<?php if ( trim($course->mode_of_study) != 'Part-time only' ): ?>
 			<?php echo $course->how_to_apply; ?>
+			<?php if ( $course->location[0]->name == 'Medway' ): ?>
+				<?php echo $course->how_to_apply_medway_fulltime; ?>
+			<?php endif; ?>
+		<?php endif; ?>
+
+		<?php if ( trim($course->mode_of_study) == 'Full-time or part-time' || trim($course->mode_of_study) == 'Part-time only' ): ?>
+			<?php echo $course->how_to_apply_parttime; ?>
+		<?php endif; ?>
+
 		</div>
   	<?php endif; ?>
     
+    <?php if ( trim($course->mode_of_study) != 'Full-time only' ): ?>
 	<form id="ug_apply_form">
-		<div class="form-row<?php echo trim($course->mode_of_study) != 'Full-time or part-time' ? ' form-row-study-type' : ''; ?>">
-			<label for="apply-study-type">Type of study</label>
-			<select id="apply-study-type">
-				<option value="ft">Full-time</option>
-				<option value="pt">Part-time</option>
-			</select>
-	    </div>
-		
-		<?php if ( trim($course->mode_of_study) == 'Part-time only' || trim($course->mode_of_study) == 'Full-time or part-time'): ?>
 			<?php
-			$text = 'Part time';
 			$apply = 'https://evision.kent.ac.uk/ipp/';
 			if ($course->parttime_mcr_code != '') {
 				$apply = 'https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&code1=' . $course->parttime_mcr_code . '&code2=0001';
 			}
 			?>
-			<?php if ( trim($course->mode_of_study) == 'Full-time or part-time' ): ?>
-			<div class="courses-sits-apply-parttime">
-			<?php else: ?>
-			<div class="courses-sits-apply-parttime-only">
-			<?php endif; ?>
-				<a href="<?php echo $apply ?>" class="apply-link">Apply for <strong><?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?></strong> - <span class="apply-type-link">Part time</span></a>
-			</div>
-		<?php endif; ?>
-
-		<?php if ( trim($course->mode_of_study) == 'Full-time only' || trim($course->mode_of_study) == 'Full-time or part-time'): ?>
-			<div class="courses-sits-apply-fulltime">
-				<a href="http://ucas.com/apply" class="apply-link">Apply for <strong><?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?></strong> - <span class="apply-type-link">Full time</span></a>
-			</div>
-		<?php endif; ?>
-
-
-
+			<a href="<?php echo $apply ?>" class="apply-link">Apply for <strong><?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?></strong> - <span class="apply-type-link">Part time</span></a>
 	</form>
-	
+	<?php endif; ?>
 
 </div>
