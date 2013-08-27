@@ -71,7 +71,7 @@
 		<div class="span5">
 			<div class="side-panel">
 			<div class="panel admission-links">
-				<a href="#" onclick="pantheon.show_tab('apply');" class="apply-adm-link">Apply</a>, <a href="#" onclick="pantheon.show_tab('enquiries');" class="enquire-adm-link">enquire</a> or <a href="#" onclick="pantheon.show_tab('enquiries');" class="pros-adm-link">order a prospectus</a>
+				<a href="#ug_apply_form" class="apply-adm-link">Apply</a>, <a href="#ug_enquiries_form" class="enquire-adm-link">enquire</a> or <a href="#ug_enquiries_form" class="pros-adm-link">order a prospectus</a>
 			</div>
 
 			<aside class="key-facts-container">
