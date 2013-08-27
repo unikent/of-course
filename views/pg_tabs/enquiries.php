@@ -62,11 +62,15 @@
 			
 		<?php else: ?>
 		<h4>School website</h4>
-		<a href="<?php echo $course->school_website ?>"><?php echo $course->administrative_school[0]->name ?></a>
+		<ul>
+			<li><a href="<?php echo $course->school_website ?>"><?php echo $course->administrative_school[0]->name ?></a></li>
+		</ul>
 		<?php endif; ?>
 	
 		<h4>Graduate School</h4>
-		<?php echo $course->globals->graduate_school; ?>
+		<ul>
+			<li><?php echo $course->globals->graduate_school; ?></li>
+		</ul>
 		
 	</section>
 
