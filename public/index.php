@@ -56,6 +56,10 @@ Flight::route('/@level:undergraduate|postgraduate/search/@search_type/@search_st
 Flight::route('/@level:undergraduate|postgraduate/search', array($main,'search_noyear'));
 Flight::route('/@level:undergraduate|postgraduate/@year:[0-9]+/search', array($main,'search'));
 
+// New courses
+Flight::route('/@level:undergraduate|postgraduate/@year:[0-9]+/new', array($main,'new_courses'));
+Flight::route('/@level:undergraduate|postgraduate/new', array($main,'new_courses_noyear'));
+
 //Subject leaflets
 Flight::route('/@level:undergraduate|postgraduate/@year:[0-9]+/leaflets', array($main,'leaflets'));
 
