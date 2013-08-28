@@ -109,13 +109,17 @@
 	<h3>Contacts</h3>
 
 	<?php if(!empty($course->globals->enquiries)): ?>
+		<div class="contacts-enquiries">
 		<h4>Admissions enquiries</h4>
 		<?php echo $course->globals->enquiries ?>
+		</div>
 	<?php endif; ?>
 
 	<?php if( ! empty($course->enquiries) ): ?>
+		<div class="contacts-enquiries">
 		<h4>Subject enquiries</h4>
 		<?php echo $course->enquiries ?>
+		</div>
 	<?php endif; ?>
 
 	<section class="info-subsection">
