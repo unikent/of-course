@@ -16,7 +16,7 @@
 		<?php echo $staff->blurb ?>
 
 		<?php if($staff->profile_url != ''): ?>
-			<a href="//<?php echo $staff->profile_url ?>">Profile</a>
+			<a href="<?php echo $staff->profile_url ?>">Profile</a>
 		<?php endif; ?>
 	</div>
 	<?php endif; ?>
