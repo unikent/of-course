@@ -37,6 +37,12 @@
 
 		<?php $sits_url = 'https://esd.kent.ac.uk/aspx_shared/newuser.aspx?'; ?>
 			<?php /* part-time links */ if ( trim($course->mode_of_study) == 'Part-time only' || trim($course->mode_of_study) == 'Full-time or part-time'): ?>
+
+			<?php
+			$event_track_enquire = "onClick=\"_gaq.push(['t0._trackEvent', 'course-enquire-pg', 'click', '" . $course->programme_title . "-parttime']);\"";
+			$event_track_prospectus = "onClick=\"_gaq.push(['t0._trackEvent', 'course-prospectus-pg', 'click', '" . $course->programme_title . "-parttime']);\"";
+			?>
+
 			<?php if ( trim($course->mode_of_study) == 'Full-time or part-time' ): ?>
 			<div class="courses-sits-enquire courses-sits-enquire-parttime">
 			<?php else: ?>
@@ -47,23 +53,25 @@
 				<?php
 				$enquire = $sits_url . 'CCTC=KENT&UTYP=APP';
 				$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CCTC=KENT';
+				$event_track_enquire = "onClick=\"_gaq.push(['t0._trackEvent', 'course-enquire-pg', 'click', '" . $course->programme_title . "-" . $delivery->award_name . "-parttime-" . $delivery->mcr . "']);\"";
+				$event_track_prospectus = "onClick=\"_gaq.push(['t0._trackEvent', 'course-prospectus-pg', 'click', '" . $course->programme_title . "-" . $delivery->award_name . "-parttime-" . $delivery->mcr . "']);\"";
 				if ($delivery->mcr != '') {
 					$enquire = $sits_url . 'CourseCode=' . $delivery->mcr . '&CCTC=KENT&UTYP=APP&EnquiryCategoryCode=10';
 					$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CourseCode=' . $delivery->mcr . '&CCTC=KENT';
 				}
 				?>
-				<a href="<?php echo $enquire ?>" class="apply-link enquire-link parttime-link award-link-<?php echo $delivery->award_name ?>">Enquire about <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?><?php echo $delivery->description != '' ? ' - ' . $delivery->description : ''?> - <span class="apply-type-link">Part time</span></strong></a>
+				<a href="<?php echo $enquire ?>" class="apply-link enquire-link parttime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track_enquire ?>>Enquire about <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?><?php echo $delivery->description != '' ? ' - ' . $delivery->description : ''?> - <span class="apply-type-link">Part time</span></strong></a>
 
-				<a href="<?php echo $prospectus ?>" class="apply-link prospectus-link parttime-link award-link-<?php echo $delivery->award_name ?>">Order a prospectus for <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?><?php echo $delivery->description != '' ? ' - ' . $delivery->description : ''?> - <span class="apply-type-link">Part time</span></strong></a>
+				<a href="<?php echo $prospectus ?>" class="apply-link prospectus-link parttime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track_prospectus ?>>Order a prospectus for <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?><?php echo $delivery->description != '' ? ' - ' . $delivery->description : ''?> - <span class="apply-type-link">Part time</span></strong></a>
 				<?php endif; ?>
 			<?php endforeach; ?>
 
 			<?php /* in case there are no deliveries, just show a basic set of links */ if ( empty($course->deliveries) ): ?>
 				<?php $enquire = $sits_url . 'CCTC=KENT&UTYP=APP'; $prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CCTC=KENT';?>
 				<?php foreach($course->award as $award): ?>
-				<a href="<?php echo $enquire ?>" class="apply-link enquire-link parttime-link award-link-<?php echo $award->name; ?>">Enquire about <strong><?php echo $course->programme_title; ?> <?php echo $award->name; ?> - <span class="apply-type-link">Part time</span></strong></a>
+				<a href="<?php echo $enquire ?>" class="apply-link enquire-link parttime-link award-link-<?php echo $award->name; ?>" <?php echo $event_track_enquire ?>>Enquire about <strong><?php echo $course->programme_title; ?> <?php echo $award->name; ?> - <span class="apply-type-link">Part time</span></strong></a>
 
-				<a href="<?php echo $prospectus ?>" class="apply-link prospectus-link parttime-link award-link-<?php echo $award->name; ?>">Order a prospectus for <strong><?php echo $course->programme_title; ?> <?php echo $award->name; ?> - <span class="apply-type-link">Part time</span></strong></a>
+				<a href="<?php echo $prospectus ?>" class="apply-link prospectus-link parttime-link award-link-<?php echo $award->name; ?>" <?php echo $event_track_prospectus ?>>Order a prospectus for <strong><?php echo $course->programme_title; ?> <?php echo $award->name; ?> - <span class="apply-type-link">Part time</span></strong></a>
 				<?php endforeach; ?>
 			<?php endif; ?>
 
@@ -71,29 +79,37 @@
 			<?php endif; ?>
 
 			<?php /* full-time links */ if ( trim($course->mode_of_study) == 'Full-time only' || trim($course->mode_of_study) == 'Full-time or part-time'): ?>
+
+			<?php
+			$event_track_enquire = "onClick=\"_gaq.push(['t0._trackEvent', 'course-enquire-pg', 'click', '" . $course->programme_title . "-fulltime']);\"";
+			$event_track_prospectus = "onClick=\"_gaq.push(['t0._trackEvent', 'course-prospectus-pg', 'click', '" . $course->programme_title . "-fulltime']);\"";
+			?>
+
 			<div class="courses-sits-enquire courses-sits-enquire-fulltime">
 			<?php foreach ($course->deliveries as $delivery): ?>
 				<?php if ($delivery->attendance_pattern == 'full-time'): ?>
 				<?php
 				$enquire = $sits_url . 'CCTC=KENT&UTYP=APP';
 				$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CCTC=KENT';
+				$event_track_enquire = "onClick=\"_gaq.push(['t0._trackEvent', 'course-enquire-pg', 'click', '" . $course->programme_title . "-" . $delivery->award_name . "-fulltime-" . $delivery->mcr . "']);\"";
+				$event_track_prospectus = "onClick=\"_gaq.push(['t0._trackEvent', 'course-prospectus-pg', 'click', '" . $course->programme_title . "-" . $delivery->award_name . "-fulltime-" . $delivery->mcr . "']);\"";
 				if ($delivery->mcr != '') {
 					$enquire = $sits_url . 'CourseCode=' . $delivery->mcr . '&CCTC=KENT&UTYP=APP&EnquiryCategoryCode=10';
 					$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CourseCode=' . $delivery->mcr . '&CCTC=KENT';
 				}
 				?>
-				<a href="<?php echo $enquire ?>" class="apply-link enquire-link fulltime-link award-link-<?php echo $delivery->award_name ?>">Enquire about <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?><?php echo $delivery->description != '' ? ' - ' . $delivery->description : ''?> - <span class="apply-type-link">Full time</span></strong></a>
+				<a href="<?php echo $enquire ?>" class="apply-link enquire-link fulltime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track_enquire ?>>Enquire about <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?><?php echo $delivery->description != '' ? ' - ' . $delivery->description : ''?> - <span class="apply-type-link">Full time</span></strong></a>
 
-				<a href="<?php echo $prospectus ?>" class="apply-link prospectus-link fulltime-link award-link-<?php echo $delivery->award_name ?>">Order a prospectus for <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?><?php echo $delivery->description != '' ? ' - ' . $delivery->description : ''?> - <span class="apply-type-link">Full time</span></strong></a>
+				<a href="<?php echo $prospectus ?>" class="apply-link prospectus-link fulltime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track_prospectus ?>>Order a prospectus for <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?><?php echo $delivery->description != '' ? ' - ' . $delivery->description : ''?> - <span class="apply-type-link">Full time</span></strong></a>
 				<?php endif; ?>
 			<?php endforeach; ?>
 
 			<?php /* in case there are no deliveries, just show a basic set of links */ if ( empty($course->deliveries) ): ?>
 				<?php $enquire = $sits_url . 'CCTC=KENT&UTYP=APP'; $prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CCTC=KENT';?>
 				<?php foreach($course->award as $award): ?>
-				<a href="<?php echo $enquire ?>" class="apply-link enquire-link fulltime-link award-link-<?php echo $award->name; ?>">Enquire about <strong><?php echo $course->programme_title; ?> <?php echo $award->name; ?> - <span class="apply-type-link">Full time</span></strong></a>
+				<a href="<?php echo $enquire ?>" class="apply-link enquire-link fulltime-link award-link-<?php echo $award->name; ?>" <?php echo $event_track_enquire ?>>Enquire about <strong><?php echo $course->programme_title; ?> <?php echo $award->name; ?> - <span class="apply-type-link">Full time</span></strong></a>
 
-				<a href="<?php echo $prospectus ?>" class="apply-link prospectus-link fulltime-link award-link-<?php echo $award->name; ?>">Order a prospectus for <strong><?php echo $course->programme_title; ?> <?php echo $award->name; ?> - <span class="apply-type-link">Full time</span></strong></a>
+				<a href="<?php echo $prospectus ?>" class="apply-link prospectus-link fulltime-link award-link-<?php echo $award->name; ?>" <?php echo $event_track_prospectus ?>>Order a prospectus for <strong><?php echo $course->programme_title; ?> <?php echo $award->name; ?> - <span class="apply-type-link">Full time</span></strong></a>
 				<?php endforeach; ?>
 			<?php endif; ?>
 
