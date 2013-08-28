@@ -1,5 +1,11 @@
 <h2>Programme structure</h2>
 
+<?php if(!empty($course->programme_overview)):?>
+	<p><?php echo $course->programme_overview; ?></p>
+<?php endif;?>
+
+<h3>Modules</h3>
+
 <?php echo $course->modules_intro; ?>
 
 <?php
@@ -69,14 +75,15 @@
 
 
 <section class="info-section">
-	<h3>Learning outcomes</h3>
+	
 	<?php if(!empty($course->assessment)): ?>
-	<section class="info-subsection">
-		<h4>Assessment</h4>
-		<?php echo $course->assessment ?>
-	</section>
+		<h3>Assessment</h3>
+		<section class="info-subsection">
+			<?php echo $course->assessment ?>
+		</section>
 	<?php endif; ?>
-
+	
+	<h3>Learning outcomes</h3>
 	<?php if(!empty($course->programme_aims)): ?>
 	<section class="info-subsection">
 		<h4>Programme aims</h4>
