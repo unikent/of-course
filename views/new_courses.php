@@ -8,7 +8,9 @@
       <?php elseif ($level == 'postgraduate'): ?>
         <h1>New Postgraduate Courses A-Z</h1>
       <?php endif; ?>
-           
+    
+    <p>We have an exciting range of new courses available below.</p>
+    
     <table id="programme-list" class="table table-striped-search advanced-search-table">
         <thead>
           <tr>
