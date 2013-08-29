@@ -1,5 +1,6 @@
 <?php $year_for_url = empty($year) ? '' : ((strcmp($year, CoursesFrontEnd::$current_year) == 0) ? '' : $year . '/'); ?>
 
+<?php if(empty($course->subject_to_approval)): ?>
 <div class="panel admissions">
 
 	<h2>I would like to...</h2>
@@ -103,6 +104,7 @@
 	</form>
 	
 </div><!-- /panel admissions -->
+<?php endif; ?>
 
 
 <section class="info-section">
