@@ -45,6 +45,9 @@ Flight::route('/ajax/leaflets/@level:undergraduate|postgraduate/@year:[0-9]+', a
 // Preview
 Flight::route('/@level:undergraduate|postgraduate/preview/@hash', array($main,'preview'));
 
+// simpleview
+Flight::route('/@level:undergraduate|postgraduate/simpleview/@hash', array($main,'simpleview'));
+
 //XCRIP-CAP feed
 Flight::route('/@level:undergraduate|postgraduate/@year:[0-9]+/xcri', array($main, 'xcri_cap'));
 Flight::route('/@level:undergraduate|postgraduate/xcri', array($main, 'xcri_cap_noyear'));
