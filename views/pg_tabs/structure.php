@@ -4,11 +4,11 @@
 	<p><?php echo $course->programme_overview; ?></p>
 <?php endif;?>
 
-<h3>Modules</h3>
+<?php if(sizeof($course->modules > 1)): ?>
+	<h3>Modules</h3>
 
-<?php echo $course->modules_intro; ?>
+	<?php echo $course->modules_intro; ?>
 
-<?php var_dump($course->modules);exit(); ?>
 
 <?php
 	// get modules from all deliveries as unique lists
@@ -69,7 +69,7 @@
 	    </div>
 	<?php endif; ?>
 	
-	
+<?php endif; ?>	
 
 
 
