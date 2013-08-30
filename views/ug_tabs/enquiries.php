@@ -2,6 +2,7 @@
 
 <h2>Enquiries</h2>
 
+ <?php if(empty($course->subject_to_approval)): ?>
 <div class="panel admissions">
 	
 	<form id="ug_enquiries_form">
@@ -29,15 +30,16 @@
 		    </div>
 		</div>
 		
-		<?php $event_track = "onClick=\"_gaq.push(['t0._trackEvent', 'course-enquire-ug', 'click', 'enquire-link-ug-mcrcode']);\""; ?>
 		<?php $sits_url = 'https://esd.kent.ac.uk/aspx_shared/newuser.aspx?'; ?>
 		<?php if ( trim($course->mode_of_study) == 'Part-time only' || trim($course->mode_of_study) == 'Full-time or part-time'): ?>
 			<?php
 			$text = 'Part time';
 			$enquire = $sits_url . 'CCTC=KENT&UTYP=APP';
 			$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CCTC=KENT';
+
 			$event_track_enquire = "onClick=\"_gaq.push(['t0._trackEvent', 'course-enquire-ug', 'click', '" . $course->programme_title . "-" . $course->award[0]->name . "-parttime-" . $course->parttime_mcr_code . "']);\"";
 			$event_track_prospectus = "onClick=\"_gaq.push(['t0._trackEvent', 'course-prospectus-ug', 'click', '" . $course->programme_title . "-" . $course->award[0]->name . "-parttime-" . $course->parttime_mcr_code . "']);\"";
+
 			if ($course->parttime_mcr_code != '') {
 				$enquire = $sits_url . 'CourseCode=' . $course->parttime_mcr_code . '&CCTC=KENT&UTYP=APP&EnquiryCategoryCode=10';
 				$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CourseCode=' . $course->parttime_mcr_code . '&CCTC=KENT';
@@ -73,12 +75,11 @@
 			</div>
 		<?php endif; ?>
 
-
-		
-
 	</form>
 	
 </div><!-- /panel admissions -->
+<?php endif; ?>
+
 
 <section class="info-section">
 	<h3>Contacts</h3>

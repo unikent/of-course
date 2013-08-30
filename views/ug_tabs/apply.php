@@ -17,7 +17,8 @@
 
 		</div>
   	<?php endif; ?>
-    
+
+ <?php if(empty($course->subject_to_approval)): ?>
     <?php if ( trim($course->mode_of_study) != 'Full-time only' ): ?>
 	<form id="ug_apply_form">
 			<?php
@@ -30,5 +31,5 @@
 			<a href="<?php echo $apply ?>" class="apply-link" <?php echo $event_track ?>>Apply for <strong><?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?></strong> - <span class="apply-type-link">Part time</span></a>
 	</form>
 	<?php endif; ?>
-
+<?php endif; ?>
 </div>

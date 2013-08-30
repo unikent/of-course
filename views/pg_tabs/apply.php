@@ -8,6 +8,7 @@
 		</div>
 	<?php endif; ?>
 
+<?php if(empty($course->subject_to_approval)): ?>
 	<?php if ( !empty($course->deliveries) ): ?>
 	<form id="ug_apply_form">
 		<div class="form-row<?php echo trim($course->mode_of_study) != 'Full-time or part-time' ? ' form-row-study-type' : ''; ?>">
@@ -29,8 +30,7 @@
 
 
 		<?php if ( trim($course->mode_of_study) == 'Part-time only' || trim($course->mode_of_study) == 'Full-time or part-time'): ?>
-
-			<?php $event_track = "onClick=\"_gaq.push(['t0._trackEvent', 'course-apply-pg', 'click', '" . $course->programme_title . "-parttime']);\""; ?>
+			
 			<?php if ( trim($course->mode_of_study) == 'Full-time or part-time' ): ?>
 			<div class="courses-sits-apply courses-sits-apply-parttime">
 			<?php else: ?>
@@ -72,5 +72,5 @@
 
 	</form>
 	<?php endif; ?>
-	
+<?php endif; ?>	
 </div>
