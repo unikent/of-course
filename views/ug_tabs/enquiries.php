@@ -2,6 +2,7 @@
 
 <h2>Enquiries</h2>
 
+ <?php if(empty($course->subject_to_approval)): ?>
 <div class="panel admissions">
 	
 	<form id="ug_enquiries_form">
@@ -35,6 +36,10 @@
 			$text = 'Part time';
 			$enquire = $sits_url . 'CCTC=KENT&UTYP=APP';
 			$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CCTC=KENT';
+
+			$event_track_enquire = "onClick=\"_gaq.push(['t0._trackEvent', 'course-enquire-ug', 'click', '" . $course->programme_title . "-" . $course->award[0]->name . "-parttime-" . $course->parttime_mcr_code . "']);\"";
+			$event_track_prospectus = "onClick=\"_gaq.push(['t0._trackEvent', 'course-prospectus-ug', 'click', '" . $course->programme_title . "-" . $course->award[0]->name . "-parttime-" . $course->parttime_mcr_code . "']);\"";
+
 			if ($course->parttime_mcr_code != '') {
 				$enquire = $sits_url . 'CourseCode=' . $course->parttime_mcr_code . '&CCTC=KENT&UTYP=APP&EnquiryCategoryCode=10';
 				$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CourseCode=' . $course->parttime_mcr_code . '&CCTC=KENT';
@@ -45,9 +50,9 @@
 			<?php else: ?>
 			<div class="courses-sits-enquire courses-sits-enquire-parttime-only">
 			<?php endif; ?>
-				<a href="<?php echo $enquire ?>" class="apply-link enquire-link parttime-link">Enquire about <strong><?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?></strong> - <span class="apply-type-link"><?php echo $text ?></span></a>
+				<a href="<?php echo $enquire ?>" class="apply-link enquire-link parttime-link" <?php echo $event_track_enquire ?>>Enquire about <strong><?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?></strong> - <span class="apply-type-link"><?php echo $text ?></span></a>
 
-				<a href="<?php echo $prospectus ?>" class="apply-link prospectus-link parttime-link">Order a prospectus for <strong><?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?></strong> - <span class="apply-type-link"><?php echo $text ?></span></a>
+				<a href="<?php echo $prospectus ?>" class="apply-link prospectus-link parttime-link" <?php echo $event_track_prospectus ?>>Order a prospectus for <strong><?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?></strong> - <span class="apply-type-link"><?php echo $text ?></span></a>
 			</div>
 		<?php endif; ?>
 
@@ -56,24 +61,25 @@
 				$text = 'Full time';
 				$enquire = $sits_url . 'CCTC=KENT&UTYP=APP';
 				$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CCTC=KENT';
+				$event_track_enquire = "onClick=\"_gaq.push(['t0._trackEvent', 'course-enquire-ug', 'click', '" . $course->programme_title . "-" . $course->award[0]->name . "-fulltime-" . $course->fulltime_mcr_code . "']);\"";
+				$event_track_prospectus = "onClick=\"_gaq.push(['t0._trackEvent', 'course-prospectus-ug', 'click', '" . $course->programme_title . "-" . $course->award[0]->name . "-fulltime-" . $course->fulltime_mcr_code . "']);\"";
 				if ($course->fulltime_mcr_code != '') {
 					$enquire = $sits_url . 'CourseCode=' . $course->fulltime_mcr_code . '&CCTC=KENT&UTYP=APP&EnquiryCategoryCode=10';
 					$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CourseCode=' . $course->fulltime_mcr_code . '&CCTC=KENT';
 				}
 			?>
 			<div class="courses-sits-enquire courses-sits-enquire-fulltime">
-				<a href="<?php echo $enquire ?>" class="apply-link enquire-link fulltime-link">Enquire about <strong><?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?></strong> - <span class="apply-type-link"><?php echo $text ?></span></a>
+				<a href="<?php echo $enquire ?>" class="apply-link enquire-link fulltime-link" <?php echo $event_track_enquire ?>>Enquire about <strong><?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?></strong> - <span class="apply-type-link"><?php echo $text ?></span></a>
 
-				<a href="<?php echo $prospectus ?>" class="apply-link prospectus-link fulltime-link">Order a prospectus for <strong><?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?></strong> - <span class="apply-type-link"><?php echo $text ?></span></a>
+				<a href="<?php echo $prospectus ?>" class="apply-link prospectus-link fulltime-link" <?php echo $event_track_prospectus ?>>Order a prospectus for <strong><?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?></strong> - <span class="apply-type-link"><?php echo $text ?></span></a>
 			</div>
 		<?php endif; ?>
-
-
-		
 
 	</form>
 	
 </div><!-- /panel admissions -->
+<?php endif; ?>
+
 
 <section class="info-section">
 	<h3>Contacts</h3>
@@ -151,6 +157,6 @@
 	</div>
 	<div class="span5">
 		<?php $ukprn = (isset($course->kis_institution_id) && $course->kis_institution_id != '') ? $course->kis_institution_id : $course->globals->ukprn; ?>
-		<iframe class="pull-right" id="unistats-widget-frame" title="Unistats KIS Widget" src="http://stg.unistats.eduserv.org.uk/Widget/<?php echo $ukprn ?>/<?php echo str_replace(array('/', '|', ':', '&', '.', '>', '+', '#', ';', '?', '@', '='), '_', $course->kiscourseid); ?>/vertical/small/en-GB" scrolling="no" style="overflow: hidden; border: 0px none transparent; width: 190px; height: 500px;"> </iframe>
+		<iframe class="pull-right" id="unistats-widget-frame" title="Unistats KIS Widget" src="http://stg.unistats.eduserv.org.uk/Widget/<?php echo $ukprn ?>/<?php echo str_replace(array('/', '|', ':', '&', '.', '>', '+', '#', ';', '?', '@', '=', '!'), '_', $course->kiscourseid); ?>/vertical/small/en-GB" scrolling="no" style="overflow: hidden; border: 0px none transparent; width: 190px; height: 500px;"> </iframe>
 	</div>
 </div>
