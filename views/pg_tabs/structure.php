@@ -8,6 +8,8 @@
 
 <?php echo $course->modules_intro; ?>
 
+<?php var_dump($course->modules);exit(); ?>
+
 <?php
 	// get modules from all deliveries as unique lists
 	$module_list = array(); 
