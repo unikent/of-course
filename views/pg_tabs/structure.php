@@ -4,7 +4,7 @@
 	<p><?php echo $course->programme_overview; ?></p>
 <?php endif;?>
 
-<?php if(sizeof($course->modules > 1)): ?>
+<?php if(sizeof($course->modules) > 1): ?>
 	<h3>Modules</h3>
 
 	<?php echo $course->modules_intro; ?>
