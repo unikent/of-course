@@ -3,7 +3,7 @@
 <?php if(!empty($course->programme_overview)):?>
 	<p><?php echo $course->programme_overview; ?></p>
 <?php endif;?>
-<?php var_dump($course->modules);exit();?>
+
 <?php if(sizeof($course->modules) > 1): ?>
 	<h3>Modules</h3>
 
