@@ -13,12 +13,11 @@ class CoursesFrontEnd {
 	{
 		static::$pp = new ProgrammesPlant\API(XCRI_WEBSERVICE);
 
-/**
+
 		if (defined('CACHE_DIRECTORY') && is_dir(CACHE_DIRECTORY))
 		{
 		    static::$pp->with_cache('file')->directory(CACHE_DIRECTORY);
 		}
-**/
 
 		static::$pp->no_ssl_verification();
 	}
