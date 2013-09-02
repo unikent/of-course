@@ -4,6 +4,7 @@
 /menubin/
 vendor/
 bin/
+cache/
 composer.lock
 composer.phar
 .DS_Store
