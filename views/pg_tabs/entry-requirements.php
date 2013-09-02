@@ -13,34 +13,3 @@
 	<?php echo $course->english_language_requirements_intro_text ?>
 </section>
 <?php endif; ?>
-
-<table class="table table-striped pg-entry-requirements">
-	<thead>
-		<tr>
-			<th>Qualification</th>
-			<th>Rating</th>
-		</tr>
-	</thead>
-
-	<tbody>
-		<tr>
-			<td>IELTS</td>
-			<td>
-				<?php echo $course->ielts_english_language_requirement ?>
-			</td>
-		</tr>
-		<tr>
-			<td>TOEFL internet-based</td>
-			<td>
-				<?php echo $course->toefl_english_language_requirements ?>
-			</td>
-		</tr>
-		<tr>
-			<td>Pearson Test of English Academic (PTE academic)</td>
-			<td>
-				<?php echo $course->pearson_test_english_language_requirements ?>
-			</td>
-		</tr>
-
-	</tbody>
-</table>
