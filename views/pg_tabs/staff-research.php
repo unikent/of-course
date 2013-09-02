@@ -1,5 +1,8 @@
 <h2>Staff research interests</h2>
+
+<?php if ( strstr($course->programme_type, 'research') ): ?>
 <?php echo $course->staff_research_interests_intro ?>
+<?php endif; ?>
 
 <?php if (!empty($course->staff_profile_links)): ?>
 	<?php echo $course->staff_profile_links; ?>
