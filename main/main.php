@@ -147,6 +147,38 @@ class CoursesFrontEnd {
 
 		return Flight::layout($course->programme_level.'_course_page', array('course'=> $course));
 	}
+
+	/**
+	 * Display a simpleview page
+	 *
+	 * @param string $hash of simpleview
+	 */
+	public function simpleview($level, $hash)
+	{
+		try
+		{
+			$course = static::$pp->get_preview_programme($level, $hash);
+		}
+		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
+		{	
+			// We dont know enough to help the 404 out really
+			return Flight::notFound(array('error'=> $e));
+		}
+		catch(\Exception $e)
+		{
+			// Another error. Pretend it was a 404.
+			return Flight::error($e);
+		}
+
+		Flight::cachecheck();
+
+		// Debug option
+		if(isset($_GET['debug_performance'])){ inspect($course); }
+		
+		Flight::setup($course->year, null, false, true);
+
+		return Flight::render('simpleview_course_page', array('course'=> $course));
+	}
 	
 	/**
 	 * Get the XCRI feed
