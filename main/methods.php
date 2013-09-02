@@ -63,12 +63,14 @@
 	 * @param $year Year to be displayed
 	 * @param $level Undergraduate vs Postgraduate
 	 * @param $preview true|false
+	 * @param $simpleview true|false
 	 */
-	Flight::map('setup', function($year, $level, $preview = false){
+	Flight::map('setup', function($year, $level, $preview = false, $simpleview = false){
 		// Set data for view
 		Flight::view()->set('level', (!$level) ? 'undergraduate' : $level);
 		Flight::view()->set('year', $year);
 		Flight::view()->set('preview', $preview);
+		Flight::view()->set('simpleview', $simpleview);
 	});
 
 	/**
