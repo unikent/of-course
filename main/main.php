@@ -157,7 +157,7 @@ class CoursesFrontEnd {
 	{
 		try
 		{
-			$course = static::$pp->get_simpleview_programme($level, $hash);
+			$course = static::$pp->get_preview_programme($level, $hash);
 		}
 		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
 		{	
