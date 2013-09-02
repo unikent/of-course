@@ -4,7 +4,9 @@
 	<p><?php echo $course->programme_overview; ?></p>
 <?php endif;?>
 
-<?php if(sizeof($course->modules) > 1): ?>
+<?php if((empty($course->modules[0])) || empty($course->modules[0]->stages)): ?>
+	
+<?php else: ?>
 	<h3>Modules</h3>
 
 	<?php echo $course->modules_intro; ?>
