@@ -4,9 +4,13 @@
 	<p><?php echo $course->programme_overview; ?></p>
 <?php endif;?>
 
-<h3>Modules</h3>
+<?php if((empty($course->modules[0])) || empty($course->modules[0]->stages)): ?>
+	
+<?php else: ?>
+	<h3>Modules</h3>
 
-<?php echo $course->modules_intro; ?>
+	<?php echo $course->modules_intro; ?>
+
 
 <?php
 	// get modules from all deliveries as unique lists
@@ -67,7 +71,7 @@
 	    </div>
 	<?php endif; ?>
 	
-	
+<?php endif; ?>	
 
 
 
