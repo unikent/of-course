@@ -4,7 +4,17 @@
 	<p><?php echo $course->programme_overview; ?></p>
 <?php endif;?>
 
-<?php if((empty($course->modules[0])) || empty($course->modules[0]->stages)): ?>
+<?php $emptystages = true;?>
+
+<?php
+foreach($course->modules as $module){
+	if(!empty($module->stages)){
+		$emptystages = false;
+	}
+}	
+?>
+
+<?php if((empty($course->modules[0])) || $emptystages): ?>
 	
 <?php else: ?>
 	<h3>Modules</h3>
