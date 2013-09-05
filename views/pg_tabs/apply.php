@@ -3,7 +3,7 @@
 	
 	<?php
 	$evision_url = "evision";
-	if((strpos($_SERVER['SERVER_NAME'], 'www-test')!==false) || (strpos($_SERVER['SERVER_NAME'], 'www-dev')!==false)){
+	if((strpos($_SERVER['SERVER_NAME'], 'www-wibble')!==false) || (strpos($_SERVER['SERVER_NAME'], 'www-dev')!==false)){
 		$evision_url = "evision-test";
 	}
 	?>
