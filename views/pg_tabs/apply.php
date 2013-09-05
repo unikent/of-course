@@ -1,5 +1,12 @@
 <div class="panel admissions">
 	<h2>Apply</h2>
+	
+	<?php
+	$evision_url = "evision";
+	if((strpos($_SERVER['SERVER_NAME'], 'www-test')!==false) || (strpos($_SERVER['SERVER_NAME'], 'www-dev')!==false)){
+		$evision_url = "evision-test";
+	}
+	?>
 
 
 	<?php if(!empty($course->how_to_apply)): ?>
@@ -9,6 +16,8 @@
 	<?php endif; ?>
 
 <?php if(empty($course->subject_to_approval)): ?>
+	
+	
 	<?php if ( !empty($course->deliveries) ): ?>
 	<form id="ug_apply_form">
 		<div class="form-row<?php echo trim($course->mode_of_study) != 'Full-time or part-time' ? ' form-row-study-type' : ''; ?>">
@@ -39,10 +48,11 @@
 			<?php foreach ($course->deliveries as $delivery): ?>
 				<?php if ($delivery->attendance_pattern == 'part-time'): ?>
 				<?php
-				$apply = 'https://evision.kent.ac.uk/ipp/';
+				
+				$apply = 'https://'.$evision_url.'.kent.ac.uk/ipp/';
 				$event_track = "onClick=\"_gaq.push(['t0._trackEvent', 'course-apply-pg', 'click', '" . $course->programme_title . "-" . $delivery->award_name . "-parttime-" . $delivery->mcr . "']);\"";
 				if ($delivery->mcr != '') {
-					$apply = 'https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&code1=' . $delivery->mcr . '&code2=0001';
+					$apply = 'https://'.$evision_url.'.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&code1=' . $delivery->mcr . '&code2=0001';
 				}
 				?>
 				<a href="<?php echo $apply ?>" class="apply-link parttime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track ?>>Apply for <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?></strong> - <span class="apply-type-link">Part time</span></a>
@@ -59,7 +69,7 @@
 				$apply = 'https://evision.kent.ac.uk/ipp/';
 				$event_track = "onClick=\"_gaq.push(['t0._trackEvent', 'course-apply-pg', 'click', '" . $course->programme_title . "-" . $delivery->award_name . "-fulltime-" . $delivery->mcr . "']);\"";
 				if ($delivery->mcr != '') {
-					$apply = 'https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&code1=' . $delivery->mcr . '&code2=0001';
+					$apply = 'https://'.$evision_url.'.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&code1=' . $delivery->mcr . '&code2=0001';
 				}
 				?>
 				<a href="<?php echo $apply ?>" class="apply-link fulltime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track ?>>Apply for <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?></strong> - <span class="apply-type-link">Full time</span></a>
