@@ -10,3 +10,7 @@ composer.phar
 .DS_Store
 node_modules
 .htaccess
+/public/undergraduate
+/public/postgraduate
+/public/postgrad
+/public/menu
