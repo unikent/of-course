@@ -20,7 +20,7 @@ $(document).ready(function(){
 	 * Module showhide
 	 */
 	$('.module-collapse').click(function() {
-	  $(this).find('i').toggleClass('icon-plus-sign').toggleClass('icon-minus-sign');
+	  $(this).find('i').toggleClass('icon-plus').toggleClass('icon-minus');
 	});
 
 	$('.form-row-study-type').hide();
