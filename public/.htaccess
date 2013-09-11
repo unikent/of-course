@@ -344,6 +344,57 @@ Redirect 301 /courses/undergrad/2013/subjects/music/music http://www.kent.ac.uk/
 Redirect 301 /courses/undergrad/2013/subjects/accounting-and-finance/accounting-and-finance http://www.kent.ac.uk/courses/undergraduate/235/accounting-and-finance
 Redirect 301 /courses/undergrad/2013/subjects/politics-and-international-relations/politics-and-international-relations-bidiplôme http://www.kent.ac.uk/courses/undergraduate/33/politics-and-international-relations-bidiplome
 
+
+###
+
+
+Redirect 301 /courses/undergrad/2013/subjects/business-administration/business-administration-and-english-language-and-linguistics http://www.kent.ac.uk/courses/undergraduate/200/business-administration-english-language-and-linguistics
+Redirect 301 /courses/undergrad/2013/subjects/english-language-and-linguistics/business-administration-and-english-language-and-linguistics http://www.kent.ac.uk/courses/undergraduate/200/business-administration-english-language-and-linguistics
+Redirect 301 /courses/undergrad/2013/subjects/history/history-and-english-american-and-postcolonial-literature http://www.kent.ac.uk/courses/undergraduate/316/history-and-english-american-and-postcolonial-literature
+Redirect 301 /courses/undergrad/2013/subjects/english-literature/history-and-english-american-and-postcolonial-literature http://www.kent.ac.uk/courses/undergraduate/316/history-and-english-american-and-postcolonial-literature
+Redirect 301 /courses/undergrad/2013/subjects/social-anthropology/sociology-and-social-anthropology-with-a-year-in-finland http://www.kent.ac.uk/courses/undergraduate/357/sociology-and-social-anthropology-year-finland
+Redirect 301 /courses/undergrad/2013/subjects/politics-and-international-relations/politics-and-international-relations-with-a-year-in-chinahong-kong http://www.kent.ac.uk/courses/undergraduate/35/politics-and-international-relations-with-a-year-in-china-hong-kong
+Redirect 301 /courses/undergrad/2013/subjects/intellectual-and-developmental-disabilities/intellectual-and-developmental-disabilities http://www.kent.ac.uk/courses/undergraduate/240/intellectual-and-developmental-disabilities-bsc
+Redirect 301 /courses/undergrad/2013/subjects/english-language-and-linguistics/english-language-and-linguistics-and-comparative-literature http://www.kent.ac.uk/courses/undergraduate/382/comparative-literature-and-english-language-and-linguistics
+Redirect 301 /courses/undergrad/2013/subjects/cultural-studies/comparative-literature-and-cultural-studies http://www.kent.ac.uk/courses/undergraduate/198/cultural-studies-and-comparative-literature
+Redirect 301 /courses/undergrad/2013/subjects/comparative-literature/comparative-literature-and-cultural-studies http://www.kent.ac.uk/courses/undergraduate/198/cultural-studies-and-comparative-literature
+Redirect 301 /courses/undergrad/2013/subjects/drama-and-theatre/drama-and-theatre-4-years http://www.kent.ac.uk/courses/undergraduate/86/drama-and-theatre-mdrama
+Redirect 301 /courses/undergrad/2013/subjects/drama-and-theatre/drama-and-theatre-3-years http://www.kent.ac.uk/courses/undergraduate/114/drama-and-theatre
+Redirect 301 /courses/undergrad/2013/subjects/comparative-literature/comparative-literature-and-german http://www.kent.ac.uk/courses/undergraduate/345/german-and-comparative-literature
+Redirect 301 /courses/undergrad/2013/subjects/german/comparative-literature-and-german http://www.kent.ac.uk/courses/undergraduate/345/german-and-comparative-literature
+Redirect 301 /courses/undergrad/2013/subjects/law-at-canterbury/law-with-a-language-french-or-german-only http://www.kent.ac.uk/courses/undergraduate/law-with-a-language
+Redirect 301 /courses/undergrad/2013/subjects/law-at-canterbury/law-with-a-language-french-or-german-only http://www.kent.ac.uk/courses/undergraduate/law-with-a-language
+Redirect 301 /courses/undergrad/2013/subjects/computing-and-business-information-technology/computing-with-a-year-in-industry http://www.kent.ac.uk/courses/undergraduate/183/computing--with-a-year-in-industry
+Redirect 301 /courses/undergrad/2013/subjects/english-language-and-linguistics/business-administration-and-english-language-and-linguistics http://www.kent.ac.uk/courses/undergraduate/200/business-administration-english-language-and-linguistics
+Redirect 301 /courses/undergrad/2013/subjects/cultural-studies/comparative-literature-and-cultural-studies http://www.kent.ac.uk/courses/undergraduate/198/cultural-studies-and-comparative-literature
+Redirect 301 /courses/undergrad/2013/subjects/german/comparative-literature-and-german http://www.kent.ac.uk/courses/undergraduate/345/german-and-comparative-literature
+Redirect 301 /courses/undergrad/2013/subjects/computing---joint-honours/social-policy-with-computing http://www.kent.ac.uk/courses/undergraduate/computing
+Redirect 301 /courses/undergrad/2013/subjects/computing-and-business-information-technology/computing-with-a-year-in-industry http://www.kent.ac.uk/courses/undergraduate/183/computing--with-a-year-in-industry
+Redirect 301 /courses/undergrad/2013/subjects/drama-and-theatre/drama-and-theatre-3-years http://www.kent.ac.uk/courses/undergraduate/114/drama-and-theatre
+Redirect 301 /courses/undergrad/2013/subjects/drama-and-theatre/drama-and-theatre-4-years http://www.kent.ac.uk/courses/undergraduate/86/drama-and-theatre-mdrama
+Redirect 301 /courses/undergrad/2013/subjects/english-language-and-linguistics/english-language-and-linguistics-and-comparative-literature http://www.kent.ac.uk/courses/undergraduate/382/comparative-literature-and-english-language-and-linguistics
+Redirect 301 /courses/undergrad/2013/subjects/hispanic-studies/hispanic-studies-and-english-american-and-postcolonial-literature http://www.kent.ac.uk/courses/undergraduate/hispanic-studies
+Redirect 301 /courses/undergrad/2013/subjects/history/history-and-english-american-and-postcolonial-literature http://www.kent.ac.uk/courses/undergraduate/316/history-and-english-american-and-postcolonial-literature
+Redirect 301 /courses/undergrad/2013/subjects/philosophy/philosophy-and-english-american-and-postcolonial-literature http://www.kent.ac.uk/courses/undergraduate/philosophy
+Redirect 301 /courses/undergrad/2013/subjects/european-studies/european-studies-humanities-combined-languages http://www.kent.ac.uk/courses/undergraduate/125/european-studies-humanities-combined-languages
+Redirect 301 /courses/undergrad/2013/subjects/film/european-arts-film http://www.kent.ac.uk/courses/undergraduate/film
+Redirect 301 /courses/undergrad/2013/subjects/film/film-with-a-placement-year http://www.kent.ac.uk/courses/undergraduate/film
+Redirect 301 /courses/undergrad/2013/subjects/philosophy/history-of-science-and-philosophy http://www.kent.ac.uk/courses/undergraduate/philosophy
+Redirect 301 /courses/undergrad/2013/subjects/intellectual-and-developmental-disabilities/intellectual-and-developmental-disabilities http://www.kent.ac.uk/courses/undergraduate/240/intellectual-and-developmental-disabilities-bsc
+Redirect 301 /courses/undergrad/2013/subjects/international-foundation-programme/international-foundation-programme-biosciences http://www.kent.ac.uk/courses/undergraduate/international-foundation
+Redirect 301 /courses/undergrad/2013/subjects/international-foundation-programme/international-foundation-programme-computer-science http://www.kent.ac.uk/courses/undergraduate/international-foundation
+Redirect 301 /courses/undergrad/2013/subjects/international-foundation-programme/international-foundation-programme-electronic-engineering http://www.kent.ac.uk/courses/undergraduate/international-foundation
+Redirect 301 /courses/undergrad/2013/subjects/international-foundation-programme/international-foundation-programme-humanities http://www.kent.ac.uk/courses/undergraduate/international-foundation
+Redirect 301 /courses/undergrad/2013/subjects/international-foundation-programme/international-foundation-programme-social-sciences-business-pathway-only-january-intake http://www.kent.ac.uk/courses/undergraduate/international-foundation
+Redirect 301 /courses/undergrad/2013/subjects/international-foundation-programme/international-foundation-programme-social-sciences http://www.kent.ac.uk/courses/undergraduate/international-foundation
+Redirect 301 /courses/undergrad/2013/subjects/law-at-canterbury/law-with-a-language-french-or-german-only http://www.kent.ac.uk/courses/undergraduate/law-with-a-language
+Redirect 301 /courses/undergrad/2013/subjects/mathematics-and-statistics/mathematics-mmath http://www.kent.ac.uk/courses/undergraduate/385/mathematics
+Redirect 301 /courses/undergrad/2013/subjects/social-policy/philosophy-and-social-policy http://www.kent.ac.uk/courses/undergraduate/social-policy
+Redirect 301 /courses/undergrad/2013/subjects/politics-and-international-relations/politics-and-international-relations-with-a-year-in-chinahong-kong http://www.kent.ac.uk/courses/undergraduate/35/politics-and-international-relations-with-a-year-in-china-hong-kong
+Redirect 301 /courses/undergrad/2013/subjects/social-anthropology/sociology-and-social-anthropology-with-a-year-in-finland http://www.kent.ac.uk/courses/undergraduate/357/sociology-and-social-anthropology-year-finland
+
+
+
 # PG redirects
 Redirect 301 /courses/postgrad/subjects/law/international-law-with-international-relations-pdip-llm http://www.kent.ac.uk/courses/postgraduate/139/international-law-with-international-relations
 Redirect 301 /courses/postgrad/subjects/social-and-community-care/analysis-and-intervention-in-intellectual-and-developmental-disabilities-pdip-msc http://www.kent.ac.uk/courses/postgraduate/94/analysis-and-intervention-in-intellectual-and-developmental-disabilities
@@ -580,6 +631,13 @@ Redirect 301 /courses/postgrad/subjects/philosophy/philosophy-ma-phd http://www.
 Redirect 301 /courses/postgrad/subjects/business/industrial-relations-phd http://www.kent.ac.uk/courses/postgraduate/313/industrial-relations
 Redirect 301 /courses/postgrad/subjects/law/criminal-justice-pdip-llm http://www.kent.ac.uk/courses/postgraduate/114/criminal-justice
 Redirect 301 /courses/postgrad/subjects/engineering-and-digital-arts/electronic-engineering-msc-mphil-phd http://www.kent.ac.uk/courses/postgraduate/262/electronic-engineering
+
+
+
+
+
+
+
 
 
 RewriteEngine On
