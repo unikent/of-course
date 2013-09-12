@@ -59,7 +59,7 @@
 							<a href="<?php echo $apply ?>" class="apply-link parttime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track ?>>Apply for <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?></strong> - <span class="apply-type-link">Part time</span></a>
 						<?php endif; ?>
 					<?php else: ?>
-						<p class="apply-link parttime-link award-link-<?php echo $delivery->award_name ?>"><strong><?php echo $course->programme_title; ?><?php echo $delivery->award_name; ?></strong><br /><br />This course is not currently open for applications. If you would like to be informed when we are accepting applications, please email <a href="mailto:information@kent.ac.uk">information@kent.ac.uk</a>.</p>
+						<p class="apply-link parttime-link award-link-<?php echo $delivery->award_name ?>"><strong><?php echo $course->programme_title; ?> - <?php echo $delivery->award_name; ?></strong><br /><br />This course is not currently open for applications. If you would like to be informed when we are accepting applications, please email <a href="mailto:information@kent.ac.uk">information@kent.ac.uk</a>.</p>
 					<?php endif; ?>
 				<?php endif; ?>
 			<?php endforeach; ?>
@@ -85,7 +85,7 @@
 							
 						<?php endif;?>
 					<?php else: ?>
-						<p class="apply-link fulltime-link award-link-<?php echo $delivery->award_name ?>"><strong><?php echo $course->programme_title; ?><?php echo $delivery->award_name; ?></strong><br /><br />This course is not currently open for applications. If you would like to be informed when we are accepting applications, please email <a href="mailto:information@kent.ac.uk">information@kent.ac.uk</a>.</p>
+						<p class="apply-link fulltime-link award-link-<?php echo $delivery->award_name ?>"><strong><?php echo $course->programme_title; ?> - <?php echo $delivery->award_name; ?></strong><br /><br />This course is not currently open for applications. If you would like to be informed when we are accepting applications, please email <a href="mailto:information@kent.ac.uk">information@kent.ac.uk</a>.</p>
 					<?php endif;?>
 				<?php endif; ?>
 			<?php endforeach; ?>
