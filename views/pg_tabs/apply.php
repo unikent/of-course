@@ -47,23 +47,20 @@
 			<?php endif; ?>
 			<?php foreach ($course->deliveries as $delivery): ?>
 				<?php if ($delivery->attendance_pattern == 'part-time'): ?>
-					<?php if ($delivery->mcr != ''): ?>
-					
-						<?php
-						//$apply = 'https://'.$evision_url.'.kent.ac.uk/ipp/';
-						$event_track = "onClick=\"_gaq.push(['t0._trackEvent', 'course-apply-pg', 'click', '" . $course->programme_title . "-" . $delivery->award_name . "-parttime-" . $delivery->mcr . "']);\"";
-					
+					<?php
+				
+					$apply = 'https://'.$evision_url.'.kent.ac.uk/ipp/';
+					$event_track = "onClick=\"_gaq.push(['t0._trackEvent', 'course-apply-pg', 'click', '" . $course->programme_title . "-" . $delivery->award_name . "-parttime-" . $delivery->mcr . "']);\"";
+					if ($delivery->mcr != '') {
 						$apply = 'https://'.$evision_url.'.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&code1=' . $delivery->mcr . '&code2=0001';
-						?>
-						<?php if($delivery->description != ''):?>
-							<a href="<?php echo $apply ?>" class="apply-link parttime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track ?>>Apply for <strong><?php echo $delivery->description; ?></strong></a>
-						<?php else:?>
+					}
+					?>
+					<?php if($delivery->description != ''):?>
+						<a href="<?php echo $apply ?>" class="apply-link parttime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track ?>>Apply for <strong><?php echo $delivery->description; ?></strong></a>
+					<?php else:?>
 						<a href="<?php echo $apply ?>" class="apply-link parttime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track ?>>Apply for <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?></strong> - <span class="apply-type-link">Part time</span></a>
-						<?php endif;?>
-					<?php else: ?>
-						<p class="apply-link parttime-link award-link"><strong><?php echo $course->programme_title; ?><?php echo $delivery->award_name; ?></strong><br /><br />This course is not currently open for applications. If you would like to be informed when we are accepting applications, please email <a href="mailto:information@kent.ac.uk">information@kent.ac.uk</a>.</p>
-					<?php endif;?>
-				<?php endif;?>
+					<?php endif; ?>
+				<?php endif; ?>
 			<?php endforeach; ?>
 			</div>
 		<?php endif; ?>
@@ -72,28 +69,19 @@
 			<div class="courses-sits-apply courses-sits-apply-fulltime">
 			<?php foreach ($course->deliveries as $delivery): ?>
 				<?php if ($delivery->attendance_pattern == 'full-time'): ?>
-					<?php if($delivery->mcr != ''):?>
-					
-						<?php
-						//$apply = 'https://evision.kent.ac.uk/ipp/';
-					
-						$event_track = "onClick=\"_gaq.push(['t0._trackEvent', 'course-apply-pg', 'click', '" . $course->programme_title . "-" . $delivery->award_name . "-fulltime-" . $delivery->mcr . "']);\"";
-						
+					<?php
+					$apply = 'https://evision.kent.ac.uk/ipp/';
+					$event_track = "onClick=\"_gaq.push(['t0._trackEvent', 'course-apply-pg', 'click', '" . $course->programme_title . "-" . $delivery->award_name . "-fulltime-" . $delivery->mcr . "']);\"";
+					if ($delivery->mcr != '') {
 						$apply = 'https://'.$evision_url.'.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&code1=' . $delivery->mcr . '&code2=0001';
-					
-						?>
-						<?php if($delivery->description != ''):?>
-							<a href="<?php echo $apply ?>" class="apply-link fulltime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track ?>>Apply for <strong><?php echo $delivery->description; ?></strong></a>
-						<?php else:?>
-							<a href="<?php echo $apply ?>" class="apply-link fulltime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track ?>>Apply for <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?></strong> - <span class="apply-type-link">Full time</span></a>
-						<?php endif;?>
-					<?php else: ?>
-						<p class="apply-link fulltime-link award-link"><strong><?php echo $course->programme_title; ?><?php echo $delivery->award_name; ?></strong><br /><br />This course is not currently open for applications. If you would like to be informed when we are accepting applications, please email <a href="mailto:information@kent.ac.uk">information@kent.ac.uk</a>.</p>
-					
-					<?php endif; ?>
-				
+					}
+					?>
+					<?php if($delivery->description != ''):?>
+						<a href="<?php echo $apply ?>" class="apply-link fulltime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track ?>>Apply for <strong><?php echo $delivery->description; ?></strong></a>
+					<?php else:?>
+						<a href="<?php echo $apply ?>" class="apply-link fulltime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track ?>>Apply for <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?></strong> - <span class="apply-type-link">Full time</span></a>
+					<?php endif;?>
 				<?php endif; ?>
-			
 			<?php endforeach; ?>
 			</div>
 		<?php endif; ?>
