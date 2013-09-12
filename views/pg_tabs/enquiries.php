@@ -72,7 +72,7 @@
 				$event_track_enquire = "onClick=\"_gaq.push(['t0._trackEvent', 'course-enquire-pg', 'click', '" . $course->programme_title . "-parttime']);\"";
 				$event_track_prospectus = "onClick=\"_gaq.push(['t0._trackEvent', 'course-prospectus-pg', 'click', '" . $course->programme_title . "-parttime']);\"";
 				?>
-				<?php $enquire = $sits_url . 'CCTC=KENT&UTYP=APP'; $prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CCTC=KENT';?>
+				<?php $enquire = $sits_url . 'CourseCode='.$generic_pg_mcr.'&CCTC=KENT&UTYP=APP'; $prospectus = $sits_url . 'CourseCode='.$generic_pg_mcr.'&EnquiryCategoryCode=PRO&CCTC=KENT';?>
 				<?php foreach($course->award as $award): ?>
 				<a href="<?php echo $enquire ?>" class="apply-link enquire-link parttime-link award-link-<?php echo $award->name; ?>" <?php echo $event_track_enquire ?>>Enquire about <strong><?php echo $course->programme_title; ?> <?php echo $award->name; ?> - <span class="apply-type-link">Part time</span></strong></a>
 
