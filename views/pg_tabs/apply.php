@@ -56,7 +56,7 @@
 					}
 					?>
 					<?php if($delivery->description != ''):?>
-						<a href="<?php echo $apply ?>" class="apply-link parttime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track ?>>Apply for <strong><?php echo $delivery->description; ?></a>
+						<a href="<?php echo $apply ?>" class="apply-link parttime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track ?>>Apply for <strong><?php echo $delivery->description; ?></strong></a>
 					<?php else:?>
 						<a href="<?php echo $apply ?>" class="apply-link parttime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track ?>>Apply for <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?></strong> - <span class="apply-type-link">Part time</span></a>
 					<?php endif; ?>
@@ -77,7 +77,7 @@
 					}
 					?>
 					<?php if($delivery->description != ''):?>
-						<a href="<?php echo $apply ?>" class="apply-link fulltime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track ?>>Apply for <strong><?php echo $delivery->description; ?></a>
+						<a href="<?php echo $apply ?>" class="apply-link fulltime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track ?>>Apply for <strong><?php echo $delivery->description; ?></strong></a>
 					<?php else:?>
 						<a href="<?php echo $apply ?>" class="apply-link fulltime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track ?>>Apply for <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?></strong> - <span class="apply-type-link">Full time</span></a>
 					<?php endif;?>
