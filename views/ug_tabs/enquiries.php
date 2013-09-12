@@ -31,6 +31,7 @@
 		</div>
 		
 		<?php $sits_url = 'https://esd.kent.ac.uk/aspx_shared/newuser.aspx?'; ?>
+		<?php $generic_ug_mcr = 'AAGEN101';?>
 		<?php if ( trim($course->mode_of_study) == 'Part-time only' || trim($course->mode_of_study) == 'Full-time or part-time'): ?>
 			<?php
 			$text = 'Part time';
@@ -43,6 +44,10 @@
 			if ($course->parttime_mcr_code != '') {
 				$enquire = $sits_url . 'CourseCode=' . $course->parttime_mcr_code . '&CCTC=KENT&UTYP=APP&EnquiryCategoryCode=10';
 				$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CourseCode=' . $course->parttime_mcr_code . '&CCTC=KENT';
+			}
+			else{
+				$enquire = $sits_url . 'CourseCode=' . $generic_ug_mcr . '&CCTC=KENT&UTYP=APP&EnquiryCategoryCode=10';
+				$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CourseCode=' . $generic_uc_mcr . '&CCTC=KENT';
 			}
 			?>
 			<?php if ( trim($course->mode_of_study) == 'Full-time or part-time' ): ?>
@@ -66,6 +71,10 @@
 				if ($course->fulltime_mcr_code != '') {
 					$enquire = $sits_url . 'CourseCode=' . $course->fulltime_mcr_code . '&CCTC=KENT&UTYP=APP&EnquiryCategoryCode=10';
 					$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CourseCode=' . $course->fulltime_mcr_code . '&CCTC=KENT';
+				}
+				else{
+					$enquire = $sits_url . 'CourseCode=' . $generic_ug_mcr . '&CCTC=KENT&UTYP=APP&EnquiryCategoryCode=10';
+					$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CourseCode=' . $generic_ug_mcr . '&CCTC=KENT';
 				}
 			?>
 			<div class="courses-sits-enquire courses-sits-enquire-fulltime">
