@@ -65,13 +65,13 @@ $(document).ready(function(){
 		// now show relevant links
 		if ($('#apply-study-type').val() == 'ft') {
 			$('.courses-sits-apply > .fulltime-link' + applyawardlink).show();
-			if($('.courses-sits-apply > .fulltime-link' + applyawardlink)){
+			if($('.courses-sits-apply > .fulltime-link' + applyawardlink)[0]){
 				counter++;
 			}
 		}
 		if ($('#apply-study-type').val() == 'pt') {
 			$('.courses-sits-apply > .parttime-link' + applyawardlink).show();
-			if($('.courses-sits-apply > .parttime-link' + applyawardlink)){
+			if($('.courses-sits-apply > .parttime-link' + applyawardlink)[0]){
 				counter++;
 			}
 			
