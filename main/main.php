@@ -359,7 +359,7 @@ class CoursesFrontEnd {
 	public function ajax_search_data($level, $year)
 	{
 		// Cache json output for a minute or so (go faster!)
-		$output = Cache::get("courses-daedalus-search-json", function() use ($level, $year) {
+		$output = Cache::get("courses-daedalus-search-json-{$level}-{$year}", function() use ($level, $year) {
 
 			try
 			{
