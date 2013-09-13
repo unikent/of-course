@@ -97,7 +97,7 @@
 			</div>
 		<?php endif; ?>
 		
-		<p class="apply-link fulltime-link courses-sits-apply-hidden"><strong>No matching courses</strong><br /><br />There are currently no courses matching your selection. Please make a different selection.</p>
+		<p class="apply-link courses-sits-apply-hidden"><strong>No matching courses</strong><br /><br />There are currently no courses matching your selection. Please make a different selection.</p>
 
 			
 
