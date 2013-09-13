@@ -77,6 +77,8 @@ $(document).ready(function(){
 			
 		}
 		
+		alert(counter);
+		
 		if(counter == 0){
 			//show the 'no matching items' box
 			$('.courses-sits-apply-hidden').show();
