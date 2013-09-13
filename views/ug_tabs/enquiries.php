@@ -46,7 +46,7 @@
 				$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CourseCode=' . $course->parttime_mcr_code . '&CCTC=KENT';
 			}
 			else{
-				$enquire = $sits_url . 'CourseCode=' . $generic_ug_mcr . '&CCTC=KENT&UTYP=APP&EnquiryCategoryCode=10';
+				$enquire = $sits_url . 'CCTC=KENT&UTYP=APP&EnquiryCategoryCode=10';
 				$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CourseCode=' . $generic_uc_mcr . '&CCTC=KENT';
 			}
 			?>
@@ -73,7 +73,7 @@
 					$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CourseCode=' . $course->fulltime_mcr_code . '&CCTC=KENT';
 				}
 				else{
-					$enquire = $sits_url . 'CourseCode=' . $generic_ug_mcr . '&CCTC=KENT&UTYP=APP&EnquiryCategoryCode=10';
+					$enquire = $sits_url . 'CCTC=KENT&UTYP=APP&EnquiryCategoryCode=10';
 					$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CourseCode=' . $generic_ug_mcr . '&CCTC=KENT';
 				}
 			?>
