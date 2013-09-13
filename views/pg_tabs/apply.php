@@ -40,7 +40,7 @@
 			</select>
 		</div>
 		
-		<div class="clear"></div>
+		<div style="clear:both"></div>
 
 
 		<?php if ( trim($course->mode_of_study) == 'Part-time only' || trim($course->mode_of_study) == 'Full-time or part-time'): ?>
