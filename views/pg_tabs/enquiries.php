@@ -34,6 +34,7 @@
 					<?php endforeach; ?>
 				</select>
 			</div>
+			<div style="clear:both"></div>
 		</div>
 
 		<?php $sits_url = 'https://esd.kent.ac.uk/aspx_shared/newuser.aspx?'; ?>
