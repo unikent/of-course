@@ -68,6 +68,7 @@ $(document).ready(function(){
 			}
 			else{
 				$('.courses-sits-apply-hidden-ft').hide();
+				$('.courses-sits-apply-hidden-pt').hide();
 			}
 		}
 		if ($('#apply-study-type').val() == 'pt') {
@@ -77,6 +78,7 @@ $(document).ready(function(){
 			}
 			else{
 				$('.courses-sits-apply-hidden-pt').hide();
+				$('.courses-sits-apply-hidden-ft').hide();
 			}
 			
 		}
