@@ -59,27 +59,20 @@ $(document).ready(function(){
 			applyawardlink = ".award-link-" + $('#apply-study-award').val();
 		}
 		
-		//to show the 'there are no matching items' box
-		var counter = 0;
 
 		// now show relevant links
 		if ($('#apply-study-type').val() == 'ft') {
 			$('.courses-sits-apply > .fulltime-link' + applyawardlink).show();
 			if(!$('.fulltime-link' + applyawardlink).length){
-				counter++;
+				$('.courses-sits-apply-hidden-ft').show();
 			}
 		}
 		if ($('#apply-study-type').val() == 'pt') {
 			$('.courses-sits-apply > .parttime-link' + applyawardlink).show();
 			if(!$('.parttime-link' + applyawardlink).length){
-				counter++;
+				$('.courses-sits-apply-hidden-pt').show();
 			}
 			
-		}
-		
-		if(counter > 0){
-			//show the 'no matching items' box
-			$('.courses-sits-apply-hidden').show();
 		}
 
 	});
