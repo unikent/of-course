@@ -96,6 +96,10 @@
 			<?php endforeach; ?>
 			</div>
 		<?php endif; ?>
+		
+		<div class="courses-sits-apply courses-sits-apply-hidden" style="display:none">
+			<p class="apply-link fulltime-link"><strong>No matching course</strong><br /><br />There are currently no courses matching your selection. Please make a different selection.</p>
+		</div>
 
 			
 
