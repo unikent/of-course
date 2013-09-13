@@ -65,11 +65,16 @@ $(document).ready(function(){
 		// now show relevant links
 		if ($('#apply-study-type').val() == 'ft') {
 			$('.courses-sits-apply > .fulltime-link' + applyawardlink).show();
-			counter++;
+			if($('.courses-sits-apply > .fulltime-link' + applyawardlink)){
+				counter++;
+			}
 		}
 		if ($('#apply-study-type').val() == 'pt') {
 			$('.courses-sits-apply > .parttime-link' + applyawardlink).show();
-			counter++;
+			if($('.courses-sits-apply > .parttime-link' + applyawardlink)){
+				counter++;
+			}
+			
 		}
 		
 		if(counter == 0){
