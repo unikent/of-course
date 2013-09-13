@@ -66,11 +66,17 @@ $(document).ready(function(){
 			if(!$('.fulltime-link' + applyawardlink).length){
 				$('.courses-sits-apply-hidden-ft').show();
 			}
+			else{
+				$('.courses-sits-apply-hidden-ft').hide();
+			}
 		}
 		if ($('#apply-study-type').val() == 'pt') {
 			$('.courses-sits-apply > .parttime-link' + applyawardlink).show();
 			if(!$('.parttime-link' + applyawardlink).length){
 				$('.courses-sits-apply-hidden-pt').show();
+			}
+			else{
+				$('.courses-sits-apply-hidden-pt').hide();
 			}
 			
 		}
