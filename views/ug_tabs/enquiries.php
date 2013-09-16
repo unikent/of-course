@@ -47,7 +47,7 @@
 			}
 			else{
 				$enquire = $sits_url . 'CCTC=KENT&UTYP=APP&EnquiryCategoryCode=10';
-				$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CourseCode=' . $generic_uc_mcr . '&CCTC=KENT';
+				$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CourseCode=' . $generic_ug_mcr . '&CCTC=KENT';
 			}
 			?>
 			<?php if ( trim($course->mode_of_study) == 'Full-time or part-time' ): ?>
