@@ -1,142 +1,64 @@
-/* general course page styles */
-.daedalus .general_disclaimer {
-	margin-top: 0px;
-	padding: 20px 0 20px 0;
-	border-top: 1px solid rgb(221, 221, 221);
+.pg-entry-requirements td p {
+  margin-bottom: 0px;
 }
-
-.daedalus .info-section {
-	padding-bottom: 30px;
+.programme-scroll-menu {
+  display: none;
 }
-
-.daedalus .info-section h3 {
-	border-bottom: 1px solid rgb(58, 135, 173);
-	margin-bottom: 20px;
+.scroll-to-top {
+  display: none;
 }
-
-.daedalus .info-subsection {
-	padding: 5px 0;
+/* Course page tab responcive styles */
+@media (max-width: 990px) {
+  .daedalus-courses .daedalus-tabs .nav-tabs {
+    border-bottom: 0;
+  }
+  .daedalus-courses .daedalus-tabs .nav-tabs li {
+    width: 25%;
+    border: 0;
+  }
+  .daedalus-courses .daedalus-tabs .nav-tabs li a {
+    border: solid 1px #eee;
+    margin-bottom: 3px;
+    padding-right: 0;
+    padding-left: 0;
+    text-align: center;
+  }
+  .daedalus-courses .daedalus-tabs .nav-tabs li.active a {
+    background-color: #eeeeee;
+  }
 }
-
-
-/* key facts box */
-.daedalus .key-facts-container {
-	margin-left: 20px;
+@media (max-width: 700px) {
+  .daedalus-courses .daedalus-tabs .nav-tabs li {
+    width: 33%;
+  }
 }
-
-.daedalus .key-facts {
-	border-top: 1px solid rgb(58, 135, 173);
-	border-bottom: 1px solid rgb(58, 135, 173);
-	padding: 20px 0;
+@media (max-width: 480px) {
+  .daedalus-courses .daedalus-tabs .nav-tabs {
+    display: block;
+  }
+  .daedalus-courses .daedalus-tabs .nav-tabs li {
+    display: none;
+  }
+  .daedalus-courses .daedalus-tabs .programme-scroll-menu {
+    display: block;
+    width: 100%;
+  }
 }
-
-.daedalus .key-facts li {
-	padding: 4px 0;
+@media (max-width: 480px) {
+  a.scroll-to-top {
+    display: none;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: #5c5c5c;
+    border: 0;
+    opacity: 0.8;
+  }
 }
-
-
-/* module listings */
-.daedalus .module-read-more {
-	padding-bottom: 20px;
+.info-section .contacts-enquiries p {
+  margin-bottom: 0;
 }
-
-.daedalus .module-synopsis {
-	padding-left: 15px;
-}
-.daedalus li span.btn {
-	text-align: left;
-}
-
-
-/* related course carousel */
-.daedalus .carousel-control {
-	color: #fff;
-	text-decoration: none;
-	opacity: 0.7;
-	-webkit-transition: all 0.5s linear;
-	-moz-transition: all 0.5s linear;
-	-o-transition: all 0.5s linear;
-	-ms-transition: all 0.5s linear;
-	transition: all 0.5s linear;
-}
-
-.daedalus .carousel-control:hover {
-	color: #fff;
-	text-decoration: none;
-	opacity: 0.9;
-}
-
-.daedalus .carousel {
-	margin-top: 20px;
-	line-height: 20px;
-}
-
-.daedalus .carousel-inner {
-	margin-left:100px;
-	width: 750px;
-}
-
-.daedalus .carousel-inner-left {
-	width: 850px;
-	position: relative;
-    overflow: hidden;
-}
-
-.daedalus .related-course {
-	margin-left:70px;
-}
-
-.daedalus .related-course .cell {
-	width: 160px;
-	height: 120px;
-	float: left;
-	overflow: hidden;
-	position: relative;
-	text-align: center;
-	cursor: default;
-}
-
-.daedalus .related-course .cell p {
-}
-
-.daedalus .related-course .mask {
-}
-
-.daedalus .related-course .mask:hover {
-}
-
-.daedalus .related-course-section {
-	padding: 30px 0;
-}
-
-
-/* courses advanced search page */
-.daedalus .advanced-search {
-	margin-bottom: 120px;
-}
-
-.daedalus .advanced-search-boxes {
-	
-}
-
-.daedalus .advanced-search-table {
-	
-}
-
-.daedalus #programme-list {
-	border-radius: 0px;
-}
-
-.daedalus th, td {
-	border-radius: 0px !important;
-}
-
-.daedalus .advanced-text-search {
-	border-radius: 0px;
-	width: 303px;
-}
-
-.daedalus .advanced-search-boxes {
-	margin: 30px 0;
-}
-

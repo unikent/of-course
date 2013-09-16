@@ -16,7 +16,9 @@
 		<link rel="canonical" href="<?php echo $meta['canonical']; ?>" />
 		<?php endif; ?>
 
-		<link href="<?php echo ASSET_URL; ?>/css/build/of-course.min.css" type="text/css" rel="stylesheet">
+
+		<link media='screen' type='text/css' rel='stylesheet' href='<?php echo ASSET_URL ?>/css/courses.css' />
+
 		<!-- InstanceEndEditable -->
 	</kentMeta>
 	<kentContent>
@@ -32,7 +34,16 @@
 
               <?php echo $content; ?>
 
+
+              <a href='#' onclick= "$('html, body').scrollTop();" class='scroll-to-top'>
+             	 <i class="icon-chevron-up icon-white"></i>
+              </a>
+
 		<!-- InstanceEndEditable -->
 	</kentContent>	
+	<kentScripts>
+		<script type="text/javascript" charset="utf8" src="//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.1/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" charset="utf-8" language="javascript" src="<?php echo ASSET_URL ?>/js/build/of-course.min.js"></script>
+	</kentScripts>
 </kentWrapper>	
 <!-- InstanceEnd -->

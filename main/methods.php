@@ -63,12 +63,14 @@
 	 * @param $year Year to be displayed
 	 * @param $level Undergraduate vs Postgraduate
 	 * @param $preview true|false
+	 * @param $simpleview true|false
 	 */
-	Flight::map('setup', function($year, $level, $preview = false){
+	Flight::map('setup', function($year, $level, $preview = false, $simpleview = false){
 		// Set data for view
 		Flight::view()->set('level', (!$level) ? 'undergraduate' : $level);
 		Flight::view()->set('year', $year);
 		Flight::view()->set('preview', $preview);
+		Flight::view()->set('simpleview', $simpleview);
 	});
 
 	/**
@@ -129,6 +131,30 @@
 	// Use data to try and figure out best 404 info
 	Flight::map('notFound', function($data = array()){
 
+		$pantheon_config = Util::getConfig();
+		if($pantheon_config["theme"] != "Daedalus"){
+
+			$page404 = Cache::get("courses-daedalus-chronos-error-page", function(){
+				$ch = curl_init();
+				curl_setopt($ch, CURLOPT_URL, "http://kent.ac.uk/404.html");//url
+				curl_setopt($ch, CURLOPT_HEADER, 0);
+				curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+				curl_setopt($ch, CURLOPT_TIMEOUT, 2);
+
+				$data = curl_exec($ch);
+
+				curl_close($ch);
+
+				return $data;
+			}, 120);
+
+			$page404 .= '<!-- loaded via chronos -->';
+
+			// Avoid WSOD
+			Flight::halt('404', $page404);
+		}
+		
 		// Attempt to resolve URL details, location, path and other stuff
 		// that will allow us to be more helpful.
 		$data = validate_404_data($data);

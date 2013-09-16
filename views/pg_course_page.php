@@ -1,7 +1,14 @@
-<article class="container">
+<?php
+	// pull out awards and combine into a comma separated list
+	$course->award_list = '';
+	foreach ($course->award as $award) if (!empty($award->name)) $course->award_list .= $award->name . ', ';
+	$course->award_list = substr($course->award_list, 0, -2); // cuts off the final comma+space
+?>
+
+<article class="container pg">
 	<h1>
-		<?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?>
-		<?php if($course->subject_to_approval == 'true'){ echo "<span>(Subject to approval)</span>";} ?>
+		<?php echo $course->programme_title; ?> <?php echo $course->award_list; ?>
+		<?php if($course->subject_to_approval == 'true'){ echo " (subject to approval)";} ?>
 	</h1>
 	
 	<?php if($course->programme_suspended == 'true' || $course->programme_withdrawn == 'true'): ?>
@@ -10,18 +17,19 @@
 
 
 	<div class="daedalus-tabs">
-	
 	<div class="row-fluid">
 		<div class="span12">
 			<ul class="nav nav-tabs">
 				<li><a href="#overview">Overview</a></li>
-				<li><a href="#structure">Course structure</a></li>
-				<li><a href="#teaching">Teaching &amp; Assessment</a></li>
-				<li><a href="#careers">Careers</a></li>
-				<li><a href="#entry">Entry requirements</a></li>
-				<li><a href="#fees">Fees &amp; Funding</a></li>
+				<?php if((!empty($course->programme_overview)) || (strpos($course->programme_type, 'taught') !== false )):?>
+					<li><a href="#structure">Course structure</a></li>
+				<?php endif;?>
+				<li><a href="#study-support">Study support</a></li>
+				<li><a href="#entry-requirements">Entry requirements</a></li>
+				<li><a href="#research-areas">Research areas</a></li>
+				<li><a href="#staff-research">Staff research</a></li>
+				<li><a href="#enquiries">Enquiries</a></li>
 				<li><a href="#apply">Apply</a></li>
-				<li><a href="#info">Further info</a></li>
 			</ul>
 		</div><!-- /span -->
 	</div><!-- /row -->
@@ -30,24 +38,53 @@
 		<div class="span7">
 			<div class="tab-content">
 				<section id="overview"><?php Flight::render('pg_tabs/overview', array('course'=>$course)); ?></section>
-				<?php if ( empty($course->modules->stages) ) : ?>
-				<section id="structure"><?php Flight::render('pg_tabs/structure_empty', array('course'=>$course)); ?></section>
-				<?php else: ?>
-				<section id="structure"><?php Flight::render('pg_tabs/structure', array('course'=>$course)); ?></section>
-				<?php endif; ?>
-				<section id="teaching"><?php Flight::render('pg_tabs/teaching', array('course'=>$course)); ?></section>
-				<section id="careers"><?php Flight::render('pg_tabs/careers', array('course'=>$course)); ?></section>	
-				<section id="entry"><?php Flight::render('pg_tabs/entry', array('course'=>$course)); ?></section>
-				<section id="fees"><?php Flight::render('pg_tabs/fees', array('course'=>$course)); ?></section>
+				
+				<?php if(strpos($course->programme_type, 'taught') === false): ?>
+					<?php if(!empty($course->programme_overview)): ?>
+						<section id="structure"><?php Flight::render('pg_tabs/structure_research', array('course'=>$course)); ?></section>
+					<?php endif;?>
+				
+				<?php else :?>
+					<?php
+					$stage_found = false;
+					foreach($course->modules as $module){
+						if (!empty($module->stages)){
+							$stage_found = true;
+							break;
+						}
+					}?>
+				 	<?php if( (!$stage_found) && (empty($course->programme_overview)) ) : ?>
+						<section id="structure"><?php Flight::render('pg_tabs/structure_empty', array('course'=>$course)); ?></section>
+					<?php else: ?>
+						<section id="structure"><?php Flight::render('pg_tabs/structure', array('course'=>$course)); ?></section>
+					<?php endif; ?>
+				<?php endif;?>
+				
+				<section id="study-support"><?php Flight::render('pg_tabs/study-support', array('course'=>$course)); ?></section>	
+				<section id="entry-requirements"><?php Flight::render('pg_tabs/entry-requirements', array('course'=>$course)); ?></section>
+				<section id="research-areas"><?php Flight::render('pg_tabs/research-areas', array('course'=>$course)); ?></section>
+				<section id="staff-research"><?php Flight::render('pg_tabs/staff-research', array('course'=>$course)); ?></section>
+				<section id="enquiries"><?php Flight::render('pg_tabs/enquiries', array('course'=>$course)); ?></section>
 				<section id="apply"><?php Flight::render('pg_tabs/apply', array('course'=>$course)); ?></section>
-				<section id="info"><?php Flight::render('pg_tabs/info', array('course'=>$course)); ?></section>
 			</div>
 		</div><!-- /span -->
 		<div class="span5">
+			<div class="side-panel">
+			<div class="panel admission-links">
+				<a href="#ug_apply_form" class="apply-adm-link">Apply</a>, <a href="#ug_enquiries_form" class="enquire-adm-link">enquire</a> or <a href="#ug_enquiries_form" class="pros-adm-link">order a prospectus</a>
+			</div>
+
 			<aside class="key-facts-container">
 				<h2>Key facts</h2>
 				<div class="key-facts">
 					<ul>
+						<li>
+							<?php if(!empty($course->additional_school[0])): ?>
+							<strong>Schools:</strong> <a href="<?php echo $course->school_website ?>"><?php echo $course->administrative_school[0]->name ?></a>, <a href="<?php echo $course->url_for_additional_school ?>"><?php echo $course->additional_school[0]->name ?></a>
+							<?php else: ?>
+							<strong>School:</strong> <a href="<?php echo $course->school_website ?>"><?php echo $course->administrative_school[0]->name ?></a>
+							<?php endif; ?>
+						</li>
 						<?php
 							// If there a second subject area?
 							 $second_subject = (isset($course->subject_area_2[0]) && $course->subject_area_2[0] != null);
@@ -55,26 +92,47 @@
 						<li><strong>Subject area<?php if($second_subject) echo 's'; ?>:</strong>
 							<?php 
 								echo $course->subject_area_1[0]->name; 
-								echo ($second_subject) ? ' | '.$course->subject_area_2[0]->name : '';
+								echo ($second_subject) ? ', '.$course->subject_area_2[0]->name : '';
 							?>
 						</li>
-						<li><strong>Award:</strong> <?php echo $course->award[0]->name;?> </li>
-						<li><strong>Honours type:</strong> <?php echo $course->honours_type;?> </li>
-					
-						<li><strong>Location:</strong> <a href="<?php echo $course->location[0]->url;?>"><?php echo $course->location[0]->name;?></a>	</li>
+						<li><strong>Award:</strong> <?php echo $course->award_list;?></li>
+
+						<li><strong>Location:</strong>
+
+						<?php
+							$locations = "<a href='{$course->location[0]->url}'>".$course->location[0]->name."</a>";
+							$additional_locations = '';
+
+							foreach ($course->additional_locations as $key=>$additional_location) {
+								if ($additional_location != '') {
+									if ( $key == (sizeof($course->additional_locations)-1) ) {
+										$additional_locations .= " and <a href='$additional_location->url'>$additional_location->name</a>";
+									}
+									else {
+										$additional_locations .= ", <a href='$additional_location->url'>$additional_location->name</a>";
+									}
+								}
+							}
+						?>
+						<?php echo $locations.$additional_locations ?>
+						</li>
 					
 						<li><strong>Mode of study:</strong> <?php echo $course->mode_of_study;?></li>
-					
-						<?php if(!empty($course->duration)): ?>
-						<li><strong>Duration:</strong> <?php echo $course->duration;?></li>
+
+						<?php if(!empty($course->attendance_mode)): ?>
+						<li><strong>Attendance mode:</strong> <?php echo $course->attendance_mode;?></li>
 						<?php endif; ?>
-					
+
+						<?php if(!empty($course->attendance_text)): ?>
+						<li><strong>Duration:</strong> <?php echo $course->attendance_text;?></li>
+						<?php endif; ?>
+						
 						<?php if(!empty($course->start)): ?>
 						<li><strong>Start: </strong> <?php echo $course->start;?> </li>
 						<?php endif; ?>
 						
 						<?php if(!empty($course->accredited_by)): ?>
-						<li><strong>Accredited by</strong>: <?php echo $course->accredited_by;?>	</li>
+						<li><strong>Accredited by</strong>: <?php echo $course->accredited_by ?></li>
 						<?php endif; ?>
 						
 						<?php if(!empty($course->total_kent_credits_awarded_on_completion)): ?>
@@ -84,9 +142,14 @@
 						<?php if(!empty($course->total_ects_credits_awarded_on_completion)): ?>
 						<li><strong>Total ECTS credits:</strong> <?php echo $course->total_ects_credits_awarded_on_completion;?></li>
 						<?php endif; ?>
+
+						<li><strong><a href="http://www.kent.ac.uk/courses/funding/postgraduate/index.html">Postgraduate fees and funding information</a></strong></li>
+						
+
 					</ul>
 				</div>
 			</aside>
+			</div>
 		</div><!-- /span -->
 	</div><!-- /row -->
 
@@ -94,7 +157,7 @@
 	
 	<?php if ( ! empty($course->related_courses) ): ?>
 	<section class="related-course-section">
-		<h3>Related to this course</h3>
+		<h2>Related to this course</h2>
 		
 		<div id="myCarousel" class="carousel slide" data-interval="false">
 		  <!-- Carousel items -->
@@ -109,10 +172,9 @@
 		                <div class="cell">
 		                    <div class="mask">
 		                        <a href="<?php echo Flight::url("{$level}/{$related_course->id}/{$related_course->slug}"); ?>">
-		                        <p><?php echo $related_course->name ?></p>
-		                        <p><?php echo $related_course->award ?></p>
+		                        	<span><?php echo $related_course->name ?><?php if($related_course->subject_to_approval == 'true'){ echo " (subject to approval)";} ?></span>
+		                        	<span class="related-award"><?php echo $related_course->award;?></span>
 		                        </a>
-		                        
 		                    </div>
 		                </div> 
 					</div>
@@ -128,6 +190,19 @@
 		  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
 		  <?php endif; ?>
 		</div>
+
+		<ul class="related-course-list">
+		<?php foreach($course->related_courses as $related_course): ?>
+                    <li>
+                    <a href="<?php echo Flight::url("{$level}/{$related_course->id}/{$related_course->slug}"); ?>">
+                    	<span><?php echo $related_course->name ?><?php if($related_course->subject_to_approval == 'true'){ echo " (subject to approval)";} ?></span>
+                    	<span class="related-award"><?php echo $related_course->award;?></span>
+                    </a>
+                    </li>
+		<?php endforeach; ?>
+		</ul>
+
+
 	
 	</section>
 	<?php endif; ?>

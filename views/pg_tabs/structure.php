@@ -1,74 +1,138 @@
-<h2>Course structure</h2>
+<h2>Programme structure</h2>
 
-<?php echo $course->globals->modules_intro; ?>
+<?php if(!empty($course->programme_overview)):?>
+	<p><?php echo $course->programme_overview; ?></p>
+<?php endif;?>
+
+<?php $emptystages = true;?>
+
+<?php
+foreach($course->modules as $module){
+	if(!empty($module->stages)){
+		$emptystages = false;
+	}
+}	
+?>
+
+<?php if((empty($course->modules[0])) || $emptystages): ?>
+	
+<?php else: ?>
+	<h3>Modules</h3>
+
+	<?php echo $course->modules_intro; ?>
 
 
-<?php if (isset($course->modules->stages->{1})): ?>
+<?php
+	// get modules from all deliveries as unique lists
+	$module_list = array(); 
+
+	foreach($course->modules as $delivery_modules){
+		foreach($delivery_modules->stages as $stage){
+			foreach($stage->clusters as $cluster){
+				foreach($cluster[0]->modules as $modules){
+					foreach($modules as $module){
+						//skip blanks
+						if($module->module_code=='')continue;
+						// index on module code, so duplicates will just overwrite each other
+						$module_list[$module->module_code] = $module;
+					}
+				}
+			}
+		}
+	}
+
+
+?>
+
+	 
+	<?php 
+		$show_count = 10;
+		$first_modules = array_slice($module_list, 0, $show_count);
+		$other_modules = array_slice($module_list, $show_count);
+	?>
+	<ul class="unstyled"> 
+	<?php foreach($first_modules as $module): ?>
+		<li>
+            <span class="btn btn-link module-collapse" data-toggle="collapse" data-target="#module-more-info-<?php echo $module->module_code ?>-<?php echo $stage_id ?>"><i class="icon-plus-sign"></i> <?php echo $module->module_code ?> - <?php echo $module->module_title ?></span>  
+            <div id="module-more-info-<?php echo $module->module_code ?>-<?php echo $stage_id ?>" class="collapse module-synopsis"><p><?php echo $module->synopsis ?></p>
+            <p><strong>Credits:</strong> <?php echo $module->credit_amount ?> credits (<?php echo $module->ects_credit ?> ECTS credits).</p>
+            <p class="module-read-more"><a href="http://www.kent.ac.uk/courses/modulecatalogue/modules/<?php echo $module->module_code ?>">Read more <i class="icon-arrow-right"></i></a></p>
+            </div>
+        </li>
+	<?php endforeach; ?>
+	</ul>
+
+	<?php if(sizeof($other_modules) != 0): ?>
+		<div class="daedalus-show-hide show-hide minimal">
+	      	<p class="show-hide-title">Show more...</p>
+	      	<div class="show-hide-content">
+	      		<ul class="unstyled"> 
+	        	<?php foreach($other_modules as $module): ?>
+					<li>
+			            <span class="btn btn-link module-collapse" data-toggle="collapse" data-target="#module-more-info-<?php echo $module->module_code ?>-<?php echo $stage_id ?>"><i class="icon-plus-sign"></i> <?php echo $module->module_code ?> - <?php echo $module->module_title ?></span>  
+			            <div id="module-more-info-<?php echo $module->module_code ?>-<?php echo $stage_id ?>" class="collapse module-synopsis"><p><?php echo $module->synopsis ?></p>
+			            <p><strong>Credits:</strong> <?php echo $module->credit_amount ?> credits (<?php echo $module->ects_credit ?> ECTS credits).</p>
+			            <p class="module-read-more"><a href="http://www.kent.ac.uk/courses/modulecatalogue/modules/<?php echo $module->module_code ?>">Read more <i class="icon-arrow-right"></i></a></p>
+			            </div>
+			        </li>
+				<?php endforeach; ?>
+				</ul>
+	      	</div>
+	    </div>
+	<?php endif; ?>
+	
+<?php endif; ?>	
+
+
+
+
+
+
 <section class="info-section">
-	<h3>Stage ?</h3>
-	<?php Flight::render('partials/stage', array('stage' => $course->modules->stages->{1}, 'stage_id' => '1')); ?>
-</section>
-<?php endif; ?>
-
-
-<?php if (! empty($course->year_abroad)): ?>
-<section class="info-section">
-	<h3>Year abroad</h3>
+	
+	<?php if(!empty($course->assessment)): ?>
+		<h3>Assessment</h3>
+		<section class="info-subsection">
+			<?php echo $course->assessment ?>
+		</section>
+	<?php endif; ?>
+	
+	<h3>Learning outcomes</h3>
+	<?php if(!empty($course->programme_aims)): ?>
 	<section class="info-subsection">
-		<?php echo $course->year_abroad ?>
-		<?php echo $course->globals->year_abroad ?>
+		<h4>Programme aims</h4>
+		<?php echo $course->programme_aims ?>
 	</section>
-
-	<?php if (isset($course->modules->stages->{"A"})): ?>
-		<?php if (empty($course->year_abroad)): ?>
-		<h3>Year abroad</h3>
-		<?php endif; ?>
-		<?php Flight::render('partials/stage', array('stage' => $course->modules->stages->{"A"}, 'stage_id' => 'a')); ?>
-	<?php endif; ?>
-	<?php if (isset($course->modules->stages->{"A1"})): ?>
-		<h3>1st year abroad</h3>
-		<?php Flight::render('partials/stage', array('stage' => $course->modules->stages->{"A1"}, 'stage_id' => 'a1')); ?>
-	<?php endif; ?>
-	<?php if (isset($course->modules->stages->{"A2"})): ?>
-		<h3>2nd year abroad</h3>
-		<?php Flight::render('partials/stage', array('stage' => $course->modules->stages->{"A2"}, 'stage_id' => 'a2')); ?>
 	<?php endif; ?>
 
+	<?php if(!empty($course->knowledge_and_understanding_learning_outcomes)): ?>
+	<section class="info-subsection">
+		<h4>Knowledge and understanding</h4>
+		<?php echo $course->knowledge_and_understanding_learning_outcomes ?>
+	</section>
+	<?php endif; ?>
+	
+	<?php if(!empty($course->intellectual_skills_learning_outcomes)): ?>
+	<section class="info-subsection">
+		<h4>Intellectual skills</h4>
+		<?php echo $course->intellectual_skills_learning_outcomes ?>
+	</section>
+	<?php endif; ?>
+
+	<?php if(!empty($course->subjectspecific_skills_learning_outcomes)): ?>
+	<section class="info-subsection">
+		<h4>Subject-specific skills</h4>
+		<?php echo $course->subjectspecific_skills_learning_outcomes ?>
+	</section>
+	<?php endif; ?>
+
+	<?php if(!empty($course->transferable_skills_learning_outcomes)): ?>
+	<section class="info-subsection">
+		<h4>Transferable skills</h4>
+		<?php echo $course->transferable_skills_learning_outcomes ?>
+	</section>
+	<?php endif; ?>
 </section>
-<?php endif; ?>
-
-<?php if (isset($course->modules->stages->{3})): ?>
-<section class="info-section">
-	<h3>Stage 3</h3>
-	<?php Flight::render('partials/stage', array('stage' => $course->modules->stages->{3}, 'stage_id' => '3')); ?>
-</section>
-<?php endif; ?>
-
-<?php if (isset($course->modules->stages->{4})): ?>
-<section class="info-section">
-	<h3>Stage 4</h3>
-	<?php Flight::render('partials/stage', array('stage' => $course->modules->stages->{4}, 'stage_id' => '4')); ?>
-</section>
-<?php endif; ?>
-
-<?php if (isset($course->modules->stages->{5})): ?>
-<section class="info-section">
-	<h3>Stage 5</h3>
-	<?php Flight::render('partials/stage', array('stage' => $course->modules->stages->{5}, 'stage_id' => '5')); ?>
-</section>
-<?php endif; ?>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

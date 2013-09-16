@@ -13,12 +13,11 @@ class CoursesFrontEnd {
 	{
 		static::$pp = new ProgrammesPlant\API(XCRI_WEBSERVICE);
 
-/**
+
 		if (defined('CACHE_DIRECTORY') && is_dir(CACHE_DIRECTORY))
 		{
 		    static::$pp->with_cache('file')->directory(CACHE_DIRECTORY);
 		}
-**/
 
 		static::$pp->no_ssl_verification();
 	}
@@ -145,8 +144,39 @@ class CoursesFrontEnd {
 		
 		Flight::setup($course->year, null, true);
 
-
 		return Flight::layout($course->programme_level.'_course_page', array('course'=> $course));
+	}
+
+	/**
+	 * Display a simpleview page
+	 *
+	 * @param string $hash of simpleview
+	 */
+	public function simpleview($level, $hash)
+	{
+		try
+		{
+			$course = static::$pp->get_preview_programme($level, $hash);
+		}
+		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
+		{	
+			// We dont know enough to help the 404 out really
+			return Flight::notFound(array('error'=> $e));
+		}
+		catch(\Exception $e)
+		{
+			// Another error. Pretend it was a 404.
+			return Flight::error($e);
+		}
+
+		Flight::cachecheck();
+
+		// Debug option
+		if(isset($_GET['debug_performance'])){ inspect($course); }
+		
+		Flight::setup($course->year, null, false, true);
+
+		return Flight::render('simpleview_course_page', array('course'=> $course));
 	}
 	
 	/**
@@ -217,16 +247,16 @@ class CoursesFrontEnd {
 			case 'postgraduate':
 				$template = 'pg_search';
 				$meta = array(
-					'title' => 'Advanced Course Search | Undergraduate Programmes | The University of Kent',
-					'description' => 'Search all of the undergraduate programmes offered by the University of Kent',
+					'title' => 'Courses A-Z | Postgraduate Courses | The University of Kent',
+					'description' => 'Search all of the postgraduate courses offered by the University of Kent',
 				);
 				break;
 
 			default:
 				$template = 'ug_search';
 				$meta = array(
-					'title' => 'Advanced Course Search | Postgraduate Programmes | The University of Kent',
-					'description' => 'Search all of the postgraduate programmes offered by the University of Kent',
+					'title' => 'Courses A-Z | Undergraduate Courses | The University of Kent',
+					'description' => 'Search all of the undergraduate courses offered by the University of Kent',
 				);
 				break;
 		}
@@ -238,7 +268,14 @@ class CoursesFrontEnd {
 		try {
 			$programmes = static::$pp->get_programmes_index($year, $level);//5 minute cache
 	    	$campuses = static::$pp->get_campuses();
-	    	$subject_categories = static::$pp->get_subjectcategories();
+	    	$subject_categories = static::$pp->get_subjectcategories($level);
+	    	$awards = static::$pp->get_awards($level);
+	    	$award_names = array();
+	    	foreach ($awards as $award)
+	    	{
+	    		$award_names[] = $award->name;
+	    	}
+	    	sort($award_names);
 		}
 		catch(\Exception $e)
 		{
@@ -250,7 +287,7 @@ class CoursesFrontEnd {
 		if(isset($_GET['debug_performance'])){ inspect($programmes); }
 		
 		//Render full page
-		return Flight::layout($template, array('meta' => $meta, 'programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'search_type' => $search_type, 'search_string' => $search_string));	
+		return Flight::layout($template, array('meta' => $meta, 'programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'search_type' => $search_type, 'search_string' => $search_string, 'awards' => $award_names));	
 		
 	}
 	/**
@@ -262,30 +299,91 @@ class CoursesFrontEnd {
 	}
 
 	/**
+	 * new courses list
+	 *
+	 * @param string Type UG|PG
+	 * @param yyyy Year to show
+	 */
+	public function new_courses($level, $year)
+	{
+		switch($level){
+			case 'postgraduate':
+				$template = 'new_courses';
+				$meta = array(
+					'title' => 'New Courses A-Z | Postgraduate Courses | The University of Kent',
+					'description' => 'Search all of the new postgraduate courses offered by the University of Kent',
+				);
+				break;
+
+			default:
+				$template = 'new_courses';
+				$meta = array(
+					'title' => 'New Courses A-Z | Undergraduate Courses | The University of Kent',
+					'description' => 'Search all of the new undergraduate courses offered by the University of Kent',
+				);
+				break;
+		}
+
+
+		Flight::setup($year, $level);
+
+		try {
+			$programmes = static::$pp->get_programmes_index($year, $level);//5 minute cache
+		}
+		catch(\Exception $e)
+		{
+			// Another error.
+			return Flight::error($e);
+		}
+
+		//debug option
+		if(isset($_GET['debug_performance'])){ inspect($programmes); }
+		
+		//Render full page
+		return Flight::layout($template, array('meta' => $meta, 'programmes' => $programmes, 'level' => $level));
+	}
+
+	/**
+	 * Search page (no year)
+	 */
+	public function new_courses_noyear($level)
+	{
+		return $this->new_courses($level, static::$current_year);
+	}
+
+
+	/**
 	 * Data formatted for searching by quickspot
 	 *
 	 */
 	public function ajax_search_data($level, $year)
 	{
-		$out = array();
+		// Cache json output for a minute or so (go faster!)
+		$output = Cache::get("courses-daedalus-search-json-{$level}-{$year}", function() use ($level, $year) {
 
-		try{
-			$js = static::$pp->get_programmes_index($year, $level);
-		}
-		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
-		{
-			return Flight::halt(501, "Fatal error in getting programmes index.");
-		}
-		catch(\Exception $e)
-		{
-			// Another error.
-			echo "{'error':'Unable to load data.'}";
-		}
+			try
+			{
+				$js = CoursesFrontEnd::$pp->get_programmes_index($year, $level);
+			}
+			catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
+			{
+				return false; 
+			}
+			catch(\Exception $e)
+			{
+				// Another error.
+				return "{'error':'Unable to load data.'}";
+			}
+
+			return json_encode($js);
+
+		}, 2);
+
+		if($out === false) Flight::halt(501, "Fatal error in getting programmes index.");
 
 		// Try & cache
-		Flight::cachecheck();
 
-		echo json_encode($js);
+		echo $output;
 	}
 
 	/**
@@ -293,9 +391,10 @@ class CoursesFrontEnd {
 	 */
 	public function ajax_subjects_page($level, $year)
 	{
+
 		try
 		{
-			$subjects = static::$pp->get_subjectcategories();
+			$subjects = static::$pp->get_subjectcategories($level);
 		}
 		catch(\Exception $e)
 		{
