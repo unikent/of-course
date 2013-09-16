@@ -1,7 +1,7 @@
 <article class="container">
 	<h1>
 		<?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?>
-		<?php if($course->subject_to_approval == 'true'){ echo "<span>(Subject to approval)</span>";} ?>
+		<?php if($course->subject_to_approval == 'true'){ echo " (subject to approval)";} ?>
 	</h1>
 	
 	<?php if($course->programme_suspended == 'true' || $course->programme_withdrawn == 'true'): ?>
@@ -20,8 +20,8 @@
 				<li><a href="#careers">Careers</a></li>
 				<li><a href="#entry">Entry requirements</a></li>
 				<li><a href="#fees">Fees &amp; Funding</a></li>
+				<li><a href="#enquiries">Enquiries</a></li>
 				<li><a href="#apply">Apply</a></li>
-				<li><a href="#info">Further info</a></li>
 			</ul>
 		</div><!-- /span -->
 	</div><!-- /row -->
@@ -39,11 +39,17 @@
 				<section id="careers"><?php Flight::render('ug_tabs/careers', array('course'=>$course)); ?></section>	
 				<section id="entry"><?php Flight::render('ug_tabs/entry', array('course'=>$course)); ?></section>
 				<section id="fees"><?php Flight::render('ug_tabs/fees', array('course'=>$course)); ?></section>
+				<section id="enquiries"><?php Flight::render('ug_tabs/enquiries', array('course'=>$course)); ?></section>
 				<section id="apply"><?php Flight::render('ug_tabs/apply', array('course'=>$course)); ?></section>
-				<section id="info"><?php Flight::render('ug_tabs/info', array('course'=>$course)); ?></section>
 			</div>
 		</div><!-- /span -->
 		<div class="span5">
+
+			<div class="side-panel">
+			<div class="panel admission-links">
+				<a href="#ug_apply_form" class="apply-adm-link">Apply</a>, <a href="#ug_enquiries_form" class="enquire-adm-link">enquire</a> or <a href="#ug_enquiries_form" class="pros-adm-link">order a prospectus</a>
+			</div>
+
 			<aside class="key-facts-container">
 				<h2>Key facts</h2>
 				<div class="key-facts">
@@ -91,6 +97,7 @@
 					</ul>
 				</div>
 			</aside>
+			</div>
 		</div><!-- /span -->
 	</div><!-- /row -->
 
@@ -98,7 +105,7 @@
 	
 	<?php if ( ! empty($course->related_courses) ): ?>
 	<section class="related-course-section">
-		<h3>Related to this course</h3>
+		<h2>Related to this course</h2>
 		
 		<div id="myCarousel" class="carousel slide" data-interval="false">
 		  <!-- Carousel items -->
@@ -113,10 +120,9 @@
 		                <div class="cell">
 		                    <div class="mask">
 		                        <a href="<?php echo Flight::url("{$level}/{$related_course->id}/{$related_course->slug}"); ?>">
-		                        <p><?php echo $related_course->name ?></p>
-		                        <p><?php echo $related_course->award ?></p>
+		                        	<span><?php echo $related_course->name ?><?php if($related_course->subject_to_approval == 'true'){ echo " (subject to approval)";} ?></span>
+		                        	<span class="related-award"><?php echo $related_course->award;?></span>
 		                        </a>
-		                        
 		                    </div>
 		                </div> 
 					</div>
@@ -132,6 +138,17 @@
 		  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
 		  <?php endif; ?>
 		</div>
+
+		<ul class="related-course-list">
+		<?php foreach($course->related_courses as $related_course): ?>
+                    <li>
+                    <a href="<?php echo Flight::url("{$level}/{$related_course->id}/{$related_course->slug}"); ?>">
+                    	<span><?php echo $related_course->name ?><?php if($related_course->subject_to_approval == 'true'){ echo " (subject to approval)";} ?></span>
+                    	<span class="related-award"><?php echo $related_course->award;?></span>
+                    </a>
+                    </li>
+		<?php endforeach; ?>
+		</ul>
 	
 	</section>
 	<?php endif; ?>

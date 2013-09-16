@@ -45,6 +45,9 @@ Flight::route('/ajax/leaflets/@level:undergraduate|postgraduate/@year:[0-9]+', a
 // Preview
 Flight::route('/@level:undergraduate|postgraduate/preview/@hash', array($main,'preview'));
 
+// simpleview
+Flight::route('/@level:undergraduate|postgraduate/simpleview/@hash', array($main,'simpleview'));
+
 //XCRIP-CAP feed
 Flight::route('/@level:undergraduate|postgraduate/@year:[0-9]+/xcri', array($main, 'xcri_cap'));
 Flight::route('/@level:undergraduate|postgraduate/xcri', array($main, 'xcri_cap_noyear'));
@@ -55,6 +58,10 @@ Flight::route('/@level:undergraduate|postgraduate/@year:[0-9]+/search/@search_ty
 Flight::route('/@level:undergraduate|postgraduate/search/@search_type/@search_string', array($main,'search_noyear'));
 Flight::route('/@level:undergraduate|postgraduate/search', array($main,'search_noyear'));
 Flight::route('/@level:undergraduate|postgraduate/@year:[0-9]+/search', array($main,'search'));
+
+// New courses
+Flight::route('/@level:undergraduate|postgraduate/@year:[0-9]+/new', array($main,'new_courses'));
+Flight::route('/@level:undergraduate|postgraduate/new', array($main,'new_courses_noyear'));
 
 //Subject leaflets
 Flight::route('/@level:undergraduate|postgraduate/@year:[0-9]+/leaflets', array($main,'leaflets'));
