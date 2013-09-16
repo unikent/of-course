@@ -30,6 +30,7 @@
  <?php if(empty($course->subject_to_approval)): ?>
     <?php if ( trim($course->mode_of_study) != 'Full-time only' ): ?>
 	<form id="ug_apply_form">
+		<?php if($course->parttime_mcr_code != ''):?>
 			<?php
 			$apply = 'https://'.$evision_url.'.kent.ac.uk/ipp/';
 			$event_track = "onClick=\"_gaq.push(['t0._trackEvent', 'course-apply-ug', 'click', '" . $course->programme_title . "-" . $course->award[0]->name . "-parttime-" . $course->parttime_mcr_code . "']);\"";
@@ -38,6 +39,10 @@
 			}
 			?>
 			<a href="<?php echo $apply ?>" class="apply-link" <?php echo $event_track ?>>Apply for <strong><?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?></strong> - <span class="apply-type-link">Part time</span></a>
+		<?php else:?>
+			<p class="apply-link"><strong><?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?></strong> - <span class="apply-type-link">Part time</span><br /><br />This course is not currently open for applications. If you would like to be informed when we are accepting applications, please email <a href="mailto:information@kent.ac.uk">information@kent.ac.uk</a>.</p>
+			
+		<?php endif;?>
 	</form>
 	<?php endif; ?>
 <?php endif; ?>
