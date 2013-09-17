@@ -1,6 +1,6 @@
 <div class="panel admissions">
 	<h2>Apply</h2>
-	
+
 	<?php
 	$evision_url = "evision";
 	if(strpos($_SERVER['SERVER_NAME'], 'www-dev')!==false){
@@ -53,7 +53,7 @@
 			<?php foreach ($course->deliveries as $delivery): ?>
 				<?php if ($delivery->attendance_pattern == 'part-time'): ?>
 					<?php if ($delivery->mcr != ''):?>
-					
+
 						<?php
 							$event_track = "onClick=\"_gaq.push(['t0._trackEvent', 'course-apply-pg', 'click', '" . $course->programme_title . "-" . $delivery->award_name . "-parttime-" . $delivery->mcr . "']);\"";
 							$apply = 'https://'.$evision_url.'.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&code1=' . $delivery->mcr . '&code2=0001';
@@ -76,11 +76,11 @@
 			<?php foreach ($course->deliveries as $delivery): ?>
 				<?php if ($delivery->attendance_pattern == 'full-time'): ?>
 					<?php if ($delivery->mcr != ''):?>
-					
+
 						<?php
-					
+
 						$event_track = "onClick=\"_gaq.push(['t0._trackEvent', 'course-apply-pg', 'click', '" . $course->programme_title . "-" . $delivery->award_name . "-fulltime-" . $delivery->mcr . "']);\"";
-					
+
 						$apply = 'https://'.$evision_url.'.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&code1=' . $delivery->mcr . '&code2=0001';
 						?>
 						<?php if($delivery->description != ''):?>
