@@ -1,7 +1,7 @@
 <?php if ( ! empty($stage->clusters->compulsory) || ! empty($stage->clusters->optional) ): ?> 
 <p>Possible modules may include: </p>
 
-<div class="daedalus-show-hide show-hide minimal">
+
     <?php foreach ($stage->clusters->compulsory as $cluster): ?>
         <?php foreach ($cluster->modules->module as $module): ?>
             <?php if ( ! empty($module->module_code) && ! empty($module->module_title) ): ?>
@@ -34,7 +34,7 @@
         <?php endforeach; ?>
     <?php endforeach; ?>
     
-</div>
+
 <?php endif; ?>
 
 <?php if ( ! empty($stage->clusters->wildcard) ): ?>
