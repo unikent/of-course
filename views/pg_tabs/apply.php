@@ -31,6 +31,7 @@
 			</select>
 	    </div>
 
+	    <?php if ( sizeof($course->award) > 1 ): ?>
 		<div class="form-row">
 			<label for="apply-study-award">Award</label>
 			<select class="input-medium apply-select" id="apply-study-award">
@@ -39,6 +40,7 @@
 				<?php endforeach; ?>
 			</select>
 		</div>
+		<?php endif; ?>
 		
 		<div style="clear:both"></div>
 
