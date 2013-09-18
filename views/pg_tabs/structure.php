@@ -50,33 +50,31 @@ foreach($course->modules as $module){
 		$first_modules = array_slice($module_list, 0, $show_count);
 		$other_modules = array_slice($module_list, $show_count);
 	?>
-	<ul class="unstyled"> 
+	<div class="daedalus-show-hide show-hide minimal">
 	<?php foreach($first_modules as $module): ?>
-		<li>
-            <span class="btn btn-link module-collapse" data-toggle="collapse" data-target="#module-more-info-<?php echo $module->module_code ?>-<?php echo $stage_id ?>"><i class="icon-plus-sign"></i> <?php echo $module->module_code ?> - <?php echo $module->module_title ?></span>  
-            <div id="module-more-info-<?php echo $module->module_code ?>-<?php echo $stage_id ?>" class="collapse module-synopsis"><p><?php echo $module->synopsis ?></p>
-            <p><strong>Credits:</strong> <?php echo $module->credit_amount ?> credits (<?php echo $module->ects_credit ?> ECTS credits).</p>
-            <p class="module-read-more"><a href="http://www.kent.ac.uk/courses/modulecatalogue/modules/<?php echo $module->module_code ?>">Read more <i class="icon-arrow-right"></i></a></p>
+            <p class="show-hide-title"><?php echo $module->module_code ?> - <?php echo $module->module_title ?></p>
+            <div class="show-hide-content">
+            	<p><?php echo $module->synopsis ?></p>
+            	<p><strong>Credits:</strong> <?php echo $module->credit_amount ?> credits (<?php echo $module->ects_credit ?> ECTS credits).</p>
+            	<p class="module-read-more"><a href="http://www.kent.ac.uk/courses/modulecatalogue/modules/<?php echo $module->module_code ?>">Read more <i class="icon-arrow-right"></i></a></p>
             </div>
-        </li>
 	<?php endforeach; ?>
-	</ul>
+	</div>
 
 	<?php if(sizeof($other_modules) != 0): ?>
 		<div class="daedalus-show-hide show-hide minimal">
 	      	<p class="show-hide-title">Show more...</p>
 	      	<div class="show-hide-content">
-	      		<ul class="unstyled"> 
+	      		<div class="daedalus-show-hide show-hide minimal">
 	        	<?php foreach($other_modules as $module): ?>
-					<li>
-			            <span class="btn btn-link module-collapse" data-toggle="collapse" data-target="#module-more-info-<?php echo $module->module_code ?>-<?php echo $stage_id ?>"><i class="icon-plus-sign"></i> <?php echo $module->module_code ?> - <?php echo $module->module_title ?></span>  
-			            <div id="module-more-info-<?php echo $module->module_code ?>-<?php echo $stage_id ?>" class="collapse module-synopsis"><p><?php echo $module->synopsis ?></p>
-			            <p><strong>Credits:</strong> <?php echo $module->credit_amount ?> credits (<?php echo $module->ects_credit ?> ECTS credits).</p>
-			            <p class="module-read-more"><a href="http://www.kent.ac.uk/courses/modulecatalogue/modules/<?php echo $module->module_code ?>">Read more <i class="icon-arrow-right"></i></a></p>
-			            </div>
-			        </li>
+		            <p class="show-hide-title"><?php echo $module->module_code ?> - <?php echo $module->module_title ?></p>
+		            <div class="show-hide-content">
+		            	<p><?php echo $module->synopsis ?></p>
+		            	<p><strong>Credits:</strong> <?php echo $module->credit_amount ?> credits (<?php echo $module->ects_credit ?> ECTS credits).</p>
+		            	<p class="module-read-more"><a href="http://www.kent.ac.uk/courses/modulecatalogue/modules/<?php echo $module->module_code ?>">Read more <i class="icon-arrow-right"></i></a></p>
+		            </div>
 				<?php endforeach; ?>
-				</ul>
+				</div>
 	      	</div>
 	    </div>
 	<?php endif; ?>
