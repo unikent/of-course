@@ -36,7 +36,7 @@
 				</select>
 			</div>
 			<?php endif; ?>
-			
+
 			<div style="clear:both"></div>
 		</div>
 
@@ -128,6 +128,11 @@
 
 			</div>
 			<?php endif; ?>
+
+
+			<p class="apply-link fulltime-link courses-sits-enquire-hidden-ft" style="display:none"><strong>No matching courses</strong><br /><br />There are currently no courses matching your selection. Please make a different selection.</p>
+		
+			<p class="apply-link parttime-link courses-sits-enquire-hidden-pt" style="display:none"><strong>No matching courses</strong><br /><br />There are currently no courses matching your selection. Please make a different selection.</p>
 
 	</form>
 	
