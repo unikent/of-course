@@ -166,6 +166,6 @@
 	</div>
 	<div class="span5">
 		<?php $ukprn = (isset($course->kis_institution_id) && $course->kis_institution_id != '') ? $course->kis_institution_id : $course->globals->ukprn; ?>
-		<iframe class="pull-right" id="unistats-widget-frame" title="Unistats KIS Widget" src="http://stg.unistats.eduserv.org.uk/Widget/<?php echo $ukprn ?>/<?php echo str_replace(array('/', '|', ':', '&', '.', '>', '+', '#', ';', '?', '@', '=', '!'), '_', $course->kiscourseid); ?>/vertical/small/en-GB" scrolling="no" style="overflow: hidden; border: 0px none transparent; width: 190px; height: 500px;"> </iframe>
+		<iframe class="pull-right" id="unistats-widget-frame" title="Unistats KIS Widget" src="http://widget.unistats.ac.uk/Widget/<?php echo $ukprn ?>/<?php echo str_replace(array('/', '|', ':', '&', '.', '>', '+', '#', ';', '?', '@', '=', '!'), '_', $course->kiscourseid); ?>/vertical/small/en-GB" scrolling="no" style="overflow: hidden; border: 0px none transparent; width: 190px; height: 500px;"> </iframe>
 	</div>
 </div>
