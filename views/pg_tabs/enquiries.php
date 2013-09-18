@@ -25,7 +25,8 @@
 					<option value="pt" <?php echo trim($course->mode_of_study) == 'Part-time only' ? '  selected = "selected"' : ''; ?>>Part-time</option>
 				</select>
 		    </div>
-				
+			
+			<?php if ( sizeof($course->award) > 1 ): ?>
 			<div class="form-row">
 				<label for="enquire-study-award">Award</label>
 				<select class="input-medium enquiry-select" id="enquire-study-award">
@@ -34,6 +35,8 @@
 					<?php endforeach; ?>
 				</select>
 			</div>
+			<?php endif; ?>
+			
 			<div style="clear:both"></div>
 		</div>
 
