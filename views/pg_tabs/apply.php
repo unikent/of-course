@@ -26,8 +26,8 @@
 		<div class="form-row<?php echo trim($course->mode_of_study) != 'Full-time or part-time' ? ' form-row-study-type' : ''; ?>">
 			<label for="apply-study-type">Type of study</label>
 			<select id="apply-study-type">
-				<option value="ft">Full-time</option>
-				<option value="pt">Part-time</option>
+				<option value="ft" <?php echo trim($course->mode_of_study) == 'Full-time only' ? '  selected = "selected"' : ''; ?>>Full-time</option>
+				<option value="pt" <?php echo trim($course->mode_of_study) == 'Part-time only' ? '  selected = "selected"' : ''; ?>>Part-time</option>
 			</select>
 	    </div>
 
