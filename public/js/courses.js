@@ -45,7 +45,13 @@ $(document).ready(function(){
 		applyawardlink = ".award-link-" + $('#apply-study-award option').first().val();
 	}
 	$('.courses-sits-apply > .apply-link').hide();
-	$('.courses-sits-apply > .fulltime-link' + applyawardlink).show();
+
+	if ($('#apply-study-type').val() == 'ft') {
+		$('.courses-sits-apply > .fulltime-link' + applyawardlink).show();
+	}
+	if ($('#apply-study-type').val() == 'pt') {
+		$('.courses-sits-apply > .parttime-link' + applyawardlink).show();
+	}
 
 	// when things change...
 	$('#apply-study-type,#apply-study-award').change(function () {
@@ -94,7 +100,14 @@ $(document).ready(function(){
 		awardlink = ".award-link-" + $('#enquire-study-award option').first().val();
 	}
 	$('.courses-sits-enquire > .apply-link').hide();
-	$('.courses-sits-enquire > .fulltime-link.enquire-link' + awardlink).show();
+
+	if ($('#enquire-study-type').val() == 'ft') {
+		$('.courses-sits-enquire > .fulltime-link.enquire-link' + awardlink).show();
+	}
+	if ($('#enquire-study-type').val() == 'pt') {
+		$('.courses-sits-enquire > .parttime-link.enquire-link' + awardlink).show();
+	}
+
 
 	// set up some vars
 	var prospectus = false;
