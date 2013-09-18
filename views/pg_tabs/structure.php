@@ -50,31 +50,31 @@ foreach($course->modules as $module){
 		$first_modules = array_slice($module_list, 0, $show_count);
 		$other_modules = array_slice($module_list, $show_count);
 	?>
-	<div class="daedalus-show-hide show-hide minimal">
 	<?php foreach($first_modules as $module): ?>
+		<div class="daedalus-show-hide show-hide minimal">
             <p class="show-hide-title"><?php echo $module->module_code ?> - <?php echo $module->module_title ?></p>
             <div class="show-hide-content">
             	<p><?php echo $module->synopsis ?></p>
             	<p><strong>Credits:</strong> <?php echo $module->credit_amount ?> credits (<?php echo $module->ects_credit ?> ECTS credits).</p>
             	<p class="module-read-more"><a href="http://www.kent.ac.uk/courses/modulecatalogue/modules/<?php echo $module->module_code ?>">Read more <i class="icon-arrow-right"></i></a></p>
             </div>
+		</div>
 	<?php endforeach; ?>
-	</div>
 
 	<?php if(sizeof($other_modules) != 0): ?>
 		<div class="daedalus-show-hide show-hide minimal">
 	      	<p class="show-hide-title">Show more...</p>
 	      	<div class="show-hide-content">
-	      		<div class="daedalus-show-hide show-hide minimal">
 	        	<?php foreach($other_modules as $module): ?>
+	      		<div class="daedalus-show-hide show-hide minimal">
 		            <p class="show-hide-title"><?php echo $module->module_code ?> - <?php echo $module->module_title ?></p>
 		            <div class="show-hide-content">
 		            	<p><?php echo $module->synopsis ?></p>
 		            	<p><strong>Credits:</strong> <?php echo $module->credit_amount ?> credits (<?php echo $module->ects_credit ?> ECTS credits).</p>
 		            	<p class="module-read-more"><a href="http://www.kent.ac.uk/courses/modulecatalogue/modules/<?php echo $module->module_code ?>">Read more <i class="icon-arrow-right"></i></a></p>
 		            </div>
-				<?php endforeach; ?>
 				</div>
+				<?php endforeach; ?>
 	      	</div>
 	    </div>
 	<?php endif; ?>
