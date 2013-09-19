@@ -77,7 +77,7 @@ foreach($course->modules as $module){
 			<?php endforeach; ?>
       	</div>
 	<?php endif; ?>
-	
+<br />
 <?php endif; ?>	
 
 
