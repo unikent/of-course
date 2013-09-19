@@ -19,16 +19,14 @@
 				<label for="prospectus" id="prospectus-lbl">Order a prospectus <span>(<a href="#">PDF - 2MB</a>)</span></label>
 			</div>
 		</div>
-
-		<div style="">
-			<div class="form-row<?php echo trim($course->mode_of_study) != 'Full-time or part-time' ? ' form-row-study-type' : ''; ?>">
-				<label for="enquire-study-type">Type of study</label>
-				<select class="input-medium enquiry-select" id="enquire-study-type">
-					<option value="ft">Full-time</option>
-					<option value="pt">Part-time</option>
-				</select>
-		    </div>
-		</div>
+		
+		<div class="form-row<?php echo trim($course->mode_of_study) != 'Full-time or part-time' ? ' form-row-study-type' : ''; ?>">
+			<label for="enquire-study-type">Type of study</label>
+			<select class="input-medium enquiry-select" id="enquire-study-type">
+				<option value="ft" <?php echo trim($course->mode_of_study) == 'Full-time only' ? '  selected = "selected"' : ''; ?>>Full-time</option>
+				<option value="pt" <?php echo trim($course->mode_of_study) == 'Part-time only' ? '  selected = "selected"' : ''; ?>>Part-time</option>
+			</select>
+	    </div>
 		
 		<?php $sits_url = 'https://esd.kent.ac.uk/aspx_shared/newuser.aspx?'; ?>
 		<?php $generic_ug_mcr = 'AAGEN101';?>
@@ -166,6 +164,6 @@
 	</div>
 	<div class="span5">
 		<?php $ukprn = (isset($course->kis_institution_id) && $course->kis_institution_id != '') ? $course->kis_institution_id : $course->globals->ukprn; ?>
-		<iframe class="pull-right" id="unistats-widget-frame" title="Unistats KIS Widget" src="http://stg.unistats.eduserv.org.uk/Widget/<?php echo $ukprn ?>/<?php echo str_replace(array('/', '|', ':', '&', '.', '>', '+', '#', ';', '?', '@', '=', '!'), '_', $course->kiscourseid); ?>/vertical/small/en-GB" scrolling="no" style="overflow: hidden; border: 0px none transparent; width: 190px; height: 500px;"> </iframe>
+		<iframe class="pull-right" id="unistats-widget-frame" title="Unistats KIS Widget" src="http://widget.unistats.ac.uk/Widget/<?php echo $ukprn ?>/<?php echo str_replace(array('/', '|', ':', '&', '.', '>', '+', '#', ';', '?', '@', '=', '!'), '_', $course->kiscourseid); ?>/vertical/small/en-GB" scrolling="no" style="overflow: hidden; border: 0px none transparent; width: 190px; height: 500px;"> </iframe>
 	</div>
 </div>
