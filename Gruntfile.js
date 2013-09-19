@@ -80,7 +80,7 @@ module.exports = function(grunt) {
 	});
 
 	// Default task(s).
-	grunt.registerTask('default', [ 'watch' ]);
+	grunt.registerTask('default', ['clean', 'uglify', 'concat', 'less:development', 'removeconcat', 'watch' ]);
 	grunt.registerTask('production', ['clean', 'uglify', 'concat', 'less:production', 'removeconcat' ] )
 };
 

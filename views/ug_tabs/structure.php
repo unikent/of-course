@@ -26,6 +26,7 @@
 	<h3>Stage 1</h3>
 	<?php Flight::render('partials/stage', array('stage' => $course->modules->stages->{1}, 'stage_id' => '1')); ?>
 </section>
+<br />
 <?php endif; ?>
 
 <?php if (isset($course->modules->stages->{2})): ?>
@@ -33,6 +34,7 @@
 	<h3>Stage 2</h3>
 	<?php Flight::render('partials/stage', array('stage' => $course->modules->stages->{2}, 'stage_id' => '2')); ?>
 </section>
+<br />
 <?php endif; ?>
 
 
@@ -51,6 +53,7 @@
 	<?php Flight::render('partials/stage', array('stage' => $course->modules->stages->{S}, 'stage_id' => 's')); ?>
 <?php endif; ?>
 </section>
+<br />
 <?php endif; ?>
 
 
@@ -78,6 +81,7 @@
 	<?php endif; ?>
 
 </section>
+<br />
 <?php endif; ?>
 
 <?php if (isset($course->modules->stages->{3})): ?>
@@ -99,6 +103,7 @@
 	<h3>Stage 5</h3>
 	<?php Flight::render('partials/stage', array('stage' => $course->modules->stages->{5}, 'stage_id' => '5')); ?>
 </section>
+<br />
 <?php endif; ?>
 
 
