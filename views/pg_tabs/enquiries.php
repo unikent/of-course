@@ -21,11 +21,12 @@
 			<div class="form-row<?php echo trim($course->mode_of_study) != 'Full-time or part-time' ? ' form-row-study-type' : ''; ?>">
 				<label for="enquire-study-type">Type of study</label>
 				<select class="input-medium enquiry-select" id="enquire-study-type">
-					<option value="ft">Full-time</option>
-					<option value="pt">Part-time</option>
+					<option value="ft" <?php echo trim($course->mode_of_study) == 'Full-time only' ? '  selected = "selected"' : ''; ?>>Full-time</option>
+					<option value="pt" <?php echo trim($course->mode_of_study) == 'Part-time only' ? '  selected = "selected"' : ''; ?>>Part-time</option>
 				</select>
 		    </div>
-				
+			
+			<?php if ( sizeof($course->award) > 1 ): ?>
 			<div class="form-row">
 				<label for="enquire-study-award">Award</label>
 				<select class="input-medium enquiry-select" id="enquire-study-award">
@@ -34,6 +35,8 @@
 					<?php endforeach; ?>
 				</select>
 			</div>
+			<?php endif; ?>
+
 			<div style="clear:both"></div>
 		</div>
 
@@ -125,6 +128,11 @@
 
 			</div>
 			<?php endif; ?>
+
+
+			<p class="apply-link fulltime-link courses-sits-enquire-hidden-ft" style="display:none"><strong>No matching courses</strong><br /><br />There are currently no courses matching your selection. Please make a different selection.</p>
+		
+			<p class="apply-link parttime-link courses-sits-enquire-hidden-pt" style="display:none"><strong>No matching courses</strong><br /><br />There are currently no courses matching your selection. Please make a different selection.</p>
 
 	</form>
 	

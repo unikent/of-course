@@ -45,7 +45,13 @@ $(document).ready(function(){
 		applyawardlink = ".award-link-" + $('#apply-study-award option').first().val();
 	}
 	$('.courses-sits-apply > .apply-link').hide();
-	$('.courses-sits-apply > .fulltime-link' + applyawardlink).show();
+
+	if ($('#apply-study-type').val() == 'ft') {
+		$('.courses-sits-apply > .fulltime-link' + applyawardlink).show();
+	}
+	if ($('#apply-study-type').val() == 'pt') {
+		$('.courses-sits-apply > .parttime-link' + applyawardlink).show();
+	}
 
 	// when things change...
 	$('#apply-study-type,#apply-study-award').change(function () {
@@ -80,7 +86,6 @@ $(document).ready(function(){
 			 	$('.courses-sits-apply-hidden-pt').hide();
 			 	$('.courses-sits-apply-hidden-ft').hide();
 			 }
-			
 		}
 
 	});
@@ -94,7 +99,14 @@ $(document).ready(function(){
 		awardlink = ".award-link-" + $('#enquire-study-award option').first().val();
 	}
 	$('.courses-sits-enquire > .apply-link').hide();
-	$('.courses-sits-enquire > .fulltime-link.enquire-link' + awardlink).show();
+
+	if ($('#enquire-study-type').val() == 'ft') {
+		$('.courses-sits-enquire > .fulltime-link.enquire-link' + awardlink).show();
+	}
+	if ($('#enquire-study-type').val() == 'pt') {
+		$('.courses-sits-enquire > .parttime-link.enquire-link' + awardlink).show();
+	}
+
 
 	// set up some vars
 	var prospectus = false;
@@ -163,16 +175,48 @@ $(document).ready(function(){
 		// now show relevant links
 		if (prospectus && fulltime) {
 			$('.courses-sits-enquire > .fulltime-link.prospectus-link' + awardlink).show();
+			if(!$('.fulltime-link' + awardlink).length){
+			 	$('.courses-sits-enquire-hidden-ft').show();
+			 	$('.courses-sits-enquire-hidden-pt').hide();
+			 }
+			 else{
+			 	$('.courses-sits-enquire-hidden-ft').hide();
+			 	$('.courses-sits-enquire-hidden-pt').hide();
+			 }
 		}
 		if (prospectus && parttime) {
 			$('.courses-sits-enquire > .parttime-link.prospectus-link' + awardlink).show();
+			if(!$('.parttime-link' + awardlink).length){
+			 	$('.courses-sits-enquire-hidden-pt').show();
+			 	$('.courses-sits-enquire-hidden-ft').hide();
+			 }
+			 else{
+			 	$('.courses-sits-enquire-hidden-ft').hide();
+			 	$('.courses-sits-enquire-hidden-pt').hide();
+			 }
 		}
 
 		if (enquire && fulltime) {
 			$('.courses-sits-enquire > .fulltime-link.enquire-link' + awardlink).show();
+			if(!$('.fulltime-link' + awardlink).length){
+			 	$('.courses-sits-enquire-hidden-ft').show();
+			 	$('.courses-sits-enquire-hidden-pt').hide();
+			 }
+			 else{
+			 	$('.courses-sits-enquire-hidden-ft').hide();
+			 	$('.courses-sits-enquire-hidden-pt').hide();
+			 }
 		}
 		if (enquire && parttime) {
 			$('.courses-sits-enquire > .parttime-link.enquire-link' + awardlink).show();
+			if(!$('.parttime-link' + awardlink).length){
+			 	$('.courses-sits-enquire-hidden-pt').show();
+			 	$('.courses-sits-enquire-hidden-ft').hide();
+			 }
+			 else{
+			 	$('.courses-sits-enquire-hidden-ft').hide();
+			 	$('.courses-sits-enquire-hidden-pt').hide();
+			 }
 		}
 		return true;
 
