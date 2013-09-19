@@ -17,7 +17,8 @@ foreach($course->modules as $module){
 <?php if((empty($course->modules[0])) || $emptystages): ?>
 	
 <?php else: ?>
-	<h3>Modules</h3>
+	<section class="info-section">
+		<h3>Modules</h3>
 
 	<?php echo $course->modules_intro; ?>
 
@@ -78,10 +79,8 @@ foreach($course->modules as $module){
       	</div>
 	<?php endif; ?>
 <br />
+</section>
 <?php endif; ?>	
-
-
-
 
 
 
