@@ -62,7 +62,7 @@ foreach($course->modules as $module){
 	<?php endforeach; ?>
 
 	<?php if(sizeof($other_modules) != 0): ?>
-      	<p><a data-toggle="collapse" data-target="#more-modules" tabindex="0">Show more...</a></p>
+      	<p><a data-toggle="collapse" href="#more-modules">Show more...</a></p>
       	<div id="more-modules" class="collapse">
         	<?php foreach($other_modules as $module): ?>
       		<div class="daedalus-show-hide show-hide minimal">
