@@ -1,6 +1,6 @@
 <?php $year_for_url = empty($year) ? '' : ((strcmp($year, CoursesFrontEnd::$current_year) == 0) ? '' : $year . '/'); ?>
 
-<?php if(empty($course->subject_to_approval)): ?>
+
 <div class="panel admissions">
 
 	<h2>I would like to...</h2>
@@ -49,6 +49,7 @@
 			<?php else: ?>
 			<div class="courses-sits-enquire courses-sits-enquire-parttime-only">
 			<?php endif; ?>
+			<?php if(empty($course->subject_to_approval)): ?>
 			<?php foreach ($course->deliveries as $delivery): ?>
 				<?php if ($delivery->attendance_pattern == 'part-time'): ?>
 				<?php
@@ -70,6 +71,7 @@
 				<a href="<?php echo $prospectus ?>" class="apply-link prospectus-link parttime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track_prospectus ?>>Order a prospectus for <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?><?php echo $delivery->description != '' ? ' - ' . $delivery->description : ''?></strong></a>
 				<?php endif; ?>
 			<?php endforeach; ?>
+			<?php endif; ?>
 
 			<?php /* in case there are no deliveries, just show a basic set of links */ if ( empty($course->deliveries) ): ?>
 				<?php
@@ -95,6 +97,7 @@
 			?>
 
 			<div class="courses-sits-enquire courses-sits-enquire-fulltime">
+			<?php if(empty($course->subject_to_approval)): ?>
 			<?php foreach ($course->deliveries as $delivery): ?>
 				<?php if ($delivery->attendance_pattern == 'full-time'): ?>
 				<?php
@@ -116,6 +119,7 @@
 				<a href="<?php echo $prospectus ?>" class="apply-link prospectus-link fulltime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track_prospectus ?>>Order a prospectus for <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?><?php echo $delivery->description != '' ? ' - ' . $delivery->description : ''?></strong></a>
 				<?php endif; ?>
 			<?php endforeach; ?>
+			<?php endif; ?>
 
 			<?php /* in case there are no deliveries, just show a basic set of links */ if ( empty($course->deliveries) ): ?>
 				<?php $enquire = $sits_url . 'CCTC=KENT&UTYP=APP'; $prospectus = $sits_url . 'CourseCode='.$generic_pg_mcr.'&EnquiryCategoryCode=PRO&CCTC=KENT';?>
@@ -137,7 +141,7 @@
 	</form>
 	
 </div><!-- /panel admissions -->
-<?php endif; ?>
+
 
 
 <section class="info-section">
