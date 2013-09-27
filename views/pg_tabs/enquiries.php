@@ -1,6 +1,6 @@
 <?php $year_for_url = empty($year) ? '' : ((strcmp($year, CoursesFrontEnd::$current_year) == 0) ? '' : $year . '/'); ?>
 
-<?php if(empty($course->subject_to_approval)): ?>
+
 <div class="panel admissions">
 
 	<h2>I would like to...</h2>
@@ -13,7 +13,7 @@
 			</div>
 			<div class="prospectus-radio">
 				<input type="radio" name="enquire" id="prospectus" value="prospectus">
-				<label for="prospectus" id="prospectus-lbl">Order a prospectus <span>(<a href="#">PDF - 2MB</a>)</span></label>
+				<label for="prospectus" id="prospectus-lbl">Order a prospectus <span>(<a href="/courses/postgraduate/pdf/prospectus.pdf" <?php echo "onClick=\"_gaq.push(['t0._trackEvent', 'course-enquiry-download-pdf-pg', 'click', '" . $course->programme_title . "']);\"";?> >PDF - 2MB</a>)</span></label>
 			</div>
 		</div>
 
@@ -137,7 +137,7 @@
 	</form>
 	
 </div><!-- /panel admissions -->
-<?php endif; ?>
+
 
 
 <section class="info-section">
