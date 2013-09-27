@@ -26,7 +26,9 @@
 				<?php endif;?>
 				<li><a href="#study-support">Study support</a></li>
 				<li><a href="#entry-requirements">Entry requirements</a></li>
-				<li><a href="#research-areas">Research areas</a></li>
+				<?php if(!empty($course->research_groups)):?>
+					<li><a href="#research-areas">Research areas</a></li>
+				<?php endif;?>
 				<li><a href="#staff-research">Staff research</a></li>
 				<li><a href="#enquiries">Enquiries</a></li>
 				<li><a href="#apply">Apply</a></li>
