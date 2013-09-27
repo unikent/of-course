@@ -13,7 +13,7 @@
 			</div>
 			<div class="prospectus-radio">
 				<input type="radio" name="enquire" id="prospectus" value="prospectus">
-				<label for="prospectus" id="prospectus-lbl">Order a prospectus <span>(<a href="#">PDF - 2MB</a>)</span></label>
+				<label for="prospectus" id="prospectus-lbl">Order a prospectus <span>(<a href="/courses/postgraduate/pdf/prospectus.pdf" <?php echo "onClick=\"_gaq.push(['t0._trackEvent', 'course-enquiry-download-pdf-pg', 'click', '" . $course->programme_title . "']);\"";?> >PDF - 2MB</a>)</span></label>
 			</div>
 		</div>
 
