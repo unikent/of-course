@@ -98,6 +98,16 @@
 							?>
 						</li>
 						<li><strong>Award:</strong> <?php echo $course->award_list;?></li>
+						
+						<li><strong>Course type:</strong>
+							<?php if(strpos($course->programme_type, 'research') === false ):?>
+								Taught
+							<?php elseif(strpos($course->programme_type, 'taught') === false):?>
+								Research
+							<?php else:?>
+								Taught-research
+							<?php endif;?>
+						</li>
 
 						<li><strong>Location:</strong>
 
