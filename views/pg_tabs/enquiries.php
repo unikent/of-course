@@ -65,9 +65,9 @@
 					$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CourseCode='.$generic_pg_mcr.'&CCTC=KENT';
 				}
 				?>
-				<a href="<?php echo $enquire ?>" class="apply-link enquire-link parttime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track_enquire ?>>Enquire about <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?><?php echo $delivery->description != '' ? ' - ' . $delivery->description : ''?></strong></a>
+				<a href="<?php echo $enquire ?>" class="apply-link enquire-link parttime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track_enquire ?>>Enquire about <strong><?php echo $delivery->description != '' ? $delivery->description : $course->programme_title . ' ' . $delivery->award_name; ?></strong></a>
 
-				<a href="<?php echo $prospectus ?>" class="apply-link prospectus-link parttime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track_prospectus ?>>Order a prospectus for <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?><?php echo $delivery->description != '' ? ' - ' . $delivery->description : ''?></strong></a>
+				<a href="<?php echo $prospectus ?>" class="apply-link prospectus-link parttime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track_prospectus ?>>Order a prospectus for <strong><?php echo $delivery->description != '' ? $delivery->description : $course->programme_title . ' ' . $delivery->award_name; ?></strong></a>
 				<?php endif; ?>
 			<?php endforeach; ?>
 
@@ -111,9 +111,9 @@
 					$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CourseCode='.$generic_pg_mcr.'&CCTC=KENT';
 				}
 				?>
-				<a href="<?php echo $enquire ?>" class="apply-link enquire-link fulltime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track_enquire ?>>Enquire about <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?><?php echo $delivery->description != '' ? ' - ' . $delivery->description : ''?></strong></a>
+				<a href="<?php echo $enquire ?>" class="apply-link enquire-link fulltime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track_enquire ?>>Enquire about <strong><?php echo $delivery->description != '' ? $delivery->description : $course->programme_title . ' ' . $delivery->award_name ;?></strong></a>
 
-				<a href="<?php echo $prospectus ?>" class="apply-link prospectus-link fulltime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track_prospectus ?>>Order a prospectus for <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?><?php echo $delivery->description != '' ? ' - ' . $delivery->description : ''?></strong></a>
+				<a href="<?php echo $prospectus ?>" class="apply-link prospectus-link fulltime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track_prospectus ?>>Order a prospectus for <strong><?php echo $delivery->description != '' ? $delivery->description : $course->programme_title . ' ' . $delivery->award_name ;?></strong></a>
 				<?php endif; ?>
 			<?php endforeach; ?>
 
