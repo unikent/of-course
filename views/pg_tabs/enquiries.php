@@ -143,10 +143,10 @@
 <section class="info-section">
 	<h3>Contacts</h3>
 
-	<?php if(!empty($course->globals->enquiries)): ?>
+	<?php if(!empty($course->admissions_enquiries)): ?>
 		<div class="contacts-enquiries">
 		<h4>Admissions enquiries</h4>
-		<?php echo $course->globals->enquiries ?>
+		<?php echo $course->admissions_enquiries ?>
 		</div>
 	<?php endif; ?>
 
