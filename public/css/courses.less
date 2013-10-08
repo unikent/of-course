@@ -27,17 +27,22 @@
 
 		}
 	}
+
 	@media (max-width:700px) {
 		.nav-tabs li {width:33%}
+
+		.daedalus-courses .search-bar .nav li a {
+			padding-left: 0px;
+		}
 	}
+
 	@media (max-width:480px) {
 		.nav-tabs {
 			display: block;
 			li { display:none; }
 		}
-		.programme-scroll-menu {display:block; width:100%;}
 
-		
+		.programme-scroll-menu {display:block; width:100%;}
 	}	
 }
 
@@ -59,4 +64,11 @@
 
 .info-section .contacts-enquiries p{
 	margin-bottom: 0;
+}
+
+
+@media(max-width:990px){
+	.daedalus-courses .search-bar .nav li:first-child a {
+		padding-left: 0px;
+	}
 }
