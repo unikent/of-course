@@ -72,8 +72,8 @@
           <tr>
             <th>Name <i class="icon-resize-vertical"></i></th>
             <th style="width:120px">Course type <i class="icon-resize-vertical"></i></th>
-            <th style="width:120px">Campus <i class="icon-resize-vertical"></i></th>
-            <th style="width:150px">Full-time/Part-time <i class="icon-resize-vertical"></i></th>
+            <th style="width:120px" class="hidden-phone">Campus <i class="icon-resize-vertical"></i></th>
+            <th style="width:150px" class="hidden-phone">Full-time/Part-time <i class="icon-resize-vertical"></i></th>
             <th class="hide">Subject categories</th>
             <th class="hide">Search keywords</th>
             <th class="hide">Award</th>
@@ -90,7 +90,7 @@
             <td>
                 <?php echo ucwords($p->programme_type);?>
             </td>
-            <td>
+            <td class="hidden-phone">
                 <?php if ($p->additional_locations != ''): ?>
                   <?php if ( strstr($p->additional_locations, ',') ): ?>
                     <?php echo $p->campus.', '.$p->additional_locations ?>
@@ -101,7 +101,7 @@
                   <?php echo $p->campus ?>
                 <?php endif ?>
             </td>
-            <td>
+            <td class="hidden-phone">
                 <?php echo $p->mode_of_study;?>
             </td>
             <td class="hide">
