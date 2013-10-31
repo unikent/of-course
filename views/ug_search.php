@@ -42,6 +42,14 @@
             <?php endforeach; ?>
           </select>
 
+          <select class="school-search input-large <?php if(strcmp($search_type, 'school')  == 0) echo 'highlighted'; ?>">
+            <option value="">All schools</option>
+            <?php foreach($schools as $school): ?>
+            <option <?php if(strcmp($search_type, 'school')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower($school->name))  == 0) echo 'selected'; ?>><?php echo $school->name?></option>
+            <?php endforeach; ?>
+          </select>
+
+
         </div>
       
     </div>
@@ -57,6 +65,8 @@
             <th style="width:150px" class="hidden-phone">Full-time/Part-time <i class="icon-resize-vertical"></i></th>
             <th class="hide">Subject categories</th>
             <th class="hide">Search keywords</th>
+            <th class="hide">Main school</th>
+            <th class="hide">Secondary school</th>
           </tr>
         </thead>
         <tbody>
@@ -90,6 +100,12 @@
             <td class="hide">
                   <?php echo $p->search_keywords;?>
             </td>
+            <td class="hide">
+                  <?php echo $p->main_school;?>
+            </td>
+            <td class="hide">
+                  <?php echo $p->secondary_school;?>
+            </td>
           </tr>
         <?php endforeach; ?>
 
@@ -110,6 +126,7 @@ $(document).ready(function(){
   var campus_search = $('select.campus-search');
   var study_mode_search = $('select.study-mode-search');
   var subject_categories_search = $('select.subject-categories-search');
+  var school_search = $('select.school-search');
 
 
   /* Custom filtering function which will filter data using our advanced search fields */
@@ -123,14 +140,18 @@ $(document).ready(function(){
   var study_mode = aData[3];
   var subject_categories = aData[4];
   var search_keywords = aData[5];
+  var main_school = aData[6];
+  var secondary_school = aData[7];
 
-  if(advanced_text_search && campus_search && study_mode_search && subject_categories_search){
+  if(advanced_text_search && campus_search && study_mode_search && subject_categories_search && school_search){
 
     // search both the Name, UCAS code and Search keywords fields if our search box is filled
     var advanced_text_search_result = (advanced_text_search.val() == '') ? true : 
         (
           (name.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) || 
           (search_keywords.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) || 
+          (main_school.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) || 
+          (secondary_school.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) || 
           (study_mode.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) || 
           (campus.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) || 
           (subject_categories.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) || 
@@ -143,6 +164,9 @@ $(document).ready(function(){
     
     // search the study mode field if a study mode is selected
     var study_mode_search_result = (study_mode_search.val() == '') ? true : (( study_mode.toLowerCase().indexOf( study_mode_search.val().toLowerCase() ) !== -1 ) ? true : false );
+
+    // search the school field if a school is selected
+    var school_search_result = (school_search.val() == '') ? true : (( main_school.toLowerCase().indexOf( school_search.val().toLowerCase() ) !== -1  || secondary_school.toLowerCase().indexOf( school_search.val().toLowerCase() ) !== -1 ) ? true : false );
     
     // lets split subject categories up so we can search then individually
     var subject_categories_vals = subject_categories.split(';');
@@ -164,7 +188,7 @@ $(document).ready(function(){
     
 
     // return our results
-    return advanced_text_search_result && campus_search_result && study_mode_search_result && subject_categories_search_result;
+    return advanced_text_search_result && campus_search_result && study_mode_search_result && subject_categories_search_result && school_search_result;
   }
 
   return true;
@@ -190,12 +214,14 @@ $(document).ready(function(){
           { "bSortable": true },
           { "bSortable": true },
           { "bSortable": false },
+          { "bSortable": false },
+          { "bSortable": false },
           { "bSortable": false }
           ]
     });
 
     //now add appropriate event listeners to our custom search items
-    if(advanced_text_search && campus_search && study_mode_search && subject_categories_search){
+    if(advanced_text_search && campus_search && study_mode_search && subject_categories_search && school_search){
       
       advanced_text_search.keyup(function() {
         programme_list.fnDraw();
@@ -217,6 +243,11 @@ $(document).ready(function(){
       });
 
       subject_categories_search.change(function(){
+        programme_list.fnDraw();
+        highlight($(this));
+      });
+
+      school_search.change(function(){
         programme_list.fnDraw();
         highlight($(this));
       });

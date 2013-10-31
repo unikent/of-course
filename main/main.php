@@ -276,6 +276,7 @@ class CoursesFrontEnd {
 	    		$award_names[] = $award->name;
 	    	}
 	    	sort($award_names);
+	    	$schools = static::$pp->get_schools();
 		}
 		catch(\Exception $e)
 		{
@@ -287,7 +288,7 @@ class CoursesFrontEnd {
 		if(isset($_GET['debug_performance'])){ inspect($programmes); }
 		
 		//Render full page
-		return Flight::layout($template, array('meta' => $meta, 'programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'search_type' => $search_type, 'search_string' => $search_string, 'awards' => $award_names));	
+		return Flight::layout($template, array('meta' => $meta, 'programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'schools' => $schools, 'search_type' => $search_type, 'search_string' => $search_string, 'awards' => $award_names));	
 		
 	}
 	/**
