@@ -29,13 +29,15 @@ foreach($course->modules as $module){
 
 	foreach($course->modules as $delivery_modules){
 		foreach($delivery_modules->stages as $stage){
-			foreach($stage->clusters as $cluster){
-				foreach($cluster[0]->modules as $modules){
-					foreach($modules as $module){
-						//skip blanks
-						if($module->module_code=='')continue;
-						// index on module code, so duplicates will just overwrite each other
-						$module_list[$module->module_code] = $module;
+			foreach($stage->clusters as $clusters){
+				foreach($clusters as $cluster){
+					foreach($cluster->modules as $modules){
+						foreach($modules as $module){
+							//skip blanks
+							if($module->module_code=='')continue;
+							// index on module code, so duplicates will just overwrite each other
+							$module_list[$module->module_code] = $module;
+						}
 					}
 				}
 			}
