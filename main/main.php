@@ -6,7 +6,7 @@ class CoursesFrontEnd {
 	 * A Programmes Plant API Object.
 	 */
 	public static $pp = false;
-	public static $current_year = '2014';
+	public static $current_year = 'current';
 
 	// New frontend controller
 	public function __construct()
@@ -356,7 +356,7 @@ class CoursesFrontEnd {
 	 * Data formatted for searching by quickspot
 	 *
 	 */
-	public function ajax_search_data($level, $year)
+	public function ajax_search_data($level, $year='current')
 	{
 		// Cache json output for a minute or so (go faster!)
 		$output = Cache::get("courses-daedalus-search-json-{$level}-{$year}", function() use ($level, $year) {
@@ -389,7 +389,7 @@ class CoursesFrontEnd {
 	/**
 	 * Subjects Page
 	 */
-	public function ajax_subjects_page($level, $year)
+	public function ajax_subjects_page($level, $year='current')
 	{
 
 		try
@@ -412,7 +412,7 @@ class CoursesFrontEnd {
 	 * Get a json representation of the subject leaflets
 	 *
 	 */
-	public function ajax_leaflets_data($level, $year)
+	public function ajax_leaflets_data($level, $year='current')
 	{
 		$out = array();
 
@@ -433,7 +433,7 @@ class CoursesFrontEnd {
 	 * @param string Type UG|PG
 	 * @param yyyy Year to show
 	 */
-	public function subjects($level, $year)
+	public function subjects($level, $year='current')
 	{	
 		Flight::setup($year, $level);
 
@@ -457,7 +457,7 @@ class CoursesFrontEnd {
 	 * @param string Type UG|PG
 	 * @param yyyy Year to show
 	 */
-	public function list_programmes($level, $year)
+	public function list_programmes($level, $year='current')
 	{
 		$listing = static::$pp->get_programmes_index(static::$current_year, 'undergraduate');
 
@@ -478,7 +478,7 @@ class CoursesFrontEnd {
 	 * @param string Type UG|PG
 	 * @param yyyy Year to show
 	 */
-	public function leaflets($level, $year)
+	public function leaflets($level, $year='current')
 	{
 		
 		Flight::setup($year, $level);
@@ -497,6 +497,17 @@ class CoursesFrontEnd {
 		//Render full page
 		Flight::layout('leaflets', array('leaflets' => $leaflets, 'type' => $level));	
 		
+	}
+
+	/**
+	 * Subject leaflets page when no year is specified
+	 *
+	 * @param string Type UG|PG
+	 * @return rendering of the leaflets view
+	 */
+	public function leaflets_noyear($level)
+	{
+		return $this->leaflets($level, static::$current_year);
 	}
 
 
