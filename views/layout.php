@@ -30,6 +30,12 @@
                     <div class='alert alert-error' style="padding: 10px;margin:10px 0 0 0;">
                         You are currently viewing a preview of revision <strong><?php echo $course->revision_id; ?></strong>. This is preview data ONLY and is not representative of any course offered by this institution.
                     </div>
+
+                <?php elseif($course->current_year < $course->year): ?>
+                	<meta name="robots" content="noindex, nofollow" />
+                    <div class='alert alert-error' style="padding: 10px;margin:10px 0 0 0;">
+                        You are currently viewing a programme for an upcoming academic year. This data is preview ONLY and may not be representative of any course offered by this institution.
+                    </div>
                 <?php endif;?>
 
               <?php echo $content; ?>
@@ -40,7 +46,7 @@
               </a>
 
 		<!-- InstanceEndEditable -->
-	</kentContent>
+	</kentContent>	
 	<kentScripts>
 		<script type="text/javascript" charset="utf8" src="//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.1/jquery.dataTables.min.js"></script>
 		<script type="text/javascript" charset="utf-8" language="javascript" src="<?php echo ASSET_URL ?>/js/build/of-course.min.js"></script>
