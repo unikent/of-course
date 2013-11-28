@@ -18,7 +18,7 @@
 
 
 		<link media='screen' type='text/css' rel='stylesheet' href='<?php echo ASSET_URL ?>/css/courses.css' />
-
+		<link rel="feed" type="application/xcri+xml" href="/courses/xcri"/>
 		<!-- InstanceEndEditable -->
 	</kentMeta>
 	<kentContent>
