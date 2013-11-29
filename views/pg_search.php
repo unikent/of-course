@@ -61,6 +61,11 @@
             <option <?php if(strcmp($search_type, 'programme_type') == 0  && strcmp(urldecode(strtolower($search_string)), 'taught-research') == 0) echo 'selected'; ?>>Taught-research</option>
           </select>
 
+          <select class="study-abroad-option-search input-medium <?php if( $search_type == 'study_abroad_option' ) echo 'highlighted'; ?>">
+            <option value="">No</option>
+            <option <?php if ( $search_type == 'study_abroad_option' && urldecode(strtolower($search_string)) == 'yes' ) echo 'selected'; ?>>Yes</option>
+          </select>
+
         </div>
       
     </div>
@@ -77,6 +82,7 @@
             <th class="hide">Subject categories</th>
             <th class="hide">Search keywords</th>
             <th class="hide">Award</th>
+            <th class="hide">Study abroad option</th>
           </tr>
         </thead>
         <tbody>
@@ -121,6 +127,9 @@
             <td class="hide">
                   <?php echo $p->award;?>
             </td>
+            <td class="hide">
+                  <?php echo $p->study_abroad_option;?>
+            </td>
           </tr>
         <?php endforeach; ?>
 
@@ -141,6 +150,7 @@ $(document).ready(function(){
   var subject_categories_search = $('select.subject-categories-search');
   var award_search = $('select.award-search');
   var programme_type_search = $('select.programme-type-search');
+  var study_abroad_option_search = $('select.study-abroad-option-search');
 
   /* Custom filtering function which will filter data using our advanced search fields */
   $.fn.dataTableExt.afnFiltering.push(
@@ -154,8 +164,9 @@ $(document).ready(function(){
   var study_mode = aData[3];
   var subject_categories = aData[4];
   var search_keywords = aData[5];
+  var study_abroad_option = aData[6];
 
-  if(advanced_text_search && campus_search && study_mode_search && subject_categories_search && award_search && programme_type_search){
+  if(advanced_text_search && campus_search && study_mode_search && subject_categories_search && award_search && programme_type_search && study_abroad_option_search){
 
     // search both the Name, award and Search keywords fields if our search box is filled
     var advanced_text_search_result = (advanced_text_search.val() == '') ? true : 
@@ -166,7 +177,8 @@ $(document).ready(function(){
           (programme_type.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) ||
           (campus.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) ||
           (study_mode.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) ||
-          (subject_categories.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1)
+          (subject_categories.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) ||
+          (study_abroad_option.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1)
 
           ? true : false 
         );
@@ -201,6 +213,9 @@ $(document).ready(function(){
     // search the programme type field if a programme type is selected
     var programme_type_search_result = (programme_type_search.val() == '') ? true : (( programme_type.toLowerCase().indexOf( programme_type_search.val().toLowerCase() ) !== -1 ) ? true : false );
 
+    // search the study abroad option field if a study abroad option is selected
+    var study_abroad_option_search_result = (study_abroad_option_search.val() == '') ? true : (( study_abroad_option.toLowerCase().indexOf( study_abroad_option_search.val().toLowerCase() ) !== -1 ) ? true : false );
+
     // return our results
     return advanced_text_search_result && campus_search_result && study_mode_search_result && subject_categories_search_result && award_search_result && programme_type_search_result;
   }
@@ -229,12 +244,13 @@ $(document).ready(function(){
           { "bSortable": true },
           { "bSortable": false },
           { "bSortable": false },
+          { "bSortable": false },
           { "bSortable": false }
         ]
     });
 
     //now add appropriate event listeners to our custom search items
-    if(advanced_text_search && campus_search && study_mode_search && subject_categories_search && award_search && programme_type_search){
+    if(advanced_text_search && campus_search && study_mode_search && subject_categories_search && award_search && programme_type_search && study_abroad_option_search){
       
       advanced_text_search.keyup(function() {
         programme_list.fnDraw();
@@ -266,6 +282,11 @@ $(document).ready(function(){
       });
 
       programme_type_search.change(function(){
+        programme_list.fnDraw();
+        highlight($(this));
+      });
+
+      study_abroad_option_search.change(function(){
         programme_list.fnDraw();
         highlight($(this));
       });
