@@ -7,7 +7,7 @@
 
 <article class="container pg">
 	<h1>
-		<?php echo $course->programme_title; ?> <?php echo $course->award_list; ?>
+		<?php echo $course->programme_title; ?> (<?php echo $course->award_list; ?>)
 		<?php if($course->subject_to_approval == 'true'){ echo " (subject to approval)";} ?>
 	</h1>
 	
