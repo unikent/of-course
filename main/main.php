@@ -363,7 +363,7 @@ class CoursesFrontEnd {
 			case 'postgraduate':
 				$template = 'study_abroad';
 				$meta = array(
-					'title' => 'Study Abroad Courses A-Z | Postgraduate Courses | The University of Kent',
+					'title' => 'Postgraduate courses with a study abroad option | Postgraduate Courses | The University of Kent',
 					'description' => 'Search all of the study abroad option courses offered by the University of Kent',
 				);
 				break;
@@ -371,7 +371,7 @@ class CoursesFrontEnd {
 			default:
 				$template = 'study_abroad';
 				$meta = array(
-					'title' => 'Study Abroad Courses A-Z | Postgraduate Courses | The University of Kent',
+					'title' => 'Postgraduate courses with a study abroad option | Postgraduate Courses | The University of Kent',
 					'description' => 'Search all of the study abroad option courses offered by the University of Kent',
 				);
 				break;
