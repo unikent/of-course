@@ -28,11 +28,11 @@
             <option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Medway'))  == 0) echo 'selected'; ?>>Medway</option>
           </select>
         
-          <select class="study-mode-search input-large <?php if(strcmp($search_type, 'study_mode')  == 0) echo 'highlighted'; ?>">
-            <option value="">All study modes</option>
-            <option <?php if(strcmp($search_type, 'study_mode')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Full-time only'))  == 0) echo 'selected'; ?>>Full-time only</option>
-            <option <?php if(strcmp($search_type, 'study_mode')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Part-time only'))  == 0) echo 'selected'; ?>>Part-time only</option>
-            <option <?php if(strcmp($search_type, 'study_mode')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Full-time or part-time'))  == 0) echo 'selected'; ?>>Full-time or part-time</option>
+          <select class="attendance-mode-search input-large <?php if ( $search_type == 'study_mode' || $search_type == 'attendance_mode' ) echo 'highlighted'; ?>">
+            <option value="">All attendance modes</option>
+            <option <?php if ( ($search_type == 'study_mode' || $search_type == 'attendance_mode') && urldecode(strtolower($search_string)) == strtolower('Full-time only') ) echo 'selected'; ?>>Full-time only</option>
+            <option <?php if ( ($search_type == 'study_mode' || $search_type == 'attendance_mode') && urldecode(strtolower($search_string)) == strtolower('Part-time only') ) echo 'selected'; ?>>Part-time only</option>
+            <option <?php if ( ($search_type == 'study_mode' || $search_type == 'attendance_mode') && urldecode(strtolower($search_string)) == strtolower('Full-time or part-time') ) echo 'selected'; ?>>Full-time or part-time</option>
           </select>
         
           <select class="subject-categories-search input-large <?php if(strcmp($search_type, 'subject_category')  == 0) echo 'highlighted'; ?>">
@@ -42,11 +42,11 @@
             <?php endforeach; ?>
           </select>
 
-          <select class="programme-type-search input-large <?php if(strcmp($search_type, 'programme_type')  == 0) echo 'highlighted'; ?>">
-            <option value="">All programme types</option>
-            <option <?php if ( $search_type == 'programme_type' && urldecode(strtolower(trim($search_string))) == 'year abroad' ) echo 'selected'; ?>>Year abroad</option>
-            <option <?php if ( $search_type == 'programme_type' && urldecode(strtolower(trim($search_string))) == 'year in industry' ) echo 'selected'; ?>>Year in industry</option>
-            <option <?php if ( $search_type == 'programme_type' && urldecode(strtolower(trim($search_string))) == 'foundation year' ) echo 'selected'; ?>>Foundation year</option>
+          <select class="course-options-search input-large <?php if ( $search_type == 'programme_type' || $search_type == 'course_options' ) echo 'highlighted'; ?>">
+            <option value="">All course options</option>
+            <option <?php if ( ($search_type == 'programme_type' || $search_type == 'course_options') && urldecode(strtolower(trim($search_string))) == 'year abroad' ) echo 'selected'; ?>>Year abroad</option>
+            <option <?php if ( ($search_type == 'programme_type' || $search_type == 'course_options') && urldecode(strtolower(trim($search_string))) == 'year in industry' ) echo 'selected'; ?>>Year in industry</option>
+            <option <?php if ( ($search_type == 'programme_type' || $search_type == 'course_options') && urldecode(strtolower(trim($search_string))) == 'foundation year' ) echo 'selected'; ?>>Foundation year</option>
           </select>
 
         </div>
@@ -64,7 +64,7 @@
             <th style="width:150px" class="hidden-phone">Full-time/Part-time <i class="icon-resize-vertical"></i></th>
             <th class="hide">Subject categories</th>
             <th class="hide">Search keywords</th>
-            <th class="hide">Programme type</th>
+            <th class="hide">Course options</th>
           </tr>
         </thead>
         <tbody>
@@ -82,7 +82,7 @@
                 <?php echo $p->campus;?>
             </td>
             <td class="hidden-phone">
-                <?php echo $p->mode_of_study;?>
+                <?php /* mode_of_study aka 'attendance modes' eg full-time */ echo $p->mode_of_study;?>
             </td>
             <td class="hide">
                 <?php foreach((array)$p->subject_categories as $key => $sc): ?>
@@ -99,7 +99,7 @@
                   <?php echo $p->search_keywords;?>
             </td>
             <td class="hide">
-                  <?php echo trim($p->programme_type);?>
+                  <?php /* programme_type aka 'course options' eg year abroad */ echo trim($p->programme_type);?>
             </td>
           </tr>
         <?php endforeach; ?>
@@ -119,9 +119,9 @@ $(document).ready(function(){
   //put our custom search items into variables
   var advanced_text_search = $('input.advanced-text-search');
   var campus_search = $('select.campus-search');
-  var study_mode_search = $('select.study-mode-search');
+  var attendance_mode_search = $('select.attendance-mode-search');
   var subject_categories_search = $('select.subject-categories-search');
-  var programme_type_search = $('select.programme-type-search');
+  var course_options_search = $('select.course-options-search');
 
 
   /* Custom filtering function which will filter data using our advanced search fields */
@@ -132,23 +132,23 @@ $(document).ready(function(){
   var name = $(aData[0]).html();
   var ucas_code = aData[1];
   var campus = aData[2];
-  var study_mode = aData[3];
+  var attendance_mode = aData[3];
   var subject_categories = aData[4];
   var search_keywords = aData[5];
-  var programme_type = aData[6];
+  var course_options = aData[6];
 
-  if(advanced_text_search && campus_search && study_mode_search && subject_categories_search && programme_type_search){
+  if(advanced_text_search && campus_search && attendance_mode_search && subject_categories_search && course_options_search){
 
     // search both the Name, UCAS code and Search keywords fields if our search box is filled
     var advanced_text_search_result = (advanced_text_search.val() == '') ? true : 
         (
           (name.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) || 
           (search_keywords.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) || 
-          (study_mode.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) || 
+          (attendance_mode.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) || 
           (campus.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) || 
           (subject_categories.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) || 
           (ucas_code.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) ||
-          (programme_type.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1)
+          (course_options.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1)
           ? true : false 
         );
     
@@ -156,10 +156,10 @@ $(document).ready(function(){
     var campus_search_result = (campus_search.val() == '') ? true : (( campus.toLowerCase().indexOf( campus_search.val().toLowerCase() ) !== -1 ) ? true : false );
     
     // search the study mode field if a study mode is selected
-    var study_mode_search_result = (study_mode_search.val() == '') ? true : (( study_mode.toLowerCase().indexOf( study_mode_search.val().toLowerCase() ) !== -1 ) ? true : false );
+    var attendance_mode_search_result = (attendance_mode_search.val() == '') ? true : (( attendance_mode.toLowerCase().indexOf( attendance_mode_search.val().toLowerCase() ) !== -1 ) ? true : false );
 
     // search the programme type field if a programme type is selected
-    var programme_type_search_result = (programme_type_search.val() == '') ? true : (( programme_type.toLowerCase().indexOf( programme_type_search.val().toLowerCase() ) !== -1 ) ? true : false );
+    var course_options_search_result = (course_options_search.val() == '') ? true : (( course_options.toLowerCase().indexOf( course_options_search.val().toLowerCase() ) !== -1 ) ? true : false );
     
     // lets split subject categories up so we can search then individually
     var subject_categories_vals = subject_categories.split(';');
@@ -181,7 +181,7 @@ $(document).ready(function(){
     
 
     // return our results
-    return advanced_text_search_result && campus_search_result && study_mode_search_result && subject_categories_search_result && programme_type_search_result;
+    return advanced_text_search_result && campus_search_result && attendance_mode_search_result && subject_categories_search_result && course_options_search_result;
   }
 
   return true;
@@ -213,7 +213,7 @@ $(document).ready(function(){
     });
 
     //now add appropriate event listeners to our custom search items
-    if(advanced_text_search && campus_search && study_mode_search && subject_categories_search){
+    if(advanced_text_search && campus_search && attendance_mode_search && subject_categories_search){
       
       advanced_text_search.keyup(function() {
         programme_list.fnDraw();
@@ -229,12 +229,12 @@ $(document).ready(function(){
         highlight($(this));
       });
 
-      study_mode_search.change(function(){
+      attendance_mode_search.change(function(){
         programme_list.fnDraw();
         highlight($(this));
       });
 
-      programme_type_search.change(function(){
+      course_options_search.change(function(){
         programme_list.fnDraw();
         highlight($(this));
       });
