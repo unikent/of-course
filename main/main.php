@@ -351,6 +351,58 @@ class CoursesFrontEnd {
 		return $this->new_courses($level, static::$current_year);
 	}
 
+	/**
+	 * study abroad courses list
+	 *
+	 * @param string Type UG|PG
+	 * @param yyyy Year to show
+	 */
+	public function study_abroad($level, $year)
+	{
+		switch($level){
+			case 'postgraduate':
+				$template = 'study_abroad';
+				$meta = array(
+					'title' => 'Study Abroad Courses A-Z | Postgraduate Courses | The University of Kent',
+					'description' => 'Search all of the study abroad option courses offered by the University of Kent',
+				);
+				break;
+
+			default:
+				$template = 'study_abroad';
+				$meta = array(
+					'title' => 'Study Abroad Courses A-Z | Postgraduate Courses | The University of Kent',
+					'description' => 'Search all of the study abroad option courses offered by the University of Kent',
+				);
+				break;
+		}
+
+
+		Flight::setup($year, $level);
+
+		try {
+			$programmes = static::$pp->get_programmes_index($year, $level);//5 minute cache
+		}
+		catch(\Exception $e)
+		{
+			// Another error.
+			return Flight::error($e);
+		}
+
+		//debug option
+		if(isset($_GET['debug_performance'])){ inspect($programmes); }
+		
+		//Render full page
+		return Flight::layout($template, array('meta' => $meta, 'programmes' => $programmes, 'level' => $level));
+	}
+
+	/**
+	 * Search page (no year)
+	 */
+	public function study_abroad_noyear($level)
+	{
+		return $this->study_abroad($level, static::$current_year);
+	}
 
 	/**
 	 * Data formatted for searching by quickspot
