@@ -1,16 +1,8 @@
 <?php $year_for_url = empty($year) ? '' : ((strcmp($year, CoursesFrontEnd::$current_year) == 0) ? '' : $year . '/'); ?>
+<?php if (!isset($search_type)) $search_type = ''; ?>
 
 <div class="advanced-search">
-    <h1>Courses A-Z</h1>
-
-      <div class="row-fluid">
-        <div class="span12">
-          <ul class="nav nav-tabs">
-            <li><a href="<?php echo BASE_URL != '/' ? BASE_URL : ''; ?>/undergraduate/search">Undergraduate</a></li>
-            <li class="active"><a href="<?php echo BASE_URL != '/' ? BASE_URL : ''; ?>/postgraduate/search">Postgraduate</a></li>
-          </ul>
-        </div><!-- /span -->
-      </div><!-- /row -->
+    <h1>Postgraduate courses with a study abroad option</h1>
 
     <div class="row advanced-search-boxes">
 
@@ -82,7 +74,7 @@
         <tbody>
         
         <?php foreach($programmes as $p):?>
-          
+          <?php if ($p->study_abroad_option != ''): ?>
           <tr>
             <td>
                 <div class="advanced-search-name-award"><a href='<?php echo Flight::url("{$level}/{$year_for_url}{$p->id}/{$p->slug}"); ?>'><?php echo $p->name;?> <?php if($p->subject_to_approval == 'true'){ echo "(subject to approval)";} ?></a><br /><span class="advanced-search-award"><?php echo $p->award;?></span></div>
@@ -122,6 +114,7 @@
                   <?php echo $p->award;?>
             </td>
           </tr>
+          <?php endif; ?>
         <?php endforeach; ?>
 
 
