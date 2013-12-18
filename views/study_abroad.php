@@ -1,16 +1,8 @@
 <?php $year_for_url = empty($year) ? '' : ((strcmp($year, CoursesFrontEnd::$current_year) == 0) ? '' : $year . '/'); ?>
+<?php if (!isset($search_type)) $search_type = ''; ?>
 
 <div class="advanced-search">
-    <h1>Courses A-Z</h1>
-
-      <div class="row-fluid">
-        <div class="span12">
-          <ul class="nav nav-tabs">
-            <li class="active"><a href="<?php echo BASE_URL != '/' ? BASE_URL : ''; ?>/undergraduate/search">Undergraduate</a></li>
-            <li><a href="<?php echo BASE_URL != '/' ? BASE_URL : ''; ?>/postgraduate/search">Postgraduate</a></li>
-          </ul>
-        </div><!-- /span -->
-      </div><!-- /row -->
+    <h1>Postgraduate courses with a study abroad option</h1>
 
     <div class="row advanced-search-boxes">
 
@@ -22,17 +14,22 @@
 
         <div class="advanced-search-filters">
 
-          <select class="campus-search input-large <?php if(strcmp($search_type, 'campus')  == 0) echo 'highlighted'; ?>">
+          <select class="campus-search input-medium <?php if(strcmp($search_type, 'campus')  == 0) echo 'highlighted'; ?>">
             <option value="">All campuses</option>
             <option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Canterbury'))  == 0) echo 'selected'; ?>>Canterbury</option>
             <option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Medway'))  == 0) echo 'selected'; ?>>Medway</option>
+            <option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Paris'))  == 0) echo 'selected'; ?>>Paris</option>
+            <option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Rome'))  == 0) echo 'selected'; ?>>Rome</option>
+            <option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Brussels'))  == 0) echo 'selected'; ?>>Brussels</option>
+            <option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Athens'))  == 0) echo 'selected'; ?>>Athens</option>
+            <option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('KSS Dental Deanery'))  == 0) echo 'selected'; ?>>KSS Dental Deanery</option>
           </select>
         
-          <select class="attendance-mode-search input-large <?php if ( $search_type == 'study_mode' || $search_type == 'attendance_mode' ) echo 'highlighted'; ?>">
-            <option value="">All attendance modes</option>
-            <option <?php if ( ($search_type == 'study_mode' || $search_type == 'attendance_mode') && urldecode(strtolower($search_string)) == strtolower('Full-time only') ) echo 'selected'; ?>>Full-time only</option>
-            <option <?php if ( ($search_type == 'study_mode' || $search_type == 'attendance_mode') && urldecode(strtolower($search_string)) == strtolower('Part-time only') ) echo 'selected'; ?>>Part-time only</option>
-            <option <?php if ( ($search_type == 'study_mode' || $search_type == 'attendance_mode') && urldecode(strtolower($search_string)) == strtolower('Full-time or part-time') ) echo 'selected'; ?>>Full-time or part-time</option>
+          <select class="study-mode-search input-medium <?php if(strcmp($search_type, 'study_mode')  == 0) echo 'highlighted'; ?>">
+            <option value="">All study modes</option>
+            <option <?php if(strcmp($search_type, 'study_mode')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Full-time only'))  == 0) echo 'selected'; ?>>Full-time only</option>
+            <option <?php if(strcmp($search_type, 'study_mode')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Part-time only'))  == 0) echo 'selected'; ?>>Part-time only</option>
+            <option <?php if(strcmp($search_type, 'study_mode')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Full-time or part-time'))  == 0) echo 'selected'; ?>>Full-time or part-time</option>
           </select>
         
           <select class="subject-categories-search input-large <?php if(strcmp($search_type, 'subject_category')  == 0) echo 'highlighted'; ?>">
@@ -42,11 +39,18 @@
             <?php endforeach; ?>
           </select>
 
-          <select class="course-options-search input-large <?php if ( $search_type == 'programme_type' || $search_type == 'course_options' ) echo 'highlighted'; ?>">
-            <option value="">All course options</option>
-            <option <?php if ( ($search_type == 'programme_type' || $search_type == 'course_options') && urldecode(strtolower(trim($search_string))) == 'year abroad' ) echo 'selected'; ?>>Year abroad</option>
-            <option <?php if ( ($search_type == 'programme_type' || $search_type == 'course_options') && urldecode(strtolower(trim($search_string))) == 'year in industry' ) echo 'selected'; ?>>Year in industry</option>
-            <option <?php if ( ($search_type == 'programme_type' || $search_type == 'course_options') && urldecode(strtolower(trim($search_string))) == 'foundation year' ) echo 'selected'; ?>>Foundation year</option>
+          <select class="award-search input-medium <?php if(strcmp($search_type, 'award')  == 0) echo 'highlighted'; ?>">
+            <option value="">All awards</option>
+            <?php foreach($awards as $award): ?>
+            <option <?php if(strcmp($search_type, 'award')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower($award))  == 0) echo 'selected'; ?>><?php echo $award ?></option>
+            <?php endforeach; ?>
+          </select>
+
+          <select class="programme-type-search input-medium <?php if(strcmp($search_type, 'programme_type')  == 0) echo 'highlighted'; ?>">
+            <option value="">All course types</option>
+            <option <?php if(strcmp($search_type, 'programme_type') == 0  && strcmp(urldecode(strtolower($search_string)), 'research') == 0) echo 'selected'; ?>>Research</option>
+            <option <?php if(strcmp($search_type, 'programme_type') == 0  && strcmp(urldecode(strtolower($search_string)), 'taught') == 0) echo 'selected'; ?>>Taught</option>
+            <option <?php if(strcmp($search_type, 'programme_type') == 0  && strcmp(urldecode(strtolower($search_string)), 'taught-research') == 0) echo 'selected'; ?>>Taught-research</option>
           </select>
 
         </div>
@@ -59,30 +63,38 @@
         <thead>
           <tr>
             <th>Name <i class="icon-resize-vertical"></i></th>
-            <th style="width:100px">UCAS code <i class="icon-resize-vertical"></i></th>
-            <th style="width:80px" class="hidden-phone">Campus <i class="icon-resize-vertical"></i></th>
+            <th style="width:120px">Course type <i class="icon-resize-vertical"></i></th>
+            <th style="width:120px" class="hidden-phone">Campus <i class="icon-resize-vertical"></i></th>
             <th style="width:150px" class="hidden-phone">Full-time/Part-time <i class="icon-resize-vertical"></i></th>
             <th class="hide">Subject categories</th>
             <th class="hide">Search keywords</th>
-            <th class="hide">Course options</th>
+            <th class="hide">Award</th>
           </tr>
         </thead>
         <tbody>
         
         <?php foreach($programmes as $p):?>
-          
+          <?php if ($p->study_abroad_option != ''): ?>
           <tr>
             <td>
-                <a href='<?php echo Flight::url("{$level}/{$year_for_url}{$p->id}/{$p->slug}"); ?>'><?php echo $p->name;?> <?php if($p->subject_to_approval == 'true'){ echo "(subject to approval)";} ?></a><br /><span class="advanced-search-award"><?php echo $p->award;?></span>
+                <div class="advanced-search-name-award"><a href='<?php echo Flight::url("{$level}/{$year_for_url}{$p->id}/{$p->slug}"); ?>'><?php echo $p->name;?> <?php if($p->subject_to_approval == 'true'){ echo "(subject to approval)";} ?></a><br /><span class="advanced-search-award"><?php echo $p->award;?></span></div>
             </td>
             <td>
-                <?php echo $p->ucas_code;?>
+                <?php echo ucwords($p->programme_type);?>
             </td>
             <td class="hidden-phone">
-                <?php echo $p->campus;?>
+                <?php if ($p->additional_locations != ''): ?>
+                  <?php if ( strstr($p->additional_locations, ',') ): ?>
+                    <?php echo $p->campus.', '.$p->additional_locations ?>
+                  <?php else: ?>
+                    <?php echo $p->campus.' and '.$p->additional_locations ?>
+                  <?php endif ?>
+                <?php else: ?>
+                  <?php echo $p->campus ?>
+                <?php endif ?>
             </td>
             <td class="hidden-phone">
-                <?php /* mode_of_study aka 'attendance modes' eg full-time */ echo $p->mode_of_study;?>
+                <?php echo $p->mode_of_study;?>
             </td>
             <td class="hide">
                 <?php foreach((array)$p->subject_categories as $key => $sc): ?>
@@ -99,9 +111,10 @@
                   <?php echo $p->search_keywords;?>
             </td>
             <td class="hide">
-                  <?php /* programme_type aka 'course options' eg year abroad */ echo trim($p->programme_type);?>
+                  <?php echo $p->award;?>
             </td>
           </tr>
+          <?php endif; ?>
         <?php endforeach; ?>
 
 
@@ -113,16 +126,14 @@
                
 <kentScripts>
 <script type='text/javascript'>
-
 $(document).ready(function(){ 
-
   //put our custom search items into variables
   var advanced_text_search = $('input.advanced-text-search');
   var campus_search = $('select.campus-search');
-  var attendance_mode_search = $('select.attendance-mode-search');
+  var study_mode_search = $('select.study-mode-search');
   var subject_categories_search = $('select.subject-categories-search');
-  var course_options_search = $('select.course-options-search');
-
+  var award_search = $('select.award-search');
+  var programme_type_search = $('select.programme-type-search');
 
   /* Custom filtering function which will filter data using our advanced search fields */
   $.fn.dataTableExt.afnFiltering.push(
@@ -130,25 +141,26 @@ $(document).ready(function(){
 
   // get each column out
   var name = $(aData[0]).html();
-  var ucas_code = aData[1];
+  var award = $(aData[0]).find('span').text();
+  var programme_type = aData[1];
   var campus = aData[2];
-  var attendance_mode = aData[3];
+  var study_mode = aData[3];
   var subject_categories = aData[4];
   var search_keywords = aData[5];
-  var course_options = aData[6];
 
-  if(advanced_text_search && campus_search && attendance_mode_search && subject_categories_search && course_options_search){
+  if(advanced_text_search && campus_search && study_mode_search && subject_categories_search && award_search && programme_type_search){
 
-    // search both the Name, UCAS code and Search keywords fields if our search box is filled
+    // search both the Name, award and Search keywords fields if our search box is filled
     var advanced_text_search_result = (advanced_text_search.val() == '') ? true : 
         (
           (name.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) || 
-          (search_keywords.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) || 
-          (attendance_mode.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) || 
-          (campus.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) || 
-          (subject_categories.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) || 
-          (ucas_code.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) ||
-          (course_options.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1)
+          (search_keywords.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) ||
+          (award.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) ||
+          (programme_type.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) ||
+          (campus.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) ||
+          (study_mode.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) ||
+          (subject_categories.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1)
+
           ? true : false 
         );
     
@@ -156,10 +168,7 @@ $(document).ready(function(){
     var campus_search_result = (campus_search.val() == '') ? true : (( campus.toLowerCase().indexOf( campus_search.val().toLowerCase() ) !== -1 ) ? true : false );
     
     // search the study mode field if a study mode is selected
-    var attendance_mode_search_result = (attendance_mode_search.val() == '') ? true : (( attendance_mode.toLowerCase().indexOf( attendance_mode_search.val().toLowerCase() ) !== -1 ) ? true : false );
-
-    // search the programme type field if a programme type is selected
-    var course_options_search_result = (course_options_search.val() == '') ? true : (( course_options.toLowerCase().indexOf( course_options_search.val().toLowerCase() ) !== -1 ) ? true : false );
+    var study_mode_search_result = (study_mode_search.val() == '') ? true : (( study_mode.toLowerCase().indexOf( study_mode_search.val().toLowerCase() ) !== -1 ) ? true : false );
     
     // lets split subject categories up so we can search then individually
     var subject_categories_vals = subject_categories.split(';');
@@ -178,10 +187,15 @@ $(document).ready(function(){
         }
       }
     }
-    
+
+    // search the award field if an award is selected
+    var award_search_result = (award_search.val() == '') ? true : (( award.toLowerCase().indexOf( award_search.val().toLowerCase() ) !== -1 ) ? true : false );
+
+    // search the programme type field if a programme type is selected
+    var programme_type_search_result = (programme_type_search.val() == '') ? true : (( programme_type.toLowerCase().indexOf( programme_type_search.val().toLowerCase() ) !== -1 ) ? true : false );
 
     // return our results
-    return advanced_text_search_result && campus_search_result && attendance_mode_search_result && subject_categories_search_result && course_options_search_result;
+    return advanced_text_search_result && campus_search_result && study_mode_search_result && subject_categories_search_result && award_search_result && programme_type_search_result;
   }
 
   return true;
@@ -195,7 +209,7 @@ $(document).ready(function(){
   */
   $(document).ready(function(){
   var programme_list = $('#programme-list').dataTable({
-        "sDom": "t<'muted pull-right'i><'clearfix'>p", // no need for this since we're implementing our own search: "<'navbar'<'navbar-inner'<'navbar-search pull-left'f>>r>t<'muted pull-right'i><'clearfix'>p",
+        "sDom": "t<'muted pull-right'i><'clearfix'>p",
         "sPaginationType": "bootstrap",
         "iDisplayLength": 50,
         "oLanguage": {
@@ -209,11 +223,11 @@ $(document).ready(function(){
           { "bSortable": false },
           { "bSortable": false },
           { "bSortable": false }
-          ]
+        ]
     });
 
     //now add appropriate event listeners to our custom search items
-    if(advanced_text_search && campus_search && attendance_mode_search && subject_categories_search){
+    if(advanced_text_search && campus_search && study_mode_search && subject_categories_search && award_search && programme_type_search){
       
       advanced_text_search.keyup(function() {
         programme_list.fnDraw();
@@ -229,17 +243,22 @@ $(document).ready(function(){
         highlight($(this));
       });
 
-      attendance_mode_search.change(function(){
-        programme_list.fnDraw();
-        highlight($(this));
-      });
-
-      course_options_search.change(function(){
+      study_mode_search.change(function(){
         programme_list.fnDraw();
         highlight($(this));
       });
 
       subject_categories_search.change(function(){
+        programme_list.fnDraw();
+        highlight($(this));
+      });
+
+      award_search.change(function(){
+        programme_list.fnDraw();
+        highlight($(this));
+      });
+
+      programme_type_search.change(function(){
         programme_list.fnDraw();
         highlight($(this));
       });
@@ -255,6 +274,7 @@ $(document).ready(function(){
       }
 
     }
+
     /* fades the scroll to top button in and out as you scroll away from/near to the top of the page */
     $(window).bind('scroll', function(){
       if($(this).scrollTop() > 650) {
@@ -267,8 +287,9 @@ $(document).ready(function(){
 
   });
 
+
 });
+
 </script>
 
 </kentScripts>
-
