@@ -16,6 +16,11 @@ $(document).ready(function(){
 	select_tmp.addClass("programme-scroll-menu");
 	$(".daedalus-tabs .nav-tabs").append(select_tmp);
 
+	$('.fees-tables').hide();
+	$('.fees-toggle').click(function() {
+		$('.fees-tables').slideToggle();
+	});
+
 	/**
 	 * Module showhide
 	 */

@@ -76,11 +76,11 @@
 				<a href="#ug_apply_form" class="apply-adm-link">Apply</a>, <a href="#ug_enquiries_form" class="enquire-adm-link">enquire</a> or <a href="#ug_enquiries_form" class="pros-adm-link">order a prospectus</a>
 			</div>
 
-			<div class="key-facts-block">
-			<div class="key-facts-container">
-			
-			<h2>Fees</h2>
-			<div class="fees-tabless">
+			<div class="fees-container">
+			<div class="panel admission-links">
+				<a class="fees-toggle">Fees</a>
+			</div>
+			<div class="fees-tables">
 			<?php foreach ($course->deliveries as $delivery): ?>
 			<?php if ( ! in_array($delivery->pos_code, $pos_codes) ): ?>
 			<table class="table">
@@ -107,14 +107,8 @@
 			<?php $pos_codes[] = $delivery->pos_code; endif; ?>
 			<?php endforeach; ?>
 			</div>
-
 			</div>
-			<div class="more-info">
-				<a href="#">Read more</a>
-			</div>
-			</div>
-
-			<div class="key-facts-block">
+<div class="key-facts-block">
 			<aside class="key-facts-container">
 				<h2>Key facts</h2>
 				<div class="key-facts">
@@ -200,13 +194,12 @@
 					</ul>
 				</div>
 
+
+
+
 			</aside>
-			</div>
+</div>
 			
-
-
-			
-
 
 
 			</div>
