@@ -52,30 +52,32 @@
 
 			<div class="key-facts-block">
 			<div class="key-facts-container">
-			<h2>Fees</h2>
-			<div>
-			<table class="table table-fees">
-			  <thead>
-			    <tr>
-			      <th></th>
-			      <th>UK/EU</th>
-			      <th>Overseas</th>
-			    </tr>
-			  </thead>
-			  <tbody>
-					<tr>
-					  <td><strong>Full-time</strong></td>
-				      <td>&pound;<?php echo $course->fees->home->{'full-time'}; ?></td>
-				      <td>&pound;<?php echo $course->fees->int->{'full-time'}; ?></td>
-				    </tr>
-				    <tr>
-				      <td><strong>Part-time</strong></td>
-				      <td>&pound;<?php echo $course->fees->home->{'part-time'}; ?></td>
-				      <td>&pound;<?php echo $course->fees->int->{'part-time'}; ?></td>
-				    </tr>
-			  </tbody>
-			</table>
-			</div>
+				<h2><a class="fees-link">Fees <i class="icon-chevron-down toggler"></i></a></h2>
+				<div class="fees-tables" style="display: none">
+					<table class="table">
+					  <thead>
+					    <tr>
+					      <th></th>
+					      <th>UK/EU</th>
+					      <th>Overseas</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+							<tr>
+							  <td><strong>Full-time</strong></td>
+						      <td>&pound;<?php echo $course->fees->home->{'full-time'}; ?></td>
+						      <td>&pound;<?php echo $course->fees->int->{'full-time'}; ?></td>
+						    </tr>
+						    <tr>
+						      <td><strong>Part-time</strong></td>
+						      <td>&pound;<?php echo $course->fees->home->{'part-time'}; ?></td>
+						      <td>&pound;<?php echo $course->fees->int->{'part-time'}; ?></td>
+						    </tr>
+					  </tbody>
+					</table>
+
+					<p>Exceptions may apply. <br /><a href="#">See our Student Finance pages for more information.</a></p>
+				</div>
 			</div>
 			</div>
 

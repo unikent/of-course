@@ -79,34 +79,36 @@
 			<div class="key-facts-block">
 			<div class="key-facts-container">
 			
-			<h2>Fees</h2>
-			<div class="fees-tabless">
-			<?php foreach ($course->deliveries as $delivery): ?>
-			<?php if ( ! in_array($delivery->pos_code, $pos_codes) ): ?>
-			<table class="table">
-			  <thead>
-			    <tr>
-			      <th><strong><?php echo $delivery->award_name ?></strong></th>
-			      <th>UK/EU</th>
-			      <th>Overseas</th>
-			    </tr>
-			  </thead>
-			  <tbody>
-					<tr>
-					  <td>Full-time</td>
-				      <td>&pound;<?php echo $delivery->fees->home->{'full-time'}; ?></td>
-				      <td>&pound;<?php echo $delivery->fees->int->{'full-time'}; ?></td>
-				    </tr>
-				    <tr>
-				      <td>Part-time</td>
-				      <td>&pound;<?php echo $delivery->fees->home->{'part-time'}; ?></td>
-				      <td>&pound;<?php echo $delivery->fees->int->{'part-time'}; ?></td>
-				    </tr>
-			  </tbody>
-			</table>
-			<?php $pos_codes[] = $delivery->pos_code; endif; ?>
-			<?php endforeach; ?>
-			</div>
+				<h2><a class="fees-link">Fees <i class="icon-chevron-down toggler"></i></a></h2>
+				<div class="fees-tables" style="display: none">
+				<?php foreach ($course->deliveries as $delivery): ?>
+				<?php if ( ! in_array($delivery->pos_code, $pos_codes) ): ?>
+					<table class="table">
+					  <thead>
+					    <tr>
+					      <th><strong><?php echo $delivery->award_name ?></strong></th>
+					      <th>UK/EU</th>
+					      <th>Overseas</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+							<tr>
+							  <td>Full-time</td>
+						      <td>&pound;<?php echo $delivery->fees->home->{'full-time'}; ?></td>
+						      <td>&pound;<?php echo $delivery->fees->int->{'full-time'}; ?></td>
+						    </tr>
+						    <tr>
+						      <td>Part-time</td>
+						      <td>&pound;<?php echo $delivery->fees->home->{'part-time'}; ?></td>
+						      <td>&pound;<?php echo $delivery->fees->int->{'part-time'}; ?></td>
+						    </tr>
+					  </tbody>
+					</table>
+				<?php $pos_codes[] = $delivery->pos_code; endif; ?>
+				<?php endforeach; ?>
+
+					<p>Exceptions may apply. <br /><a href="#">See our Student Finance pages for more information.</a></p>
+				</div>
 
 			</div>
 			<div class="more-info">
