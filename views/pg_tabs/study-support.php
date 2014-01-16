@@ -2,9 +2,10 @@
 
 <?php echo !empty($course->key_information_miscellaneous) ? $course->key_information_miscellaneous : '' ?>
 
-<?php if(!empty($course->globals->careersemployability_text)): ?>
+<?php if ( !empty($course->careers_and_employability) || !empty($course->globals->careersemployability_text) ): ?>
 <section class="info-subsection">
 	<h4>Careers and employability</h4>
+	<?php echo $course->careers_and_employability ?>
 	<?php echo $course->globals->careersemployability_text ?>
 </section>
 <?php endif; ?>
