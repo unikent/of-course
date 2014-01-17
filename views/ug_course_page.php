@@ -54,6 +54,7 @@
 			<div class="key-facts-container">
 				<h2><a class="fees-link">Fees <i class="icon-chevron-down toggler"></i></a></h2>
 				<div class="fees-tables" style="display: none">
+					<p>The <?php echo $course->current_year . '/' . (intval($course->current_year) + 1) ?> tuition fees have not yet been set. As a guide only, the <?php echo (intval($course->current_year) - 1) . '/' . $course->current_year ?> annual tuition fees for standard degree courses are:</p>
 					<table class="table">
 					  <thead>
 					    <tr>
@@ -76,7 +77,7 @@
 					  </tbody>
 					</table>
 
-					<p>Exceptions may apply. <br /><a href="#">See our Student Finance pages for more information.</a></p>
+					<p>Exceptions may apply. <br /><a href="http://www.kent.ac.uk/finance-student/">See our Student Finance pages for more information.</a></p>
 				</div>
 			</div>
 			</div>
