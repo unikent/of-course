@@ -15,6 +15,13 @@ foreach($course->modules as $module){
 ?>
 
 <?php if((empty($course->modules[0])) || $emptystages): ?>
+
+	<?php if ( !empty($course->modules_intro_no_pos) ): ?>
+	<section class="info-section">
+		<h3>Modules</h3>
+		<?php echo $course->modules_intro_no_pos ?>
+	</section>
+	<?php endif; ?>
 	
 <?php else: ?>
 	<section class="info-section">
