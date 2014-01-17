@@ -91,6 +91,9 @@
 					      <th>UK/EU</th>
 					      <th>Overseas</th>
 					    </tr>
+					    <tr>
+					    	<td colspan="3"><?php echo $delivery->description ?></td>
+					    </tr>
 					  </thead>
 					  <tbody>
 							<tr>
