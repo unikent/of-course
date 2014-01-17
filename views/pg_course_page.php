@@ -81,7 +81,7 @@
 			
 				<h2><a class="fees-link">Fees <i class="icon-chevron-down toggler"></i></a></h2>
 				<div class="fees-tables" style="display: none">
-					<p>The <?php echo $course->current_year . '/' . (intval($course->current_year) + 1) ?> tuition fees have not yet been set. As a guide only, the <?php echo (intval($course->current_year) - 1) . '/' . $course->current_year ?> annual tuition fees for standard degree courses are:</p>
+					<?php if (isset($course->globals->fees_caveat_text_pg) && !empty($course->globals->fees_caveat_text_pg)) echo $course->globals->fees_caveat_text_pg ?> 
 				<?php foreach ($course->deliveries as $delivery): ?>
 				<?php if ( ! in_array($delivery->pos_code, $pos_codes) ): ?>
 					<table class="table">
