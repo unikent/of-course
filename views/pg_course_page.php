@@ -115,13 +115,15 @@
 							$locations = "<a href='{$course->location[0]->url}'>".$course->location[0]->name."</a>";
 							$additional_locations = '';
 
-							foreach ($course->additional_locations as $key=>$additional_location) {
-								if ($additional_location != '') {
-									if ( $key == (sizeof($course->additional_locations)-1) ) {
-										$additional_locations .= " and <a href='$additional_location->url'>$additional_location->name</a>";
-									}
-									else {
-										$additional_locations .= ", <a href='$additional_location->url'>$additional_location->name</a>";
+							if ($course->additional_locations != null) {
+								foreach ($course->additional_locations as $key=>$additional_location) {
+									if ($additional_location != '') {
+										if ( $key == (sizeof($course->additional_locations)-1) ) {
+											$additional_locations .= " and <a href='$additional_location->url'>$additional_location->name</a>";
+										}
+										else {
+											$additional_locations .= ", <a href='$additional_location->url'>$additional_location->name</a>";
+										}
 									}
 								}
 							}
