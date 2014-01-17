@@ -382,6 +382,15 @@ class CoursesFrontEnd {
 
 		try {
 			$programmes = static::$pp->get_programmes_index($year, $level);//5 minute cache
+			$campuses = static::$pp->get_campuses();
+	    	$subject_categories = static::$pp->get_subjectcategories($level);
+	    	$awards = static::$pp->get_awards($level);
+	    	$award_names = array();
+	    	foreach ($awards as $award)
+	    	{
+	    		$award_names[] = $award->name;
+	    	}
+	    	sort($award_names);
 		}
 		catch(\Exception $e)
 		{
@@ -394,6 +403,9 @@ class CoursesFrontEnd {
 		
 		//Render full page
 		return Flight::layout($template, array('meta' => $meta, 'programmes' => $programmes, 'level' => $level));
+
+		return Flight::layout($template, array('meta' => $meta, 'programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'awards' => $award_names));	
+
 	}
 
 	/**
