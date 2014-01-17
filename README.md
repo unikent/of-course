@@ -33,6 +33,20 @@ In order to compress the assets (CSS and JS) for a distribution (images are alre
 ## Notes.
 - Flight has been extended with some useful helper functions. You can find these in main/methods.php
 
+## Notes on filtering search results in the URL
+
+the url structure is:
+
+* campus/{campus name}
+* study_mode/{mode name}
+* subject_category/{category name}
+* award/{award name}
+* programme_type/{type}
+* course_options/{option}
+
+eg  http://www.kent.ac.uk/courses/postgraduate/search/subject_category/testtest/
+
+
 ## Licensing
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or any later version.
