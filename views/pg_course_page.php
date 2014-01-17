@@ -115,7 +115,7 @@
 							$locations = "<a href='{$course->location[0]->url}'>".$course->location[0]->name."</a>";
 							$additional_locations = '';
 
-							if ($course->additional_locations != null) {
+							if ($course->additional_locations != "") {
 								foreach ($course->additional_locations as $key=>$additional_location) {
 									if ($additional_location != '') {
 										if ( $key == (sizeof($course->additional_locations)-1) ) {
