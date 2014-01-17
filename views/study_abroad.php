@@ -2,7 +2,7 @@
 <?php if (!isset($search_type)) $search_type = ''; ?>
 
 <div class="advanced-search">
-    <h1>Postgraduate courses with a study abroad option</h1>
+    <h1>Postgraduate courses with international study</h1>
 
     <div class="row advanced-search-boxes">
 
