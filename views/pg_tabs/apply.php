@@ -1,33 +1,3 @@
-<h2>Fees</h2>
-			<div>
-			<?php foreach ($course->deliveries as $delivery): ?>
-			<?php if ( ! in_array($delivery->pos_code, $pos_codes) ): ?>
-			<table class="table">
-			  <thead>
-			    <tr>
-			      <th><strong><?php echo $delivery->award_name ?></strong></th>
-			      <th>UK/EU</th>
-			      <th>Overseas</th>
-			    </tr>
-			  </thead>
-			  <tbody>
-					<tr>
-					  <td>Full-time</td>
-				      <td>&pound;<?php echo $delivery->fees->home->{'full-time'}; ?></td>
-				      <td>&pound;<?php echo $delivery->fees->int->{'full-time'}; ?></td>
-				    </tr>
-				    <tr>
-				      <td>Part-time</td>
-				      <td>&pound;<?php echo $delivery->fees->home->{'part-time'}; ?></td>
-				      <td>&pound;<?php echo $delivery->fees->int->{'part-time'}; ?></td>
-				    </tr>
-			  </tbody>
-			</table>
-			<?php $pos_codes[] = $delivery->pos_code; endif; ?>
-			<?php endforeach; ?>
-			</div>
-
-
 <div class="panel admissions">
 
 	<h2>Apply</h2>

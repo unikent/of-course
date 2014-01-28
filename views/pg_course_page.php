@@ -115,9 +115,7 @@
 				</div>
 
 			</div>
-			<div class="more-info">
-				<a href="#">Read more</a>
-			</div>
+
 			</div>
 
 			<div class="key-facts-block">
