@@ -1,5 +1,7 @@
 <div class="panel admissions">
+
 	<h2>Apply</h2>
+
 
 	<?php
 	$evision_url = "evision";
@@ -17,6 +19,9 @@
 			<?php echo $course->how_to_apply; ?>
 		</div>
 	<?php endif; ?>
+
+
+
 
 <?php if(empty($course->subject_to_approval)): ?>
 	

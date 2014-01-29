@@ -154,6 +154,7 @@
 </section>
 <?php endif; ?>
 
+<?php if ($course->kiscourseid != ''): ?>
 <div class="row-fluid kiss-widget-section">
 	<div class="span7">
 		<div class="panel kis-info">
@@ -163,9 +164,8 @@
 		</div>
 	</div>
 	<div class="span5">
-		<?php if ($course->kiscourseid != ''): ?>
 		<?php $ukprn = (isset($course->kis_institution_id) && $course->kis_institution_id != '') ? $course->kis_institution_id : $course->globals->ukprn; ?>
-		<iframe class="pull-right" id="unistats-widget-frame" title="Unistats KIS Widget" src="//widget.unistats.ac.uk/Widget/<?php echo $ukprn ?>/<?php echo str_replace(array('/', '|', ':', '&', '.', '>', '+', '#', ';', '?', '@', '='), '_', $course->kiscourseid); ?>/vertical/small/en-GB/Full%20Time" scrolling="no" style="overflow: hidden; border: 0px none transparent; width: 190px; height: 500px;"> </iframe>
-		<?php endif; ?>
+		<iframe class="pull-right" id="unistats-widget-frame" title="Unistats KIS Widget" src="//widget.unistats.ac.uk/Widget/<?php echo $ukprn ?>/<?php echo str_replace(array('/', '|', ':', '&', '.', '>', '+', '#', ';', '?', '@', '='), '_', $course->kiscourseid); ?>/vertical/small/en-GB/Full%20Time" scrolling="no" style="overflow: hidden; border: 0px none transparent; width: 190px; height: 500px;"> </iframe>	
 	</div>
 </div>
+<?php endif; ?>

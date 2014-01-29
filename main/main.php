@@ -363,7 +363,7 @@ class CoursesFrontEnd {
 			case 'postgraduate':
 				$template = 'study_abroad';
 				$meta = array(
-					'title' => 'Postgraduate courses with a study abroad option | Postgraduate Courses | The University of Kent',
+					'title' => 'Postgraduate courses with international study | Postgraduate Courses | The University of Kent',
 					'description' => 'Search all of the study abroad option courses offered by the University of Kent',
 				);
 				break;
@@ -371,7 +371,7 @@ class CoursesFrontEnd {
 			default:
 				$template = 'study_abroad';
 				$meta = array(
-					'title' => 'Postgraduate courses with a study abroad option | Postgraduate Courses | The University of Kent',
+					'title' => 'Postgraduate courses with international study | Postgraduate Courses | The University of Kent',
 					'description' => 'Search all of the study abroad option courses offered by the University of Kent',
 				);
 				break;
@@ -382,6 +382,15 @@ class CoursesFrontEnd {
 
 		try {
 			$programmes = static::$pp->get_programmes_index($year, $level);//5 minute cache
+			$campuses = static::$pp->get_campuses();
+	    	$subject_categories = static::$pp->get_subjectcategories($level);
+	    	$awards = static::$pp->get_awards($level);
+	    	$award_names = array();
+	    	foreach ($awards as $award)
+	    	{
+	    		$award_names[] = $award->name;
+	    	}
+	    	sort($award_names);
 		}
 		catch(\Exception $e)
 		{
@@ -394,6 +403,9 @@ class CoursesFrontEnd {
 		
 		//Render full page
 		return Flight::layout($template, array('meta' => $meta, 'programmes' => $programmes, 'level' => $level));
+
+		return Flight::layout($template, array('meta' => $meta, 'programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'awards' => $award_names));	
+
 	}
 
 	/**

@@ -16,6 +16,11 @@ $(document).ready(function(){
 	select_tmp.addClass("programme-scroll-menu");
 	$(".daedalus-tabs .nav-tabs").append(select_tmp);
 
+	$('.fees-tables').hide();
+	$('.fees-toggle').click(function() {
+		$('.fees-tables').slideToggle();
+	});
+
 	/**
 	 * Module showhide
 	 */
@@ -51,6 +56,27 @@ $(document).ready(function(){
 	}
 	if ($('#apply-study-type').val() == 'pt') {
 		$('.courses-sits-apply > .parttime-link' + applyawardlink).show();
+	}
+
+	var feeslink = $('.fees-link');
+	feeslink.click(function(){
+		toggleFees();
+	});
+
+	function toggleFees (show){
+
+		show = typeof show !== 'undefined' ? show : !$('.fees-tables').is(":visible");
+
+		if (show) {
+			$('.fees-tables').slideDown(400);
+			$(".fees-link i.toggler").removeClass('icon-chevron-down');
+			$(".fees-link i.toggler").addClass('icon-chevron-up');
+		}
+		else{
+			$('.fees-tables').slideUp(400);
+			$(".fees-link i.toggler").removeClass('icon-chevron-up');
+			$(".fees-link i.toggler").addClass('icon-chevron-down');
+		}
 	}
 
 	// when things change...
