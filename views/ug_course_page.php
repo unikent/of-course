@@ -66,13 +66,13 @@
 					  <tbody>
 							<tr>
 							  <td><strong>Full-time</strong></td>
-						      <td><?php echo empty($course->fees->home->{'full-time'}) ? 'TBC' : '&pound;' . $course->fees->home->{'full-time'}); ?></td>
-						      <td><?php echo empty($course->fees->int->{'full-time'}) ? 'TBC' : '&pound;' . $course->fees->int->{'full-time'}); ?></td>
+						      <td><?php echo empty($course->fees->home->{'full-time'}) ? 'TBC' : '&pound;' . $course->fees->home->{'full-time'}; ?></td>
+						      <td><?php echo empty($course->fees->int->{'full-time'}) ? 'TBC' : '&pound;' . $course->fees->int->{'full-time'}; ?></td>
 						    </tr>
 						    <tr>
 						      <td><strong>Part-time</strong></td>
-						      <td><?php echo empty($course->fees->home->{'part-time'}) ? 'TBC' : '&pound;' . $course->fees->home->{'part-time'}); ?></td>
-						      <td><?php echo empty($course->fees->int->{'part-time'}) ? 'TBC' : '&pound;' . $course->fees->int->{'part-time'}); ?></td>
+						      <td><?php echo empty($course->fees->home->{'part-time'}) ? 'TBC' : '&pound;' . $course->fees->home->{'part-time'}; ?></td>
+						      <td><?php echo empty($course->fees->int->{'part-time'}) ? 'TBC' : '&pound;' . $course->fees->int->{'part-time'}; ?></td>
 						    </tr>
 					  </tbody>
 					</table>
