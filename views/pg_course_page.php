@@ -76,6 +76,7 @@
 				<a href="#ug_apply_form" class="apply-adm-link">Apply</a>, <a href="#ug_enquiries_form" class="enquire-adm-link">enquire</a> or <a href="#ug_enquiries_form" class="pros-adm-link">order a prospectus</a>
 			</div>
 
+			<div class="key-facts-block">
 			<aside class="key-facts-container">
 				<h2>Key facts</h2>
 				<div class="key-facts">
@@ -162,7 +163,16 @@
 
 					</ul>
 				</div>
+
 			</aside>
+			</div>
+			
+
+
+			
+
+
+
 			</div>
 		</div><!-- /span -->
 	</div><!-- /row -->
