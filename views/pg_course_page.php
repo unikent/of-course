@@ -77,48 +77,6 @@
 			</div>
 
 			<div class="key-facts-block">
-			<div class="key-facts-container">
-			
-				<h2><a class="fees-link">Fees <i class="icon-chevron-down toggler"></i></a></h2>
-				<div class="fees-tables" style="display: none">
-					<?php if (isset($course->globals->fees_caveat_text_pg) && !empty($course->globals->fees_caveat_text_pg)) echo $course->globals->fees_caveat_text_pg ?> 
-				<?php foreach ($course->deliveries as $delivery): ?>
-				<?php if ( ! in_array($delivery->pos_code, $pos_codes) ): ?>
-					<table class="table">
-					  <thead>
-					    <tr>
-					      <th><strong><?php echo $delivery->award_name ?></strong></th>
-					      <th>UK/EU</th>
-					      <th>Overseas</th>
-					    </tr>
-					    <tr>
-					    	<td colspan="3"><?php echo $delivery->description ?></td>
-					    </tr>
-					  </thead>
-					  <tbody>
-							<tr>
-							  <td><strong>Full-time</strong></td>
-						      <td><?php echo empty($delivery->fees->home->{'full-time'}) ? 'TBC' : '&pound;' . $delivery->fees->home->{'full-time'}; ?></td>
-						      <td><?php echo empty($delivery->fees->int->{'full-time'}) ? 'TBC' : '&pound;' . $delivery->fees->int->{'full-time'}; ?></td>
-						    </tr>
-						    <tr>
-						      <td><strong>Part-time</strong></td>
-						      <td><?php echo empty($delivery->fees->home->{'part-time'}) ? 'TBC' : '&pound;' . $delivery->fees->home->{'part-time'}; ?></td>
-						      <td><?php echo empty($delivery->fees->int->{'part-time'}) ? 'TBC' : '&pound;' . $delivery->fees->int->{'part-time'}; ?></td>
-						    </tr>
-					  </tbody>
-					</table>
-				<?php $pos_codes[] = $delivery->pos_code; endif; ?>
-				<?php endforeach; ?>
-
-					<p>Exceptions may apply. <br /><a href="http://www.kent.ac.uk/finance-student/">See our Student Finance pages for more information.</a></p>
-				</div>
-
-			</div>
-
-			</div>
-
-			<div class="key-facts-block">
 			<aside class="key-facts-container">
 				<h2>Key facts</h2>
 				<div class="key-facts">
