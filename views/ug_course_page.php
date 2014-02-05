@@ -51,6 +51,38 @@
 			</div>
 
 			<div class="key-facts-block">
+			<div class="key-facts-container">
+				<h2><a class="fees-link">Fees <i class="icon-chevron-down toggler"></i></a></h2>
+				<div class="fees-tables" style="display: none">
+					<?php if (isset($course->globals->fees_caveat_text_ug) && !empty($course->globals->fees_caveat_text_ug)) echo $course->globals->fees_caveat_text_ug ?> 
+					<table class="table">
+					  <thead>
+					    <tr>
+					      <th></th>
+					      <th>UK/EU</th>
+					      <th>Overseas</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+							<tr>
+							  <td><strong>Full-time</strong></td>
+						      <td><?php echo empty($course->fees->home->{'full-time'}) ? 'TBC' : '&pound;' . $course->fees->home->{'full-time'}; ?></td>
+						      <td><?php echo empty($course->fees->int->{'full-time'}) ? 'TBC' : '&pound;' . $course->fees->int->{'full-time'}; ?></td>
+						    </tr>
+						    <tr>
+						      <td><strong>Part-time</strong></td>
+						      <td><?php echo empty($course->fees->home->{'part-time'}) ? 'TBC' : '&pound;' . $course->fees->home->{'part-time'}; ?></td>
+						      <td><?php echo empty($course->fees->int->{'part-time'}) ? 'TBC' : '&pound;' . $course->fees->int->{'part-time'}; ?></td>
+						    </tr>
+					  </tbody>
+					</table>
+
+					<p>Exceptions may apply. <br /><a href="http://www.kent.ac.uk/finance-student/">See our Student Finance pages for more information.</a></p>
+				</div>
+			</div>
+			</div>
+
+			<div class="key-facts-block">
 			<aside class="key-facts-container">
 				<h2>Key facts</h2>
 				<div class="key-facts">
