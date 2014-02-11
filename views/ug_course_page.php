@@ -19,7 +19,7 @@
 				<li><a href="#teaching">Teaching &amp; Assessment</a></li>
 				<li><a href="#careers">Careers</a></li>
 				<li><a href="#entry">Entry requirements</a></li>
-				<li><a href="#fees">Fees &amp; Funding</a></li>
+				<li><a href="#fees">Funding</a></li>
 				<li><a href="#enquiries">Enquiries</a></li>
 				<li><a href="#apply">Apply</a></li>
 			</ul>
