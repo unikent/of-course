@@ -90,7 +90,7 @@
 					    	<td colspan="3"><i class="icon icon-bullet"></i> <?php echo preg_replace('/- (\w){4}-time/', '', $delivery->description) . ':' ?></td>
 					    </tr>
 					    <tr>
-					      <th><strong><?php echo $delivery->award_name ?></strong></th>
+					      <th><strong><?php //echo $delivery->award_name ?></strong></th>
 					      <th>UK/EU</th>
 					      <th>Overseas</th>
 					    </tr>
