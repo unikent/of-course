@@ -110,8 +110,10 @@
 					</table>
 				<?php $pos_codes[] = $delivery->pos_code; endif; ?>
 				<?php endforeach; ?>
-
-					<p>Exceptions may apply. <br /><a href="http://www.kent.ac.uk/finance-student/">See our Student Finance pages for more information.</a></p>
+					<?php 
+						if(isset($course->globals->fees_exception_text_pg) echo $course->globals->fees_exception_text_pg;
+					?>
+					
 				</div>
 
 			</div>

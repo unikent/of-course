@@ -77,7 +77,13 @@
 					  </tbody>
 					</table>
 
-					<p>Exceptions may apply. <br /><a href="http://www.kent.ac.uk/finance-student/">See our Student Finance pages for more information.</a></p>
+					<?php 
+						if(isset($course->globals->fees_year_in_industryabroad_text_ug) echo $course->globals->fees_year_in_industryabroad_text_ug;
+					?>
+
+					<?php 
+						if(isset($course->globals->fees_exception_text_ug) echo $course->globals->fees_exception_text_ug;
+					?>
 				</div>
 			</div>
 			</div>
