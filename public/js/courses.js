@@ -84,18 +84,11 @@ $(document).ready(function(){
 
 		// hide everything
 		$('.courses-sits-apply > .apply-link').hide();
-
-		// award-link changes depending on the value of the award currently chosen
-		var applyawardlink = '';
-		if ($('#apply-study-award').val() != undefined) {
-			applyawardlink = ".award-link-" + $('#apply-study-award').val();
-		}
 		
-
 		// now show relevant links
 		if ($('#apply-study-type').val() == 'ft') {
-			$('.courses-sits-apply > .fulltime-link' + applyawardlink).show();
-			 if(!$('.fulltime-link' + applyawardlink).length){
+			$('.courses-sits-apply > .fulltime-link').show();
+			 if(!$('.fulltime-link').length){
 			 	$('.courses-sits-apply-hidden-ft').show();
 			 }
 			 else{
@@ -104,8 +97,8 @@ $(document).ready(function(){
 			 }
 		}
 		if ($('#apply-study-type').val() == 'pt') {
-			$('.courses-sits-apply > .parttime-link' + applyawardlink).show();
-			 if(!$('.parttime-link' + applyawardlink).length){
+			$('.courses-sits-apply > .parttime-link').show();
+			 if(!$('.parttime-link').length){
 			 	$('.courses-sits-apply-hidden-pt').show();
 			 }
 			 else{
@@ -119,18 +112,14 @@ $(document).ready(function(){
 	/**
 	* Enquire tab
 	*/
-	// set up defaults for the first hit on the page
-	var awardlink = '';
-	if ($('#apply-study-award option').first().val() != undefined) {
-		awardlink = ".award-link-" + $('#enquire-study-award option').first().val();
-	}
+	
 	$('.courses-sits-enquire > .apply-link').hide();
 
 	if ($('#enquire-study-type').val() == 'ft') {
-		$('.courses-sits-enquire > .fulltime-link.enquire-link' + awardlink).show();
+		$('.courses-sits-enquire > .fulltime-link.enquire-link').show();
 	}
 	if ($('#enquire-study-type').val() == 'pt') {
-		$('.courses-sits-enquire > .parttime-link.enquire-link' + awardlink).show();
+		$('.courses-sits-enquire > .parttime-link.enquire-link').show();
 	}
 
 
