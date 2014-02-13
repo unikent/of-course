@@ -47,7 +47,7 @@
 
 			<div class="side-panel">
 			<div class="panel admission-links">
-				<a href="#ug_apply_form" class="apply-adm-link">Apply</a>, <a href="#ug_enquiries_form" class="enquire-adm-link">enquire</a> or <a href="#ug_enquiries_form" class="pros-adm-link">order a prospectus</a>
+				<a href="#!apply" class="apply-adm-link">Apply</a>, <a href="#!enquiries" class="enquire-adm-link">enquire</a> or <a href="#!enquiries" class="pros-adm-link">order a prospectus</a>
 			</div>
 
 			<div class="key-facts-block">
@@ -77,7 +77,22 @@
 					  </tbody>
 					</table>
 
-					<p>Exceptions may apply. <br /><a href="http://www.kent.ac.uk/finance-student/">See our Student Finance pages for more information.</a></p>
+					<?php 
+
+						if( 
+							isset($course->globals->fees_year_in_industryabroad_text_ug) && // If YII/YA text is set AND
+							( 
+								(!empty($course->year_in_industry)) || // YII or YA has some text
+								(!empty($course->year_abroad)) 
+							) // then
+						){
+							 echo $course->globals->fees_year_in_industryabroad_text_ug;
+						}
+					?>
+
+					<?php 
+						if(isset($course->globals->fees_exception_text_ug)) echo $course->globals->fees_exception_text_ug;
+					?>
 				</div>
 			</div>
 			</div>
