@@ -78,7 +78,16 @@
 					</table>
 
 					<?php 
-						if(isset($course->globals->fees_year_in_industryabroad_text_ug)) echo $course->globals->fees_year_in_industryabroad_text_ug;
+
+						if( 
+							isset($course->globals->fees_year_in_industryabroad_text_ug) && // If YII/YA text is set AND
+							( 
+								(!empty($course->year_in_industry)) || // YII or YA has some text
+								(!empty($course->year_abroad)) 
+							) // then
+						){
+							 echo $course->globals->fees_year_in_industryabroad_text_ug;
+						}
 					?>
 
 					<?php 
