@@ -30,7 +30,11 @@
                     <div class='alert alert-error' style="padding: 10px;margin:10px 0 0 0;">
                         You are currently viewing a preview of revision <strong><?php echo $course->revision_id; ?></strong>. This is preview data ONLY and is not representative of any course offered by this institution.
                     </div>
-
+                <?php elseif($course->current_year > $course->year): ?>
+                	<meta name="robots" content="noindex, nofollow" />
+                    <div class='alert alert-daedalus'>
+                        This is a <?php echo $course->year;?> entry programme. Would you like to <a href='<?php echo $meta['active_instance']; ?>'> view <?php echo $course->programme_title;?> for the <?php echo $course->current_year;?> entry?</a>
+                    </div>
                 <?php elseif($course->current_year < $course->year): ?>
                 	<meta name="robots" content="noindex, nofollow" />
                     <div class='alert alert-error' style="padding: 10px;margin:10px 0 0 0;">

@@ -89,6 +89,7 @@ class CoursesFrontEnd {
 
 		$meta = array(
 			'canonical' => Flight::url("{$level}/{$id}/{$course->slug}"),
+			'active_instance' => Flight::url("{$level}/{$id}/{$course->slug}"),
 			'description' => strip_tags($course->programme_abstract),
 		);
 
