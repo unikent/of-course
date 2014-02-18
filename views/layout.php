@@ -33,7 +33,7 @@
                 <?php elseif($course->current_year > $course->year): ?>
                 	<meta name="robots" content="noindex, nofollow" />
                     <div class='alert alert-daedalus'>
-                        This is a <?php echo $course->year;?> entry programme. Would you like to <a href='<?php echo $meta['active_instance']; ?>'> view <?php echo $course->programme_title;?> for the <?php echo $course->current_year;?> entry?</a>
+                        This is a <?php echo $course->year;?> entry programme. Would you like to <a href='<?php echo $meta['active_instance']; ?>'> view <?php echo $course->programme_title;?> for <?php echo $course->current_year;?> entry?</a>
                     </div>
                 <?php elseif($course->current_year < $course->year): ?>
                 	<meta name="robots" content="noindex, nofollow" />
