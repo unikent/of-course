@@ -15,10 +15,10 @@
 		<?php if(isset($meta) && isset($meta['canonical'])): ?>
 		<link rel="canonical" href="<?php echo $meta['canonical']; ?>" />
 		<?php endif; ?>
-
+		<link rel="feed" type="application/xcri+xml" href="/courses/xcri"/>
 
 		<link media='screen' type='text/css' rel='stylesheet' href='<?php echo ASSET_URL ?>/css/courses.css' />
-		<link rel="feed" type="application/xcri+xml" href="/courses/xcri"/>
+		<link media='print' type='text/css' rel='stylesheet' href='<?php echo ASSET_URL ?>/css/print.css' />
 		<!-- InstanceEndEditable -->
 	</kentMeta>
 	<kentContent>
