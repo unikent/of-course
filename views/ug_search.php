@@ -1,5 +1,12 @@
 <?php $year_for_url = empty($year) ? '' : ((strcmp($year, CoursesFrontEnd::$current_year) == 0) ? '' : $year . '/'); ?>
 
+<?php if($year !== CoursesFrontEnd::$current_year): ?>
+  <meta name="robots" content="noindex, nofollow" />
+  <div class='alert alert-daedalus'>
+    You're not searching for programmes in the current upcoming year. <a href="<?php echo BASE_URL != '/' ? BASE_URL : ''; ?>/undergraduate/search">Search for current programmes here.</a>
+  </div>
+<?php endif; ?>
+
 <div class="advanced-search">
     <h1>Courses A-Z</h1>
 
