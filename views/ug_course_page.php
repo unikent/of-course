@@ -142,6 +142,14 @@
 						<?php if(!empty($course->total_ects_credits_awarded_on_completion)): ?>
 						<li><strong>Total ECTS credits:</strong> <?php echo $course->total_ects_credits_awarded_on_completion;?></li>
 						<?php endif; ?>
+
+						<?php if(strpos($course->programme_type, "year abroad") !== false): ?>
+							<li><strong>Year abroad:</strong> Yes</li>
+						<?php endif; ?>
+
+						<?php if(strpos($course->programme_type, "year in industry") !== false): ?>
+							<li><strong>Year in Industry:</strong> Yes</li>
+						<?php endif; ?>
 					</ul>
 				</div>
 			</aside>
