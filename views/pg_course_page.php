@@ -73,7 +73,51 @@
 		<div class="span5">
 			<div class="side-panel">
 			<div class="panel admission-links">
-				<a href="#ug_apply_form" class="apply-adm-link">Apply</a>, <a href="#ug_enquiries_form" class="enquire-adm-link">enquire</a> or <a href="#ug_enquiries_form" class="pros-adm-link">order a prospectus</a>
+				<a href="#!apply" class="apply-adm-link">Apply</a>, <a href="#!enquiries" class="enquire-adm-link">enquire</a> or <a href="#!enquiries" class="pros-adm-link">order a prospectus</a>
+			</div>
+
+			<div class="key-facts-block">
+			<div class="key-facts-container">
+			
+				<h2><a class="fees-link">Fees <i class="icon-chevron-down toggler"></i></a></h2>
+				<div class="fees-tables" style="display: none">
+					<?php if (isset($course->globals->fees_caveat_text_pg) && !empty($course->globals->fees_caveat_text_pg)) echo $course->globals->fees_caveat_text_pg ?> 
+				<?php foreach ($course->deliveries as $delivery): ?>
+				<?php if ( ! in_array($delivery->pos_code, $pos_codes) ): ?>
+					<table class="table">
+					  <thead>
+					    <tr>
+					    	<td colspan="3"><i class="icon icon-bullet"></i> <?php echo preg_replace('/- (\w){4}-time/', '', $delivery->description) . ':' ?></td>
+					    </tr>
+					    <tr>
+					      <th><strong><?php //echo $delivery->award_name ?></strong></th>
+					      <th>UK/EU</th>
+					      <th>Overseas</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+							<tr>
+							  <td><strong>Full-time</strong></td>
+						      <td><?php echo empty($delivery->fees->home->{'full-time'}) ? 'TBC' : '&pound;' . $delivery->fees->home->{'full-time'}; ?></td>
+						      <td><?php echo empty($delivery->fees->int->{'full-time'}) ? 'TBC' : '&pound;' . $delivery->fees->int->{'full-time'}; ?></td>
+						    </tr>
+						    <tr>
+						      <td><strong>Part-time</strong></td>
+						      <td><?php echo empty($delivery->fees->home->{'part-time'}) ? 'TBC' : '&pound;' . $delivery->fees->home->{'part-time'}; ?></td>
+						      <td><?php echo empty($delivery->fees->int->{'part-time'}) ? 'TBC' : '&pound;' . $delivery->fees->int->{'part-time'}; ?></td>
+						    </tr>
+					  </tbody>
+					</table>
+				<?php $pos_codes[] = $delivery->pos_code; endif; ?>
+				<?php endforeach; ?>
+					<?php 
+						if(isset($course->globals->fees_exception_text_pg)) echo $course->globals->fees_exception_text_pg;
+					?>
+					
+				</div>
+
+			</div>
+
 			</div>
 
 			<div class="key-facts-block">

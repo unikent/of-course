@@ -16,7 +16,7 @@
 			</div>
 			<div class="prospectus-radio">
 				<input type="radio" name="enquire" id="prospectus" value="prospectus">
-				<label for="prospectus" id="prospectus-lbl">Order a prospectus <span>(<a href="/courses/undergraduate/prospectus/2014/full-prospectus.pdf" <?php echo "onClick=\"_gaq.push(['t0._trackEvent', 'course-enquiry-download-pdf-ug', 'click', '" . $course->programme_title . "']);\"";?> >PDF - 2MB</a>)</span></label>
+				<label for="prospectus" id="prospectus-lbl">Order a prospectus <span>(<a href="/courses/undergraduate/prospectus/<?php echo $course->year ?>/full-prospectus.pdf" <?php echo "onClick=\"_gaq.push(['t0._trackEvent', 'course-enquiry-download-pdf-ug-{$course->year}', 'click', '" . $course->programme_title . "']);\"";?> >PDF - 2MB</a>)</span></label>
 			</div>
 		</div>
 		
@@ -147,7 +147,7 @@
     <section class="info-subsection">
 		<ul>
 		  <?php foreach ($course->related_courses as $course_obj): ?>
-		  <li><a href="<?php echo Flight::url("{$level}/{$year_for_url}{$course_obj->id}/{$course_obj->slug}"); ?>"><?php echo $course_obj->name ?></a></li>
+		  <li><a href="<?php echo Flight::url("{$level}/{$year_for_url}{$course_obj->id}/{$course_obj->slug}"); ?>"><?php echo $course_obj->name . ' ' . $course_obj->award ?></a></li>
 		  <?php endforeach; ?>
 		</ul>
     </section>

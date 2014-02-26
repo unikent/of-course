@@ -8,6 +8,12 @@
 </section>
 <?php endif; ?>
 
+<?php if(!empty($course->learning_outcomes) ||
+			!empty($course->intellectual_skills_learning_outcomes) ||
+			!empty($course->subjectspecific_skills_learning_outcomes) ||
+			!empty($course->transferable_skills_learning_outcomes)
+			): ?>
+
 <section class="info-section">
 	<h3>Learning outcomes</h3>
 	
@@ -40,3 +46,5 @@
 	<?php endif; ?>
 	
 </section>
+
+<?php endif; ?>

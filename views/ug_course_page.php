@@ -19,7 +19,7 @@
 				<li><a href="#teaching">Teaching &amp; Assessment</a></li>
 				<li><a href="#careers">Careers</a></li>
 				<li><a href="#entry">Entry requirements</a></li>
-				<li><a href="#fees">Fees &amp; Funding</a></li>
+				<li><a href="#fees">Funding</a></li>
 				<li><a href="#enquiries">Enquiries</a></li>
 				<li><a href="#apply">Apply</a></li>
 			</ul>
@@ -47,7 +47,54 @@
 
 			<div class="side-panel">
 			<div class="panel admission-links">
-				<a href="#ug_apply_form" class="apply-adm-link">Apply</a>, <a href="#ug_enquiries_form" class="enquire-adm-link">enquire</a> or <a href="#ug_enquiries_form" class="pros-adm-link">order a prospectus</a>
+				<a href="#!apply" class="apply-adm-link">Apply</a>, <a href="#!enquiries" class="enquire-adm-link">enquire</a> or <a href="#!enquiries" class="pros-adm-link">order a prospectus</a>
+			</div>
+
+			<div class="key-facts-block">
+			<div class="key-facts-container">
+				<h2><a class="fees-link">Fees <i class="icon-chevron-down toggler"></i></a></h2>
+				<div class="fees-tables" style="display: none">
+					<?php if (isset($course->globals->fees_caveat_text_ug) && !empty($course->globals->fees_caveat_text_ug)) echo $course->globals->fees_caveat_text_ug ?> 
+					<table class="table">
+					  <thead>
+					    <tr>
+					      <th></th>
+					      <th>UK/EU</th>
+					      <th>Overseas</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+							<tr>
+							  <td><strong>Full-time</strong></td>
+						      <td><?php echo empty($course->fees->home->{'full-time'}) ? 'TBC' : '&pound;' . $course->fees->home->{'full-time'}; ?></td>
+						      <td><?php echo empty($course->fees->int->{'full-time'}) ? 'TBC' : '&pound;' . $course->fees->int->{'full-time'}; ?></td>
+						    </tr>
+						    <tr>
+						      <td><strong>Part-time</strong></td>
+						      <td><?php echo empty($course->fees->home->{'part-time'}) ? 'TBC' : '&pound;' . $course->fees->home->{'part-time'}; ?></td>
+						      <td><?php echo empty($course->fees->int->{'part-time'}) ? 'TBC' : '&pound;' . $course->fees->int->{'part-time'}; ?></td>
+						    </tr>
+					  </tbody>
+					</table>
+
+					<?php 
+
+						if( 
+							isset($course->globals->fees_year_in_industryabroad_text_ug) && // If YII/YA text is set AND
+							( 
+								(!empty($course->year_in_industry)) || // YII or YA has some text
+								(!empty($course->year_abroad)) 
+							) // then
+						){
+							 echo $course->globals->fees_year_in_industryabroad_text_ug;
+						}
+					?>
+
+					<?php 
+						if(isset($course->globals->fees_exception_text_ug)) echo $course->globals->fees_exception_text_ug;
+					?>
+				</div>
+			</div>
 			</div>
 
 			<div class="key-facts-block">
@@ -94,6 +141,14 @@
 					
 						<?php if(!empty($course->total_ects_credits_awarded_on_completion)): ?>
 						<li><strong>Total ECTS credits:</strong> <?php echo $course->total_ects_credits_awarded_on_completion;?></li>
+						<?php endif; ?>
+
+						<?php if(strpos($course->programme_type, "year abroad") !== false): ?>
+							<li><strong>Year abroad:</strong> Yes</li>
+						<?php endif; ?>
+
+						<?php if(strpos($course->programme_type, "year in industry") !== false): ?>
+							<li><strong>Year in Industry:</strong> Yes</li>
 						<?php endif; ?>
 					</ul>
 				</div>
