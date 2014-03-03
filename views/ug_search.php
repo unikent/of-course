@@ -3,7 +3,7 @@
 <?php if($year !== CoursesFrontEnd::$current_year): ?>
   <meta name="robots" content="noindex, nofollow" />
   <div class='alert alert-daedalus'>
-    You're not searching for programmes in the current upcoming year. <a href="<?php echo BASE_URL != '/' ? BASE_URL : ''; ?>/undergraduate/search">Search for current programmes here.</a>
+    This course search is for undergraduate programmes starting in September 2014. <a href="<?php echo BASE_URL != '/' ? BASE_URL : ''; ?>/undergraduate/search">Search for programmes starting in September 2015 here.</a>
   </div>
 <?php endif; ?>
 
