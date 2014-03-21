@@ -76,7 +76,7 @@
 		<div class="span5">
 			<div class="side-panel">
 			<div class="panel admission-links">
-				<a href="#!apply" class="apply-adm-link">Apply</a>, <a href="#!enquiries" class="enquire-adm-link">enquire</a> or <a href="#!enquiries" class="pros-adm-link">order a prospectus</a>
+				<a href="#!apply" class="apply-adm-link" role="tab" aria-controls="apply">Apply</a>, <a href="#!enquiries" class="enquire-adm-link" role="tab" aria-controls="enquiries">enquire</a> or <a href="#!enquiries" class="pros-adm-link" role="tab" aria-controls="enquiries">order a prospectus</a>
 			</div>
 
 			<div class="key-facts-block">
