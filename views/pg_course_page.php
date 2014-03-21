@@ -73,14 +73,14 @@
 		<div class="span5">
 			<div class="side-panel">
 			<div class="panel admission-links">
-				<a href="#!apply" class="apply-adm-link">Apply</a>, <a href="#!enquiries" class="enquire-adm-link">enquire</a> or <a href="#!enquiries" class="pros-adm-link">order a prospectus</a>
+				<a href="#!apply" class="apply-adm-link" aria-controls="#apply">Apply</a>, <a href="#!enquiries" class="enquire-adm-link" aria-controls="#enquire">enquire</a> or <a href="#!enquiries" class="pros-adm-link">order a prospectus</a>
 			</div>
 
 			<div class="key-facts-block">
 			<div class="key-facts-container">
 			
 				<h2><a class="fees-link">Fees <i class="icon-chevron-down toggler"></i></a></h2>
-				<div class="fees-tables" style="display: none">
+				<div class="fees-tables" style="display: none" aria-expanded="false">
 					<?php if (isset($course->globals->fees_caveat_text_pg) && !empty($course->globals->fees_caveat_text_pg)) echo $course->globals->fees_caveat_text_pg ?> 
 				<?php foreach ($course->deliveries as $delivery): ?>
 				<?php if ( ! in_array($delivery->pos_code, $pos_codes) ): ?>

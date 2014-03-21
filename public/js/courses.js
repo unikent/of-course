@@ -68,12 +68,12 @@ $(document).ready(function(){
 		show = typeof show !== 'undefined' ? show : !$('.fees-tables').is(":visible");
 
 		if (show) {
-			$('.fees-tables').slideDown(400);
+			$('.fees-tables').attr("aria-expanded","true").slideDown(400);
 			$(".fees-link i.toggler").removeClass('icon-chevron-down');
 			$(".fees-link i.toggler").addClass('icon-chevron-up');
 		}
 		else{
-			$('.fees-tables').slideUp(400);
+			$('.fees-tables').attr("aria-expanded","false").slideUp(400);
 			$(".fees-link i.toggler").removeClass('icon-chevron-up');
 			$(".fees-link i.toggler").addClass('icon-chevron-down');
 		}
