@@ -110,6 +110,13 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 				<h2>Key facts</h2>
 				<div class="key-facts">
 					<ul>
+						<li>
+							<?php if(!empty($course->additional_school[0])): ?>
+								<strong>Schools:</strong> <a href="<?php echo $course->url_for_administrative_school ?>"><?php echo $course->administrative_school[0]->name ?></a>, <a href="<?php echo $course->url_for_additional_school ?>"><?php echo $course->additional_school[0]->name ?></a>
+							<?php else: ?>
+								<strong>School:</strong> <a href="<?php echo $course->url_for_administrative_school ?>"><?php echo $course->administrative_school[0]->name ?></a>
+							<?php endif; ?>
+						</li>
 						<?php
 							// If there a second subject area?
 							 $second_subject = (isset($course->subject_area_2[0]) && $course->subject_area_2[0] != null);
