@@ -33,8 +33,8 @@
 					<li><a href="#research-areas">Research areas</a></li>
 				<?php endif;?>
 				<li><a href="#staff-research">Staff research</a></li>
-				<li><a href="#enquiries">Enquiries</a></li>
-				<li><a href="#apply">Apply</a></li>
+				<li class='screenreader-only'><a href="#enquiries">Enquiries</a></li>
+				<li class='screenreader-only'><a href="#apply">Apply</a></li>
 			</ul>
 		</div><!-- /span -->
 	</div><!-- /row -->

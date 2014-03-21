@@ -24,8 +24,8 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 				<li><a href="#careers">Careers</a></li>
 				<li><a href="#entry">Entry requirements</a></li>
 				<li><a href="#fees">Funding</a></li>
-				<li><a href="#enquiries">Enquiries</a></li>
-				<li><a href="#apply">Apply</a></li>
+				<li class='screenreader-only'><a href="#enquiries" >Enquiries</a></li>
+				<li class='screenreader-only'><a href="#apply">Apply</a></li>
 			</ul>
 		</div><!-- /span -->
 	</div><!-- /row -->
