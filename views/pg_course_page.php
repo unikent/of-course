@@ -3,6 +3,9 @@
 	$course->award_list = '';
 	foreach ($course->award as $award) if (!empty($award->name)) $course->award_list .= $award->name . ', ';
 	$course->award_list = substr($course->award_list, 0, -2); // cuts off the final comma+space
+
+	$has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
+	$has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
 ?>
 
 <article class="container pg">
@@ -96,16 +99,20 @@
 					    </tr>
 					  </thead>
 					  <tbody>
+						  	<?php if($has_fulltime):?>
 							<tr>
 							  <td><strong>Full-time</strong></td>
 						      <td><?php echo empty($delivery->fees->home->{'full-time'}) ? 'TBC' : '&pound;' . $delivery->fees->home->{'full-time'}; ?></td>
 						      <td><?php echo empty($delivery->fees->int->{'full-time'}) ? 'TBC' : '&pound;' . $delivery->fees->int->{'full-time'}; ?></td>
 						    </tr>
+						    <?php endif;?>
+						    <?php if($has_parttime):?>
 						    <tr>
 						      <td><strong>Part-time</strong></td>
 						      <td><?php echo empty($delivery->fees->home->{'part-time'}) ? 'TBC' : '&pound;' . $delivery->fees->home->{'part-time'}; ?></td>
 						      <td><?php echo empty($delivery->fees->int->{'part-time'}) ? 'TBC' : '&pound;' . $delivery->fees->int->{'part-time'}; ?></td>
 						    </tr>
+						    <?php endif;?>
 					  </tbody>
 					</table>
 				<?php $pos_codes[] = $delivery->pos_code; endif; ?>

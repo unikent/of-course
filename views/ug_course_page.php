@@ -1,3 +1,7 @@
+<?php	
+$has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
+$has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
+?>
 <article class="container">
 	<h1>
 		<?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?>
@@ -64,16 +68,20 @@
 					    </tr>
 					  </thead>
 					  <tbody>
+					  		<?php if($has_fulltime):?>
 							<tr>
 							  <td><strong>Full-time</strong></td>
 						      <td><?php echo empty($course->fees->home->{'full-time'}) ? 'TBC' : '&pound;' . $course->fees->home->{'full-time'}; ?></td>
 						      <td><?php echo empty($course->fees->int->{'full-time'}) ? 'TBC' : '&pound;' . $course->fees->int->{'full-time'}; ?></td>
 						    </tr>
+							<?php endif;?>
+							<?php if($has_parttime):?>
 						    <tr>
 						      <td><strong>Part-time</strong></td>
 						      <td><?php echo empty($course->fees->home->{'part-time'}) ? 'TBC' : '&pound;' . $course->fees->home->{'part-time'}; ?></td>
 						      <td><?php echo empty($course->fees->int->{'part-time'}) ? 'TBC' : '&pound;' . $course->fees->int->{'part-time'}; ?></td>
 						    </tr>
+							<?php endif;?>
 					  </tbody>
 					</table>
 
