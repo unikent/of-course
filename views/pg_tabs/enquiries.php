@@ -1,131 +1,85 @@
-<?php $year_for_url = empty($year) ? '' : ((strcmp($year, CoursesFrontEnd::$current_year) == 0) ? '' : $year . '/'); ?>
+<?php 
+$year_for_url = empty($year) ? '' : ((strcmp($year, CoursesFrontEnd::$current_year) == 0) ? '' : $year . '/');
+$has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
+$has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
+?>
+
+<h2>Enquire or order a prospectus</h2>
+
+<p><a href="/courses/postgraduate/prospectus/<?php echo $course->year ?>/full-prospectus.pdf" <?php echo "onClick=\"_gaq.push(['t0._trackEvent', 'course-enquiry-download-pdf-pg-{$course->year}', 'click', '" . $course->programme_title . "']);\"";?> >Download a prospectus (PDF - 2MB)</a> or order one below.</p>
 
 
-<div class="panel admissions">
+<?php
+$sits_url = 'https://esd.kent.ac.uk/aspx_shared/newuser.aspx?'; 
 
-	<h2>I would like to...</h2>
-	
-	<form id="pg_enquiries_form">
-		<div class="form-row enquiry-option">
-			<div class="enquiry-radio">
-				<input type="radio" name="enquire" id="enquire" value="enquiry" checked="checked">
-				<label for="enquire" id="enquire-lbl">Make an online enquiry</label>
-			</div>
-			<div class="prospectus-radio">
-				<input type="radio" name="enquire" id="prospectus" value="prospectus">
-				<label for="prospectus" id="prospectus-lbl">Order a prospectus <span>(<a href="/courses/postgraduate/pdf/prospectus.pdf" <?php echo "onClick=\"_gaq.push(['t0._trackEvent', 'course-enquiry-download-pdf-pg', 'click', '" . $course->programme_title . "']);\"";?> >PDF - 2MB</a>)</span></label>
-			</div>
-		</div>
+$enquire_link = array();
+$prospectus_link = array();
+$enquire_event = array();
+$prospectus_event = array();
+$awards = array();
+$descriptions = array();
+foreach($course->deliveries as $delivery){
 
-		<div style="">
-			<div class="form-row<?php echo trim($course->mode_of_study) != 'Full-time or part-time' ? ' form-row-study-type' : ''; ?>">
-				<label for="enquire-study-type">Type of study</label>
-				<select class="input-medium enquiry-select" id="enquire-study-type">
-					<option value="ft" <?php echo trim($course->mode_of_study) == 'Full-time only' ? '  selected = "selected"' : ''; ?>>Full-time</option>
-					<option value="pt" <?php echo trim($course->mode_of_study) == 'Part-time only' ? '  selected = "selected"' : ''; ?>>Part-time</option>
-				</select>
-		    </div>
+	$mode = $delivery->attendance_pattern;
+	$award = $delivery->award_name;
+	// pos is used to group pt/ft deliveries together for each award
+	$pos = $delivery->pos_code;
+	// Get MCR code
+	if (trim($delivery->mcr) != '') {
+		$mcr = $delivery->mcr;
+	}else {
+		$mcr = 'AAGEN102'; // Generic MCR
+	}
 
-			<div style="clear:both"></div>
-		</div>
+	// create vars
+	if(!isset($enquire_link[$pos])){
+		$enquire_link[$pos] = array();
+		$prospectus_link[$pos] = array();
+		$enquire_event[$pos] = array();
+		$prospectus_event[$pos] = array();
+	}
 
-		<?php $sits_url = 'https://esd.kent.ac.uk/aspx_shared/newuser.aspx?'; ?>
-		<?php $generic_pg_mcr = 'AAGEN102';?>
-			<?php /* part-time links */ if ( trim($course->mode_of_study) == 'Part-time only' || trim($course->mode_of_study) == 'Full-time or part-time'): ?>
+	// Generate Links
+	$enquire_link[$pos][$mode] = $sits_url . 'CCTC=KENT&UTYP=APP&EnquiryCategoryCode=10&CourseCode=' . $mcr;
+	$prospectus_link[$pos][$mode]	= $sits_url .'CCTC=KENT&EnquiryCategoryCode=PRO&CourseCode=' . $mcr;
+	// Generate event trackers	
+	$enquire_event[$pos][$mode]  = "onClick=\"_gaq.push(['t0._trackEvent', 'course-enquire-pg', 'click', '" . $course->programme_title . "-" . $award . "-{$mode}-" . $mcr . "']);\"";
+ 	$prospectus_event[$pos][$mode] = "onClick=\"_gaq.push(['t0._trackEvent', 'course-prospectus-pg', 'click', '" . $course->programme_title . "-" . $award . "-{$mode}-" . $mcr . "']);\"";
 
-			<?php if ( trim($course->mode_of_study) == 'Full-time or part-time' ): ?>
-			<div class="courses-sits-enquire courses-sits-enquire-parttime">
-			<?php else: ?>
-			<div class="courses-sits-enquire courses-sits-enquire-parttime-only">
-			<?php endif; ?>
-			<?php foreach ($course->deliveries as $delivery): ?>
-				<?php if ($delivery->attendance_pattern == 'part-time'): ?>
-				<?php
-				$enquire = $sits_url . 'CCTC=KENT&UTYP=APP';
-				$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CCTC=KENT';
-				$event_track_enquire = "onClick=\"_gaq.push(['t0._trackEvent', 'course-enquire-pg', 'click', '" . $course->programme_title . "-" . $delivery->award_name . "-parttime-" . $delivery->mcr . "']);\"";
-				$event_track_prospectus = "onClick=\"_gaq.push(['t0._trackEvent', 'course-prospectus-pg', 'click', '" . $course->programme_title . "-" . $delivery->award_name . "-parttime-" . $delivery->mcr . "']);\"";
-				if ($delivery->mcr != '') {
-					$enquire = $sits_url . 'CourseCode=' . $delivery->mcr . '&CCTC=KENT&UTYP=APP&EnquiryCategoryCode=10';
-					$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CourseCode=' . $delivery->mcr . '&CCTC=KENT';
-				}
-				else{
-					$enquire = $sits_url .'CCTC=KENT&UTYP=APP&EnquiryCategoryCode=10';
-					$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CourseCode='.$generic_pg_mcr.'&CCTC=KENT';
-				}
-				?>
-				<a href="<?php echo $enquire ?>" class="apply-link enquire-link parttime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track_enquire ?>>Enquire about <strong><?php echo $delivery->description != '' ? $delivery->description : $course->programme_title . ' ' . $delivery->award_name; ?></strong></a>
+ 	$awards[$pos] = $award;
 
-				<a href="<?php echo $prospectus ?>" class="apply-link prospectus-link parttime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track_prospectus ?>>Order a prospectus for <strong><?php echo $delivery->description != '' ? $delivery->description : $course->programme_title . ' ' . $delivery->award_name; ?></strong></a>
-				<?php endif; ?>
-			<?php endforeach; ?>
+ 	$description = str_replace($course->programme_title,'', $delivery->description);
+	$description = substr($description ,0, strpos($description, '-')); 
 
-			<?php /* in case there are no deliveries, just show a basic set of links */ if ( empty($course->deliveries) ): ?>
-				<?php
-				$event_track_enquire = "onClick=\"_gaq.push(['t0._trackEvent', 'course-enquire-pg', 'click', '" . $course->programme_title . "-parttime']);\"";
-				$event_track_prospectus = "onClick=\"_gaq.push(['t0._trackEvent', 'course-prospectus-pg', 'click', '" . $course->programme_title . "-parttime']);\"";
-				?>
-				<?php $enquire = $sits_url . 'CCTC=KENT&UTYP=APP'; $prospectus = $sits_url . 'CourseCode='.$generic_pg_mcr.'&EnquiryCategoryCode=PRO&CCTC=KENT';?>
-				<?php foreach($course->award as $award): ?>
-				<a href="<?php echo $enquire ?>" class="apply-link enquire-link parttime-link award-link-<?php echo $award->name; ?>" <?php echo $event_track_enquire ?>>Enquire about <strong><?php echo $course->programme_title; ?> <?php echo $award->name; ?></strong></a>
+ 	$descriptions[$pos] = $description;
+}
+?>
 
-				<a href="<?php echo $prospectus ?>" class="apply-link prospectus-link parttime-link award-link-<?php echo $award->name; ?>" <?php echo $event_track_prospectus ?>>Order a prospectus for <strong><?php echo $course->programme_title; ?> <?php echo $award->name; ?></strong></a>
-				<?php endforeach; ?>
+	<div class='enquire-block'>
+
+		<?php foreach($enquire_link as $pos => $details): ?>
+
+			<h3><?php echo $awards[$pos]. ' '.$descriptions[$pos]; ?></h3>
+
+			<ul>
+			<?php if($has_fulltime): ?>
+				<li>
+				<strong>Full time</strong> -
+				<a title="Enquire online - <?php echo $awards[$pos]. ' '.$descriptions[$pos];?> Full time" href='<?php echo $enquire_link[$pos]['full-time'];?>' <?php echo $enquire_event[$pos]['full-time'];?> >Enquire online</a> | 
+				<a title="Order prospectus for <?php echo $awards[$pos]. ' '.$descriptions[$pos];?> Full time" href='<?php echo $prospectus_link[$pos]['full-time'];?>' <?php echo $prospectus_event[$pos]['full-time'];?>>order a prospectus</a>
+				</li>
 			<?php endif; ?>
 
-			</div>
+			<?php if($has_parttime): ?>
+				<li>
+				<strong>Part time</strong> -
+				<a title="Enquire online - <?php echo $awards[$pos]. ' '.$descriptions[$pos];?> Part time" href='<?php echo $enquire_link[$pos]['part-time'];?>' <?php echo $enquire_event[$pos]['part-time'];?> >Enquire online</a> | 
+				<a title="Order prospectus for <?php echo $awards[$pos]. ' '.$descriptions[$pos];?> Part time" href='<?php echo $prospectus_link[$pos]['part-time'];?>' <?php echo $prospectus_event[$pos]['part-time'];?>>order a prospectus</a>
+				</li>
 			<?php endif; ?>
-
-			<?php /* full-time links */ if ( trim($course->mode_of_study) == 'Full-time only' || trim($course->mode_of_study) == 'Full-time or part-time'): ?>
-
-			<?php
-			$event_track_enquire = "onClick=\"_gaq.push(['t0._trackEvent', 'course-enquire-pg', 'click', '" . $course->programme_title . "-fulltime']);\"";
-			$event_track_prospectus = "onClick=\"_gaq.push(['t0._trackEvent', 'course-prospectus-pg', 'click', '" . $course->programme_title . "-fulltime']);\"";
-			?>
-
-			<div class="courses-sits-enquire courses-sits-enquire-fulltime">
-			<?php foreach ($course->deliveries as $delivery): ?>
-				<?php if ($delivery->attendance_pattern == 'full-time'): ?>
-				<?php
-				$enquire = $sits_url . 'CCTC=KENT&UTYP=APP';
-				$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CCTC=KENT';
-				$event_track_enquire = "onClick=\"_gaq.push(['t0._trackEvent', 'course-enquire-pg', 'click', '" . $course->programme_title . "-" . $delivery->award_name . "-fulltime-" . $delivery->mcr . "']);\"";
-				$event_track_prospectus = "onClick=\"_gaq.push(['t0._trackEvent', 'course-prospectus-pg', 'click', '" . $course->programme_title . "-" . $delivery->award_name . "-fulltime-" . $delivery->mcr . "']);\"";
-				if ($delivery->mcr != '') {
-					$enquire = $sits_url . 'CourseCode=' . $delivery->mcr . '&CCTC=KENT&UTYP=APP&EnquiryCategoryCode=10';
-					$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CourseCode=' . $delivery->mcr . '&CCTC=KENT';
-				}
-				else{
-					$enquire = $sits_url . 'CCTC=KENT&UTYP=APP&EnquiryCategoryCode=10';
-					$prospectus = $sits_url . 'EnquiryCategoryCode=PRO&CourseCode='.$generic_pg_mcr.'&CCTC=KENT';
-				}
-				?>
-				<a href="<?php echo $enquire ?>" class="apply-link enquire-link fulltime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track_enquire ?>>Enquire about <strong><?php echo $delivery->description != '' ? $delivery->description : $course->programme_title . ' ' . $delivery->award_name ;?></strong></a>
-
-				<a href="<?php echo $prospectus ?>" class="apply-link prospectus-link fulltime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track_prospectus ?>>Order a prospectus for <strong><?php echo $delivery->description != '' ? $delivery->description : $course->programme_title . ' ' . $delivery->award_name ;?></strong></a>
-				<?php endif; ?>
-			<?php endforeach; ?>
-
-			<?php /* in case there are no deliveries, just show a basic set of links */ if ( empty($course->deliveries) ): ?>
-				<?php $enquire = $sits_url . 'CCTC=KENT&UTYP=APP'; $prospectus = $sits_url . 'CourseCode='.$generic_pg_mcr.'&EnquiryCategoryCode=PRO&CCTC=KENT';?>
-				<?php foreach($course->award as $award): ?>
-				<a href="<?php echo $enquire ?>" class="apply-link enquire-link fulltime-link award-link-<?php echo $award->name; ?>" <?php echo $event_track_enquire ?>>Enquire about <strong><?php echo $course->programme_title; ?> <?php echo $award->name; ?></strong></a>
-
-				<a href="<?php echo $prospectus ?>" class="apply-link prospectus-link fulltime-link award-link-<?php echo $award->name; ?>" <?php echo $event_track_prospectus ?>>Order a prospectus for <strong><?php echo $course->programme_title; ?> <?php echo $award->name; ?></strong></a>
-				<?php endforeach; ?>
-			<?php endif; ?>
-
-			</div>
-			<?php endif; ?>
-
-
-			<p class="apply-link fulltime-link courses-sits-enquire-hidden-ft" style="display:none"><strong>No matching courses</strong><br /><br />There are currently no courses matching your selection. Please make a different selection.</p>
-		
-			<p class="apply-link parttime-link courses-sits-enquire-hidden-pt" style="display:none"><strong>No matching courses</strong><br /><br />There are currently no courses matching your selection. Please make a different selection.</p>
-
-	</form>
-	
-</div><!-- /panel admissions -->
+			</ul>
+		<?php endforeach;?>
+	</div>
 
 
 

@@ -1,4 +1,4 @@
-<div class="panel admissions">
+
 	<h2>Apply</h2>
 	<?php
 	$evision_url = "evision";
@@ -46,4 +46,3 @@
 	</form>
 	<?php endif; ?>
 <?php endif; ?>
-</div>

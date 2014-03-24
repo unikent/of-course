@@ -82,3 +82,18 @@
   color: #1d1d1d;
   margin-bottom: 0px;
 }
+.daedalus-courses .enquire-block {
+  margin-bottom: 14px;
+  padding: 0 0em 0em 1.5em;
+}
+.daedalus-courses .enquire-block h3 {
+  margin: 12px 0;
+}
+.daedalus-courses .enquire-block ul {
+  margin-left: 20px;
+  margin-bottom: 1.8em;
+}
+.daedalus-courses .enquire-block strong {
+  width: 65px;
+  display: inline-block;
+}
