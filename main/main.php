@@ -52,7 +52,6 @@ class CoursesFrontEnd {
 		{
 			$course = static::$pp->get_programme($year, $level, $id);
 		}
-
 		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
 		{
 			// Not found?
@@ -62,6 +61,12 @@ class CoursesFrontEnd {
 		}
 		catch(\Exception $e)
 		{
+			// Year to old
+			if($year < 2014){
+				$data = array('slug' => $slug, 'id' => $id, 'year'=> $year, 'level' => $level, 'error'=> $e);
+				return Flight::notFound($data);
+			}
+
 			// Another error type?
 			$data = array('slug' => $slug, 'id' => $id, 'year'=> $year, 'level' => $level);
 			return Flight::error($e, $data);

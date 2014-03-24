@@ -135,18 +135,18 @@ $(document).ready(function(){
 	// when people click on the apply, enquire, or prospectus links
 	// we show the appropriate tab, and for enquire and prospectus we show the appropriate radio button clicked
 	$('.apply-adm-link').click(function () {
-		pantheon.show_tab('apply', '#ug_apply_form');
+		pantheon.show_tab('apply');
 	});
 
 	$('.enquire-adm-link').click(function () {
-		pantheon.show_tab('enquiries', '#ug_enquiries_form');
+		pantheon.show_tab('enquiries');
 		$('#prospectus').prop('checked', false);
 		$('#enquire').prop('checked', true);
 		enquiries_status_check();
 	});
 
 	$('.pros-adm-link').click(function () {
-		pantheon.show_tab('enquiries', '#ug_enquiries_form');
+		pantheon.show_tab('enquiries');
 		$('#enquire').prop('checked', false);
 		$('#prospectus').prop('checked', true);
 		enquiries_status_check();

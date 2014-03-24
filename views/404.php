@@ -1,4 +1,13 @@
 <article class="container">
+
+    <?php if($year < 2014): ?>
+        <meta name="robots" content="noindex, nofollow" />
+        <div class='alert alert-daedalus'>
+            Course data for <?php echo $year;?> is unavailable. Would you like view <a href='/courses/<?php echo $level?>/search'>courses for the current entry?</a>
+        </div>
+    <?php endif; ?>
+
+
     <div class='row-fluid'>
         <div class='span12'>
             <h1>We were unable to find <?php echo (!empty($slug)) ? "'{$slug}' "  : " a course "; ?><?php if(isset($id)): ?> with the id <?php echo $id;?> <?php endif; ?> </h1>
