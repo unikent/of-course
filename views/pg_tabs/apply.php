@@ -1,105 +1,90 @@
-<div class="panel admissions">
+<?php
+$evision_url = "evision";
+if(strpos($_SERVER['SERVER_NAME'], 'www-dev')!==false){
+	$evision_url = "evision-dev";
+}
+if(strpos($_SERVER['SERVER_NAME'], 'www-test')!==false){
+	$evision_url = "evision-test";
+}
+$has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
+$has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
+?>
 
 	<h2>Apply</h2>
 
-
-	<?php
-	$evision_url = "evision";
-	if(strpos($_SERVER['SERVER_NAME'], 'www-dev')!==false){
-		$evision_url = "evision-dev";
-	}
-	if(strpos($_SERVER['SERVER_NAME'], 'www-test')!==false){
-		$evision_url = "evision-test";
-	}
-	?>
-
-
 	<?php if(!empty($course->how_to_apply)): ?>
-		<div class="apply-details">
-			<?php echo $course->how_to_apply; ?>
-		</div>
+		<?php echo $course->how_to_apply; ?>
+
 	<?php endif; ?>
-
-
-
 
 <?php if(empty($course->subject_to_approval)): ?>
-	
-	
 	<?php if ( !empty($course->deliveries) ): ?>
-	<form id="ug_apply_form">
-		<div class="form-row<?php echo trim($course->mode_of_study) != 'Full-time or part-time' ? ' form-row-study-type' : ''; ?>">
-			<label for="apply-study-type">Type of study</label>
-			<select id="apply-study-type">
-				<option value="ft" <?php echo trim($course->mode_of_study) == 'Full-time only' ? '  selected = "selected"' : ''; ?>>Full-time</option>
-				<option value="pt" <?php echo trim($course->mode_of_study) == 'Part-time only' ? '  selected = "selected"' : ''; ?>>Part-time</option>
-			</select>
-	    </div>
-		
-		<div style="clear:both"></div>
 
+		<?php
+		$sits_url = 'https://'.$evision_url.'.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?'; 
 
-		<?php if ( trim($course->mode_of_study) == 'Part-time only' || trim($course->mode_of_study) == 'Full-time or part-time'): ?>
-			
-			<?php if ( trim($course->mode_of_study) == 'Full-time or part-time' ): ?>
-			<div class="courses-sits-apply courses-sits-apply-parttime">
-			<?php else: ?>
-			<div class="courses-sits-apply courses-sits-apply-parttime-only">
+		$apply_link = array();
+		$apply_event = array();
+		$awards = array();
+		$descriptions = array();
+
+		foreach($course->deliveries as $delivery){
+
+			$mode = $delivery->attendance_pattern;
+			$award = $delivery->award_name;
+			// pos is used to group pt/ft deliveries together for each award
+			$pos = $delivery->pos_code;
+			$mcr = $delivery->mcr;
+
+			// skip if no mcr
+			if($mcr == '') continue;
+
+			// create vars
+			if(!isset($apply_link[$pos])){
+				$apply_link[$pos] = array();
+				$apply_event[$pos] = array();
+			}
+
+			// Generate Links
+			$apply_link[$pos][$mode] = $sits_url . 'process=siw_ipp_app&code1=' . $mcr . '&code2=0001';
+
+			// Generate event trackers	
+			$apply_event[$pos][$mode]  = "onClick=\"_gaq.push(['t0._trackEvent', 'course-apply-pg', 'click', '" . $course->programme_title . "-" . $award . "-{$mode}-" . $mcr . "']);\"";
+
+		 	$awards[$pos] = $award;
+
+		 	$description = str_replace($course->programme_title,'', $delivery->description);
+			$description = substr($description ,0, strpos($description, '-')); 
+		 	$descriptions[$pos] = $description;
+		}
+		?>
+
+		<div class='enquire-block'>
+
+		<?php foreach($apply_link as $pos => $details): ?>
+
+			<h3><?php echo $awards[$pos]. ' '.$descriptions[$pos]; ?></h3>
+
+			<ul>
+			<?php if($has_fulltime && isset($apply_event[$pos]['full-time'])): ?>
+				<li>
+				<strong>Full time</strong> -
+				<a title="Apply online - <?php echo $awards[$pos]. ' '.$descriptions[$pos];?> Full time" href='<?php echo $apply_link[$pos]['full-time'];?>' <?php echo $apply_event[$pos]['full-time'];?> >Apply online</a>
+				
+				</li>
 			<?php endif; ?>
-			<?php foreach ($course->deliveries as $delivery): ?>
-				<?php if ($delivery->attendance_pattern == 'part-time'): ?>
-					<?php if ($delivery->mcr != ''):?>
 
-						<?php
-							$event_track = "onClick=\"_gaq.push(['t0._trackEvent', 'course-apply-pg', 'click', '" . $course->programme_title . "-" . $delivery->award_name . "-parttime-" . $delivery->mcr . "']);\"";
-							$apply = 'https://'.$evision_url.'.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&code1=' . $delivery->mcr . '&code2=0001';
-						?>
-						<?php if($delivery->description != ''):?>
-							<a href="<?php echo $apply ?>" class="apply-link parttime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track ?>>Apply for <strong><?php echo $delivery->description; ?></strong></a>
-						<?php else:?>
-							<a href="<?php echo $apply ?>" class="apply-link parttime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track ?>>Apply for <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?></strong> - <span class="apply-type-link">Part time</span></a>
-						<?php endif; ?>
-					<?php else: ?>
-						<p class="apply-link parttime-link award-link-<?php echo $delivery->award_name ?>"><strong><?php echo $course->programme_title; ?> - <?php echo $delivery->award_name; ?></strong><br /><br />This course is not currently open for applications. If you would like to be informed when we are accepting applications, please email <a href="mailto:information@kent.ac.uk">information@kent.ac.uk</a>.</p>
-					<?php endif; ?>
-				<?php endif; ?>
-			<?php endforeach; ?>
-			</div>
-		<?php endif; ?>
-		<?php if ( trim($course->mode_of_study) == 'Full-time only' || trim($course->mode_of_study) == 'Full-time or part-time'): ?>
-			<?php $event_track = "onClick=\"_gaq.push(['t0._trackEvent', 'course-apply-pg', 'click', '" . $course->programme_title . "-fulltime']);\""; ?>
-			<div class="courses-sits-apply courses-sits-apply-fulltime">
-			<?php foreach ($course->deliveries as $delivery): ?>
-				<?php if ($delivery->attendance_pattern == 'full-time'): ?>
-					<?php if ($delivery->mcr != ''):?>
+			<?php if($has_parttime && isset($apply_event[$pos]['part-time'])): ?>
+				<li>
+				<strong>Part time</strong> -
+				<a title="Apply online - <?php echo $awards[$pos]. ' '.$descriptions[$pos];?> Part time" href='<?php echo $apply_link[$pos]['part-time'];?>' <?php echo $apply_event[$pos]['part-time'];?> >Apply online</a>
+				</li>
+			<?php endif; ?>
+			</ul>
 
-						<?php
+		<?php endforeach;?>
+		</div>
 
-						$event_track = "onClick=\"_gaq.push(['t0._trackEvent', 'course-apply-pg', 'click', '" . $course->programme_title . "-" . $delivery->award_name . "-fulltime-" . $delivery->mcr . "']);\"";
 
-						$apply = 'https://'.$evision_url.'.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&code1=' . $delivery->mcr . '&code2=0001';
-						?>
-						<?php if($delivery->description != ''):?>
-							<a href="<?php echo $apply ?>" class="apply-link fulltime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track ?>>Apply for <strong><?php echo $delivery->description; ?></strong></a>
-						<?php else:?>
-							<a href="<?php echo $apply ?>" class="apply-link fulltime-link award-link-<?php echo $delivery->award_name ?>" <?php echo $event_track ?>>Apply for <strong><?php echo $course->programme_title; ?> <?php echo $delivery->award_name; ?></strong> - <span class="apply-type-link">Full time</span></a>
-							
-						<?php endif;?>
-					<?php else: ?>
-						<p class="apply-link fulltime-link award-link-<?php echo $delivery->award_name ?>"><strong><?php echo $course->programme_title; ?> - <?php echo $delivery->award_name; ?></strong><br /><br />This course is not currently open for applications. If you would like to be informed when we are accepting applications, please email <a href="mailto:information@kent.ac.uk">information@kent.ac.uk</a>.</p>
-					<?php endif;?>
-				<?php endif; ?>
-			<?php endforeach; ?>
-			</div>
-		<?php endif; ?>
-		
-		<p class="apply-link fulltime-link courses-sits-apply-hidden-ft" style="display:none"><strong>No matching courses</strong><br /><br />There are currently no courses matching your selection. Please make a different selection.</p>
-		
-		<p class="apply-link parttime-link courses-sits-apply-hidden-pt" style="display:none"><strong>No matching courses</strong><br /><br />There are currently no courses matching your selection. Please make a different selection.</p>
-
-			
-
-	</form>
 	<?php endif; ?>
 <?php endif; ?>	
-</div>

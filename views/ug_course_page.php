@@ -1,3 +1,7 @@
+<?php	
+$has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
+$has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
+?>
 <article class="container">
 	<h1>
 		<?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?>
@@ -20,8 +24,8 @@
 				<li><a href="#careers">Careers</a></li>
 				<li><a href="#entry">Entry requirements</a></li>
 				<li><a href="#fees">Funding</a></li>
-				<li><a href="#enquiries">Enquiries</a></li>
-				<li><a href="#apply">Apply</a></li>
+				<li class='screenreader-only'><a href="#enquiries" >Enquiries</a></li>
+				<li class='screenreader-only'><a href="#apply">Apply</a></li>
 			</ul>
 		</div><!-- /span -->
 	</div><!-- /row -->
@@ -47,7 +51,7 @@
 
 			<div class="side-panel">
 			<div class="panel admission-links">
-				<a href="#!apply" class="apply-adm-link" aria-controls="#apply">Apply</a>, <a href="#!enquiries" class="enquire-adm-link" aria-controls="#enquire">enquire</a> or <a href="#!enquiries" class="pros-adm-link">order a prospectus</a>
+				<a href="#!apply" class="apply-adm-link" role="tab" aria-controls="apply">Apply</a>, <a href="#!enquiries" class="enquire-adm-link" role="tab" aria-controls="enquiries">enquire</a> or <a href="#!enquiries" class="pros-adm-link" role="tab" aria-controls="enquiries">order a prospectus</a>
 			</div>
 
 			<div class="key-facts-block">
@@ -64,16 +68,20 @@
 					    </tr>
 					  </thead>
 					  <tbody>
+					  		<?php if($has_fulltime):?>
 							<tr>
 							  <td><strong>Full-time</strong></td>
 						      <td><?php echo empty($course->fees->home->{'full-time'}) ? 'TBC' : '&pound;' . $course->fees->home->{'full-time'}; ?></td>
 						      <td><?php echo empty($course->fees->int->{'full-time'}) ? 'TBC' : '&pound;' . $course->fees->int->{'full-time'}; ?></td>
 						    </tr>
+							<?php endif;?>
+							<?php if($has_parttime):?>
 						    <tr>
 						      <td><strong>Part-time</strong></td>
 						      <td><?php echo empty($course->fees->home->{'part-time'}) ? 'TBC' : '&pound;' . $course->fees->home->{'part-time'}; ?></td>
 						      <td><?php echo empty($course->fees->int->{'part-time'}) ? 'TBC' : '&pound;' . $course->fees->int->{'part-time'}; ?></td>
 						    </tr>
+							<?php endif;?>
 					  </tbody>
 					</table>
 
@@ -102,6 +110,13 @@
 				<h2>Key facts</h2>
 				<div class="key-facts">
 					<ul>
+						<li>
+							<?php if(!empty($course->additional_school[0])): ?>
+								<strong>Schools:</strong> <a href="<?php echo $course->url_for_administrative_school ?>"><?php echo $course->administrative_school[0]->name ?></a>, <a href="<?php echo $course->url_for_additional_school ?>"><?php echo $course->additional_school[0]->name ?></a>
+							<?php else: ?>
+								<strong>School:</strong> <a href="<?php echo $course->url_for_administrative_school ?>"><?php echo $course->administrative_school[0]->name ?></a>
+							<?php endif; ?>
+						</li>
 						<?php
 							// If there a second subject area?
 							 $second_subject = (isset($course->subject_area_2[0]) && $course->subject_area_2[0] != null);
