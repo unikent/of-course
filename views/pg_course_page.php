@@ -82,8 +82,8 @@
 			<div class="key-facts-block">
 			<div class="key-facts-container">
 			
-				<h2><a class="fees-link">Fees <i class="icon-chevron-down toggler"></i></a></h2>
-				<div class="fees-tables" style="display: none" aria-expanded="false">
+				<h2><a id="fees-tables-link" class="fees-link" role="button" aria-controls="fees-tables">Fees <i class="icon-chevron-down toggler"></i></a></h2>
+				<div id="fees-tables" class="fees-tables" style="display: none" aria-expanded="false">
 					<?php if (isset($course->globals->fees_caveat_text_pg) && !empty($course->globals->fees_caveat_text_pg)) echo $course->globals->fees_caveat_text_pg ?> 
 				<?php foreach ($course->deliveries as $delivery): ?>
 				<?php if ( ! in_array($delivery->pos_code, $pos_codes) ): ?>
