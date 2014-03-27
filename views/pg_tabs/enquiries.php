@@ -6,7 +6,7 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 
 <h2>Enquire or order a prospectus</h2>
 
-<p><a href="/courses/postgraduate/prospectus/<?php echo $course->year ?>/full-prospectus.pdf" <?php echo "onClick=\"_gaq.push(['t0._trackEvent', 'course-enquiry-download-pdf-pg-{$course->year}', 'click', '" . $course->programme_title . "']);\"";?> >Download a prospectus (PDF - 2MB)</a> or order one below.</p>
+<p><a href="/courses/postgraduate/pdf/prospectus.pdf" <?php echo "onClick=\"_gaq.push(['t0._trackEvent', 'course-enquiry-download-pdf-pg-{$course->year}', 'click', '" . $course->programme_title . "']);\"";?> >Download a prospectus (PDF - 2MB)</a> or order one below.</p>
 
 
 <?php
