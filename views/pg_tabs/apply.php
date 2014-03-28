@@ -36,48 +36,52 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 			$pos = $delivery->pos_code;
 			$mcr = $delivery->mcr;
 
+			$key = substr($mcr,0,strpos($mcr,"-"));
+
 			// skip if no mcr
 			if($mcr == '') continue;
 
 			// create vars
-			if(!isset($apply_link[$pos])){
-				$apply_link[$pos] = array();
-				$apply_event[$pos] = array();
+			if(!isset($apply_link[$key])){
+				$apply_link[$key] = array();
+				$apply_event[$key] = array();
 			}
 
+			
+
 			// Generate Links
-			$apply_link[$pos][$mode] = $sits_url . 'process=siw_ipp_app&code1=' . $mcr . '&code2=0001';
+			$apply_link[$key][$mode] = $sits_url . 'process=siw_ipp_app&code1=' . $mcr . '&code2=0001';
 
 			// Generate event trackers	
-			$apply_event[$pos][$mode]  = "onClick=\"_gaq.push(['t0._trackEvent', 'course-apply-pg', 'click', '" . $course->programme_title . "-" . $award . "-{$mode}-" . $mcr . "']);\"";
+			$apply_event[$key][$mode]  = "onClick=\"_gaq.push(['t0._trackEvent', 'course-apply-pg', 'click', '" . $course->programme_title . "-" . $award . "-{$mode}-" . $mcr . "']);\"";
 
-		 	$awards[$pos] = $award;
+		 	$awards[$key] = $award;
 
 		 	$description = str_replace($course->programme_title,'', $delivery->description);
 			$description = substr($description ,0, strpos($description, '-')); 
-		 	$descriptions[$pos] = $description;
+		 	$descriptions[$key] = $description;
 		}
 		?>
 
 		<div class='enquire-block'>
 
-		<?php foreach($apply_link as $pos => $details): ?>
+		<?php foreach($apply_link as $key => $details): ?>
 
-			<h3><?php echo $awards[$pos]. ' '.$descriptions[$pos]; ?></h3>
+			<h3><?php echo $awards[$key]. ' '.$descriptions[$key]; ?></h3>
 
 			<ul>
-			<?php if($has_fulltime && isset($apply_event[$pos]['full-time'])): ?>
+			<?php if($has_fulltime && isset($apply_event[$key]['full-time'])): ?>
 				<li>
 				<strong>Full time</strong> -
-				<a title="Apply online - <?php echo $awards[$pos]. ' '.$descriptions[$pos];?> Full time" href='<?php echo $apply_link[$pos]['full-time'];?>' <?php echo $apply_event[$pos]['full-time'];?> >Apply online</a>
+				<a title="Apply online - <?php echo $awards[$key]. ' '.$descriptions[$key];?> Full time" href='<?php echo $apply_link[$key]['full-time'];?>' <?php echo $apply_event[$key]['full-time'];?> >Apply online</a>
 				
 				</li>
 			<?php endif; ?>
 
-			<?php if($has_parttime && isset($apply_event[$pos]['part-time'])): ?>
+			<?php if($has_parttime && isset($apply_event[$key]['part-time'])): ?>
 				<li>
 				<strong>Part time</strong> -
-				<a title="Apply online - <?php echo $awards[$pos]. ' '.$descriptions[$pos];?> Part time" href='<?php echo $apply_link[$pos]['part-time'];?>' <?php echo $apply_event[$pos]['part-time'];?> >Apply online</a>
+				<a title="Apply online - <?php echo $awards[$key]. ' '.$descriptions[$key];?> Part time" href='<?php echo $apply_link[$key]['part-time'];?>' <?php echo $apply_event[$key]['part-time'];?> >Apply online</a>
 				</li>
 			<?php endif; ?>
 			</ul>
