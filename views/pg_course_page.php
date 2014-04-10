@@ -209,8 +209,9 @@
 						<li><strong>Total ECTS credits:</strong> <?php echo $course->total_ects_credits_awarded_on_completion;?></li>
 						<?php endif; ?>
 
-						<li><strong><a href="http://www.kent.ac.uk/courses/funding/postgraduate/index.html">Postgraduate fees and funding information</a></strong></li>
-						
+						<?php if(!empty($course->fees_and_funding)): ?>
+						<li><strong><?php echo $course->fees_and_funding; ?></strong></li>
+						<?php endif; ?>
 
 					</ul>
 				</div>
