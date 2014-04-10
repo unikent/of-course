@@ -210,7 +210,7 @@
 						<?php endif; ?>
 
 						<?php if(!empty($course->fees_and_funding)): ?>
-						<li><strong><?php $fees_and_funding = str_replace(array('<p>', '</p>'), '', $course->fees_and_funding); ?></strong></li>
+						<li><strong><?php echo str_replace(array('<p>', '</p>'), '', $course->fees_and_funding); ?></strong></li>
 						<?php endif; ?>
 
 					</ul>
