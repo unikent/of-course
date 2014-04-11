@@ -1,6 +1,6 @@
 <h2>Course structure</h2>
 
-<?php echo $course->globals->modules_intro; ?>
+<?php echo (isset($course->module_intro) && !empty($course->module_intro)) ? $course->module_intro : $course->globals->modules_intro; ?>
 
 
 <?php if (! empty($course->foundation_year)): ?>
