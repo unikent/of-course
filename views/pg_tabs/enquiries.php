@@ -45,16 +45,16 @@ foreach($course->deliveries as $delivery){
 	$enquire_link[$pos][$mode] = $sits_url . 'CCTC=KENT&UTYP=APP&EnquiryCategoryCode=10&CourseCode=' . $mcr;
 	$prospectus_link[$pos][$mode]	= $sits_url .'CCTC=KENT&EnquiryCategoryCode=PRO&CourseCode=' . $mcr;
 
-	// Generate event trackers	
-	$enquire_event[$pos][$mode]   = 'onClick="_pat.event(\'course-page\', \'enquire-pg\', \''.$course_name_fortracking.' - '.$award.' - '.$mode.' ['.$mcr.'] \');"';
-	$prospectus_event[$pos][$mode]  = 'onClick="_pat.event(\'course-page\', \'order-prospectus-pg\', \''.$course_name_fortracking.' - '.$award.' - '.$mode.' ['.$mcr.'] \');"';
-
  	$awards[$pos] = $award;
 
  	$description = str_replace($course->programme_title,'', $delivery->description);
 	$description = substr($description ,0, strpos($description, '-')); 
 
  	$descriptions[$pos] = $description;
+
+ 	// Generate event trackers	
+ 	$enquire_event[$pos][$mode]   = 'onClick="_pat.event(\'course-page\', \'enquire-pg\', \''.$course_name_fortracking.' - '.$award.' '.$description.' - '.$mode.' ['.$mcr.'] \');"';
+	$prospectus_event[$pos][$mode]  = 'onClick="_pat.event(\'course-page\', \'order-prospectus-pg\', \''.$course_name_fortracking.' - '.$award.' '.$description.' - '.$mode.' ['.$mcr.'] \');"';
 }
 ?>
 
