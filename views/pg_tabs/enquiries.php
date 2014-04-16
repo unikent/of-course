@@ -2,11 +2,13 @@
 $year_for_url = empty($year) ? '' : ((strcmp($year, CoursesFrontEnd::$current_year) == 0) ? '' : $year . '/');
 $has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
 $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
+
+$course_name_fortracking = "[{$course->instance_id} in {$course->year}] {$course->programme_title} ";
 ?>
 
 <h2>Enquire or order a prospectus</h2>
 
-<p><a href="/courses/postgraduate/pdf/prospectus.pdf" <?php echo "onClick=\"_gaq.push(['t0._trackEvent', 'course-enquiry-download-pdf-pg-{$course->year}', 'click', '" . $course->programme_title . "']);\"";?> >Download a prospectus (PDF - 2MB)</a> or order one below.</p>
+<p><a href="/courses/postgraduate/pdf/prospectus.pdf" <?php echo 'onClick="_pat.event(\'course-page\', \'download-prospectus-pg\', \''.$course_name_fortracking.'\');"';?> >Download a prospectus (PDF - 2MB)</a> or order one below.</p>
 
 
 <?php
@@ -42,9 +44,10 @@ foreach($course->deliveries as $delivery){
 	// Generate Links
 	$enquire_link[$pos][$mode] = $sits_url . 'CCTC=KENT&UTYP=APP&EnquiryCategoryCode=10&CourseCode=' . $mcr;
 	$prospectus_link[$pos][$mode]	= $sits_url .'CCTC=KENT&EnquiryCategoryCode=PRO&CourseCode=' . $mcr;
+
 	// Generate event trackers	
-	$enquire_event[$pos][$mode]  = "onClick=\"_gaq.push(['t0._trackEvent', 'course-enquire-pg', 'click', '" . $course->programme_title . "-" . $award . "-{$mode}-" . $mcr . "']);\"";
- 	$prospectus_event[$pos][$mode] = "onClick=\"_gaq.push(['t0._trackEvent', 'course-prospectus-pg', 'click', '" . $course->programme_title . "-" . $award . "-{$mode}-" . $mcr . "']);\"";
+	$enquire_event[$pos][$mode]   = 'onClick="_pat.event(\'course-page\', \'enquire-pg\', \''.$course_name_fortracking.' - '.$award.' - '.$mode.' ['.$mcr.'] \');"';
+	$prospectus_event[$pos][$mode]  = 'onClick="_pat.event(\'course-page\', \'order-prospectus-pg\', \''.$course_name_fortracking.' - '.$award.' - '.$mode.' ['.$mcr.'] \');"';
 
  	$awards[$pos] = $award;
 

@@ -48,14 +48,15 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 			// Generate Links
 			$apply_link[$pos][$mode] = $sits_url . 'process=siw_ipp_app&code1=' . $mcr . '&code2=0001';
 
-			// Generate event trackers	
-			$apply_event[$pos][$mode]  = "onClick=\"_gaq.push(['t0._trackEvent', 'course-apply-pg', 'click', '" . $course->programme_title . "-" . $award . "-{$mode}-" . $mcr . "']);\"";
-
 		 	$awards[$pos] = $award;
 
 		 	$description = str_replace($course->programme_title,'', $delivery->description);
 			$description = substr($description ,0, strpos($description, '-')); 
 		 	$descriptions[$pos] = $description;
+
+		 	// Generate event trackers
+		 	$tracking_name = "[{$course->instance_id} in {$course->year}] {$course->programme_title} - {$award} {$description} - {$mode} [{$mcr}]";
+			$apply_event[$pos][$mode] = 'onClick="_pat.event(\'course-page\', \'apply-pg\', \''.$tracking_name .'\');"';
 		}
 		?>
 
