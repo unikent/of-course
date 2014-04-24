@@ -56,7 +56,7 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 
 			<div class="key-facts-block">
 			<div class="key-facts-container">
-				<h2><a id="fees-tables-link" class="fees-link" role="button" aria-controls="fees-tables" tabindex='0' title='Click to toggle basic fee information'>Fees <i class="icon-chevron-down toggler"></i></a></h2>
+				<h2><a id="fees-tables-link" class="fees-link" role="button" aria-controls="fees-tables" tabindex='0' title='Click to toggle basic fee information' onClick='_pat("course-page","expand-fees-ug", "<?php echo "[{$course->instance_id} in {$course->year}] {$course->programme_title} - {$course->award[0]->name} [{$course->pos_code} / {$course->parttime_mcr_code}]"; ?>");'>Fees <i class="icon-chevron-down toggler"></i></a></h2>
 				<div id="fees-tables" class="fees-tables" style="display: none" aria-expanded="false" aria-labelledby="fees-tables-link">
 					<?php if (isset($course->globals->fees_caveat_text_ug) && !empty($course->globals->fees_caveat_text_ug)) echo $course->globals->fees_caveat_text_ug ?> 
 					<table class="table">
@@ -234,3 +234,12 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 				
 	<?php endif;?>
 </article>
+<kentScripts>
+<script>
+	$("#enquiries .info-section a").click(function(){
+		var link = $(this)[0];
+		if(link.protocol !== 'mailto:') return;
+		_pat.event("course-page", "enquire-by-email-ug", link.pathname + " via <?php echo "[{$course->instance_id} in {$course->year}] {$course->programme_title} ( {$course->award[0]->name} )" ?>");
+	});
+</script>
+</kentScripts>

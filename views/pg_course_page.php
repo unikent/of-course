@@ -82,7 +82,7 @@
 			<div class="key-facts-block">
 			<div class="key-facts-container">
 			
-				<h2><a id="fees-tables-link" class="fees-link" role="button" aria-controls="fees-tables" tabindex='0' title='Click to toggle basic fee information'>Fees <i class="icon-chevron-down toggler"></i></a></h2>
+				<h2><a id="fees-tables-link" class="fees-link" role="button" aria-controls="fees-tables" tabindex='0' title='Click to toggle basic fee information'  onClick='_pat("course-page","expand-fees-pg", "<?php echo "[{$course->instance_id} in {$course->year}] {$course->programme_title} - {$course->award[0]->name}"; ?>");'>Fees <i class="icon-chevron-down toggler"></i></a></h2>
 				<div id="fees-tables" class="fees-tables" style="display: none" aria-expanded="false" aria-labelledby="fees-tables-link">
 					<?php if (isset($course->globals->fees_caveat_text_pg) && !empty($course->globals->fees_caveat_text_pg)) echo $course->globals->fees_caveat_text_pg ?> 
 				<?php foreach ($course->deliveries as $delivery): ?>
@@ -292,3 +292,12 @@
 				
 	<?php endif;?>
 </article>
+<kentScripts>
+<script>
+	$("#enquiries .contacts-enquiries a").click(function(){
+		var link = $(this)[0];
+		if(link.protocol !== 'mailto:') return;
+		_pat.event("course-page", "enquire-by-email-pg", link.pathname + " via <?php echo "[{$course->instance_id} in {$course->year}] {$course->programme_title} ( {$course->award[0]->name} )" ?>");
+	});
+</script>
+</kentScripts>

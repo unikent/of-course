@@ -33,7 +33,10 @@
 		<?php if($course->parttime_mcr_code != ''):?>
 			<?php
 			$apply = 'https://'.$evision_url.'.kent.ac.uk/ipp/';
-			$event_track = "onClick=\"_gaq.push(['t0._trackEvent', 'course-apply-ug', 'click', '" . $course->programme_title . "-" . $course->award[0]->name . "-parttime-" . $course->parttime_mcr_code . "']);\"";
+
+			$tracking_name = "[{$course->instance_id} in {$course->year}] {$course->programme_title} - {$course->award[0]->name} [{$course->pos_code} / {$course->parttime_mcr_code}] part-time";
+			$event_track = 'onClick="_pat.event(\'course-page\', \'apply-ug\', \''.$tracking_name .'\');"';
+			
 			if ($course->parttime_mcr_code != '') {
 				$apply = 'https://'.$evision_url.'.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&code1=' . $course->parttime_mcr_code . '&code2=0001';
 			}

@@ -2,10 +2,13 @@
 
 $has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
 $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
+// Tracking name
+$course_name_fortracking = "[{$course->instance_id} in {$course->year}] {$course->programme_title} - {$course->award[0]->name} [{$course->pos_code}]";
+
 ?>
 
 <h2>Enquire or order a prospectus</h2>
-<p><a href="/courses/undergraduate/prospectus/<?php echo $course->year ?>/full-prospectus.pdf" <?php echo "onClick=\"_gaq.push(['t0._trackEvent', 'course-enquiry-download-pdf-ug-{$course->year}', 'click', '" . $course->programme_title . "']);\"";?> >Download a prospectus (PDF - 2MB)</a> or order one below.</p>
+<p><a href="/courses/undergraduate/prospectus/<?php echo $course->year ?>/full-prospectus.pdf" <?php echo 'onClick="_pat.event(\'course-page\', \'download-prospectus-ug\', \''.$course_name_fortracking.'\');"';?> >Download a prospectus (PDF - 2MB)</a> or order one below.</p>
 
 <?php if(empty($course->subject_to_approval)): ?>
 
@@ -26,12 +29,14 @@ foreach(array("fulltime","parttime") as $mode){
 	}else {
 		$mcr = 'AAGEN101'; // Generic MCR
 	}
+
 	// Generate Links
 	$enquire_link[$mode] = $sits_url . 'CCTC=KENT&UTYP=APP&EnquiryCategoryCode=10&CourseCode=' . $mcr;
 	$prospectus_link[$mode]	= $sits_url . 'CCTC=KENT&EnquiryCategoryCode=PRO&CourseCode=' . $mcr;
+
 	// Generate event trackers	
-	$enquire_event[$mode]  = "onClick=\"_gaq.push(['t0._trackEvent', 'course-enquire-ug', 'click', '" . $course->programme_title . "-" . $course->award[0]->name . "-{$mode}-" . $mcr . "']);\"";
- 	$prospectus_event[$mode] = "onClick=\"_gaq.push(['t0._trackEvent', 'course-prospectus-ug', 'click', '" . $course->programme_title . "-" . $course->award[0]->name . "-{$mode}-" . $mcr . "']);\"";
+	$enquire_event[$mode]  = 'onClick="_pat.event(\'course-page\', \'enquire-ug\', \''.$course_name_fortracking.' - '.$mode.'\');"';
+	$prospectus_event[$mode]  = 'onClick="_pat.event(\'course-page\', \'order-prospectus-ug\', \''.$course_name_fortracking.' - '.$mode.'\');"';
 }
 ?>
 
