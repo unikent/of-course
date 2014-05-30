@@ -30,7 +30,7 @@
         <div class="advanced-search-filters">
 
           <select class="campus-search input-medium <?php if(strcmp($search_type, 'campus')  == 0) echo 'highlighted'; ?>">
-            <option value="">All campuses</option>
+            <option value="">All locations</option>
             <option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Canterbury'))  == 0) echo 'selected'; ?>>Canterbury</option>
             <option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Medway'))  == 0) echo 'selected'; ?>>Medway</option>
             <option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Paris'))  == 0) echo 'selected'; ?>>Paris</option>
@@ -38,14 +38,16 @@
             <option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Brussels'))  == 0) echo 'selected'; ?>>Brussels</option>
             <option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Athens'))  == 0) echo 'selected'; ?>>Athens</option>
             <option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('KSS Dental Deanery'))  == 0) echo 'selected'; ?>>KSS Dental Deanery</option>
+            <option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Mauritius'))  == 0) echo 'selected'; ?>>Mauritius</option>
+            <option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Moscow'))  == 0) echo 'selected'; ?>>Moscow</option>
           </select>
-        
+
           <select class="study-mode-search input-medium <?php if(strcmp($search_type, 'study_mode')  == 0) echo 'highlighted'; ?>">
             <option value="">All study modes</option>
             <option <?php if(strcmp($search_type, 'study_mode')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Full-time'))  == 0) echo 'selected'; ?>>Full-time</option>
             <option <?php if(strcmp($search_type, 'study_mode')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Part-time'))  == 0) echo 'selected'; ?>>Part-time</option>
           </select>
-        
+
           <select class="subject-categories-search input-large <?php if(strcmp($search_type, 'subject_category')  == 0) echo 'highlighted'; ?>">
             <option value="">All subject categories</option>
             <?php foreach($subject_categories as $sc): ?>
@@ -68,11 +70,11 @@
           </select>
 
         </div>
-      
+
     </div>
 
-    
-           
+
+
     <table id="programme-list" class="table table-striped-search advanced-search-table">
         <thead>
           <tr>
@@ -86,9 +88,9 @@
           </tr>
         </thead>
         <tbody>
-        
+
         <?php foreach($programmes as $p):?>
-          
+
           <tr>
             <td>
                 <div class="advanced-search-name-award"><a href='<?php echo Flight::url("{$level}/{$year_for_url}{$p->id}/{$p->slug}"); ?>'><?php echo $p->name;?> <?php if($p->subject_to_approval == 'true'){ echo "(subject to approval)";} ?></a><br /><span class="advanced-search-award"><?php echo $p->award;?></span></div>
@@ -112,7 +114,7 @@
             </td>
             <td class="hide">
                 <?php foreach((array)$p->subject_categories as $key => $sc): ?>
-                  <?php 
+                  <?php
                     if(!empty($sc)){
                       echo $sc;
                       // dont echo a seperator if its the last subject category
@@ -136,10 +138,10 @@
 </div>
 
 
-               
+
 <kentScripts>
 <script type='text/javascript'>
-$(document).ready(function(){ 
+$(document).ready(function(){
   //put our custom search items into variables
   var advanced_text_search = $('input.advanced-text-search');
   var campus_search = $('select.campus-search');
@@ -164,9 +166,9 @@ $(document).ready(function(){
   if(advanced_text_search && campus_search && study_mode_search && subject_categories_search && award_search && programme_type_search){
 
     // search both the Name, award and Search keywords fields if our search box is filled
-    var advanced_text_search_result = (advanced_text_search.val() == '') ? true : 
+    var advanced_text_search_result = (advanced_text_search.val() == '') ? true :
         (
-          (name.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) || 
+          (name.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) ||
           (search_keywords.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) ||
           (award.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) ||
           (programme_type.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) ||
@@ -174,15 +176,15 @@ $(document).ready(function(){
           (study_mode.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) ||
           (subject_categories.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1)
 
-          ? true : false 
+          ? true : false
         );
-    
+
     // search the campus field if a campus is selected
     var campus_search_result = (campus_search.val() == '') ? true : (( campus.toLowerCase().indexOf( campus_search.val().toLowerCase() ) !== -1 ) ? true : false );
-    
+
     // search the study mode field if a study mode is selected
     var study_mode_search_result = (study_mode_search.val() == '') ? true : (( study_mode.toLowerCase().indexOf( study_mode_search.val().toLowerCase() ) !== -1 ) ? true : false );
-    
+
     // lets split subject categories up so we can search then individually
     var subject_categories_vals = subject_categories.split(';');
 
@@ -228,7 +230,7 @@ $(document).ready(function(){
         "oLanguage": {
             "sSearch": ""
         },
-        "aoColumns": [ 
+        "aoColumns": [
           { "bSortable": true },
           { "bSortable": true },
           { "bSortable": true },
@@ -241,7 +243,7 @@ $(document).ready(function(){
 
     //now add appropriate event listeners to our custom search items
     if(advanced_text_search && campus_search && study_mode_search && subject_categories_search && award_search && programme_type_search){
-      
+
       advanced_text_search.keyup(function() {
         programme_list.fnDraw();
         /* show/hide the search hint when the input box is empty */
