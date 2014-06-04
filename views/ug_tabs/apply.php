@@ -36,7 +36,7 @@
 
 			$tracking_name = "[{$course->instance_id} in {$course->year}] {$course->programme_title} - {$course->award[0]->name} [{$course->pos_code} / {$course->parttime_mcr_code}] part-time";
 			$event_track = 'onClick="_pat.event(\'course-page\', \'apply-ug\', \''.$tracking_name .'\');"';
-			
+
 			if ($course->parttime_mcr_code != '') {
 				$apply = 'https://'.$evision_url.'.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&code1=' . $course->parttime_mcr_code . '&code2=0001';
 			}
@@ -44,13 +44,13 @@
 
 			<div class='enquire-block'>
 				<ul>
-				<li><strong>Part time</strong> - <a title="Apply online - <?php echo $course->award[0]->name;?> part time" href="<?php echo $apply ?>" class="" <?php echo $event_track ?>>Apply online</a> </li>
+				<li><strong>Part-time</strong> - <a title="Apply online - <?php echo $course->award[0]->name;?> part time" href="<?php echo $apply ?>" class="" <?php echo $event_track ?>>Apply online</a> </li>
 				</ul>
-			</div>	
+			</div>
 
 		<?php else:?>
-			<p class="apply-link"><strong><?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?></strong> - <span class="apply-type-link">Part time</span><br /><br />This part-time course is not currently open for applications. If you would like to be informed when we are accepting applications, please email <a href="mailto:information@kent.ac.uk">information@kent.ac.uk</a>.</p>
-			
+			<p class="apply-link"><strong><?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?></strong> - <span class="apply-type-link">Part-time</span><br /><br />This part-time course is not currently open for applications. If you would like to be informed when we are accepting applications, please email <a href="mailto:information@kent.ac.uk">information@kent.ac.uk</a>.</p>
+
 		<?php endif;?>
 	</form>
 	<?php endif; ?>

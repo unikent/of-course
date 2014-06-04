@@ -21,7 +21,7 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 	<?php if ( !empty($course->deliveries) ): ?>
 
 		<?php
-		$sits_url = 'https://'.$evision_url.'.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?'; 
+		$sits_url = 'https://'.$evision_url.'.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?';
 
 		$apply_link = array();
 		$apply_event = array();
@@ -52,7 +52,7 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 		 	$awards[$key] = $award;
 
 		 	$description = str_replace($course->programme_title,'', $delivery->description);
-			$description = substr($description ,0, strpos($description, '-')); 
+			$description = substr($description ,0, strpos($description, '-'));
 		 	$descriptions[$key] = $description;
 
 		 	// Generate event trackers
@@ -70,15 +70,15 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 			<ul>
 			<?php if($has_fulltime && isset($apply_event[$key]['full-time'])): ?>
 				<li>
-				<strong>Full time </strong> -
+				<strong>Full-time </strong> -
 				<a title="Apply online - <?php echo $awards[$key]. ' '.$descriptions[$key];?> Full time" href='<?php echo $apply_link[$key]['full-time'];?>' <?php echo $apply_event[$key]['full-time'];?> >Apply online</a>
-				
+
 				</li>
 			<?php endif; ?>
 
 			<?php if($has_parttime && isset($apply_event[$key]['part-time'])): ?>
 				<li>
-				<strong>Part time</strong> -
+				<strong>Part-time</strong> -
 				<a title="Apply online - <?php echo $awards[$key]. ' '.$descriptions[$key];?> Part time" href='<?php echo $apply_link[$key]['part-time'];?>' <?php echo $apply_event[$key]['part-time'];?> >Apply online</a>
 				</li>
 			<?php endif; ?>
@@ -89,4 +89,4 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 
 
 	<?php endif; ?>
-<?php endif; ?>	
+<?php endif; ?>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 $year_for_url = empty($year) ? '' : ((strcmp($year, CoursesFrontEnd::$current_year) == 0) ? '' : $year . '/');
 $has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
 $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
@@ -12,7 +12,7 @@ $course_name_fortracking = "[{$course->instance_id} in {$course->year}] {$course
 
 
 <?php
-$sits_url = 'https://esd.kent.ac.uk/aspx_shared/newuser.aspx?'; 
+$sits_url = 'https://esd.kent.ac.uk/aspx_shared/newuser.aspx?';
 
 $enquire_link = array();
 $prospectus_link = array();
@@ -53,11 +53,11 @@ foreach($course->deliveries as $delivery){
  	$awards[$key] = $award;
 
  	$description = str_replace($course->programme_title,'', $delivery->description);
-	$description = substr($description ,0, strpos($description, '-')); 
+	$description = substr($description ,0, strpos($description, '-'));
 
  	$descriptions[$key] = $description;
 
- 	// Generate event trackers	
+ 	// Generate event trackers
  	$enquire_event[$key][$mode]   = 'onClick="_pat.event(\'course-page\', \'enquire-pg\', \''.$course_name_fortracking.' - '.$award.' '.$description.' - '.$mode.' ['.$mcr.'] \');"';
 	$prospectus_event[$key][$mode]  = 'onClick="_pat.event(\'course-page\', \'order-prospectus-pg\', \''.$course_name_fortracking.' - '.$award.' '.$description.' - '.$mode.' ['.$mcr.'] \');"';
 }
@@ -72,16 +72,16 @@ foreach($course->deliveries as $delivery){
 			<ul>
 			<?php if($has_fulltime): ?>
 				<li>
-				<strong>Full time</strong> -
-				<a title="Enquire online - <?php echo $awards[$key]. ' '.$descriptions[$key];?> Full time" href='<?php echo $enquire_link[$key]['full-time'];?>' <?php echo $enquire_event[$key]['full-time'];?> >Enquire online</a> | 
+				<strong>Full-time</strong> -
+				<a title="Enquire online - <?php echo $awards[$key]. ' '.$descriptions[$key];?> Full time" href='<?php echo $enquire_link[$key]['full-time'];?>' <?php echo $enquire_event[$key]['full-time'];?> >Enquire online</a> |
 				<a title="Order prospectus for <?php echo $awards[$key]. ' '.$descriptions[$key];?> Full time" href='<?php echo $prospectus_link[$key]['full-time'];?>' <?php echo $prospectus_event[$key]['full-time'];?>>order a prospectus</a>
 				</li>
 			<?php endif; ?>
 
 			<?php if($has_parttime): ?>
 				<li>
-				<strong>Part time</strong> -
-				<a title="Enquire online - <?php echo $awards[$key]. ' '.$descriptions[$key];?> Part time" href='<?php echo $enquire_link[$key]['part-time'];?>' <?php echo $enquire_event[$key]['part-time'];?> >Enquire online</a> | 
+				<strong>Part-time</strong> -
+				<a title="Enquire online - <?php echo $awards[$key]. ' '.$descriptions[$key];?> Part time" href='<?php echo $enquire_link[$key]['part-time'];?>' <?php echo $enquire_event[$key]['part-time'];?> >Enquire online</a> |
 				<a title="Order prospectus for <?php echo $awards[$key]. ' '.$descriptions[$key];?> Part time" href='<?php echo $prospectus_link[$key]['part-time'];?>' <?php echo $prospectus_event[$key]['part-time'];?>>order a prospectus</a>
 				</li>
 			<?php endif; ?>
@@ -109,24 +109,24 @@ foreach($course->deliveries as $delivery){
 	<?php endif; ?>
 
 	<section class="info-subsection">
-		
+
 		<?php if(!empty($course->additional_school[0])): ?>
 			<h4>School websites</h4>
 			<ul>
 				<li><a href="<?php echo $course->school_website ?>"><?php echo $course->administrative_school[0]->name ?></a></li>
 				<li><a href="<?php echo $course->url_for_additional_school ?>"><?php echo $course->additional_school[0]->name ?></a></li>
 			</ul>
-			
+
 		<?php else: ?>
 			<h4>School website</h4>
 			<ul>
 				<li><a href="<?php echo $course->school_website ?>"><?php echo $course->administrative_school[0]->name ?></a></li>
 			</ul>
 		<?php endif; ?>
-	
+
 		<h4>Graduate School</h4>
 		<?php echo $course->globals->graduate_school; ?>
-		
+
 	</section>
 
 </section>
@@ -158,7 +158,7 @@ foreach($course->deliveries as $delivery){
 		<?php endif; ?>
 
 	<?php endif; ?>
-	
+
 
 	<?php if(!empty($course->globals->pg_open_days)): ?>
 	<section class="info-subsection">
@@ -168,7 +168,7 @@ foreach($course->deliveries as $delivery){
 		</div>
 	</section>
 	<?php endif; ?>
-	
+
 </section>
 
 <?php if (!empty($course->related_courses)): ?>
