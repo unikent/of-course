@@ -50,9 +50,16 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 		<div class="span5">
 
 			<div class="side-panel">
+
+			<?php if ( defined('CLEARING') && CLEARING && $course->current_year > $course->year ): ?>
+			<div class="panel admission-links">
+				<a href="/clearing/vacancies.html" class="apply-adm-link" role="tab" aria-controls="apply">Apply for Clearing</a>
+			</div>
+			<?php else: ?>
 			<div class="panel admission-links">
 				<a href="#!apply" class="apply-adm-link" role="tab" aria-controls="apply">Apply</a>, <a href="#!enquiries" class="enquire-adm-link" role="tab" aria-controls="enquiries">enquire</a> or <a href="#!enquiries" class="pros-adm-link" role="tab" aria-controls="enquiries">order a prospectus</a>
 			</div>
+			<?php endif; ?>
 
 			<div class="key-facts-block">
 			<div class="key-facts-container">
