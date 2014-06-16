@@ -30,15 +30,13 @@
                         You are currently viewing a preview of revision <strong><?php echo $course->revision_id; ?></strong>. This is preview data ONLY and is not representative of any course offered by this institution.
                     </div>
                 <?php endif; ?>
-                <?php if ( $level == 'undergraduate' && !isset($course) && $year == 'current' && defined('CLEARING') && CLEARING ): ?>
+                <?php if ( defined('CLEARING') && CLEARING && $level == 'undergraduate' ): ?>
                     <meta name="robots" content="noindex, nofollow" />
                     <div class='alert alert-daedalus' style="padding: 20px;margin:10px 0 0 0;">
+                    <?php if ( !isset($course) && $year == 'current' ): ?>
                         <strong>These pages are for undergraduate programmes starting in September <?php echo date('Y');?>.</strong>
                         <br>If you are a <strong>Clearing</strong>, <strong>Adjustment</strong> or <strong>part-time</strong> applicant wishing to start this September, go to our <a href="http://www.kent.ac.uk/courses/undergraduate/<?php echo date('Y') - 1;?>/search/"><?php echo date('Y') - 1;?> search page</a>.
-                    </div>
-                <?php elseif ( $level == 'undergraduate' && $course->current_year == $course->year && defined('CLEARING') && CLEARING ): ?>
-                	<meta name="robots" content="noindex, nofollow" />
-                	<div class='alert alert-daedalus' style="padding: 20px;margin:10px 0 0 0;">
+                    <?php elseif ( $course->current_year == $course->year ): ?>
                 		<?php
                 		$exists = true;
 						$file_headers = get_headers("http://www.kent.ac.uk/courses/undergraduate/" . ($course->current_year - 1) . "/" . $course->instance_id);
@@ -52,6 +50,7 @@
                 		<?php else: ?>
                 		<strong>This is a <?php echo $course->current_year;?> entry programme</strong>.<br>If you are a <strong>Clearing</strong>, <strong>Adjustment</strong> or <strong>part-time</strong> applicant wishing to start this September, please view the <a href="/courses/undergraduate/<?php echo $course->current_year - 1;?>/search/"><?php echo $course->current_year - 1;?> entry online prospectus.</a>
                         <?php endif; ?>
+                    <?php endif; ?>
                 	</div>
                 <?php elseif($course->current_year > $course->year): ?>
                 	<meta name="robots" content="noindex, nofollow" />
