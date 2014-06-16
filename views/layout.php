@@ -35,7 +35,7 @@
                         <meta name="robots" content="noindex, nofollow" />
                         <div class='alert alert-daedalus' style="padding: 20px;margin:10px 0 0 0;">
                         <strong>These pages are for undergraduate programmes starting in September <?php echo date('Y') + 1;?>.</strong>
-                        <br>If you are a <strong>Clearing</strong>, <strong>Adjustment</strong> or <strong>part-time</strong> applicant wishing to start this September, go to our <a href="http://www.kent.ac.uk/courses/undergraduate/<?php echo date('Y');?>/search/"><?php echo date('Y');?> search page</a>.
+                        <br>If you are a <strong>Clearing</strong>, <strong>Adjustment</strong> or <strong>part-time</strong> applicant wishing to start this September, go to our <a href="/courses/undergraduate/<?php echo date('Y');?>/search/"><?php echo date('Y');?> search page</a>.
                     <?php elseif ( $course->current_year == $course->year ): ?>
                         <meta name="robots" content="noindex, nofollow" />
                         <div class='alert alert-daedalus' style="padding: 20px;margin:10px 0 0 0;">
