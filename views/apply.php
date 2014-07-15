@@ -21,7 +21,7 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 		<fieldset class="highlight-fieldset indent">
 		    <legend>Course options</legend>
 		    <div class="form-group">
-		        <label for="type">Type of study</label>
+		        <label for="type">Full-time or part-time</label>
 		        <div class="controls">
 		            <select name="type" id="type">
 						<?php if($has_fulltime && $has_parttime): ?>
@@ -56,7 +56,7 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 		    </div>
 
 		    <div class="form-group coursetwo-row">
-		        <label for="year">Year</label>
+		        <label for="year">Year of entry</label>
 		        <div class="controls">
 		            <select name="year" id="year">
 						<option value="<?php echo $course->year?>"><?php echo $course->year?></option>
@@ -74,14 +74,14 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 	<?php foreach ($course->deliveries as $delivery): ?>
 
 	<p class="btn-indent daedalus-tab-action daedaus-js-display">
-		<a type="button" id="apply-link-<?php echo strtolower(str_replace(' ', '', $delivery->award_name)) ?>-<?php echo $delivery->attendance_pattern ?>-<?php echo $course->year ?>" class="btn btn-large btn-primary next-btn apply-link" tabindex="0" role="button" title="Apply online - <?php echo $delivery->description ?>" href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=0001" onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $delivery->programme_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>]');">Next <i class="icon-chevron-right icon-white"></i></a>
+		<a type="button" id="apply-link-<?php echo strtolower(str_replace(' ', '', $delivery->award_name)) ?>-<?php echo $delivery->attendance_pattern ?>-<?php echo $course->year ?>" class="btn btn-large btn-primary next-btn apply-link-courses" tabindex="0" role="button" title="Apply online - <?php echo $delivery->description ?>" href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=0001" onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $delivery->programme_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>]');">Next <i class="icon-chevron-right icon-white"></i></a>
 
-		<a type="button" id="apply-link-<?php echo strtolower(str_replace(' ', '', $delivery->award_name)) ?>-<?php echo $delivery->attendance_pattern ?>-<?php echo $course->year-1 ?>" class="btn btn-large btn-primary next-btn apply-link" tabindex="0" role="button" title="Apply online - <?php echo $delivery->description ?>" href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=0001" onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $delivery->programme_id ?> in <?php echo $course->year-1 ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>]');">Next <i class="icon-chevron-right icon-white"></i></a>
+		<a type="button" id="apply-link-<?php echo strtolower(str_replace(' ', '', $delivery->award_name)) ?>-<?php echo $delivery->attendance_pattern ?>-<?php echo $course->year-1 ?>" class="btn btn-large btn-primary next-btn apply-link-courses" tabindex="0" role="button" title="Apply online - <?php echo $delivery->description ?>" href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=0001" onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $delivery->programme_id ?> in <?php echo $course->year-1 ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>]');">Next <i class="icon-chevron-right icon-white"></i></a>
 	
 
 	<?php endforeach; ?>
 
-		<a type="button" id="apply-link-dummy" class="btn btn-large btn-primary next-btn apply-link disabledd" tabindex="0" role="button" title="Apply online - <?php echo $delivery->description ?>">Next <i class="icon-chevron-right icon-white"></i></a>
+		<a type="button" id="apply-link-dummy" class="btn btn-large next-btn apply-link-courses disabled" tabindex="0" role="button" rel="tooltip" data-placement="right" title="Please select your course options above">Next <i class="icon-chevron-right icon-white"></i></a>
 	</p>
 
 </div>

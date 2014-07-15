@@ -154,6 +154,17 @@ a.btn {
 .btn.btn-block {
   display: block;
 }
+.disabled {
+  background: #e2e2e2 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  color: #888 !important;
+  text-decoration: none !important;
+}
+.disabled:hover,
+.disabled:focus {
+  cursor: not-allowed;
+}
 .icon-big {
   font-size: 1.6em;
   position: relative;
@@ -459,8 +470,6 @@ a.scroll-to-top {
     left: 1em;
     width: 12em;
     color: #263566;
-    /*font-family:century schoolbook;*/
-  
     position: absolute;
     top: .5em;
   }
@@ -489,6 +498,8 @@ a.scroll-to-top {
   }
   legend {
     width: 90%;
+    position: relative;
+    top: 1.5em;
   }
 }
 @media (max-width: 700px) {

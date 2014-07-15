@@ -240,7 +240,7 @@ $(document).ready(function(){
 	// new apply links
 	$(".apply-form").css('visibility', 'visible');
 	$(".apply-form").css('display', 'block');
-	$(".apply-link").hide();
+	$(".apply-link-courses").hide();
 	$("#apply-link-dummy").show();
 	var award = $("#award").val();
 	var type = $("#type").val();
@@ -253,7 +253,7 @@ $(document).ready(function(){
 	$("#award").change(function(){
 		award = $(this).val();
 		linkid = 'apply-link-' + award + '-' + type + '-' + year;
-		$(".apply-link").hide();
+		$(".apply-link-courses").hide();
 		if ($("#" + linkid).length > 0) {
 			$("#apply-link-dummy").hide();
 			$("#" + linkid).show();
@@ -265,7 +265,7 @@ $(document).ready(function(){
 	$("#type").change(function(){
 		type = $(this).val();
 		linkid = 'apply-link-' + award + '-' + type + '-' + year;
-		$(".apply-link").hide();
+		$(".apply-link-courses").hide();
 		if ($("#" + linkid).length > 0) {
 			$("#apply-link-dummy").hide();
 			$("#" + linkid).show();
@@ -277,7 +277,7 @@ $(document).ready(function(){
 	$("#year").change(function(){
 		year = $(this).val();
 		linkid = 'apply-link-' + award + '-' + type + '-' + year;
-		$(".apply-link").hide();
+		$(".apply-link-courses").hide();
 		if ($("#" + linkid).length > 0) {
 			$("#apply-link-dummy").hide();
 			$("#" + linkid).show();
@@ -286,7 +286,8 @@ $(document).ready(function(){
 			$("#apply-link-dummy").show();
 		}
 	});
-	//if ( $("#type").val() == 'pleaseselect' ) $("#type").css('border-color', 'red');
+	
+	$("[rel=tooltip]").tooltip();
 
 }); 
 
