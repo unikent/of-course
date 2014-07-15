@@ -236,7 +236,57 @@ $(document).ready(function(){
 		return true;
 
 	}
-	
+
+	// new apply links
+	$(".apply-form").css('visibility', 'visible');
+	$(".apply-form").css('display', 'block');
+	$(".apply-link").hide();
+	$("#apply-link-dummy").show();
+	var award = $("#award").val();
+	var type = $("#type").val();
+	var year = $("#year").val();
+	var linkid = 'apply-link-' + award + '-' + type + '-' + year;
+	if ($("#" + linkid).length > 0) {
+		$("#apply-link-dummy").hide();
+		$("#" + linkid).show();
+	}
+	$("#award").change(function(){
+		award = $(this).val();
+		linkid = 'apply-link-' + award + '-' + type + '-' + year;
+		$(".apply-link").hide();
+		if ($("#" + linkid).length > 0) {
+			$("#apply-link-dummy").hide();
+			$("#" + linkid).show();
+		}
+		else {
+			$("#apply-link-dummy").show();
+		}
+	});
+	$("#type").change(function(){
+		type = $(this).val();
+		linkid = 'apply-link-' + award + '-' + type + '-' + year;
+		$(".apply-link").hide();
+		if ($("#" + linkid).length > 0) {
+			$("#apply-link-dummy").hide();
+			$("#" + linkid).show();
+		}
+		else {
+			$("#apply-link-dummy").show();
+		}
+	});
+	$("#year").change(function(){
+		year = $(this).val();
+		linkid = 'apply-link-' + award + '-' + type + '-' + year;
+		$(".apply-link").hide();
+		if ($("#" + linkid).length > 0) {
+			$("#apply-link-dummy").hide();
+			$("#" + linkid).show();
+		}
+		else {
+			$("#apply-link-dummy").show();
+		}
+	});
+	//if ( $("#type").val() == 'pleaseselect' ) $("#type").css('border-color', 'red');
 
 }); 
 

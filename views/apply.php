@@ -12,88 +12,87 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 
 <h1>Your application - <?php echo $course->programme_title ?></h1>
 
-<h2>Select your course options.</h2>
+<div class="apply-form hidden">
+	<h2>Select your course options.</h2>
 
-<p>To begin your application process, you'll need to select your course options below.</p>
+	<p>To begin your application process, you'll need to select your course options below.</p>
 
-<p><em class="icon-asterisk required"></em> required field</p>
+	<div>
+		<fieldset class="highlight-fieldset indent">
+		    <legend>Course options</legend>
+		    <div class="form-group">
+		        <label for="type">Type of study</label>
+		        <div class="controls">
+		            <select name="type" id="type">
+						<?php if($has_fulltime && $has_parttime): ?>
+						<option value="pleaseselect">Please select</option>
+						<?php endif; ?>
+						<?php if($has_fulltime): ?>
+							<option value="full-time">Full-time</option>
+						<?php endif; ?>
+						<?php if($has_parttime): ?>
+							<option value="part-time">Part-time</option>
+						<?php endif; ?>
+					</select>
+		        </div>
+		    </div>
+		    
+		    <div class="form-group">
+		        <label for="award">Award</label>
+		        <div class="controls">
+		            <select name="award" id="award">
+		            	<?php if (sizeof($course->award) === 1): ?>
+		            		<?php echo strtolower(str_replace(' ', '', $delivery->award_name)) ?>
 
-<div>
-	<fieldset class="highlight-fieldset indent">
-	    <legend>Course options</legend>
-	    <div class="form-group">
-	        <label for="type">Type of study <em class="icon-asterisk required"><span class="collapse-text">(required)</span></em></label>
-	        <div class="controls">
-	            <select name="type" required="required" id="type" parsley-select="" class="parsley-validated">
-					<?php if($has_fulltime && $has_parttime): ?>
-					<option value="pleaseselect">Please select</option>
-					<?php endif; ?>
-					<?php if($has_fulltime): ?>
-						<option value="ft">Full-time</option>
-					<?php endif; ?>
-					<?php if($has_parttime): ?>
-						<option value="pt">Part-time</option>
-					<?php endif; ?>
-				</select>
-	        </div>
-	    </div>
-	    
-	    <div class="form-group">
-	        <label for="award">Award <em class="icon-asterisk required"><span class="collapse-text">(required)</span></em></label>
-	        <div class="controls">
-	            <select name="award" required="required" id="award" parsley-select="" class="parsley-validated">
-	            	<?php if (sizeof($course->award) === 1): ?>
-	            	<option value="<?php echo $course->award[0]->{name}?>"><?php echo $course->award[0]->{name}?></option>
-	            	<?php else: ?>
-					<option value="pleaseselect">Please select</option>
-					<?php foreach ($course->award as $award): ?>
-					<option value="<?php echo $award->name?>"><?php echo $award->name?></option>
-					<?php endforeach; ?>
-					<?php endif; ?>
-				</select>
-			</div>
-	    </div>
+		            	<option value="<?php echo strtolower(str_replace(' ', '', $course->award[0]->{name})) ?>"><?php echo $course->award[0]->{name}?></option>
+		            	<?php else: ?>
+						<option value="pleaseselect">Please select</option>
+						<?php foreach ($course->award as $award): ?>
+						<option value="<?php echo strtolower(str_replace(' ', '', $award->name)) ?>"><?php echo $award->name?></option>
+						<?php endforeach; ?>
+						<?php endif; ?>
+					</select>
+				</div>
+		    </div>
 
-	    <div class="form-group coursetwo-row">
-	        <label for="year">Year <em class="icon-asterisk required"><span class="collapse-text">(required)</span></em></label>
-	        <div class="controls">
-	            <select name="year" id="year" required="required" parsley-select="" class="parsley-validated">
-					<option value="<?php echo $course->year?>"><?php echo $course->year?></option>
-					<?php if ($course->current_year == $course->year): ?>
-					<option value="<?php echo $course->year-1?>"><?php echo $course->year-1?></option>
-					<?php else: ?>
-					<option value="<?php echo $course->year+1?>"><?php echo $course->year+1?></option>
-					<?php endif; ?>
-				</select>
-			</div>
-	    </div>
-	</fieldset>
+		    <div class="form-group coursetwo-row">
+		        <label for="year">Year</label>
+		        <div class="controls">
+		            <select name="year" id="year">
+						<option value="<?php echo $course->year?>"><?php echo $course->year?></option>
+						<?php if ($course->current_year == $course->year): ?>
+						<option value="<?php echo $course->year-1?>"><?php echo $course->year-1?></option>
+						<?php else: ?>
+						<option value="<?php echo $course->year+1?>"><?php echo $course->year+1?></option>
+						<?php endif; ?>
+					</select>
+				</div>
+		    </div>
+		</fieldset>
+	</div>
+
+	<?php foreach ($course->deliveries as $delivery): ?>
+
+	<p class="btn-indent daedalus-tab-action daedaus-js-display">
+		<a type="button" id="apply-link-<?php echo strtolower(str_replace(' ', '', $delivery->award_name)) ?>-<?php echo $delivery->attendance_pattern ?>-<?php echo $course->year ?>" class="btn btn-large btn-primary next-btn apply-link" tabindex="0" role="button" title="Apply online - <?php echo $delivery->description ?>" href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=0001" onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $delivery->programme_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>]');">Next <i class="icon-chevron-right icon-white"></i></a>
+
+		<a type="button" id="apply-link-<?php echo strtolower(str_replace(' ', '', $delivery->award_name)) ?>-<?php echo $delivery->attendance_pattern ?>-<?php echo $course->year-1 ?>" class="btn btn-large btn-primary next-btn apply-link" tabindex="0" role="button" title="Apply online - <?php echo $delivery->description ?>" href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=0001" onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $delivery->programme_id ?> in <?php echo $course->year-1 ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>]');">Next <i class="icon-chevron-right icon-white"></i></a>
+	
+
+	<?php endforeach; ?>
+
+		<a type="button" id="apply-link-dummy" class="btn btn-large btn-primary next-btn apply-link disabledd" tabindex="0" role="button" title="Apply online - <?php echo $delivery->description ?>">Next <i class="icon-chevron-right icon-white"></i></a>
+	</p>
+
 </div>
 
+<noscript>
+	<ul>
+	<?php foreach ($course->deliveries as $delivery): ?>
+		<li><p><a title="Apply online - <?php echo $delivery->description ?>" href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=0001" onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $delivery->programme_id ?> in <?php echo $course->year ?>] <?php echo description ?> [<?php echo $delivery->mcr ?>]');">Apply for <?php echo $course->year ?> entry to <?php echo $delivery->description ?></a></p></li>
 
-<p class="btn-indent daedalus-tab-action daedaus-js-display">
-	<button type="button" class="btn btn-large btn-primary next-btn" tabindex="0" role="button">Next <i class="icon-chevron-right icon-white"></i></button>
-</p>
+		<li><p><a title="Apply online - <?php echo $delivery->description ?>" href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=0001" onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $delivery->programme_id ?> in <?php echo $course->year ?>] <?php echo description ?> [<?php echo $delivery->mcr ?>]');">Apply for <?php echo $course->year-1 ?> entry to <?php echo $delivery->description ?></a></p></li>
 
-<?php
-/*
-[0] => stdClass Object (
-[id] => 156
-[created_at] => 2013-07-29 14:38:23
-[updated_at] => 2013-07-29 14:38:23
-[award] => 5
-[pos_code] => COGNEURO:MSC-T
-[attendance_pattern] => full-time
-[mcr] => PCPN000101MS-FD
-[programme_id] => 65
-[description] => Cognitive Psychology/Neuropsychology - MSc - Full-time at Canterbury
-[award_name] => MSc
-[fees] => )
-*/
-foreach ($course->deliveries as $delivery) {
-
-}
-
-?>
-
-<?php print_r($course) ?>
+	<?php endforeach; ?>
+	</ul>
+</noscript>
