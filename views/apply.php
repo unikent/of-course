@@ -21,9 +21,9 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 		<fieldset class="highlight-fieldset indent">
 		    <legend>Course options</legend>
 		    <div class="form-group">
-		        <label for="type">Full-time or part-time</label>
+		        <label for="type"><em class="icon-asterisk required"><span class="collapse-text">(required)</span></em> Full-time or part-time</label>
 		        <div class="controls">
-		            <select name="type" id="type">
+		            <select name="type" id="type" required="required">
 						<?php if($has_fulltime && $has_parttime): ?>
 						<option value="pleaseselect">Please select</option>
 						<?php endif; ?>
@@ -38,9 +38,9 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 		    </div>
 		    
 		    <div class="form-group">
-		        <label for="award">Award</label>
+		        <label for="award"><em class="icon-asterisk required"><span class="collapse-text">(required)</span></em> Award</label>
 		        <div class="controls">
-		            <select name="award" id="award">
+		            <select name="award" id="award" required="required">
 		            	<?php if (sizeof($course->award) === 1): ?>
 		            		<?php echo strtolower(str_replace(' ', '', $delivery->award_name)) ?>
 
@@ -56,9 +56,9 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 		    </div>
 
 		    <div class="form-group coursetwo-row">
-		        <label for="year">Year of entry</label>
+		        <label for="year"><em class="icon-asterisk required"><span class="collapse-text">(required)</span></em> Year of entry</label>
 		        <div class="controls">
-		            <select name="year" id="year">
+		            <select name="year" id="year" required="required">
 						<option value="<?php echo $course->year?>"><?php echo $course->year?></option>
 						<?php if ($course->current_year == $course->year): ?>
 						<option value="<?php echo $course->year-1?>"><?php echo $course->year-1?></option>
