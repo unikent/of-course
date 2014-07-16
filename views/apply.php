@@ -17,6 +17,8 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 
 	<p>To begin your application process, you'll need to select your course options below.</p>
 
+	<p><em class="icon-asterisk required"></em> Please select whether you'd like to study full-time or part-time, the award type, and the year of entry.</p>
+
 	<div>
 		<fieldset class="highlight-fieldset indent">
 		    <legend>Course options</legend>
