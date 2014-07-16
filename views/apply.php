@@ -81,7 +81,7 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 
 	<?php endforeach; ?>
 
-		<a type="button" id="apply-link-dummy" class="btn btn-large next-btn apply-link-courses disabled" tabindex="0" role="button" rel="tooltip" data-placement="right" title="Please select your course options above">Next <i class="icon-chevron-right icon-white"></i></a>
+		<a type="button" id="apply-link-dummy" class="btn btn-large next-btn apply-link-courses disabled" tabindex="0" role="button" data-toggle="tooltip" data-placement="right" title="Please select your course options above">Next <i class="icon-chevron-right icon-white"></i></a>
 	</p>
 
 </div>

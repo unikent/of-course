@@ -287,7 +287,7 @@ $(document).ready(function(){
 		}
 	});
 	
-	$("[rel=tooltip]").tooltip();
+	$('#apply-link-dummy').tooltip();
 
 }); 
 
