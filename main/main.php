@@ -716,16 +716,18 @@ class CoursesFrontEnd {
 				if($year && ($year !== static::$current_year)){
 					$meta['title'] = "{$course->programme_title} | Postgraduate Programmes {$year} Application | The University of Kent";
 				}
+				return Flight::layout('apply-pg', array('meta' => $meta, 'course' => $course, 'apply' => true));
  				break;
 
  			default:
 				if($year && ($year !== static::$current_year)){
 					$meta['title'] = "{$course->programme_title} ($course->ucas_code) | Undergraduate Programmes {$year} Application | The University of Kent";
 				}
+				return Flight::layout('apply-ug', array('meta' => $meta, 'course' => $course, 'apply' => true));
  				break;
  		}
- 		
- 		return Flight::layout('apply', array('meta' => $meta, 'course' => $course, 'apply' => true));
+
+ 		return true;
 	}
 
 	/**

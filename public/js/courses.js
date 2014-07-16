@@ -242,9 +242,19 @@ $(document).ready(function(){
 	$(".apply-form").css('display', 'block');
 	$(".apply-link-courses").hide();
 	$("#apply-link-dummy").show();
+	$("#apply-link-ucas").hide();
 	var award = $("#award").val();
 	var type = $("#type").val();
 	var year = $("#year").val();
+	if ($("#award").is('p')) {
+		award = $("#award").data('award');
+	}
+	if ($("#type").is('p')) {
+		type = $("#type").data('type');
+	}
+	if ($("#year").is('p')) {
+		year = $("#year").data('year');
+	}
 	var linkid = 'apply-link-' + award + '-' + type + '-' + year;
 	if ($("#" + linkid).length > 0) {
 		$("#apply-link-dummy").hide();
@@ -264,14 +274,22 @@ $(document).ready(function(){
 	});
 	$("#type").change(function(){
 		type = $(this).val();
-		linkid = 'apply-link-' + award + '-' + type + '-' + year;
-		$(".apply-link-courses").hide();
-		if ($("#" + linkid).length > 0) {
+		if (type == 'full-time-ug') {
+			$("#apply-link-ucas").show();
+			$(".apply-link-courses").hide();
 			$("#apply-link-dummy").hide();
-			$("#" + linkid).show();
 		}
 		else {
-			$("#apply-link-dummy").show();
+			linkid = 'apply-link-' + award + '-' + type + '-' + year;
+			$(".apply-link-courses").hide();
+			$("#apply-link-ucas").hide();
+			if ($("#" + linkid).length > 0) {
+				$("#apply-link-dummy").hide();
+				$("#" + linkid).show();
+			}
+			else {
+				$("#apply-link-dummy").show();
+			}
 		}
 	});
 	$("#year").change(function(){
