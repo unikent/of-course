@@ -306,8 +306,11 @@ $(document).ready(function(){
 			$(".year").show();
 		}
 		else {
+			$(".apply-link-courses").hide();
+			$("#apply-link-ucas").hide();
 			$(".full-time-text").hide();
 			$(".part-time-text").hide();
+			$("#apply-link-dummy").show();
 			$(".year").show();
 		}
 	});
