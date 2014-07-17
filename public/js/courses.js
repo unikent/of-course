@@ -243,6 +243,13 @@ $(document).ready(function(){
 	$(".apply-link-courses").hide();
 	$("#apply-link-dummy").show();
 	$("#apply-link-ucas").hide();
+	
+	$(".full-time-text").hide();
+	$(".part-time-text").hide();
+
+	//$(".apply-form").css('visibility', 'visible');
+	//$(".apply-form").css('display', 'block');
+
 	var award = $("#award").val();
 	var type = $("#type").val();
 	var year = $("#year").val();
@@ -278,11 +285,14 @@ $(document).ready(function(){
 			$("#apply-link-ucas").show();
 			$(".apply-link-courses").hide();
 			$("#apply-link-dummy").hide();
+			$(".full-time-text").show();
+			$(".part-time-text").hide();
+			$(".year").hide();
 		}
-		else {
+		else if (type == 'part-time') {
 			linkid = 'apply-link-' + award + '-' + type + '-' + year;
 			$(".apply-link-courses").hide();
-			$("#apply-link-ucas").hide();
+
 			if ($("#" + linkid).length > 0) {
 				$("#apply-link-dummy").hide();
 				$("#" + linkid).show();
@@ -290,6 +300,15 @@ $(document).ready(function(){
 			else {
 				$("#apply-link-dummy").show();
 			}
+			$("#apply-link-ucas").hide();
+			$(".full-time-text").hide();
+			$(".part-time-text").show();
+			$(".year").show();
+		}
+		else {
+			$(".full-time-text").hide();
+			$(".part-time-text").hide();
+			$(".year").show();
 		}
 	});
 	$("#year").change(function(){
