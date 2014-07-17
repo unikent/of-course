@@ -6,7 +6,7 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 <h1>Your application</h1>
 
 <div class="apply-form hidden">
-	<h2>Select your course options for <a href="/courses/postgraduate/<?php echo $course->instance_id ?>/<?php echo $course->slug ?>"><?php echo $course->programme_title ?></a></h2>
+	<h2>Select your course options for <a href="/courses/postgraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?><?php echo $course->instance_id ?>/<?php echo $course->slug ?>"><?php echo $course->programme_title ?></a></h2>
 
 	<p>To begin your application process, you'll need to select your course options below.</p>
 

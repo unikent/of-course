@@ -3,11 +3,11 @@ $has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== fal
 $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
 ?>
 
-<h1>Your application - <?php echo $course->programme_title ?></h1>
+<h1>Your application</h1>
 
 <div class="apply-form hidden">
-	<h2>Select your course options.</h2>
-
+	<h2>Select your course options for <a href="/courses/undergraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?><?php echo $course->instance_id ?>/<?php echo $course->slug ?>"><?php echo $course->programme_title ?></a></h2>
+	
 	<p>To begin your application process, you'll need to select your course options below.</p>
 
 	<p><em class="icon-asterisk required"></em> Required fields.</p>
@@ -39,30 +39,18 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 		    <?php endif; ?>
 
 		    <div class="full-time-text">
-				<h3>Full-time applicants</h3>
-				<p>Full-time applicants (including international applicants) should apply through the&nbsp;<a href="http://www.ucas.com/apply" onclick="ga('send','event','course-page','ug-apply-ucas')" rel="nofollow" target="_blank">Universities and Colleges Admissions Service (UCAS)</a>&nbsp;system. If you need help or advice on your application, you should speak with your careers advisor or contact <a href="http://www.ucas.com/about-us/contact-us" onclick="ga('send','event','course-page','ug-apply-ucas-customer-contact')" target="_blank">UCAS Customer Contact Centre.</a>&nbsp;You can also write to UCAS at:</p>
-
-				<p>UCAS Customer Contact Centre,<br>
-				PO Box 28,<br>
-				Cheltenham<br>
-				GL52 3LZ</p>
-
-				<p>The institution code number of the University of Kent is K24, and the code name is KENT.</p>
-
-				<h4>Application deadlines</h4>
-
-				<p>See our <a href="http://www.kent.ac.uk/courses/undergraduate/apply/how.html#!ucas">UCAS application timeline</a> for&nbsp;information about deadlines and an outline of the UCAS process.&nbsp;</p>
+				<?php if ( trim($course->mode_of_study) != 'Part-time only' ): ?>
+					<?php echo $course->how_to_apply; ?>
+					<?php if ( $course->location[0]->name == 'Medway' ): ?>
+						<?php echo $course->how_to_apply_medway_fulltime; ?>
+					<?php endif; ?>
+				<?php endif; ?>
 			</div>
 			
 			<div class="part-time-text">
-				<h3>Part-time applicants</h3>
-				<p>If you need more advice on making an application or choosing your programme, please contact the Recruitment and Admissions Office:</p>
-				<ul>
-					<li>T: +44 (0)1227 827272</li>
-					<li>Freephone (UK only): 0800 975 3777</li>
-					<li>or make an online enquiry (click on 'enquire' on the right-hand side).</li>
-				</ul>
-				<p>Part-time students should apply directly to the University. There is no fixed closing date, but you should apply for your programme as early a possible. You can apply online by clicking&nbsp;the link below:</p>
+				<?php if ( trim($course->mode_of_study) == 'Full-time or part-time' || trim($course->mode_of_study) == 'Part-time only' ): ?>
+					<?php echo $course->how_to_apply_parttime; ?>
+				<?php endif; ?>
 			</div>
 
 	        <p id="award" data-award="<?php echo strtolower(str_replace(array(' ', '(', ')'), '', $course->award[0]->{name})) ?>" class="hidden" aria-hidden="true"><?php echo $course->award[0]->{name}?></p>
