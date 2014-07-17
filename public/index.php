@@ -82,7 +82,9 @@ Flight::route('/@level:undergraduate|postgraduate/@year:[0-9]+/leaflets', array(
 Flight::route('/@level:undergraduate|postgraduate/leaflets', array($main,'leaflets_noyear'));
 
 //apply page
+Flight::route('/@level:undergraduate|postgraduate/@year:[0-9]+/apply/@id:[0-9]+/@slug', array($main,'apply'));
 Flight::route('/@level:undergraduate|postgraduate/@year:[0-9]+/apply/@id:[0-9]+', array($main,'apply'));
+Flight::route('/@level:undergraduate|postgraduate/apply/@id:[0-9]+/@slug', array($main,'apply_noyear'));
 Flight::route('/@level:undergraduate|postgraduate/apply/@id:[0-9]+', array($main,'apply_noyear'));
 
 // Courses

@@ -736,7 +736,7 @@ class CoursesFrontEnd {
 	 * @param string $type undergraduate or postgraduate.
 	 * @param int Id of programme
 	 */
-	public function apply_noyear($level, $id)
+	public function apply_noyear($level, $id, $slug='')
 	{
 		return $this->apply($level, static::$current_year, $id);
 	}

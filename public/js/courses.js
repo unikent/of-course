@@ -289,6 +289,17 @@ $(document).ready(function(){
 			$(".part-time-text").hide();
 			$(".year").hide();
 		}
+		else if (type == 'full-time') {
+			linkid = 'apply-link-' + award + '-' + type + '-' + year;
+			$(".apply-link-courses").hide();
+			if ($("#" + linkid).length > 0) {
+				$("#apply-link-dummy").hide();
+				$("#" + linkid).show();
+			}
+			else {
+				$("#apply-link-dummy").show();
+			}
+		}
 		else if (type == 'part-time') {
 			linkid = 'apply-link-' + award + '-' + type + '-' + year;
 			$(".apply-link-courses").hide();
