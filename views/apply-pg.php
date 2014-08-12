@@ -38,8 +38,8 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 		    </div>
 		    <?php endif; ?>
 
-		    <?php if (sizeof($course->award) === 1): ?>
-	        <p id="award" data-award="<?php echo strtolower(str_replace(' ', '', $course->award[0]->{name})) ?>" class="hidden" aria-hidden="true"><?php echo $course->award[0]->{name}?></p>
+		    <?php if (sizeof($course->deliveries) === 1): ?>
+	        <p id="award" data-award="<?php echo $course->deliveries[0]->{id})) ?>" class="hidden" aria-hidden="true"><?php echo $course->deliveries[0]->{description}?></p>
 	        <?php else: ?>
 		    <div class="form-group">
 		        <label for="award">Award <em class="icon-asterisk required"><span class="collapse-text">(required)</span></em></label>
@@ -47,8 +47,8 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 		            <select name="award" id="award" required="required">
 		            	
 						<option value="pleaseselect">Please select</option>
-						<?php foreach ($course->award as $award): ?>
-						<option value="<?php echo strtolower(str_replace(' ', '', $award->name)) ?>"><?php echo $award->name?></option>
+						<?php foreach ($course->deliveries as $delivery): ?>
+						<option value="delivery<?php echo $delivery->id ?>"><?php echo $delivery->description?></option>
 						<?php endforeach; ?>
 						
 					</select>

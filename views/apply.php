@@ -24,12 +24,12 @@
 	        <label for="award">Award <em class="icon-asterisk required"><span class="collapse-text">(required)</span></em></label>
 	        <div class="controls">
 	            <select name="award" required="required" id="award" parsley-select="" class="parsley-validated">
-	            	<?php if (sizeof($course->deliveries) === 1): ?>
-	            	<option value="delivery<?php echo $course->deliveries[0]->{id}?>"><?php echo $course->deliveries[0]->{award_name}?></option>
+	            	<?php if (sizeof($course->award) === 1): ?>
+	            	<option value="<?php echo $course->award[0]->{name}?>"><?php echo $course->award[0]->{name}?></option>
 	            	<?php else: ?>
 					<option value="pleaseselect">Please select</option>
-					<?php foreach ($course->deliveries as $delivery): ?>
-					<option value="delivery<?php echo $delivery->id?>"><?php echo $delivery->description?></option>
+					<?php foreach ($course->award as $award): ?>
+					<option value="<?php echo $award->name?>"><?php echo $award->name?></option>
 					<?php endforeach; ?>
 					<?php endif; ?>
 				</select>
@@ -56,3 +56,4 @@
 <p class="btn-indent daedalus-tab-action daedaus-js-display">
 	<button type="button" class="btn btn-large btn-primary next-btn" tabindex="0" role="button">Next <i class="icon-chevron-right icon-white"></i></button>
 </p>
+<?php print_r($course) ?>
