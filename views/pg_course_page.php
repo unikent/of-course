@@ -83,39 +83,50 @@
 				<h2><a id="fees-tables-link" class="fees-link" role="button" aria-controls="fees-tables" tabindex='0' title='Click to toggle basic fee information'  onClick='_pat("course-page","expand-fees-pg", "<?php echo "[{$course->instance_id} in {$course->year}] {$course->programme_title} - {$course->award[0]->name}"; ?>");'>Fees <i class="icon-chevron-down toggler"></i></a></h2>
 				<div id="fees-tables" class="fees-tables" style="display: none" aria-expanded="false" aria-labelledby="fees-tables-link">
 					<?php if (isset($course->globals->fees_caveat_text_pg) && !empty($course->globals->fees_caveat_text_pg)) echo $course->globals->fees_caveat_text_pg ?> 
-				<?php foreach ($course->deliveries as $delivery): ?>
-				<?php if ( ! in_array($delivery->pos_code, $pos_codes) ): ?>
-					<table class="table">
-					  <thead>
-					    <tr>
-					    	<td colspan="3"><i class="icon icon-bullet"></i> <?php echo preg_replace('/- (\w){4}-time/', '', $delivery->description) . ':' ?></td>
-					    </tr>
-					    <tr>
-					      <th><strong><?php //echo $delivery->award_name ?></strong></th>
-					      <th>UK/EU</th>
-					      <th>Overseas</th>
-					    </tr>
-					  </thead>
-					  <tbody>
-						  	<?php if($has_fulltime):?>
-							<tr>
-							  <td><strong>Full-time</strong></td>
-						      <td><?php echo empty($delivery->fees->home->{'full-time'}) ? 'TBC' : '&pound;' . $delivery->fees->home->{'full-time'}; ?></td>
-						      <td><?php echo empty($delivery->fees->int->{'full-time'}) ? 'TBC' : '&pound;' . $delivery->fees->int->{'full-time'}; ?></td>
-						    </tr>
-						    <?php endif;?>
-						    <?php if($has_parttime):?>
+					<?php foreach ($course->deliveries as $delivery): ?>
+					<?php if ( ! in_array($delivery->pos_code, $pos_codes) ): ?>
+						<table class="table">
+						  <thead>
 						    <tr>
-						      <td><strong>Part-time</strong></td>
-						      <td><?php echo empty($delivery->fees->home->{'part-time'}) ? 'TBC' : '&pound;' . $delivery->fees->home->{'part-time'}; ?></td>
-						      <td><?php echo empty($delivery->fees->int->{'part-time'}) ? 'TBC' : '&pound;' . $delivery->fees->int->{'part-time'}; ?></td>
+						    	<td colspan="3"><i class="icon icon-bullet"></i> <?php echo preg_replace('/- (\w){4}-time/', '', $delivery->description) . ':' ?></td>
 						    </tr>
-						    <?php endif;?>
-					  </tbody>
-					</table>
-				<?php $pos_codes[] = $delivery->pos_code; endif; ?>
-				<?php endforeach; ?>
+						    <tr>
+						      <th></th>
+						      <th>UK/EU</th>
+						      <th>Overseas</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+							  	<?php if($has_fulltime):?>
+								<tr>
+								  <td><strong>Full-time</strong></td>
+							      <td><?php echo empty($delivery->fees->home->{'full-time'}) ? 'TBC' : '&pound;' . $delivery->fees->home->{'full-time'}; ?></td>
+							      <td><?php echo empty($delivery->fees->int->{'full-time'}) ? 'TBC' : '&pound;' . $delivery->fees->int->{'full-time'}; ?></td>
+							    </tr>
+							    <?php endif;?>
+							    <?php if($has_parttime):?>
+							    <tr>
+							      <td><strong>Part-time</strong></td>
+							      <td><?php echo empty($delivery->fees->home->{'part-time'}) ? 'TBC' : '&pound;' . $delivery->fees->home->{'part-time'}; ?></td>
+							      <td><?php echo empty($delivery->fees->int->{'part-time'}) ? 'TBC' : '&pound;' . $delivery->fees->int->{'part-time'}; ?></td>
+							    </tr>
+							    <?php endif;?>
+						  </tbody>
+						</table>
+					<?php $pos_codes[] = $delivery->pos_code; endif; ?>
+					<?php endforeach; ?>
+
 					<?php 
+						if( 
+							isset($course->globals->fees_year_in_industryabroad_text_pg) && // If YII/YA text is set AND
+							( 
+								(!empty($course->year_in_industry)) || // YII or YA has some text
+								(!empty($course->year_abroad)) 
+							) // then
+						){
+							 echo $course->globals->fees_year_in_industryabroad_text_pg;
+						}
+					
 						if(isset($course->globals->fees_exception_text_pg)) echo $course->globals->fees_exception_text_pg;
 					?>
 					

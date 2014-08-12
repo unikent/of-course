@@ -22,7 +22,7 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 				<li><a href="#structure">Course structure</a></li>
 				<li><a href="#teaching">Teaching &amp; Assessment</a></li>
 				<li><a href="#careers">Careers</a></li>
-				<li><a href="#entry">Entry requirements</a></li>
+				<?php if ( (!defined('CLEARING') || (defined('CLEARING') && !CLEARING)) || (defined('CLEARING') && CLEARING && $course->current_year == $course->year ) ): ?><li><a href="#entry">Entry requirements</a></li><?php endif; ?>
 				<li><a href="#fees">Funding</a></li>
 				<li class='screenreader-only'><a href="#enquiries" >Enquiries</a></li>
 			</ul>
@@ -40,7 +40,7 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 				<?php endif; ?>
 				<section id="teaching"><?php Flight::render('ug_tabs/teaching', array('course'=>$course)); ?></section>
 				<section id="careers"><?php Flight::render('ug_tabs/careers', array('course'=>$course)); ?></section>	
-				<section id="entry"><?php Flight::render('ug_tabs/entry', array('course'=>$course)); ?></section>
+				<?php if ( (!defined('CLEARING') || (defined('CLEARING') && !CLEARING)) || (defined('CLEARING') && CLEARING && $course->current_year == $course->year ) ): ?><section id="entry"><?php Flight::render('ug_tabs/entry', array('course'=>$course)); ?></section><?php endif; ?>
 				<section id="fees"><?php Flight::render('ug_tabs/fees', array('course'=>$course)); ?></section>
 				<section id="enquiries"><?php Flight::render('ug_tabs/enquiries', array('course'=>$course)); ?></section>
 			</div>
@@ -48,9 +48,16 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 		<div class="span5">
 
 			<div class="side-panel">
+
+			<?php if ( defined('CLEARING') && CLEARING && $course->current_year > $course->year ): ?>
+			<div class="panel admission-links">
+				<a href="/clearing/vacancies.html">Apply for Clearing</a>
+			</div>
+			<?php else: ?>
 			<div class="panel admission-links">
 				<a href="/courses/undergraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?>apply-online/<?php echo $course->instance_id ?>" class="apply-adm-link" role="tab" aria-controls="apply">Apply</a>, <a href="#!enquiries" class="enquire-adm-link" role="tab" aria-controls="enquiries">enquire</a> or <a href="#!enquiries" class="pros-adm-link" role="tab" aria-controls="enquiries">order a prospectus</a>
 			</div>
+			<?php endif; ?>
 
 			<div class="key-facts-block">
 			<div class="key-facts-container">
