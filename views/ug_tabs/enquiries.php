@@ -14,7 +14,7 @@ $course_name_fortracking = "[{$course->instance_id} in {$course->year}] {$course
 
 
 <?php
-$sits_url = 'https://esd.kent.ac.uk/aspx_shared/newuser.aspx?';
+$sits_url = 'https://evision-dev.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?';
 
 $enquire_link = array();
 $prospectus_link = array();
@@ -30,9 +30,15 @@ foreach(array("fulltime","parttime") as $mode){
 		$mcr = 'AAGEN101'; // Generic MCR
 	}
 
+	// get the ari code
+	$ari_code = '';
+	if ($course->ari_code != '') {
+		$ari_code = $course->ari_code;
+	}
+
 	// Generate Links
-	$enquire_link[$mode] = $sits_url . 'CCTC=KENT&UTYP=APP&EnquiryCategoryCode=10&CourseCode=' . $mcr;
-	$prospectus_link[$mode]	= $sits_url . 'CCTC=KENT&EnquiryCategoryCode=PRO&CourseCode=' . $mcr;
+	$enquire_link[$mode] = $sits_url . 'process=siw_ipp_enq&code1='.$ari_code.'&code2=&code4=ipr_ipp5=10' . $mcr;
+	$prospectus_link[$mode]	= $sits_url . 'process=siw_ipp_enq&code1='.$ari_code.'&code2=&code4=ipr_ipp5=PRO' . $mcr;
 
 	// Generate event trackers
 	$enquire_event[$mode]  = 'onClick="_pat.event(\'course-page\', \'enquire-ug\', \''.$course_name_fortracking.' - '.$mode.'\');"';
