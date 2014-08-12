@@ -39,7 +39,7 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 		    <?php endif; ?>
 
 		    <?php if (sizeof($course->deliveries) === 1): ?>
-	        <p id="award" data-award="<?php echo $course->deliveries[0]->{id})) ?>" class="hidden" aria-hidden="true"><?php echo $course->deliveries[0]->{description}?></p>
+	        <p id="award" data-award="<?php echo $course->deliveries[0]->{id} ?>" class="hidden" aria-hidden="true"><?php echo $course->deliveries[0]->{description}?></p>
 	        <?php else: ?>
 		    <div class="form-group">
 		        <label for="award">Award <em class="icon-asterisk required"><span class="collapse-text">(required)</span></em></label>
