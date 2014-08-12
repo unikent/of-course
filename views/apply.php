@@ -25,11 +25,11 @@
 	        <div class="controls">
 	            <select name="award" required="required" id="award" parsley-select="" class="parsley-validated">
 	            	<?php if (sizeof($course->deliveries) === 1): ?>
-	            	<option value="<?php echo $course->award[0]->{name}?>"><?php echo $course->award[0]->{name}?></option>
+	            	<option value="delivery<?php echo $course->deliveries[0]->{id}?>"><?php echo $course->deliveries[0]->{award_name}?></option>
 	            	<?php else: ?>
 					<option value="pleaseselect">Please select</option>
 					<?php foreach ($course->deliveries as $delivery): ?>
-					<option value="<?php echo $delivery->award_name?>"><?php echo $delivery->description?></option>
+					<option value="delivery<?php echo $delivery->id?>"><?php echo $delivery->description?></option>
 					<?php endforeach; ?>
 					<?php endif; ?>
 				</select>
