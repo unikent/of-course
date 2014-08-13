@@ -1,6 +1,7 @@
 <?php	
 $has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
 $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
+$has_foundation = (strpos(strtolower($course->programme_type), 'foundation year') !== false);
 ?>
 <article class="container">
 	<h1>
@@ -91,6 +92,12 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 							<?php endif;?>
 					  </tbody>
 					</table>
+
+					<?php
+						if($has_foundation && isset($course->globals->fees_foundation_year_exception_text_ug)){
+							echo $course->globals->fees_foundation_year_exception_text_ug;
+						}
+					?>
 
 					<?php 
 
