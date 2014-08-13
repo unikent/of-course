@@ -47,10 +47,10 @@
     					}
 						?>
 						<?php if ($exists): ?>
-                        <strong>This is a <?php echo $course->current_year;?> entry programme</strong>.<br>If you are a <strong>Clearing</strong>, <strong>Adjustment</strong> or <strong>part-time</strong> applicant wishing to start this September, please view <a href="/courses/undergraduate/<?php echo $course->current_year - 1;?>/<?php echo $course->instance_id ?>/<?php echo $course->slug ?>"><?php echo $course->programme_title;?></a> for <?php echo $course->current_year - 1;?> entry.
+                        <strong>This is a <?php echo $course->current_year;?> entry programme</strong>.<br>If you are a <strong>Clearing</strong>, <strong>Adjustment</strong> or <strong>part-time</strong> applicant wishing to start this September, please view <a href="/courses/undergraduate/<?php echo $course->year - 1;?>/<?php echo $course->instance_id ?>/<?php echo $course->slug ?>"><?php echo $course->programme_title;?></a> for <?php echo $course->year - 1;?> entry.
                     
                 		<?php else: ?>
-                		<strong>This is a <?php echo $course->current_year;?> entry programme</strong>.<br>If you are a <strong>Clearing</strong>, <strong>Adjustment</strong> or <strong>part-time</strong> applicant wishing to start this September, please view the <a href="/courses/undergraduate/<?php echo $course->current_year - 1;?>/search/"><?php echo $course->current_year - 1;?> entry online prospectus.</a>
+                		<strong>This is a <?php echo $course->current_year;?> entry programme</strong>.<br>If you are a <strong>Clearing</strong>, <strong>Adjustment</strong> or <strong>part-time</strong> applicant wishing to start this September, please view the <a href="/courses/undergraduate/<?php echo $course->year - 1;?>/search/"><?php echo $course->year - 1;?> entry online prospectus.</a>
                         <?php endif; ?>
                     <?php endif; ?>
                 	</div>
