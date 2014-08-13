@@ -1,4 +1,4 @@
-<?php $year_for_url = empty($year) ? '' : ((strcmp($year, CoursesFrontEnd::$current_year) == 0) ? '' : $year . '/'); 
+<?php $year_for_url = empty($year) ? '' : ((strcmp($year, CoursesFrontEnd::$current_year) == 0) ? '' : $year . '/');
 
 $has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
 $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
@@ -14,7 +14,7 @@ $course_name_fortracking = "[{$course->instance_id} in {$course->year}] {$course
 
 
 <?php
-$sits_url = 'https://esd.kent.ac.uk/aspx_shared/newuser.aspx?'; 
+$sits_url = 'https://esd.kent.ac.uk/aspx_shared/newuser.aspx?';
 
 $enquire_link = array();
 $prospectus_link = array();
@@ -34,7 +34,7 @@ foreach(array("fulltime","parttime") as $mode){
 	$enquire_link[$mode] = $sits_url . 'CCTC=KENT&UTYP=APP&EnquiryCategoryCode=10&CourseCode=' . $mcr;
 	$prospectus_link[$mode]	= $sits_url . 'CCTC=KENT&EnquiryCategoryCode=PRO&CourseCode=' . $mcr;
 
-	// Generate event trackers	
+	// Generate event trackers
 	$enquire_event[$mode]  = 'onClick="_pat.event(\'course-page\', \'enquire-ug\', \''.$course_name_fortracking.' - '.$mode.'\');"';
 	$prospectus_event[$mode]  = 'onClick="_pat.event(\'course-page\', \'order-prospectus-ug\', \''.$course_name_fortracking.' - '.$mode.'\');"';
 }
@@ -45,16 +45,16 @@ foreach(array("fulltime","parttime") as $mode){
 		<ul>
 		<?php if($has_fulltime): ?>
 			<li>
-			<strong>Full time</strong> 
-			<a title="Enquire online - <?php echo $awards[$pos];?> Full time" href='<?php echo $enquire_link['fulltime'];?>' <?php echo $enquire_event['fulltime'];?> >Enquire online</a> | 
+			<strong>Full-time</strong>
+			<a title="Enquire online - <?php echo $awards[$pos];?> Full time" href='<?php echo $enquire_link['fulltime'];?>' <?php echo $enquire_event['fulltime'];?> >Enquire online</a> |
 			<a title="Order prospectus for <?php echo $awards[$pos];?> Full time" href='<?php echo $prospectus_link['fulltime'];?>' <?php echo $prospectus_event['fulltime'];?>>order a prospectus</a>
 			</li>
 		<?php endif; ?>
 
 		<?php if($has_parttime): ?>
 			<li>
-			<strong>Part time</strong>
-			<a title="Enquire online - <?php echo $awards[$pos];?> Part time"  href='<?php echo $enquire_link['parttime'];?>' <?php echo $enquire_event['parttime'];?> >Enquire online</a> | 
+			<strong>Part-time</strong>
+			<a title="Enquire online - <?php echo $awards[$pos];?> Part time"  href='<?php echo $enquire_link['parttime'];?>' <?php echo $enquire_event['parttime'];?> >Enquire online</a> |
 			<a title="Order prospectus for <?php echo $awards[$pos];?> Full time" href='<?php echo $prospectus_link['parttime'];?>' <?php echo $prospectus_event['parttime'];?>>order a prospectus</a>
 			</li>
 		<?php endif; ?>
@@ -140,7 +140,7 @@ foreach(array("fulltime","parttime") as $mode){
 	</div>
 	<div class="span5">
 		<?php $ukprn = (isset($course->kis_institution_id) && $course->kis_institution_id != '') ? $course->kis_institution_id : $course->globals->ukprn; ?>
-		<iframe class="pull-right" id="unistats-widget-frame" title="Unistats KIS Widget" src="//widget.unistats.ac.uk/Widget/<?php echo $ukprn ?>/<?php echo str_replace(array('/', '|', ':', '&', '.', '>', '+', '#', ';', '?', '@', '='), '_', $course->kiscourseid); ?>/vertical/small/en-GB/Full%20Time" scrolling="no" style="overflow: hidden; border: 0px none transparent; width: 190px; height: 500px;"> </iframe>	
+		<iframe class="pull-right" id="unistats-widget-frame" title="Unistats KIS Widget" src="//widget.unistats.ac.uk/Widget/<?php echo $ukprn ?>/<?php echo str_replace(array('/', '|', ':', '&', '.', '>', '+', '#', ';', '?', '@', '='), '_', $course->kiscourseid); ?>/vertical/small/en-GB/Full%20Time" scrolling="no" style="overflow: hidden; border: 0px none transparent; width: 190px; height: 500px;"> </iframe>
 	</div>
 </div>
 <?php endif; ?>
