@@ -18,6 +18,7 @@
 		<link rel="feed" type="application/xcri+xml" href="/courses/xcri"/>
 
 		<link media='screen' type='text/css' rel='stylesheet' href='<?php echo ASSET_URL ?>/css/courses.css' />
+		<link media='screen' type='text/css' rel='stylesheet' href='<?php echo ASSET_URL ?>/css/courses-form.css' />
 		<link media='print' type='text/css' rel='stylesheet' href='<?php echo ASSET_URL ?>/css/print.css' />
 		<!-- InstanceEndEditable -->
 	</kentMeta>
@@ -36,7 +37,7 @@
                         <div class='alert alert-daedalus' style="padding: 20px;margin:10px 0 0 0;">
                         <strong>These pages are for undergraduate programmes starting in September <?php echo date('Y') + 1;?>.</strong>
                         <br>If you are a <strong>Clearing</strong>, <strong>Adjustment</strong> or <strong>part-time</strong> applicant wishing to start this September, go to our <a href="/courses/undergraduate/<?php echo date('Y');?>/search/"><?php echo date('Y');?> search page</a>.
-                    <?php elseif ( $course->current_year == $course->year ): ?>
+                    <?php elseif ( isset($course) && $course->current_year == $course->year ): ?>
                         <meta name="robots" content="noindex, nofollow" />
                         <div class='alert alert-daedalus' style="padding: 20px;margin:10px 0 0 0;">
                 		<?php
@@ -47,10 +48,10 @@
     					}
 						?>
 						<?php if ($exists): ?>
-                        <strong>This is a <?php echo $course->current_year;?> entry programme</strong>.<br>If you are a <strong>Clearing</strong>, <strong>Adjustment</strong> or <strong>part-time</strong> applicant wishing to start this September, please view <a href="/courses/undergraduate/<?php echo $course->year - 1;?>/<?php echo $course->instance_id ?>/<?php echo $course->slug ?>"><?php echo $course->programme_title;?></a> for <?php echo $course->year - 1;?> entry.
+                        <strong>This is a <?php echo $course->current_year;?> entry programme</strong>.<br>If you are a <strong>Clearing</strong>, <strong>Adjustment</strong> or <strong>part-time</strong> applicant wishing to start this September, please view <a href="/courses/undergraduate/<?php echo $course->current_year - 1;?>/<?php echo $course->instance_id ?>/<?php echo $course->slug ?>"><?php echo $course->programme_title;?></a> for <?php echo $course->current_year - 1;?> entry.
                     
                 		<?php else: ?>
-                		<strong>This is a <?php echo $course->current_year;?> entry programme</strong>.<br>If you are a <strong>Clearing</strong>, <strong>Adjustment</strong> or <strong>part-time</strong> applicant wishing to start this September, please view the <a href="/courses/undergraduate/<?php echo $course->year - 1;?>/search/"><?php echo $course->year - 1;?> entry online prospectus.</a>
+                		<strong>This is a <?php echo $course->current_year;?> entry programme</strong>.<br>If you are a <strong>Clearing</strong>, <strong>Adjustment</strong> or <strong>part-time</strong> applicant wishing to start this September, please view the <a href="/courses/undergraduate/<?php echo $course->current_year - 1;?>/search/"><?php echo $course->current_year - 1;?> entry online prospectus.</a>
                         <?php endif; ?>
                     <?php endif; ?>
                 	</div>
@@ -79,6 +80,7 @@
 	<kentScripts>
 		<script type="text/javascript" charset="utf8" src="//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.1/jquery.dataTables.min.js"></script>
 		<script type="text/javascript" charset="utf-8" language="javascript" src="<?php echo ASSET_URL ?>/js/build/of-course.min.js"></script>
+		<script type="text/javascript" src="/pantheon/static/daedalus/scripts/lib/bootstrap/2.3.2/bootstrap-tooltip.js"></script>
 	</kentScripts>
 </kentWrapper>	
 <!-- InstanceEnd -->
