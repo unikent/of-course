@@ -457,12 +457,6 @@ a.scroll-to-top {
   opacity: 0.8;
   color: #fff;
 }
-@media (min-width: 1140px) {
-  .daedalus,
-  .container {
-    width: 1140px;
-  }
-}
 @media (min-width: 961px) {
   .indent {
     padding-left: 19em;

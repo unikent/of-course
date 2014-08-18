@@ -37,7 +37,7 @@
                         <div class='alert alert-daedalus' style="padding: 20px;margin:10px 0 0 0;">
                         <strong>These pages are for undergraduate programmes starting in September <?php echo date('Y') + 1;?>.</strong>
                         <br>If you are a <strong>Clearing</strong>, <strong>Adjustment</strong> or <strong>part-time</strong> applicant wishing to start this September, go to our <a href="/courses/undergraduate/<?php echo date('Y');?>/search/"><?php echo date('Y');?> search page</a>.
-                    <?php elseif ( $course->current_year == $course->year ): ?>
+                    <?php elseif ( isset($course) && $course->current_year == $course->year ): ?>
                         <meta name="robots" content="noindex, nofollow" />
                         <div class='alert alert-daedalus' style="padding: 20px;margin:10px 0 0 0;">
                 		<?php
@@ -48,10 +48,10 @@
     					}
 						?>
 						<?php if ($exists): ?>
-                        <strong>This is a <?php echo $course->current_year;?> entry programme</strong>.<br>If you are a <strong>Clearing</strong>, <strong>Adjustment</strong> or <strong>part-time</strong> applicant wishing to start this September, please view <a href="/courses/undergraduate/<?php echo $course->current_year - 1;?>/<?php echo $course->instance_id ?>/<?php echo $course->slug ?>"><?php echo $course->programme_title;?></a> for <?php echo $course->current_year - 1;?> entry.
+                        <strong>This is a <?php echo $course->current_year;?> entry programme</strong>. If you are a <strong>Clearing</strong>, <strong>Adjustment</strong> or <strong>part-time</strong> applicant wishing to start this September, please view <a href="/courses/undergraduate/<?php echo $course->current_year - 1;?>/<?php echo $course->instance_id ?>/<?php echo $course->slug ?>"><?php echo $course->programme_title;?></a> for <?php echo $course->current_year - 1;?> entry.
                     
                 		<?php else: ?>
-                		<strong>This is a <?php echo $course->current_year;?> entry programme</strong>.<br>If you are a <strong>Clearing</strong>, <strong>Adjustment</strong> or <strong>part-time</strong> applicant wishing to start this September, please view the <a href="/courses/undergraduate/<?php echo $course->current_year - 1;?>/search/"><?php echo $course->current_year - 1;?> entry online prospectus.</a>
+                		<strong>This is a <?php echo $course->current_year;?> entry programme</strong>. If you are a <strong>Clearing</strong>, <strong>Adjustment</strong> or <strong>part-time</strong> applicant wishing to start this September, please view the <a href="/courses/undergraduate/<?php echo $course->current_year - 1;?>/search/"><?php echo $course->current_year - 1;?> entry online prospectus.</a>
                         <?php endif; ?>
                     <?php endif; ?>
                 	</div>
