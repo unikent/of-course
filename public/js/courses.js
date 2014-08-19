@@ -243,12 +243,16 @@ $(document).ready(function(){
 	$(".apply-link-courses").hide();
 	$("#apply-link-dummy").show();
 	$("#apply-link-ucas").hide();
-	
 	$(".full-time-text").hide();
 	$(".part-time-text").hide();
 
-	//$(".apply-form").css('visibility', 'visible');
-	//$(".apply-form").css('display', 'block');
+	// the radio button list for the same-award-multiple-delivery edge case
+	$('input[type=radio][name=delivery]').change(function(){
+		$(".apply-link-courses").hide();
+		var id = 'apply-link-' + $(this).val();
+		$("#apply-link-dummy").hide();
+		$("#" + id).show();
+	});
 
 	var award = $("#award").val();
 	var type = $("#type").val();

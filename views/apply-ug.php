@@ -55,19 +55,8 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 
 	        <p id="award" data-award="<?php echo strtolower(str_replace(array(' ', '(', ')'), '', $course->award[0]->{name})) ?>" class="hidden" aria-hidden="true"><?php echo $course->award[0]->{name}?></p>
 
-		    <div class="form-group year">
-		        <label for="year">Year of entry <em class="icon-asterisk required"><span class="collapse-text">(required)</span></em></label>
-		        <div class="controls">
-		            <select name="year" id="year" required="required">
-						<option value="<?php echo $course->year?>"><?php echo $course->year?></option>
-						<?php if ($course->current_year == $course->year): ?>
-						<option value="<?php echo $course->year-1?>"><?php echo $course->year-1?></option>
-						<?php else: ?>
-						<option value="<?php echo $course->year+1?>"><?php echo $course->year+1?></option>
-						<?php endif; ?>
-					</select>
-				</div>
-		    </div>
+	        <p id="year" data-year="<?php echo $course->year; ?>" class="hidden" aria-hidden="true"><?php echo $course->year; ?></p>
+	        
 		</fieldset>
 	</div>
 

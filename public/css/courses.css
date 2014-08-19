@@ -97,3 +97,7 @@
   width: 65px;
   display: inline-block;
 }
+.daedalus-courses input[type="radio"],
+.daedalus-courses input[type="checkbox"] {
+  margin: 10px;
+}
