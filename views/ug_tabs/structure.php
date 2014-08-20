@@ -2,7 +2,6 @@
 
 <?php echo (isset($course->module_intro) && !empty($course->module_intro)) ? $course->module_intro : $course->globals->modules_intro; ?>
 
-
 <?php if (! empty($course->foundation_year)): ?>
 <section class="info-section">
 	<h3>Foundation year</h3>
@@ -12,14 +11,12 @@
 	</section>
 </section>
 <?php endif; ?>
-<?php if (isset($course->modules->stages->{foundation})): ?>
+<?php if (isset($course->modules->stages->{"foundation"})): ?>
 	<?php if (empty($course->foundation_year)): ?>
 	<h3>Foundation year</h3>
 	<?php endif; ?>
-	<?php Flight::render('partials/stage', array('stage' => $course->modules->stages->{foundation}, 'stage_id' => '0')); ?>
+	<?php Flight::render('partials/stage', array('stage' => $course->modules->stages->{"foundation"}, 'stage_id' => '0')); ?>
 <?php endif; ?>
-
-
 
 <?php if (isset($course->modules->stages->{1})): ?>
 <section class="info-section">

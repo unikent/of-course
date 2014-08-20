@@ -35,11 +35,11 @@ $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year'
 		<div class="span7">
 			<div class="tab-content">
 				<section id="overview"><?php Flight::render('ug_tabs/overview', array('course'=>$course)); ?></section>
-				<?php if ( empty($course->modules->stages) ) : ?>
-				<section id="structure"><?php Flight::render('ug_tabs/structure_empty', array('course'=>$course)); ?></section>
-				<?php else: ?>
+				
+				
+				
 				<section id="structure"><?php Flight::render('ug_tabs/structure', array('course'=>$course)); ?></section>
-				<?php endif; ?>
+				
 				<section id="teaching"><?php Flight::render('ug_tabs/teaching', array('course'=>$course)); ?></section>
 				<section id="careers"><?php Flight::render('ug_tabs/careers', array('course'=>$course)); ?></section>	
 				<?php if ( (!defined('CLEARING') || (defined('CLEARING') && !CLEARING)) || (defined('CLEARING') && CLEARING && $course->current_year == $course->year ) ): ?><section id="entry"><?php Flight::render('ug_tabs/entry', array('course'=>$course)); ?></section><?php endif; ?>

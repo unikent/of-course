@@ -46,16 +46,16 @@ foreach(array("fulltime","parttime") as $mode){
 		<?php if($has_fulltime): ?>
 			<li>
 			<strong>Full-time</strong>
-			<a title="Enquire online - <?php echo $awards[$pos];?> Full time" href='<?php echo $enquire_link['fulltime'];?>' <?php echo $enquire_event['fulltime'];?> >Enquire online</a> |
-			<a title="Order prospectus for <?php echo $awards[$pos];?> Full time" href='<?php echo $prospectus_link['fulltime'];?>' <?php echo $prospectus_event['fulltime'];?>>order a prospectus</a>
+			<a title="Enquire online - <?php echo $course->award[0]->name;?> Full time" href='<?php echo $enquire_link['fulltime'];?>' <?php echo $enquire_event['fulltime'];?> >Enquire online</a> |
+			<a title="Order prospectus for <?php echo $course->award[0]->name;?> Full time" href='<?php echo $prospectus_link['fulltime'];?>' <?php echo $prospectus_event['fulltime'];?>>order a prospectus</a>
 			</li>
 		<?php endif; ?>
 
 		<?php if($has_parttime): ?>
 			<li>
 			<strong>Part-time</strong>
-			<a title="Enquire online - <?php echo $awards[$pos];?> Part time"  href='<?php echo $enquire_link['parttime'];?>' <?php echo $enquire_event['parttime'];?> >Enquire online</a> |
-			<a title="Order prospectus for <?php echo $awards[$pos];?> Full time" href='<?php echo $prospectus_link['parttime'];?>' <?php echo $prospectus_event['parttime'];?>>order a prospectus</a>
+			<a title="Enquire online - <?php echo $course->award[0]->name;?> Part time"  href='<?php echo $enquire_link['parttime'];?>' <?php echo $enquire_event['parttime'];?> >Enquire online</a> |
+			<a title="Order prospectus for <?php echo $course->award[0]->name;?> Full time" href='<?php echo $prospectus_link['parttime'];?>' <?php echo $prospectus_event['parttime'];?>>order a prospectus</a>
 			</li>
 		<?php endif; ?>
 		</ul>
