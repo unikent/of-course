@@ -715,7 +715,7 @@ class CoursesFrontEnd {
  			case 'postgraduate':
  				if ( sizeof($course->award) === 1 && ( trim(strtolower($course->mode_of_study)) == 'part-time only' || trim(strtolower($course->mode_of_study)) == 'full-time only' ) ) {
  					foreach ($course->deliveries as $delivery) {
-						$url = "https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=" . $delivery->mcr . "&amp;code2=" . $delivery->current_ipo;
+						$url = "https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&code1=" . $delivery->mcr . "&code2=" . $delivery->current_ipo;
 					}
  					header('Location: ' . $url);
  					exit;
