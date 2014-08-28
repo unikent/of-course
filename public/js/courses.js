@@ -261,13 +261,13 @@ $(document).ready(function(){
 		award = $("#award").data('award');
 		awardsettings(award);
 	}
-	if ($("#type").is('p')) {
-		type = $("#type").data('type');
-		typesettings(type);
-	}
 	if ($("#year").is('p')) {
 		year = $("#year").data('year');
 		yearsettings(year);
+	}
+	if ($("#type").is('p')) {
+		type = $("#type").data('type');
+		typesettings(type);
 	}
 	var linkid = 'apply-link-' + award + '-' + type + '-' + year;
 	if ($("#" + linkid).length > 0) {
