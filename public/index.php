@@ -81,6 +81,12 @@ Flight::route('/@level:postgraduate/study-abroad', array($main,'study_abroad_noy
 Flight::route('/@level:undergraduate|postgraduate/@year:[0-9]+/leaflets', array($main,'leaflets'));
 Flight::route('/@level:undergraduate|postgraduate/leaflets', array($main,'leaflets_noyear'));
 
+//apply page
+Flight::route('/@level:undergraduate|postgraduate/@year:[0-9]+/apply-online/@id:[0-9]+/@slug', array($main,'apply'));
+Flight::route('/@level:undergraduate|postgraduate/@year:[0-9]+/apply-online/@id:[0-9]+', array($main,'apply'));
+Flight::route('/@level:undergraduate|postgraduate/apply-online/@id:[0-9]+/@slug', array($main,'apply_noyear'));
+Flight::route('/@level:undergraduate|postgraduate/apply-online/@id:[0-9]+', array($main,'apply_noyear'));
+
 // Courses
 Flight::route('/@level:undergraduate|postgraduate/@year:[0-9]+/@id:[0-9]+/@slug', array($main, 'view'));
 Flight::route('/@level:undergraduate|postgraduate/@year:[0-9]+/@id:[0-9]+', array($main, 'view'));

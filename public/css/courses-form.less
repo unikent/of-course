@@ -151,20 +151,21 @@ a.btn{
 
 
 
-        .disabled{ 
-          background: #e2e2e2; 
-          border: 1px solid #e2e2e2;
-          border-radius: 0; 
-          color: #888;
-          text-decoration: none;
-          text-shadow: -1px -1px #2f2f2f;
+        
 
-          &:hover,
-          &:focus {
-            cursor: not-allowed;
-          }
-        }
+}
 
+.disabled { 
+  background: #e2e2e2 !important;
+  border: 1px solid #fff !important;
+  border-radius: 0 !important;
+  color: #888 !important;
+  text-decoration: none !important;
+
+  &:hover,
+  &:focus {
+    cursor: not-allowed;
+  }
 }
 
 .question-mark {
@@ -440,7 +441,9 @@ color:#B94A48;
 font-size:1em;
 }
 
-
+.icon-asterisk{
+  font-size: 12px;
+}
 
 
 .container {
@@ -532,7 +535,6 @@ a.scroll-to-top {
     color:#fff;
 }
 
-
 @media (min-width: 961px) {
 
 .indent {
@@ -544,9 +546,8 @@ a.scroll-to-top {
     left:1em;
     width:12em;
     color:#263566;
-  /*font-family:century schoolbook;*/
-  position:absolute;
-  top:.5em;
+    position:absolute;
+    top:.5em;
   }
 }
 
@@ -574,6 +575,8 @@ a.scroll-to-top {
   }
   legend {
     width:90%;
+    position:relative;
+    top:1.5em;
   }
 }
 

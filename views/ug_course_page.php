@@ -26,7 +26,6 @@ $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year'
 				<?php if ( (!defined('CLEARING') || (defined('CLEARING') && !CLEARING)) || (defined('CLEARING') && CLEARING && $course->current_year == $course->year ) ): ?><li><a href="#entry">Entry requirements</a></li><?php endif; ?>
 				<li><a href="#fees">Funding</a></li>
 				<li class='screenreader-only'><a href="#enquiries" >Enquiries</a></li>
-				<?php if ( (!defined('CLEARING') || (defined('CLEARING') && !CLEARING)) || (defined('CLEARING') && CLEARING && $course->current_year == $course->year ) ): ?><li class='screenreader-only'><a href="#apply">Apply</a></li><?php endif; ?>
 			</ul>
 		</div><!-- /span -->
 	</div><!-- /row -->
@@ -45,7 +44,6 @@ $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year'
 				<?php if ( (!defined('CLEARING') || (defined('CLEARING') && !CLEARING)) || (defined('CLEARING') && CLEARING && $course->current_year == $course->year ) ): ?><section id="entry"><?php Flight::render('ug_tabs/entry', array('course'=>$course)); ?></section><?php endif; ?>
 				<section id="fees"><?php Flight::render('ug_tabs/fees', array('course'=>$course)); ?></section>
 				<section id="enquiries"><?php Flight::render('ug_tabs/enquiries', array('course'=>$course)); ?></section>
-				<?php if ( (!defined('CLEARING') || (defined('CLEARING') && !CLEARING)) || (defined('CLEARING') && CLEARING && $course->current_year == $course->year ) ): ?><section id="apply"><?php Flight::render('ug_tabs/apply', array('course'=>$course)); ?></section><?php endif; ?>
 			</div>
 		</div><!-- /span -->
 		<div class="span5">
@@ -58,7 +56,7 @@ $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year'
 			</div>
 			<?php else: ?>
 			<div class="panel admission-links">
-				<a href="#!apply" class="apply-adm-link" role="tab" aria-controls="apply">Apply</a>, <a href="#!enquiries" class="enquire-adm-link" role="tab" aria-controls="enquiries">enquire</a> or <a href="#!enquiries" class="pros-adm-link" role="tab" aria-controls="enquiries">order a prospectus</a>
+				<a href="/courses/undergraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?>apply-online/<?php echo $course->instance_id ?>" class="apply-adm-link" role="tab" aria-controls="apply">Apply</a>, <a href="#!enquiries" class="enquire-adm-link" role="tab" aria-controls="enquiries">enquire</a> or <a href="#!enquiries" class="pros-adm-link" role="tab" aria-controls="enquiries">order a prospectus</a>
 			</div>
 			<?php endif; ?>
 

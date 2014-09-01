@@ -41,7 +41,8 @@ module.exports = function(grunt) {
 		less: {
 		  development: {
 		    files: {
-		      './public/css/courses.css': './public/css/courses.less'
+		      './public/css/courses.css': './public/css/courses.less',
+		      './public/css/courses-form.css': './public/css/courses-form.less'
 		    }
 		  },
 
@@ -51,7 +52,8 @@ module.exports = function(grunt) {
 		    },
 
 		    files: {
-		      './public/css/courses.css': './public/css/courses.less'
+		      './public/css/courses.css': './public/css/courses.less',
+		      './public/css/courses-form.css': './public/css/courses-form.less'
 		    }
 		  }
 		},

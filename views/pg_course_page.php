@@ -34,7 +34,6 @@
 				<?php endif;?>
 				<li><a href="#staff-research">Staff research</a></li>
 				<li class='screenreader-only'><a href="#enquiries">Enquiries</a></li>
-				<li class='screenreader-only'><a href="#apply">Apply</a></li>
 			</ul>
 		</div><!-- /span -->
 	</div><!-- /row -->
@@ -70,13 +69,12 @@
 				<section id="research-areas"><?php Flight::render('pg_tabs/research-areas', array('course'=>$course)); ?></section>
 				<section id="staff-research"><?php Flight::render('pg_tabs/staff-research', array('course'=>$course)); ?></section>
 				<section id="enquiries"><?php Flight::render('pg_tabs/enquiries', array('course'=>$course)); ?></section>
-				<section id="apply"><?php Flight::render('pg_tabs/apply', array('course'=>$course)); ?></section>
 			</div>
 		</div><!-- /span -->
 		<div class="span5">
 			<div class="side-panel">
 			<div class="panel admission-links">
-				<a href="#!apply" class="apply-adm-link" role="tab" aria-controls="apply">Apply</a>, <a href="#!enquiries" class="enquire-adm-link" role="tab" aria-controls="enquiries">enquire</a> or <a href="#!enquiries" class="pros-adm-link" role="tab" aria-controls="enquiries">order a prospectus</a>
+				<a href="/courses/postgraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?>apply-online/<?php echo $course->instance_id ?>" class="apply-adm-link" role="tab" aria-controls="apply">Apply</a>, <a href="#!enquiries" class="enquire-adm-link" role="tab" aria-controls="enquiries">enquire</a> or <a href="#!enquiries" class="pros-adm-link" role="tab" aria-controls="enquiries">order a prospectus</a>
 			</div>
 
 			<div class="key-facts-block">

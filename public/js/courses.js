@@ -236,7 +236,128 @@ $(document).ready(function(){
 		return true;
 
 	}
+
+	// new apply links
+	$(".apply-form").css('visibility', 'visible');
+	$(".apply-form").css('display', 'block');
+	$(".apply-link-courses").hide();
+	$("#apply-link-dummy").show();
+	$("#apply-link-ucas").hide();
+	$(".full-time-text").hide();
+	$(".part-time-text").hide();
+
+	// the radio button list for the same-award-multiple-delivery edge case
+	$('input[type=radio][name=delivery]').change(function(){
+		$(".apply-link-courses").hide();
+		var id = 'apply-link-' + $(this).val();
+		$("#apply-link-dummy").hide();
+		$("#" + id).show();
+	});
+
+	var award = $("#award").val();
+	var type = $("#type").val();
+	var year = $("#year").val();
+	if ($("#award").is('p')) {
+		award = $("#award").data('award');
+		awardsettings(award);
+	}
+	if ($("#year").is('p')) {
+		year = $("#year").data('year');
+		yearsettings(year);
+	}
+	if ($("#type").is('p')) {
+		type = $("#type").data('type');
+		typesettings(type);
+	}
+	var linkid = 'apply-link-' + award + '-' + type + '-' + year;
+	if ($("#" + linkid).length > 0) {
+		$("#apply-link-dummy").hide();
+		$("#" + linkid).show();
+	}
+	$("#award").change(function(){
+		award = $(this).val();
+		awardsettings(award);
+	});
+	$("#type").change(function(){
+		type = $(this).val();
+		typesettings(type);
+	});
+	$("#year").change(function(){
+		year = $(this).val();
+		yearsettings(year);
+	});
 	
+	$('#apply-link-dummy').tooltip();
+
+	function typesettings(type) {
+		if (type == 'full-time-ug') {
+			$("#apply-link-ucas").show();
+			$(".apply-link-courses").hide();
+			$("#apply-link-dummy").hide();
+			$(".full-time-text").show();
+			$(".part-time-text").hide();
+			$(".year").hide();
+		}
+		else if (type == 'full-time') {
+			linkid = 'apply-link-' + award + '-' + type + '-' + year;
+			$(".apply-link-courses").hide();
+			if ($("#" + linkid).length > 0) {
+				$("#apply-link-dummy").hide();
+				$("#" + linkid).show();
+			}
+			else {
+				$("#apply-link-dummy").show();
+			}
+		}
+		else if (type == 'part-time') {
+			linkid = 'apply-link-' + award + '-' + type + '-' + year;
+			$(".apply-link-courses").hide();
+
+			if ($("#" + linkid).length > 0) {
+				$("#apply-link-dummy").hide();
+				$("#" + linkid).show();
+			}
+			else {
+				$("#apply-link-dummy").show();
+			}
+			$("#apply-link-ucas").hide();
+			$(".full-time-text").hide();
+			$(".part-time-text").show();
+			$(".year").show();
+		}
+		else {
+			$(".apply-link-courses").hide();
+			$("#apply-link-ucas").hide();
+			$(".full-time-text").hide();
+			$(".part-time-text").hide();
+			$("#apply-link-dummy").show();
+			$(".year").show();
+		}
+	}
+
+	function yearsettings(year) {
+		linkid = 'apply-link-' + award + '-' + type + '-' + year;
+		$(".apply-link-courses").hide();
+		if ($("#" + linkid).length > 0) {
+			$("#apply-link-dummy").hide();
+			$("#" + linkid).show();
+		}
+		else {
+			$("#apply-link-dummy").show();
+		}
+	}
+
+	function awardsettings(award) {
+		linkid = 'apply-link-' + award + '-' + type + '-' + year;
+		$(".apply-link-courses").hide();
+		if ($("#" + linkid).length > 0) {
+			$("#apply-link-dummy").hide();
+			$("#" + linkid).show();
+		}
+		else {
+			$("#apply-link-dummy").show();
+		}
+	}
 
 }); 
 
