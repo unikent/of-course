@@ -18,7 +18,11 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 		    <div class="form-group">
 		    	<div class="controls">
 	    			<?php foreach ($course->deliveries as $delivery): ?>
-					<p><input id="delivery<?php echo $delivery->id ?>" type="radio" name="delivery" value="delivery<?php echo $delivery->id ?>"><?php echo str_ireplace(array('part-time', 'full-time'), array('<strong>part-time</strong>', '<strong>full-time</strong>'), $delivery->description)?></p>
+						<input id="delivery<?php echo $delivery->id ?>" type="radio" class="radioLeft" name="delivery" value="delivery<?php echo $delivery->id ?>">
+						<div class="textBlock">
+							<?php echo str_ireplace(array('part-time', 'full-time'), array('<strong>part-time</strong>', '<strong>full-time</strong>'), $delivery->description)?>
+						</div>
+						<div style="clear:both;"/>
 					<?php endforeach; ?>
 				</div>
 			</div>
