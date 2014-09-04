@@ -92,10 +92,23 @@
         <tbody>
 
         <?php foreach($programmes as $p):?>
+          <?php 
+            $statuses = '(';
+            if($p->subject_to_approval == 'true'){
+              $statuses .= "subject to approval";
+            }
+            if($p->withdrawn == 'true'){
+              $statuses .= $statuses == '(' ? "withdrawn" : ", withdrawn";
+            }
+            if ($p->suspended == 'true') {
+              $statuses .= $statuses == '(' ? "suspended" : ", suspended";
+            }
+            $statuses = $statuses == '(' ? '' : $statuses . ')';
+          ?>
 
           <tr>
             <td>
-                <div class="advanced-search-name-award"><a href='<?php echo Flight::url("{$level}/{$year_for_url}{$p->id}/{$p->slug}"); ?>'><?php echo $p->name;?> <?php if($p->subject_to_approval == 'true'){ echo "(subject to approval)";} ?></a><br /><span class="advanced-search-award"><?php echo $p->award;?></span></div>
+                <div class="advanced-search-name-award"><a href='<?php echo Flight::url("{$level}/{$year_for_url}{$p->id}/{$p->slug}"); ?>'><?php echo $p->name;?> <?php echo $statuses; ?></a><br /><span class="advanced-search-award"><?php echo $p->award;?></span></div>
             </td>
             <td>
                 <?php echo ucwords($p->programme_type);?>
