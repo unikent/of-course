@@ -10,9 +10,8 @@ $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year'
 	</h1>
 	
 	<?php if($course->programme_suspended == 'true' || $course->programme_withdrawn == 'true'): ?>
-		<?php echo $course->holding_message; ?>
-	<?php else: ?>
-
+	
+	<?php echo $course->holding_message; ?>
 
 	<div class="daedalus-tabs">
 	

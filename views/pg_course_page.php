@@ -15,10 +15,9 @@
 	</h1>
 	
 	<?php if($course->programme_suspended == 'true' || $course->programme_withdrawn == 'true'): ?>
-		<?php echo $course->holding_message; ?>
-	<?php else: ?>
-
-
+		
+	<?php echo $course->holding_message; ?>
+	
 	<div class="daedalus-tabs">
 	<div class="row-fluid">
 		<div class="span12">
