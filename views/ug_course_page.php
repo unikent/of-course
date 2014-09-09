@@ -6,13 +6,13 @@ $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year'
 <article class="container">
 	<h1>
 		<?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?>
-		<?php echo $course->programmme_status_text; ?>
+		<?php if(isset($course->programmme_status_text)) echo $course->programmme_status_text; ?>
 	</h1>
 	
 	<?php if($course->programme_suspended == 'true' || $course->programme_withdrawn == 'true'): ?>
+		<?php echo $course->holding_message; ?>		
+	<?php endif;?>
 	
-	<?php echo $course->holding_message; ?>
-
 	<div class="daedalus-tabs">
 	
 	<div class="row-fluid">
@@ -242,8 +242,7 @@ $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year'
 		<?php echo $course->globals->general_disclaimer; ?>
 	</footer>
 	<?php endif;?>
-				
-	<?php endif;?>
+
 </article>
 <kentScripts>
 <script>
