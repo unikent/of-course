@@ -3,12 +3,11 @@ $has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== fal
 $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
 ?>
 
-<h1>Your application <a href="/courses/undergraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?><?php echo $course->instance_id ?>/<?php echo $course->slug ?>"><?php echo $course->programme_title ?></a></h1>
+<h1>Your application: <a href="/courses/undergraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?><?php echo $course->instance_id ?>/<?php echo $course->slug ?>"><?php echo $course->programme_title ?> <?php echo $course->award[0]->name; ?> <?php echo $course->programmme_status_text; ?></a></h1>
 
 <div class="apply-form hidden">
-	<h2>Select your course options.</h2>
 	
-	<p>To begin your application process, you'll need to select your course options below.</p>
+	<p>To begin your application process, you'll need to select your course options below:</p>
 
 	<p><em class="icon-asterisk required"></em> Required fields.</p>
 
