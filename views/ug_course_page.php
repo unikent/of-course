@@ -12,9 +12,10 @@ $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year'
 	<?php if($course->programme_suspended == 'true' || $course->programme_withdrawn == 'true'): ?>
 		<?php echo $course->holding_message; ?>		
 	<?php endif;?>
-	
+
+
+
 	<div class="daedalus-tabs">
-	
 	<div class="row-fluid">
 		<div class="span12">
 			<ul class="nav nav-tabs">
@@ -22,7 +23,7 @@ $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year'
 				<li><a href="#structure">Course structure</a></li>
 				<li><a href="#teaching">Teaching &amp; Assessment</a></li>
 				<li><a href="#careers">Careers</a></li>
-				<?php if ( (!defined('CLEARING') || (defined('CLEARING') && !CLEARING)) || (defined('CLEARING') && CLEARING && $course->current_year == $course->year ) ): ?><li><a href="#entry">Entry requirements</a></li><?php endif; ?>
+				<?php if ( (isset($preview) && $preview == true) || (!defined('CLEARING') || (defined('CLEARING') && !CLEARING)) || (defined('CLEARING') && CLEARING && $course->current_year == $course->year ) ): ?><li><a href="#entry">Entry requirements</a></li><?php endif; ?>
 				<li><a href="#fees">Funding</a></li>
 				<li class='screenreader-only'><a href="#enquiries" >Enquiries</a></li>
 			</ul>
@@ -40,7 +41,7 @@ $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year'
 				
 				<section id="teaching"><?php Flight::render('ug_tabs/teaching', array('course'=>$course)); ?></section>
 				<section id="careers"><?php Flight::render('ug_tabs/careers', array('course'=>$course)); ?></section>	
-				<?php if ( (!defined('CLEARING') || (defined('CLEARING') && !CLEARING)) || (defined('CLEARING') && CLEARING && $course->current_year == $course->year ) ): ?><section id="entry"><?php Flight::render('ug_tabs/entry', array('course'=>$course)); ?></section><?php endif; ?>
+				<?php if ( (isset($preview) && $preview == true) || (!defined('CLEARING') || (defined('CLEARING') && !CLEARING)) || (defined('CLEARING') && CLEARING && $course->current_year == $course->year ) ): ?><section id="entry"><?php Flight::render('ug_tabs/entry', array('course'=>$course)); ?></section><?php endif; ?>
 				<section id="fees"><?php Flight::render('ug_tabs/fees', array('course'=>$course)); ?></section>
 				<section id="enquiries"><?php Flight::render('ug_tabs/enquiries', array('course'=>$course)); ?></section>
 			</div>
