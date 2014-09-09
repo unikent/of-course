@@ -14,10 +14,10 @@
 		<?php echo $course->programmme_status_text;?>
 	</h1>
 	
-	<?php if($course->programme_suspended == 'true' || $course->programme_withdrawn == 'true'): ?>
-		
-	<?php echo $course->holding_message; ?>
-	
+	<?php if($course->programme_suspended == 'true' || $course->programme_withdrawn == 'true'): ?>	
+		<?php echo $course->holding_message; ?>				
+	<?php endif;?>
+
 	<div class="daedalus-tabs">
 	<div class="row-fluid">
 		<div class="span12">
@@ -297,8 +297,7 @@
 		<?php echo $course->globals->general_disclaimer; ?>
 	</footer>
 	<?php endif;?>
-				
-	<?php endif;?>
+
 </article>
 <kentScripts>
 <script>
