@@ -11,14 +11,13 @@
 <article class="container pg">
 	<h1>
 		<?php echo $course->programme_title; ?> (<?php echo $course->award_list; ?>)
-		<?php if($course->subject_to_approval == 'true'){ echo " (subject to approval)";} ?>
+		<?php echo $course->programmme_status_text;?>
 	</h1>
 	
 	<?php if($course->programme_suspended == 'true' || $course->programme_withdrawn == 'true'): ?>
-		<?php echo $course->holding_message; ?>
-	<?php else: ?>
-
-
+		
+	<?php echo $course->holding_message; ?>
+	
 	<div class="daedalus-tabs">
 	<div class="row-fluid">
 		<div class="span12">
@@ -257,7 +256,7 @@
 		                <div class="cell">
 		                    <div class="mask">
 		                        <a href="<?php echo Flight::url("{$level}/{$related_course->id}/{$related_course->slug}"); ?>">
-		                        	<span><?php echo $related_course->name ?><?php if($related_course->subject_to_approval == 'true'){ echo " (subject to approval)";} ?></span>
+		                        	<span><?php echo $related_course->name ?> <?php echo !empty($related_course->programmme_status_text) ? $related_course->programmme_status_text : '';  ?></span>
 		                        	<span class="related-award"><?php echo $related_course->award;?></span>
 		                        </a>
 		                    </div>
@@ -280,7 +279,7 @@
 		<?php foreach($course->related_courses as $related_course): ?>
                     <li>
                     <a href="<?php echo Flight::url("{$level}/{$related_course->id}/{$related_course->slug}"); ?>">
-                    	<span><?php echo $related_course->name ?><?php if($related_course->subject_to_approval == 'true'){ echo " (subject to approval)";} ?></span>
+                    	<span><?php echo $related_course->name ?> <?php echo !empty($related_course->programmme_status_text) ? $related_course->programmme_status_text : '';  ?></span>
                     	<span class="related-award"><?php echo $related_course->award;?></span>
                     </a>
                     </li>
