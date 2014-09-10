@@ -9,8 +9,6 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 	
 	<p>To begin your application process, you'll need to select your course options below:</p>
 
-	<p><em class="icon-asterisk required"></em> Required fields.</p>
-
 	<div>
 		<fieldset class="highlight-fieldset indent">
 		    <legend>Course options</legend>
@@ -20,7 +18,7 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 		    <p id="type" data-type="part-time" class="hidden" aria-hidden="true">Part-time</p>
 		    <?php else: ?>
 		    <div class="form-group type">
-		        <label for="type">Full-time or part-time <em class="icon-asterisk required"><span class="collapse-text">(required)</span></em></label>
+		        <label for="type">Full-time or part-time</label>
 		        <div class="controls">
 		            <select name="type" id="type" required="required">
 						<?php if($has_fulltime && $has_parttime): ?>

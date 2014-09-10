@@ -46,8 +46,6 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 
 	<?php else: ?>
 
-	<p><em class="icon-asterisk required"></em> All fields below are required.</p>
-
 	<div>
 		<fieldset class="highlight-fieldset indent">
 		    <legend>Course options</legend>
@@ -57,7 +55,7 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 		    <p id="type" data-type="part-time" class="hidden" aria-hidden="true">Part-time</p>
 		    <?php else: ?>
 		    <div class="form-group">
-		        <label for="type">Full-time or part-time <em class="icon-asterisk required"><span class="collapse-text">(required)</span></em></label>
+		        <label for="type">Full-time or part-time</label>
 		        <div class="controls">
 		            <select name="type" id="type" required="required">
 						<?php if($has_fulltime && $has_parttime): ?>
@@ -78,7 +76,7 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 	        <p id="award" data-award="<?php echo strtolower(str_replace(' ', '', $course->award[0]->{name})) ?>" class="hidden" aria-hidden="true"><?php echo $course->award[0]->{name}?></p>
 	        <?php else: ?>
 		    <div class="form-group">
-		        <label for="award">Award <em class="icon-asterisk required"><span class="collapse-text">(required)</span></em></label>
+		        <label for="award">Award</label>
 		        <div class="controls">
 		            <select name="award" id="award" required="required">
 		            	
