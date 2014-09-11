@@ -6,16 +6,16 @@ $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year'
 <article class="container">
 	<h1>
 		<?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?>
-		<?php if($course->subject_to_approval == 'true'){ echo " (subject to approval)";} ?>
+		<?php if(isset($course->programmme_status_text)) echo $course->programmme_status_text; ?>
 	</h1>
 	
 	<?php if($course->programme_suspended == 'true' || $course->programme_withdrawn == 'true'): ?>
-		<?php echo $course->holding_message; ?>
-	<?php else: ?>
+		<?php echo $course->holding_message; ?>		
+	<?php endif;?>
+
 
 
 	<div class="daedalus-tabs">
-	
 	<div class="row-fluid">
 		<div class="span12">
 			<ul class="nav nav-tabs">
@@ -23,7 +23,7 @@ $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year'
 				<li><a href="#structure">Course structure</a></li>
 				<li><a href="#teaching">Teaching &amp; Assessment</a></li>
 				<li><a href="#careers">Careers</a></li>
-				<?php if ( (!defined('CLEARING') || (defined('CLEARING') && !CLEARING)) || (defined('CLEARING') && CLEARING && $course->current_year == $course->year ) ): ?><li><a href="#entry">Entry requirements</a></li><?php endif; ?>
+				<?php if ( (isset($preview) && $preview == true) || (!defined('CLEARING') || (defined('CLEARING') && !CLEARING)) || (defined('CLEARING') && CLEARING && $course->current_year == $course->year ) ): ?><li><a href="#entry">Entry requirements</a></li><?php endif; ?>
 				<li><a href="#fees">Funding</a></li>
 				<li class='screenreader-only'><a href="#enquiries" >Enquiries</a></li>
 			</ul>
@@ -41,7 +41,7 @@ $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year'
 				
 				<section id="teaching"><?php Flight::render('ug_tabs/teaching', array('course'=>$course)); ?></section>
 				<section id="careers"><?php Flight::render('ug_tabs/careers', array('course'=>$course)); ?></section>	
-				<?php if ( (!defined('CLEARING') || (defined('CLEARING') && !CLEARING)) || (defined('CLEARING') && CLEARING && $course->current_year == $course->year ) ): ?><section id="entry"><?php Flight::render('ug_tabs/entry', array('course'=>$course)); ?></section><?php endif; ?>
+				<?php if ( (isset($preview) && $preview == true) || (!defined('CLEARING') || (defined('CLEARING') && !CLEARING)) || (defined('CLEARING') && CLEARING && $course->current_year == $course->year ) ): ?><section id="entry"><?php Flight::render('ug_tabs/entry', array('course'=>$course)); ?></section><?php endif; ?>
 				<section id="fees"><?php Flight::render('ug_tabs/fees', array('course'=>$course)); ?></section>
 				<section id="enquiries"><?php Flight::render('ug_tabs/enquiries', array('course'=>$course)); ?></section>
 			</div>
@@ -77,15 +77,15 @@ $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year'
 					  		<?php if($has_fulltime):?>
 							<tr>
 							  <td><strong>Full-time</strong></td>
-						      <td><?php echo empty($course->fees->home->{'full-time'}) ? 'TBC' : '&pound;' . $course->fees->home->{'full-time'}; ?></td>
-						      <td><?php echo empty($course->fees->int->{'full-time'}) ? 'TBC' : '&pound;' . $course->fees->int->{'full-time'}; ?></td>
+						      <td><?php echo empty($course->fees->home->{'full-time'}) ? ((empty($course->fees->home->{'euro-full-time'})) ? 'TBC' : '&euro;' . $course->fees->home->{'euro-full-time'}) : '&pound;' . $course->fees->home->{'full-time'}; ?></td>
+						      <td><?php echo empty($course->fees->int->{'full-time'}) ? ((empty($course->fees->int->{'euro-full-time'})) ? 'TBC' : '&euro;' . $course->fees->int->{'euro-full-time'}) : '&pound;' . $course->fees->int->{'full-time'}; ?></td>
 						    </tr>
 							<?php endif;?>
 							<?php if($has_parttime):?>
 						    <tr>
 						      <td><strong>Part-time</strong></td>
-						      <td><?php echo empty($course->fees->home->{'part-time'}) ? 'TBC' : '&pound;' . $course->fees->home->{'part-time'}; ?></td>
-						      <td><?php echo empty($course->fees->int->{'part-time'}) ? 'TBC' : '&pound;' . $course->fees->int->{'part-time'}; ?></td>
+						      <td><?php echo empty($course->fees->home->{'part-time'}) ? ((empty($course->fees->home->{'euro-part-time'})) ? 'TBC' : '&euro;' . $course->fees->home->{'euro-part-time'}) : '&pound;' . $course->fees->home->{'part-time'}; ?></td>
+						      <td><?php echo empty($course->fees->int->{'part-time'}) ? ((empty($course->fees->int->{'euro-part-time'})) ? 'TBC' : '&euro;' . $course->fees->int->{'euro-part-time'}) : '&pound;' . $course->fees->int->{'part-time'}; ?></td>
 						    </tr>
 							<?php endif;?>
 					  </tbody>
@@ -204,7 +204,7 @@ $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year'
 		                <div class="cell">
 		                    <div class="mask">
 		                        <a href="<?php echo Flight::url("{$level}/{$related_course->id}/{$related_course->slug}"); ?>">
-		                        	<span><?php echo $related_course->name ?><?php if($related_course->subject_to_approval == 'true'){ echo " (subject to approval)";} ?></span>
+		                        	<span><?php echo $related_course->name ?> <?php echo !empty($related_course->programmme_status_text) ? $related_course->programmme_status_text : '';  ?></span>
 		                        	<span class="related-award"><?php echo $related_course->award;?></span>
 		                        </a>
 		                    </div>
@@ -227,7 +227,7 @@ $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year'
 		<?php foreach($course->related_courses as $related_course): ?>
                     <li>
                     <a href="<?php echo Flight::url("{$level}/{$related_course->id}/{$related_course->slug}"); ?>">
-                    	<span><?php echo $related_course->name ?><?php if($related_course->subject_to_approval == 'true'){ echo " (subject to approval)";} ?></span>
+                    	<span><?php echo $related_course->name ?> <?php echo !empty($related_course->programmme_status_text) ? $related_course->programmme_status_text : '';  ?></span>
                     	<span class="related-award"><?php echo $related_course->award;?></span>
                     </a>
                     </li>
@@ -243,8 +243,7 @@ $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year'
 		<?php echo $course->globals->general_disclaimer; ?>
 	</footer>
 	<?php endif;?>
-				
-	<?php endif;?>
+
 </article>
 <kentScripts>
 <script>

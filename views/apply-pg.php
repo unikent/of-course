@@ -3,12 +3,35 @@ $has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== fal
 $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
 ?>
 
-<h1>Your application <a href="/courses/postgraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?><?php echo $course->instance_id ?>/<?php echo $course->slug ?>"><?php echo $course->programme_title ?></a></h1>
+<?php
+	// pull out awards and combine into a comma separated list
+	$course->award_list = '';
+	foreach ($course->award as $award) if (!empty($award->name)) $course->award_list .= $award->name . ', ';
+	$course->award_list = substr($course->award_list, 0, -2); // cuts off the final comma+space
+
+	$has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
+	$has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
+?>
+
+<h1>Your application: <a href="/courses/postgraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?><?php echo $course->instance_id ?>/<?php echo $course->slug ?>"><?php echo $course->programme_title ?>  (<?php echo $course->award_list; ?>) <?php echo $course->programmme_status_text;?></a></h1>
+
+
+<?php 
+
+// How to apply 53 is "How to apply (atypical courses)".
+// When this field is populated, show only its contents, not the standard apply text.
+
+if(isset($course->how_to_apply) && trim($course->how_to_apply) != '' && !empty($course->how_to_apply)): ?>
+
+	<?php echo $course->how_to_apply; ?>
+
+<?php else: ?>
 
 <div class="apply-form hidden">
-	<h2>Select your course options.</h2>
 
-	<p>To begin your application process, you'll need to select your course options below.</p>
+	<?php if(isset($course->how_to_apply_supplementary)) echo $course->how_to_apply_supplementary; ?>
+
+	<p>To begin your application process, you'll need to select your course options below:</p>
 
 	<?php /* one award but lots of deliveries - edge case */ if ( sizeof($course->award) === 1 && sizeof($course->deliveries) > 2 ): ?>
 
@@ -18,7 +41,11 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 		    <div class="form-group">
 		    	<div class="controls">
 	    			<?php foreach ($course->deliveries as $delivery): ?>
-					<p><input id="delivery<?php echo $delivery->id ?>" type="radio" name="delivery" value="delivery<?php echo $delivery->id ?>"><?php echo str_ireplace(array('part-time', 'full-time'), array('<strong>part-time</strong>', '<strong>full-time</strong>'), $delivery->description)?></p>
+						<input id="delivery<?php echo $delivery->id ?>" type="radio" class="radioLeft" name="delivery" value="delivery<?php echo $delivery->id ?>">
+						<div class="textBlock">
+							<?php echo str_ireplace(array('part-time', 'full-time'), array('<strong>part-time</strong>', '<strong>full-time</strong>'), $delivery->description)?>
+						</div>
+						<div style="clear:both;"/>
 					<?php endforeach; ?>
 				</div>
 			</div>
@@ -33,8 +60,6 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 
 	<?php else: ?>
 
-	<p><em class="icon-asterisk required"></em> All fields below are required.</p>
-
 	<div>
 		<fieldset class="highlight-fieldset indent">
 		    <legend>Course options</legend>
@@ -44,7 +69,7 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 		    <p id="type" data-type="part-time" class="hidden" aria-hidden="true">Part-time</p>
 		    <?php else: ?>
 		    <div class="form-group">
-		        <label for="type">Full-time or part-time <em class="icon-asterisk required"><span class="collapse-text">(required)</span></em></label>
+		        <label for="type">Full-time or part-time</label>
 		        <div class="controls">
 		            <select name="type" id="type" required="required">
 						<?php if($has_fulltime && $has_parttime): ?>
@@ -65,7 +90,7 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 	        <p id="award" data-award="<?php echo strtolower(str_replace(' ', '', $course->award[0]->{name})) ?>" class="hidden" aria-hidden="true"><?php echo $course->award[0]->{name}?></p>
 	        <?php else: ?>
 		    <div class="form-group">
-		        <label for="award">Award <em class="icon-asterisk required"><span class="collapse-text">(required)</span></em></label>
+		        <label for="award">Award</label>
 		        <div class="controls">
 		            <select name="award" id="award" required="required">
 		            	
@@ -113,3 +138,5 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 	<?php endforeach; ?>
 	</ul>
 </noscript>
+
+<?php endif; ?>
