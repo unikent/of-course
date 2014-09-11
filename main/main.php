@@ -713,9 +713,18 @@ class CoursesFrontEnd {
 
  		switch($level){
  			case 'postgraduate':
+
+				// get the deliveris with valid IPOs
+				$validDeliveries = array();
+				foreach ($course->deliveries as $delivery) {
+					if(!empty($delivery->current_ipo)){
+						$validDeliveries[] = $delivery;
+					}
+				}
  				
-				if (count($course->deliveries) == 1) {
-					$delivery = $course->deliveries[0];
+ 				// go directly to evision if there is only one valid delivery for this course
+				if (count($validDeliveries) == 1) {
+					$delivery = $validDeliveries[0];
 					$url = (!empty($delivery->current_ipo)) ? "https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&code1=" . $delivery->mcr . "&code2=" . $delivery->current_ipo : '';
 
 					if (!empty($url)) {
@@ -723,14 +732,7 @@ class CoursesFrontEnd {
 						exit;
 					}
 				}
-				$validDeliveries = array();
-				foreach ($course->deliveries as $delivery) {
-					if(!empty($delivery->current_ipo)){
-						$validDeliveries[] = $delivery;
-					}
-				}
  					
- 				
 				if($year && ($year !== static::$current_year)){
 					$meta['title'] = "{$course->programme_title} | Postgraduate Programmes {$year} Application | The University of Kent";
 				}
