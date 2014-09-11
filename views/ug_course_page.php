@@ -77,15 +77,15 @@ $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year'
 					  		<?php if($has_fulltime):?>
 							<tr>
 							  <td><strong>Full-time</strong></td>
-						      <td><?php echo empty($course->fees->home->{'full-time'}) ? ((empty($course->fees->home{'euro-full-time'})) ? 'TBC' : '&euro;' . $course->fees->home{'euro-full-time'}) : '&pound;' . $course->fees->home->{'full-time'}; ?></td>
-						      <td><?php echo empty($course->fees->int->{'full-time'}) ? ((empty($course->fees->int{'euro-full-time'})) ? 'TBC' : '&euro;' . $course->fees->int{'euro-full-time'}) : '&pound;' . $course->fees->int->{'full-time'}; ?></td>
+						      <td><?php echo empty($course->fees->home->{'full-time'}) ? ((empty($course->fees->home->{'euro-full-time'})) ? 'TBC' : '&euro;' . $course->fees->home->{'euro-full-time'}) : '&pound;' . $course->fees->home->{'full-time'}; ?></td>
+						      <td><?php echo empty($course->fees->int->{'full-time'}) ? ((empty($course->fees->int->{'euro-full-time'})) ? 'TBC' : '&euro;' . $course->fees->int->{'euro-full-time'}) : '&pound;' . $course->fees->int->{'full-time'}; ?></td>
 						    </tr>
 							<?php endif;?>
 							<?php if($has_parttime):?>
 						    <tr>
 						      <td><strong>Part-time</strong></td>
-						      <td><?php echo empty($course->fees->home->{'part-time'}) ? ((empty($course->fees->home{'euro-part-time'})) ? 'TBC' : '&euro;' . $course->fees->home{'euro-part-time'}) : '&pound;' . $course->fees->home->{'part-time'}; ?></td>
-						      <td><?php echo empty($course->fees->int->{'part-time'}) ? ((empty($course->fees->int{'euro-part-time'})) ? 'TBC' : '&euro;' . $course->fees->int{'euro-part-time'}) : '&pound;' . $course->fees->int->{'part-time'}; ?></td>
+						      <td><?php echo empty($course->fees->home->{'part-time'}) ? ((empty($course->fees->home->{'euro-part-time'})) ? 'TBC' : '&euro;' . $course->fees->home->{'euro-part-time'}) : '&pound;' . $course->fees->home->{'part-time'}; ?></td>
+						      <td><?php echo empty($course->fees->int->{'part-time'}) ? ((empty($course->fees->int->{'euro-part-time'})) ? 'TBC' : '&euro;' . $course->fees->int->{'euro-part-time'}) : '&pound;' . $course->fees->int->{'part-time'}; ?></td>
 						    </tr>
 							<?php endif;?>
 					  </tbody>
