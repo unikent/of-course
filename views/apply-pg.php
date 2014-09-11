@@ -25,6 +25,10 @@ if(isset($course->how_to_apply) && trim($course->how_to_apply) != '' && !empty($
 
 	<?php echo $course->how_to_apply; ?>
 
+<?php elseif (count($deliveries) === 0) : ?>
+
+	<p>We will be taking applications for this programme soon, please check back shortly.</p>
+
 <?php else: ?>
 
 <div class="apply-form hidden">
@@ -33,14 +37,14 @@ if(isset($course->how_to_apply) && trim($course->how_to_apply) != '' && !empty($
 
 	<p>To begin your application process, you'll need to select your course options below:</p>
 
-	<?php /* one award but lots of deliveries - edge case */ if ( sizeof($course->award) === 1 && sizeof($course->deliveries) > 2 ): ?>
+	<?php /* one award but lots of deliveries - edge case */ if ( sizeof($course->award) === 1 && sizeof($deliveries) > 2 ): ?>
 
 	<div>
 		<fieldset class="highlight-fieldset indent">
 		    <legend>Course options</legend>
 		    <div class="form-group">
 		    	<div class="controls">
-	    			<?php foreach ($course->deliveries as $delivery): ?>
+	    			<?php foreach ($deliveries as $delivery): ?>
 						<input id="delivery<?php echo $delivery->id ?>" type="radio" class="radioLeft" name="delivery" value="delivery<?php echo $delivery->id ?>">
 						<div class="textBlock">
 							<?php echo str_ireplace(array('part-time', 'full-time'), array('<strong>part-time</strong>', '<strong>full-time</strong>'), $delivery->description)?>
@@ -52,7 +56,7 @@ if(isset($course->how_to_apply) && trim($course->how_to_apply) != '' && !empty($
 		</fieldset>
 	</div>
 
-	<?php foreach ($course->deliveries as $delivery): ?>
+	<?php foreach ($deliveries as $delivery): ?>
 	<p class="btn-indent daedalus-tab-action daedaus-js-display">
 		<a type="button" id="apply-link-delivery<?php echo $delivery->id ?>" class="btn btn-large btn-primary next-btn apply-link-courses" tabindex="0" role="button" title="Apply for <?php echo $delivery->description ?>" href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=<?php echo $delivery->current_ipo ?>" onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $delivery->programme_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>]');">Next <i class="icon-chevron-right icon-white"></i></a>
 	</p>
@@ -112,7 +116,7 @@ if(isset($course->how_to_apply) && trim($course->how_to_apply) != '' && !empty($
 
 	
 
-	<?php foreach ($course->deliveries as $delivery): ?>
+	<?php foreach ($deliveries as $delivery): ?>
 
 	<p class="btn-indent daedalus-tab-action daedaus-js-display">
 		<a type="button" id="apply-link-<?php echo strtolower(str_replace(' ', '', $delivery->award_name)) ?>-<?php echo $delivery->attendance_pattern ?>-<?php echo $course->year ?>" class="btn btn-large btn-primary next-btn apply-link-courses" tabindex="0" role="button" title="Apply for <?php echo $delivery->description ?>" href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=<?php echo $delivery->current_ipo ?>" onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $delivery->programme_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>]');">Next <i class="icon-chevron-right icon-white"></i></a>
@@ -130,10 +134,10 @@ if(isset($course->how_to_apply) && trim($course->how_to_apply) != '' && !empty($
 
 <noscript>
 	<ul>
-	<?php foreach ($course->deliveries as $delivery): ?>
-		<li><p><a title="Apply for <?php echo $delivery->description ?>" href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=<?php echo $delivery->current_ipo ?>" onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $delivery->programme_id ?> in <?php echo $course->year ?>] <?php echo description ?> [<?php echo $delivery->mcr ?>]');">Apply for <?php echo $course->year ?> entry to <?php echo $delivery->description ?></a></p></li>
+	<?php foreach ($deliveries as $delivery): ?>
+		<li><p><a title="Apply for <?php echo $delivery->description ?>" href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=<?php echo $delivery->current_ipo ?>" onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $delivery->programme_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>]');">Apply for <?php echo $course->year ?> entry to <?php echo $delivery->description ?></a></p></li>
 
-		<li><p><a title="Apply for <?php echo $delivery->description ?>" href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=<?php echo $delivery->previous_ipo ?>" onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $delivery->programme_id ?> in <?php echo $course->year ?>] <?php echo description ?> [<?php echo $delivery->mcr ?>]');">Apply for <?php echo $course->year-1 ?> entry to <?php echo $delivery->description ?></a></p></li>
+		<li><p><a title="Apply for <?php echo $delivery->description ?>" href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=<?php echo $delivery->previous_ipo ?>" onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $delivery->programme_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>]');">Apply for <?php echo $course->year-1 ?> entry to <?php echo $delivery->description ?></a></p></li>
 
 	<?php endforeach; ?>
 	</ul>

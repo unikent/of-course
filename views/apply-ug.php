@@ -1,12 +1,22 @@
 <?php
 $has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
 $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
+
+if (empty($course->current_ipo_pt)) {
+	$has_parttime = false;
+}
 ?>
 
 <h1>Your application: <a href="/courses/undergraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?><?php echo $course->instance_id ?>/<?php echo $course->slug ?>"><?php echo $course->programme_title ?> <?php echo $course->award[0]->name; ?> <?php echo $course->programmme_status_text; ?></a></h1>
 
 <?php if ( $course->how_to_apply_atypical_courses != '' ): ?>
+	
 	<?php echo $course->how_to_apply_atypical_courses; ?>
+
+<?php elseif (!$has_parttime && !$has_fulltime): ?>
+
+	<p>We will be taking applications for this programme soon, please check back shortly.</p>
+
 <?php else: ?>
 
 <div class="apply-form hidden">
