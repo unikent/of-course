@@ -713,24 +713,35 @@ class CoursesFrontEnd {
 
  		switch($level){
  			case 'postgraduate':
- 				if ( sizeof($course->award) === 1 && ( trim(strtolower($course->mode_of_study)) == 'part-time only' || trim(strtolower($course->mode_of_study)) == 'full-time only' ) ) {
- 					foreach ($course->deliveries as $delivery) {
-						$url = "https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&code1=" . $delivery->mcr . "&code2=" . $delivery->current_ipo;
+ 				
+				if (count($course->deliveries) == 1) {
+					$delivery = $course->deliveries[0];
+					$url = (!empty($delivery->current_ipo)) ? "https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&code1=" . $delivery->mcr . "&code2=" . $delivery->current_ipo : '';
+
+					if (!empty($url)) {
+						header('Location: ' . $url);
+						exit;
 					}
- 					header('Location: ' . $url);
- 					exit;
- 				}
+				}
+				$validDeliveries = array();
+				foreach ($course->deliveries as $delivery) {
+					if(!empty($delivery->current_ipo)){
+						$validDeliveries[] = $delivery;
+					}
+				}
+ 					
+ 				
 				if($year && ($year !== static::$current_year)){
 					$meta['title'] = "{$course->programme_title} | Postgraduate Programmes {$year} Application | The University of Kent";
 				}
-				return Flight::layout('apply-pg', array('meta' => $meta, 'course' => $course, 'apply' => true));
+				return Flight::layout('apply-pg', array('meta' => $meta, 'course' => $course, 'deliveries' => $validDeliveries));
  				break;
 
  			default:
 				if($year && ($year !== static::$current_year)){
 					$meta['title'] = "{$course->programme_title} ($course->ucas_code) | Undergraduate Programmes {$year} Application | The University of Kent";
 				}
-				return Flight::layout('apply-ug', array('meta' => $meta, 'course' => $course, 'apply' => true));
+				return Flight::layout('apply-ug', array('meta' => $meta, 'course' => $course));
  				break;
  		}
 
