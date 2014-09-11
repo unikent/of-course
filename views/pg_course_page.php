@@ -99,15 +99,15 @@
 							  	<?php if($has_fulltime):?>
 								<tr>
 								  <td><strong>Full-time</strong></td>
-							      <td><?php echo empty($delivery->fees->home->{'full-time'}) ? 'TBC' : '&pound;' . $delivery->fees->home->{'full-time'}; ?></td>
-							      <td><?php echo empty($delivery->fees->int->{'full-time'}) ? 'TBC' : '&pound;' . $delivery->fees->int->{'full-time'}; ?></td>
+							      <td><?php echo empty($delivery->fees->home->{'full-time'}) ? ((empty($delivery->fees->home{'euro-full-time'})) ? 'TBC' : '&euro;' . $delivery->fees->home{'euro-full-time'}) : '&pound;' . $delivery->fees->home->{'full-time'}; ?></td>
+							      <td><?php echo empty($delivery->fees->int->{'full-time'}) ? ((empty($delivery->fees->int{'euro-full-time'})) ? 'TBC' : '&euro;' . $delivery->fees->int{'euro-full-time'}) : '&pound;' . $delivery->fees->int->{'full-time'}; ?></td>
 							    </tr>
 							    <?php endif;?>
 							    <?php if($has_parttime):?>
 							    <tr>
 							      <td><strong>Part-time</strong></td>
-							      <td><?php echo empty($delivery->fees->home->{'part-time'}) ? 'TBC' : '&pound;' . $delivery->fees->home->{'part-time'}; ?></td>
-							      <td><?php echo empty($delivery->fees->int->{'part-time'}) ? 'TBC' : '&pound;' . $delivery->fees->int->{'part-time'}; ?></td>
+							      <td><?php echo empty($delivery->fees->home->{'part-time'}) ? ((empty($delivery->fees->home{'euro-part-time'})) ? 'TBC' : '&euro;' . $delivery->fees->home{'euro-part-time'}) : '&pound;' . $delivery->fees->home->{'part-time'}; ?></td>
+							      <td><?php echo empty($delivery->fees->int->{'part-time'}) ? ((empty($delivery->fees->int{'euro-part-time'})) ? 'TBC' : '&euro;' . $delivery->fees->int{'euro-part-time'}) : '&pound;' . $delivery->fees->int->{'part-time'}; ?></td>
 							    </tr>
 							    <?php endif;?>
 						  </tbody>
