@@ -720,7 +720,7 @@ class CoursesFrontEnd {
 
 					if (!empty($url)) {
 						header('Location: ' . $url);
-					exit;
+						exit;
 					}
 				}
  					
