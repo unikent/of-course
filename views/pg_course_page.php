@@ -11,13 +11,12 @@
 <article class="container pg">
 	<h1>
 		<?php echo $course->programme_title; ?> (<?php echo $course->award_list; ?>)
-		<?php if($course->subject_to_approval == 'true'){ echo " (subject to approval)";} ?>
+		<?php echo $course->programmme_status_text;?>
 	</h1>
 	
-	<?php if($course->programme_suspended == 'true' || $course->programme_withdrawn == 'true'): ?>
-		<?php echo $course->holding_message; ?>
-	<?php else: ?>
-
+	<?php if($course->programme_suspended == 'true' || $course->programme_withdrawn == 'true'): ?>	
+		<?php echo $course->holding_message; ?>				
+	<?php endif;?>
 
 	<div class="daedalus-tabs">
 	<div class="row-fluid">
@@ -34,7 +33,6 @@
 				<?php endif;?>
 				<li><a href="#staff-research">Staff research</a></li>
 				<li class='screenreader-only'><a href="#enquiries">Enquiries</a></li>
-				<li class='screenreader-only'><a href="#apply">Apply</a></li>
 			</ul>
 		</div><!-- /span -->
 	</div><!-- /row -->
@@ -70,13 +68,12 @@
 				<section id="research-areas"><?php Flight::render('pg_tabs/research-areas', array('course'=>$course)); ?></section>
 				<section id="staff-research"><?php Flight::render('pg_tabs/staff-research', array('course'=>$course)); ?></section>
 				<section id="enquiries"><?php Flight::render('pg_tabs/enquiries', array('course'=>$course)); ?></section>
-				<section id="apply"><?php Flight::render('pg_tabs/apply', array('course'=>$course)); ?></section>
 			</div>
 		</div><!-- /span -->
 		<div class="span5">
 			<div class="side-panel">
 			<div class="panel admission-links">
-				<a href="#!apply" class="apply-adm-link" role="tab" aria-controls="apply">Apply</a>, <a href="#!enquiries" class="enquire-adm-link" role="tab" aria-controls="enquiries">enquire</a> or <a href="#!enquiries" class="pros-adm-link" role="tab" aria-controls="enquiries">order a prospectus</a>
+				<a href="/courses/postgraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?>apply-online/<?php echo $course->instance_id ?>" class="apply-adm-link" role="tab" aria-controls="apply">Apply</a>, <a href="#!enquiries" class="enquire-adm-link" role="tab" aria-controls="enquiries">enquire</a> or <a href="#!enquiries" class="pros-adm-link" role="tab" aria-controls="enquiries">order a prospectus</a>
 			</div>
 
 			<div class="key-facts-block">
@@ -102,15 +99,15 @@
 							  	<?php if($has_fulltime):?>
 								<tr>
 								  <td><strong>Full-time</strong></td>
-							      <td><?php echo empty($delivery->fees->home->{'full-time'}) ? 'TBC' : '&pound;' . $delivery->fees->home->{'full-time'}; ?></td>
-							      <td><?php echo empty($delivery->fees->int->{'full-time'}) ? 'TBC' : '&pound;' . $delivery->fees->int->{'full-time'}; ?></td>
+							      <td><?php echo empty($delivery->fees->home->{'full-time'}) ? ((empty($delivery->fees->home{'euro-full-time'})) ? 'TBC' : '&euro;' . $delivery->fees->home{'euro-full-time'}) : '&pound;' . $delivery->fees->home->{'full-time'}; ?></td>
+							      <td><?php echo empty($delivery->fees->int->{'full-time'}) ? ((empty($delivery->fees->int{'euro-full-time'})) ? 'TBC' : '&euro;' . $delivery->fees->int{'euro-full-time'}) : '&pound;' . $delivery->fees->int->{'full-time'}; ?></td>
 							    </tr>
 							    <?php endif;?>
 							    <?php if($has_parttime):?>
 							    <tr>
 							      <td><strong>Part-time</strong></td>
-							      <td><?php echo empty($delivery->fees->home->{'part-time'}) ? 'TBC' : '&pound;' . $delivery->fees->home->{'part-time'}; ?></td>
-							      <td><?php echo empty($delivery->fees->int->{'part-time'}) ? 'TBC' : '&pound;' . $delivery->fees->int->{'part-time'}; ?></td>
+							      <td><?php echo empty($delivery->fees->home->{'part-time'}) ? ((empty($delivery->fees->home{'euro-part-time'})) ? 'TBC' : '&euro;' . $delivery->fees->home{'euro-part-time'}) : '&pound;' . $delivery->fees->home->{'part-time'}; ?></td>
+							      <td><?php echo empty($delivery->fees->int->{'part-time'}) ? ((empty($delivery->fees->int{'euro-part-time'})) ? 'TBC' : '&euro;' . $delivery->fees->int{'euro-part-time'}) : '&pound;' . $delivery->fees->int->{'part-time'}; ?></td>
 							    </tr>
 							    <?php endif;?>
 						  </tbody>
@@ -259,7 +256,7 @@
 		                <div class="cell">
 		                    <div class="mask">
 		                        <a href="<?php echo Flight::url("{$level}/{$related_course->id}/{$related_course->slug}"); ?>">
-		                        	<span><?php echo $related_course->name ?><?php if($related_course->subject_to_approval == 'true'){ echo " (subject to approval)";} ?></span>
+		                        	<span><?php echo $related_course->name ?> <?php echo !empty($related_course->programmme_status_text) ? $related_course->programmme_status_text : '';  ?></span>
 		                        	<span class="related-award"><?php echo $related_course->award;?></span>
 		                        </a>
 		                    </div>
@@ -282,7 +279,7 @@
 		<?php foreach($course->related_courses as $related_course): ?>
                     <li>
                     <a href="<?php echo Flight::url("{$level}/{$related_course->id}/{$related_course->slug}"); ?>">
-                    	<span><?php echo $related_course->name ?><?php if($related_course->subject_to_approval == 'true'){ echo " (subject to approval)";} ?></span>
+                    	<span><?php echo $related_course->name ?> <?php echo !empty($related_course->programmme_status_text) ? $related_course->programmme_status_text : '';  ?></span>
                     	<span class="related-award"><?php echo $related_course->award;?></span>
                     </a>
                     </li>
@@ -300,8 +297,7 @@
 		<?php echo $course->globals->general_disclaimer; ?>
 	</footer>
 	<?php endif;?>
-				
-	<?php endif;?>
+
 </article>
 <kentScripts>
 <script>

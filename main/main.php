@@ -656,6 +656,98 @@ class CoursesFrontEnd {
 		}
 	}
 
+	/**
+	 * apply - View the apply page for a course
+	 *
+	 * @param string $type undergraduate or postgraduate.
+	 * @param yyyy Year to show
+	 * @param int Id of programme
+	 */
+	public function apply($level, $year, $id)
+	{
+		$meta = array();
+ 
+		// Use webservices to get course data for programme.
+		try
+		{
+			$course = static::$pp->get_programme($year, $level, $id);
+		}
+		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
+		{
+			// Not found?
+			// Do 404 action, sending any useful enviormental data we have so it can be as useful as possible
+			$data = array('id' => $id, 'year'=> $year, 'level' => $level, 'error'=> $e);
+			return Flight::notFound($data);
+		}
+		catch(\Exception $e)
+		{
+			// Year to old
+			if($year < 2014){
+				$data = array('id' => $id, 'year'=> $year, 'level' => $level, 'error'=> $e);
+				return Flight::notFound($data);
+			}
+
+			// Another error type?
+			$data = array('id' => $id, 'year'=> $year, 'level' => $level);
+			return Flight::error($e, $data);
+		}
+		
+		// Attempt to cache responce with browser + debug some extra information.
+		Flight::cachecheck();
+
+		// Debug option
+		if(isset($_GET['debug_performance'])){ inspect($course); }
+
+ 		// Render programme page
+ 		Flight::setup($year, $level);
+
+		$meta = array(
+			'canonical' => Flight::url("{$level}/{$id}/{$course->slug}"),
+			'active_instance' => Flight::url("{$level}/{$id}/{$course->slug}"),
+			'description' => strip_tags($course->programme_abstract),
+		);
+
+		if($year && ($year !== static::$current_year)){
+			$meta['canonical'] =  Flight::url("{$level}/{$year}/{$id}/{$course->slug}");	
+		}
+
+ 		switch($level){
+ 			case 'postgraduate':
+ 				if ( sizeof($course->award) === 1 && ( trim(strtolower($course->mode_of_study)) == 'part-time only' || trim(strtolower($course->mode_of_study)) == 'full-time only' ) ) {
+ 					foreach ($course->deliveries as $delivery) {
+						$url = "https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&code1=" . $delivery->mcr . "&code2=" . $delivery->current_ipo;
+					}
+ 					header('Location: ' . $url);
+ 					exit;
+ 				}
+				if($year && ($year !== static::$current_year)){
+					$meta['title'] = "{$course->programme_title} | Postgraduate Programmes {$year} Application | The University of Kent";
+				}
+				return Flight::layout('apply-pg', array('meta' => $meta, 'course' => $course, 'apply' => true));
+ 				break;
+
+ 			default:
+				if($year && ($year !== static::$current_year)){
+					$meta['title'] = "{$course->programme_title} ($course->ucas_code) | Undergraduate Programmes {$year} Application | The University of Kent";
+				}
+				return Flight::layout('apply-ug', array('meta' => $meta, 'course' => $course, 'apply' => true));
+ 				break;
+ 		}
+
+ 		return true;
+	}
+
+	/**
+	 * apply - View the apply page for a course, but without any year
+	 *
+	 * @param string $type undergraduate or postgraduate.
+	 * @param int Id of programme
+	 */
+	public function apply_noyear($level, $id, $slug='')
+	{
+		return $this->apply($level, static::$current_year, $id);
+	}
+
 	// Quietly grab index
 	private function get_programme_index($year, $level)
 	{
