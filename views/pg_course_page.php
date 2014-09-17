@@ -14,9 +14,10 @@
 		<?php echo $course->programmme_status_text;?>
 	</h1>
 	
-	<?php if($course->programme_suspended == 'true' || $course->programme_withdrawn == 'true'): ?>	
-		<?php echo $course->holding_message; ?>				
-	<?php endif;?>
+	<?php if($course->programme_suspended == 'true' || $course->programme_withdrawn == 'true'):	
+		 //suppress content if holding message text filled in
+		 echo $course->holding_message;			
+	else: ?>
 
 	<div class="daedalus-tabs">
 	<div class="row-fluid">
@@ -42,26 +43,24 @@
 			<div class="tab-content">
 				<section id="overview"><?php Flight::render('pg_tabs/overview', array('course'=>$course)); ?></section>
 				
-				<?php if(strpos($course->programme_type, 'taught') === false): ?>
-					<?php if(!empty($course->programme_overview)): ?>
-						<section id="structure"><?php Flight::render('pg_tabs/structure_research', array('course'=>$course)); ?></section>
-					<?php endif;?>
-				
-				<?php else :?>
-					<?php
-					$stage_found = false;
-					foreach($course->modules as $module){
-						if (!empty($module->stages)){
-							$stage_found = true;
-							break;
+				<?php if(strpos($course->programme_type, 'taught') === false):
+						if(!empty($course->programme_overview)): ?>
+							<section id="structure"><?php Flight::render('pg_tabs/structure_research', array('course'=>$course)); ?></section>
+						<?php endif;
+					else:
+						$stage_found = false;
+						foreach($course->modules as $module){
+							if (!empty($module->stages)){
+								$stage_found = true;
+								break;
+							}
 						}
-					}?>
-				 	<?php if( (!$stage_found) && (empty($course->programme_overview)) ) : ?>
-						<section id="structure"><?php Flight::render('pg_tabs/structure_empty', array('course'=>$course)); ?></section>
-					<?php else: ?>
-						<section id="structure"><?php Flight::render('pg_tabs/structure', array('course'=>$course)); ?></section>
-					<?php endif; ?>
-				<?php endif;?>
+						if( (!$stage_found) && (empty($course->programme_overview)) ) : ?>
+							<section id="structure"><?php Flight::render('pg_tabs/structure_empty', array('course'=>$course)); ?></section>
+						<?php else: ?>
+							<section id="structure"><?php Flight::render('pg_tabs/structure', array('course'=>$course)); ?></section>
+						<?php endif;
+					endif;?>
 				
 				<section id="study-support"><?php Flight::render('pg_tabs/study-support', array('course'=>$course)); ?></section>	
 				<section id="entry-requirements"><?php Flight::render('pg_tabs/entry-requirements', array('course'=>$course)); ?></section>
@@ -86,30 +85,30 @@
 					<?php if ( ! in_array($delivery->pos_code, $pos_codes) ): ?>
 						<table class="table">
 						  <thead>
-						    <tr>
-						    	<td colspan="3"><i class="icon icon-bullet"></i> <?php echo preg_replace('/- (\w){4}-time/', '', $delivery->description) . ':' ?></td>
-						    </tr>
-						    <tr>
-						      <th></th>
-						      <th>UK/EU</th>
-						      <th>Overseas</th>
-						    </tr>
+							<tr>
+								<td colspan="3"><i class="icon icon-bullet"></i> <?php echo preg_replace('/- (\w){4}-time/', '', $delivery->description) . ':' ?></td>
+							</tr>
+							<tr>
+							  <th></th>
+							  <th>UK/EU</th>
+							  <th>Overseas</th>
+							</tr>
 						  </thead>
 						  <tbody>
-							  	<?php if($has_fulltime):?>
+								<?php if($has_fulltime):?>
 								<tr>
 								  <td><strong>Full-time</strong></td>
-							      <td><?php echo empty($delivery->fees->home->{'full-time'}) ? ((empty($delivery->fees->home->{'euro-full-time'})) ? 'TBC' : '&euro;' . $delivery->fees->home->{'euro-full-time'}) : '&pound;' . $delivery->fees->home->{'full-time'}; ?></td>
-							      <td><?php echo empty($delivery->fees->int->{'full-time'}) ? ((empty($delivery->fees->int->{'euro-full-time'})) ? 'TBC' : '&euro;' . $delivery->fees->int->{'euro-full-time'}) : '&pound;' . $delivery->fees->int->{'full-time'}; ?></td>
-							    </tr>
-							    <?php endif;?>
-							    <?php if($has_parttime):?>
-							    <tr>
-							      <td><strong>Part-time</strong></td>
-							      <td><?php echo empty($delivery->fees->home->{'part-time'}) ? ((empty($delivery->fees->home->{'euro-part-time'})) ? 'TBC' : '&euro;' . $delivery->fees->home->{'euro-part-time'}) : '&pound;' . $delivery->fees->home->{'part-time'}; ?></td>
-							      <td><?php echo empty($delivery->fees->int->{'part-time'}) ? ((empty($delivery->fees->int->{'euro-part-time'})) ? 'TBC' : '&euro;' . $delivery->fees->int->{'euro-part-time'}) : '&pound;' . $delivery->fees->int->{'part-time'}; ?></td>
-							    </tr>
-							    <?php endif;?>
+								  <td><?php echo empty($delivery->fees->home->{'full-time'}) ? ((empty($delivery->fees->home->{'euro-full-time'})) ? 'TBC' : '&euro;' . $delivery->fees->home->{'euro-full-time'}) : '&pound;' . $delivery->fees->home->{'full-time'}; ?></td>
+								  <td><?php echo empty($delivery->fees->int->{'full-time'}) ? ((empty($delivery->fees->int->{'euro-full-time'})) ? 'TBC' : '&euro;' . $delivery->fees->int->{'euro-full-time'}) : '&pound;' . $delivery->fees->int->{'full-time'}; ?></td>
+								</tr>
+								<?php endif;?>
+								<?php if($has_parttime):?>
+								<tr>
+								  <td><strong>Part-time</strong></td>
+								  <td><?php echo empty($delivery->fees->home->{'part-time'}) ? ((empty($delivery->fees->home->{'euro-part-time'})) ? 'TBC' : '&euro;' . $delivery->fees->home->{'euro-part-time'}) : '&pound;' . $delivery->fees->home->{'part-time'}; ?></td>
+								  <td><?php echo empty($delivery->fees->int->{'part-time'}) ? ((empty($delivery->fees->int->{'euro-part-time'})) ? 'TBC' : '&euro;' . $delivery->fees->int->{'euro-part-time'}) : '&pound;' . $delivery->fees->int->{'part-time'}; ?></td>
+								</tr>
+								<?php endif;?>
 						  </tbody>
 						</table>
 					<?php $pos_codes[] = $delivery->pos_code; endif; ?>
@@ -238,6 +237,8 @@
 	</div><!-- /row -->
 
 </div>
+
+<?php endif; ?>
 	
 	<?php if ( ! empty($course->related_courses) ): ?>
 	<section class="related-course-section">
@@ -253,14 +254,14 @@
 				
 					<?php foreach($related_courses as $related_course): ?>
 					<div class="span2 related-course">
-		                <div class="cell">
-		                    <div class="mask">
-		                        <a href="<?php echo Flight::url("{$level}/{$related_course->id}/{$related_course->slug}"); ?>">
-		                        	<span><?php echo $related_course->name ?> <?php echo !empty($related_course->programmme_status_text) ? $related_course->programmme_status_text : '';  ?></span>
-		                        	<span class="related-award"><?php echo $related_course->award;?></span>
-		                        </a>
-		                    </div>
-		                </div> 
+						<div class="cell">
+							<div class="mask">
+								<a href="<?php echo Flight::url("{$level}/{$related_course->id}/{$related_course->slug}"); ?>">
+									<span><?php echo $related_course->name ?> <?php echo !empty($related_course->programmme_status_text) ? $related_course->programmme_status_text : '';  ?></span>
+									<span class="related-award"><?php echo $related_course->award;?></span>
+								</a>
+							</div>
+						</div> 
 					</div>
 					<?php $count++; if ($count%4 == 0) break; ?>
 					<?php endforeach; ?>
@@ -277,12 +278,12 @@
 
 		<ul class="related-course-list">
 		<?php foreach($course->related_courses as $related_course): ?>
-                    <li>
-                    <a href="<?php echo Flight::url("{$level}/{$related_course->id}/{$related_course->slug}"); ?>">
-                    	<span><?php echo $related_course->name ?> <?php echo !empty($related_course->programmme_status_text) ? $related_course->programmme_status_text : '';  ?></span>
-                    	<span class="related-award"><?php echo $related_course->award;?></span>
-                    </a>
-                    </li>
+					<li>
+					<a href="<?php echo Flight::url("{$level}/{$related_course->id}/{$related_course->slug}"); ?>">
+						<span><?php echo $related_course->name ?> <?php echo !empty($related_course->programmme_status_text) ? $related_course->programmme_status_text : '';  ?></span>
+						<span class="related-award"><?php echo $related_course->award;?></span>
+					</a>
+					</li>
 		<?php endforeach; ?>
 		</ul>
 
