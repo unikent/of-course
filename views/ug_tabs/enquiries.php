@@ -1,69 +1,98 @@
-<?php $year_for_url = empty($year) ? '' : ((strcmp($year, CoursesFrontEnd::$current_year) == 0) ? '' : $year . '/');
+<?php
+	$year_for_url = empty($year) ? '' : ((strcmp($year, CoursesFrontEnd::$current_year) == 0) ? '' : $year . '/');
 
-$has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
-$has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
-// Tracking name
-$course_name_fortracking = "[{$course->instance_id} in {$course->year}] {$course->programme_title} - {$course->award[0]->name} [{$course->pos_code}]";
+	$has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
+	$has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
+	
+	// Tracking name
+	$course_name_fortracking = "[{$course->instance_id} in {$course->year}] {$course->programme_title} - {$course->award[0]->name} [{$course->pos_code}]";
+	$eventjs = "onClick=\"_pat.event('course-page', '%s', '%s');\"";
 
+	// Get whether this course has an ARI code or not
+	$ari_code = isset($course->ari_code) ? $course->ari_code : (string)null;
 ?>
 
 <h2>Enquire or order a prospectus</h2>
-<p><a href="/courses/undergraduate/prospectus/<?php echo $course->year ?>/full-prospectus.pdf" <?php echo 'onClick="_pat.event(\'course-page\', \'download-prospectus-ug\', \''.$course_name_fortracking.'\');"';?> >Download a prospectus (PDF - 2MB)</a> or order one below.</p>
+<p>
+	<a
+		href="/courses/undergraduate/prospectus/<?php echo $course->year; ?>/full-prospectus.pdf"
+		<?php echo sprintf($eventjs, 'download-prospectus-ug', $course_name_fortracking); ?>
+	>
+		Download a prospectus (PDF - 2MB)
+	</a>
 
-<?php if(empty($course->subject_to_approval)): ?>
+	<?php if (strlen($ari_code) > 0): ?>
+		or order one below.
+	<?php endif; ?>
+</p>
 
+<?php if (empty($course->subject_to_approval) && strlen($ari_code) > 0):
 
-<?php
-$sits_url = 'https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?';
+	$sits_url = 'https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?';
 
-$enquire_link = array();
-$prospectus_link = array();
-$enquire_event = array();
-$prospectus_event = array();
+	$enquire_link = array();
+	$prospectus_link = array();
+	$enquire_event = array();
+	$prospectus_event = array();
 
-foreach(array("fulltime","parttime") as $mode){
-	// Get MCR code
-	$mcr_attribute = $mode.'_mcr_code';
-	if ($course->$mcr_attribute != '') {
-		$mcr = $course->$mcr_attribute;
-	}else {
-		$mcr = 'AAGEN101'; // Generic MCR
+	foreach (array("fulltime", "parttime") as $mode) {
+		// Get MCR code
+		$mcr_attribute = $mode.'_mcr_code';
+		$mcr = $course->mcr_attribute != '' ? $course->mcr_attribute : 'AAGEN101';
+
+		$link = $sits_url . 'process=siw_ipp_enq&code1=%s&code2=&code4=ipr_ipp5=%s';
+		$enquire_link[$mode] = sprintf($link, $ari_code, '10');
+		$prospectus_link[$mode] = sprintf($link, $ari_code, 'PRO');
+
+		$enquire_event[$mode] = sprintf($eventjs, 'enquire-ug', $course_name_fortracking.'-'.$mode);
+		$prospectus_event[$mode] = sprintf($eventjs, 'order-prospectus-ug', $course_name_fortracking.'-'.$mode);
 	}
-
-	// get the ari code
-	$ari_code = '';
-	if ($course->ari_code != '') {
-		$ari_code = $course->ari_code;
-	}
-
-	// Generate Links
-	$enquire_link[$mode] = $sits_url . 'process=siw_ipp_enq&code1='.$ari_code.'&code2=&code4=ipr_ipp5=10';
-	$prospectus_link[$mode]	= $sits_url . 'process=siw_ipp_enq&code1='.$ari_code.'&code2=&code4=ipr_ipp5=PRO';
-
-	// Generate event trackers
-	$enquire_event[$mode]  = 'onClick="_pat.event(\'course-page\', \'enquire-ug\', \''.$course_name_fortracking.' - '.$mode.'\');"';
-	$prospectus_event[$mode]  = 'onClick="_pat.event(\'course-page\', \'order-prospectus-ug\', \''.$course_name_fortracking.' - '.$mode.'\');"';
-}
 ?>
 
 	<div class='enquire-block'>
 		<h3><?php echo $course->award[0]->name; ?></h3>
 		<ul>
-		<?php if($has_fulltime): ?>
+
+		<?php if ($has_fulltime): ?>
 			<li>
-			<strong>Full-time</strong>
-			<a title="Enquire online - <?php echo $awards[$pos];?> Full time" href='<?php echo $enquire_link['fulltime'];?>' <?php echo $enquire_event['fulltime'];?> >Enquire online</a> |
-			<a title="Order prospectus for <?php echo $awards[$pos];?> Full time" href='<?php echo $prospectus_link['fulltime'];?>' <?php echo $prospectus_event['fulltime'];?>>order a prospectus</a>
+				<strong>Full-time</strong>
+				<a
+					title="Enquire online - <?php echo $awards[$pos];?> Full time"
+					href='<?php echo $enquire_link['fulltime'];?>'
+					<?php echo $enquire_event['fulltime'];?>
+				>
+					Enquire online
+				</a> |
+				<a
+					title="Order prospectus for <?php echo $awards[$pos];?> Full time"
+					href='<?php echo $prospectus_link['fulltime'];?>'
+					<?php echo $prospectus_event['fulltime'];?>
+				>
+					Order a prospectus
+				</a>
 			</li>
 		<?php endif; ?>
 
 		<?php if($has_parttime): ?>
 			<li>
-			<strong>Part-time</strong>
-			<a title="Enquire online - <?php echo $awards[$pos];?> Part time"  href='<?php echo $enquire_link['parttime'];?>' <?php echo $enquire_event['parttime'];?> >Enquire online</a> |
-			<a title="Order prospectus for <?php echo $awards[$pos];?> Full time" href='<?php echo $prospectus_link['parttime'];?>' <?php echo $prospectus_event['parttime'];?>>order a prospectus</a>
+				<strong>Part-time</strong>
+				<a
+					title="Enquire online - <?php echo $awards[$pos];?> Part time" 
+					href='<?php echo $enquire_link['parttime'];?>'
+					<?php echo $enquire_event['parttime'];?>
+				>
+					Enquire online
+				</a> |
+				<a
+					title="Order prospectus for <?php echo $awards[$pos];?> Full time"
+					href='<?php echo $prospectus_link['parttime'];?>'
+					<?php echo $prospectus_event['parttime'];?>
+				>
+					Order a prospectus
+				</a>
 			</li>
 		<?php endif; ?>
+		
 		</ul>
 	</div>
 
