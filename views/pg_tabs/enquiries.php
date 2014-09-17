@@ -12,7 +12,7 @@ $course_name_fortracking = "[{$course->instance_id} in {$course->year}] {$course
 
 
 <?php
-$sits_url = 'https://esd.kent.ac.uk/aspx_shared/newuser.aspx?';
+$sits_url = 'https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?';
 
 $enquire_link = array();
 $prospectus_link = array();
@@ -34,9 +34,11 @@ foreach($course->deliveries as $delivery){
 		$mcr = 'AAGEN102'; // Generic MCR
 	}
 
-
-	// Generate unqiue grouping key from MCR code
-	$key = substr($mcr,0,strpos($mcr,"-"));
+	// get the ari code
+	$ari_code = '';
+	if ($course->ari_code != '') {
+		$ari_code = $course->ari_code;
+	}
 
 	// create vars
 	if(!isset($enquire_link[$key])){
@@ -47,8 +49,8 @@ foreach($course->deliveries as $delivery){
 	}
 
 	// Generate Links
-	$enquire_link[$key][$mode] = $sits_url . 'CCTC=KENT&UTYP=APP&EnquiryCategoryCode=10&CourseCode=' . $mcr;
-	$prospectus_link[$key][$mode]	= $sits_url .'CCTC=KENT&EnquiryCategoryCode=PRO&CourseCode=' . $mcr;
+	$enquire_link[$key][$mode] = $sits_url . 'process=siw_ipp_enq&code1='.$ari_code.'&code2=&code4=ipr_ipp5=10' . $mcr;
+	$prospectus_link[$key][$mode] = $sits_url . 'process=siw_ipp_enq&code1='.$ari_code.'&code2=&code4=ipr_ipp5=PRO' . $mcr;
 
  	$awards[$key] = $award;
 
