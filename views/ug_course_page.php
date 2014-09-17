@@ -11,7 +11,7 @@ $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year'
 	
 	<?php if($course->programme_suspended == 'true' || $course->programme_withdrawn == 'true'):
 		 //suppress content if holding message text filled in
-		 echo $course->holding_message;		echo $course->holding_message;			
+		 echo $course->holding_message;		
 	else: ?>
 
 	<div class="daedalus-tabs">
