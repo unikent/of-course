@@ -14,7 +14,7 @@ $course_name_fortracking = "[{$course->instance_id} in {$course->year}] {$course
 
 
 <?php
-$sits_url = 'https://evision-dev.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?';
+$sits_url = 'https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?';
 
 $enquire_link = array();
 $prospectus_link = array();
