@@ -37,8 +37,8 @@ foreach(array("fulltime","parttime") as $mode){
 	}
 
 	// Generate Links
-	$enquire_link[$mode] = $sits_url . 'process=siw_ipp_enq&code1='.$ari_code.'&code2=&code4=ipr_ipp5=10' . $mcr;
-	$prospectus_link[$mode]	= $sits_url . 'process=siw_ipp_enq&code1='.$ari_code.'&code2=&code4=ipr_ipp5=PRO' . $mcr;
+	$enquire_link[$mode] = $sits_url . 'process=siw_ipp_enq&code1='.$ari_code.'&code2=&code4=ipr_ipp5=10';
+	$prospectus_link[$mode]	= $sits_url . 'process=siw_ipp_enq&code1='.$ari_code.'&code2=&code4=ipr_ipp5=PRO';
 
 	// Generate event trackers
 	$enquire_event[$mode]  = 'onClick="_pat.event(\'course-page\', \'enquire-ug\', \''.$course_name_fortracking.' - '.$mode.'\');"';

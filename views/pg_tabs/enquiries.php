@@ -36,8 +36,8 @@ foreach($course->deliveries as $delivery){
 
 	// get the ari code
 	$ari_code = '';
-	if ($course->ari_code != '') {
-		$ari_code = $course->ari_code;
+	if ($delivery->ari_code != '') {
+		$ari_code = $delivery->ari_code;
 	}
 
 	// create vars
@@ -49,8 +49,8 @@ foreach($course->deliveries as $delivery){
 	}
 
 	// Generate Links
-	$enquire_link[$key][$mode] = $sits_url . 'process=siw_ipp_enq&code1='.$ari_code.'&code2=&code4=ipr_ipp5=10' . $mcr;
-	$prospectus_link[$key][$mode] = $sits_url . 'process=siw_ipp_enq&code1='.$ari_code.'&code2=&code4=ipr_ipp5=PRO' . $mcr;
+	$enquire_link[$key][$mode] = $sits_url . 'process=siw_ipp_enq&code1='.$ari_code.'&code2=&code4=ipr_ipp5=10';
+	$prospectus_link[$key][$mode] = $sits_url . 'process=siw_ipp_enq&code1='.$ari_code.'&code2=&code4=ipr_ipp5=PRO';
 
  	$awards[$key] = $award;
 
