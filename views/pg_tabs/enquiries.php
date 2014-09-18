@@ -1,93 +1,133 @@
 <?php
-$year_for_url = empty($year) ? '' : ((strcmp($year, CoursesFrontEnd::$current_year) == 0) ? '' : $year . '/');
-$has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
-$has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
+	$year_for_url = empty($year) ? '' : ((strcmp($year, CoursesFrontEnd::$current_year) == 0) ? '' : $year . '/');
+	$has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
+	$has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
 
-$course_name_fortracking = "[{$course->instance_id} in {$course->year}] {$course->programme_title} ";
+	// Tracking name
+	$course_name_fortracking = "[{$course->instance_id} in {$course->year}] {$course->programme_title} ";
+	$sits_url = 'https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?';
+
+	$enquire_link = array();
+	$prospectus_link = array();
+	$enquire_event = array();
+	$prospectus_event = array();
+	$awards = array();
+	$descriptions = array();
+
+	foreach($course->deliveries as $delivery){
+
+		$mode = $delivery->attendance_pattern;
+		$award = $delivery->award_name;
+		// pos is used to group pt/ft deliveries together for each award
+
+		$pos = $delivery->pos_code;
+		$mcr = trim($delivery->mcr) != '' ? $delivery->mcr : 'AAGEN102';
+
+		// create vars
+		if (!isset($enquire_link[$key])) {
+			$enquire_link[$key] = array();
+			$prospectus_link[$key] = array();
+			$enquire_event[$key] = array();
+			$prospectus_event[$key] = array();
+		}
+
+		if (isset($delivery->ari_code)) {
+			$ari_code = $delivery->ari_code;
+			$show[$key] = true;
+		} else {
+			$ari_code = (string)null;
+			$show[$key] = false;
+		}
+
+	 	$description = str_replace($course->programme_title, '', $delivery->description);
+		$description = substr($description, 0, strpos($description, '-'));
+
+	 	$descriptions[$key] = $description;
+	 	$awards[$key] = $award;
+
+	 	// Generate links
+		$link = $sits_url . 'process=siw_ipp_enq&code1=%s&code2=&code4=ipr_ipp5=%s';
+		$enquire_link[$key][$mode] = sprintf($link, $ari_code, '10');
+		$prospectus_link[$key][$mode] = sprintf($link, $ari_code, 'PRO');
+
+		// Generate event trackers
+		$eventjs = "onClick=\"_pat.event('course-page', '%s', '%s');\"";
+		$event = "$course_name_fortracking - $award" . "$description - $mode [$mcr]";
+		$enquire_event[$key][$mode] = sprintf($eventjs, 'enquire-pg', $event);
+		$enquire_event[$key][$mode] = sprintf($eventjs, 'order-prospectus-pg', $event);
+	}
 ?>
 
-<h2>Enquire or order a prospectus</h2>
+	<h2>Enquire or order a prospectus</h2>
 
-<p><a href="/courses/postgraduate/pdf/prospectus.pdf" <?php echo 'onClick="_pat.event(\'course-page\', \'download-prospectus-pg\', \''.$course_name_fortracking.'\');"';?> >Download a prospectus (PDF - 2MB)</a> or order one below.</p>
+	<p>
+		<a
+			href="/courses/postgraduate/pdf/prospectus.pdf"
+			<?php echo sprintf($eventjs, 'download-prospectus-pg', $course_name_fortracking); ?>
+		>
+			Download a prospectus (PDF - 2MB)
+		</a>
 
+		<?php if (in_array(true, $show)): // if any of the prospectus order links at all are visible below… ?>
+			or order one below.
+		<?php endif; ?>
+	</p>
 
-<?php
-$sits_url = 'https://esd.kent.ac.uk/aspx_shared/newuser.aspx?';
-
-$enquire_link = array();
-$prospectus_link = array();
-$enquire_event = array();
-$prospectus_event = array();
-$awards = array();
-$descriptions = array();
-foreach($course->deliveries as $delivery){
-
-	$mode = $delivery->attendance_pattern;
-	$award = $delivery->award_name;
-	// pos is used to group pt/ft deliveries together for each award
-	$pos = $delivery->pos_code;
-
-	// Get MCR code
-	if (trim($delivery->mcr) != '') {
-		$mcr = $delivery->mcr;
-	}else {
-		$mcr = 'AAGEN102'; // Generic MCR
-	}
-
-
-	// Generate unqiue grouping key from MCR code
-	$key = substr($mcr,0,strpos($mcr,"-"));
-
-	// create vars
-	if(!isset($enquire_link[$key])){
-		$enquire_link[$key] = array();
-		$prospectus_link[$key] = array();
-		$enquire_event[$key] = array();
-		$prospectus_event[$key] = array();
-	}
-
-	// Generate Links
-	$enquire_link[$key][$mode] = $sits_url . 'CCTC=KENT&UTYP=APP&EnquiryCategoryCode=10&CourseCode=' . $mcr;
-	$prospectus_link[$key][$mode]	= $sits_url .'CCTC=KENT&EnquiryCategoryCode=PRO&CourseCode=' . $mcr;
-
- 	$awards[$key] = $award;
-
- 	$description = str_replace($course->programme_title,'', $delivery->description);
-	$description = substr($description ,0, strpos($description, '-'));
-
- 	$descriptions[$key] = $description;
-
- 	// Generate event trackers
- 	$enquire_event[$key][$mode]   = 'onClick="_pat.event(\'course-page\', \'enquire-pg\', \''.$course_name_fortracking.' - '.$award.' '.$description.' - '.$mode.' ['.$mcr.'] \');"';
-	$prospectus_event[$key][$mode]  = 'onClick="_pat.event(\'course-page\', \'order-prospectus-pg\', \''.$course_name_fortracking.' - '.$award.' '.$description.' - '.$mode.' ['.$mcr.'] \');"';
-}
-?>
+	<?php if (in_array(true, $show)): ?>
 
 	<div class='enquire-block'>
 
-		<?php foreach($enquire_link as $key => $details): ?>
+		<?php foreach($enquire_link as $key => $details):
+			if ($show[$key]): ?>
 
 			<h3><?php echo $awards[$key]. ' '.$descriptions[$key]; ?></h3>
 
 			<ul>
 			<?php if($has_fulltime): ?>
 				<li>
-				<strong>Full-time</strong> -
-				<a title="Enquire online - <?php echo $awards[$key]. ' '.$descriptions[$key];?> Full time" href='<?php echo $enquire_link[$key]['full-time'];?>' <?php echo $enquire_event[$key]['full-time'];?> >Enquire online</a> |
-				<a title="Order prospectus for <?php echo $awards[$key]. ' '.$descriptions[$key];?> Full time" href='<?php echo $prospectus_link[$key]['full-time'];?>' <?php echo $prospectus_event[$key]['full-time'];?>>order a prospectus</a>
+					<strong>Full-time</strong> -
+					<a
+						title="Enquire online - <?php echo $awards[$key]. ' '.$descriptions[$key];?> Full time"
+						href='<?php echo $enquire_link[$key]['full-time'];?>'
+						<?php echo $enquire_event[$key]['full-time'];?>
+					>
+						Enquire online
+					</a> |
+					<a
+						title="Order prospectus for <?php echo $awards[$key]. ' '.$descriptions[$key];?> Full time"
+						href='<?php echo $prospectus_link[$key]['full-time'];?>'
+						<?php echo $prospectus_event[$key]['full-time'];?>
+					>
+						Order a prospectus
+					</a>
 				</li>
 			<?php endif; ?>
 
 			<?php if($has_parttime): ?>
 				<li>
-				<strong>Part-time</strong> -
-				<a title="Enquire online - <?php echo $awards[$key]. ' '.$descriptions[$key];?> Part time" href='<?php echo $enquire_link[$key]['part-time'];?>' <?php echo $enquire_event[$key]['part-time'];?> >Enquire online</a> |
-				<a title="Order prospectus for <?php echo $awards[$key]. ' '.$descriptions[$key];?> Part time" href='<?php echo $prospectus_link[$key]['part-time'];?>' <?php echo $prospectus_event[$key]['part-time'];?>>order a prospectus</a>
+					<strong>Part-time</strong> -
+					<a
+						title="Enquire online - <?php echo $awards[$key]. ' '.$descriptions[$key];?> Part time"
+						href='<?php echo $enquire_link[$key]['part-time'];?>'
+						<?php echo $enquire_event[$key]['part-time'];?>
+					>
+						Enquire online
+					</a> |
+					<a
+						title="Order prospectus for <?php echo $awards[$key]. ' '.$descriptions[$key];?> Part time"
+						href='<?php echo $prospectus_link[$key]['part-time'];?>'
+						<?php echo $prospectus_event[$key]['part-time'];?>
+					>
+						Order a prospectus
+					</a>
 				</li>
 			<?php endif; ?>
 			</ul>
-		<?php endforeach;?>
+		<?php endif;
+			endforeach;
+		?>
 	</div>
+	<?php endif; ?>
 
 
 
