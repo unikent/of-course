@@ -44,15 +44,14 @@
 		$mcr = $course->mcr_attribute != '' ? $course->mcr_attribute : 'AAGEN101';
 
 		$link = $sits_url . 'process=siw_ipp_enq&code1=%s&code2=&code4=ipr_ipp5=%s';
-		<?php if ($has_fulltime): ?>
+		if ($has_fulltime):
 			$enquire_link[$mode] = sprintf($link, $ari_code_ft, '10');
 			$prospectus_link[$mode] = sprintf($link, $ari_code_ft, 'PRO');
-		<?php endif; ?>
-
-		<?php if ($has_parttime): ?>
+		endif;
+		if ($has_parttime): 
 			$enquire_link[$mode] = sprintf($link, $ari_code, '10');
 			$prospectus_link[$mode] = sprintf($link, $ari_code, 'PRO');
-		<?php endif; ?>
+		endif;
 
 		$enquire_event[$mode] = sprintf($eventjs, 'enquire-ug', $course_name_fortracking.'-'.$mode);
 		$prospectus_event[$mode] = sprintf($eventjs, 'order-prospectus-ug', $course_name_fortracking.'-'.$mode);
