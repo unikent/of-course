@@ -23,7 +23,7 @@
 		Download a prospectus (PDF - 2MB)
 	</a>
 
-	<?php if (strlen($ari_code) > 0) || strlen($ari_code_ft) > 0): ?>
+	<?php if ((strlen($ari_code) > 0) || strlen($ari_code_ft) > 0): ?>
 		or order one below.
 	<?php endif; ?>
 </p>
