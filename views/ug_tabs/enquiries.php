@@ -10,6 +10,8 @@
 
 	// Get whether this course has an ARI code or not
 	$ari_code = isset($course->ari_code) ? $course->ari_code : (string)null;
+	//for full-time
+	$ari_code_ft = isset($course->ft_ari_code) ? $course->ft_ari_code : (string)null;
 ?>
 
 <h2>Enquire or order a prospectus</h2>
@@ -21,12 +23,13 @@
 		Download a prospectus (PDF - 2MB)
 	</a>
 
-	<?php if (strlen($ari_code) > 0): ?>
+	<?php if (strlen($ari_code) > 0) || strlen($ari_code_ft) > 0): ?>
 		or order one below.
 	<?php endif; ?>
 </p>
 
-<?php if (empty($course->subject_to_approval) && strlen($ari_code) > 0):
+<?php if ((empty($course->subject_to_approval) && 
+	(strlen($ari_code) > 0) || strlen($ari_code_ft) > 0)) :
 
 	$sits_url = 'https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?';
 
@@ -41,8 +44,15 @@
 		$mcr = $course->mcr_attribute != '' ? $course->mcr_attribute : 'AAGEN101';
 
 		$link = $sits_url . 'process=siw_ipp_enq&code1=%s&code2=&code4=ipr_ipp5=%s';
-		$enquire_link[$mode] = sprintf($link, $ari_code, '10');
-		$prospectus_link[$mode] = sprintf($link, $ari_code, 'PRO');
+		<?php if ($has_fulltime): ?>
+			$enquire_link[$mode] = sprintf($link, $ari_code_ft, '10');
+			$prospectus_link[$mode] = sprintf($link, $ari_code_ft, 'PRO');
+		<?php endif; ?>
+
+		<?php if ($has_parttime): ?>
+			$enquire_link[$mode] = sprintf($link, $ari_code, '10');
+			$prospectus_link[$mode] = sprintf($link, $ari_code, 'PRO');
+		<?php endif; ?>
 
 		$enquire_event[$mode] = sprintf($eventjs, 'enquire-ug', $course_name_fortracking.'-'.$mode);
 		$prospectus_event[$mode] = sprintf($eventjs, 'order-prospectus-ug', $course_name_fortracking.'-'.$mode);
