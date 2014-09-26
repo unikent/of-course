@@ -54,7 +54,7 @@
 		$eventjs = "onClick=\"_pat.event('course-page', '%s', '%s');\"";
 		$event = "$course_name_fortracking - $award" . "$description - $mode [$mcr]";
 		$enquire_event[$key][$mode] = sprintf($eventjs, 'enquire-pg', $event);
-		$enquire_event[$key][$mode] = sprintf($eventjs, 'order-prospectus-pg', $event);
+		$prospectus_event[$key][$mode] = sprintf($eventjs, 'order-prospectus-pg', $event);
 	}
 ?>
 
