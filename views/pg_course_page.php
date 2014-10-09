@@ -75,9 +75,12 @@
 				<a href="/courses/postgraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?>apply-online/<?php echo $course->instance_id ?>" class="apply-adm-link" role="tab" aria-controls="apply">Apply</a>, <a href="#!enquiries" class="enquire-adm-link" role="tab" aria-controls="enquiries">enquire</a> or <a href="#!enquiries" class="pros-adm-link" role="tab" aria-controls="enquiries">order a prospectus</a>
 			</div>
 
+			<?php if (isset($course->no_fee_output) && $course->no_fee_output === 'true'): ?>
+			<!-- Do nothing -->
+			<?php else: ?>
 			<div class="key-facts-block">
 			<div class="key-facts-container">
-			
+				
 				<h2><a id="fees-tables-link" class="fees-link" role="button" aria-controls="fees-tables" tabindex='0' title='Click to toggle basic fee information'  onClick='_pat("course-page","expand-fees-pg", "<?php echo "[{$course->instance_id} in {$course->year}] {$course->programme_title} - {$course->award[0]->name}"; ?>");'>Fees <i class="icon-chevron-down toggler"></i></a></h2>
 				<div id="fees-tables" class="fees-tables" style="display: none" aria-expanded="false" aria-labelledby="fees-tables-link">
 					<?php if (isset($course->globals->fees_caveat_text_pg) && !empty($course->globals->fees_caveat_text_pg)) echo $course->globals->fees_caveat_text_pg ?> 
@@ -129,11 +132,12 @@
 					?>
 					
 				</div>
+				
 
 			</div>
 
 			</div>
-
+			<?php endif; ?>
 			<div class="key-facts-block">
 			<aside class="key-facts-container">
 				<h2>Key facts</h2>
