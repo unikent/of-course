@@ -27,11 +27,21 @@
 				<?php if((!empty($course->programme_overview)) || (strpos($course->programme_type, 'taught') !== false )):?>
 					<li><a href="#structure">Course structure</a></li>
 				<?php endif;?>
-				<li><a href="#study-support">Study support</a></li>
+
+				<?php if(!empty($course->key_information_miscellaneous)): ?>
+					<li><a href="#study-support">Study support</a></li>
+				<?php endif; ?>
+
+				<?php if ( !empty($course->careers_and_employability) || !empty($course->globals->careersemployability_text) ): ?>
+					<li><a href="#careers">Careers</a></li>
+				<?php endif; ?>
+				
 				<li><a href="#entry-requirements">Entry requirements</a></li>
+
 				<?php if(!empty($course->research_groups)):?>
 					<li><a href="#research-areas">Research areas</a></li>
 				<?php endif;?>
+
 				<li><a href="#staff-research">Staff research</a></li>
 				<li class='screenreader-only'><a href="#enquiries">Enquiries</a></li>
 			</ul>
@@ -61,7 +71,7 @@
 							<section id="structure"><?php Flight::render('pg_tabs/structure', array('course'=>$course)); ?></section>
 						<?php endif;
 					endif;?>
-				
+				<section id="careers"><?php Flight::render('pg_tabs/careers', array('course'=>$course)); ?></section>	
 				<section id="study-support"><?php Flight::render('pg_tabs/study-support', array('course'=>$course)); ?></section>	
 				<section id="entry-requirements"><?php Flight::render('pg_tabs/entry-requirements', array('course'=>$course)); ?></section>
 				<section id="research-areas"><?php Flight::render('pg_tabs/research-areas', array('course'=>$course)); ?></section>
