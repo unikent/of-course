@@ -103,8 +103,8 @@ foreach($course->modules as $module){
 	<?php endif; ?>
 	
 	<?php if(!empty($course->programme_aims)): ?>
+	<h3>Programme aims</h3>
 	<section class="info-subsection">
-		<h3>Programme aims</h3>
 		<?php echo $course->programme_aims ?>
 	</section>
 	<?php endif; ?>
