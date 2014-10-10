@@ -102,14 +102,14 @@ foreach($course->modules as $module){
 		</section>
 	<?php endif; ?>
 	
-	<h3>Learning outcomes</h3>
 	<?php if(!empty($course->programme_aims)): ?>
 	<section class="info-subsection">
-		<h4>Programme aims</h4>
+		<h3>Programme aims</h3>
 		<?php echo $course->programme_aims ?>
 	</section>
 	<?php endif; ?>
-
+	
+	<h3>Learning outcomes</h3>
 	<?php if(!empty($course->knowledge_and_understanding_learning_outcomes)): ?>
 	<section class="info-subsection">
 		<h4>Knowledge and understanding</h4>
