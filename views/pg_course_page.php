@@ -32,10 +32,10 @@
 					<li><a href="#study-support">Study support</a></li>
 				<?php endif; ?>
 
-				<?php if ( !empty($course->careers_and_employability) || !empty($course->globals->careersemployability_text) ): ?>
+				<?php if ( !empty($course->careers_and_employability) || !empty($course->globals->careersemployability_text) || !empty($course->professional_recognition) ): ?>
 					<li><a href="#careers">Careers</a></li>
 				<?php endif; ?>
-				
+
 				<li><a href="#entry-requirements">Entry requirements</a></li>
 
 				<?php if(!empty($course->research_groups)):?>
