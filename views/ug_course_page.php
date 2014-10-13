@@ -59,6 +59,9 @@ $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year'
 			</div>
 			<?php endif; ?>
 
+			<?php if (isset($course->no_fee_output) && $course->no_fee_output === 'true'): ?>
+			<!-- Do nothing -->
+			<?php else: ?>
 			<div class="key-facts-block">
 			<div class="key-facts-container">
 				<h2><a id="fees-tables-link" class="fees-link" role="button" aria-controls="fees-tables" tabindex='0' title='Click to toggle basic fee information' onClick='_pat("course-page","expand-fees-ug", "<?php echo "[{$course->instance_id} in {$course->year}] {$course->programme_title} - {$course->award[0]->name} [{$course->pos_code} / {$course->parttime_mcr_code}]"; ?>");'>Fees <i class="icon-chevron-down toggler"></i></a></h2>
@@ -115,6 +118,7 @@ $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year'
 				</div>
 			</div>
 			</div>
+			<?php endif; ?>
 
 			<div class="key-facts-block">
 			<aside class="key-facts-container">
