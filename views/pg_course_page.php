@@ -27,11 +27,21 @@
 				<?php if((!empty($course->programme_overview)) || (strpos($course->programme_type, 'taught') !== false )):?>
 					<li><a href="#structure">Course structure</a></li>
 				<?php endif;?>
-				<li><a href="#study-support">Study support</a></li>
+
+				<?php if(!empty($course->key_information_miscellaneous)): ?>
+					<li><a href="#study-support">Study support</a></li>
+				<?php endif; ?>
+
+				<?php if ( !empty($course->careers_and_employability) || !empty($course->globals->careersemployability_text) || !empty($course->professional_recognition) ): ?>
+					<li><a href="#careers">Careers</a></li>
+				<?php endif; ?>
+
 				<li><a href="#entry-requirements">Entry requirements</a></li>
+
 				<?php if(!empty($course->research_groups)):?>
 					<li><a href="#research-areas">Research areas</a></li>
 				<?php endif;?>
+
 				<li><a href="#staff-research">Staff research</a></li>
 				<li class='screenreader-only'><a href="#enquiries">Enquiries</a></li>
 			</ul>
@@ -61,7 +71,7 @@
 							<section id="structure"><?php Flight::render('pg_tabs/structure', array('course'=>$course)); ?></section>
 						<?php endif;
 					endif;?>
-				
+				<section id="careers"><?php Flight::render('pg_tabs/careers', array('course'=>$course)); ?></section>	
 				<section id="study-support"><?php Flight::render('pg_tabs/study-support', array('course'=>$course)); ?></section>	
 				<section id="entry-requirements"><?php Flight::render('pg_tabs/entry-requirements', array('course'=>$course)); ?></section>
 				<section id="research-areas"><?php Flight::render('pg_tabs/research-areas', array('course'=>$course)); ?></section>
@@ -75,9 +85,12 @@
 				<a href="/courses/postgraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?>apply-online/<?php echo $course->instance_id ?>" class="apply-adm-link" role="tab" aria-controls="apply">Apply</a>, <a href="#!enquiries" class="enquire-adm-link" role="tab" aria-controls="enquiries">enquire</a> or <a href="#!enquiries" class="pros-adm-link" role="tab" aria-controls="enquiries">order a prospectus</a>
 			</div>
 
+			<?php if (isset($course->no_fee_output) && $course->no_fee_output === 'true'): ?>
+			<!-- Do nothing -->
+			<?php else: ?>
 			<div class="key-facts-block">
 			<div class="key-facts-container">
-			
+				
 				<h2><a id="fees-tables-link" class="fees-link" role="button" aria-controls="fees-tables" tabindex='0' title='Click to toggle basic fee information'  onClick='_pat("course-page","expand-fees-pg", "<?php echo "[{$course->instance_id} in {$course->year}] {$course->programme_title} - {$course->award[0]->name}"; ?>");'>Fees <i class="icon-chevron-down toggler"></i></a></h2>
 				<div id="fees-tables" class="fees-tables" style="display: none" aria-expanded="false" aria-labelledby="fees-tables-link">
 					<?php if (isset($course->globals->fees_caveat_text_pg) && !empty($course->globals->fees_caveat_text_pg)) echo $course->globals->fees_caveat_text_pg ?> 
@@ -129,11 +142,12 @@
 					?>
 					
 				</div>
+				
 
 			</div>
 
 			</div>
-
+			<?php endif; ?>
 			<div class="key-facts-block">
 			<aside class="key-facts-container">
 				<h2>Key facts</h2>
