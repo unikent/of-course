@@ -14,7 +14,7 @@
 	$awards = array();
 	$descriptions = array();
 
-	foreach($course->deliveries as $delivery){
+	foreach($course->deliveries as $key => $delivery){
 
 		$mode = $delivery->attendance_pattern;
 		$award = $delivery->award_name;
