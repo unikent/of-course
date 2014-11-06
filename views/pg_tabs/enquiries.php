@@ -14,7 +14,7 @@
 	$awards = array();
 	$descriptions = array();
 
-	foreach($course->deliveries as $key => $delivery){
+	foreach($course->deliveries as $delivery){
 
 		$mode = $delivery->attendance_pattern;
 		$award = $delivery->award_name;
@@ -22,6 +22,10 @@
 
 		$pos = $delivery->pos_code;
 		$mcr = trim($delivery->mcr) != '' ? $delivery->mcr : 'AAGEN102';
+
+		//work out the key from the first part of the MCR code
+		$mcr_split = split('-', $delivery->mcr);
+		$key = $mcr_split[0];
 
 		// create vars
 		if (!isset($enquire_link[$key])) {
