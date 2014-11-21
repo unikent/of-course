@@ -1,3 +1,5 @@
+<?php $show_modules = (strtolower($course->module_session) != 'none'); ?>
+
 <h2>Course structure</h2>
 
 <?php if(!empty($course->programme_overview)):?>
@@ -23,7 +25,7 @@ foreach($course->modules as $module){
 	</section>
 	<?php endif; ?>
 	
-<?php else: ?>
+<?php elseif($show_modules): ?>
 	<section class="info-section">
 		<h3>Modules</h3>
 
@@ -50,7 +52,6 @@ foreach($course->modules as $module){
 			}
 		}
 	}
-
 
 ?>
 
