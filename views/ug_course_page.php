@@ -1,4 +1,4 @@
-<?php	
+<?php
 $has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
 $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
 $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year') !== false);
@@ -8,10 +8,10 @@ $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year'
 		<?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?>
 		<?php if(isset($course->programmme_status_text)) echo $course->programmme_status_text; ?>
 	</h1>
-	
+
 	<?php if($course->programme_suspended == 'true' || $course->programme_withdrawn == 'true'|| $course->holding_message != ''):
 		 //suppress content if holding message text filled in
-		 echo $course->holding_message;		
+		 echo $course->holding_message;
 	else: ?>
 
 	<div class="daedalus-tabs">
@@ -28,18 +28,18 @@ $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year'
 			</ul>
 		</div><!-- /span -->
 	</div><!-- /row -->
-	
+
 	<div class="row-fluid">
 		<div class="span7">
 			<div class="tab-content">
 				<section id="overview"><?php Flight::render('ug_tabs/overview', array('course'=>$course)); ?></section>
-				
-				
-				
+
+
+
 				<section id="structure"><?php Flight::render('ug_tabs/structure', array('course'=>$course)); ?></section>
-				
+
 				<section id="teaching"><?php Flight::render('ug_tabs/teaching', array('course'=>$course)); ?></section>
-				<section id="careers"><?php Flight::render('ug_tabs/careers', array('course'=>$course)); ?></section>	
+				<section id="careers"><?php Flight::render('ug_tabs/careers', array('course'=>$course)); ?></section>
 				<?php if ( (isset($preview) && $preview == true) || (!defined('CLEARING') || (defined('CLEARING') && !CLEARING)) || (defined('CLEARING') && CLEARING && $course->current_year == $course->year ) ): ?><section id="entry"><?php Flight::render('ug_tabs/entry', array('course'=>$course)); ?></section><?php endif; ?>
 				<section id="fees"><?php Flight::render('ug_tabs/fees', array('course'=>$course)); ?></section>
 				<section id="enquiries"><?php Flight::render('ug_tabs/enquiries', array('course'=>$course)); ?></section>
@@ -66,7 +66,7 @@ $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year'
 			<div class="key-facts-container">
 				<h2><a id="fees-tables-link" class="fees-link" role="button" aria-controls="fees-tables" tabindex='0' title='Click to toggle basic fee information' onClick='_pat("course-page","expand-fees-ug", "<?php echo "[{$course->instance_id} in {$course->year}] {$course->programme_title} - {$course->award[0]->name} [{$course->pos_code} / {$course->parttime_mcr_code}]"; ?>");'>Fees <i class="icon-chevron-down toggler"></i></a></h2>
 				<div id="fees-tables" class="fees-tables" style="display: none" aria-expanded="false" aria-labelledby="fees-tables-link">
-					<?php if (isset($course->globals->fees_caveat_text_ug) && !empty($course->globals->fees_caveat_text_ug)) echo $course->globals->fees_caveat_text_ug ?> 
+					<?php if (isset($course->globals->fees_caveat_text_ug) && !empty($course->globals->fees_caveat_text_ug)) echo $course->globals->fees_caveat_text_ug ?>
 					<table class="table">
 					  <thead>
 						<tr>
@@ -99,20 +99,20 @@ $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year'
 						}
 					?>
 
-					<?php 
+					<?php
 
-						if( 
+						if(
 							isset($course->globals->fees_year_in_industryabroad_text_ug) && // If YII/YA text is set AND
-							( 
+							(
 								(!empty($course->year_in_industry)) || // YII or YA has some text
-								(!empty($course->year_abroad)) 
+								(!empty($course->year_abroad))
 							) // then
 						){
 							 echo $course->globals->fees_year_in_industryabroad_text_ug;
 						}
 					?>
 
-					<?php 
+					<?php
 						if(isset($course->globals->fees_exception_text_ug)) echo $course->globals->fees_exception_text_ug;
 					?>
 				</div>
@@ -137,38 +137,57 @@ $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year'
 							 $second_subject = (isset($course->subject_area_2[0]) && $course->subject_area_2[0] != null);
 						?>
 						<li><strong>Subject area<?php if($second_subject) echo 's'; ?>:</strong>
-							<?php 
-								echo $course->subject_area_1[0]->name; 
+							<?php
+								echo $course->subject_area_1[0]->name;
 								echo ($second_subject) ? ' | '.$course->subject_area_2[0]->name : '';
 							?>
 						</li>
 						<li><strong>Award:</strong> <?php echo $course->award[0]->name;?> </li>
 						<li><strong>Honours type:</strong> <?php echo $course->honours_type;?> </li>
-					
+
 						<?php if(!empty($course->ucas_code)): ?>
 						<li><strong>UCAS code:</strong> <?php echo $course->ucas_code;?>	</li>
 						<?php endif; ?>
-					
-						<li><strong>Location:</strong> <a href="<?php echo $course->location[0]->url;?>"><?php echo $course->location[0]->name;?></a>	</li>
-					
+
+						<li><strong>Location:</strong>
+							<?php
+
+							$locations = "<a href='{$course->location[0]->url}'>".$course->location[0]->name."</a>";
+							$additional_locations = '';
+
+							if ($course->additional_locations != "") {
+								foreach ($course->additional_locations as $key=>$additional_location) {
+									if ($additional_location != '') {
+										if ( $key == (sizeof($course->additional_locations)-1) ) {
+											$additional_locations .= " and <a href='$additional_location->url'>$additional_location->name</a>";
+										} else {
+											$additional_locations .= ", <a href='$additional_location->url'>$additional_location->name</a>";
+										}
+									}
+								}
+							}
+							echo $locations.$additional_locations
+							?>
+						</li>
+											
 						<li><strong>Mode of study:</strong> <?php echo $course->mode_of_study;?></li>
-					
+
 						<?php if(!empty($course->duration)): ?>
 						<li><strong>Duration:</strong> <?php echo $course->duration;?></li>
 						<?php endif; ?>
-					
+
 						<?php if(!empty($course->start)): ?>
 						<li><strong>Start: </strong> <?php echo $course->start;?> </li>
 						<?php endif; ?>
-						
+
 						<?php if(!empty($course->accredited_by)): ?>
 						<li><strong>Accredited by</strong>: <?php echo $course->accredited_by;?>	</li>
 						<?php endif; ?>
-						
+
 						<?php if(!empty($course->total_kent_credits_awarded_on_completion)): ?>
 						<li><strong>Total Kent credits:</strong> <?php echo $course->total_kent_credits_awarded_on_completion;?></li>
 						<?php endif; ?>
-					
+
 						<?php if(!empty($course->total_ects_credits_awarded_on_completion)): ?>
 						<li><strong>Total ECTS credits:</strong> <?php echo $course->total_ects_credits_awarded_on_completion;?></li>
 						<?php endif; ?>
@@ -190,11 +209,11 @@ $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year'
 
 </div>
 <?php endif; ?>
-	
+
 	<?php if ( ! empty($course->related_courses) ): ?>
 	<section class="related-course-section">
 		<h2>Related to this course</h2>
-		
+
 		<div id="myCarousel" class="carousel slide" data-interval="false">
 		  <!-- Carousel items -->
 		  <div class="<?php echo count($course->related_courses) > 4 ? 'carousel-inner' : 'carousel-inner-left'; ?>">
@@ -202,7 +221,7 @@ $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year'
 		  <?php for( $i = 0; $i < ( round( (count($course->related_courses) / 4) + 0.5, 0, PHP_ROUND_HALF_DOWN ) ); $i++ ): ?>
 		  <?php $related_courses = array_slice($course->related_courses, $i*4) ?>
 			<div class="<?php if ($count == 0) echo 'active ' ?>item">
-				
+
 					<?php foreach($related_courses as $related_course): ?>
 					<div class="span2 related-course">
 						<div class="cell">
@@ -212,11 +231,11 @@ $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year'
 									<span class="related-award"><?php echo $related_course->award;?></span>
 								</a>
 							</div>
-						</div> 
+						</div>
 					</div>
 					<?php $count++; if ($count%4 == 0) break; ?>
 					<?php endforeach; ?>
-				
+
 			</div>
 			<?php endfor; ?>
 		  </div>
@@ -237,11 +256,11 @@ $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year'
 					</li>
 		<?php endforeach; ?>
 		</ul>
-	
+
 	</section>
 	<?php endif; ?>
-	
-		
+
+
 	<?php if (!empty($course->globals->general_disclaimer)): ?>
 	<footer class="general_disclaimer" style='font-size:0.8em;'>
 		<?php echo $course->globals->general_disclaimer; ?>
