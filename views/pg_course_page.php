@@ -10,13 +10,13 @@
 
 <article class="container pg">
 	<h1>
-		<?php echo $course->programme_title; ?> (<?php echo $course->award_list; ?>)
+		<?php echo $course->programme_title; ?> - <?php echo $course->award_list; ?>
 		<?php echo $course->programmme_status_text;?>
 	</h1>
-	
-	<?php if($course->programme_suspended == 'true' || $course->programme_withdrawn == 'true' || $course->holding_message != ''):	
+
+	<?php if($course->programme_suspended == 'true' || $course->programme_withdrawn == 'true' || $course->holding_message != ''):
 		 //suppress content if holding message text filled in
-		 echo $course->holding_message;			
+		 echo $course->holding_message;
 	else: ?>
 
 	<div class="daedalus-tabs">
@@ -47,12 +47,12 @@
 			</ul>
 		</div><!-- /span -->
 	</div><!-- /row -->
-	
+
 	<div class="row-fluid">
 		<div class="span7">
 			<div class="tab-content">
 				<section id="overview"><?php Flight::render('pg_tabs/overview', array('course'=>$course)); ?></section>
-				
+
 				<?php if(strpos($course->programme_type, 'taught') === false):
 						if(!empty($course->programme_overview)): ?>
 							<section id="structure"><?php Flight::render('pg_tabs/structure_research', array('course'=>$course)); ?></section>
@@ -71,8 +71,8 @@
 							<section id="structure"><?php Flight::render('pg_tabs/structure', array('course'=>$course)); ?></section>
 						<?php endif;
 					endif;?>
-				<section id="careers"><?php Flight::render('pg_tabs/careers', array('course'=>$course)); ?></section>	
-				<section id="study-support"><?php Flight::render('pg_tabs/study-support', array('course'=>$course)); ?></section>	
+				<section id="careers"><?php Flight::render('pg_tabs/careers', array('course'=>$course)); ?></section>
+				<section id="study-support"><?php Flight::render('pg_tabs/study-support', array('course'=>$course)); ?></section>
 				<section id="entry-requirements"><?php Flight::render('pg_tabs/entry-requirements', array('course'=>$course)); ?></section>
 				<section id="research-areas"><?php Flight::render('pg_tabs/research-areas', array('course'=>$course)); ?></section>
 				<section id="staff-research"><?php Flight::render('pg_tabs/staff-research', array('course'=>$course)); ?></section>
@@ -90,10 +90,10 @@
 			<?php else: ?>
 			<div class="key-facts-block">
 			<div class="key-facts-container">
-				
+
 				<h2><a id="fees-tables-link" class="fees-link" role="button" aria-controls="fees-tables" tabindex='0' title='Click to toggle basic fee information'  onClick='_pat("course-page","expand-fees-pg", "<?php echo "[{$course->instance_id} in {$course->year}] {$course->programme_title} - {$course->award[0]->name}"; ?>");'>Fees <i class="icon-chevron-down toggler"></i></a></h2>
 				<div id="fees-tables" class="fees-tables" style="display: none" aria-expanded="false" aria-labelledby="fees-tables-link">
-					<?php if (isset($course->globals->fees_caveat_text_pg) && !empty($course->globals->fees_caveat_text_pg)) echo $course->globals->fees_caveat_text_pg ?> 
+					<?php if (isset($course->globals->fees_caveat_text_pg) && !empty($course->globals->fees_caveat_text_pg)) echo $course->globals->fees_caveat_text_pg ?>
 					<?php foreach ($course->deliveries as $delivery): ?>
 					<?php if ( ! in_array($delivery->pos_code, $pos_codes) ): ?>
 						<table class="table">
@@ -127,22 +127,22 @@
 					<?php $pos_codes[] = $delivery->pos_code; endif; ?>
 					<?php endforeach; ?>
 
-					<?php 
-						if( 
+					<?php
+						if(
 							isset($course->globals->fees_year_in_industryabroad_text_pg) && // If YII/YA text is set AND
-							( 
+							(
 								(!empty($course->year_in_industry)) || // YII or YA has some text
-								(!empty($course->year_abroad)) 
+								(!empty($course->year_abroad))
 							) // then
 						){
 							 echo $course->globals->fees_year_in_industryabroad_text_pg;
 						}
-					
+
 						if(isset($course->globals->fees_exception_text_pg)) echo $course->globals->fees_exception_text_pg;
 					?>
-					
+
 				</div>
-				
+
 
 			</div>
 
@@ -165,13 +165,13 @@
 							 $second_subject = (isset($course->subject_area_2[0]) && $course->subject_area_2[0] != null);
 						?>
 						<li><strong>Subject area<?php if($second_subject) echo 's'; ?>:</strong>
-							<?php 
-								echo $course->subject_area_1[0]->name; 
+							<?php
+								echo $course->subject_area_1[0]->name;
 								echo ($second_subject) ? ', '.$course->subject_area_2[0]->name : '';
 							?>
 						</li>
 						<li><strong>Award:</strong> <?php echo $course->award_list;?></li>
-						
+
 						<li><strong>Course type:</strong>
 							<?php if(strpos($course->programme_type, 'research') === false ):?>
 								Taught
@@ -203,7 +203,7 @@
 						?>
 						<?php echo $locations.$additional_locations ?>
 						</li>
-					
+
 						<li><strong>Mode of study:</strong> <?php echo $course->mode_of_study;?></li>
 
 						<?php if(!empty($course->attendance_mode)): ?>
@@ -213,19 +213,19 @@
 						<?php if(!empty($course->attendance_text)): ?>
 						<li><strong>Duration:</strong> <?php echo $course->attendance_text;?></li>
 						<?php endif; ?>
-						
+
 						<?php if(!empty($course->start)): ?>
 						<li><strong>Start: </strong> <?php echo $course->start;?> </li>
 						<?php endif; ?>
-						
+
 						<?php if(!empty($course->accredited_by)): ?>
 						<li><strong>Accredited by</strong>: <?php echo $course->accredited_by ?></li>
 						<?php endif; ?>
-						
+
 						<?php if(!empty($course->total_kent_credits_awarded_on_completion)): ?>
 						<li><strong>Total Kent credits:</strong> <?php echo $course->total_kent_credits_awarded_on_completion;?></li>
 						<?php endif; ?>
-					
+
 						<?php if(!empty($course->total_ects_credits_awarded_on_completion)): ?>
 						<li><strong>Total ECTS credits:</strong> <?php echo $course->total_ects_credits_awarded_on_completion;?></li>
 						<?php endif; ?>
@@ -239,10 +239,10 @@
 
 			</aside>
 			</div>
-			
 
 
-			
+
+
 
 
 
@@ -253,11 +253,11 @@
 </div>
 
 <?php endif; ?>
-	
+
 	<?php if ( ! empty($course->related_courses) ): ?>
 	<section class="related-course-section">
 		<h2>Related to this course</h2>
-		
+
 		<div id="myCarousel" class="carousel slide" data-interval="false">
 		  <!-- Carousel items -->
 		  <div class="<?php echo count($course->related_courses) > 4 ? 'carousel-inner' : 'carousel-inner-left'; ?>">
@@ -265,7 +265,7 @@
 		  <?php for( $i = 0; $i < ( round( (count($course->related_courses) / 4) + 0.5, 0, PHP_ROUND_HALF_DOWN ) ); $i++ ): ?>
 		  <?php $related_courses = array_slice($course->related_courses, $i*4) ?>
 			<div class="<?php if ($count == 0) echo 'active ' ?>item">
-				
+
 					<?php foreach($related_courses as $related_course): ?>
 					<div class="span2 related-course">
 						<div class="cell">
@@ -275,11 +275,11 @@
 									<span class="related-award"><?php echo $related_course->award;?></span>
 								</a>
 							</div>
-						</div> 
+						</div>
 					</div>
 					<?php $count++; if ($count%4 == 0) break; ?>
 					<?php endforeach; ?>
-				
+
 			</div>
 			<?php endfor; ?>
 		  </div>
@@ -302,11 +302,11 @@
 		</ul>
 
 
-	
+
 	</section>
 	<?php endif; ?>
-	
-		
+
+
 	<?php if (!empty($course->globals->general_disclaimer)): ?>
 	<footer class="general_disclaimer" style='font-size:0.8em;'>
 		<?php echo $course->globals->general_disclaimer; ?>

@@ -14,7 +14,7 @@
 
 <article class="container">
 	<h1>
-		<?php echo $course->programme_title; ?> (<?php echo $course->award_list; ?>)
+		<?php echo $course->programme_title; ?> - <?php echo $course->award_list; ?>
 		<?php echo $course->programmme_status_text;?>
 	</h1>
 
