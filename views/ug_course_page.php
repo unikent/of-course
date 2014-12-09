@@ -1,4 +1,5 @@
 <?php
+
 	$has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
 	$has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
 	$has_foundation = (strpos(strtolower($course->programme_type), 'foundation year') !== false);
@@ -7,9 +8,6 @@
 	$course->award_list = '';
 	foreach ($course->award as $award) if (!empty($award->name)) $course->award_list .= $award->name . ', ';
 	$course->award_list = substr($course->award_list, 0, -2); // cuts off the final comma+space
-
-	$has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
-	$has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
 ?>
 
 <article class="container">
@@ -158,7 +156,26 @@
 						<li><strong>UCAS code:</strong> <?php echo $course->ucas_code;?>	</li>
 						<?php endif; ?>
 
-						<li><strong>Location:</strong> <a href="<?php echo $course->location[0]->url;?>"><?php echo $course->location[0]->name;?></a>	</li>
+						<li><strong>Location:</strong>
+							<?php
+
+							$locations = "<a href='{$course->location[0]->url}'>".$course->location[0]->name."</a>";
+							$additional_locations = '';
+
+							if ($course->additional_locations != "") {
+								foreach ($course->additional_locations as $key=>$additional_location) {
+									if ($additional_location != '') {
+										if ( $key == (sizeof($course->additional_locations)-1) ) {
+											$additional_locations .= " and <a href='$additional_location->url'>$additional_location->name</a>";
+										} else {
+											$additional_locations .= ", <a href='$additional_location->url'>$additional_location->name</a>";
+										}
+									}
+								}
+							}
+							echo $locations.$additional_locations
+							?>
+						</li>
 
 						<li><strong>Mode of study:</strong> <?php echo $course->mode_of_study;?></li>
 
