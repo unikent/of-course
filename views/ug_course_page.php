@@ -1,12 +1,19 @@
 <?php
-$has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
-$has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
-$has_foundation = (strpos(strtolower($course->programme_type), 'foundation year') !== false);
+
+	$has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
+	$has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
+	$has_foundation = (strpos(strtolower($course->programme_type), 'foundation year') !== false);
+
+	// pull out awards and combine into a comma separated list
+	$course->award_list = '';
+	foreach ($course->award as $award) if (!empty($award->name)) $course->award_list .= $award->name . ', ';
+	$course->award_list = substr($course->award_list, 0, -2); // cuts off the final comma+space
 ?>
+
 <article class="container">
 	<h1>
-		<?php echo $course->programme_title; ?> <?php echo $course->award[0]->name; ?>
-		<?php if(isset($course->programmme_status_text)) echo $course->programmme_status_text; ?>
+		<?php echo $course->programme_title; ?> - <?php echo $course->award_list; ?>
+		<?php echo $course->programmme_status_text;?>
 	</h1>
 
 	<?php if($course->programme_suspended == 'true' || $course->programme_withdrawn == 'true'|| $course->holding_message != ''):
@@ -169,7 +176,7 @@ $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year'
 							echo $locations.$additional_locations
 							?>
 						</li>
-											
+
 						<li><strong>Mode of study:</strong> <?php echo $course->mode_of_study;?></li>
 
 						<?php if(!empty($course->duration)): ?>
