@@ -11,9 +11,8 @@
 	$course->award_list = substr($course->award_list, 0, -2); // cuts off the final comma+space
 
 
-	// Make pos Avaiabale
-	$course->pos_code = $delivery[0]->pos_code;
-
+	// Make pos available
+	$course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_code : '';
 
 ?>
 
@@ -90,18 +89,21 @@
 						</tr>
 					  </thead>
 					  <tbody>
+					  <?php 
+					 	 $fees = $course->deliveries[0]->fees;
+					  ?>
 							<?php if($has_fulltime):?>
 							<tr>
 							  <td><strong>Full-time</strong></td>
-							  <td><?php echo empty($course->fees->home->{'full-time'}) ? ((empty($course->fees->home->{'euro-full-time'})) ? 'TBC' : '&euro;' . $course->fees->home->{'euro-full-time'}) : '&pound;' . $course->fees->home->{'full-time'}; ?></td>
-							  <td><?php echo empty($course->fees->int->{'full-time'}) ? ((empty($course->fees->int->{'euro-full-time'})) ? 'TBC' : '&euro;' . $course->fees->int->{'euro-full-time'}) : '&pound;' . $course->fees->int->{'full-time'}; ?></td>
+							  <td><?php echo empty($fees->home->{'full-time'}) ? ((empty($fees->home->{'euro-full-time'})) ? 'TBC' : '&euro;' . $fees->home->{'euro-full-time'}) : '&pound;' . $fees->home->{'full-time'}; ?></td>
+							  <td><?php echo empty($fees->int->{'full-time'}) ? ((empty($fees->int->{'euro-full-time'})) ? 'TBC' : '&euro;' . $fees->int->{'euro-full-time'}) : '&pound;' . $fees->int->{'full-time'}; ?></td>
 							</tr>
 							<?php endif;?>
 							<?php if($has_parttime):?>
 							<tr>
 							  <td><strong>Part-time</strong></td>
-							  <td><?php echo empty($course->fees->home->{'part-time'}) ? ((empty($course->fees->home->{'euro-part-time'})) ? 'TBC' : '&euro;' . $course->fees->home->{'euro-part-time'}) : '&pound;' . $course->fees->home->{'part-time'}; ?></td>
-							  <td><?php echo empty($course->fees->int->{'part-time'}) ? ((empty($course->fees->int->{'euro-part-time'})) ? 'TBC' : '&euro;' . $course->fees->int->{'euro-part-time'}) : '&pound;' . $course->fees->int->{'part-time'}; ?></td>
+							  <td><?php echo empty($fees->home->{'part-time'}) ? ((empty($fees->home->{'euro-part-time'})) ? 'TBC' : '&euro;' . $fees->home->{'euro-part-time'}) : '&pound;' . $fees->home->{'part-time'}; ?></td>
+							  <td><?php echo empty($fees->int->{'part-time'}) ? ((empty($fees->int->{'euro-part-time'})) ? 'TBC' : '&euro;' . $fees->int->{'euro-part-time'}) : '&pound;' . $fees->int->{'part-time'}; ?></td>
 							</tr>
 							<?php endif;?>
 					  </tbody>
