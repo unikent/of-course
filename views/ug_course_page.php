@@ -1,3 +1,4 @@
+
 <?php
 
 	$has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
@@ -8,6 +9,12 @@
 	$course->award_list = '';
 	foreach ($course->award as $award) if (!empty($award->name)) $course->award_list .= $award->name . ', ';
 	$course->award_list = substr($course->award_list, 0, -2); // cuts off the final comma+space
+
+
+	// Make pos Avaiabale
+	$course->pos_code = $delivery[0]->pos_code;
+
+
 ?>
 
 <article class="container">
