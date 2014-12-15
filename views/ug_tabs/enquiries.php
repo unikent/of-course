@@ -28,8 +28,8 @@
 	<?php endif; ?>
 </p>
 
-<?php if ((empty($course->subject_to_approval) && 
-	(strlen($ari_code) > 0) || strlen($ari_code_ft) > 0)) :
+<?php if ((empty($course->subject_to_approval) && (strlen($ari_code) > 0) || strlen($ari_code_ft) > 0)) :
+
 
 	$sits_url = 'https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?';
 
@@ -38,17 +38,14 @@
 	$enquire_event = array();
 	$prospectus_event = array();
 
-	foreach (array("fulltime", "parttime") as $mode) {
-		// Get MCR code
-		$mcr_attribute = $mode.'_mcr_code';
-		$mcr = $course->mcr_attribute != '' ? $course->mcr_attribute : 'AAGEN101';
+	foreach($course->deliveries as $delivery){
+
+		$mode = str_replace('-','', $delivery->attendance_pattern);
 
 		$link = $sits_url . 'process=siw_ipp_enq&code1=%s&code2=&code4=ipr_ipp5=%s';
 
-		$ari_to_use = $mode === 'fulltime' ? $ari_code_ft : $ari_code;
-
-		$enquire_link[$mode] = sprintf($link, $ari_to_use, '10');
-		$prospectus_link[$mode] = sprintf($link, $ari_to_use, 'PRO');
+		$enquire_link[$mode] = sprintf($link, $delivery->ari_code, '10');
+		$prospectus_link[$mode] = sprintf($link, $delivery->ari_code, 'PRO');
 
 		$enquire_event[$mode] = sprintf($eventjs, 'enquire-ug', $course_name_fortracking.'-'.$mode);
 		$prospectus_event[$mode] = sprintf($eventjs, 'order-prospectus-ug', $course_name_fortracking.'-'.$mode);
