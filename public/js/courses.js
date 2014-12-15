@@ -290,9 +290,17 @@ $(document).ready(function(){
 	$('#apply-link-dummy').tooltip();
 
 	function typesettings(type) {
-		if (type == 'full-time-ug') {
+		if (type == 'full-time-ug-ucas') {
 			$("#apply-link-ucas").show();
 			$(".apply-link-courses").hide();
+			$("#apply-link-dummy").hide();
+			$(".full-time-text").show();
+			$(".part-time-text").hide();
+			$(".year").hide();
+		}
+		else if (type == 'full-time-ug-direct') {
+			$("#apply-link-ucas").hide();
+			$(".apply-link-courses").show();
 			$("#apply-link-dummy").hide();
 			$(".full-time-text").show();
 			$(".part-time-text").hide();
