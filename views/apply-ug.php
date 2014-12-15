@@ -2,7 +2,6 @@
 $has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
 $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
 $full_type='ucas';
-print_r($deliveries);
 if(empty($deliveries)){
 	$has_fulltime = $has_parttime = FALSE;
 }else {
