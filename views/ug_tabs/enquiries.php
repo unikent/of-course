@@ -8,10 +8,6 @@
 	$course_name_fortracking = "[{$course->instance_id} in {$course->year}] {$course->programme_title} - {$course->award[0]->name} [{$course->pos_code}]";
 	$eventjs = "onClick=\"_pat.event('course-page', '%s', '%s');\"";
 
-	// Get whether this course has an ARI code or not
-	$ari_code = isset($course->ari_code) ? $course->ari_code : (string)null;
-	//for full-time
-	$ari_code_ft = isset($course->ft_ari_code) ? $course->ft_ari_code : (string)null;
 ?>
 
 <h2>Enquire or order a prospectus</h2>
@@ -23,12 +19,12 @@
 		Download a prospectus (PDF - 2MB)
 	</a>
 
-	<?php if ((strlen($ari_code) > 0) || strlen($ari_code_ft) > 0): ?>
+	<?php if (!empty($course->deliveries)): ?>
 		or order one below.
 	<?php endif; ?>
 </p>
 
-<?php if ((empty($course->subject_to_approval) && (strlen($ari_code) > 0) || strlen($ari_code_ft) > 0)) :
+<?php if (empty($course->subject_to_approval) && (!empty($course->deliveries))) :
 
 
 	$sits_url = 'https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?';
