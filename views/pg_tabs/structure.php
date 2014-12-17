@@ -1,3 +1,5 @@
+<?php $show_modules = (strtolower($course->module_session) != 'none'); ?>
+
 <h2>Course structure</h2>
 
 <?php if(!empty($course->programme_overview)):?>
@@ -14,16 +16,6 @@ foreach($course->modules as $module){
 }	
 ?>
 
-<?php if((empty($course->modules[0])) || $emptystages): ?>
-
-	<?php if ( !empty($course->modules_intro_no_pos) ): ?>
-	<section class="info-section">
-		<h3>Modules</h3>
-		<?php echo $course->modules_intro_no_pos ?>
-	</section>
-	<?php endif; ?>
-	
-<?php else: ?>
 	<section class="info-section">
 		<h3>Modules</h3>
 
@@ -31,6 +23,7 @@ foreach($course->modules as $module){
 
 
 <?php
+	if($show_modules): 
 	// get modules from all deliveries as unique lists
 	$module_list = array(); 
 
@@ -50,7 +43,6 @@ foreach($course->modules as $module){
 			}
 		}
 	}
-
 
 ?>
 
