@@ -1,7 +1,9 @@
 <?php
 $show_modules = (strtolower($course->module_session) != 'none');
 $modules = $course->modules;
-$modules = $modules[0];
+if(!empty($modules)) {
+	$modules = $modules[0];
+}
 ?>
 
 <h2>Course structure</h2>
