@@ -93,6 +93,9 @@
 
 				<h2><a id="fees-tables-link" class="fees-link" role="button" aria-controls="fees-tables" tabindex='0' title='Click to toggle basic fee information'  onClick='_pat("course-page","expand-fees-pg", "<?php echo "[{$course->instance_id} in {$course->year}] {$course->programme_title} - {$course->award[0]->name}"; ?>");'>Fees <i class="icon-chevron-down toggler"></i></a></h2>
 				<div id="fees-tables" class="fees-tables" style="display: none" aria-expanded="false" aria-labelledby="fees-tables-link">
+					<?php if (isset($course->globals->fees_override_pgr) && !empty($course->globals->fees_override_pgr) && strpos($course->programme_type,'research')!==false){
+						echo $course->globals->fees_override_pgr;
+					}else{ ?>
 					<?php if (isset($course->globals->fees_caveat_text_pg) && !empty($course->globals->fees_caveat_text_pg)) echo $course->globals->fees_caveat_text_pg ?>
 					<?php foreach ($course->deliveries as $delivery): ?>
 					<?php if ( ! in_array($delivery->pos_code, $pos_codes) ): ?>
@@ -140,7 +143,9 @@
 
 						if(isset($course->globals->fees_exception_text_pg)) echo $course->globals->fees_exception_text_pg;
 					?>
-
+					<?php
+					}
+					?>
 				</div>
 
 
