@@ -67,8 +67,9 @@
 				<a href="/clearing/vacancies.html">Apply for Clearing</a>
 			</div>
 			<?php else: ?>
-			<div class="panel admission-links">
-				<a href="/courses/undergraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?>apply-online/<?php echo $course->instance_id ?>" class="apply-adm-link" role="tab" aria-controls="apply">Apply</a>, <a href="#!enquiries" class="enquire-adm-link" role="tab" aria-controls="enquiries">enquire</a> or <a href="#!enquiries" class="pros-adm-link" role="tab" aria-controls="enquiries">order a prospectus</a>
+			<div class="admission-links">
+				<a class="btn btn-large apply-adm-link" href="/courses/undergraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?>apply-online/<?php echo $course->instance_id ?>" role="tab" aria-controls="apply">Apply <i class="icon-chevron-right"></i></a>
+				<a href="#!enquiries" class="enquire-adm-link" role="tab" aria-controls="enquiries">Contact us</a> or <a href="#!enquiries" class="pros-adm-link" role="tab" aria-controls="enquiries">order a prospectus</a>
 			</div>
 			<?php endif; ?>
 
