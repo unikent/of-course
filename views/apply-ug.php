@@ -41,7 +41,7 @@ if(empty($deliveries)){
 		    <p id="type" data-type="part-time" class="hidden" aria-hidden="true">Part-time</p>
 		    <?php else: ?>
 		    <div class="form-group type">
-		        <label for="type">Full-time or part-time</label>
+		        <label for="type">Mode of study</label>
 		        <div class="controls">
 		            <select name="type" id="type" required="required">
 						<?php if($has_fulltime && $has_parttime): ?>

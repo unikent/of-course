@@ -1,22 +1,54 @@
 <?php
-$has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
-$has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
-?>
-
-<?php
 	// pull out awards and combine into a comma separated list
 	$course->award_list = '';
 	foreach ($course->award as $award) if (!empty($award->name)) $course->award_list .= $award->name . ', ';
 	$course->award_list = substr($course->award_list, 0, -2); // cuts off the final comma+space
 
-	$has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
-	$has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
+
+	/**
+	* Returns what the delivery and the course data say about whether there's a
+	* full-time or part-time option for that course, and whether or not they agree
+	*
+	* @param $deliveries - array of deliveries
+	* @param $course     - course object
+	* @param $needle     - search string (typically 'full-time' or 'part-time')
+	*
+	* @returns int:
+	*   - 0 if there *definitely is not* a delivery of that type
+	*   - 2 if there *definitely is* a delivery of that type
+	*   - 1 if the two sources disagree on the matter
+	*/
+	$delivery_truth = function($deliveries, $course, $needle) {
+
+		// Does the delivery data say that there's a delivery of type $needle?
+		$delivery_says = function($deliveries, $needle) {
+			foreach ($deliveries as $d) {
+				if (stristr($d->attendance_pattern, $needle)) {
+					return (int)true;
+				}
+			}
+
+			return (int)false;
+		};
+
+		// Does the course object say that there's a delivery of type $needle?
+		$course_says = function($course, $needle) {
+			return (int)(stristr($course->mode_of_study, $needle) !== false);
+		};
+
+		return ($delivery_says($deliveries, $needle) + $course_says($course, $needle));
+
+	};
+
+
+	$has_parttime = $delivery_truth($deliveries, $course, "part-time");
+	$has_fulltime = $delivery_truth($deliveries, $course, "full-time");
 ?>
 
 <h1>Your application: <a href="/courses/postgraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?><?php echo $course->instance_id ?>/<?php echo $course->slug ?>"><?php echo $course->programme_title ?>  (<?php echo $course->award_list; ?>) <?php echo $course->programmme_status_text;?></a></h1>
 
 
-<?php 
+<?php
 
 // How to apply 53 is "How to apply (atypical courses)".
 // When this field is populated, show only its contents, not the standard apply text.
@@ -41,10 +73,10 @@ if(isset($course->how_to_apply) && trim($course->how_to_apply) != '' && !empty($
 
 	<div>
 		<fieldset class="highlight-fieldset indent">
-		    <legend>Course options</legend>
-		    <div class="form-group">
-		    	<div class="controls">
-	    			<?php foreach ($deliveries as $delivery): ?>
+			<legend>Course options</legend>
+			<div class="form-group">
+				<div class="controls">
+					<?php foreach ($deliveries as $delivery): ?>
 						<input id="delivery<?php echo $delivery->id ?>" type="radio" class="radioLeft" name="delivery" value="delivery<?php echo $delivery->id ?>">
 						<div class="textBlock">
 							<?php echo str_ireplace(array('part-time', 'full-time'), array('<strong>part-time</strong>', '<strong>full-time</strong>'), $delivery->description)?>
@@ -66,55 +98,55 @@ if(isset($course->how_to_apply) && trim($course->how_to_apply) != '' && !empty($
 
 	<div>
 		<fieldset class="highlight-fieldset indent">
-		    <legend>Course options</legend>
-		    <?php if (!$has_parttime): ?>
-		    <p id="type" data-type="full-time" class="hidden" aria-hidden="true">Full-time</p>
-		    <?php elseif (!$has_fulltime): ?>
-		    <p id="type" data-type="part-time" class="hidden" aria-hidden="true">Part-time</p>
-		    <?php else: ?>
-		    <div class="form-group">
-		        <label for="type">Full-time or part-time</label>
-		        <div class="controls">
-		            <select name="type" id="type" required="required">
+			<legend>Course options</legend>
+			<?php if (!$has_parttime): ?>
+			<p id="type" data-type="full-time" class="hidden" aria-hidden="true">Full-time</p>
+			<?php elseif (!$has_fulltime): ?>
+			<p id="type" data-type="part-time" class="hidden" aria-hidden="true">Part-time</p>
+			<?php else: ?>
+			<div class="form-group">
+				<label for="type">Mode of study</label>
+				<div class="controls">
+					<select name="type" id="type" required="required">
 						<?php if($has_fulltime && $has_parttime): ?>
 						<option value="pleaseselect">Please select</option>
 						<?php endif; ?>
-						<?php if($has_fulltime): ?>
+						<?php if($has_fulltime === 2): ?>
 							<option value="full-time">Full-time</option>
 						<?php endif; ?>
-						<?php if($has_parttime): ?>
+						<?php if($has_parttime === 2): ?>
 							<option value="part-time">Part-time</option>
 						<?php endif; ?>
 					</select>
-		        </div>
-		    </div>
-		    <?php endif; ?>
+				</div>
+			</div>
+			<?php endif; ?>
 
-		    <?php if (sizeof($course->award) === 1): ?>
-	        <p id="award" data-award="<?php echo strtolower(str_replace(' ', '', $course->award[0]->{name})) ?>" class="hidden" aria-hidden="true"><?php echo $course->award[0]->{name}?></p>
-	        <?php else: ?>
-		    <div class="form-group">
-		        <label for="award">Award</label>
-		        <div class="controls">
-		            <select name="award" id="award" required="required">
-		            	
+			<?php if (sizeof($course->award) === 1): ?>
+			<p id="award" data-award="<?php echo strtolower(str_replace(' ', '', $course->award[0]->{name})) ?>" class="hidden" aria-hidden="true"><?php echo $course->award[0]->{name}?></p>
+			<?php else: ?>
+			<div class="form-group">
+				<label for="award">Award</label>
+				<div class="controls">
+					<select name="award" id="award" required="required">
+
 						<option value="pleaseselect">Please select</option>
 						<?php foreach ($course->award as $award): ?>
 						<option value="<?php echo strtolower(str_replace(' ', '', $award->name)) ?>"><?php echo $award->name?></option>
 						<?php endforeach; ?>
-						
+
 					</select>
 				</div>
-		    </div>
-		    <?php endif; ?>
+			</div>
+			<?php endif; ?>
 
 
-		    <p id="year" data-year="<?php echo $course->year; ?>" class="hidden" aria-hidden="true"><?php echo $course->year; ?></p>
+			<p id="year" data-year="<?php echo $course->year; ?>" class="hidden" aria-hidden="true"><?php echo $course->year; ?></p>
 
 		</fieldset>
 	</div>
 
-	
+
 
 	<?php foreach ($deliveries as $delivery): ?>
 
