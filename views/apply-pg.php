@@ -13,10 +13,9 @@ $course->award_list = substr($course->award_list, 0, -2); // cuts off the final 
  * @param $course - course object
  * @param $needle - search string (typically 'full-time' or 'part-time')
  *
- * @returns int:
- *   - 0 if there *definitely is not* a delivery of that type
- *   - 2 if there *definitely is* a delivery of that type
- *   - 1 if the two sources disagree on the matter
+	* @returns boolean:
+	*   - false if there *definitely is not* a delivery of that type or the two sources disagree on the matter
+	*   - true if there *definitely is* a delivery of that type
  */
 $delivery_truth = function ($deliveries, $course, $needle) {
 
@@ -24,19 +23,19 @@ $delivery_truth = function ($deliveries, $course, $needle) {
     $delivery_says = function ($deliveries, $needle) {
         foreach ($deliveries as $d) {
             if (stristr($d->attendance_pattern, $needle)) {
-                return (int)true;
+					return true;
             }
         }
 
-        return (int)false;
+			return false;
     };
 
     // Does the course object say that there's a delivery of type $needle?
     $course_says = function ($course, $needle) {
-        return (int)(stristr($course->mode_of_study, $needle) !== false);
+			return (stristr($course->mode_of_study, $needle) !== false);
     };
 
-    return ($delivery_says($deliveries, $needle) + $course_says($course, $needle));
+		return ($delivery_says($deliveries, $needle) && $course_says($course, $needle));
 
 };
 
@@ -123,10 +122,10 @@ else: ?>
                                     <?php if ($has_fulltime && $has_parttime): ?>
                                         <option value="pleaseselect">Please select</option>
                                     <?php endif; ?>
-                                    <?php if ($has_fulltime === 2): ?>
+						<?php if($has_fulltime): ?>
                                         <option value="full-time">Full-time</option>
                                     <?php endif; ?>
-                                    <?php if ($has_parttime === 2): ?>
+						<?php if($has_parttime): ?>
                                         <option value="part-time">Part-time</option>
                                     <?php endif; ?>
                                 </select>
