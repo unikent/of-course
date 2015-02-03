@@ -82,7 +82,7 @@ else: ?>
                             <?php foreach ($deliveries as $delivery): ?>
                                 <input id="delivery<?php echo $delivery->id ?>" type="radio" class="radioLeft"
                                        name="delivery" value="delivery<?php echo $delivery->id ?>">
-                                <div class="textBlock">]
+                                <div class="textBlock">
                                     <?php echo str_ireplace(array('part-time', 'full-time'), array('<strong>part-time</strong>', '<strong>full-time</strong>'), $delivery->description) ?>
                                 </div>
                                 <div style="clear:both;"/>
