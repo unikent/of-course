@@ -24,6 +24,7 @@ foreach ($course->modules as $module) {
 
     <?php
     if ($show_modules):
+
         // get modules from all deliveries as unique lists
         $module_list = array();
 
@@ -45,6 +46,7 @@ foreach ($course->modules as $module) {
             }
         }
 
+
         ?>
 
 
@@ -63,6 +65,7 @@ foreach ($course->modules as $module) {
                 <p><strong>Credits:</strong> <?php echo $module->credit_amount ?> credits
                     (<?php echo $module->ects_credit ?> ECTS credits).</p>
 
+
                 <p class="module-read-more"><a
                         href="http://www.kent.ac.uk/courses/modulecatalogue/modules/<?php echo $module->module_code ?>">Read
                         more <i class="icon-arrow-right"></i></a></p>
@@ -71,6 +74,7 @@ foreach ($course->modules as $module) {
     <?php endforeach; ?>
 
         <?php if (sizeof($other_modules) != 0): ?>
+
         <a data-toggle="collapse" href="#more-modules">Show more...</a>
         <br/>
         <div id="more-modules" class="collapse">
@@ -93,8 +97,10 @@ foreach ($course->modules as $module) {
             <?php endforeach; ?>
         </div>
     <?php endif; ?>
+
     <?php endif; ?>
 </section>
+
 
 
 <section class="info-section">
@@ -113,8 +119,8 @@ foreach ($course->modules as $module) {
         </section>
     <?php endif; ?>
 
-    <h3>Learning outcomes</h3>
     <?php if (!empty($course->knowledge_and_understanding_learning_outcomes)): ?>
+        <h3>Learning outcomes</h3>
         <section class="info-subsection">
             <h4>Knowledge and understanding</h4>
             <?php echo $course->knowledge_and_understanding_learning_outcomes ?>
@@ -142,6 +148,3 @@ foreach ($course->modules as $module) {
         </section>
     <?php endif; ?>
 </section>
-
-
-
