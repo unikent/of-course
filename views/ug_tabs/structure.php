@@ -88,7 +88,6 @@ if(!empty($modules)) {
 			<?php endif; ?>
 		<?php endif; ?>
 	</section>
-	<br />
 <?php endif; ?>
 
 <?php if($show_modules): ?>
