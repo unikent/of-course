@@ -56,6 +56,11 @@
 				<?php if ( (isset($preview) && $preview == true) || (!defined('CLEARING') || (defined('CLEARING') && !CLEARING)) || (defined('CLEARING') && CLEARING && $course->current_year == $course->year ) ): ?><section id="entry"><?php Flight::render('ug_tabs/entry', array('course'=>$course)); ?></section><?php endif; ?>
 				<section id="fees"><?php Flight::render('ug_tabs/fees', array('course'=>$course)); ?></section>
 				<section id="enquiries"><?php Flight::render('ug_tabs/enquiries', array('course'=>$course)); ?></section>
+			
+				<ul>
+					<li><a href="#!enquiries" class="enquire-adm-link" role="tab" aria-controls="enquiries">Contact us</a> or <a href="#!enquiries" class="pros-adm-link" role="tab" aria-controls="enquiries">order a prospectus</a></li>
+				</ul>
+
 			</div>
 		</div><!-- /span -->
 		<div class="span5">
