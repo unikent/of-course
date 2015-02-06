@@ -100,75 +100,6 @@ else: ?>
 				</div>
             <?php endif; ?>
 
-            <?php if (isset($course->no_fee_output) && $course->no_fee_output === 'true'): ?>
-                <!-- Do nothing -->
-            <?php else: ?>
-                <div class="key-facts-block">
-                    <div class="key-facts-container">
-                        <h2><a id="fees-tables-link" class="fees-link" role="button" aria-controls="fees-tables"
-                               tabindex='0' title='Click to toggle basic fee information'
-                               onClick="_pat('course-page','expand-fees-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?> - <?php echo $course->award[0]->name ?>');">Fees
-                                <i class="icon-chevron-down toggler"></i></a></h2>
-
-                        <div id="fees-tables" class="fees-tables" style="display: none" aria-expanded="false"
-                             aria-labelledby="fees-tables-link">
-                            <?php if (isset($course->globals->fees_caveat_text_ug) && !empty($course->globals->fees_caveat_text_ug)) echo $course->globals->fees_caveat_text_ug ?>
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>UK/EU</th>
-                                    <th>Overseas</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <?php
-                                $fees = $course->deliveries[0]->fees;
-                                ?>
-                                <?php if ($has_fulltime): ?>
-                                    <tr>
-                                        <td><strong>Full-time</strong></td>
-                                        <td><?php echo empty($fees->home->{'full-time'}) ? ((empty($fees->home->{'euro-full-time'})) ? 'TBC' : '&euro;' . number_format($fees->home->{'euro-full-time'})) : '&pound;' . number_format($fees->home->{'full-time'}); ?></td>
-                                        <td><?php echo empty($fees->int->{'full-time'}) ? ((empty($fees->int->{'euro-full-time'})) ? 'TBC' : '&euro;' . number_format($fees->int->{'euro-full-time'})) : '&pound;' . number_format($fees->int->{'full-time'}); ?></td>
-                                    </tr>
-                                <?php endif; ?>
-                                <?php if ($has_parttime): ?>
-                                    <tr>
-                                        <td><strong>Part-time</strong></td>
-                                        <td><?php echo empty($fees->home->{'part-time'}) ? ((empty($fees->home->{'euro-part-time'})) ? 'TBC' : '&euro;' . number_format($fees->home->{'euro-part-time'})) : '&pound;' . number_format($fees->home->{'part-time'}); ?></td>
-                                        <td><?php echo empty($fees->int->{'part-time'}) ? ((empty($fees->int->{'euro-part-time'})) ? 'TBC' : '&euro;' . number_format($fees->int->{'euro-part-time'})) : '&pound;' . number_format($fees->int->{'part-time'}); ?></td>
-                                    </tr>
-                                <?php endif; ?>
-                                </tbody>
-                            </table>
-
-                            <?php
-                            if ($has_foundation && isset($course->globals->fees_foundation_year_exception_text_ug)) {
-                                echo $course->globals->fees_foundation_year_exception_text_ug;
-                            }
-                            ?>
-
-                            <?php
-
-                            if (
-                                isset($course->globals->fees_year_in_industryabroad_text_ug) && // If YII/YA text is set AND
-                                (
-                                    (!empty($course->year_in_industry)) || // YII or YA has some text
-                                    (!empty($course->year_abroad))
-                                ) // then
-                            ) {
-                                echo $course->globals->fees_year_in_industryabroad_text_ug;
-                            }
-                            ?>
-
-                            <?php
-                            if (isset($course->globals->fees_exception_text_ug)) echo $course->globals->fees_exception_text_ug;
-                            ?>
-                        </div>
-                    </div>
-                </div>
-            <?php endif; ?>
-
             <div class="key-facts-block">
                 <aside class="key-facts-container">
                     <h2>Key facts</h2>
@@ -261,6 +192,76 @@ else: ?>
                     </div>
                 </aside>
             </div>
+
+            <?php if (isset($course->no_fee_output) && $course->no_fee_output === 'true'): ?>
+                <!-- Do nothing -->
+            <?php else: ?>
+                <div class="key-facts-block">
+                    <div class="key-facts-container">
+                        <h2><a id="fees-tables-link" class="fees-link" role="button" aria-controls="fees-tables"
+                               tabindex='0' title='Click to toggle basic fee information'
+                               onClick="_pat('course-page','expand-fees-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?> - <?php echo $course->award[0]->name ?>');">Fees
+                                <i class="icon-chevron-down toggler"></i></a></h2>
+
+                        <div id="fees-tables" class="fees-tables" style="display: none" aria-expanded="false"
+                             aria-labelledby="fees-tables-link">
+                            <?php if (isset($course->globals->fees_caveat_text_ug) && !empty($course->globals->fees_caveat_text_ug)) echo $course->globals->fees_caveat_text_ug ?>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>UK/EU</th>
+                                    <th>Overseas</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                $fees = $course->deliveries[0]->fees;
+                                ?>
+                                <?php if ($has_fulltime): ?>
+                                    <tr>
+                                        <td><strong>Full-time</strong></td>
+                                        <td><?php echo empty($fees->home->{'full-time'}) ? ((empty($fees->home->{'euro-full-time'})) ? 'TBC' : '&euro;' . number_format($fees->home->{'euro-full-time'})) : '&pound;' . number_format($fees->home->{'full-time'}); ?></td>
+                                        <td><?php echo empty($fees->int->{'full-time'}) ? ((empty($fees->int->{'euro-full-time'})) ? 'TBC' : '&euro;' . number_format($fees->int->{'euro-full-time'})) : '&pound;' . number_format($fees->int->{'full-time'}); ?></td>
+                                    </tr>
+                                <?php endif; ?>
+                                <?php if ($has_parttime): ?>
+                                    <tr>
+                                        <td><strong>Part-time</strong></td>
+                                        <td><?php echo empty($fees->home->{'part-time'}) ? ((empty($fees->home->{'euro-part-time'})) ? 'TBC' : '&euro;' . number_format($fees->home->{'euro-part-time'})) : '&pound;' . number_format($fees->home->{'part-time'}); ?></td>
+                                        <td><?php echo empty($fees->int->{'part-time'}) ? ((empty($fees->int->{'euro-part-time'})) ? 'TBC' : '&euro;' . number_format($fees->int->{'euro-part-time'})) : '&pound;' . number_format($fees->int->{'part-time'}); ?></td>
+                                    </tr>
+                                <?php endif; ?>
+                                </tbody>
+                            </table>
+
+                            <?php
+                            if ($has_foundation && isset($course->globals->fees_foundation_year_exception_text_ug)) {
+                                echo $course->globals->fees_foundation_year_exception_text_ug;
+                            }
+                            ?>
+
+                            <?php
+
+                            if (
+                                isset($course->globals->fees_year_in_industryabroad_text_ug) && // If YII/YA text is set AND
+                                (
+                                    (!empty($course->year_in_industry)) || // YII or YA has some text
+                                    (!empty($course->year_abroad))
+                                ) // then
+                            ) {
+                                echo $course->globals->fees_year_in_industryabroad_text_ug;
+                            }
+                            ?>
+
+                            <?php
+                            if (isset($course->globals->fees_exception_text_ug)) echo $course->globals->fees_exception_text_ug;
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+            
         </div>
     </div>
     <!-- /span -->
