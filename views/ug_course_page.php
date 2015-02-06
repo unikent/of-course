@@ -62,6 +62,7 @@
 				</ul>
 
 			</div>
+
 		</div><!-- /span -->
 		<div class="span5">
 
@@ -231,6 +232,8 @@
 
 </div>
 <?php endif; ?>
+
+<section id="learnmore" class="learnmore-section"></section>
 
 	<?php if ( ! empty($course->related_courses) ): ?>
 	<section class="related-course-section">
