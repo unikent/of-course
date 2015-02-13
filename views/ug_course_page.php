@@ -79,23 +79,23 @@ else: ?>
             <?php if (defined('CLEARING') && CLEARING && $course->current_year > $course->year): ?>
                 <div class="panel admission-links">
                     <a href="/clearing/vacancies.html"
-                    	class="btn btn-large apply-adm-link" 
-                    	type="button" 
-						role="button" 
+                    	class="btn btn-large apply-adm-link"
+                    	type="button"
+						role="button"
 						aria-controls="apply">Apply for Clearing <i class="icon-chevron-right"></i></a>
                 </div>
             <?php else: ?>
                 <div class="admission-links">
-					<a href="/courses/undergraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?>apply-online/<?php echo $course->instance_id ?>" 
-						class="btn btn-large apply-adm-link" 
-						type="button" 
-						role="button" 
+					<a href="/courses/undergraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?>apply-online/<?php echo $course->instance_id ?>"
+						class="btn btn-large apply-adm-link"
+						type="button"
+						role="button"
 						aria-controls="apply"
 						onclick="_pat.event('course-page', 'apply-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?>');">Apply <i class="icon-chevron-right"></i></a>
-					<a href="#!enquiries" 
-						class="enquire-adm-link" 
-						role="tab" 
-						aria-controls="enquiries">Contact us</a> 
+					<a href="#!enquiries"
+						class="enquire-adm-link"
+						role="tab"
+						aria-controls="enquiries">Contact us</a>
 					or <a href="#!enquiries" class="pros-adm-link" role="tab" aria-controls="enquiries">order a prospectus</a>
 				</div>
             <?php endif; ?>
@@ -200,7 +200,7 @@ else: ?>
                     <div class="key-facts-container">
                         <h2><a id="fees-tables-link" class="fees-link" role="button" aria-controls="fees-tables"
                                tabindex='0' title='Click to toggle basic fee information'
-                               onClick="_pat('course-page','expand-fees-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?> - <?php echo $course->award[0]->name ?>');">Fees
+                               onClick="_pat.event('course-page','expand-fees-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?> - <?php echo $course->award[0]->name ?>');">Fees
                                 <i class="icon-chevron-down toggler"></i></a></h2>
 
                         <div id="fees-tables" class="fees-tables" style="display: none" aria-expanded="false"
@@ -261,7 +261,7 @@ else: ?>
                     </div>
                 </div>
             <?php endif; ?>
-            
+
         </div>
     </div>
     <!-- /span -->
