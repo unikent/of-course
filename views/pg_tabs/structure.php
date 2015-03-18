@@ -12,6 +12,7 @@
 foreach ($course->modules as $module) {
     if (!empty($module->stages)) {
         $emptystages = false;
+        break;
     }
 }
 ?>
