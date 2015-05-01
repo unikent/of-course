@@ -87,10 +87,10 @@ else: ?>
             <section
                 id="staff-research"><?php Flight::render('pg_tabs/staff-research', array('course' => $course)); ?></section>
             <section id="enquiries"><?php Flight::render('pg_tabs/enquiries', array('course' => $course)); ?></section>
-        	
-        	<ul>
-				<li><a href="#!enquiries" class="enquire-adm-link" role="tab" aria-controls="enquiries">Contact us</a> or <a href="#!enquiries" class="pros-adm-link" role="tab" aria-controls="enquiries">order a prospectus</a></li>
-			</ul>
+
+            <ul>
+                <li><a href="#!enquiries" class="enquire-adm-link" role="tab" aria-controls="enquiries">Contact us</a> or <a href="#!enquiries" class="pros-adm-link" role="tab" aria-controls="enquiries">order a prospectus</a></li>
+            </ul>
 
         </div>
     </div>
@@ -98,15 +98,15 @@ else: ?>
     <div class="span5">
         <div class="side-panel">
             <div class="admission-links">
-				<a href="/courses/postgraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?>apply-online/<?php echo $course->instance_id ?>"
-					class="btn btn-large apply-adm-link" 
-					type="button" 
-					role="button" 
-					aria-controls="apply"
-					onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?>');">Apply <i class="icon-chevron-right"></i></a>
-				<a href="#!enquiries" class="enquire-adm-link" role="tab" aria-controls="enquiries">Contact us</a> or 
-				<a href="#!enquiries" class="pros-adm-link" role="tab" aria-controls="enquiries">order a prospectus</a>
-			</div>
+                <a href="/courses/postgraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?>apply-online/<?php echo $course->instance_id ?>"
+                   class="btn btn-large apply-adm-link"
+                   type="button"
+                   role="button"
+                   aria-controls="apply"
+                   onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?>');">Apply <i class="icon-chevron-right"></i></a>
+                <a href="#!enquiries" class="enquire-adm-link" role="tab" aria-controls="enquiries">Contact us</a> or
+                <a href="#!enquiries" class="pros-adm-link" role="tab" aria-controls="enquiries">order a prospectus</a>
+            </div>
 
             <div class="key-facts-block">
                 <aside class="key-facts-container">

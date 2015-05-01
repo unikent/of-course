@@ -67,8 +67,8 @@ else: ?>
                 id="enquiries"><?php Flight::render('ug_tabs/enquiries', array('course' => $course)); ?></section>
 
             <ul>
-				<li><a href="#!enquiries" class="enquire-adm-link" role="tab" aria-controls="enquiries">Contact us</a> or <a href="#!enquiries" class="pros-adm-link" role="tab" aria-controls="enquiries">order a prospectus</a></li>
-			</ul>
+                <li><a href="#!enquiries" class="enquire-adm-link" role="tab" aria-controls="enquiries">Contact us</a> or <a href="#!enquiries" class="pros-adm-link" role="tab" aria-controls="enquiries">order a prospectus</a></li>
+            </ul>
         </div>
     </div>
     <!-- /span -->
@@ -79,25 +79,27 @@ else: ?>
             <?php if (defined('CLEARING') && CLEARING && $course->current_year > $course->year): ?>
                 <div class="panel admission-links">
                     <a href="/clearing/vacancies.html"
-                    	class="btn btn-large apply-adm-link" 
-                    	type="button" 
-						role="button" 
-						aria-controls="apply">Apply for Clearing <i class="icon-chevron-right"></i></a>
+                       class="btn btn-large apply-adm-link"
+                       type="button"
+                       role="button"
+                       aria-controls="apply">Apply for Clearing <i class="icon-chevron-right"></i></a>
                 </div>
             <?php else: ?>
+
                 <div class="admission-links">
-					<a href="/courses/undergraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?>apply-online/<?php echo $course->instance_id ?>" 
-						class="btn btn-large apply-adm-link" 
-						type="button" 
-						role="button" 
-						aria-controls="apply"
-						onclick="_pat.event('course-page', 'apply-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?>');">Apply <i class="icon-chevron-right"></i></a>
-					<a href="#!enquiries" 
-						class="enquire-adm-link" 
-						role="tab" 
-						aria-controls="enquiries">Contact us</a> 
-					or <a href="#!enquiries" class="pros-adm-link" role="tab" aria-controls="enquiries">order a prospectus</a>
-				</div>
+                    <a href="/courses/undergraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?>apply-online/<?php echo $course->instance_id ?>"
+                       class="btn btn-large apply-adm-link"
+                       type="button"
+                       role="button"
+                       aria-controls="apply"
+                       onclick="_pat.event('course-page', 'apply-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?>');">Apply <i class="icon-chevron-right"></i></a>
+                    <a href="#!enquiries"
+                       class="enquire-adm-link"
+                       role="tab"
+                       aria-controls="enquiries">Contact us</a>
+                    or <a href="#!enquiries" class="pros-adm-link" role="tab" aria-controls="enquiries">order a prospectus</a>
+                </div>
+
             <?php endif; ?>
 
             <div class="key-facts-block">
@@ -261,7 +263,7 @@ else: ?>
                     </div>
                 </div>
             <?php endif; ?>
-            
+
         </div>
     </div>
     <!-- /span -->
