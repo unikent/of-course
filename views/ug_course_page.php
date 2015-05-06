@@ -196,7 +196,7 @@ else: ?>
                             <li><strong>Location:</strong>
                                 <?php
 
-                                $locations = "<a href='{$course->location[0]->url}'>" . $course->location[0]->name . "</a>";
+                                $locations = (empty($course->location[0]->url)?'':"<a href='{$course->location[0]->url}'>") . $course->location[0]->name . (empty($course->location[0]->url)?'':"</a>");
                                 $additional_locations = '';
 
                                 if ($course->additional_locations != "") {
