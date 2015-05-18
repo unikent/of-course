@@ -101,3 +101,11 @@
 .daedalus-courses input[type="checkbox"] {
   margin-bottom: 10px;
 }
+.daedalus-courses article h1 {
+  padding-bottom: 0px;
+  margin-bottom: 5px;
+}
+.daedalus-courses article .location-header {
+  color: #937227;
+  padding-bottom: 15px;
+}
