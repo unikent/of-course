@@ -123,7 +123,7 @@ endforeach;
 <section class="info-section">
 
   <?php
-  $file = 'www.kent.ac.uk/courses/postgraduate/pdf/prospectus.pdf';
+  $file = 'https://www.kent.ac.uk/courses/postgraduate/pdf/prospectus.pdf';
   $fileSize = strlen(file_get_contents($file))/1024/1024;
   $fileMB = round($fileSize, 2);
   ?>
@@ -131,7 +131,7 @@ endforeach;
   <h3>Resources</h3>
   <ul>
     <li>
-      <a href="/courses/postgraduate/pdf/prospectus.pdf"
+      <a href="https://www.kent.ac.uk/courses/postgraduate/pdf/prospectus.pdf"
       <?php echo sprintf($eventjs, 'download-prospectus-pg', $course_name_fortracking); ?>
       >
       Download a prospectus (PDF - <?php echo $fileMB ?> MB)
@@ -154,6 +154,7 @@ endforeach;
       <?php endforeach; ?>
     <?php endif; ?>
   <?php endif; ?>
+  <br>
 </ul>
 
 <?php if ( !empty($course->student_profile)  || !empty($course->programme_leaflet)): ?>
