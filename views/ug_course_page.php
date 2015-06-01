@@ -4,32 +4,19 @@ $has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== fal
 $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
 $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year') !== false);
 
-// pull out awards and combine into a comma separated list
-$course->award_list = '';
-foreach ($course->award as $award) if (!empty($award->name)) $course->award_list .= $award->name . ', ';
-$course->award_list = substr($course->award_list, 0, -2); // cuts off the final comma+space
-
-// Create location(s) string
-$additional_locations =  is_array($course->additional_locations) ? $course->additional_locations : array();
-$locations = array_merge($course->location, $additional_locations);
-$locations_count = sizeof($locations); $locations_str = '';
-foreach($locations as $key => $loc){
-    $locations_str .= $loc->name;
-    $locations_str .= ($key === $locations_count-2) ? ' and ' : (($key === $locations_count-1) ? '' : ', ');
-}
-
 // Make pos available
 $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_code : '';
 
 ?>
 
 <article class="container">
-<h1>
-    <?php echo $course->programme_title; ?> - <?php echo $course->award_list; ?>
-    <?php echo $course->programmme_status_text; ?>
-</h1>
-<div class='location-header' ><?php echo $locations_str; ?></div>
-
+    <header>
+        <h1>
+            <?php echo $course->programme_title; ?> - <?php echo $course->award_list; ?>
+            <?php echo $course->programmme_status_text; ?>
+        </h1>
+        <h2 class='location-header' ><?php echo $course->locations_str; ?></h2>
+    </header>
 <?php if ($course->programme_suspended == 'true' || $course->programme_withdrawn == 'true' || $course->holding_message != ''):
     //suppress content if holding message text filled in
     echo $course->holding_message;
