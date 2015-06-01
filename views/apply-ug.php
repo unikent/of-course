@@ -125,7 +125,7 @@ else: ?>
 
     </div>
 
-    <noscript>
+    <div id="no-script">
         <ul>
 
             <li><a href="http://www.ucas.com/apply" title="For all full-time courses, apply through UCAS">Apply through
@@ -146,6 +146,6 @@ else: ?>
 
 
         </ul>
-    </noscript>
+    </div>
 
 <?php endif; ?>
