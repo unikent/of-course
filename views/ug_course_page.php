@@ -270,17 +270,6 @@ else: ?>
     </div>
 <?php endif; ?>
 
-<?php if(!empty($course->current_year) && $course->current_year === $course->year): ?>
-  <meta name="robots" content="noindex, nofollow" />
-  <div id="noAlert">
-    This is a <?php $previousYear = "/courses/undergraduate/" . ($course->current_year - 1) . "/" . $course->instance_id;
-    echo $course->year;?> entry programme. Would you like to <a href='
-    <?php echo $previousYear; ?>'> view
-      <?php echo $course->programme_title;?> for
-      <?php echo $course->current_year-1;?> entry?</a>
-  </div>
-<?php endif; ?>
-
 <?php if (!empty($course->related_courses)): ?>
     <section class="related-course-section">
         <h2>Related to this course</h2>
