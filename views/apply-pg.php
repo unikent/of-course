@@ -188,7 +188,7 @@ else: ?>
 
     </div>
 
-    <noscript>
+    <div id="no-script">
         <ul>
             <?php foreach ($deliveries as $delivery): ?>
                 <li><p><a title="Apply for <?php echo $delivery->description ?>"
@@ -204,6 +204,6 @@ else: ?>
 
             <?php endforeach; ?>
         </ul>
-    </noscript>
+    </div>
 
 <?php endif; ?>
