@@ -6,6 +6,7 @@ if(strpos($_SERVER['SERVER_NAME'], 'www-dev')!==false){
 if(strpos($_SERVER['SERVER_NAME'], 'www-test')!==false){
 	$evision_url = "evision-test";
 }
+$schoolName = $course->administrative_school[0]->name;
 $has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
 $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
 ?>
@@ -56,7 +57,7 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 		 	$descriptions[$key] = $description;
 
 		 	// Generate event trackers
-		 	$tracking_name = "[{$course->instance_id} in {$course->year}] {$course->programme_title} - {$award} {$description} - {$mode} [{$mcr}]";
+		 	$tracking_name = "[{$course->instance_id} in {$course->year}] {$course->programme_title} - {$award} {$description} - {$mode} [{$mcr}] at {$schoolName}";
 			$apply_event[$key][$mode] = 'onClick="_pat.event(\'course-page\', \'apply-pg\', \''.$tracking_name .'\');"';
 		}
 		?>
