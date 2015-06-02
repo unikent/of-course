@@ -43,11 +43,12 @@ $delivery_truth = function ($deliveries, $course, $needle) {
 $has_parttime = $delivery_truth($deliveries, $course, "part-time");
 $has_fulltime = $delivery_truth($deliveries, $course, "full-time");
 ?>
-
-<h1>Your application: <a
+<header>
+    <h1>Your application: <a
         href="/courses/postgraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?><?php echo $course->instance_id ?>/<?php echo $course->slug ?>"><?php echo $course->programme_title ?>
         (<?php echo $course->award_list; ?>) <?php echo $course->programmme_status_text; ?></a></h1>
-
+    <h2 class='location-header' ><?php echo $course->locations_str; ?></h2>
+</header>
 
 <?php
 

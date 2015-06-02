@@ -15,11 +15,12 @@ if (empty($deliveries)) {
     }
 }
 ?>
-
-<h1>Your application: <a
-        href="/courses/undergraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?><?php echo $course->instance_id ?>/<?php echo $course->slug ?>"><?php echo $course->programme_title ?> <?php echo $course->award[0]->name; ?> <?php echo $course->programmme_status_text; ?></a>
-</h1>
-
+<header>
+    <h1>Your application: <a
+            href="/courses/undergraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?><?php echo $course->instance_id ?>/<?php echo $course->slug ?>"><?php echo $course->programme_title ?> <?php echo $course->award[0]->name; ?> <?php echo $course->programmme_status_text; ?></a>
+    </h1>
+    <h2 class='location-header' ><?php echo $course->locations_str; ?></h2>
+</header>
 <?php if ($course->how_to_apply_atypical_courses != ''): ?>
 
     <?php echo $course->how_to_apply_atypical_courses; ?>

@@ -102,10 +102,15 @@
   margin-bottom: 10px;
 }
 .daedalus-courses article h1 {
-  padding-bottom: 0px;
+  padding-bottom: 0;
   margin-bottom: 5px;
 }
-.daedalus-courses article .location-header {
+.daedalus-courses header h1 {
+  padding-bottom: 0;
+  margin-bottom: 5px;
+}
+.daedalus-courses header h2.location-header {
   color: #937227;
   padding-bottom: 15px;
+  font-size: 1em;
 }
