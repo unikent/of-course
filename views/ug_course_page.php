@@ -4,23 +4,19 @@ $has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== fal
 $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
 $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year') !== false);
 
-// pull out awards and combine into a comma separated list
-$course->award_list = '';
-foreach ($course->award as $award) if (!empty($award->name)) $course->award_list .= $award->name . ', ';
-$course->award_list = substr($course->award_list, 0, -2); // cuts off the final comma+space
-
-
 // Make pos available
 $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_code : '';
 
 ?>
 
 <article class="container">
-
-<h1>
-    <?php echo $course->programme_title; ?> - <?php echo $course->award_list; ?>
-    <?php echo $course->programmme_status_text; ?>
-</h1>
+    <header>
+        <h1>
+            <?php echo $course->programme_title; ?> - <?php echo $course->award_list; ?>
+            <?php echo $course->programmme_status_text; ?>
+        </h1>
+        <h2 class='location-header' ><?php echo $course->locations_str; ?></h2>
+    </header>
 
 <?php if ($course->programme_suspended == 'true' || $course->programme_withdrawn == 'true' || $course->holding_message != ''):
     //suppress content if holding message text filled in
@@ -138,7 +134,7 @@ else: ?>
                             <li><strong>Location:</strong>
                                 <?php
 
-                                $locations = "<a href='{$course->location[0]->url}'>" . $course->location[0]->name . "</a>";
+                                $locations = (empty($course->location[0]->url)?'':"<a href='{$course->location[0]->url}'>") . $course->location[0]->name . (empty($course->location[0]->url)?'':"</a>");
                                 $additional_locations = '';
 
                                 if ($course->additional_locations != "") {

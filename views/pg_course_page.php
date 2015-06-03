@@ -1,19 +1,18 @@
 <?php
-// pull out awards and combine into a comma separated list
-$course->award_list = '';
-foreach ($course->award as $award) if (!empty($award->name)) $course->award_list .= $award->name . ', ';
-$course->award_list = substr($course->award_list, 0, -2); // cuts off the final comma+space
 
 $has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
 $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
+
 ?>
 
 <article class="container pg">
-
-<h1>
-    <?php echo $course->programme_title; ?> - <?php echo $course->award_list; ?>
-    <?php echo $course->programmme_status_text; ?>
-</h1>
+    <header>
+        <h1>
+            <?php echo $course->programme_title; ?> - <?php echo $course->award_list; ?>
+            <?php echo $course->programmme_status_text; ?>
+        </h1>
+        <h2 class='location-header'><?php echo  $course->locations_str; ?></h2>
+    </header>
 
 <?php if ($course->programme_suspended == 'true' || $course->programme_withdrawn == 'true' || $course->holding_message != ''):
     //suppress content if holding message text filled in
@@ -25,7 +24,7 @@ else: ?>
         <div class="span12">
             <ul class="nav nav-tabs">
                 <li><a href="#overview">Overview</a></li>
-                <?php if ((!empty($course->programme_overview)) || (strpos($course->programme_type, 'taught') !== false)): ?>
+                <?php if (strpos($course->programme_type, 'taught') !== false || (strpos($course->programme_type, 'research') !== false && !empty($course->programme_overview))): ?>
                     <li><a href="#structure">Course structure</a></li>
                 <?php endif; ?>
 
@@ -56,27 +55,15 @@ else: ?>
         <div class="tab-content">
             <section id="overview"><?php Flight::render('pg_tabs/overview', array('course' => $course)); ?></section>
 
-            <?php if (strpos($course->programme_type, 'taught') === false):
-                if (!empty($course->programme_overview)): ?>
+            <?php if (strpos($course->programme_type, 'research') !== false): ?>
+                <?php if(!empty($course->programme_overview)): ?>
                     <section
                         id="structure"><?php Flight::render('pg_tabs/structure_research', array('course' => $course)); ?></section>
-                <?php endif;
-            else:
-                $stage_found = false;
-                foreach ($course->modules as $module) {
-                    if (!empty($module->stages)) {
-                        $stage_found = true;
-                        break;
-                    }
-                }
-                if ((!$stage_found) && (empty($course->programme_overview))) : ?>
-                    <section
-                        id="structure"><?php Flight::render('pg_tabs/structure_empty', array('course' => $course)); ?></section>
-                <?php else: ?>
+                <?php endif; ?>
+            <?php else: ?>
                     <section
                         id="structure"><?php Flight::render('pg_tabs/structure', array('course' => $course)); ?></section>
-                <?php endif;
-            endif;?>
+            <?php endif; ?>
             <section id="careers"><?php Flight::render('pg_tabs/careers', array('course' => $course)); ?></section>
             <section
                 id="study-support"><?php Flight::render('pg_tabs/study-support', array('course' => $course)); ?></section>
