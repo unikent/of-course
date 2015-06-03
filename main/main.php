@@ -92,7 +92,22 @@ class CoursesFrontEnd {
  		// Render programme page
  		Flight::setup($year, $level);
 
+
+        $additional_locations =  is_array($course->additional_locations) ? $course->additional_locations : array();
+        $locations = array_merge($course->location, $additional_locations);
+        $locations_count = sizeof($locations); $locations_str = '';
+        foreach($locations as $key => $loc){
+            $locations_str .= $loc->name;
+            $locations_str .= ($key === $locations_count-2) ? ' and ' : (($key === $locations_count-1) ? '' : ', ');
+        }
+        $course->locations_str = $locations_str;
+        $course->award_list = '';
+        foreach ($course->award as $award) if (!empty($award->name)) $course->award_list .= $award->name . ', ';
+        $course->award_list = substr($course->award_list, 0, -2); // cuts off the final comma+space
+
+
 		$meta = array(
+            'title'=> "{$course->programme_title} - {$course->award_list} - {$locations_str} - The University of Kent",
 			'canonical' => Flight::url("{$level}/{$id}/{$course->slug}"),
 			'active_instance' => Flight::url("{$level}/{$id}/{$course->slug}"),
 			'description' => strip_tags($course->programme_abstract),
@@ -701,7 +716,22 @@ class CoursesFrontEnd {
  		// Render programme page
  		Flight::setup($year, $level);
 
-		$meta = array(
+
+        $additional_locations =  is_array($course->additional_locations) ? $course->additional_locations : array();
+        $locations = array_merge($course->location, $additional_locations);
+        $locations_count = sizeof($locations); $locations_str = '';
+        foreach($locations as $key => $loc){
+            $locations_str .= $loc->name;
+            $locations_str .= ($key === $locations_count-2) ? ' and ' : (($key === $locations_count-1) ? '' : ', ');
+        }
+        $course->locations_str = $locations_str;
+        $course->award_list = '';
+        foreach ($course->award as $award) if (!empty($award->name)) $course->award_list .= $award->name . ', ';
+        $course->award_list = substr($course->award_list, 0, -2); // cuts off the final comma+space
+
+
+        $meta = array(
+            'title' => "{$course->programme_title} - {$course->award_list} - {$locations_str} - The University of Kent",
 			'canonical' => Flight::url("{$level}/{$id}/{$course->slug}"),
 			'active_instance' => Flight::url("{$level}/{$id}/{$course->slug}"),
 			'description' => strip_tags($course->programme_abstract),
@@ -737,7 +767,7 @@ class CoursesFrontEnd {
 		switch($level){
 			case 'postgraduate':
 				if($year && ($year !== static::$current_year)){
-					$meta['title'] = "{$course->programme_title} | Postgraduate Programmes {$year} Application | The University of Kent";
+					$meta['title'] = "{$course->programme_title} - {$course->award_list} - {$locations_str} - Postgraduate Programmes {$year} Application - The University of Kent";
 				}
 
 				return Flight::layout('apply-pg', array('meta' => $meta, 'course' => $course, 'deliveries' => $validDeliveries));
@@ -745,7 +775,7 @@ class CoursesFrontEnd {
 
  			default:
 				if($year && ($year !== static::$current_year)){
-					$meta['title'] = "{$course->programme_title} ($course->ucas_code) | Undergraduate Programmes {$year} Application | The University of Kent";
+					$meta['title'] = "{$course->programme_title} ($course->ucas_code) - {$course->award_list} - {$locations_str} - Undergraduate Programmes {$year} Application - The University of Kent";
 				}
 				return Flight::layout('apply-ug', array('meta' => $meta, 'course' => $course, 'deliveries' => $validDeliveries));
  				break;
