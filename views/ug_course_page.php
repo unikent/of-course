@@ -1,22 +1,8 @@
 <?php
-
+$schoolName = $course->administrative_school[0]->name;
 $has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
 $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
 $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year') !== false);
-
-// pull out awards and combine into a comma separated list
-$course->award_list = '';
-foreach ($course->award as $award) if (!empty($award->name)) $course->award_list .= $award->name . ', ';
-$course->award_list = substr($course->award_list, 0, -2); // cuts off the final comma+space
-
-// Create location(s) string
-$additional_locations =  is_array($course->additional_locations) ? $course->additional_locations : array();
-$locations = array_merge($course->location, $additional_locations);
-$locations_count = sizeof($locations); $locations_str = '';
-foreach($locations as $key => $loc){
-    $locations_str .= $loc->name;
-    $locations_str .= ($key === $locations_count-2) ? ' and ' : (($key === $locations_count-1) ? '' : ', ');
-}
 
 // Make pos available
 $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_code : '';
@@ -24,12 +10,13 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 ?>
 
 <article class="container">
-<h1>
-    <?php echo $course->programme_title; ?> - <?php echo $course->award_list; ?>
-    <?php echo $course->programmme_status_text; ?>
-</h1>
-<div class='location-header' ><?php echo $locations_str; ?></div>
-
+    <header>
+        <h1>
+            <?php echo $course->programme_title; ?> - <?php echo $course->award_list; ?>
+            <?php echo $course->programmme_status_text; ?>
+        </h1>
+        <h2 class='location-header' ><?php echo $course->locations_str; ?></h2>
+    </header>
 <?php if ($course->programme_suspended == 'true' || $course->programme_withdrawn == 'true' || $course->holding_message != ''):
     //suppress content if holding message text filled in
     echo $course->holding_message;
@@ -90,7 +77,7 @@ else: ?>
                        class="apply-adm-link"
                        role="tab"
                        aria-controls="apply"
-                       onclick="_pat.event('course-page', 'apply-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?>');">Apply</a>,
+                       onclick="_pat.event('course-page', 'apply-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?> at <?php echo $schoolName ?>');">Apply</a>,
                     <a href="#!enquiries"
                        class="enquire-adm-link"
                        role="tab"
@@ -268,17 +255,6 @@ else: ?>
     <!-- /row -->
 
     </div>
-<?php endif; ?>
-
-<?php if(!empty($course->current_year) && $course->current_year === $course->year): ?>
-  <meta name="robots" content="noindex, nofollow" />
-  <div id="noAlert">
-    This is a <?php $previousYear = "/courses/undergraduate/" . ($course->current_year - 1) . "/" . $course->instance_id;
-    echo $course->year;?> entry programme. Would you like to <a href='
-    <?php echo $previousYear; ?>'> view
-      <?php echo $course->programme_title;?> for
-      <?php echo $course->current_year-1;?> entry?</a>
-  </div>
 <?php endif; ?>
 
 <?php if (!empty($course->related_courses)): ?>
