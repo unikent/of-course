@@ -74,11 +74,6 @@ else: ?>
             <section
                 id="staff-research"><?php Flight::render('pg_tabs/staff-research', array('course' => $course)); ?></section>
             <section id="enquiries"><?php Flight::render('pg_tabs/enquiries', array('course' => $course)); ?></section>
-
-            <ul>
-                <li><a href="#!enquiries" class="enquire-adm-link" role="tab" aria-controls="enquiries">Contact us</a> or <a href="#!enquiries" class="pros-adm-link" role="tab" aria-controls="enquiries">order a prospectus</a></li>
-            </ul>
-
         </div>
     </div>
     <!-- /span -->
