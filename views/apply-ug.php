@@ -1,4 +1,5 @@
 <?php
+$schoolName = $course->administrative_school[0]->name;
 $has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
 $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
 $full_type = 'ucas';
@@ -99,7 +100,7 @@ else: ?>
                    class="btn btn-large btn-primary next-btn apply-link-courses" tabindex="0" role="button"
                    title="Apply for <?php echo $delivery->description ?>"
                    href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=<?php echo $delivery->current_ipo ?>"
-                   onclick="_pat.event('course-page', 'apply-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>]');">Next
+                   onclick="_pat.event('course-page', 'apply-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>] at <?php echo $schoolName ?>');">Next
                 <i class="icon-chevron-right icon-white"></i></a>
             </p>
 
@@ -113,7 +114,7 @@ else: ?>
                tabindex="0"
                role="button"
                title="UCAS"
-               onclick="_pat.event('course-page', 'apply-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>]');">Apply through UCAS
+               onclick="_pat.event('course-page', 'apply-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>] at <?php echo $schoolName ?>');">Apply through UCAS
                 <i class="icon-chevron-right icon-white"></i>
             </a>
         </p>
@@ -126,7 +127,7 @@ else: ?>
 
     </div>
 
-    <noscript>
+    <div id="no-script">
         <ul>
 
             <li><a href="http://www.ucas.com/apply" title="For all full-time courses, apply through UCAS">Apply through
@@ -135,18 +136,18 @@ else: ?>
             <li>
                 <a title="Apply for <?php echo $course->programme_title ?> part-time for <?php echo $course->year ?> entry"
                    href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $course->parttime_mcr_code ?>&amp;code2=<?php echo $course->current_ipo_pt ?>"
-                   onclick="_pat.event('course-page', 'apply-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?> [<?php echo $course->parttime_mcr_code ?>]');">Apply
+                   onclick="_pat.event('course-page', 'apply-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?> [<?php echo $course->parttime_mcr_code ?>] at <?php echo $schoolName ?>');">Apply
                     for <?php echo $course->programme_title ?> part-time for <?php echo $course->year ?> entry</a></li>
 
             <li>
                 <a title="Apply for <?php echo $course->programme_title ?> part-time for <?php echo $course->year - 1 ?> entry"
                    href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $course->parttime_mcr_code ?>&amp;code2=<?php echo $course->previous_ipo_pt ?>"
-                   onclick="_pat.event('course-page', 'apply-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year - 1 ?>] <?php echo $course->programme_title ?> [<?php echo $course->parttime_mcr_code ?>]');">Apply
+                   onclick="_pat.event('course-page', 'apply-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year - 1 ?>] <?php echo $course->programme_title ?> [<?php echo $course->parttime_mcr_code ?>] at <?php echo $schoolName ?>');">Apply
                     for <?php echo $course->programme_title ?> part-time for <?php echo $course->year - 1 ?> entry</a>
             </li>
 
 
         </ul>
-    </noscript>
+    </div>
 
 <?php endif; ?>

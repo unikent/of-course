@@ -84,7 +84,7 @@ $(document).ready(function(){
 
 		// hide everything
 		$('.courses-sits-apply > .apply-link').hide();
-		
+
 		// now show relevant links
 		if ($('#apply-study-type').val() == 'ft') {
 			$('.courses-sits-apply > .fulltime-link').show();
@@ -112,7 +112,7 @@ $(document).ready(function(){
 	/**
 	* Enquire tab
 	*/
-	
+
 	$('.courses-sits-enquire > .apply-link').hide();
 
 	if ($('#enquire-study-type').val() == 'ft') {
@@ -243,8 +243,13 @@ $(document).ready(function(){
 	$(".apply-link-courses").hide();
 	$("#apply-link-dummy").show();
 	$("#apply-link-ucas").hide();
+	//workaround for quickspot blocked in China
+	$("#no-script").hide();
 	$(".full-time-text").hide();
 	$(".part-time-text").hide();
+
+
+
 
 	// the radio button list for the same-award-multiple-delivery edge case
 	$('input[type=radio][name=delivery]').change(function(){
@@ -286,7 +291,7 @@ $(document).ready(function(){
 		year = $(this).val();
 		yearsettings(year);
 	});
-	
+
 	$('#apply-link-dummy').tooltip();
 
 	function typesettings(type) {
@@ -367,5 +372,4 @@ $(document).ready(function(){
 		}
 	}
 
-}); 
-
+});

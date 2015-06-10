@@ -1,5 +1,5 @@
 <?php
-
+$schoolName = $course->administrative_school[0]->name;
 $has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
 $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
 $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year') !== false);
@@ -83,7 +83,7 @@ else: ?>
                        type="button"
                        role="button"
                        aria-controls="apply"
-                       onclick="_pat.event('course-page', 'apply-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?>');">Apply <i class="icon-chevron-right"></i></a>
+                       onclick="_pat.event('course-page', 'apply-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?> at <?php echo $schoolName ?>');">Apply</a>,
                     <a href="#!enquiries"
                        class="enquire-adm-link"
                        role="tab"
