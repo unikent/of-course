@@ -83,7 +83,7 @@ else: ?>
                        type="button"
                        role="button"
                        aria-controls="apply"
-                       onclick="_pat.event('course-page', 'apply-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?> at <?php echo $schoolName ?>');">Apply</a>,
+                       onclick="_pat.event('course-page', 'apply-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?> at <?php echo $schoolName ?>');">Apply</a>
                     <a href="#!enquiries"
                        class="enquire-adm-link"
                        role="tab"

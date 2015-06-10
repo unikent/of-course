@@ -85,8 +85,8 @@ else: ?>
                    type="button"
                    role="button"
                    aria-controls="apply"
-                   onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?> at <?php echo $schoolName ?>');">Apply</a>,
-                <a href="#!enquiries" class="enquire-adm-link" role="tab" aria-controls="enquiries">enquire</a> or <a
+                   onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?> at <?php echo $schoolName ?>');">Apply</a>
+                <a href="#!enquiries" class="enquire-adm-link" role="tab" aria-controls="enquiries">Contact us</a> or <a
                     href="#!enquiries" class="pros-adm-link" role="tab" aria-controls="enquiries">order a prospectus</a>
             </div>
 
