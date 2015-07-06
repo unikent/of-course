@@ -61,8 +61,13 @@
                         This is a <?php echo $course->year;?> entry programme. Would you like to <a href='<?php echo $meta['active_instance']; ?>'> view <?php echo $course->programme_title;?> for <?php echo $course->current_year;?> entry?</a>
                     </div>
                 <?php elseif(!empty($course->current_year) && (strpos($_SERVER['REQUEST_URI'], "undergraduate") !== false) && $course->current_year === $course->year): ?>
-                  <div id="noAlert">
+                  <!--commented out for clearing 2015-->
+                  <!--div id="noAlert">
                     This is a <?php $previousYear = "http://www.kent.ac.uk/courses/undergraduate/" . ($course->current_year - 1) . "/" . $course->instance_id; echo $course->year;?> entry programme. Would you like to <a href='<?php echo $previousYear; ?>'> view <?php echo $course->programme_title;?> for <?php echo $course->current_year-1;?> entry?</a>
+                  </div-->
+                  <div class-"alert alert-daedalus">
+                    <strong>Applying through clearing?</strong>
+                    Clearing applicants and others planning to start in 2015 should view <a href='<?php echo $previousYear; ?>'><?php echo $course->programme_title;?> for <?php echo $course->current_year-1;?> entry.</a>
                   </div>
                 <?php elseif($course->current_year < $course->year): ?>
                   <meta name="robots" content="noindex, nofollow" />
