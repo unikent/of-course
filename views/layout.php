@@ -49,9 +49,7 @@
             <?php if ($exists): ?>
                         <strong>Applying through clearing?</strong>
                         <br>Clearing applicants and others planning to start in 2015 should view
-                        <a href="/courses/undergraduate/<?php echo $course->current_year - 1;?>
-                          /<?php echo $course->instance_id ?>/<?php echo $course->slug ?>">
-                          <?php echo $course->programme_title;?> for <?php echo $course->current_year - 1;?> entry.
+                        <a href="/courses/undergraduate/<?php echo $course->current_year - 1;?>/<?php echo $course->instance_id ?>/<?php echo $course->slug ?>"><?php echo $course->programme_title;?> for <?php echo $course->current_year - 1;?> entry.
                         </a>
 
                     <?php else: ?>
