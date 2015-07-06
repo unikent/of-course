@@ -66,10 +66,9 @@ else: ?>
     <div class="span5">
 
         <div class="side-panel">
-
-            <?php if (defined('CLEARING') && CLEARING && $course->current_year > $course->year): ?>
+          <?php if (defined('CLEARING') && CLEARING && $course->current_year > $course->year): ?>
                 <div class="panel admission-links">
-                    <a href="/clearing/vacancies.html">Apply for Clearing</a>
+                    <a href="<?php echo $course->globals->clearing_vacancies_link; ?>">Is this course in Clearing?</a>
                 </div>
             <?php else: ?>
                 <div class="panel admission-links">
