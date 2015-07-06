@@ -38,7 +38,6 @@
                         <strong>These pages are for undergraduate programmes starting in September <?php echo date('Y') + 1;?>.</strong>
                         <br>If you are a <strong>Clearing</strong>, <strong>Adjustment</strong> or <strong>part-time</strong> applicant wishing to start this September, go to our <a href="/courses/undergraduate/<?php echo date('Y');?>/search/"><?php echo date('Y');?> search page</a>.
                     <?php elseif ( isset($course) && $course->current_year == $course->year ): ?>
-                        <meta name="robots" content="noindex, nofollow" />
                         <div class='alert alert-daedalus' style="padding: 20px;margin:10px 0 0 0;">
                     <?php
                     $exists = true;
@@ -48,10 +47,14 @@
               }
             ?>
             <?php if ($exists): ?>
-                        <strong>This is a <?php echo $course->current_year;?> entry programme</strong>. If you are a <strong>Clearing</strong>, <strong>Adjustment</strong> or <strong>part-time</strong> applicant wishing to start this September, please view <a href="/courses/undergraduate/<?php echo $course->current_year - 1;?>/<?php echo $course->instance_id ?>/<?php echo $course->slug ?>"><?php echo $course->programme_title;?></a> for <?php echo $course->current_year - 1;?> entry.
+                        <strong>Applying through clearing?</strong>
+                        <br>Clearing applicants and others planning to start in 2015 should view
+                        <a href="/courses/undergraduate/<?php echo $course->current_year - 1;?>/<?php echo $course->instance_id ?>/<?php echo $course->slug ?>"><?php echo $course->programme_title;?> for <?php echo $course->current_year - 1;?> entry.</a>
 
                     <?php else: ?>
-                    <strong>This is a <?php echo $course->current_year;?> entry programme</strong>. If you are a <strong>Clearing</strong>, <strong>Adjustment</strong> or <strong>part-time</strong> applicant wishing to start this September, please view the <a href="/courses/undergraduate/<?php echo $course->current_year - 1;?>/search/"><?php echo $course->current_year - 1;?> entry online prospectus.</a>
+                      <strong>Applying through clearing?</strong>
+                      <br>Clearing applicants and others planning to start in 2015 should view
+                      <a href="/courses/undergraduate/<?php echo $course->current_year - 1;?>/search/"><?php echo $course->current_year - 1;?> entry online prospectus.</a>
                         <?php endif; ?>
                     <?php endif; ?>
                   </div>
@@ -61,11 +64,11 @@
                     <div class='alert alert-daedalus'>
                         This is a <?php echo $course->year;?> entry programme. Would you like to <a href='<?php echo $meta['active_instance']; ?>'> view <?php echo $course->programme_title;?> for <?php echo $course->current_year;?> entry?</a>
                     </div>
-                <?php elseif(!empty($course->current_year) && (strpos($_SERVER['REQUEST_URI'], "undergraduate") !== false) && $course->current_year === $course->year): ?>
-                  <meta name="robots" content="noindex, nofollow" />
+                <?php elseif(!empty($course->current_year) && (CLEARING === false) && (strpos($_SERVER['REQUEST_URI'], "undergraduate") !== false) && $course->current_year === $course->year): ?>
                   <div id="noAlert">
                     This is a <?php $previousYear = "http://www.kent.ac.uk/courses/undergraduate/" . ($course->current_year - 1) . "/" . $course->instance_id; echo $course->year;?> entry programme. Would you like to <a href='<?php echo $previousYear; ?>'> view <?php echo $course->programme_title;?> for <?php echo $course->current_year-1;?> entry?</a>
                   </div>
+
                 <?php elseif($course->current_year < $course->year): ?>
                   <meta name="robots" content="noindex, nofollow" />
                     <div class='alert alert-error' style="padding: 10px;margin:10px 0 0 0;">
