@@ -39,15 +39,16 @@ $delivery_truth = function ($deliveries, $course, $needle) {
 
 };
 
-
+$schoolName = $course->administrative_school[0]->name;
 $has_parttime = $delivery_truth($deliveries, $course, "part-time");
 $has_fulltime = $delivery_truth($deliveries, $course, "full-time");
 ?>
-
-<h1>Your application: <a
+<header>
+    <h1>Your application: <a
         href="/courses/postgraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?><?php echo $course->instance_id ?>/<?php echo $course->slug ?>"><?php echo $course->programme_title ?>
         (<?php echo $course->award_list; ?>) <?php echo $course->programmme_status_text; ?></a></h1>
-
+    <h2 class='location-header' ><?php echo $course->locations_str; ?></h2>
+</header>
 
 <?php
 
@@ -98,7 +99,7 @@ else: ?>
                        class="btn btn-large btn-primary next-btn apply-link-courses" tabindex="0" role="button"
                        title="Apply for <?php echo $delivery->description ?>"
                        href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=<?php echo $delivery->current_ipo ?>"
-                       onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>]');">Next
+                       onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>] at <?php echo $schoolName ?>');">Next
                         <i class="icon-chevron-right icon-white"></i></a>
                 </p>
             <?php endforeach; ?>
@@ -172,7 +173,7 @@ else: ?>
                        class="btn btn-large btn-primary next-btn apply-link-courses" tabindex="0" role="button"
                        title="Apply for <?php echo $delivery->description ?>"
                        href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=<?php echo $delivery->current_ipo ?>"
-                       onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>]');">Next
+                       onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>] at <?php echo $schoolName ?>');">Next
                         <i class="icon-chevron-right icon-white"></i></a>
                 </p>
 
@@ -188,22 +189,22 @@ else: ?>
 
     </div>
 
-    <noscript>
+    <div id="no-script">
         <ul>
             <?php foreach ($deliveries as $delivery): ?>
                 <li><p><a title="Apply for <?php echo $delivery->description ?>"
                           href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=<?php echo $delivery->current_ipo ?>"
-                          onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>]');">Apply
+                          onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>] at <?php echo $schoolName ?>');">Apply
                             for <?php echo $course->year ?> entry to <?php echo $delivery->description ?></a></p></li>
 
                 <li><p><a title="Apply for <?php echo $delivery->description ?>"
                           href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=<?php echo $delivery->previous_ipo ?>"
-                          onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>]');">Apply
+                          onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>] at <?php echo $schoolName ?>');">Apply
                             for <?php echo $course->year - 1 ?> entry to <?php echo $delivery->description ?></a></p>
                 </li>
 
             <?php endforeach; ?>
         </ul>
-    </noscript>
+    </div>
 
 <?php endif; ?>
