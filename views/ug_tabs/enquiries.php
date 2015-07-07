@@ -93,7 +93,7 @@
   ?>
   <ul>
     <li>
-      <a href="https://www.kent.ac.uk/courses/undergraduate/prospectus/<?php echo $course->year; ?>/full-prospectus.pdf"
+      <a href="https://www.kent.ac.uk/courses/undergraduate/prospectus/<?php echo $course->year; ?>/prospectus-full.pdf"
         <?php echo sprintf($eventjs, 'download-prospectus-ug', $course_name_fortracking); ?>>
         Download a prospectus (PDF - <?php echo $fileMB ?> MB)
       </a>

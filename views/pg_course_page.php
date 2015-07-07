@@ -13,6 +13,7 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
         </h1>
         <h2 class='location-header'><?php echo  $course->locations_str; ?></h2>
     </header>
+
 <?php if ($course->programme_suspended == 'true' || $course->programme_withdrawn == 'true' || $course->holding_message != ''):
     //suppress content if holding message text filled in
     echo $course->holding_message;
@@ -78,93 +79,17 @@ else: ?>
     <!-- /span -->
     <div class="span5">
         <div class="side-panel">
-            <div class="panel admission-links">
-
+            <div class="admission-links">
                 <a href="/courses/postgraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?>apply-online/<?php echo $course->instance_id ?>"
-                   class="apply-adm-link"
-                   role="tab"
+                   class="btn btn-large apply-adm-link"
+                   type="button"
+                   role="button"
                    aria-controls="apply"
-                   onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?> at <?php echo $schoolName ?>');">Apply</a>,
-                <a href="#!enquiries" class="enquire-adm-link" role="tab" aria-controls="enquiries">enquire</a> or <a
+                   onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?> at <?php echo $schoolName ?>');">Apply</a>
+                <a href="#!enquiries" class="enquire-adm-link" role="tab" aria-controls="enquiries">Contact us</a> or <a
                     href="#!enquiries" class="pros-adm-link" role="tab" aria-controls="enquiries">order a prospectus</a>
             </div>
 
-            <?php if (isset($course->no_fee_output) && $course->no_fee_output === 'true'): ?>
-                <!-- Do nothing -->
-            <?php else: ?>
-                <div class="key-facts-block">
-                    <div class="key-facts-container">
-
-                        <h2><a id="fees-tables-link" class="fees-link" role="button" aria-controls="fees-tables"
-                               tabindex='0' title='Click to toggle basic fee information'
-                               onClick="_pat.event('course-page','expand-fees-pg', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?> - <?php echo $course->award[0]->name; ?>');">Fees
-                                <i class="icon-chevron-down toggler"></i></a></h2>
-
-                        <div id="fees-tables" class="fees-tables" style="display: none" aria-expanded="false"
-                             aria-labelledby="fees-tables-link">
-                            <?php if (isset($course->globals->fees_override_pgr) && !empty($course->globals->fees_override_pgr) && strpos($course->programme_type, 'research') !== false) {
-                                echo $course->globals->fees_override_pgr;
-                            } else {
-                                ?>
-                                <?php if (isset($course->globals->fees_caveat_text_pg) && !empty($course->globals->fees_caveat_text_pg)) echo $course->globals->fees_caveat_text_pg ?>
-                                <?php foreach ($course->deliveries as $delivery): ?>
-                                    <?php if (!in_array($delivery->pos_code, $pos_codes)): ?>
-                                        <table class="table">
-                                            <thead>
-                                            <tr>
-                                                <td colspan="3"><i
-                                                        class="icon icon-bullet"></i> <?php echo preg_replace('/- (\w){4}-time/', '', $delivery->description) . ':' ?>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th></th>
-                                                <th>UK/EU</th>
-                                                <th>Overseas</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <?php if ($has_fulltime): ?>
-                                                <tr>
-                                                    <td><strong>Full-time</strong></td>
-                                                    <td><?php echo empty($delivery->fees->home->{'full-time'}) ? ((empty($delivery->fees->home->{'euro-full-time'})) ? 'TBC' : '&euro;' . number_format($delivery->fees->home->{'euro-full-time'})) : '&pound;' . number_format($delivery->fees->home->{'full-time'}); ?></td>
-                                                    <td><?php echo empty($delivery->fees->int->{'full-time'}) ? ((empty($delivery->fees->int->{'euro-full-time'})) ? 'TBC' : '&euro;' . number_format($delivery->fees->int->{'euro-full-time'})) : '&pound;' . number_format($delivery->fees->int->{'full-time'}); ?></td>
-                                                </tr>
-                                            <?php endif; ?>
-                                            <?php if ($has_parttime): ?>
-                                                <tr>
-                                                    <td><strong>Part-time</strong></td>
-                                                    <td><?php echo empty($delivery->fees->home->{'part-time'}) ? ((empty($delivery->fees->home->{'euro-part-time'})) ? 'TBC' : '&euro;' . number_format($delivery->fees->home->{'euro-part-time'})) : '&pound;' . number_format($delivery->fees->home->{'part-time'}); ?></td>
-                                                    <td><?php echo empty($delivery->fees->int->{'part-time'}) ? ((empty($delivery->fees->int->{'euro-part-time'})) ? 'TBC' : '&euro;' . number_format($delivery->fees->int->{'euro-part-time'})) : '&pound;' . number_format($delivery->fees->int->{'part-time'}); ?></td>
-                                                </tr>
-                                            <?php endif; ?>
-                                            </tbody>
-                                        </table>
-                                        <?php $pos_codes[] = $delivery->pos_code; endif; ?>
-                                <?php endforeach; ?>
-
-                                <?php
-                                if (
-                                    isset($course->globals->fees_year_in_industryabroad_text_pg) && // If YII/YA text is set AND
-                                    (
-                                        (!empty($course->year_in_industry)) || // YII or YA has some text
-                                        (!empty($course->year_abroad))
-                                    ) // then
-                                ) {
-                                    echo $course->globals->fees_year_in_industryabroad_text_pg;
-                                }
-
-                                if (isset($course->globals->fees_exception_text_pg)) echo $course->globals->fees_exception_text_pg;
-                                ?>
-                            <?php
-                            }
-                            ?>
-                        </div>
-
-
-                    </div>
-
-                </div>
-            <?php endif; ?>
             <div class="key-facts-block">
                 <aside class="key-facts-container">
                     <h2>Key facts</h2>
@@ -267,6 +192,83 @@ else: ?>
                 </aside>
             </div>
 
+            <?php if (isset($course->no_fee_output) && $course->no_fee_output === 'true'): ?>
+                <!-- Do nothing -->
+            <?php else: ?>
+                <div class="key-facts-block">
+                    <div class="key-facts-container">
+
+                        <h2><a id="fees-tables-link" class="fees-link" role="button" aria-controls="fees-tables"
+                               tabindex='0' title='Click to toggle basic fee information'
+                               onClick="_pat('course-page','expand-fees-pg', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?> - <?php echo $course->award[0]->name; ?>');">Fees
+                                <i class="icon-chevron-down toggler"></i></a></h2>
+
+                        <div id="fees-tables" class="fees-tables" style="display: none" aria-expanded="false"
+                             aria-labelledby="fees-tables-link">
+                            <?php if (isset($course->globals->fees_override_pgr) && !empty($course->globals->fees_override_pgr) && strpos($course->programme_type, 'research') !== false) {
+                                echo $course->globals->fees_override_pgr;
+                            } else {
+                                ?>
+                                <?php if (isset($course->globals->fees_caveat_text_pg) && !empty($course->globals->fees_caveat_text_pg)) echo $course->globals->fees_caveat_text_pg ?>
+                                <?php foreach ($course->deliveries as $delivery): ?>
+                                    <?php if (!in_array($delivery->pos_code, $pos_codes)): ?>
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <td colspan="3"><i
+                                                        class="icon icon-bullet"></i> <?php echo preg_replace('/- (\w){4}-time/', '', $delivery->description) . ':' ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th></th>
+                                                <th>UK/EU</th>
+                                                <th>Overseas</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <?php if ($has_fulltime): ?>
+                                                <tr>
+                                                    <td><strong>Full-time</strong></td>
+                                                    <td><?php echo empty($delivery->fees->home->{'full-time'}) ? ((empty($delivery->fees->home->{'euro-full-time'})) ? 'TBC' : '&euro;' . number_format($delivery->fees->home->{'euro-full-time'})) : '&pound;' . number_format($delivery->fees->home->{'full-time'}); ?></td>
+                                                    <td><?php echo empty($delivery->fees->int->{'full-time'}) ? ((empty($delivery->fees->int->{'euro-full-time'})) ? 'TBC' : '&euro;' . number_format($delivery->fees->int->{'euro-full-time'})) : '&pound;' . number_format($delivery->fees->int->{'full-time'}); ?></td>
+                                                </tr>
+                                            <?php endif; ?>
+                                            <?php if ($has_parttime): ?>
+                                                <tr>
+                                                    <td><strong>Part-time</strong></td>
+                                                    <td><?php echo empty($delivery->fees->home->{'part-time'}) ? ((empty($delivery->fees->home->{'euro-part-time'})) ? 'TBC' : '&euro;' . number_format($delivery->fees->home->{'euro-part-time'})) : '&pound;' . number_format($delivery->fees->home->{'part-time'}); ?></td>
+                                                    <td><?php echo empty($delivery->fees->int->{'part-time'}) ? ((empty($delivery->fees->int->{'euro-part-time'})) ? 'TBC' : '&euro;' . number_format($delivery->fees->int->{'euro-part-time'})) : '&pound;' . number_format($delivery->fees->int->{'part-time'}); ?></td>
+                                                </tr>
+                                            <?php endif; ?>
+                                            </tbody>
+                                        </table>
+                                        <?php $pos_codes[] = $delivery->pos_code; endif; ?>
+                                <?php endforeach; ?>
+
+                                <?php
+                                if (
+                                    isset($course->globals->fees_year_in_industryabroad_text_pg) && // If YII/YA text is set AND
+                                    (
+                                        (!empty($course->year_in_industry)) || // YII or YA has some text
+                                        (!empty($course->year_abroad))
+                                    ) // then
+                                ) {
+                                    echo $course->globals->fees_year_in_industryabroad_text_pg;
+                                }
+
+                                if (isset($course->globals->fees_exception_text_pg)) echo $course->globals->fees_exception_text_pg;
+                                ?>
+                            <?php
+                            }
+                            ?>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            <?php endif; ?>
+
 
         </div>
     </div>
@@ -277,6 +279,8 @@ else: ?>
     </div>
 
 <?php endif; ?>
+
+<section id="learnmore" class="learnmore-section"></section>
 
 <?php if (!empty($course->related_courses)): ?>
     <section class="related-course-section">
