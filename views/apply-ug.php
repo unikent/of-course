@@ -70,10 +70,8 @@ else: ?>
 
                 <div class="full-time-text">
                     <?php if (defined('CLEARING') && CLEARING && $course->current_year > $course->year): ?>
-                        <div class="panel admission-links">
-                            <h3>Full-time applicants</h3>
-                            <p><a href="<?php echo $course->globals->clearing_vacancies_link; ?>">Is this course in Clearing?</a></p>
-                        </div>
+                        <h3>Full-time applicants</h3>
+                        <p><a href="<?php echo $course->globals->clearing_vacancies_link; ?>">Is this course in Clearing?</a></p>
                     <?php elseif (trim($course->mode_of_study) != 'Part-time only'): ?>
                         <?php echo $course->how_to_apply; ?>
                         <?php if ($course->location[0]->name == 'Medway'): ?>
