@@ -69,7 +69,12 @@ else: ?>
 
 
                 <div class="full-time-text">
-                    <?php if (trim($course->mode_of_study) != 'Part-time only'): ?>
+                    <?php if (defined('CLEARING') && CLEARING && $course->current_year > $course->year): ?>
+                        <div class="panel admission-links">
+                            <h3>Full-time applicants</h3>
+                            <p><a href="<?php echo $course->globals->clearing_vacancies_link; ?>">Is this course in Clearing?</a></p>
+                        </div>
+                    <?php elseif (trim($course->mode_of_study) != 'Part-time only'): ?>
                         <?php echo $course->how_to_apply; ?>
                         <?php if ($course->location[0]->name == 'Medway'): ?>
                             <?php echo $course->how_to_apply_medway_fulltime; ?>
@@ -106,6 +111,7 @@ else: ?>
 
         <?php endforeach; ?>
 
+        <?php if (!defined('CLEARING') || !CLEARING || !($course->current_year > $course->year)): ?>
         <p class="btn-indent daedalus-tab-action daedaus-js-display">
             <a href="http://www.ucas.com/apply"
                type="button"
@@ -118,6 +124,7 @@ else: ?>
                 <i class="icon-chevron-right icon-white"></i>
             </a>
         </p>
+        <?php endif; ?>
 
         <p class="btn-indent daedalus-tab-action daedaus-js-display">
             <a type="button" id="apply-link-dummy" class="btn btn-large next-btn apply-link-courses disabled"
