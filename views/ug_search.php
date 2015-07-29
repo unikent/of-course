@@ -45,7 +45,14 @@
           <select class="subject-categories-search input-large <?php if(strcmp($search_type, 'subject_category')  == 0) echo 'highlighted'; ?>">
             <option value="">All subject categories</option>
             <?php
-            sort($subject_categories);
+            
+            usort($subject_categories, function ($a, $b){
+              if ($a->name == $b->name) {
+                return 0;
+              }
+              return ($a->name < $b->name) ? -1 : 1;
+            });
+
             foreach($subject_categories as $sc): ?>
             <option <?php if(strcmp($search_type, 'subject_category')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower($sc->name))  == 0) echo 'selected'; ?>><?php echo $sc->name?></option>
             <?php endforeach; ?>
