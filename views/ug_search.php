@@ -45,7 +45,8 @@
           <select class="subject-categories-search input-large <?php if(strcmp($search_type, 'subject_category')  == 0) echo 'highlighted'; ?>">
             <option value="">All subject categories</option>
             <?php
-            
+
+            $subject_categories = (array) $subject_categories;
             usort($subject_categories, function ($a, $b){
               if ($a->name == $b->name) {
                 return 0;

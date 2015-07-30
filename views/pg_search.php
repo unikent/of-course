@@ -52,6 +52,7 @@
             <option value="">All subject categories</option>
             <?php
             
+            $subject_categories = (array) $subject_categories;
             usort($subject_categories, function ($a, $b){
               if ($a->name == $b->name) {
                 return 0;
