@@ -217,7 +217,7 @@ else: ?>
                                     <tr>
                                         <td><strong>Part-time</strong></td>
                                         <td><?php echo empty($fees->home->{'part-time'}) ? ((empty($fees->home->{'euro-part-time'})) ? 'TBC' : '&euro;' . number_format($fees->home->{'euro-part-time'})) : '&pound;' . number_format($fees->home->{'part-time'}); ?></td>
-                                        <td><?php echo empty($fees->int->{'part-time'}) ? ((empty($fees->int->{'euro-part-time'})) ? 'TBC' : '&euro;' . number_format($fees->int->{'euro-part-time'})) : '&pound;' . number_format($fees->int->{'part-time'}); ?></td>
+                                        <td>N/A</td>
                                     </tr>
                                 <?php endif; ?>
                                 </tbody>
