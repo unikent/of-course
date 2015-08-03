@@ -46,12 +46,13 @@
             <option value="">All study modes</option>
             <option <?php if(strcmp($search_type, 'study_mode')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Full-time'))  == 0) echo 'selected'; ?>>Full-time</option>
             <option <?php if(strcmp($search_type, 'study_mode')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Part-time'))  == 0) echo 'selected'; ?>>Part-time</option>
+            <option <?php if(strcmp($search_type, 'study_mode')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Distance learning'))  == 0) echo 'selected'; ?>>Distance learning</option>
           </select>
 
           <select class="subject-categories-search input-large <?php if(strcmp($search_type, 'subject_category')  == 0) echo 'highlighted'; ?>">
             <option value="">All subject categories</option>
             <?php
-            
+
             $subject_categories = (array) $subject_categories;
             usort($subject_categories, function ($a, $b){
               if ($a->name == $b->name) {
@@ -120,6 +121,15 @@
             </td>
             <td class="hidden-phone">
                 <?php echo $p->mode_of_study;?>
+                <span style="display:none">
+                    <?php
+                      $distance = strtok($p->attendance_mode, ' ');
+                      if (strpos($distance, 'Distance') !== false) {
+                        $distance = "Distance learning";
+                      }
+                      echo $distance;
+                    ?>
+                </span>
             </td>
             <td class="hide">
                 <?php foreach((array)$p->subject_categories as $key => $sc): ?>
