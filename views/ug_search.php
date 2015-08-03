@@ -45,7 +45,15 @@
           <select class="subject-categories-search input-large <?php if(strcmp($search_type, 'subject_category')  == 0) echo 'highlighted'; ?>">
             <option value="">All subject categories</option>
             <?php
-            sort($subject_categories);
+
+            $subject_categories = (array) $subject_categories;
+            usort($subject_categories, function ($a, $b){
+              if ($a->name == $b->name) {
+                return 0;
+              }
+              return ($a->name < $b->name) ? -1 : 1;
+            });
+
             foreach($subject_categories as $sc): ?>
             <option <?php if(strcmp($search_type, 'subject_category')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower($sc->name))  == 0) echo 'selected'; ?>><?php echo $sc->name?></option>
             <?php endforeach; ?>
@@ -277,6 +285,19 @@ $(document).ready(function(){
 
 });
 </script>
+<script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 982380334;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+    <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/982380334/?value=0&amp;guid=ON&amp;script=0" />
+    </div>
+</noscript>
 
 </kentScripts>
-
