@@ -15,21 +15,21 @@
     </div>
     <div class='row-fluid' style='min-height:300px;'>
         <div class='span7'>
-            <p><strong>Sorry but we could not find the programme you were attempting to view.</strong></p>
+            <p><strong>Sorry but we could not find the webpage you were attempting to view.</strong></p>
             <p>Try using the search above to find what you are looking for or alternatively go back to the <a href='<?php echo BASE_URL; ?>'>courses index page</a>.</p>
-       
+
             <?php if(!empty($slug)): ?>
                 <?php
                     $limit = 6;
                     $found = array();
-                
+
                     foreach($programmes as $programme){
                        if(strpos($programme->name, $slug) !==false || strpos($programme->slug, $slug) !==false){
                             $link = Flight::url("{$level}/{$year_for_url}{$programme->id}/{$programme->slug}");
                             $found[] = "<li><a href='{$link}'>{$programme->name}</a></li>";
                         }
                         if(sizeof($found) >= $limit)break;
-                    }  
+                    }
                 ?>
                 <?php if(sizeof($found) != 0): ?>
                 <h4>Are any of these what you're looking for?</h4>
@@ -56,7 +56,7 @@
 </article>
 
 <!--
-    
+
 Debug Info:
 <?php
    if(isset($error)) echo $error->getCode().': '.$error->getMessage();
