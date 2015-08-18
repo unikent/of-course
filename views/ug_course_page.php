@@ -66,27 +66,20 @@ else: ?>
     <div class="span5">
 
         <div class="side-panel">
-          <?php if (defined('CLEARING') && CLEARING && $course->current_year > $course->year): ?>
-                <div class="panel admission-links">
-                    <a href="<?php echo $course->globals->clearing_vacancies_link; ?>">Is this course in Clearing?</a>
-                </div>
-            <?php else: ?>
 
-                <div class="admission-links">
-                    <a href="/courses/undergraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?>apply-online/<?php echo $course->instance_id ?>"
-                       class="btn btn-large apply-adm-link"
-                       type="button"
-                       role="button"
-                       aria-controls="apply"
-                       onclick="_pat.event('course-page', 'apply-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?> at <?php echo $schoolName ?>');">Apply</a>
-                    <a href="#!enquiries"
-                       class="enquire-adm-link"
-                       role="tab"
-                       aria-controls="enquiries">Contact us</a>
-                    or <a href="#!enquiries" class="pros-adm-link" role="tab" aria-controls="enquiries">order a prospectus</a>
-                </div>
-
-            <?php endif; ?>
+            <div class="admission-links">
+                <a href="/courses/undergraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?>apply-online/<?php echo $course->instance_id ?>"
+                   class="btn btn-large apply-adm-link"
+                   type="button"
+                   role="button"
+                   aria-controls="apply"
+                   onclick="_pat.event('course-page', 'apply-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?> at <?php echo $schoolName ?>');">Apply</a>
+                <a href="#!enquiries"
+                   class="enquire-adm-link"
+                   role="tab"
+                   aria-controls="enquiries">Contact us</a>
+                or <a href="#!enquiries" class="pros-adm-link" role="tab" aria-controls="enquiries">order a prospectus</a>
+            </div>
 
             <div class="key-facts-block">
                 <aside class="key-facts-container">
