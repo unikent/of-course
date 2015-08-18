@@ -124,8 +124,6 @@ endforeach;
 
   <?php
   $file = 'https://www.kent.ac.uk/courses/postgraduate/pdf/prospectus.pdf';
-  $fileSize = strlen(file_get_contents($file))/1024/1024;
-  $fileMB = round($fileSize, 2);
   ?>
 
   <h3>Resources</h3>
@@ -134,7 +132,7 @@ endforeach;
       <a href="https://www.kent.ac.uk/courses/postgraduate/pdf/prospectus.pdf"
       <?php echo sprintf($eventjs, 'download-prospectus-pg', $course_name_fortracking); ?>
       >
-      Download a prospectus (PDF - <?php echo $fileMB ?> MB)
+      Download a prospectus (PDF)
     </a>
   </li>
 
@@ -143,13 +141,11 @@ endforeach;
       <?php foreach ($course->programme_leaflet as $leaflet):
         $file = $leaflet->tracking_code;
         $pathParts = pathinfo($file);
-        $fileSize = strlen(file_get_contents($file))/1024/1024;
-        $fileMB = round($fileSize, 2);
         $fileType = strtoupper($pathParts['extension']);
         ?>
 
         <li>
-          <a href="<?php echo $leaflet->tracking_code ?>">Download a <?php echo $leaflet->name ?> subject leaflet (<?php echo $fileType . ' - '. $fileMB ?> MB)</a>
+          <a href="<?php echo $leaflet->tracking_code ?>">Download a <?php echo $leaflet->name ?> subject leaflet (<?php echo $fileType ?>)</a>
         </li>
       <?php endforeach; ?>
     <?php endif; ?>
