@@ -88,14 +88,12 @@
   <h3>Resources</h3>
   <?php
   $file = 'https://www.kent.ac.uk/courses/undergraduate/prospectus/' . $course->year . '/prospectus-full.pdf';
-  $fileSize = strlen(file_get_contents($file))/1024/1024;
-  $fileMB = round($fileSize, 2);
   ?>
   <ul>
     <li>
       <a href="https://www.kent.ac.uk/courses/undergraduate/prospectus/<?php echo $course->year; ?>/prospectus-full.pdf"
         <?php echo sprintf($eventjs, 'download-prospectus-ug', $course_name_fortracking); ?>>
-        Download a prospectus (PDF - <?php echo $fileMB ?> MB)
+        Download a prospectus (PDF)
       </a>
       <?php if (!empty($course->delveries)): ?>
         or order one below.
@@ -107,8 +105,6 @@
 
         $file = $course->subject_leaflet[0]->tracking_code;
         $pathParts = pathinfo($file);
-        $fileSize = strlen(file_get_contents($file))/1024/1024;
-        $fileMB = round($fileSize, 2);
         $fileType = strtoupper($pathParts['extension']);
     ?>
     <section class="info-subsection">
@@ -116,20 +112,18 @@
         <li>
           <a href="<?php echo $course->subject_leaflet[0]->tracking_code ?>">Download a
             <?php echo $course->subject_leaflet[0]->name ?>
-            subject leaflet (<?php echo $fileType . ' - ' . $fileMB ?>MB)
+            subject leaflet (<?php echo $fileType ?>)
           </a>
         </li>
       <?php if(!empty($course->subject_leaflet_2[0])):
         $file = $course->subject_leaflet_2[0]->tracking_code;
         $pathParts = pathinfo($file);
-        $fileSize = strlen(file_get_contents($file))/1024/1024;
-        $fileMB = round($fileSize, 2);
         $fileType = strtoupper($pathParts['extension']);
       ?>
       <li>
         <a href="<?php echo $course->subject_leaflet_2[0]->tracking_code ?>">Download a
           <?php echo $course->subject_leaflet_2[0]->name ?>
-          subject leaflet (<?php echo $fileType . ' - ' . $fileMB ?>MB)
+          subject leaflet (<?php echo $fileType ?>)
         </a>
       </li>
       <?php endif; ?>
