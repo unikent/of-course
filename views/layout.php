@@ -39,23 +39,11 @@
                         <br>If you are a <strong>Clearing</strong>, <strong>Adjustment</strong> or <strong>part-time</strong> applicant wishing to start this September, go to our <a href="/courses/undergraduate/<?php echo date('Y');?>/search/"><?php echo date('Y');?> search page</a>.
                     <?php elseif ( isset($course) && $course->current_year == $course->year ): ?>
                         <div class='alert alert-daedalus' style="padding: 20px;margin:10px 0 0 0;">
-                    <?php
-                    $exists = true;
-            $file_headers = get_headers("http://www.kent.ac.uk/courses/undergraduate/" . ($course->current_year - 1) . "/" . $course->instance_id);
-            if($file_headers[0] == 'HTTP/1.1 404 Not Found') {
-                $exists = false;
-              }
-            ?>
-            <?php if ($exists): ?>
+
                         <strong>Applying through clearing?</strong>
                         <br>Clearing applicants and others planning to start in 2015 should view
                         <a href="/courses/undergraduate/<?php echo $course->current_year - 1;?>/<?php echo $course->instance_id ?>/<?php echo $course->slug ?>"><?php echo $course->programme_title;?> for <?php echo $course->current_year - 1;?> entry.</a>
 
-                    <?php else: ?>
-                      <strong>Applying through clearing?</strong>
-                      <br>Clearing applicants and others planning to start in 2015 should view
-                      <a href="/courses/undergraduate/<?php echo $course->current_year - 1;?>/search/"><?php echo $course->current_year - 1;?> entry online prospectus.</a>
-                        <?php endif; ?>
                     <?php endif; ?>
                   </div>
                 <?php endif;?>
