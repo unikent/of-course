@@ -95,7 +95,7 @@ class CoursesFrontEnd {
 		$course->award_list	= $this->getCourseAwardList($course);
 
 		$meta = array(
-			'title'=> "{$course->programme_title} - {$course->award_list} - {$locations_str} - The University of Kent",
+			'title'=> "{$course->programme_title} - {$course->award_list} - {$course->locations_str} - The University of Kent",
 			'canonical' => Flight::url("{$level}/{$id}/{$course->slug}"),
 			'active_instance' => Flight::url("{$level}/{$id}/{$course->slug}"),
 			'description' => strip_tags($course->programme_abstract),
