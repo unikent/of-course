@@ -82,6 +82,8 @@
 			<th class="hide">Subject categories</th>
 			<th class="hide">Search keywords</th>
 			<th class="hide">Course options</th>
+			<th class="hide">Sort-key</th>
+			<th class="hide">Sort</th>
 		  </tr>
 		</thead>
 		<tbody>
@@ -117,6 +119,8 @@
 			<td class="hide">
 				  <?php /* programme_type aka 'course options' eg year abroad */ echo trim($p->programme_type);?>
 			</td>
+			<td class="hide"><?php echo strtolower($p->name);?> <?php echo strtolower($p->award);?></td>
+			<td class="hide"></td>
 		  </tr>
 		<?php endforeach; ?>
 
@@ -132,158 +136,19 @@
 
 $(document).ready(function(){
 
-  //put our custom search items into variables
-  var advanced_text_search = $('input.advanced-text-search');
-  var campus_search = $('select.campus-search');
-  var attendance_mode_search = $('select.attendance-mode-search');
-  var subject_categories_search = $('select.subject-categories-search');
-  var course_options_search = $('select.course-options-search');
-
-
-  /* Custom filtering function which will filter data using our advanced search fields */
-  $.fn.dataTableExt.afnFiltering.push(
-  function( oSettings, aData, iDataIndex ) {
-
-  // get each column out
-  var name = $(aData[0]).html();
-  var ucas_code = aData[1];
-  var campus = aData[2];
-  var attendance_mode = aData[3];
-  var subject_categories = aData[4];
-  var search_keywords = aData[5];
-  var course_options = aData[6];
-
-  if(advanced_text_search && campus_search && attendance_mode_search && subject_categories_search && course_options_search){
-
-	// search both the Name, UCAS code and Search keywords fields if our search box is filled
-	var advanced_text_search_result = (advanced_text_search.val() == '') ? true :
-		(
-		  (name.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) ||
-		  (search_keywords.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) ||
-		  (attendance_mode.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) ||
-		  (campus.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) ||
-		  (subject_categories.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) ||
-		  (ucas_code.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) ||
-		  (course_options.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1)
-		  ? true : false
-		);
-
-	// search the campus field if a campus is selected
-	var campus_search_result = (campus_search.val() == '') ? true : (( campus.toLowerCase().indexOf( campus_search.val().toLowerCase() ) !== -1 ) ? true : false );
-
-	// search the study mode field if a study mode is selected
-	var attendance_mode_search_result = (attendance_mode_search.val() == '') ? true : (( attendance_mode.toLowerCase().indexOf( attendance_mode_search.val().toLowerCase() ) !== -1 ) ? true : false );
-
-	// search the programme type field if a programme type is selected
-	var course_options_search_result = (course_options_search.val() == '') ? true : (( course_options.toLowerCase().indexOf( course_options_search.val().toLowerCase() ) !== -1 ) ? true : false );
-
-	// lets split subject categories up so we can search then individually
-	var subject_categories_vals = subject_categories.split(';');
-
-	// check to see if we find our searched subject category in the array
-	var subject_categories_search_result = false;
-	if (subject_categories_search.val() == ''){
-	  subject_categories_search_result = true;
-	}
-	else{
-	  for (var i = 0; i < subject_categories_vals.length; i++) {
-		subject_categories_vals[i] = $.trim(subject_categories_vals[i]);
-		if(subject_categories_search.val().toLowerCase() == subject_categories_vals[i].toLowerCase()){
-		  subject_categories_search_result = true;
-		  break;
+	var programme_list = new CourseFilterTable({
+		table: $('#programme-list'),
+		globalFilter: $('input.advanced-text-search'),
+		columnFilters: {
+			"2": $('select.campus-search'),
+			"3": $('select.attendance-mode-search'),
+			"4" : $('select.subject-categories-search'),
+	 		"6": $('select.course-options-search')
 		}
-	  }
-	}
-
-
-	// return our results
-	return advanced_text_search_result && campus_search_result && attendance_mode_search_result && subject_categories_search_result && course_options_search_result;
-  }
-
-  return true;
-  }
-  );
-
-  /**
-  *
-  * data tables for programme index page
-  *
-  */
-  $(document).ready(function(){
-  var programme_list = $('#programme-list').dataTable({
-		"sDom": "t<'muted pull-right'i><'clearfix'>p", // no need for this since we're implementing our own search: "<'navbar'<'navbar-inner'<'navbar-search pull-left'f>>r>t<'muted pull-right'i><'clearfix'>p",
-		"sPaginationType": "bootstrap",
-		"iDisplayLength": 50,
-		"oLanguage": {
-			"sSearch": ""
-		},
-		"aoColumns": [
-		  { "bSortable": true },
-		  { "bSortable": true },
-		  { "bSortable": true },
-		  { "bSortable": true },
-		  { "bSortable": false },
-		  { "bSortable": false },
-		  { "bSortable": false }
-		  ]
-	});
-
-	//now add appropriate event listeners to our custom search items
-	if(advanced_text_search && campus_search && attendance_mode_search && subject_categories_search){
-
-	  advanced_text_search.keyup(function() {
-		programme_list.fnDraw();
-		/* show/hide the search hint when the input box is empty */
-		$("#advanced-text-search-hint").show();
-		if( $(this).val().length == 0 ) {
-		  $("#advanced-text-search-hint").hide();
-		}
-	  });
-
-	  campus_search.change(function(){
-		programme_list.fnDraw();
-		highlight($(this));
-	  });
-
-	  attendance_mode_search.change(function(){
-		programme_list.fnDraw();
-		highlight($(this));
-	  });
-
-	  course_options_search.change(function(){
-		programme_list.fnDraw();
-		highlight($(this));
-	  });
-
-	  subject_categories_search.change(function(){
-		programme_list.fnDraw();
-		highlight($(this));
-	  });
-
-	  function highlight(obj) {
-		if ( obj.children().first().text() != $("option:selected", obj).text() ) {
-		   obj.addClass("highlighted");
-		}
-		else {
-		  obj.removeClass("highlighted");
-		}
-		return true;
-	  }
-
-	}
-	/* fades the scroll to top button in and out as you scroll away from/near to the top of the page */
-	$(window).bind('scroll', function(){
-	  if($(this).scrollTop() > 650) {
-		  $(".scroll-to-top").fadeIn();
-	  }
-	  if($(this).scrollTop() < 650) {
-		  $(".scroll-to-top").fadeOut();
-	  }
-	});
-
-  });
+	}); 
 
 });
+
 </script>
 <script type="text/javascript">
 	/* <![CDATA[ */
