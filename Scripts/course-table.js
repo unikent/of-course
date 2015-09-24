@@ -98,10 +98,12 @@ function CourseFilterTable(data){
 	 		// hook up sub filter
 	 		for(var i in data.columnFilters){
 	 			// Hook up filter event to col + provide required details
-	 			data.columnFilters[i].attr('data-col', i).on('change', function(){
+	 			var tmp = data.columnFilters[i].attr('data-col', i).on('change', function(){
 	 				// apply filter
 	 				api.column($(this).attr('data-col')).search($(this).val()).draw();
 	 			});
+	 			// Trigger any existing filters
+	 			tmp.change();
 	 		}
 	 	}
 	});
