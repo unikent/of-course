@@ -93,6 +93,7 @@ class CoursesFrontEnd {
 		Flight::setup($year, $level);
 		$course->locations_str = $this->getCourseLocations($course);
 		$course->award_list	= $this->getCourseAwardList($course);
+		$course->award_list_linked = $this->getCourseAwardListLinked($course);
 
 		$meta = array(
 			'title'=> "{$course->programme_title} - {$course->award_list} - {$course->locations_str} - The University of Kent",
@@ -155,6 +156,7 @@ class CoursesFrontEnd {
 
 		$course->locations_str = $this->getCourseLocations($course);
 		$course->award_list	= $this->getCourseAwardList($course);
+		$course->award_list_linked = $this->getCourseAwardListLinked($course);
 
 		return Flight::layout($course->programme_level.'_course_page', array('course'=> $course));
 	}
@@ -709,10 +711,10 @@ class CoursesFrontEnd {
 
 		$course->locations_str = $this->getCourseLocations($course);
 		$course->award_list	= $this->getCourseAwardList($course);
-
+		$course->award_list_linked = $this->getCourseAwardListLinked($course);
 
 		$meta = array(
-			'title' => "{$course->programme_title} - {$course->award_list} - {$locations_str} - The University of Kent",
+			'title' => "{$course->programme_title} - {$course->award_list} - {$course->locations_str} - The University of Kent",
 			'canonical' => Flight::url("{$level}/{$id}/{$course->slug}"),
 			'active_instance' => Flight::url("{$level}/{$id}/{$course->slug}"),
 			'description' => strip_tags($course->programme_abstract),
@@ -748,7 +750,7 @@ class CoursesFrontEnd {
 		switch($level){
 			case 'postgraduate':
 			if($year && ($year !== static::$current_year)){
-				$meta['title'] = "{$course->programme_title} - {$course->award_list} - {$locations_str} - Postgraduate Programmes {$year} Application - The University of Kent";
+				$meta['title'] = "{$course->programme_title} - {$course->award_list} - {$course->locations_str} - Postgraduate Programmes {$year} Application - The University of Kent";
 			}
 
 			return Flight::layout('apply-pg', array('meta' => $meta, 'course' => $course, 'deliveries' => $validDeliveries));
@@ -756,7 +758,7 @@ class CoursesFrontEnd {
 
 			default:
 			if($year && ($year !== static::$current_year)){
-				$meta['title'] = "{$course->programme_title} ($course->ucas_code) - {$course->award_list} - {$locations_str} - Undergraduate Programmes {$year} Application - The University of Kent";
+				$meta['title'] = "{$course->programme_title} ($course->ucas_code) - {$course->award_list} - {$course->locations_str} - Undergraduate Programmes {$year} Application - The University of Kent";
 			}
 			return Flight::layout('apply-ug', array('meta' => $meta, 'course' => $course, 'deliveries' => $validDeliveries));
 			break;
@@ -811,6 +813,18 @@ class CoursesFrontEnd {
 		foreach ($course->award as $award) {
 			if (!empty($award->name)) {
 				$award_list .= $award->name . ', ';
+			}
+		}
+
+		return rtrim($award_list, ', ');
+	}
+
+	private function getCourseAwardListLinked($course)
+	{
+		$award_list = '';
+		foreach ($course->award as $award) {
+			if (!empty($award->name)) {
+				$award_list .= '<a class="award-tt" title="' . $award->longname . '" data-title="' . $award->longname . '" data-toggle="popover">' . $award->name . '</a>, ';
 			}
 		}
 

@@ -109,6 +109,28 @@
   padding-bottom: 0;
   margin-bottom: 5px;
 }
+.daedalus-courses header h1 a.award-tt {
+  cursor: help;
+}
+.daedalus-courses header h1 .popover {
+  background-color: #f9f4e7;
+  border-radius: 0;
+}
+.daedalus-courses header h1 .popover .popover-title {
+  background-color: #f9f4e7;
+  font-size: 14px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, sans-serif;
+  font-weight: bold;
+  color: #555;
+}
+.daedalus-courses header h1 .popover .popover-content {
+  font-size: 14px;
+  padding: 0 10px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, sans-serif;
+}
+.daedalus-courses header h1 .popover .arrow:after {
+  border-bottom-color: #f9f4e7;
+}
 .daedalus-courses header h2.location-header {
   color: #937227;
   padding-bottom: 15px;

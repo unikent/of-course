@@ -29,6 +29,7 @@ $(document).ready(function(){
 	  $(this).find('i').toggleClass('icon-plus').toggleClass('icon-minus');
 	});
 
+	$('');
 
 	/**
 	 * Apply page
