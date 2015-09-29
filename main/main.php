@@ -824,7 +824,7 @@ class CoursesFrontEnd {
 		$award_list = '';
 		foreach ($course->award as $award) {
 			if (!empty($award->name)) {
-				$award_list .= '<a class="award-tt" title="' . $award->longname . '" data-title="' . $award->longname . '" data-toggle="popover">' . $award->name . '</a>, ';
+				$award_list .= '<a class="award-tt" title="' . $award->longname . '" data-title="' . $award->longname . '" data-toggle="popover" data-trigger="focus" tabindex="0" role="button">' . $award->name . '</a>, ';
 			}
 		}
 

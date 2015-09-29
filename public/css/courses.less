@@ -125,16 +125,31 @@
       margin-bottom: 5px;
 	  a.award-tt{
 		cursor: help;
+		outline:none;
+		&:hover,&:focus,&:active{
+		  outline: none;
+		}
 	  }
 	  .popover{
 		background-color: #f9f4e7;
 		border-radius: 0;
 		.popover-title{
+		  padding-right: 30px;
 		  background-color: #f9f4e7;
 		  font-size: 14px;
 		  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, sans-serif;
 		  font-weight: bold;
 		  color: #555;
+		  position: relative;
+		  &:after{
+			content: "\f00d";
+			font-family: "FontAwesome",sans-serif;
+			position: absolute;
+			right:6px;
+			top:6px;
+			font-size: 1.2em;
+			opacity: 0.4;
+		  }
 		}
 		.popover-content{
 		  font-size: 14px;
