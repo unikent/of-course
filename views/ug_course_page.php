@@ -9,10 +9,10 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 
 ?>
 
-<article class="container">
+<article class="container ug">
     <header>
         <h1>
-            <?php echo $course->programme_title; ?> - <?php echo $course->award_list; ?>
+            <?php echo $course->programme_title; ?> - <?php echo $course->award_list_linked; ?>
             <?php echo $course->programmme_status_text; ?>
         </h1>
         <h2 class='location-header' ><?php echo $course->locations_str; ?></h2>

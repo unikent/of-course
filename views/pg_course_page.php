@@ -8,7 +8,7 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 <article class="container pg">
     <header>
         <h1>
-            <?php echo $course->programme_title; ?> - <?php echo $course->award_list; ?>
+            <?php echo $course->programme_title; ?> - <?php echo $course->award_list_linked; ?>
             <?php echo $course->programmme_status_text; ?>
         </h1>
         <h2 class='location-header'><?php echo  $course->locations_str; ?></h2>
@@ -116,7 +116,7 @@ else: ?>
                                 echo ($second_subject) ? ', ' . $course->subject_area_2[0]->name : '';
                                 ?>
                             </li>
-                            <li><strong>Award:</strong> <?php echo $course->award_list; ?></li>
+                            <li><strong>Award:</strong> <?php echo $course->award_list; ?><br /><a href="https://www.kent.ac.uk/courses/postgraduate/types/index.html">Learn more about our Awards</a></li>
 
                             <li><strong>Course type:</strong>
                                 <?php if (strpos($course->programme_type, 'research') === false): ?>

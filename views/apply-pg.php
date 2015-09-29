@@ -55,45 +55,50 @@ $has_fulltime = $delivery_truth($deliveries, $course, "full-time");
 // How to apply 53 is "How to apply (atypical courses)".
 // When this field is populated, show only its contents, not the standard apply text.
 
-if (isset($course->how_to_apply) && trim($course->how_to_apply) != '' && !empty($course->how_to_apply)): ?>
+if (isset($course->how_to_apply) && trim($course->how_to_apply) != '' && !empty($course->how_to_apply)){
 
-    <?php echo $course->how_to_apply; ?>
+    echo $course->how_to_apply;
 
-<?php elseif (count($deliveries) === 0) : ?>
+} elseif (count($deliveries) === 0) {
+?>
 
     <p>We will be taking applications for this programme soon, please check back shortly.</p>
 
 <?php
-else: ?>
+} else { ?>
 
-    <div class="apply-form hidden">
+    <div class="apply-form apply-form-pg hidden">
 
-        <?php if (isset($course->how_to_apply_supplementary)) echo $course->how_to_apply_supplementary; ?>
+        <?php
+        if (isset($course->how_to_apply_supplementary)){
+            echo $course->how_to_apply_supplementary;
+        }
+        ?>
 
         <p>To begin your application process, you'll need to select your course options below:</p>
 
         <?php /* one award but lots of deliveries - edge case */
-        if (sizeof($course->award) === 1 && sizeof($deliveries) > 2): ?>
+        if (sizeof($course->award) === 1 && sizeof($deliveries) > 2){ ?>
 
             <div>
                 <fieldset class="highlight-fieldset indent">
                     <legend>Course options</legend>
                     <div class="form-group">
                         <div class="controls">
-                            <?php foreach ($deliveries as $delivery): ?>
-                                <input id="delivery<?php echo $delivery->id ?>" type="radio" class="radioLeft"
-                                       name="delivery" value="delivery<?php echo $delivery->id ?>">
+                            <?php foreach ($deliveries as $delivery){ ?>
+                                <input id="delivery<?php echo $delivery->id; ?>" type="radio" class="radioLeft"
+                                       name="delivery" value="delivery<?php echo $delivery->id; ?>">
                                 <div class="textBlock">
-                                    <?php echo str_ireplace(array('part-time', 'full-time'), array('<strong>part-time</strong>', '<strong>full-time</strong>'), $delivery->description) ?>
+                                    <?php echo str_ireplace(array('part-time', 'full-time'), array('<strong>part-time</strong>', '<strong>full-time</strong>'), $delivery->description); ?>
                                 </div>
                                 <div style="clear:both;"/>
-                            <?php endforeach; ?>
+                            <?php } ?>
                         </div>
                     </div>
                 </fieldset>
             </div>
 
-            <?php foreach ($deliveries as $delivery): ?>
+            <?php foreach ($deliveries as $delivery){ ?>
                 <p class="btn-indent daedalus-tab-action daedaus-js-display">
                     <a type="button" id="apply-link-delivery<?php echo $delivery->id ?>"
                        class="btn btn-large btn-primary next-btn apply-link-courses" tabindex="0" role="button"
@@ -102,43 +107,56 @@ else: ?>
                        onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>] at <?php echo $schoolName ?>');">Next
                         <i class="icon-chevron-right icon-white"></i></a>
                 </p>
-            <?php endforeach; ?>
+            <?php } ?>
 
-        <?php else: ?>
+        <?php } else { ?>
 
             <div>
                 <fieldset class="highlight-fieldset indent">
                     <legend>Course options</legend>
-                    <?php if (!$has_parttime): ?>
-                        <p id="type" data-type="full-time" class="hidden" aria-hidden="true">Full-time</p>
-                    <?php elseif (!$has_fulltime): ?>
-                        <p id="type" data-type="part-time" class="hidden" aria-hidden="true">Part-time</p>
                     <?php
-                    else: ?>
+                    if (!$has_parttime){
+                    ?>
+                        <input type="hidden" id="type" value="full-time">
+                    <?php
+                    } elseif (!$has_fulltime) {
+                    ?>
+                        <input type="hidden" id="type" value="part-time">
+                    <?php
+                    }else{
+                    ?>
                         <div class="form-group">
                             <label for="type">Mode of study</label>
 
                             <div class="controls">
                                 <select name="type" id="type" required="required">
-                                    <?php if ($has_fulltime && $has_parttime): ?>
+                                    <?php
+                                    if ($has_fulltime && $has_parttime){
+                                    ?>
                                         <option value="pleaseselect">Please select</option>
-                                    <?php endif; ?>
-						<?php if($has_fulltime): ?>
+                                    <?php
+                                    }
+                                    if($has_fulltime){
+                                    ?>
                                         <option value="full-time">Full-time</option>
-                                    <?php endif; ?>
-						<?php if($has_parttime): ?>
+                                    <?php
+                                    }
+                                    if($has_parttime){
+                                    ?>
                                         <option value="part-time">Part-time</option>
-                                    <?php endif; ?>
+                                    <?php
+                                    }
+                                    ?>
                                 </select>
                             </div>
                         </div>
-                    <?php endif; ?>
+                    <?php
+                    }
+                    ?>
 
-                    <?php if (sizeof($course->award) === 1): ?>
-                        <p id="award"
-                           data-award="<?php echo strtolower(str_replace(' ', '', $course->award[0]->{name})) ?>"
-                           class="hidden" aria-hidden="true"><?php echo $course->award[0]->{name} ?></p>
-                    <?php else: ?>
+                    <?php if (sizeof($course->award) === 1){ ?>
+                        <input type="hidden" id="award" value="<?php echo strtolower(str_replace(' ', '', $course->award[0]->name)) ?>">
+                    <?php }else{ ?>
                         <div class="form-group">
                             <label for="award">Award</label>
 
@@ -146,26 +164,24 @@ else: ?>
                                 <select name="award" id="award" required="required">
 
                                     <option value="pleaseselect">Please select</option>
-                                    <?php foreach ($course->award as $award): ?>
+                                    <?php foreach ($course->award as $award){ ?>
                                         <option
                                             value="<?php echo strtolower(str_replace(' ', '', $award->name)) ?>"><?php echo $award->name ?></option>
-                                    <?php endforeach; ?>
+                                    <?php } ?>
 
                                 </select>
                             </div>
                         </div>
-                    <?php endif; ?>
+                    <?php } ?>
 
-
-                    <p id="year" data-year="<?php echo $course->year; ?>" class="hidden"
-                       aria-hidden="true"><?php echo $course->year; ?></p>
+                    <input type="hidden" id="year" value="<?php echo $course->year; ?>">
 
                 </fieldset>
             </div>
 
 
 
-            <?php foreach ($deliveries as $delivery): ?>
+            <?php foreach ($deliveries as $delivery){ ?>
 
                 <p class="btn-indent daedalus-tab-action daedaus-js-display">
                     <a type="button"
@@ -177,9 +193,9 @@ else: ?>
                         <i class="icon-chevron-right icon-white"></i></a>
                 </p>
 
-            <?php endforeach; ?>
+            <?php } ?>
 
-        <?php endif; ?>
+        <?php } ?>
 
         <p class="btn-indent daedalus-tab-action daedaus-js-display">
             <a type="button" id="apply-link-dummy" class="btn btn-large next-btn apply-link-courses disabled"
@@ -189,22 +205,24 @@ else: ?>
 
     </div>
 
-    <div id="no-script">
+   <noscript>
         <ul>
-            <?php foreach ($deliveries as $delivery): ?>
+            <?php
+            foreach ($deliveries as $delivery){ ?>
                 <li><p><a title="Apply for <?php echo $delivery->description ?>"
                           href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=<?php echo $delivery->current_ipo ?>"
                           onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>] at <?php echo $schoolName ?>');">Apply
                             for <?php echo $course->year ?> entry to <?php echo $delivery->description ?></a></p></li>
-
+                <?php if(!empty($delivery->previous_ipo)){ ?>
                 <li><p><a title="Apply for <?php echo $delivery->description ?>"
                           href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=<?php echo $delivery->previous_ipo ?>"
                           onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>] at <?php echo $schoolName ?>');">Apply
                             for <?php echo $course->year - 1 ?> entry to <?php echo $delivery->description ?></a></p>
                 </li>
-
-            <?php endforeach; ?>
+                <?php }
+            }
+            ?>
         </ul>
-    </div>
+    </noscript>
 
-<?php endif; ?>
+<?php } ?>
