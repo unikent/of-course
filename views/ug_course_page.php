@@ -108,10 +108,10 @@ else: ?>
                                 ?>
                             </li>
                             <li><strong>Award:</strong> <?php echo $course->award[0]->name; ?> </li>
-                            <li><strong>Honours type:</strong> <?php echo $course->honours_type; ?> </li>
+                            <li><strong>Award type:</strong> <?php echo $course->honours_type; ?> </li>
 
                             <?php if (!empty($course->ucas_code)): ?>
-                                <li><strong>UCAS code:</strong> <?php echo $course->ucas_code; ?>    </li>
+                                <li><strong>UCAS code:</strong> <?php echo $course->ucas_code; ?></li>
                             <?php endif; ?>
 
                             <li><strong>Location:</strong>
