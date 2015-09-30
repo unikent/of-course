@@ -7,7 +7,7 @@ if(!$course->disable_studysupport_additional) {
     if (strpos($course->programme_type, 'research') === false) { ?>
         <?php if (!empty($course->globals->global_skills_award)) {
             ?>
-            <h2>Global Skills Award</h2>
+            <h3>Global Skills Award</h3>
             <?php
             echo $course->globals->global_skills_award;
         }
@@ -16,7 +16,7 @@ if(!$course->disable_studysupport_additional) {
         <?php
         if (!empty($course->globals->researcher_development_programme)) {
             ?>
-            <h2>Researcher Development Programme</h2>
+            <h3>Researcher Development Programme</h3>
             <?php
             echo $course->globals->researcher_development_programme;
         }
