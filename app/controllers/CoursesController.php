@@ -1,6 +1,6 @@
 <?php
 
-class CoursesFrontEnd {
+class CoursesController {
 
 	/**
 	* A Programmes Plant API Object.
@@ -301,7 +301,7 @@ class CoursesFrontEnd {
 		if(isset($_GET['debug_performance'])){ inspect($programmes); }
 
 		//Render full page
-		return Flight::layout($template, array('meta' => $meta, 'programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'search_type' => $search_type, 'search_string' => $search_string, 'awards' => $award_names));
+		return Flight::layout($template, array('meta' => $meta, 'programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'search_type' => $search_type, 'search_string' => $search_string, 'awards' => $award_names, 'disable_search_bar' => true));
 
 	}
 	/**
@@ -437,11 +437,11 @@ class CoursesFrontEnd {
 	public function ajax_search_data($level, $year='current')
 	{
 		// Cache json output for a minute or so (go faster!)
-		$output = Cache::get("courses-daedalus-search-json-{$level}-{$year}", function() use ($level, $year) {
+		//$output = Cache::get("courses-daedalus-search-json-{$level}-{$year}", function() use ($level, $year) {
 
 			try
 			{
-				$js = CoursesFrontEnd::$pp->get_programmes_index($year, $level);
+				$js = CoursesController::$pp->get_programmes_index($year, $level);
 			}
 			catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
 			{
@@ -453,9 +453,10 @@ class CoursesFrontEnd {
 				return "{'error':'Unable to load data.'}";
 			}
 
-			return json_encode($js);
+			echo json_encode($js);
+			return;
 
-		}, 2);
+		//}, 2);
 
 		if($out === false) Flight::halt(501, "Fatal error in getting programmes index.");
 

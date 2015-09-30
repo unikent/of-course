@@ -1,5 +1,5 @@
 <?php
-  $year_for_url = empty($year) ? '' : ((strcmp($year, CoursesFrontEnd::$current_year) == 0) ? '' : $year . '/');
+  $year_for_url = empty($year) ? '' : ((strcmp($year, CoursesController::$current_year) == 0) ? '' : $year . '/');
 
   $has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
   $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);

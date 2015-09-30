@@ -14,7 +14,7 @@ $subjects_b = array_slice($subject_array, $quarter, $quarter);
 $subjects_c = array_slice($subject_array, $quarter*2, $quarter);
 $subjects_d = array_slice($subject_array, $quarter*3);
 
-$year_for_url = empty($year) ? '' : ((strcmp($year, CoursesFrontEnd::$current_year) == 0) ? '' : $year . '/');
+$year_for_url = empty($year) ? '' : ((strcmp($year, CoursesController::$current_year) == 0) ? '' : $year . '/');
 
 ?>
 <div class='span3'>

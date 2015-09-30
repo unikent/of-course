@@ -1,6 +1,6 @@
-<?php $year_for_url = empty($year) ? '' : ((strcmp($year, CoursesFrontEnd::$current_year) == 0) ? '' : $year . '/'); ?>
+<?php $year_for_url = empty($year) ? '' : ((strcmp($year, CoursesController::$current_year) == 0) ? '' : $year . '/'); ?>
 
-<?php if($year !== CoursesFrontEnd::$current_year): ?>
+<?php if($year !== CoursesController::$current_year): ?>
   <meta name="robots" content="noindex, nofollow" />
   <div class='alert alert-daedalus'>
 	This course search is for undergraduate programmes starting in September <?php echo $year; ?>. <a href="<?php echo BASE_URL != '/' ? BASE_URL : ''; ?>/undergraduate/search">Search for programmes starting in September 2016 here.</a>

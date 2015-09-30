@@ -47,7 +47,6 @@ else: ?>
             <section
                 id="overview"><?php Flight::render('ug_tabs/overview', array('course' => $course)); ?></section>
 
-
             <section
                 id="structure"><?php Flight::render('ug_tabs/structure', array('course' => $course)); ?></section>
 
@@ -59,6 +58,9 @@ else: ?>
                 <section
                     id="entry"><?php Flight::render('ug_tabs/entry', array('course' => $course)); ?></section><?php endif; ?>
             <section id="fees"><?php Flight::render('ug_tabs/fees', array('course' => $course)); ?></section>
+
+
+
             <section id="enquiries"><?php Flight::render('ug_tabs/enquiries', array('course' => $course)); ?></section>
         </div>
     </div>
@@ -179,9 +181,10 @@ else: ?>
             <?php else: ?>
                 <div class="key-facts-block">
                     <div class="key-facts-container">
-                        <h2><a id="fees-tables-link" class="fees-link" role="button" aria-controls="fees-tables"
+                        <h2><a id="fees-tables-link" class="fees-toggle" role="button" aria-controls="fees-tables"
                                tabindex='0' title='Click to toggle basic fee information'
-                               onClick="_pat('course-page','expand-fees-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?> - <?php echo $course->award[0]->name ?>');">Fees
+                                onClick="_pat.event('course-page','expand-fees-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?> - <?php echo $course->award[0]->name ?>');"
+                              >Fees
                                 <i class="icon-chevron-down toggler"></i></a></h2>
 
                         <div id="fees-tables" class="fees-tables" style="display: none" aria-expanded="false"
@@ -322,3 +325,5 @@ else: ?>
         });
     </script>
 </kentScripts>
+
+
