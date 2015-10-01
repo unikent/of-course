@@ -179,7 +179,7 @@ else: ?>
             <?php else: ?>
                 <div class="key-facts-block">
                     <div class="key-facts-container">
-                        <h2><a id="fees-tables-link" class="fees-link" role="button" aria-controls="fees-tables"
+                        <h2><a id="fees-tables-link" class="fees-toggle" role="button" aria-controls="fees-tables"
                                tabindex='0' title='Click to toggle basic fee information'
                                onClick="_pat.event('course-page','expand-fees-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?> - <?php echo $course->award[0]->name ?>');">Fees
                                 <i class="icon-chevron-down toggler"></i></a></h2>
