@@ -12,23 +12,23 @@
         <!-- InstanceEndEditable -->
         </kentIncludeMeta>
         <kentIncludeCSS />
-           <link rel='stylesheet' href='<?php echo BASE_URL ?>css/import.css' />
+           <link rel='stylesheet' href='<?php echo Flight::request()->base; ?>css/import.css' />
         <kentHideInBrowser>
             <!--#include virtual="Templates/dreamweaver-styles.shtml" -->
             <!--#include virtual="/Templates/dreamweaver-styles.shtml" -->
         </kentHideInBrowser>
         <kentIncludeJavascript />
 
-        <script type='text/javascript' src='<?php echo BASE_URL ?>js/menu.js'></script>
-        <script type='text/javascript' src='<?php echo BASE_URL ?>js/quickspot.js'></script>
+        <script type='text/javascript' src='<?php echo Flight::request()->base; ?>js/menu.js'></script>
+        <script type='text/javascript' src='<?php echo Flight::request()->base; ?>js/quickspot.js'></script>
 
         <script type='text/javascript'>
             quickspot.attach({
-                "url":"<?php echo BASE_URL ?>searchajax/<?php echo $type ?>/<?php echo $year ?>/",
+                "url":"<?php echo Flight::request()->base; ?>searchajax/<?php echo $type ?>/<?php echo $year ?>/",
                 "target":"searchbox",
                 "clickhandler":function(itm){
                     //Send em to page
-                    document.location = '<?php echo BASE_URL.$type ?>/<?php echo $year ?>/'+itm.id+'/'+itm.slug;
+                    document.location = '<?php echo Flight::request()->base.$type ?>/<?php echo $year ?>/'+itm.id+'/'+itm.slug;
                 },
                 "displayhandler": function(itm){
                     return itm.name+' (ID: '+itm.id+')'; //Do somthing useful like showing award once we have it.
