@@ -1,4 +1,4 @@
-<?php $year_for_url = empty($year) ? '' : ((strcmp($year, CoursesFrontEnd::$current_year) == 0) ? '' : $year . '/'); ?>
+<?php $year_for_url = empty($year) ? '' : ((strcmp($year, CoursesController::$current_year) == 0) ? '' : $year . '/'); ?>
 <?php if (!isset($search_type)) $search_type = ''; ?>
 
 <div class="advanced-search">

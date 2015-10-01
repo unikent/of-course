@@ -1,9 +1,9 @@
-<?php $year_for_url = empty($year) ? '' : ((strcmp($year, CoursesFrontEnd::$current_year) == 0) ? '' : $year . '/'); ?>
+<?php $year_for_url = empty($year) ? '' : ((strcmp($year, CoursesController::$current_year) == 0) ? '' : $year . '/'); ?>
 
-<?php if($year !== CoursesFrontEnd::$current_year): ?>
+<?php if($year !== CoursesController::$current_year): ?>
   <meta name="robots" content="noindex, nofollow" />
   <div class='alert alert-daedalus'>
-	This course search is for undergraduate programmes starting in September <?php echo $year; ?>. <a href="<?php echo BASE_URL != '/' ? BASE_URL : ''; ?>/undergraduate/search">Search for programmes starting in September 2016 here.</a>
+	This course search is for undergraduate programmes starting in September <?php echo $year; ?>. <a href="<?php echo Flight::request()->base; ?>/undergraduate/search">Search for programmes starting in September 2016 here.</a>
   </div>
 <?php endif; ?>
 
@@ -13,8 +13,8 @@
 	  <div class="row-fluid">
 		<div class="span12">
 		  <ul class="nav nav-tabs">
-			<li class="active"><a href="<?php echo BASE_URL != '/' ? BASE_URL : ''; ?>/undergraduate/search">Undergraduate</a></li>
-			<li><a href="<?php echo BASE_URL != '/' ? BASE_URL : ''; ?>/postgraduate/search">Postgraduate</a></li>
+			<li class="active"><a href="<?php echo Flight::request()->base; ?>/undergraduate/search">Undergraduate</a></li>
+			<li><a href="<?php echo Flight::request()->base; ?>/postgraduate/search">Postgraduate</a></li>
 		  </ul>
 		</div><!-- /span -->
 	  </div><!-- /row -->

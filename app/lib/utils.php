@@ -1,5 +1,6 @@
 <?php
-	
+	use unikent\libs\Logger;
+
 	/**
 	 * Layout: applies layout wrapper to content
 	 *
@@ -7,24 +8,72 @@
 	 * @param $params Data for view
 	 * @output Renders HTML to browser
 	 */
-	Flight::map('layout', function($view, $params){
+	Flight::map('layout', function($view, $params = array()){
 		Flight::render($view, $params, 'content');
-		Flight::render('layout');
+		Flight::pantheon_render('layout', $params);
+	});
+
+	/**
+	 * Render using pantheon
+	 */
+	Flight::map('pantheon_render', function($outer_view, $params){
+		
+		// define $template as a closure for getting the pantheon wrapper
+		$template = function() use ($params)
+		{
+			if (defined("TEMPLATING_ENGINE"))
+			{	
+				// Overwrite pantheon route with "URL route"
+				if(!LOCAL) define("RELATIVE_SITE_ROOT", parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH) . '/'); 
+
+				// call pantheon
+				require TEMPLATING_ENGINE . '/template.loader.php';
+		
+				// workaround for pantheon setting get and post to null if they're empty
+				if ($_GET === null) $_GET = array();
+				if ($_POST === null) $_POST = array();
+
+				// Shim logging data
+				foreach(Logger::get('warning') as $warn){
+					inspect($warn);
+				}
+				foreach(Logger::get('debug') as $warn){
+					debug($warn);
+				}
+
+				
+				// run pantheon and store its output in a buffer
+				ob_start();
+
+				Flight::render('layout', $params);
+
+				require TEMPLATING_ENGINE . '/run.php';
+				$content = ob_get_contents();
+				ob_end_clean();
+
+				// Render with correct headers
+				Flight::response()->write($content)->send();		
+			}else{
+				Flight::render('layout');
+			}
+		};
+		
+		// go go gadget pantheon
+		return $template();
 	});
 
 	/**
 	 * URL: generate url with base path appended.
 	 *
 	 * @param $path path to link to
-	 * @param $use_base use base URL
 	 * @return string absoulte URL
 	 */
-	Flight::map('url', function($path, $use_base = true){
-	   if (BASE_URL == '/')
-	   {
-    	   return ($use_base) ? BASE_URL.$path : $path;
-	   }
-	   return ($use_base) ? BASE_URL.'/'.$path : $path;
+	Flight::map("url", function($url){
+		if(Flight::request()->base == '/'){
+			return '/'.$url;
+		}else{
+			return Flight::request()->base.'/'.$url;	
+		}
 	});
 
 	/**
@@ -80,12 +129,13 @@
 	 */
 	Flight::map("cachecheck", function(){
 		// Get last response.
-		$request = CoursesFrontEnd::$pp->request;
+		$request = CoursesController::$pp->request;
 		$response = $request->getResponse();
 		$last_modified = $response->getLastModified();
 
+		
 		// Debug data if wanted.
-		debug("[Cache] ".(string)$request."<br/>
+		Logger::debug("[Cache] ".(string)$request."<br/>
 			<br/>
 
 			Received headers:
@@ -111,7 +161,7 @@
 		// Try / Catch
 		try {
 			// Get request
-			$request = CoursesFrontEnd::$pp->request;
+			$request = CoursesController::$pp->request;
 			// If its okay, get responce
 			if($request !== null ){
 				$response = $request->getResponse();
@@ -130,7 +180,7 @@
 	// 404 handler
 	// Use data to try and figure out best 404 info
 	Flight::map('notFound', function($data = array()){
-
+		/*
 		$pantheon_config = Util::getConfig();
 		if($pantheon_config["theme"] != "Daedalus"){
 
@@ -153,7 +203,7 @@
 
 			// Avoid WSOD
 			Flight::halt('404', $page404);
-		}
+		}*/
 		
 		// Attempt to resolve URL details, location, path and other stuff
 		// that will allow us to be more helpful.
@@ -161,7 +211,7 @@
 
 		// Attempt to get programmes so we can make some suggestions
 		try {
-			$data['programmes'] = CoursesFrontEnd::$pp->get_programmes_index($data['year'], $data['level']);
+			$data['programmes'] = CoursesController::$pp->get_programmes_index($data['year'], $data['level']);
 		}catch(Exception $e){
 			$data['programmes'] = array();
 		}	
@@ -169,6 +219,8 @@
 		// Set data & open views
 	  	Flight::setup($data['year'], $data['level']);
 	  	Flight::response()->status(404);
+
+
 		return Flight::layout('404', $data);
 	});
 
@@ -251,7 +303,7 @@
 			}
 			else
 			{
-				$data['year'] = CoursesFrontEnd::$current_year;
+				$data['year'] = CoursesController::$current_year;
 			}
 			
 		}

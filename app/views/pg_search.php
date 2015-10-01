@@ -1,9 +1,9 @@
-<?php $year_for_url = empty($year) ? '' : ((strcmp($year, CoursesFrontEnd::$current_year) == 0) ? '' : $year . '/'); ?>
+<?php $year_for_url = empty($year) ? '' : ((strcmp($year, CoursesController::$current_year) == 0) ? '' : $year . '/'); ?>
 
-<?php if($year !== CoursesFrontEnd::$current_year): ?>
+<?php if($year !== CoursesController::$current_year): ?>
   <meta name="robots" content="noindex, nofollow" />
   <div class='alert alert-daedalus'>
-	You're not searching for programmes in the current upcoming year. <a href="<?php echo BASE_URL != '/' ? BASE_URL : ''; ?>/postgraduate/search">Search for current programmes here.</a>
+	You're not searching for programmes in the current upcoming year. <a href="<?php echo Flight::request()->base; ?>/postgraduate/search">Search for current programmes here.</a>
   </div>
 <?php endif; ?>
 
@@ -13,8 +13,8 @@
 	  <div class="row-fluid">
 		<div class="span12">
 		  <ul class="nav nav-tabs">
-			<li><a href="<?php echo BASE_URL != '/' ? BASE_URL : ''; ?>/undergraduate/search">Undergraduate</a></li>
-			<li class="active"><a href="<?php echo BASE_URL != '/' ? BASE_URL : ''; ?>/postgraduate/search">Postgraduate</a></li>
+			<li><a href="<?php echo Flight::request()->base; ?>/undergraduate/search">Undergraduate</a></li>
+			<li class="active"><a href="<?php echo Flight::request()->base; ?>/postgraduate/search">Postgraduate</a></li>
 		  </ul>
 		</div><!-- /span -->
 	  </div><!-- /row -->
