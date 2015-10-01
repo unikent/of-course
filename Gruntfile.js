@@ -25,7 +25,7 @@ module.exports = function(grunt) {
 			main : {
 				files: {
 		        	'public/js/build/<%= pkg.name %>.min.js': ['public/js/*.js'],
-		        	'public/js/build/coursetable.min.js': ['Scripts/datatables.js', 'Scripts/course-table.js']
+		        	'public/js/build/coursetable.min.js': ['public/js/Scripts/datatables.js', 'public/js/Scripts/course-table.js']
 		      	}
 			}
 		},
@@ -69,7 +69,7 @@ module.exports = function(grunt) {
                 }
             },
             scripts: {
-            	 files: ['public/js/*.js', 'Scripts/*.js'],
+            	 files: ['public/js/*.js', 'public/js/Scripts/*.js'],
             	 tasks: ['uglify'],
             	 options: {
                     nospawn: true,
