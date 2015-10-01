@@ -67,14 +67,14 @@ else: ?>
             <section id="careers"><?php Flight::render('pg_tabs/careers', array('course' => $course)); ?></section>
             <section
                 id="study-support"><?php Flight::render('pg_tabs/study-support', array('course' => $course)); ?></section>
-            <section
+           <section
                 id="entry-requirements"><?php Flight::render('pg_tabs/entry-requirements', array('course' => $course)); ?></section>
             <section
                 id="research-areas"><?php Flight::render('pg_tabs/research-areas', array('course' => $course)); ?></section>
-            <section
+             <section
                 id="staff-research"><?php Flight::render('pg_tabs/staff-research', array('course' => $course)); ?></section>
-            <section id="enquiries"><?php Flight::render('pg_tabs/enquiries', array('course' => $course)); ?></section>
-        </div>
+           <section id="enquiries"><?php Flight::render('pg_tabs/enquiries', array('course' => $course)); ?></section>
+        </div> 
     </div>
     <!-- /span -->
     <div class="span5">
@@ -209,8 +209,11 @@ else: ?>
                                 echo $course->globals->fees_override_pgr;
                             } else {
                                 ?>
+
                                 <?php if (isset($course->globals->fees_caveat_text_pg) && !empty($course->globals->fees_caveat_text_pg)) echo $course->globals->fees_caveat_text_pg ?>
-                                <?php foreach ($course->deliveries as $delivery): ?>
+                               
+                               
+                                <?php $pos_codes = array(); foreach ($course->deliveries as $delivery): ?>
                                     <?php if (!in_array($delivery->pos_code, $pos_codes)): ?>
                                         <table class="table">
                                             <thead>
@@ -244,7 +247,7 @@ else: ?>
                                         </table>
                                         <?php $pos_codes[] = $delivery->pos_code; endif; ?>
                                 <?php endforeach; ?>
-
+                      
                                 <?php
                                 if (
                                     isset($course->globals->fees_year_in_industryabroad_text_pg) && // If YII/YA text is set AND
