@@ -1,4 +1,6 @@
 <?php
+	use unikent\libs\Logger;
+
 	/**
 	 * Layout: applies layout wrapper to content
 	 *
@@ -16,7 +18,6 @@
 	 */
 	Flight::map('pantheon_render', function($outer_view, $params){
 		
-
 		// define $template as a closure for getting the pantheon wrapper
 		$template = function() use ($params)
 		{
@@ -31,6 +32,15 @@
 				// workaround for pantheon setting get and post to null if they're empty
 				if ($_GET === null) $_GET = array();
 				if ($_POST === null) $_POST = array();
+
+				// Shim logging data
+				foreach(Logger::get('warning') as $warn){
+					inspect($warn);
+				}
+				foreach(Logger::get('debug') as $warn){
+					debug($warn);
+				}
+
 				
 				// run pantheon and store its output in a buffer
 				ob_start();
@@ -123,9 +133,9 @@
 		$response = $request->getResponse();
 		$last_modified = $response->getLastModified();
 
-		/*
+		
 		// Debug data if wanted.
-		debug("[Cache] ".(string)$request."<br/>
+		Logger::debug("[Cache] ".(string)$request."<br/>
 			<br/>
 
 			Received headers:
@@ -140,7 +150,6 @@
 			Last Modified: {$last_modified}
 
 		");
-		*/
 
 		// Cache if we can
 		if($last_modified!==null) Flight::lastModified(strtotime($last_modified));
