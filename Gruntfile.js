@@ -22,9 +22,11 @@ module.exports = function(grunt) {
 			options: {
 				banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
 			},
-			build: {
-				src: 'public/js/*.js',
-				dest: 'public/js/build/<%= pkg.name %>.min.js'
+			main : {
+				files: {
+		        	'public/js/build/<%= pkg.name %>.min.js': ['public/js/*.js'],
+		        	'public/js/build/coursetable.min.js': ['Scripts/datatables.js', 'Scripts/course-table.js']
+		      	}
 			}
 		},
 		cssmin: {
@@ -67,8 +69,8 @@ module.exports = function(grunt) {
                 }
             },
             scripts: {
-            	 files: ['public/js/*.js'],
-            	 tasks: ['clean', 'uglify'],
+            	 files: ['public/js/*.js', 'Scripts/*.js'],
+            	 tasks: ['uglify'],
             	 options: {
                     nospawn: true,
                 }

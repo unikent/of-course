@@ -96,6 +96,8 @@
 			<th class="hide">Subject categories</th>
 			<th class="hide">Search keywords</th>
 			<th class="hide">Award</th>
+			<th class="hide">Sort-key</th>
+			<th class="hide">Sort</th>
 		  </tr>
 		</thead>
 		<tbody>
@@ -148,6 +150,8 @@
 			<td class="hide">
 				  <?php echo $p->award;?>
 			</td>
+			<td class="hide"><?php echo strtolower($p->name);?> <?php echo strtolower($p->award);?></td>
+			<td class="hide"></td>
 		  </tr>
 		<?php endforeach; ?>
 
@@ -156,174 +160,23 @@
 	</table>
 </div>
 
-
-
 <kentScripts>
 <script type='text/javascript'>
-$(document).ready(function(){
-  //put our custom search items into variables
-  var advanced_text_search = $('input.advanced-text-search');
-  var campus_search = $('select.campus-search');
-  var study_mode_search = $('select.study-mode-search');
-  var subject_categories_search = $('select.subject-categories-search');
-  var award_search = $('select.award-search');
-  var programme_type_search = $('select.programme-type-search');
+	$(document).ready(function(){
 
-  /* Custom filtering function which will filter data using our advanced search fields */
-  $.fn.dataTableExt.afnFiltering.push(
-  function( oSettings, aData, iDataIndex ) {
+		var programme_list = new CourseFilterTable({
+			table: $('#programme-list'),
+			globalFilter: $('input.advanced-text-search'),
+			columnFilters: {
+				"2": $('select.campus-search'),
+				"3": $('select.study-mode-search'),
+				"4" : $('select.subject-categories-search'),
+		 		"6": $('select.award-search'),
+		 		"1": $('select.programme-type-search')
+			}
+		}); 
 
-  // get each column out
-  var name = $(aData[0]).html();
-  var award = $(aData[0]).find('span').text();
-  var programme_type = aData[1];
-  var campus = aData[2];
-  var study_mode = aData[3];
-  var subject_categories = aData[4];
-  var search_keywords = aData[5];
-
-  if(advanced_text_search && campus_search && study_mode_search && subject_categories_search && award_search && programme_type_search){
-
-	// search both the Name, award and Search keywords fields if our search box is filled
-	var advanced_text_search_result = (advanced_text_search.val() == '') ? true :
-		(
-		  (name.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) ||
-		  (search_keywords.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) ||
-		  (award.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) ||
-		  (programme_type.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) ||
-		  (campus.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) ||
-		  (study_mode.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1) ||
-		  (subject_categories.toLowerCase().indexOf(advanced_text_search.val().toLowerCase()) !== -1)
-
-		  ? true : false
-		);
-
-	// search the campus field if a campus is selected
-	var campus_search_result = (campus_search.val() == '') ? true : (( campus.toLowerCase().indexOf( campus_search.val().toLowerCase() ) !== -1 ) ? true : false );
-
-	// search the study mode field if a study mode is selected
-	var study_mode_search_result = (study_mode_search.val() == '') ? true : (( study_mode.toLowerCase().indexOf( study_mode_search.val().toLowerCase() ) !== -1 ) ? true : false );
-
-	// lets split subject categories up so we can search then individually
-	var subject_categories_vals = subject_categories.split(';');
-
-	// check to see if we find our searched subject category in the array
-	var subject_categories_search_result = false;
-	if (subject_categories_search.val() == ''){
-	  subject_categories_search_result = true;
-	}
-	else{
-	  for (var i = 0; i < subject_categories_vals.length; i++) {
-		subject_categories_vals[i] = $.trim(subject_categories_vals[i]);
-		if(subject_categories_search.val().toLowerCase() == subject_categories_vals[i].toLowerCase()){
-		  subject_categories_search_result = true;
-		  break;
-		}
-	  }
-	}
-
-	// search the award field if an award is selected
-	var award_search_result = (award_search.val() == '') ? true : (( award.toLowerCase().indexOf( award_search.val().toLowerCase() ) !== -1 ) ? true : false );
-
-	// search the programme type field if a programme type is selected
-	var programme_type_search_result = (programme_type_search.val() == '') ? true : (( programme_type.toLowerCase().indexOf( programme_type_search.val().toLowerCase() ) !== -1 ) ? true : false );
-
-	// return our results
-	return advanced_text_search_result && campus_search_result && study_mode_search_result && subject_categories_search_result && award_search_result && programme_type_search_result;
-  }
-
-  return true;
-  }
-  );
-
-  /**
-  *
-  * data tables for programme index page
-  *
-  */
-  $(document).ready(function(){
-  var programme_list = $('#programme-list').dataTable({
-		"sDom": "t<'muted pull-right'i><'clearfix'>p",
-		"sPaginationType": "bootstrap",
-		"iDisplayLength": 50,
-		"oLanguage": {
-			"sSearch": ""
-		},
-		"aoColumns": [
-		  { "bSortable": true },
-		  { "bSortable": true },
-		  { "bSortable": true },
-		  { "bSortable": true },
-		  { "bSortable": false },
-		  { "bSortable": false },
-		  { "bSortable": false }
-		]
 	});
-
-	//now add appropriate event listeners to our custom search items
-	if(advanced_text_search && campus_search && study_mode_search && subject_categories_search && award_search && programme_type_search){
-
-	  advanced_text_search.keyup(function() {
-		programme_list.fnDraw();
-		/* show/hide the search hint when the input box is empty */
-		$("#advanced-text-search-hint").show();
-		if( $(this).val().length == 0 ) {
-		  $("#advanced-text-search-hint").hide();
-		}
-	  });
-
-	  campus_search.change(function(){
-		programme_list.fnDraw();
-		highlight($(this));
-	  });
-
-	  study_mode_search.change(function(){
-		programme_list.fnDraw();
-		highlight($(this));
-	  });
-
-	  subject_categories_search.change(function(){
-		programme_list.fnDraw();
-		highlight($(this));
-	  });
-
-	  award_search.change(function(){
-		programme_list.fnDraw();
-		highlight($(this));
-	  });
-
-	  programme_type_search.change(function(){
-		programme_list.fnDraw();
-		highlight($(this));
-	  });
-
-	  function highlight(obj) {
-		if ( obj.children().first().text() != $("option:selected", obj).text() ) {
-		   obj.addClass("highlighted");
-		}
-		else {
-		  obj.removeClass("highlighted");
-		}
-		return true;
-	  }
-
-	}
-
-	/* fades the scroll to top button in and out as you scroll away from/near to the top of the page */
-	$(window).bind('scroll', function(){
-	  if($(this).scrollTop() > 650) {
-		  $(".scroll-to-top").fadeIn();
-	  }
-	  if($(this).scrollTop() < 650) {
-		  $(".scroll-to-top").fadeOut();
-	  }
-	});
-
-  });
-
-
-});
-
 </script>
 
 </kentScripts>

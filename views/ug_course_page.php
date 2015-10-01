@@ -9,10 +9,10 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 
 ?>
 
-<article class="container">
+<article class="container ug">
     <header>
         <h1>
-            <?php echo $course->programme_title; ?> - <?php echo $course->award_list; ?>
+            <?php echo $course->programme_title; ?> - <?php echo $course->award_list_linked; ?>
             <?php echo $course->programmme_status_text; ?>
         </h1>
         <h2 class='location-header' ><?php echo $course->locations_str; ?></h2>
@@ -108,10 +108,10 @@ else: ?>
                                 ?>
                             </li>
                             <li><strong>Award:</strong> <?php echo $course->award[0]->name; ?> </li>
-                            <li><strong>Honours type:</strong> <?php echo $course->honours_type; ?> </li>
+                            <li><strong>Award type:</strong> <?php echo $course->honours_type; ?> </li>
 
                             <?php if (!empty($course->ucas_code)): ?>
-                                <li><strong>UCAS code:</strong> <?php echo $course->ucas_code; ?>    </li>
+                                <li><strong>UCAS code:</strong> <?php echo $course->ucas_code; ?></li>
                             <?php endif; ?>
 
                             <li><strong>Location:</strong>
