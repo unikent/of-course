@@ -13,7 +13,7 @@
 	  <div class="row-fluid">
 		<div class="span12">
 		  <ul class="nav nav-tabs">
-			<li class="active"><?php echo Flight::request()->base; ?>/undergraduate/search">Undergraduate</a></li>
+			<li class="active"><a href="<?php echo Flight::request()->base; ?>/undergraduate/search">Undergraduate</a></li>
 			<li><a href="<?php echo Flight::request()->base; ?>/postgraduate/search">Postgraduate</a></li>
 		  </ul>
 		</div><!-- /span -->

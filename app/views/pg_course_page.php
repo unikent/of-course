@@ -80,7 +80,7 @@ else: ?>
     <div class="span5">
         <div class="side-panel">
             <div class="admission-links">
-                <a href="/courses/postgraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?>apply-online/<?php echo $course->instance_id ?>"
+                <a href="<?php echo Flight::request()->base; ?>/postgraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?>apply-online/<?php echo $course->instance_id ?>"
                    class="btn btn-large apply-adm-link"
                    type="button"
                    role="button"

@@ -1,6 +1,6 @@
 <!-- InstanceBegin template="/Templates/daedalus_v1.dwt" codeOutsideHTMLIsLocked="false" -->
 <!-- TEMPLATE_VERSION="Daedalus v1.0" -->
-<kentWrapper type="<?php if(isset($disable_search_bar) && $disable_search_bar === true){ echo 'simple'; }else{ echo 'courses';}?>" siteroot="<?php echo Flight::request()->base; ?>/" mode="<?php echo $level;?>" year="<?php echo $year;?>" currentyear="current">
+<kentWrapper type="<?php if(isset($disable_search_bar) && $disable_search_bar === true){ echo 'courses-no-bar'; }else{ echo 'courses';}?>" siteroot="<?php echo Flight::request()->base; ?>/" mode="<?php echo $level;?>" year="<?php echo $year;?>" currentyear="current">
 
   <kentMeta>
 	<!-- InstanceBeginEditable name="metadata" -->
