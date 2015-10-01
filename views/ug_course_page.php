@@ -181,7 +181,7 @@ else: ?>
                     <div class="key-facts-container">
                         <h2><a id="fees-tables-link" class="fees-link" role="button" aria-controls="fees-tables"
                                tabindex='0' title='Click to toggle basic fee information'
-                               onClick="_pat('course-page','expand-fees-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?> - <?php echo $course->award[0]->name ?>');">Fees
+                               onClick="_pat.event('course-page','expand-fees-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?> - <?php echo $course->award[0]->name ?>');">Fees
                                 <i class="icon-chevron-down toggler"></i></a></h2>
 
                         <div id="fees-tables" class="fees-tables" style="display: none" aria-expanded="false"
