@@ -5,20 +5,23 @@
 .screenreader-only,
 .hideInBrowser,
 .department-header,
-#learnmore {display:none;}
+#enquiries .enquire-block,
+#enquiries .resources,
+#enquiries .kiss-widget-section,
+#learnmore,
+.related-course-section,
+.departmental-footer {display:none;}
 #programme-list th {text-align:left;}
 #programme-list td br {display:none;}
 
-/*
-.global-header {display:block;}
-.global-header #global_header_logo {display:block;}
-.global-header #global_header_logo .logo {display:block;}
-.global-header #global_header_logo .logo {content: '<img src="http://static.kent.ac.uk/pantheon/images/Daedalus/logo/unikentlogo50th@2x.png">'}
-*/
 h1 {font-size: 1.8em; margin-bottom: 0; padding-bottom: 0;}
 h2 {font-size: 1.5em}
 h2.location-header{font-size: 1em; margin-top: 0; padding-top: 0}
 h3 {font-size: 1.3em}
 h4 {font-size: 1.1em}
 
-#fees-tables{display: block;}
+#fees-tables{display: block !important;}
+#fees-tables .table{margin-bottom: 2em;}
+
+#enquiries .h2,
+{display: none}

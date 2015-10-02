@@ -84,7 +84,7 @@
 
 <?php endif; ?>
 
-<section class="info-section">
+<section class="info-section resources">
   <h3>Resources</h3>
   <?php
   $file = 'https://www.kent.ac.uk/courses/undergraduate/prospectus/' . $course->year . '/prospectus-full.pdf';
@@ -144,7 +144,7 @@
   <?php endif; ?>
 </section>
 
-<section class="info-section">
+<section class="info-section contacts">
   <h3>Contacts</h3>
   <section class="info-subsection">
     <h4>Related schools</h4>
