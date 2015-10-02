@@ -17,9 +17,9 @@
 	<?php endif; ?>
 	<link rel="feed" type="application/xcri+xml" href="/courses/xcri"/>
 
-	<link media='screen' type='text/css' rel='stylesheet' href='<?php echo Flight::request()->base; ?>/css/courses.css' />
-	<link media='screen' type='text/css' rel='stylesheet' href='<?php echo Flight::request()->base; ?>/css/courses-form.css' />
-	<link media='print' type='text/css' rel='stylesheet' href='<?php echo Flight::request()->base; ?>/css/print.css' />
+	<link media='screen' type='text/css' rel='stylesheet' href='<?php echo Flight::asset('css/courses.css'); ?>' />
+	<link media='screen' type='text/css' rel='stylesheet' href='<?php echo Flight::asset('css/courses-form.css'); ?>' />
+	<link media='print' type='text/css' rel='stylesheet' href='<?php echo Flight::asset('css/print.css'); ?>' />
 	<!-- InstanceEndEditable -->
   </kentMeta>
   <kentContent>
@@ -75,8 +75,8 @@
 	<!-- InstanceEndEditable -->
   </kentContent>
   <kentScripts>
-	<script type="text/javascript" charset="utf8" src="<?php echo Flight::request()->base; ?>/js/build/coursetable.min.js"></script>
-	<script type="text/javascript" charset="utf-8" language="javascript" src="<?php echo Flight::request()->base; ?>/js/build/of-course.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="<?php echo Flight::asset('js/build/coursetable.min.js'); ?>"></script>
+	<script type="text/javascript" charset="utf-8" language="javascript" src="<?php echo Flight::asset('js/build/of-course.min.js'); ?>"></script>
   </kentScripts>
 </kentWrapper>
 <!-- InstanceEnd -->
