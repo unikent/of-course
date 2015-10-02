@@ -120,7 +120,7 @@ endforeach;
 </div>
 <?php endif; ?>
 
-<section class="info-section">
+<section class="info-section resources">
 
   <?php
   $file = 'https://www.kent.ac.uk/courses/postgraduate/pdf/prospectus.pdf';
@@ -168,7 +168,7 @@ endforeach;
 <?php endif; ?>
 </section>
 
-<section class="info-section">
+<section class="info-section contacts">
   <h3>Contacts</h3>
 
   <?php if(!empty($course->admissions_enquiries)):
