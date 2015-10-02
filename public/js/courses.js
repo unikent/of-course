@@ -29,6 +29,11 @@ $(document).ready(function(){
 	  $(this).find('i').toggleClass('icon-plus').toggleClass('icon-minus');
 	});
 
+
+	$('#showMore').click(function(e){
+		e.preventDefault();
+		$('#more').slideToggle();
+	});
 	/**
 	 * Apply page
 	 */

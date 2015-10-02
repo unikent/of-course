@@ -9,7 +9,8 @@
 
 <div class="advanced-search">
 	<h1>Courses A-Z</h1>
-
+	<a id="showMore">Choose a course that's right for you. Learn more <i class="icon-chevron-right"></i></a>
+	<div id="more" class="clearfix" style="display: none;" aria-expanded="false"></div>
 	  <div class="row-fluid">
 		<div class="span12">
 		  <ul class="nav nav-tabs">
@@ -21,51 +22,55 @@
 
 	<div class="row advanced-search-boxes">
 
-		<h2>Filter course list</h2>
-
-		<input class="advanced-text-search" type="text" placeholder="Filter by keyword" />
-
-		<div id="advanced-text-search-hint-box" class="visible-phone"><span id="advanced-text-search-hint" class="hide"><a href="#programme-list">Results filtered below...</a></span></div>
-
 		<div class="advanced-search-filters">
 
-		  <select class="campus-search input-large <?php if(strcmp($search_type, 'campus')  == 0) echo 'highlighted'; ?>">
-			<option value="">All locations</option>
-			<option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Canterbury'))  == 0) echo 'selected'; ?>>Canterbury</option>
-			<option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Medway'))  == 0) echo 'selected'; ?>>Medway</option>
-		  </select>
+			<div id="advanced-text-search-hint-box" class="visible-phone"><span id="advanced-text-search-hint" class="hide"><a href="#programme-list">Results filtered below...</a></span></div>
+			<div class="row">
+				<div class="search-filter">
+				<span>Filter by: </span><input class="advanced-text-search" type="text" placeholder="keyword" />
+				</div>
+				<div class="search-select campus-search-div">
+				  <select class="campus-search input-large <?php if(strcmp($search_type, 'campus')  == 0) echo 'highlighted'; ?>">
+					<option value="">All locations</option>
+					<option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Canterbury'))  == 0) echo 'selected'; ?>>Canterbury</option>
+					<option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Medway'))  == 0) echo 'selected'; ?>>Medway</option>
+				  </select>
+				</div>
+				<div class="search-select attendance-mode-search-div">
+				  <select class="attendance-mode-search input-large <?php if ( $search_type == 'study_mode' || $search_type == 'attendance_mode' ) echo 'highlighted'; ?>">
+					<option value="">All attendance modes</option>
+					<option <?php if ( ($search_type == 'study_mode' || $search_type == 'attendance_mode') && urldecode(strtolower($search_string)) == strtolower('Full-time') ) echo 'selected'; ?>>Full-time</option>
+					<option <?php if ( ($search_type == 'study_mode' || $search_type == 'attendance_mode') && urldecode(strtolower($search_string)) == strtolower('Part-time') ) echo 'selected'; ?>>Part-time</option>
 
-		  <select class="attendance-mode-search input-large <?php if ( $search_type == 'study_mode' || $search_type == 'attendance_mode' ) echo 'highlighted'; ?>">
-			<option value="">All attendance modes</option>
-			<option <?php if ( ($search_type == 'study_mode' || $search_type == 'attendance_mode') && urldecode(strtolower($search_string)) == strtolower('Full-time') ) echo 'selected'; ?>>Full-time</option>
-			<option <?php if ( ($search_type == 'study_mode' || $search_type == 'attendance_mode') && urldecode(strtolower($search_string)) == strtolower('Part-time') ) echo 'selected'; ?>>Part-time</option>
+				  </select>
+				</div>
+				<div class="search-select subject-categories-search-div">
+				  <select class="subject-categories-search input-large <?php if(strcmp($search_type, 'subject_category')  == 0) echo 'highlighted'; ?>">
+					<option value="">All subject categories</option>
+					<?php
 
-		  </select>
+					$subject_categories = (array) $subject_categories;
+					usort($subject_categories, function ($a, $b){
+					  if ($a->name == $b->name) {
+						return 0;
+					  }
+					  return ($a->name < $b->name) ? -1 : 1;
+					});
 
-		  <select class="subject-categories-search input-large <?php if(strcmp($search_type, 'subject_category')  == 0) echo 'highlighted'; ?>">
-			<option value="">All subject categories</option>
-			<?php
-
-			$subject_categories = (array) $subject_categories;
-			usort($subject_categories, function ($a, $b){
-			  if ($a->name == $b->name) {
-				return 0;
-			  }
-			  return ($a->name < $b->name) ? -1 : 1;
-			});
-
-			foreach($subject_categories as $sc): ?>
-			<option <?php if(strcmp($search_type, 'subject_category')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower($sc->name))  == 0) echo 'selected'; ?>><?php echo $sc->name?></option>
-			<?php endforeach; ?>
-		  </select>
-
-		  <select class="course-options-search input-large <?php if ( $search_type == 'programme_type' || $search_type == 'course_options' ) echo 'highlighted'; ?>">
-			<option value="">All course options</option>
-			<option <?php if ( ($search_type == 'programme_type' || $search_type == 'course_options') && urldecode(strtolower(trim($search_string))) == 'year abroad' ) echo 'selected'; ?>>Year abroad</option>
-			<option <?php if ( ($search_type == 'programme_type' || $search_type == 'course_options') && urldecode(strtolower(trim($search_string))) == 'year in industry' ) echo 'selected'; ?>>Year in industry</option>
-			<option <?php if ( ($search_type == 'programme_type' || $search_type == 'course_options') && urldecode(strtolower(trim($search_string))) == 'foundation year' ) echo 'selected'; ?>>Foundation year</option>
-		  </select>
-
+					foreach($subject_categories as $sc): ?>
+					<option <?php if(strcmp($search_type, 'subject_category')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower($sc->name))  == 0) echo 'selected'; ?>><?php echo $sc->name?></option>
+					<?php endforeach; ?>
+				  </select>
+				</div>
+				<div class="search-select course-options-search-div">
+				  <select class="course-options-search input-large <?php if ( $search_type == 'programme_type' || $search_type == 'course_options' ) echo 'highlighted'; ?>">
+					<option value="">All course options</option>
+					<option <?php if ( ($search_type == 'programme_type' || $search_type == 'course_options') && urldecode(strtolower(trim($search_string))) == 'year abroad' ) echo 'selected'; ?>>Year abroad</option>
+					<option <?php if ( ($search_type == 'programme_type' || $search_type == 'course_options') && urldecode(strtolower(trim($search_string))) == 'year in industry' ) echo 'selected'; ?>>Year in industry</option>
+					<option <?php if ( ($search_type == 'programme_type' || $search_type == 'course_options') && urldecode(strtolower(trim($search_string))) == 'foundation year' ) echo 'selected'; ?>>Foundation year</option>
+				  </select>
+				</div>
+			</div>
 		</div>
 
 	</div>
@@ -145,8 +150,9 @@ $(document).ready(function(){
 			"4" : $('select.subject-categories-search'),
 	 		"6": $('select.course-options-search')
 		}
-	}); 
+	});
 
+	pantheon.load_section('#more', '/courses/menu/top/index.html');
 });
 
 </script>
