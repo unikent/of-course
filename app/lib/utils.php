@@ -41,7 +41,6 @@
 					debug($warn);
 				}
 
-				
 				// run pantheon and store its output in a buffer
 				ob_start();
 
@@ -52,7 +51,7 @@
 				ob_end_clean();
 
 				// Render with correct headers
-				Flight::response()->write($content)->send();		
+				Flight::response()->write($content)->send();	
 			}else{
 				Flight::render('layout');
 			}
@@ -68,7 +67,10 @@
 	 * @param $path path to link to
 	 * @return string absoulte URL
 	 */
-	Flight::map("url", function($url){
+	Flight::map("url", function($url = '/'){
+
+		if($url === '/') return Flight::request()->base;
+
 		if(Flight::request()->base == '/'){
 			return '/'.$url;
 		}else{
@@ -76,6 +78,22 @@
 		}
 	});
 
+	/**
+	 * URL: generate url with base path appended.
+	 *
+	 * @param $path path to link to
+	 * @return string absoulte URL
+	 */
+	Flight::map("asset", function($url = '/'){
+
+		if($url === '/') return Flight::request()->asset;
+
+		if(Flight::request()->asset == '/'){
+			return '/'.$url;
+		}else{
+			return Flight::request()->asset.'/'.$url;	
+		}
+	});
 	/**
 	 * gzip the content if the request can handle gzipped content
 	 *
