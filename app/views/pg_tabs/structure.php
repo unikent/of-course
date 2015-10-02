@@ -30,16 +30,29 @@ foreach ($course->modules as $module) {
         $module_list = array();
 
         //TODO: refactor this!
-        foreach ($course->modules as $delivery_modules) {
-            foreach ($delivery_modules->stages as $stage) {
-                foreach ($stage->clusters as $clusters) {
-                    foreach ($clusters as $cluster) {
-                        foreach ($cluster->modules as $modules) {
-                            foreach ($modules as $module) {
-                                //skip blanks
-                                if ($module->module_code == '') continue;
-                                // index on module code, so duplicates will just overwrite each other
-                                $module_list[$module->module_code] = $module;
+        if(is_array($course->modules)){
+            foreach ($course->modules as $delivery_modules) {
+                if(!is_array($delivery_modules->stages)) continue;
+
+                foreach ($delivery_modules->stages as $stage) {
+                    if(!is_array($stage->clusters)) continue;
+
+                    foreach ($stage->clusters as $clusters) {
+                        if(!is_array($clusters)) continue;
+
+                        foreach ($clusters as $cluster) {
+                            if(!is_array($cluster->modules)) continue;
+
+                            foreach ($cluster->modules as $modules) {
+                                if(!is_array($modules)) continue;
+
+                                foreach ($modules as $module) {
+
+                                    //skip blanks
+                                    if ($module->module_code == '') continue;
+                                    // index on module code, so duplicates will just overwrite each other
+                                    $module_list[$module->module_code] = $module;
+                                }
                             }
                         }
                     }
