@@ -43,7 +43,6 @@ if(!empty($modules)) {
 <br />
 <?php endif; ?>
 
-
 <?php if (! empty($course->year_in_industry)): ?>
 	<section class="info-section">
 		<h3>Year in industry</h3>
@@ -61,7 +60,6 @@ if(!empty($modules)) {
 	</section>
 	<br />
 <?php endif; ?>
-
 
 <?php if (! empty($course->year_abroad)): ?>
 	<section class="info-section">
@@ -115,3 +113,4 @@ if(!empty($modules)) {
 	<?php endif; ?>
 
 <?php endif; ?>
+

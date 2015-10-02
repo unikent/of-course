@@ -29,8 +29,6 @@ $(document).ready(function(){
 	  $(this).find('i').toggleClass('icon-plus').toggleClass('icon-minus');
 	});
 
-	$('');
-
 	/**
 	 * Apply page
 	 */
@@ -69,7 +67,9 @@ $(document).ready(function(){
 	var award = $award.val();
 	var type = $type.val();
 	var year = $year.val();
+
 	updateApplyLinks();
+	changeType();
 
 	$award.change(function(){
 		award = $(this).val();

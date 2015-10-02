@@ -47,7 +47,6 @@ else: ?>
             <section
                 id="overview"><?php Flight::render('ug_tabs/overview', array('course' => $course)); ?></section>
 
-
             <section
                 id="structure"><?php Flight::render('ug_tabs/structure', array('course' => $course)); ?></section>
 
@@ -59,6 +58,9 @@ else: ?>
                 <section
                     id="entry"><?php Flight::render('ug_tabs/entry', array('course' => $course)); ?></section><?php endif; ?>
             <section id="fees"><?php Flight::render('ug_tabs/fees', array('course' => $course)); ?></section>
+
+
+
             <section id="enquiries"><?php Flight::render('ug_tabs/enquiries', array('course' => $course)); ?></section>
         </div>
     </div>
@@ -68,7 +70,7 @@ else: ?>
         <div class="side-panel">
 
             <div class="admission-links">
-                <a href="/courses/undergraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?>apply-online/<?php echo $course->instance_id ?>"
+                <a href="<?php echo Flight::request()->base; ?>/undergraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?>apply-online/<?php echo $course->instance_id ?>"
                    class="btn btn-large apply-adm-link"
                    type="button"
                    role="button"
@@ -183,7 +185,6 @@ else: ?>
                                tabindex='0' title='Click to toggle basic fee information'
                                onClick="_pat.event('course-page','expand-fees-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?> - <?php echo $course->award[0]->name ?>');">Fees
                                 <i class="icon-chevron-down toggler"></i></a></h2>
-
                         <div id="fees-tables" class="fees-tables" style="display: none" aria-expanded="false"
                              aria-labelledby="fees-tables-link">
                             <?php if (isset($course->globals->fees_caveat_text_ug) && !empty($course->globals->fees_caveat_text_ug)) echo $course->globals->fees_caveat_text_ug ?>
@@ -322,3 +323,5 @@ else: ?>
         });
     </script>
 </kentScripts>
+
+

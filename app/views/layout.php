@@ -1,6 +1,6 @@
 <!-- InstanceBegin template="/Templates/daedalus_v1.dwt" codeOutsideHTMLIsLocked="false" -->
 <!-- TEMPLATE_VERSION="Daedalus v1.0" -->
-<kentWrapper type="courses" siteroot="<?php echo BASE_URL != '/' ? BASE_URL : ''; ?>/" mode="<?php echo $level;?>" year="<?php echo $year;?>" currentyear="current">
+<kentWrapper type="<?php if(isset($disable_search_bar) && $disable_search_bar === true){ echo 'courses-no-bar'; }else{ echo 'courses';}?>" siteroot="<?php echo Flight::request()->base; ?>/" mode="<?php echo $level;?>" year="<?php echo $year;?>" currentyear="current">
 
   <kentMeta>
 	<!-- InstanceBeginEditable name="metadata" -->
@@ -17,9 +17,9 @@
 	<?php endif; ?>
 	<link rel="feed" type="application/xcri+xml" href="/courses/xcri"/>
 
-	<link media='screen' type='text/css' rel='stylesheet' href='<?php echo ASSET_URL ?>/css/courses.css' />
-	<link media='screen' type='text/css' rel='stylesheet' href='<?php echo ASSET_URL ?>/css/courses-form.css' />
-	<link media='print' type='text/css' rel='stylesheet' href='<?php echo ASSET_URL ?>/css/print.css' />
+	<link media='screen' type='text/css' rel='stylesheet' href='<?php echo Flight::request()->base; ?>/css/courses.css' />
+	<link media='screen' type='text/css' rel='stylesheet' href='<?php echo Flight::request()->base; ?>/css/courses-form.css' />
+	<link media='print' type='text/css' rel='stylesheet' href='<?php echo Flight::request()->base; ?>/css/print.css' />
 	<!-- InstanceEndEditable -->
   </kentMeta>
   <kentContent>
@@ -47,7 +47,7 @@
 					<?php endif; ?>
 
 				<?php endif;?>
-				<?php if($course->current_year > $course->year): ?>
+				<?php if(isset($course) && $course->current_year > $course->year): ?>
 				  <meta name="robots" content="noindex, nofollow" />
 					<div class='alert alert-daedalus'>
 						This is a <?php echo $course->year;?> entry programme. Would you like to <a href='<?php echo $meta['active_instance']; ?>'> view <?php echo $course->programme_title;?> for <?php echo $course->current_year;?> entry?</a>
@@ -58,7 +58,7 @@
 					This is a <?php $previousYear = "http://www.kent.ac.uk/courses/undergraduate/" . ($course->current_year - 1) . "/" . $course->instance_id; echo $course->year;?> entry programme. Would you like to <a href='<?php echo $previousYear; ?>'> view <?php echo $course->programme_title;?> for <?php echo $course->current_year-1;?> entry?</a>
 				</div-->
 
-				<?php elseif($course->current_year < $course->year): ?>
+				<?php elseif(isset($course) && $course->current_year < $course->year): ?>
 				  <meta name="robots" content="noindex, nofollow" />
 					<div class='alert alert-error' style="padding: 10px;margin:10px 0 0 0;">
 						You are currently viewing a programme for an upcoming academic year. This data is preview ONLY and may not be representative of any course offered by this institution.
@@ -75,8 +75,8 @@
 	<!-- InstanceEndEditable -->
   </kentContent>
   <kentScripts>
-	<script type="text/javascript" charset="utf8" src="<?php echo ASSET_URL ?>/js/build/coursetable.min.js"></script>
-	<script type="text/javascript" charset="utf-8" language="javascript" src="<?php echo ASSET_URL ?>/js/build/of-course.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="<?php echo Flight::request()->base; ?>/js/build/coursetable.min.js"></script>
+	<script type="text/javascript" charset="utf-8" language="javascript" src="<?php echo Flight::request()->base; ?>/js/build/of-course.min.js"></script>
   </kentScripts>
 </kentWrapper>
 <!-- InstanceEnd -->

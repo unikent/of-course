@@ -1,6 +1,8 @@
 <?php
+use unikent\libs\Cache;
+use unikent\libs\Logger;
 
-class CoursesFrontEnd {
+class CoursesController {
 
 	/**
 	* A Programmes Plant API Object.
@@ -76,7 +78,7 @@ class CoursesFrontEnd {
 		Flight::cachecheck();
 
 		// Debug option
-		if(isset($_GET['debug_performance'])){ inspect($course); }
+		if(isset($_GET['debug_performance'])){ Logger::warn($course); }
 
 		// Fix slug paths
 		if($course->slug != $slug)
@@ -150,7 +152,7 @@ class CoursesFrontEnd {
 		Flight::cachecheck();
 
 		// Debug option
-		if(isset($_GET['debug_performance'])){ inspect($course); }
+		if(isset($_GET['debug_performance'])){Logger::warn($course); }
 
 		Flight::setup($course->year, null, true);
 
@@ -186,7 +188,7 @@ class CoursesFrontEnd {
 		Flight::cachecheck();
 
 		// Debug option
-		if(isset($_GET['debug_performance'])){ inspect($course); }
+		if(isset($_GET['debug_performance'])){ Logger::warn($course); }
 
 		Flight::setup($course->year, null, false, true);
 
@@ -298,10 +300,10 @@ class CoursesFrontEnd {
 		}
 
 		//debug option
-		if(isset($_GET['debug_performance'])){ inspect($programmes); }
+		if(isset($_GET['debug_performance'])){ Logger::warn($programmes); }
 
 		//Render full page
-		return Flight::layout($template, array('meta' => $meta, 'programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'search_type' => $search_type, 'search_string' => $search_string, 'awards' => $award_names));
+		return Flight::layout($template, array('meta' => $meta, 'programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'search_type' => $search_type, 'search_string' => $search_string, 'awards' => $award_names, 'disable_search_bar' => true));
 
 	}
 	/**
@@ -351,7 +353,7 @@ class CoursesFrontEnd {
 		}
 
 		//debug option
-		if(isset($_GET['debug_performance'])){ inspect($programmes); }
+		if(isset($_GET['debug_performance'])){ Logger::warn($programmes); }
 
 		//Render full page
 		return Flight::layout($template, array('meta' => $meta, 'programmes' => $programmes, 'level' => $level));
@@ -413,7 +415,7 @@ class CoursesFrontEnd {
 		}
 
 		//debug option
-		if(isset($_GET['debug_performance'])){ inspect($programmes); }
+		if(isset($_GET['debug_performance'])){ Logger::warn($programmes); }
 
 		//Render full page
 		return Flight::layout($template, array('meta' => $meta, 'programmes' => $programmes, 'level' => $level));
@@ -441,7 +443,7 @@ class CoursesFrontEnd {
 
 			try
 			{
-				$js = CoursesFrontEnd::$pp->get_programmes_index($year, $level);
+				$js = CoursesController::$pp->get_programmes_index($year, $level);
 			}
 			catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
 			{
@@ -454,7 +456,6 @@ class CoursesFrontEnd {
 			}
 
 			return json_encode($js);
-
 		}, 2);
 
 		if($out === false) Flight::halt(501, "Fatal error in getting programmes index.");
@@ -570,7 +571,7 @@ class CoursesFrontEnd {
 		});
 
 		//debug option
-		if(isset($_GET['debug_performance'])){ inspect($leaflets); }
+		if(isset($_GET['debug_performance'])){ Logger::warn($leaflets); }
 
 		//Render full page
 		Flight::layout('leaflets', array('leaflets' => $leaflets, 'type' => $level));
@@ -704,7 +705,7 @@ class CoursesFrontEnd {
 		Flight::cachecheck();
 
 		// Debug option
-		if(isset($_GET['debug_performance'])){ inspect($course); }
+		if(isset($_GET['debug_performance'])){ Logger::warn($course); }
 
 		// Render programme page
 		Flight::setup($year, $level);

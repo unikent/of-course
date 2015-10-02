@@ -16,7 +16,7 @@
     <div class='row-fluid' style='min-height:300px;'>
         <div class='span7'>
             <p><strong>Sorry but we could not find the webpage you were attempting to view.</strong></p>
-            <p>Try using the search above to find what you are looking for or alternatively go back to the <a href='<?php echo BASE_URL; ?>'>courses index page</a>.</p>
+            <p>Try using the search above to find what you are looking for or alternatively go back to the <a href='<?php echo Flight::request()->base; ?>'>courses index page</a>.</p>
 
             <?php if(!empty($slug)): ?>
                 <?php
