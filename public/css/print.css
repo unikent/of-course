@@ -20,6 +20,10 @@ h2.location-header{font-size: 1em; margin-top: 0; padding-top: 0}
 h3 {font-size: 1.3em}
 h4 {font-size: 1.1em}
 
+#structure .info-section .show-hide-title {
+	font-size: 1.1em;
+}
+
 #fees-tables{display: block !important;}
 #fees-tables .table{margin-bottom: 2em;}
 
