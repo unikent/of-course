@@ -107,4 +107,8 @@ function CourseFilterTable(data){
 	 		}
 	 	}
 	});
+
+	programme_list.on( 'search.dt', function () {
+		$('#advanced-text-search-hint').removeClass('hide');
+	});
 }
