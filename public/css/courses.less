@@ -1,6 +1,9 @@
 .contacts-enquiries {
 	padding-bottom:15px;
 }
+.daedalus-courses .advanced-search{
+  position: relative;
+}
 
 .pg-entry-requirements td p{
 	margin-bottom:0px;
@@ -173,5 +176,100 @@
   	position: relative;
   	top: -15px;
   }
+.advanced-search-boxes {
+  box-sizing: border-box;
+  background-color: #f9f4e7;
 
+  .advanced-search-filters {
+
+	&.pg{
+	  @media (min-width: 960px) {
+		.search-select {
+		  width: 138px;
+		  padding-right:0;
+		  &.campus-search-div{
+			width:120px;
+		  }
+		}
+	  }
+	}
+	#advanced-text-search-hint{
+	  padding-bottom: 8px;
+	  display: inline-block;
+	}
+
+	.row{
+	  margin-left:-10px;
+	  margin-right:-10px;
+	}
+
+	.advanced-text-search {
+	  width: 100%;
+	  display: inline-block;
+	  box-sizing: border-box;
+	  min-height: 30px;
+	}
+
+	select{
+	  box-sizing: border-box;
+	  width:100%;
+	}
+
+	.search-filter,.search-select{
+	  float:left;
+	  display: inline-block;
+	  width: 100%;
+	  padding: 0 10px;
+	  box-sizing: border-box;
+	}
+
+	@media (min-width: 480px) {
+	  .search-select {
+		width: 50%;
+	  }
+	}
+
+	@media (min-width: 960px) {
+	  .search-filter{
+		span{
+		  position: absolute;
+		  padding-top: 5px;
+		}
+		.advanced-text-search {
+		  width:202px;
+		  margin-left:63px;
+		}
+		width: 275px;
+		white-space: nowrap;
+		overflow: hidden;
+		padding-right: 0;
+		position: relative;
+	  }
+	  .search-select {
+		width: 175px;
+		padding-right:0;
+		&.campus-search-div{
+		  width:150px;
+		}
+	  }
+	}
+  }
+}
+
+  #showMore{
+	text-decoration: none;
+	border-bottom: none;
+	margin-bottom: 10px;
+	display: inline-block;
+	@media (min-width: 650px) {
+	  position: absolute;
+	  top: 20px;
+	  right: 0;
+	  margin-bottom: 0;
+	}
+  }
+}
+
+.daedalus-courses .advanced-search-boxes {
+  margin: 0 0 20px 0;
 }
