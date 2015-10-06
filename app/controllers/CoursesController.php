@@ -809,7 +809,10 @@ class CoursesController {
 	}
 
 	private function getCourseAwardList($course)
-	{
+	{	
+		// no award - should this be possible?
+		if(empty($course->award)) return '';
+
 		$award_list = '';
 		foreach ($course->award as $award) {
 			if (!empty($award->name)) {
@@ -821,7 +824,10 @@ class CoursesController {
 	}
 
 	private function getCourseAwardListLinked($course)
-	{
+	{	
+		// no award - should this be possible?
+		if(empty($course->award)) return '';
+		
 		$award_list = '';
 		foreach ($course->award as $award) {
 			if (!empty($award->name)) {
