@@ -64,7 +64,7 @@ foreach($course->deliveries as $delivery){
 
 <h2>Enquire or order a prospectus</h2>
 
-<?php if (in_array(true, $show)): ?>
+<?php if ($show !== null && in_array(true, $show)): ?>
 
   <div class='enquire-block'>
 
