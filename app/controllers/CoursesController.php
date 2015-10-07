@@ -701,6 +701,12 @@ class CoursesController {
 			return Flight::error($e, $data);
 		}
 
+		// Are applications actually open for this year?
+		if (isset($course->globals->disable_apply) && $course->globals->disable_apply=='true'){
+			//if not redirect to course home
+			Flight::redirect("$level/$year/".$course->instance_id);
+		}
+
 		// Attempt to cache responce with browser + debug some extra information.
 		Flight::cachecheck();
 
@@ -809,7 +815,10 @@ class CoursesController {
 	}
 
 	private function getCourseAwardList($course)
-	{
+	{	
+		// no award - should this be possible?
+		if(empty($course->award)) return '';
+
 		$award_list = '';
 		foreach ($course->award as $award) {
 			if (!empty($award->name)) {
@@ -821,7 +830,10 @@ class CoursesController {
 	}
 
 	private function getCourseAwardListLinked($course)
-	{
+	{	
+		// no award - should this be possible?
+		if(empty($course->award)) return '';
+
 		$award_list = '';
 		foreach ($course->award as $award) {
 			if (!empty($award->name)) {
