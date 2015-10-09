@@ -460,8 +460,10 @@ class CoursesController {
 
 		if($out === false) Flight::halt(501, "Fatal error in getting programmes index.");
 
-		// Try & cache
+		// 1h Cache.
+		Flight::response()->cache(time()+3600);
 
+		// Try & cache	
 		echo $output;
 	}
 
