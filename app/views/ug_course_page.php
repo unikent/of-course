@@ -70,12 +70,24 @@ else: ?>
         <div class="side-panel">
 
             <div class="admission-links">
-                <a href="<?php echo Flight::request()->base; ?>/undergraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?>apply-online/<?php echo $course->instance_id ?>"
-                   class="btn btn-large apply-adm-link"
-                   type="button"
-                   role="button"
-                   aria-controls="apply"
-                   onclick="_pat.event('course-page', 'apply-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?> at <?php echo $schoolName ?>');">Apply</a>
+
+
+                <?php if (isset($course->globals->disable_apply) && $course->globals->disable_apply=='true'): ?>
+                    <a href="<?php echo Flight::request()->base; ?>/undergraduate/<?php echo $course->instance_id ?>/"
+                       class="btn btn-large apply-adm-link"
+                        type="button"
+                       role="button"
+                    >View <?php echo $course->current_year ?> programme</a>
+                <?php else:?>
+                    <a href="<?php echo Flight::request()->base; ?>/undergraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?>apply-online/<?php echo $course->instance_id ?>"
+                       class="btn btn-large apply-adm-link"
+                       type="button"
+                       role="button"
+                       aria-controls="apply"
+                       onclick="_pat.event('course-page', 'apply-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?> at <?php echo $schoolName ?>');">Apply</a>
+                <?php endif; ?>
+
+
                 <a href="#!enquiries"
                    class="enquire-adm-link"
                    role="tab"

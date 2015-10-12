@@ -42,6 +42,30 @@ $delivery_truth = function ($deliveries, $course, $needle) {
 $schoolName = $course->administrative_school[0]->name;
 $has_parttime = $delivery_truth($deliveries, $course, "part-time");
 $has_fulltime = $delivery_truth($deliveries, $course, "full-time");
+
+
+
+// By default the apply page allows users to select a course by filtering on "award" and then "fulltime" or "parttime"
+// Some courses contain multiple deliveries which both have the same award & attendance pattern, which would make
+// it impossible for a user to apply for these via the standard drop downs.
+//
+// The below logic detects when a delivery can not be uniquely identify by the filters available.
+// When this happens $noneUniqueDeliveryFound is set to true, which triggers the apply page to simply
+// list out the available deliveries using their description, which a user can then pick from.
+$noneUniqueDeliveries = array();
+$noneUniqueDeliveryFound = false;
+foreach($deliveries as $delivery){
+    // Generate unqiue key for each delivery
+    $key = strtolower(str_replace(' ', '', $delivery->award_name)).'-'.$delivery->attendance_pattern;
+    // Check key is not already in use, if it is, we found a none uniquely identifiable course
+    if(array_key_exists($key, $noneUniqueDeliveries)){
+        $noneUniqueDeliveryFound = true;
+        break;
+    }
+    // Add key to array
+   $noneUniqueDeliveries[$key] = true;
+}
+
 ?>
 <header>
     <h1>Your application: <a
@@ -77,8 +101,8 @@ if (isset($course->how_to_apply) && trim($course->how_to_apply) != '' && !empty(
 
         <p>To begin your application process, you'll need to select your course options below:</p>
 
-        <?php /* one award but lots of deliveries - edge case */
-        if (sizeof($course->award) === 1 && sizeof($deliveries) > 2){ ?>
+        <?php /* one award but lots of deliveries - edge case  OR $noneUniqueDeliveries are found which means they could no normally be selected */
+        if ($noneUniqueDeliveryFound){ ?>
 
             <div>
                 <fieldset class="highlight-fieldset indent">
@@ -89,7 +113,7 @@ if (isset($course->how_to_apply) && trim($course->how_to_apply) != '' && !empty(
                                 <input id="delivery<?php echo $delivery->id; ?>" type="radio" class="radioLeft"
                                        name="delivery" value="delivery<?php echo $delivery->id; ?>">
                                 <div class="textBlock">
-                                    <?php echo str_ireplace(array('part-time', 'full-time'), array('<strong>part-time</strong>', '<strong>full-time</strong>'), $delivery->description); ?>
+                                    &nbsp;<?php echo str_ireplace(array('part-time', 'full-time'), array('<strong>part-time</strong>', '<strong>full-time</strong>'), $delivery->description); ?>
                                 </div>
                                 <div style="clear:both;"/>
                             <?php } ?>
