@@ -26,26 +26,26 @@ foreach ($course->modules as $module) {
     <?php
     if ($show_modules):
 
+
         // get modules from all deliveries as unique lists
         $module_list = array();
 
         //TODO: refactor this!
         if(is_array($course->modules)){
             foreach ($course->modules as $delivery_modules) {
-                if(!is_array($delivery_modules->stages)) continue;
+                if(!is_object($delivery_modules->stages)) continue;
 
                 foreach ($delivery_modules->stages as $stage) {
-                    if(!is_array($stage->clusters)) continue;
-
+                    if(!is_object($stage->clusters)) continue;
+  
                     foreach ($stage->clusters as $clusters) {
                         if(!is_array($clusters)) continue;
 
                         foreach ($clusters as $cluster) {
-                            if(!is_array($cluster->modules)) continue;
+                            if(!is_object($cluster->modules)) continue;
 
                             foreach ($cluster->modules as $modules) {
                                 if(!is_array($modules)) continue;
-
                                 foreach ($modules as $module) {
 
                                     //skip blanks
@@ -59,7 +59,6 @@ foreach ($course->modules as $module) {
                 }
             }
         }
-
 
         ?>
 
