@@ -561,7 +561,7 @@
 
 
 $('.pg .award-tt').popover({
-    content: '<a href="https://www.kent.ac.uk/courses/postgraduate/types/index.html">Learn more about our Awards</a>',
+    content: '<a href="https://www.kent.ac.uk/courses/postgraduate/types/index.html">Learn more about our awards</a>',
     placement:'bottom',
     html:true
 });
@@ -571,7 +571,7 @@ $('.pg .award-tt').click(function(){
 });
 
 $('.ug .award-tt').popover({
-    content: '<a href="https://www.kent.ac.uk/courses/undergraduate/how/structure.html">Learn more about our Degrees</a>',
+    content: '<a href="https://www.kent.ac.uk/courses/undergraduate/how/structure.html">Learn more about our degrees</a>',
     placement:'bottom',
     html:true
 });
