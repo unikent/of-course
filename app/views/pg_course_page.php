@@ -129,7 +129,7 @@ else: ?>
                                 echo ($second_subject) ? ', ' . $course->subject_area_2[0]->name : '';
                                 ?>
                             </li>
-                            <li><strong>Award:</strong> <?php echo $course->award_list; ?><br /><a href="https://www.kent.ac.uk/courses/postgraduate/types/index.html">Learn more about our Awards</a></li>
+                            <li><strong>Award:</strong> <?php echo $course->award_list; ?><br /><a href="https://www.kent.ac.uk/courses/postgraduate/types/index.html">Learn more about our awards</a></li>
 
                             <li><strong>Course type:</strong>
                                 <?php if (strpos($course->programme_type, 'research') === false): ?>
