@@ -203,7 +203,4 @@ endforeach;
       </ul>
     <?php endif; ?>
 
-    <h4>Graduate School</h4>
-    <?php echo $course->globals->graduate_school; ?>
-
   </section>
