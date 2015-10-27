@@ -77,13 +77,6 @@
 	</thead>
     <tbody>
 
-	<?php if(!empty($course->kent_international_foundation_programme)): ?>
-		<tr>
-			<td>Kent International Foundation Programme</td>
-			<td><?php echo $course->kent_international_foundation_programme ?></td>
-		</tr>
-  	<?php endif; ?>
-
 	<?php if(!empty($course->english_language_requirements)): ?>
 		<tr>
 			<td>English Language Requirements</td>
