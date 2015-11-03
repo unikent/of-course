@@ -276,7 +276,10 @@ else: ?>
             <?php echo $course->kis_explanatory_textarea ?>
         </div>
         <div class="span4">
-            
+            <!-- A placeholder for now -->
+            <?php if (!empty($course->globals->general_contact_blurb)): ?>
+                <?php echo $course->globals->general_contact_blurb; ?>
+            <?php endif ?>
         </div>
     </div>
 </section>
