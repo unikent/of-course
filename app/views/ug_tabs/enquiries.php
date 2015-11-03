@@ -160,19 +160,3 @@
     <?php echo $course->enquiries ?>
   </section>
 </section>
-
-<?php if ($course->kiscourseid != ''): ?>
-<div class="row-fluid kiss-widget-section">
-  <div class="span7">
-    <div class="panel kis-info">
-      <h3>UNISTATS / KIS</h3>
-      <h4>Key Information Sets</h4>
-      <?php echo $course->kis_explanatory_textarea ?>
-    </div>
-  </div>
-  <div class="span5">
-    <?php $ukprn = (isset($course->kis_institution_id) && $course->kis_institution_id != '') ? $course->kis_institution_id : $course->globals->ukprn; ?>
-    <iframe class="pull-right" id="unistats-widget-frame" title="Unistats KIS Widget" src="//widget.unistats.ac.uk/Widget/<?php echo $ukprn ?>/<?php echo str_replace(array('/', '|', ':', '&', '.', '>', '+', '#', ';', '?', '@', '='), '_', $course->kiscourseid); ?>/vertical/small/en-GB/Full%20Time" scrolling="no" style="overflow: hidden; border: 0px none transparent; width: 190px; height: 500px;"> </iframe>
-  </div>
-</div>
-<?php endif; ?>
