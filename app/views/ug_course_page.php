@@ -265,6 +265,27 @@ else: ?>
     </div>
 <?php endif; ?>
 
+<?php if ($course->kiscourseid != ''): ?>
+<section class="panel tertiary-tier highlighted no-border kiss-widget-section">
+    <h2>Key Information Sets</h2>
+    <div class="row-fluid">
+        <div class="span8">
+            <?php $ukprn = (isset($course->kis_institution_id) && $course->kis_institution_id != '') ? $course->kis_institution_id : $course->globals->ukprn; ?>
+            <iframe id="unistats-widget-frame" title="Unistats KIS Widget" src="//widget.unistats.ac.uk/Widget/<?php echo $ukprn ?>/<?php echo str_replace(array('/', '|', ':', '&', '.', '>', '+', '#', ';', '?', '@', '='), '_', $course->kiscourseid); ?>/horizontal/small/en-GB/Full%20Time" scrolling="no" style="overflow: hidden; border: 0px none transparent; width: 615px; height: 150px;"> </iframe>
+            <br><br>
+            <?php echo $course->kis_explanatory_textarea ?>
+        </div>
+        <div class="span4">
+            <!-- A placeholder for now -->
+            <?php if (!empty($course->globals->general_contact_blurb)): ?>
+                <?php echo $course->globals->general_contact_blurb; ?>
+            <?php endif ?>
+        </div>
+    </div>
+</section>
+    
+<?php endif; ?>
+
 <section id="learnmore" class="learnmore-section"></section>
 
 <?php if (!empty($course->related_courses)): ?>
