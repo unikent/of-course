@@ -265,7 +265,7 @@ else: ?>
     </div>
 <?php endif; ?>
 
-<?php if ($course->kiscourseid != ''): ?>
+<?php if ($course->kiscourseid != '' && $course->programme_suspended != 'true'): ?>
 <section class="panel tertiary-tier highlighted no-border kiss-widget-section">
     <h2>Key Information Sets</h2>
     <div class="row-fluid">
