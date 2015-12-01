@@ -64,7 +64,7 @@
 					});
 
 					foreach($subject_categories as $sc): ?>
-					<option <?php if(strcmp($search_type, 'subject_category')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower($sc->name))  == 0) echo 'selected'; ?>><?php echo $sc->name?></option>
+					<option <?php if(strcmp($search_type, 'subject_category')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower(pantheon_escape($sc->name))) == 0) echo 'selected'; ?>><?php echo $sc->name?></option>
 					<?php endforeach; ?>
 				  </select>
 				</div>
