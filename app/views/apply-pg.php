@@ -101,7 +101,7 @@ if (isset($course->how_to_apply) && trim($course->how_to_apply) != '' && !empty(
 
 		<p>Learn more about <a href="//www.kent.ac.uk/courses/postgraduate/apply/">the application process</a> or begin your application below by registering.</p>
 		<p>You don't need to complete your application all in one go - simply begin by registering. You can save and come back to your application at any time.
-            You'll need to select your course options below:</p>
+			You'll need to select your course options below:</p>
 
 		<?php /* one award but lots of deliveries - edge case  OR $noneUniqueDeliveries are found which means they could no normally be selected */
 		if ($noneUniqueDeliveryFound){ ?>
@@ -217,7 +217,7 @@ if (isset($course->how_to_apply) && trim($course->how_to_apply) != '' && !empty(
 					   href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=<?php echo $delivery->current_ipo ?>"
 					   onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>] at <?php echo $schoolName ?>');">Next
 						<i class="icon-chevron-right icon-white"></i>
-                    </a>
+					</a>
 				</p>
 
 			<?php } ?>
