@@ -34,8 +34,9 @@ if (empty($deliveries)) {
     ?>
 
     <div class="apply-form apply-form-ug hidden">
-
-        <p>To begin your application process, you'll need to select your course options below:</p>
+        <p>Learn more about <a href="//www.kent.ac.uk/courses/undergraduate/apply/how.html">the application process</a> or begin your application below by registering.</p>
+        <p>You don't need to complete your application all in one go - simply begin by registering.
+        You can save and come back to your application at any time. You'll need to select your course options below:</p>
 
         <div>
             <fieldset class="highlight-fieldset indent">
