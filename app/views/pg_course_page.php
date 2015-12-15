@@ -253,7 +253,7 @@ else: ?>
                                                 <tr>
                                                     <td><strong>Part-time</strong></td>
                                                     <td><?php echo (is_numeric($delivery->fees->home_part_time) ? '&'.$delivery->fees->currency.';' : '') . $delivery->fees->home_part_time; ?></td>
-                                                    <td>N/A</td>
+                                                    <td><?php echo (is_numeric($delivery->fees->int_part_time) ? '&'.$delivery->fees->currency.';' : '') . $delivery->fees->int_part_time; ?></td>
                                                 </tr>
                                             <?php endif; ?>
                                             </tbody>
