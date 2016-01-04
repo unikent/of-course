@@ -17,18 +17,18 @@
 	 * Render using pantheon
 	 */
 	Flight::map('pantheon_render', function($outer_view, $params){
-		
+
 		// define $template as a closure for getting the pantheon wrapper
 		$template = function() use ($params)
 		{
 			if (defined("TEMPLATING_ENGINE"))
-			{	
+			{
 				// Overwrite pantheon route with "URL route"
-				if(!LOCAL) define("RELATIVE_SITE_ROOT", parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH) . '/'); 
+				if(!LOCAL) define("RELATIVE_SITE_ROOT", parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH) . '/');
 
 				// call pantheon
 				require TEMPLATING_ENGINE . '/template.loader.php';
-		
+
 				// workaround for pantheon setting get and post to null if they're empty
 				if ($_GET === null) $_GET = array();
 				if ($_POST === null) $_POST = array();
@@ -51,12 +51,12 @@
 				ob_end_clean();
 
 				// Render with correct headers
-				Flight::response()->write($content)->send();	
+				Flight::response()->write($content)->send();
 			}else{
 				Flight::render('layout');
 			}
 		};
-		
+
 		// go go gadget pantheon
 		return $template();
 	});
@@ -74,7 +74,7 @@
 		if(Flight::request()->base == '/'){
 			return '/'.$url;
 		}else{
-			return Flight::request()->base.'/'.$url;	
+			return Flight::request()->base.'/'.$url;
 		}
 	});
 
@@ -91,7 +91,7 @@
 		if(Flight::request()->asset == '/'){
 			return '/'.$url;
 		}else{
-			return Flight::request()->asset.'/'.$url;	
+			return Flight::request()->asset.'/'.$url;
 		}
 	});
 	/**
@@ -103,25 +103,25 @@
 	Flight::map('gzip', function($content){
 
 		// what do we have in our Accept-Encoding headers
-		$HTTP_ACCEPT_ENCODING = isset($_SERVER["HTTP_ACCEPT_ENCODING"]) ? $_SERVER["HTTP_ACCEPT_ENCODING"] : ''; 
-	    
-		// set the right encoding
-		if( headers_sent() ) 
-	        $encoding = false; 
-	    else if( strpos($HTTP_ACCEPT_ENCODING, 'x-gzip') !== false ) 
-	        $encoding = 'x-gzip'; 
-	    else if( strpos($HTTP_ACCEPT_ENCODING,'gzip') !== false ) 
-	        $encoding = 'gzip'; 
-	    else 
-	        $encoding = false;
-		
-	    if($encoding){
-			// Add the appropriate encoding header and gzip our content
-	    	header('Content-Encoding: ' . $encoding);
-	    	$content = "\x1f\x8b\x08\x00\x00\x00\x00\x00" . gzcompress($content);
-	    }
+		$HTTP_ACCEPT_ENCODING = isset($_SERVER["HTTP_ACCEPT_ENCODING"]) ? $_SERVER["HTTP_ACCEPT_ENCODING"] : '';
 
-	    return $content;
+		// set the right encoding
+		if( headers_sent() )
+			$encoding = false;
+		else if( strpos($HTTP_ACCEPT_ENCODING, 'x-gzip') !== false )
+			$encoding = 'x-gzip';
+		else if( strpos($HTTP_ACCEPT_ENCODING,'gzip') !== false )
+			$encoding = 'gzip';
+		else
+			$encoding = false;
+
+		if($encoding){
+			// Add the appropriate encoding header and gzip our content
+			header('Content-Encoding: ' . $encoding);
+			$content = "\x1f\x8b\x08\x00\x00\x00\x00\x00" . gzcompress($content);
+		}
+
+		return $content;
 	});
 
 	/**
@@ -141,7 +141,7 @@
 	});
 
 	/**
-	 * Cache check. 
+	 * Cache check.
 	 * Use previous request responce data to find out if information from browser is still valid (and thus cacheable)
 	 * Additionally provides debug info on request.
 	 */
@@ -151,7 +151,7 @@
 		$response = $request->getResponse();
 		$last_modified = $response->getLastModified();
 
-		
+
 		// Debug data if wanted.
 		Logger::debug("[Cache] ".(string)$request."<br/>
 			<br/>
@@ -186,9 +186,9 @@
 				// Grab last modified, and return it if its not invalid.
 				$last_modified = $response->getLastModified();
 				if($last_modified !== null) return strtotime($last_modified);
-			} 
+			}
 			return null;
-		} 
+		}
 		catch(Exception $e)
 		{
 			return null;
@@ -222,7 +222,7 @@
 			// Avoid WSOD
 			Flight::halt('404', $page404);
 		}*/
-		
+
 		// Attempt to resolve URL details, location, path and other stuff
 		// that will allow us to be more helpful.
 		$data = validate_404_data($data);
@@ -232,7 +232,7 @@
 			$data['programmes'] = CoursesController::$pp->get_programmes_index($data['year'], $data['level']);
 		}catch(Exception $e){
 			$data['programmes'] = array();
-		}	
+		}
 
 		// Set data & open views
 	  	Flight::setup($data['year'], $data['level']);
@@ -252,7 +252,7 @@
 		// Fail mode action. Email for help?
 		if(defined("FAIL_ALERT_EMAIL") && trim(FAIL_ALERT_EMAIL) != ''){
 			$message = "
-				500 error generated from: {$data["url"]} 
+				500 error generated from: {$data["url"]}
 				At: ".date(DATE_RFC822)."
 				On server: ".$_SERVER["HTTP_HOST"]."
 
@@ -265,13 +265,13 @@
 
 			mail(FAIL_ALERT_EMAIL, "Of-Course: 500 error", $message);
 		}
-		
+
 		// Pass error message along
 		$data['error'] = $error;
 
-	    // Handle error
-	    Flight::response()->status(500);
-	    return Flight::layout('500', $data);
+		// Handle error
+		Flight::response()->status(500);
+		return Flight::layout('500', $data);
 	});
 
 	/**
@@ -323,7 +323,7 @@
 			{
 				$data['year'] = CoursesController::$current_year;
 			}
-			
+
 		}
 		// try and guess slug
 		if(!isset($data['slug'])){
@@ -334,4 +334,18 @@
 		$data['slug'] = htmlentities($data['slug']);
 
 		return $data;
+	}
+
+	/**
+	* Escape invalid characters that cause pantheon to chunder (for subject categories)
+	*
+	* @param $string
+	* @return string
+	*/
+	function pantheon_escape($string) {
+		return urlencode(
+			str_replace(' ', '-',
+				str_replace(',', '', $string)
+			)
+		);
 	}

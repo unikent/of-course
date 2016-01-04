@@ -1,39 +1,27 @@
 <?php
-// Divide our array in half so we can display it in two columns
-$subject_array = array();
-foreach ($subjects as $id=>$subject)
-{
-	$subject_array["$subject->name"] = $id;
-}
 
-ksort($subject_array);
-$quarter = round( (count($subject_array) / 4), 0, PHP_ROUND_HALF_UP );
+	$year_for_url = empty($year) ? '' : ((strcmp($year, CoursesController::$current_year) == 0) ? '' : $year . '/');
+	$all = count((array) $subjects);
+	$quarter = (int)round($all / 4, 0, PHP_ROUND_HALF_UP);
+	$counter = 0;
 
-$subjects_a = array_slice($subject_array, 0, $quarter);
-$subjects_b = array_slice($subject_array, $quarter, $quarter);
-$subjects_c = array_slice($subject_array, $quarter*2, $quarter);
-$subjects_d = array_slice($subject_array, $quarter*3);
-
-$year_for_url = empty($year) ? '' : ((strcmp($year, CoursesController::$current_year) == 0) ? '' : $year . '/');
-
+	foreach ($subjects as $subject):
+		//pantheon escaping for the subject categories on the nav
+		$url = "{$level}/{$year_for_url}search/subject_category/" . pantheon_escape($subject->name);
+		$mod = $counter % $quarter;
 ?>
-<div class='span3'>
-	<?php foreach($subjects_a as $subject=>$id): ?>
-	  <a href='<?php echo Flight::url("{$level}/{$year_for_url}search/subject_category/" . urlencode($subject)); ?>'><?php echo $subject; ?></a>
-	<?php endforeach;?>
-</div>
-<div class='span3'>
-	<?php foreach($subjects_b as $subject=>$id): ?>
-	  <a href='<?php echo Flight::url("{$level}/{$year_for_url}search/subject_category/" . urlencode($subject)); ?>'><?php echo $subject; ?></a>
-	<?php endforeach;?>
-</div>
-<div class='span3'>
-	<?php foreach($subjects_c as $subject=>$id): ?>
-	  <a href='<?php echo Flight::url("{$level}/{$year_for_url}search/subject_category/" . urlencode($subject)); ?>'><?php echo $subject; ?></a>
-	<?php endforeach;?>
-</div>
-<div class='span3'>
-	<?php foreach($subjects_d as $subject=>$id): ?>
-	  <a href='<?php echo Flight::url("{$level}/{$year_for_url}search/subject_category/" . urlencode($subject)); ?>'><?php echo $subject; ?></a>
-	<?php endforeach;?>
-</div>
+
+		<?php if ($mod === 0): ?>
+			<div class="span3">
+		<?php endif; ?>
+
+			<a href='<?php echo Flight::url($url); ?>'><?php echo $subject->name; ?></a>
+
+		<?php if ($mod + 1 == $quarter || $counter == $all): ?>
+			</div>
+		<?php endif; ?>
+
+<?php
+	++$counter;
+	endforeach;
+?>
