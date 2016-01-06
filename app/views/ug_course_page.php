@@ -33,7 +33,8 @@ else: ?>
                 <li><a href="#careers">Careers</a></li>
                 <?php if ((isset($preview) && $preview == true) || (!defined('CLEARING') || (defined('CLEARING') && !CLEARING)) || (defined('CLEARING') && CLEARING && $course->current_year == $course->year)): ?>
                     <li><a href="#entry">Entry requirements</a></li><?php endif; ?>
-                <li><a href="#fees">Funding</a></li>
+                <li><a href="#funding">Funding</a></li>
+				<li class="hidden"><a href="#fees-tables-link">Fees</a></li>
                 <li class='screenreader-only'><a href="#enquiries">Enquiries</a></li>
             </ul>
         </div>
@@ -57,7 +58,7 @@ else: ?>
             <?php if ((isset($preview) && $preview == true) || (!defined('CLEARING') || (defined('CLEARING') && !CLEARING)) || (defined('CLEARING') && CLEARING && $course->current_year == $course->year)): ?>
                 <section
                     id="entry"><?php Flight::render('ug_tabs/entry', array('course' => $course)); ?></section><?php endif; ?>
-            <section id="fees"><?php Flight::render('ug_tabs/fees', array('course' => $course)); ?></section>
+            <section id="funding"><?php Flight::render('ug_tabs/fees', array('course' => $course)); ?></section>
 
 
 

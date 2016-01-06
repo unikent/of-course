@@ -43,6 +43,7 @@ else: ?>
                 <?php endif; ?>
 
                 <li><a href="#staff-research">Staff research</a></li>
+				<li class="hidden"><a href="#fees-tables-link">Fees</a></li>
                 <li class='screenreader-only'><a href="#enquiries">Enquiries</a></li>
             </ul>
         </div>
