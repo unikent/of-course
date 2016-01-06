@@ -68,7 +68,7 @@
 			  <?php echo $content; ?>
 
 
-			  <a tabindex="0" data-trigger="focus" onclick= "$('html, body').scrollTop();" class='scroll-to-top'>
+			  <a href="#" tabindex="0" data-trigger="focus" onclick= "$('html, body').scrollTop();" class='scroll-to-top' style="cursor: pointer;">
 				<i class="icon-chevron-up icon-white"></i>
 			  </a>
 
