@@ -33,7 +33,8 @@ else: ?>
                 <li><a href="#careers">Careers</a></li>
                 <?php if ((isset($preview) && $preview == true) || (!defined('CLEARING') || (defined('CLEARING') && !CLEARING)) || (defined('CLEARING') && CLEARING && $course->current_year == $course->year)): ?>
                     <li><a href="#entry">Entry requirements</a></li><?php endif; ?>
-                <li><a href="#fees">Funding</a></li>
+                <li><a href="#funding">Funding</a></li>
+				<li class="hidden"><a href="#fees-tables-link">Fees</a></li>
                 <li class='screenreader-only'><a href="#enquiries">Enquiries</a></li>
             </ul>
         </div>
@@ -57,7 +58,7 @@ else: ?>
             <?php if ((isset($preview) && $preview == true) || (!defined('CLEARING') || (defined('CLEARING') && !CLEARING)) || (defined('CLEARING') && CLEARING && $course->current_year == $course->year)): ?>
                 <section
                     id="entry"><?php Flight::render('ug_tabs/entry', array('course' => $course)); ?></section><?php endif; ?>
-            <section id="fees"><?php Flight::render('ug_tabs/fees', array('course' => $course)); ?></section>
+            <section id="funding"><?php Flight::render('ug_tabs/fees', array('course' => $course)); ?></section>
 
 
 
@@ -215,15 +216,15 @@ else: ?>
                                 <?php if ($has_fulltime): ?>
                                     <tr>
                                         <td><strong>Full-time</strong></td>
-                                        <td><?php echo empty($fees->home->{'full-time'}) ? ((empty($fees->home->{'euro-full-time'})) ? 'TBC' : '&euro;' . number_format($fees->home->{'euro-full-time'})) : '&pound;' . number_format($fees->home->{'full-time'}); ?></td>
-                                        <td><?php echo empty($fees->int->{'full-time'}) ? ((empty($fees->int->{'euro-full-time'})) ? 'TBC' : '&euro;' . number_format($fees->int->{'euro-full-time'})) : '&pound;' . number_format($fees->int->{'full-time'}); ?></td>
+                                        <td><?php echo (is_numeric($delivery->fees->home_full_time) ? '&'.$delivery->fees->currency.';' : '') . $delivery->fees->home_full_time; ?></td>
+                                        <td><?php echo (is_numeric($delivery->fees->int_full_time) ? '&'.$delivery->fees->currency.';' : '') . $delivery->fees->int_full_time; ?></td>
                                     </tr>
                                 <?php endif; ?>
                                 <?php if ($has_parttime): ?>
                                     <tr>
                                         <td><strong>Part-time</strong></td>
-                                        <td><?php echo empty($fees->home->{'part-time'}) ? ((empty($fees->home->{'euro-part-time'})) ? 'TBC' : '&euro;' . number_format($fees->home->{'euro-part-time'})) : '&pound;' . number_format($fees->home->{'part-time'}); ?></td>
-                                        <td>N/A</td>
+                                        <td><?php echo (is_numeric($delivery->fees->home_part_time) ? '&'.$delivery->fees->currency.';' : '') . $delivery->fees->home_part_time; ?></td>
+                                        <td><?php echo (is_numeric($delivery->fees->int_part_time) ? '&'.$delivery->fees->currency.';' : '') . $delivery->fees->int_part_time; ?></td>
                                     </tr>
                                 <?php endif; ?>
                                 </tbody>

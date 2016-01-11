@@ -8,7 +8,7 @@
                 <?php if ( ! empty($module->module_code) && ! empty($module->module_title) && ! in_array($module->module_code, $module_codes) ): ?>
                     <?php $module_codes[$module->module_code] = $module->module_code ?>
                     <div class="daedalus-show-hide show-hide minimal">
-                        <p class="show-hide-title"><?php echo $module->module_code ?> - <?php echo $module->module_title ?></p>
+                        <p class="show-hide-title"><?php echo $module->module_code ?> - <?php echo $module->module_title ?> (<?php echo $module->credit_amount; ?> credits)</p>
                         
                         <div class="show-hide-content">
                             <p><?php echo $module->synopsis ?></p>
@@ -26,7 +26,7 @@
                 <?php if ( ! empty($module->module_code) && ! in_array($module->module_code, $module_codes) ): ?>
                     <?php $module_codes[$module->module_code] = $module->module_code ?>
                     <div class="daedalus-show-hide show-hide minimal">
-                        <p class="show-hide-title"><?php echo $module->module_code ?> - <?php echo $module->module_title ?></p>
+                        <p class="show-hide-title"><?php echo $module->module_code ?> - <?php echo $module->module_title ?> (<?php echo $module->credit_amount; ?> credits)</p>
                         
                         <div class="show-hide-content">
                             <p><?php echo $module->synopsis ?></p>

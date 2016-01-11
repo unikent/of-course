@@ -11,6 +11,9 @@ $(document).ready(function(){
 		$('html, body').stop().animate({
             scrollTop: $($(this).val()).offset().top
         }, 500);
+		if($(this).val()==='#fees-tables-link'){
+			$('.fees-tables').slideDown();
+		}
 	});
 	// Add class & add to page
 	select_tmp.addClass("programme-scroll-menu");
