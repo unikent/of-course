@@ -27,46 +27,15 @@ foreach ($course->modules as $module) {
     if ($show_modules):
 
 
-        // get modules from all deliveries as unique lists
-        $module_list = array();
 
-        //TODO: refactor this!
-        if(is_array($course->modules)){
-            foreach ($course->modules as $delivery_modules) {
-                if(!is_object($delivery_modules->stages)) continue;
-
-                foreach ($delivery_modules->stages as $stage) {
-                    if(!is_object($stage->clusters)) continue;
-  
-                    foreach ($stage->clusters as $clusters) {
-                        if(!is_array($clusters)) continue;
-
-                        foreach ($clusters as $cluster) {
-                            if(!is_object($cluster->modules)) continue;
-
-                            foreach ($cluster->modules as $modules) {
-                                if(!is_array($modules)) continue;
-                                foreach ($modules as $module) {
-
-                                    //skip blanks
-                                    if ($module->module_code == '') continue;
-                                    // index on module code, so duplicates will just overwrite each other
-                                    $module_list[$module->module_code] = $module;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
 
         ?>
 
 
         <?php
         $show_count = 10;
-        $first_modules = array_slice($module_list, 0, $show_count);
-        $other_modules = array_slice($module_list, $show_count);
+        $first_modules = array_slice($course->module_list, 0, $show_count);
+        $other_modules = array_slice($course->module_list, $show_count);
         ?>
         <?php foreach ($first_modules as $module): ?>
         <div class="daedalus-show-hide show-hide minimal">
