@@ -198,7 +198,7 @@ else: ?>
                                tabindex='0' title='Click to toggle basic fee information'
                                onClick="_pat.event('course-page','expand-fees-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?> - <?php echo $course->award[0]->name ?>');">Fees
                                 <i class="icon-chevron-down toggler"></i></a></h2>
-                        <div id="fees-tables" class="fees-tables" style="display: none" aria-expanded="false"
+                        <div id="fees-tables" class="fees-tables" aria-expanded="true"
                              aria-labelledby="fees-tables-link">
                             <?php if (isset($course->globals->fees_caveat_text_ug) && !empty($course->globals->fees_caveat_text_ug)) echo $course->globals->fees_caveat_text_ug ?>
                             <table class="table">
