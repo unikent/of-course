@@ -1,6 +1,7 @@
 # Of Course!
 
 A [Flight](http://flightphp.com/) based front-end application for the data produced by the [Programmes Plant](http://github.com/unikent/).
+The application communicates with the back end system via the [programmes-plant-api-php](https://github.com/unikent/programmes-plant-api-php) library (A thin wrapper around [guzzle}(https://github.com/guzzle/guzzle) ). After pulling the data, the application then renders the data in a variety of views, before passing it through the pantheon temperating engine in order to produce finalized markup for the University of Kent course pages.
 
 ![of-course sample course page screenshot](https://raw.github.com/unikent/of-course/develop/screenshot.jpg "of-course sample course page screenshot")
 
