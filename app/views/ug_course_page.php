@@ -216,15 +216,15 @@ else: ?>
                                 <?php if ($has_fulltime): ?>
                                     <tr>
                                         <td><strong>Full-time</strong></td>
-                                        <td><?php echo (is_numeric($delivery->fees->home_full_time) ? '&'.$delivery->fees->currency.';' : '') . $delivery->fees->home_full_time; ?></td>
-                                        <td><?php echo (is_numeric($delivery->fees->int_full_time) ? '&'.$delivery->fees->currency.';' : '') . $delivery->fees->int_full_time; ?></td>
+                                        <td><?php echo (is_numeric($fees->home_full_time) ? '&'.$fees->currency.';' : '') . $fees->home_full_time; ?></td>
+                                        <td><?php echo (is_numeric($fees->int_full_time) ? '&'.$fees->currency.';' : '') . $fees->int_full_time; ?></td>
                                     </tr>
                                 <?php endif; ?>
                                 <?php if ($has_parttime): ?>
                                     <tr>
                                         <td><strong>Part-time</strong></td>
-                                        <td><?php echo (is_numeric($delivery->fees->home_part_time) ? '&'.$delivery->fees->currency.';' : '') . $delivery->fees->home_part_time; ?></td>
-                                        <td><?php echo (is_numeric($delivery->fees->int_part_time) ? '&'.$delivery->fees->currency.';' : '') . $delivery->fees->int_part_time; ?></td>
+                                        <td><?php echo (is_numeric($fees->home_part_time) ? '&'.$fees->currency.';' : '') . $fees->home_part_time; ?></td>
+                                        <td><?php echo (is_numeric($fees->int_part_time) ? '&'.$fees->currency.';' : '') . $fees->int_part_time; ?></td>
                                     </tr>
                                 <?php endif; ?>
                                 </tbody>

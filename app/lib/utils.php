@@ -24,7 +24,8 @@
 			if (defined("TEMPLATING_ENGINE"))
 			{
 				// Overwrite pantheon route with "URL route"
-				if(!LOCAL) define("RELATIVE_SITE_ROOT", parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH) . '/');
+				// Remove any spaces that may cause issues for the pantheon renderer
+				if(!LOCAL) define("RELATIVE_SITE_ROOT", str_replace(array(' ','%20',','),'_', parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH)) . '/');
 
 				// call pantheon
 				require TEMPLATING_ENGINE . '/template.loader.php';
