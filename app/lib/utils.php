@@ -8,9 +8,10 @@
 	 * @param $params Data for view
 	 * @output Renders HTML to browser
 	 */
-	Flight::map('layout', function($view, $params = array()){
+	Flight::map('layout', function($view, $params = array(), $layout = 'layout'){
 		Flight::render($view, $params, 'content');
-		Flight::pantheon_render('layout', $params);
+		// allow alternate layout to be passed as param
+		Flight::pantheon_render($layout, $params);
 	});
 
 	/**
@@ -19,7 +20,7 @@
 	Flight::map('pantheon_render', function($outer_view, $params){
 
 		// define $template as a closure for getting the pantheon wrapper
-		$template = function() use ($params)
+		$template = function() use ($outer_view, $params)
 		{
 			if (defined("TEMPLATING_ENGINE"))
 			{
@@ -45,7 +46,7 @@
 				// run pantheon and store its output in a buffer
 				ob_start();
 
-				Flight::render('layout', $params);
+				Flight::render($outer_view, $params);
 
 				require TEMPLATING_ENGINE . '/run.php';
 				$content = ob_get_contents();
@@ -54,7 +55,7 @@
 				// Render with correct headers
 				Flight::response()->write($content)->send();
 			}else{
-				Flight::render('layout');
+				Flight::render($outer_view);
 			}
 		};
 
