@@ -23,12 +23,20 @@ class ModulesController {
 		$module = $this->getModule($module_code);
  
  		if($module_code !== $module_sits_code){
- 			die("?");
  			Flight::redirect("module/".$module_sits_code);
  		}
 
  		return Flight::layout("modules/module", $module, "modules/layout");
 	}
+
+
+	public function legacy_url($module_code)
+	{
+		$module = $this->getModule($module_code);
+ 		Flight::redirect("module/".$module->module_sits_code, 301);
+ 	
+	}
+
 
 
 	protected function getModule($code){
@@ -40,5 +48,8 @@ class ModulesController {
 		$data = Cache::load(KENT_API_URL ."v1/modules/collections/".$collection);
 		return json_decode($data['data']);
 	}
+
+
+
 
 }

@@ -90,4 +90,4 @@ Flight::route('/@level:undergrad|postgrad|ug|pg/@year:[0-9]+/@id:[0-9]+/@slug', 
  */
 Flight::route('/modules/', array($modules, 'index'));
 Flight::route('/modules/@code', array($modules,'view'));
-
+Flight::route('/modulecatalogue/modules/@code', array($modules,'legacy_url'));
