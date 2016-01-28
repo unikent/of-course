@@ -17,7 +17,7 @@
 		<section id="all">
 			<h2>Overview</h2>
 			
-			<table class="table">
+			<table class="dataTable table table-striped">
 				<thead>
 					<tr>
 						<th>Module title</th>
@@ -37,6 +37,8 @@
 					<td>ASB100</td>
 				</tr>
 			</table>
+
+
 		</section>
 		<section id="humanities">
 			<h2>Humanities</h2>
@@ -62,7 +64,8 @@
 	</div>
 </div>
 
-<div class="row-fluid">
+
+<div class="row-fluid" style="clear:both;">
 	<div class="span4">
 		<h3>Why study at kent</h3>
 		<a href="http://www.kent.ac.uk/courses/undergraduate/why/index.html"><img style="width:100%" src="http://www.kent.ac.uk/courses/menu/top/images/220x110-ug-why-2015.jpg" alt="student"></a>

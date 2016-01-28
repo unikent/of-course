@@ -12,6 +12,8 @@
 		<meta name="description" content="<?php echo $meta['description']; ?>" />
 	<?php endif; ?>
 
+	<link media='screen' type='text/css' rel='stylesheet' href='<?php echo Flight::asset('css/DT_bootstrap.css'); ?>' />
+
 	<!-- InstanceEndEditable -->
   </kentMeta>
   <kentContent>
@@ -20,10 +22,20 @@
 	 <?php echo $content; ?>
 
 	<!-- InstanceEndEditable -->
-  </kentContent>
-  <kentScripts>
+</kentContent>
+<kentScripts>
   	<script type="text/javascript" charset="utf8" src="<?php echo Flight::asset('js/build/moduletable.min.js'); ?>"></script>
+ 	<script>
+	$('.dataTable').DataTable({
+	//	"sPaginationType": "bootstrap",
+		"iDisplayLength": 50,
+		"serverSide": false,
+	 	"sDom": "ft<'muted pull-right'i><'clearfix'>p", 
+ 	});
+ 	</script>
+
   </kentScripts>
 
 </kentWrapper>
 <!-- InstanceEnd -->
+
