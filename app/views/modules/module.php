@@ -1,9 +1,9 @@
 <article class="container module">
 	<header>
 		<h1>
-			<?php echo "Module Climate"; ?> - <?php echo "AR545"; ?>
+			<?php echo "Module Climate"; //$module->module_title; ?> - <?php echo "AR545"; //$module->module_code; ?>
 		</h1>
-		<h2 class='location-header' ><?php echo 'OtherCode'; ?></h2>
+		<h2 class='location-header' ><?php echo 'SITSCode'; //$module->sits_code; ?></h2>
 	</header>
 
 	<div class="daedalus-tabs">
@@ -24,23 +24,82 @@
 		<div class="row-fluid">
 			<div class="span7">
 				<div class="tab-content">
-					<section
-						id="overview"><?php //Flight::render('ug_tabs/overview', array('course' => $course)); ?></section>
+					<section id="overview">
+						<h2>Overview</h2>
+						<?php if (isset($module->synopsis) && !empty($module->synopsis)): ?>
+							<?php echo nl2br(str_replace(array('…', 'æ'), array('&hellip;', 'ae'), $module->synopsis)); ?>
+						<?php else: ?>
+							<?php echo 'No overview available' ?>
+						<?php endif ?>
+					</section>
 
-					<section
-						id="details"><?php //Flight::render('ug_tabs/structure', array('course' => $course)); ?></section>
+					<section id="details">
+						<h2>Details</h2>
+						<?php if (isset($module->collections)): ?>
+							<div class="moduleTextBlock">
+								<h3>This module appears in:</h3>
+								<ul>
+									<?php foreach ($module->collections->collection as $collection): ?>
+										<li><a href="/courses/modulecatalogue/collections/<?php echo str_replace('.xml', '', $collection->collection_url) ?>" /><?php echo $collection->collection_name ?></a></li>
+									<?php endforeach ?>
+								</ul>
+							</div>
+						<?php endif ?>
 
-					<section
-						id="method_of_assessment"><?php //Flight::render('ug_tabs/overview', array('course' => $course)); ?></section>
+						<?php if (isset($module->restriction)): ?>
+							<div class="moduleTextBlock">
+								<h3>Restrictions</h3>
+								<div class="moduleText">
+									<?php echo $module->restriction ?>
+								</div>
+							</div>
+						<?php endif ?>
 
-					<section
-						id="preliminary_reading"><?php //Flight::render('ug_tabs/structure', array('course' => $course)); ?></section>
 
-					<section
-						id="progression"><?php //Flight::render('ug_tabs/overview', array('course' => $course)); ?></section>
+						<?php if (isset($module->contact_hours)): ?>
+							<div class="moduleTextBlock">
+								<h3>Contact hours</h3>
+								<div class="moduleText">
+									<?php echo $module->contact_hours ?>
+								</div>
+							</div>
+						<?php endif ?>
 
-					<section
-						id="pre_requisits"><?php //Flight::render('ug_tabs/structure', array('course' => $course)); ?></section>
+
+						<?php if (isset($module->availability)): ?>
+							<div class="moduleTextBlock">
+								<h3>Availability</h3>
+								<div class="moduleText">
+									<?php echo $module->availability ?>
+								</div>
+							</div>
+						<?php endif ?>
+
+						<?php if (isset($module->cost)): ?>
+							<div class="moduleTextBlock">
+								<h3>Cost</h3>
+								<div class="moduleText">
+									<?php echo $module->cost ?>
+								</div>
+							</div>
+						<?php endif ?>
+					</section>
+
+					<section id="method_of_assessment">
+						<?php //echo $module-> ; ?>
+					</section>
+
+					<section id="preliminary_reading">
+						<?php //echo $module-> ; ?>
+					</section>
+
+					<section id="progression">
+						<?php //echo $module-> ; ?>
+					</section>
+
+					<section id="pre_requisits">
+						<?php //echo $module-> ; ?>
+					</section>
 
 				</div>
 			</div> <!-- /span -->
