@@ -32,12 +32,12 @@ class ModulesController {
 
 
 	protected function getModule($code){
-		$data = Cache::load("https://api.kent.ac.uk/api/v1/modules/module/".$code);
+		$data = Cache::load(KENT_API_URL ."v1/modules/module/".$code);
 		return json_decode($data['data']);
 	}
 
 	protected function getModuleList($collection = 'all'){
-		$data = Cache::load("https://api.kent.ac.uk/api/v1/modules/collections/".$collection);
+		$data = Cache::load(KENT_API_URL ."v1/modules/collections/".$collection);
 		return json_decode($data['data']);
 	}
 
