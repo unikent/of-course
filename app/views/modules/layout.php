@@ -21,6 +21,9 @@
 
 	<!-- InstanceEndEditable -->
   </kentContent>
+  <kentScripts>
+  	<script type="text/javascript" charset="utf8" src="<?php echo Flight::asset('js/build/moduletable.min.js'); ?>"></script>
+  </kentScripts>
 
 </kentWrapper>
 <!-- InstanceEnd -->
