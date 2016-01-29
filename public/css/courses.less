@@ -1,3 +1,5 @@
+@import "variables.less"
+
 .contacts-enquiries {
 	padding-bottom:15px;
 }
@@ -10,7 +12,7 @@
 }
 .programme-scroll-menu {display:none;}
 .scroll-to-top {display:none; }
-/* Course page tab responcive styles */
+/* Course page tab responsive styles */
 .daedalus-courses .daedalus-tabs {
 
 	@media (max-width: 990px) {
@@ -21,14 +23,14 @@
 				width:25%; border: 0;
 
 				a {
-					border: solid 1px #eee;
+					border: solid 1px @light-grey;
 					margin-bottom:3px;
 					padding-right:0;
 					padding-left:0;
 					text-align:center;
 				}
 				&.active a {
-				 	background-color: #eeeeee;
+				 	background-color: @light-grey;
 				}
 			}
 
@@ -63,7 +65,7 @@
 		height:40px;
 		line-height:40px;
 		text-align:center;
-		background:#5c5c5c;
+		background: @middle-grey;
 		border:0;
 		opacity:0.8;
 		cursor: pointer;
@@ -83,11 +85,11 @@
 
 .daedalus-courses .alert-daedalus {
 	-border: 1px solid #ccc;
-	background: #fbf7eb;
+	background: @light-cream;
 	box-shadow: 1px 1px 3px #888;
 	padding: 1em;
 	border-radius: 0;
-	color: #1d1d1d;
+	color: @black;
 	margin-bottom:0px;
 }
 
@@ -135,11 +137,11 @@
 		}
 	  }
 	  .popover{
-		background-color: #f9f4e7;
+		background-color: @darkest-grey;
 		border-radius: 0;
 		.popover-title{
 		  padding-right: 30px;
-		  background-color: #f9f4e7;
+		  background-color: @darkest-grey;
 		  font-size: 14px;
 		  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, sans-serif;
 		  font-weight: bold;
@@ -161,7 +163,7 @@
 		  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, sans-serif;
 		}
 		.arrow:after{
-		  border-bottom-color: #f9f4e7;
+		  border-bottom-color: @darkest-grey;
 		}
 	  }
     }
@@ -179,7 +181,7 @@
   }
 .advanced-search-boxes {
   box-sizing: border-box;
-  background-color: #f9f4e7;
+  background-color: @cream;
 
   .advanced-search-filters {
 
