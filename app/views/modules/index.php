@@ -20,17 +20,19 @@
 			<table class="dataTable table table-striped">
 				<thead>
 					<tr>
+						<th>Module Code</th>
 						<th>Module title</th>
-						<th>Module codes</th>
+						<th>Alternate module code</th>
 					</tr>
 				</thead>
 
-				<?php foreach($modules->modules as $module): ?>
+				<?php foreach($modules->modules as $module){ ?>
 					<tr>
-						<td><?php echo $module->title ?></td>
-						<td><?php echo $module->code ?>, <?php echo $module->sds_code ?></td>
+						<td><a href="modules/<?php echo $module->code ?>"><?php echo $module->code ?></a></td>
+						<td><a href="modules/<?php echo $module->code ?>"><?php echo $module->title ?></a></td>
+						<td><?php echo $module->sds_code ?></td>
 					</tr>
-				<?php endforeach; ?>
+				<?php } ?>
 				
 			</table>
 
@@ -78,3 +80,55 @@
 		<p>Find out why our students love studying at Kent.</p>
 	</div>
 </div>
+
+
+<kentScripts>
+	<script type="text/javascript" charset="utf8" src="<?php echo Flight::asset('js/build/moduletable.min.js'); ?>"></script>
+<script>
+	$('.dataTable').DataTable({
+	//	"sPaginationType": "bootstrap",
+	 	"columnDefs": [
+	 		{ 
+    			"orderable": false, 
+    			"searchable": false,
+    		 	"targets": 0, 
+    		 	"data": "code",
+    		 	"type": "html" 
+    		},
+    		{ 
+    			"orderable": false, 
+    			"searchable": false,
+    		 	"targets": 1, 
+    		 	"data": "title",
+    		 	"type": "html" 
+    		},
+    		{ 
+    			"orderable": false,
+    			"searchable": false,
+    			"targets": 2,
+    			"data": "sds_code",
+    			"type": "html" 
+    		}
+    	],
+    	//"pageLength": 25,
+    	"pageLength": 25,
+		"deferLoading": 200,
+		/// set count
+		"serverSide": true,
+		"processing": true,
+	 	"sDom": "ft<'muted pull-right'i><'clearfix'>p", 
+	 	"ajax": {
+	 		"url": "https://api-test.kent.ac.uk/api/v1/modules/collection/all?format=datatables",
+	 		"dataSrc": function ( json ) {
+
+	 		 	for(var i in json.data){
+	 		 		json.data[i].title = '<a href="modules/' + json.data[i].code + '">'  + json.data[i].title +'</a>';
+	 		 		json.data[i].code = '<a href="modules/' + json.data[i].code + '">'  + json.data[i].code +'</a>';
+	 		 	}
+			    return json.data;
+			}
+	 	}
+ 	});
+ 	//http://datatables.net/forums/discussion/5714/solved-how-do-i-disable-the-cache-busting-query-parameter-that-datatables-attaches
+ </script>
+</kentScripts>
