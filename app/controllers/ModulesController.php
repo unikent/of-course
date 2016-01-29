@@ -5,14 +5,8 @@ use unikent\libs\Logger;
 
 class ModulesController {
 
-	public function __construct()
-	{
-
-	}
-
 	public function index()
 	{
-
 		$list = $this->getModuleList($module_code);
 
 		return Flight::layout("modules/index", $list, "modules/layout");
