@@ -86,11 +86,11 @@
 		if(table.attr('data-ready') == 'true') return;
 		table.attr('data-ready', 'true');
 
-		module_datatable(table, {"api_endpoint": "https://api-test.kent.ac.uk/api/v1/modules/collection/" + table.attr("data-collection")  });
+		module_datatable(table, {"api_endpoint": "<?php echo KENT_API_URL;?>v1/modules/collection/" + table.attr("data-collection")  });
 	});
 
 	// Init first table
-	module_datatable($(".dataTable_all"), {"deferLoading":true, "api_endpoint": "https://api-test.kent.ac.uk/api/v1/modules/collection/all"});
+	module_datatable($(".dataTable_all"), {"deferLoading":true, "api_endpoint": "<?php echo KENT_API_URL;?>v1/modules/collection/all"});
 
  </script>
 </kentScripts>
