@@ -17,7 +17,7 @@
 		<section id="all">
 			<h2>Overview</h2>
 			
-			<table class="dataTable table table-striped">
+			<table class="dataTable table table-striped" data-count="<?php print_r($modules->total); ?>">
 				<thead>
 					<tr>
 						<th>Module Code</th>
@@ -25,15 +25,13 @@
 						<th>Alternate module code</th>
 					</tr>
 				</thead>
-
 				<?php foreach($modules->modules as $module){ ?>
 					<tr>
-						<td><a href="modules/<?php echo $module->code ?>"><?php echo $module->code ?></a></td>
-						<td><a href="modules/<?php echo $module->code ?>"><?php echo $module->title ?></a></td>
+						<td><a href="<?php echo $module->code ?>"><?php echo $module->code ?></a></td>
+						<td><a href="<?php echo $module->code ?>"><?php echo $module->title ?></a></td>
 						<td><?php echo $module->sds_code ?></td>
 					</tr>
-				<?php } ?>
-				
+				<?php } ?>	
 			</table>
 
 
@@ -112,7 +110,7 @@
     	],
     	//"pageLength": 25,
     	"pageLength": 25,
-		"deferLoading": 200,
+		"deferLoading": $('.dataTable').attr("data-count"),
 		/// set count
 		"serverSide": true,
 		"processing": true,
@@ -122,8 +120,8 @@
 	 		"dataSrc": function ( json ) {
 
 	 		 	for(var i in json.data){
-	 		 		json.data[i].title = '<a href="modules/' + json.data[i].code + '">'  + json.data[i].title +'</a>';
-	 		 		json.data[i].code = '<a href="modules/' + json.data[i].code + '">'  + json.data[i].code +'</a>';
+	 		 		json.data[i].title = '<a href="' + json.data[i].code + '">'  + json.data[i].title +'</a>';
+	 		 		json.data[i].code = '<a href="' + json.data[i].code + '">'  + json.data[i].code +'</a>';
 	 		 	}
 			    return json.data;
 			}
