@@ -26,7 +26,7 @@ class ModulesController {
 		// 	Flight::redirect("module/".$module_sits_code);
 		// }
 
-		return Flight::layout("modules/module", $module, "modules/layout");
+		return Flight::layout("modules/module", array('module'=>$module), "modules/layout");
 	}
 
 	public function collection($collection)
