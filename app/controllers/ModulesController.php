@@ -13,9 +13,9 @@ class ModulesController {
 	public function index()
 	{	
 
-		$list = $this->getModuleList($module_code);
+		$list = $this->getModuleList();
 
-		return Flight::layout("modules/index", $list, "modules/layout");
+		return Flight::layout("modules/index", array('modules' => $list), "modules/layout");
 	}
 
 	public function view($module_code)
@@ -40,12 +40,14 @@ class ModulesController {
 
 
 	protected function getModule($code){
-		$data = Cache::load(KENT_API_URL ."v1/modules/module/".$code);
+		$data = Cache::load(KENT_API_URL . "v1/modules/module/" . $code);
 		return json_decode($data['data']);
 	}
 
 	protected function getModuleList($collection = 'all'){
-		$data = Cache::load(KENT_API_URL ."v1/modules/collections/".$collection);
+
+		// Grab first page of datatable
+		$data = Cache::load(KENT_API_URL . "v1/modules/collection/" . $collection);
 		return json_decode($data['data']);
 	}
 

@@ -36,11 +36,13 @@
 				if ($_POST === null) $_POST = array();
 
 				// Shim logging data
-				foreach(Logger::get('warning') as $warn){
-					inspect($warn);
-				}
-				foreach(Logger::get('debug') as $warn){
-					debug($warn);
+				
+				$logs = unikent\libs\Log::get();
+				foreach($logs as $log){
+					// only log debugs when debug is enabled.
+					if($log->level == 'debug' && !isset($_GET['debug_performance'])) continue;
+					// Pass logs to pantheon
+					inspect("[".strtoupper($log->level)."]".$log->message, $log->file, $log->line);
 				}
 
 				// run pantheon and store its output in a buffer
@@ -183,7 +185,7 @@
 			// Get request
 			$request = CoursesController::$pp->request;
 			// If its okay, get responce
-			if($request !== null ){
+			if($request !== null && $request !== false ){
 				$response = $request->getResponse();
 				// Grab last modified, and return it if its not invalid.
 				$last_modified = $response->getLastModified();

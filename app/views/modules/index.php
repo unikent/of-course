@@ -24,18 +24,14 @@
 						<th>Module codes</th>
 					</tr>
 				</thead>
-				<tr>
-					<td>Astro science - BSC</td>
-					<td>ASB100</td>
-				</tr>
-				<tr>
-					<td>Astro science - BSC</td>
-					<td>ASB100</td>
-				</tr>
-				<tr>
-					<td>Astro science - BSC</td>
-					<td>ASB100</td>
-				</tr>
+
+				<?php foreach($modules->modules as $module): ?>
+					<tr>
+						<td><?php echo $module->title ?></td>
+						<td><?php echo $module->code ?>, <?php echo $module->sds_code ?></td>
+					</tr>
+				<?php endforeach; ?>
+				
 			</table>
 
 

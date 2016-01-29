@@ -28,9 +28,20 @@
  	<script>
 	$('.dataTable').DataTable({
 	//	"sPaginationType": "bootstrap",
-		"iDisplayLength": 50,
-		"serverSide": false,
+	 	"columnDefs": [
+    		{ "orderable": false, "searchable": false, "targets": 0 },
+    		{ "orderable": false, "searchable": false, "targets": 1 }
+    	],
+		"iDisplayLength": 25,
+		"serverSide": true,
+		"processing": true,
 	 	"sDom": "ft<'muted pull-right'i><'clearfix'>p", 
+	 	"ajax": {
+	 		"url": "https://api-test.kent.ac.uk/api/v1/modules/collection/all?format=dataTable",
+	 		"data": function ( d ) {
+	 			console.log(d);
+	 		}
+	 	}
  	});
  	</script>
 
