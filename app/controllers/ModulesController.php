@@ -12,10 +12,19 @@ class ModulesController {
 
 	public function index()
 	{	
-
 		$list = $this->getModuleList();
 
-		return Flight::layout("modules/index", array('modules' => $list), "modules/layout");
+		$collections = array(
+			"humanities" => array("name" => "Humanities (UG)", "collection" => "H1"),
+			"sciences" => array("name" => "Sciences (UG)", "collection" => "SPS1"),
+			"social" => array("name" => "Social Sciences (UG)", "collection" => "SS1"),
+			"postgraduate" => array("name" => "Postgraduate", "collection" => "PG"),
+			"brussels" => array("name" => "Brussels", "collection" => "B"),
+			"paris " => array("name" => "Paris", "collection" => "P"),
+			"wild" => array("name" => "Wild Modules", "collection" => "W")
+		);
+
+		return Flight::layout("modules/index", array('modules' => $list, 'collections' => $collections), "modules/layout");
 	}
 
 	public function view($module_code)
