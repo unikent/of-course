@@ -4,11 +4,11 @@
 	padding-bottom:15px;
 }
 .daedalus-courses .advanced-search{
-  position: relative;
+	position: relative;
 }
 
 .pg-entry-requirements td p{
-	margin-bottom:0px;
+	margin-bottom: 0px;
 }
 .programme-scroll-menu {display:none;}
 .scroll-to-top {display:none; }
@@ -30,7 +30,7 @@
 					text-align:center;
 				}
 				&.active a {
-				 	background-color: @light-grey;
+					background-color: @light-grey;
 				}
 			}
 
@@ -96,7 +96,7 @@
 
 .daedalus-courses {
 
-	 .enquire-block {
+	.enquire-block {
 		margin-bottom: 14px;
 		padding: 0 0em 0em 1.5em;
 
@@ -125,139 +125,142 @@
 
 	}
 
-  header{
-    h1{
-      padding-bottom: 0;
-      margin-bottom: 5px;
-	  a.award-tt{
-		cursor: help;
-		outline:none;
-		&:hover,&:focus,&:active{
-		  outline: none;
-		}
-	  }
-	  .popover{
-		background-color: @darkest-grey;
-		border-radius: 0;
-		.popover-title{
-		  padding-right: 30px;
-		  background-color: @darkest-grey;
-		  font-size: 14px;
-		  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, sans-serif;
-		  font-weight: bold;
-		  color: #555;
-		  position: relative;
-		  &:after{
-			content: "\f00d";
-			font-family: "FontAwesome",sans-serif;
-			position: absolute;
-			right:6px;
-			top:6px;
-			font-size: 1.2em;
-			opacity: 0.4;
-		  }
-		}
-		.popover-content{
-		  font-size: 14px;
-		  padding: 0 10px;
-		  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, sans-serif;
-		}
-		.arrow:after{
-		  border-bottom-color: @darkest-grey;
-		}
-	  }
-    }
-    h2.location-header {
-      color:#937227;
-      padding-bottom:15px;
-      font-size: 1em;
-    }
-  }
+	header{
+		h1{
+			padding-bottom: 0;
+			margin-bottom: 5px;
+			a.award-tt{
+				cursor: help;
+				outline:none;
+				&:hover,&:focus,&:active{
+					outline: none;
+				}
+			}
+			.popover{
+				background-color: @darkest-grey;
+				border-radius: 0;
 
-  .under-promo-links{
-  	padding-left: 1em;
-  	position: relative;
-  	top: -15px;
-  }
-.advanced-search-boxes {
-  box-sizing: border-box;
-  background-color: @cream;
+				.popover-title{
+					padding-right: 30px;
+					background-color: @darkest-grey;
+					font-size: 14px;
+					font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, sans-serif;
+					font-weight: bold;
+					color: white;
+					position: relative;
+					border:none;
+					&:after{
+						content: "\f00d";
+						font-family: "FontAwesome",sans-serif;
+						position: absolute;
+						right:6px;
+						top:6px;
+						font-size: 1.2em;
+						opacity: 0.4;
+					}
+				}
 
-  .advanced-search-filters {
-
-	&.pg{
-	  @media (min-width: 960px) {
-		.search-select {
-		  width: 138px;
-		  padding-right:0;
-		  &.campus-search-div{
-			width:120px;
-		  }
+				.popover-content, a{
+					color: white;
+					font-size: 14px;
+					font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, sans-serif;
+				}
+				.arrow:after{
+					border-bottom-color: @darkest-grey;
+				}
+			}
 		}
-	  }
-	}
-	#advanced-text-search-hint{
-	  padding-bottom: 8px;
-	  display: inline-block;
+		h2.location-header {
+			color:#937227;
+			padding-bottom:15px;
+			font-size: 1em;
+		}
 	}
 
-	.row{
-	  margin-left:-10px;
-	  margin-right:-10px;
-	}
-
-	.advanced-text-search {
-	  width: 100%;
-	  display: inline-block;
-	  box-sizing: border-box;
-	  min-height: 30px;
-	}
-
-	select{
-	  box-sizing: border-box;
-	  width:100%;
-	}
-
-	.search-filter,.search-select{
-	  float:left;
-	  display: inline-block;
-	  width: 100%;
-	  padding: 0 10px;
-	  box-sizing: border-box;
-	}
-
-	@media (min-width: 480px) {
-	  .search-select {
-		width: 50%;
-	  }
-	}
-
-	@media (min-width: 960px) {
-	  .search-filter{
-		span{
-		  position: absolute;
-		  padding-top: 5px;
-		}
-		.advanced-text-search {
-		  width:202px;
-		  margin-left:63px;
-		}
-		width: 275px;
-		white-space: nowrap;
-		overflow: hidden;
-		padding-right: 0;
+	.under-promo-links{
+		padding-left: 1em;
 		position: relative;
-	  }
-	  .search-select {
-		width: 175px;
-		padding-right:0;
-		&.campus-search-div{
-		  width:150px;
-		}
-	  }
+		top: -15px;
 	}
-  }
-}
+	.advanced-search-boxes {
+		box-sizing: border-box;
+		background-color: @cream;
+
+		.advanced-search-filters {
+
+			&.pg{
+				@media (min-width: 960px) {
+					.search-select {
+						width: 138px;
+						padding-right:0;
+						&.campus-search-div{
+							width:120px;
+						}
+					}
+				}
+			}
+			#advanced-text-search-hint{
+				padding-bottom: 8px;
+				display: inline-block;
+			}
+
+			.row{
+				margin-left:-10px;
+				margin-right:-10px;
+			}
+
+			.advanced-text-search {
+				width: 100%;
+				display: inline-block;
+				box-sizing: border-box;
+				min-height: 30px;
+			}
+
+			select{
+				box-sizing: border-box;
+				width:100%;
+			}
+
+			.search-filter,.search-select{
+				float:left;
+				display: inline-block;
+				width: 100%;
+				padding: 0 10px;
+				box-sizing: border-box;
+			}
+
+			@media (min-width: 480px) {
+				.search-select {
+					width: 50%;
+				}
+			}
+
+			@media (min-width: 960px) {
+				.search-filter{
+					span{
+						position: absolute;
+						padding-top: 5px;
+					}
+					.advanced-text-search {
+						width:202px;
+						margin-left:63px;
+					}
+					width: 275px;
+					white-space: nowrap;
+					overflow: hidden;
+					padding-right: 0;
+					position: relative;
+				}
+				.search-select {
+					width: 175px;
+					padding-right:0;
+					&.campus-search-div{
+						width:150px;
+					}
+				}
+			}
+		}
+	}
 
 	#showMore{
 		text-decoration: none;
@@ -266,14 +269,14 @@
 		display: inline-block;
 		cursor: pointer;
 		@media (min-width: 650px) {
-		  position: absolute;
-		  top: 20px;
-		  right: 0;
-		  margin-bottom: 0;
+			position: absolute;
+			top: 20px;
+			right: 0;
+			margin-bottom: 0;
 		}
-  	}
+	}
 }
 
 .daedalus-courses .advanced-search-boxes {
-  margin: 0 0 20px 0;
+	margin: 0 0 20px 0;
 }

@@ -132,8 +132,9 @@
   font-size: 14px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, sans-serif;
   font-weight: bold;
-  color: #555;
+  color: white;
   position: relative;
+  border: none;
 }
 .daedalus-courses header h1 .popover .popover-title:after {
   content: "\f00d";
@@ -144,9 +145,10 @@
   font-size: 1.2em;
   opacity: 0.4;
 }
-.daedalus-courses header h1 .popover .popover-content {
+.daedalus-courses header h1 .popover .popover-content,
+.daedalus-courses header h1 .popover a {
+  color: white;
   font-size: 14px;
-  padding: 0 10px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, sans-serif;
 }
 .daedalus-courses header h1 .popover .arrow:after {
