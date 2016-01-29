@@ -38,6 +38,7 @@ function module_datatable(table, options){
 		"processing": true,
 	 	"sDom": "ft<'muted pull-right'i><'clearfix'>p", 
 	 	"ajax": {
+	 		"cache": true,
 	 		"url": options.api_endpoint + "?format=datatables",
 	 		"dataSrc": function ( json ) {
 
