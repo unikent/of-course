@@ -12,6 +12,8 @@
 		<meta name="description" content="<?php echo $meta['description']; ?>" />
 	<?php endif; ?>
 
+	<link media='screen' type='text/css' rel='stylesheet' href='<?php echo Flight::asset('css/DT_bootstrap.css'); ?>' />
+
 	<!-- InstanceEndEditable -->
   </kentMeta>
   <kentContent>
@@ -20,7 +22,31 @@
 	 <?php echo $content; ?>
 
 	<!-- InstanceEndEditable -->
-  </kentContent>
+</kentContent>
+<kentScripts>
+  	<script type="text/javascript" charset="utf8" src="<?php echo Flight::asset('js/build/moduletable.min.js'); ?>"></script>
+ 	<script>
+	$('.dataTable').DataTable({
+	//	"sPaginationType": "bootstrap",
+	 	"columnDefs": [
+    		{ "orderable": false, "searchable": false, "targets": 0 },
+    		{ "orderable": false, "searchable": false, "targets": 1 }
+    	],
+		"iDisplayLength": 25,
+		"serverSide": true,
+		"processing": true,
+	 	"sDom": "ft<'muted pull-right'i><'clearfix'>p", 
+	 	"ajax": {
+	 		"url": "https://api-test.kent.ac.uk/api/v1/modules/collection/all?format=dataTable",
+	 		"data": function ( d ) {
+	 			console.log(d);
+	 		}
+	 	}
+ 	});
+ 	</script>
+
+  </kentScripts>
 
 </kentWrapper>
 <!-- InstanceEnd -->
+

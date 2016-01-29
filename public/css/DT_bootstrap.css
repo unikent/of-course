@@ -176,3 +176,4 @@ div.DTFC_LeftBodyWrapper tbody tr:first-child td {
 div.DTFC_LeftFootWrapper table {
 	border-top: none;
 }
+.daedalus-tabs .dataTables_wrapper .row {margin-left:0;}
