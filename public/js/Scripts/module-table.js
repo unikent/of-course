@@ -6,7 +6,7 @@ function module_datatable(table, options){
 	}, options );
 	// configure table
 	table.DataTable({
-		//"sPaginationType": "bootstrap",
+		"sPaginationType": "bootstrap",
 	 	"columnDefs": [
 	 		{ 
     			"orderable": false, 
