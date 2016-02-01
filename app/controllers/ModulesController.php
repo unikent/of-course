@@ -32,6 +32,26 @@ class ModulesController {
 	}
 
 	/**
+	 * Show modules in a collection
+	 *  
+	 */
+	public function collection($collection = 'all'){
+		$list = $this->getModuleList($collection);
+
+		return Flight::layout("modules/collection", array('modules' => $list, "collection" => $collection), "modules/layout");
+	}
+
+	/**
+	 * Collections list
+	 *  
+	 */
+	public function collections(){
+		$list = $this->getCollectionList();
+
+		return Flight::layout("modules/collections", array('collections' => $list), "modules/layout");
+	}
+
+	/**
 	 * View a module
 	 *  
 	 */
@@ -77,6 +97,17 @@ class ModulesController {
 	 */
 	protected function getModule($code){
 		$data = Cache::load(KENT_API_URL . "v1/modules/module/" . $code);
+		return json_decode($data['data']);
+	}
+
+	/**
+	 * Get collection list data from API
+	 *  
+	 */
+	protected function getCollectionList(){
+
+		// Grab first page of datatable
+		$data = Cache::load(KENT_API_URL . "v1/modules/collection/");
 		return json_decode($data['data']);
 	}
 
