@@ -66,7 +66,7 @@ class ModulesController {
 
 		// If url uses "sds code", send it to sits code url
 		if(strtoupper($module_code) === strtoupper($module->sds_code)){
-			Flight::redirect("/modules/".strtolower($module->code));
+			Flight::redirect("/modules/module/".strtolower($module->code));
 		}
 
 		return Flight::layout("modules/module", array('module'=>$module), "modules/layout");
