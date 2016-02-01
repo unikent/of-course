@@ -21,6 +21,7 @@
 					<li><a href="#details">Details</a></li>
 					<li><a href="#method_of_assessment">Method of assessment</a></li>
 					<li><a href="#preliminary_reading">Preliminary reading</a></li>
+					<li><a href="#learning_outcomes">Learning outcomes</a></li>
 					<li><a href="#progression">Progression</a></li>
 					<li><a href="#pre_requisits">Pre-requisits</a></li>
 				</ul>
@@ -108,6 +109,15 @@
 								<p><a href="<?php echo $url ?>">See the library reading list for this module (<?php echo ucfirst($campus); ?>)</a></p>
 							<?php endforeach; ?>
 						<?php endif; ?>
+					</section>
+
+					<section id="learning_outcomes">
+						<h2>Learning outcomes</h2>
+						<?php if (isset($module->learning_outcome) && !empty($module->learning_outcome)): ?>
+									<p><?php echo $module->learning_outcome; ?></p>
+						<?php else: ?>
+							<?php echo 'No information available' ?>
+						<?php endif ?>
 					</section>
 
 					<section id="progression">
