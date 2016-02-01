@@ -176,12 +176,6 @@
 		</div><!-- /row -->
 	</div><!-- /tabs -->
 
-
-
-	<footer class="general_disclaimer" style='font-size:0.8em;'>
-		<?php// echo "Some kind of disclaimer?"; ?>
-	</footer>
-
 </article>
 <kentScripts>
 	<script>
