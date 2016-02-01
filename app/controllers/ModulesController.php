@@ -5,7 +5,7 @@ use unikent\libs\Logger;
 
 /**
  * Module controller
- * runs logic for module catalog replacement 
+ * runs logic for module catalogue replacement 
  */
 class ModulesController {
 
@@ -29,6 +29,31 @@ class ModulesController {
 		);
 
 		return Flight::layout("modules/index", array('modules' => $list, 'collections' => $collections), "modules/layout");
+	}
+
+	/**
+	 * Show modules in a collection
+	 *  
+	 */
+	public function collection($collection = 'all'){
+		$list = $this->getModuleList($collection);
+
+		// Handle error
+		if(isset($list->error)){
+			return $this->collection_404($list->error);
+		}
+	
+		return Flight::layout("modules/collection", array('modules' => $list, "collection" => $collection), "modules/layout");
+	}
+
+	/**
+	 * Collections list
+	 *  
+	 */
+	public function collections(){
+		$list = $this->getCollectionList();
+
+		return Flight::layout("modules/collections", array('collections' => $list), "modules/layout");
 	}
 
 	/**
@@ -72,6 +97,17 @@ class ModulesController {
 	}
 
 	/**
+	 * 404 helper for bad module catalogue.
+	 *  
+	 */
+	protected function collection_404($error){
+		$list = $this->getCollectionList();
+		Flight::response()->status(404);
+		return Flight::layout("modules/error", array('error'=> $error, 'collections' => $list), "modules/layout");
+	}
+
+
+	/**
 	 * Get module data from API
 	 *  
 	 */
@@ -81,13 +117,28 @@ class ModulesController {
 	}
 
 	/**
+	 * Get collection list data from API
+	 *  
+	 */
+	protected function getCollectionList(){
+
+		// Grab first page of datatable
+		$data = Cache::load(KENT_API_URL . "v1/modules/collection/");
+		return json_decode($data['data']);
+	}
+
+	/**
 	 * Get module list data from API
 	 *  
 	 */
 	protected function getModuleList($collection = 'all'){
-
 		// Grab first page of datatable
 		$data = Cache::load(KENT_API_URL . "v1/modules/collection/" . $collection);
+
+		if($data == false){
+			return (object) array("error" => "Unable to find specified collection.");
+		}
+
 		return json_decode($data['data']);
 	}
 }

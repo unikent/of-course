@@ -41,6 +41,8 @@ function module_datatable(table, options){
 	 		"cache": true,
 	 		"url": options.api_endpoint + "?format=datatables",
 	 		"dataSrc": function ( json ) {
+	 			// Set name from handbook title
+	 			$("#collection_title_"+table.attr("data-collection")).text(json.title);
 
 	 		 	for(var i in json.data){
 	 		 		json.data[i].title = '<a href="' + json.data[i].code + '">'  + json.data[i].title +'</a>';
