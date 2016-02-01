@@ -155,28 +155,32 @@
 
 				<div class="side-panel">
 					<?php foreach ($module->deliveries as $delivery): ?>
-						<div class="key-facts-block">
-							<aside class="key-facts-container">
-								<h2><?php echo $delivery->campus; ?></h2>
+						<?php if (array_reduce((array)$delivery->delivery_sessions, function ($carry, $session){
+							return $carry || $session->running;
+						}, false)): ?>
+							<div class="key-facts-block">
+								<aside class="key-facts-container">
+									<h2><?php echo $delivery->campus; ?></h2>
 
-								<div class="key-facts">
-									<ul>
-										<li>
-											<strong>Term:</strong> <?php echo $delivery->term; ?> - <a href="<?php echo $delivery->delivery_url; ?>">View timetable</a>
-										</li>
-										<li><strong>Level:</strong> <?php echo $delivery->credit_level; ?> </li>
-										<li><strong>Credits (ECTS):</strong> <?php echo $delivery->credit_amount; ?></li>
-										<?php if (isset($delivery->convenor) && !empty(trim($delivery->convenor))): ?>
-											<li><strong>Convenor:</strong> <?php echo $delivery->convenor; ?></li>
-										<?php endif; ?>
-										<li><strong>Years:</strong> <?php echo implode(', ', array_map(function ($session){
-											$to_year = intval($session->session_code) + 1;
-											return $session->session_code . '-' . substr($to_year, strlen($to_year)-2); 
-										}, (array)$delivery->delivery_sessions));?></li>
-									</ul>
-								</div>
-							</aside>
-						</div>
+									<div class="key-facts">
+										<ul>
+											<li>
+												<strong>Term:</strong> <?php echo $delivery->term; ?> - <a href="<?php echo $delivery->delivery_url; ?>">View timetable</a>
+											</li>
+											<li><strong>Level:</strong> <?php echo $delivery->credit_level; ?> </li>
+											<li><strong>Credits (ECTS):</strong> <?php echo $delivery->credit_amount; ?></li>
+											<?php if (isset($delivery->convenor) && !empty(trim($delivery->convenor))): ?>
+												<li><strong>Convenor:</strong> <?php echo $delivery->convenor; ?></li>
+											<?php endif; ?>
+											<li><strong>Years:</strong> <?php echo implode(', ', array_map(function ($session){
+												$to_year = intval($session->session_code) + 1;
+												return $session->session_code . '-' . substr($to_year, strlen($to_year)-2); 
+											}, (array)$delivery->delivery_sessions));?></li>
+										</ul>
+									</div>
+								</aside>
+							</div>
+						<?php endif; ?>
 					<?php endforeach; ?>
 				</div>
 			</div><!-- /span -->
