@@ -159,7 +159,9 @@
 										</li>
 										<li><strong>Level:</strong> <?php echo $delivery->credit_level; ?> </li>
 										<li><strong>Credits (ECTS):</strong> <?php echo $delivery->credit_amount; ?></li>
-										<li><strong>Convenor:</strong> <?php echo $delivery->convenor; ?></li>
+										<?php if (isset($delivery->convenor) && !empty(trim($delivery->convenor))): ?>
+											<li><strong>Convenor:</strong> <?php echo $delivery->convenor; ?></li>
+										<?php endif; ?>
 										<li><strong>Years:</strong> <?php echo implode(', ', array_map(function ($session){
 											$to_year = intval($session->session_code) + 1;
 											return $session->session_code . '-' . substr($to_year, strlen($to_year)-2); 
