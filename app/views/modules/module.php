@@ -50,7 +50,7 @@
 
 					<section id="details">
 						<h2>Details</h2>
-						<?php if (isset($module->collections)): ?>
+						<?php if (isset($module->collections) && !empty($module->collections)): ?>
 							<h3>This module appears in:</h3>
 							<ul>
 								<?php foreach ($module->collections as $collection): ?>
