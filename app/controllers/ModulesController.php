@@ -116,9 +116,9 @@ class ModulesController {
 	 *  
 	 */
 	protected function getModuleList($collection = 'all'){
-
 		// Grab first page of datatable
 		$data = Cache::load(KENT_API_URL . "v1/modules/collection/" . $collection);
+
 		return json_decode($data['data']);
 	}
 }
