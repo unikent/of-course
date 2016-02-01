@@ -24,8 +24,8 @@
 				</thead>
 				<?php foreach($modules->modules as $module){ ?>
 					<tr>
-						<td><a href="<?php echo $module->code ?>"><?php echo $module->code ?></a></td>
-						<td><a href="<?php echo $module->code ?>"><?php echo $module->title ?></a></td>
+						<td><a href="<?php echo Flight::url("modules/module/".$module->code); ?>"><?php echo $module->code ?></a></td>
+						<td><a href="<?php echo Flight::url("modules/module/".$module->code); ?>"><?php echo $module->title ?></a></td>
 						<td><?php echo $module->sds_code ?></td>
 					</tr>
 				<?php } ?>	
@@ -89,11 +89,11 @@
 		if(table.attr('data-ready') == 'true') return;
 		table.attr('data-ready', 'true');
 
-		module_datatable(table, {"api_endpoint": "<?php echo KENT_API_URL;?>v1/modules/collection/" + table.attr("data-collection")  });
+		module_datatable(table, {"api_endpoint": "<?php echo KENT_API_URL;?>v1/modules/collection/" + table.attr("data-collection"), base_url: "<?php Flight::url('modules/module/'); ?>" });
 	});
 
 	// Init first table
-	module_datatable($(".dataTable_all"), {"deferLoading":true, "api_endpoint": "<?php echo KENT_API_URL;?>v1/modules/collection/all"});
+	module_datatable($(".dataTable_all"), {"deferLoading":true, "api_endpoint": "<?php echo KENT_API_URL;?>v1/modules/collection/all", base_url: "<?php Flight::url('modules/module/'); ?>" });
 
 	// Trigger click on load (if hash is in use), so tabbed tables work
 	var hash = window.location.hash;

@@ -4,6 +4,6 @@
 
 <ul>
 	<?php foreach($collections as $code => $collection){ ?>
-			<li><a href="<?php echo $collection->code ?>"><?php echo $collection->title ?></a></li>	
+			<li><a href="<?php echo Flight::url("modules/collection/".$collection->code); ?>"><?php echo $collection->title ?></a></li>	
 	<?php } ?>	
 </ul>
