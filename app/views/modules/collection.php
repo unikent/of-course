@@ -1,6 +1,6 @@
 <h1>Module Catalogue</h1>
 
-<h2>Title: <?php echo $modules->title;?> </h2>
+<h2><?php echo $modules->title;?> </h2>
 
 <table class="dataTable_main table table-striped" data-count="<?php echo $modules->total; ?>" data-ready="true">
 	<thead>
