@@ -89,9 +89,11 @@ Flight::route('/@level:undergrad|postgrad|ug|pg/@year:[0-9]+/@id:[0-9]+/@slug', 
  *
  */
 Flight::route('/modules', array($modules, 'index'));
-Flight::route('/modules/collections', array($modules,'collections_list'));
-Flight::route('/modules/collections/@collection', array($modules,'collection'));
+Flight::route('/modules/collection', array($modules,'collections'));
+Flight::route('/modules/collection/@collection', array($modules,'collection'));
 Flight::route('/modules/@code', array($modules,'view'));
+
+
 Flight::route('/modulecatalogue', array($modules,'legacy_url'));
 Flight::route('/modulecatalogue/index.html', array($modules,'legacy_url'));
 Flight::route('/modulecatalogue/modules/@code', array($modules,'legacy_url'));

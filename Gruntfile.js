@@ -45,7 +45,8 @@ module.exports = function(grunt) {
 		  development: {
 		    files: {
 		      './public/css/courses.css': './public/css/courses.less',
-		      './public/css/courses-form.css': './public/css/courses-form.less'
+		      './public/css/courses-form.css': './public/css/courses-form.less',
+		      './public/css/module-catalogue.css': './public/css/module-catalogue.less',
 		    }
 		  },
 
