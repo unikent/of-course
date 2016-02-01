@@ -3,12 +3,19 @@
 		<div class="row-fluid">
 			<div class="span7">
 				<h1>
-					<?php echo $module->title; ?> - <?php echo $module->sds_code; ?>
+					<?php echo $module->title; ?> - <?php echo $module->code; ?> (<?php echo $module->sds_code; ?>)
 				</h1>
-				<h2 class='location-header' ><?php echo $module->code; ?></h2>
 			</div>
 			<div class="span5">
-				Search box
+				<div class="search_box pull-left">
+					<div class="quickspot-container panel">
+						<label for="modulesearch" class="screenreader-only">Search modules by code or keyword</label>
+						<input class="input-xlarge" id="modulesearch" type="text" name="search" placeholder="Search modules by code or keyword" autocomplete="off" tabindex="0">
+						<button class="btn" name="quick-spot-search">search</button>
+						<div class="quickspot-results" tabindex="100" style="display: none;"></div>
+					</div>  
+
+				</div>
 			</div>
 		</div>
 	</header>
