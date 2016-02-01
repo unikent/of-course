@@ -26,7 +26,8 @@ class ModulesController {
 	{
 		$module = $this->getModule($module_code);
 
-		if($module->code !== $module->sds_code){
+		// If url uses "sds code"
+		if(strtoupper($module_code) !== strtoupper($module->sds_code)){
 			Flight::redirect("module/".$module->code);
 		}
 
