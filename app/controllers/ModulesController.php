@@ -3,12 +3,21 @@
 use unikent\libs\Cache;
 use unikent\libs\Logger;
 
+/**
+ * Module controller
+ * runs logic for module catalog replacement 
+ */
 class ModulesController {
 
+	/**
+	 * Home
+	 *  
+	 */
 	public function index()
 	{	
 		$list = $this->getModuleList();
 
+ 		// Home page collections
 		$collections = array(
 			"humanities" => array("name" => "Humanities (UG)", "collection" => "H1"),
 			"sciences" => array("name" => "Sciences (UG)", "collection" => "SPS1"),
@@ -22,6 +31,10 @@ class ModulesController {
 		return Flight::layout("modules/index", array('modules' => $list, 'collections' => $collections), "modules/layout");
 	}
 
+	/**
+	 * View a module
+	 *  
+	 */
 	public function view($module_code)
 	{
 		$module = $this->getModule($module_code);
@@ -34,6 +47,10 @@ class ModulesController {
 		return Flight::layout("modules/module", $module, "modules/layout");
 	}
 
+	/**
+	 * handle legacy URL
+	 *  
+	 */
 	public function legacy_url($module_code = null)
 	{
 		// Redirect to module catalogue index page
@@ -54,11 +71,19 @@ class ModulesController {
 
 	}
 
+	/**
+	 * Get module data from API
+	 *  
+	 */
 	protected function getModule($code){
 		$data = Cache::load(KENT_API_URL . "v1/modules/module/" . $code);
 		return json_decode($data['data']);
 	}
 
+	/**
+	 * Get module list data from API
+	 *  
+	 */
 	protected function getModuleList($collection = 'all'){
 
 		// Grab first page of datatable
