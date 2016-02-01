@@ -12,22 +12,8 @@
 			<meta name="description" content="<?php echo $meta['description']; ?>" />
 		<?php endif; ?>
 
-		<link media='screen' type='text/css' rel='stylesheet' href='<?php echo Flight::asset('css/DT_bootstrap.css'); ?>' />
-		<style>
-			.container .dataTables_filter {
-				padding: 10px;
-				background-color: #fbf7eb;
-				margin-bottom:10px;
-			}
-			.container .dataTables_filter label {
-				float:none;
-				margin-bottom: 0;
-			}
-			.container .dataTables_filter label input {
-				border-radius: 0;
-				margin-left:10px;
-			}
-		</style>
+		<link media='screen' type='text/css' rel='stylesheet' href='<?php echo Flight::asset('css/module-catalogue.css'); ?>' />
+
 		<!-- InstanceEndEditable -->
 	</kentMeta>
 	<kentContent>
