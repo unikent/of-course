@@ -25,16 +25,9 @@
 </kentContent>
 <kentScripts>
   	<script type="text/javascript" charset="utf8" src="<?php echo Flight::asset('js/build/moduletable.min.js'); ?>"></script>
- 	<script>
-	$('.dataTable').DataTable({
-	//	"sPaginationType": "bootstrap",
-		"iDisplayLength": 50,
-		"serverSide": false,
-	 	"sDom": "ft<'muted pull-right'i><'clearfix'>p", 
- 	});
- 	</script>
+ 	
 
-  </kentScripts>
+</kentScripts>
 
 </kentWrapper>
 <!-- InstanceEnd -->

@@ -26,7 +26,7 @@ module.exports = function(grunt) {
 				files: {
 		        	'public/js/build/<%= pkg.name %>.min.js': ['public/js/*.js'],
 		        	'public/js/build/coursetable.min.js': ['public/js/Scripts/datatables.js', 'public/js/Scripts/course-table.js'],
-		        	'public/js/build/moduletable.min.js': ['public/js/Scripts/datatables.js', 'public/js/Scripts/module-table.js']
+		        	'public/js/build/moduletable.min.js': ['public/js/Scripts/datatables.js', 'public/js/DT_bootstrap.js', 'public/js/Scripts/module-table.js']
 		      	}
 			}
 		},
