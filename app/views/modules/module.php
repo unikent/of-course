@@ -54,7 +54,7 @@
 							<h3>This module appears in:</h3>
 							<ul>
 								<?php foreach ($module->collections as $collection): ?>
-									<li><a href="<?php echo Flight::url("modules/collections/{$collection->code}"); ?>" /><?php echo $collection->title ?></a></li>
+									<li><a href="<?php echo Flight::url("/modules/collections/{$collection->code}"); ?>" /><?php echo $collection->title ?></a></li>
 								<?php endforeach ?>
 							</ul>
 						<?php endif ?>
