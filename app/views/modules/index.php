@@ -2,61 +2,56 @@
 
 <p>The Module catalog contains information about academic modules taught at the university. <a href="#">Disclaimer</a>.</p>
 
-<div class="daedalus-tabs">
+<div class="daedalus-tabs module_tabs">
 	<ul class="nav nav-tabs">
 		<li><a href="#all">All collections</a></li>
-		<li><a href="#humanities">Humanities (UG)</a></li>
-		<li><a href="#sciences">Sciences (UG)</a></li>
-		<li><a href="#social">Social Sciences (UG)</a></li>
-		<li><a href="#postgraduate">Postgraduate</a></li>
-		<li><a href="#brussels">Brussels</a></li>
-		<li><a href="#paris">Paris</a></li>
-		<li><a href="#wild">Wild Modules</a></li>
+
+		<?php foreach($collections as $code => $collection){ ?>
+			<li><a href="#<?php echo $code;?>"><?php echo $collection['name'];?></a></li>
+		<?php } ?>
 	</ul>
 	<div class="tab-content">
 		<section id="all">
 			<h2>Overview</h2>
 			
-			<table class="dataTable table table-striped">
+			<table class="dataTable_all table table-striped" data-count="<?php echo $modules->total; ?>" data-ready="true">
 				<thead>
 					<tr>
+						<th>Module Code</th>
 						<th>Module title</th>
-						<th>Module codes</th>
+						<th>Alternate module code</th>
 					</tr>
 				</thead>
-
-				<?php foreach($modules->modules as $module): ?>
+				<?php foreach($modules->modules as $module){ ?>
 					<tr>
-						<td><?php echo $module->title ?></td>
-						<td><?php echo $module->code ?>, <?php echo $module->sds_code ?></td>
+						<td><a href="<?php echo $module->code ?>"><?php echo $module->code ?></a></td>
+						<td><a href="<?php echo $module->code ?>"><?php echo $module->title ?></a></td>
+						<td><?php echo $module->sds_code ?></td>
 					</tr>
-				<?php endforeach; ?>
-				
+				<?php } ?>	
 			</table>
+		</section>
 
+		<?php foreach($collections as $code => $collection){ ?>
+			<section id="<?php echo $code;?>">
+				<h2><?php echo $collection['name'];?></h2>
 
-		</section>
-		<section id="humanities">
-			<h2>Humanities</h2>
-		</section>
-		<section id="sciences">
-			<h2>Sciences (UG)</h2>
-		</section>
-		<section id="social">
-			<h2>Social Sciences (UG)</h2>
-		</section>
-		<section id="postgraduate">
-			<h2>Postgraduate</h2>
-		</section>
-		<section id="brussels">
-			<h2>Brussels</h2>
-		</section>
-		<section id="paris">
-			<h2>Paris</h2>
-		</section>
-		<section id="wild">
-			<h2>Wild Modules</h2>
-		</section>
+				<table class="dataTable_<?php echo $code;?> table table-striped" data-collection="<?php echo $collection['collection'];?>">
+					<thead>
+						<tr>
+							<th>Module Code</th>
+							<th>Module title</th>
+							<th>Alternate module code</th>
+						</tr>
+					</thead>
+					<tr>
+						<td>Loading....</td>
+						<td></td>
+						<td></td>
+					</tr>
+				</table>
+			</section>
+		<?php } ?>
 	</div>
 </div>
 
@@ -78,3 +73,24 @@
 		<p>Find out why our students love studying at Kent.</p>
 	</div>
 </div>
+
+
+<kentScripts>
+	<script type="text/javascript" charset="utf8" src="<?php echo Flight::asset('js/build/moduletable.min.js'); ?>"></script>
+<script>
+	$(".module_tabs .nav a").click(function(){
+		var tab_name = $(this).attr("href").substring(1);
+		var table = $(".dataTable_" +  tab_name);
+
+		// Don't double init
+		if(table.attr('data-ready') == 'true') return;
+		table.attr('data-ready', 'true');
+
+		module_datatable(table, {"api_endpoint": "<?php echo KENT_API_URL;?>v1/modules/collection/" + table.attr("data-collection")  });
+	});
+
+	// Init first table
+	module_datatable($(".dataTable_all"), {"deferLoading":true, "api_endpoint": "<?php echo KENT_API_URL;?>v1/modules/collection/all"});
+
+ </script>
+</kentScripts>

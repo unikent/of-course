@@ -1,4 +1,4 @@
-<?php 
+<?php
 // Setup main object
 $courses = new CoursesController();
 $modules = new ModulesController();
@@ -68,18 +68,18 @@ Flight::route('/@level:undergraduate|postgraduate/@id:[0-9]+', array($courses, '
 // These URLS look like: /undergrad/subjects/<subject name>/<slug>
 Flight::route('/@level:undergrad|postgrad/subjects/[A-Za-z0-9\-_]+/@slug', function($level, $slug) use($courses){
 	$courses->redirect_handler($slug, $level);
-}); 
+});
 // Malformed ug/pg levels for search
 Flight::route('/@level:undergrad|postgrad|ug|pg/@year:[0-9]+/search', function($level, $year) use($courses){
 	$courses->redirect_handler("search", $level, $year);
-}); 
+});
 Flight::route('/@level:undergrad|postgrad|ug|pg/search', function($level, $year) use($courses){
 	$courses->redirect_handler("search", $level);
-}); 
+});
 // Malformed ug/pg levels for programmes
 Flight::route('/@level:undergrad|postgrad|ug|pg/@id:[0-9]+/@slug', function($level, $id, $slug) use($courses){
 	$courses->redirect_handler($slug, $level, null, $id);
-}); 
+});
 Flight::route('/@level:undergrad|postgrad|ug|pg/@year:[0-9]+/@id:[0-9]+/@slug', function($level, $year, $id, $slug) use($courses){
 	$courses->redirect_handler($slug, $level, $year, $id);
 });
@@ -92,4 +92,7 @@ Flight::route('/modules', array($modules, 'index'));
 Flight::route('/modules/collections', array($modules,'collections_list'));
 Flight::route('/modules/collections/@collection', array($modules,'collection'));
 Flight::route('/modules/@code', array($modules,'view'));
+Flight::route('/modulecatalogue', array($modules,'legacy_url'));
+Flight::route('/modulecatalogue/index.html', array($modules,'legacy_url'));
 Flight::route('/modulecatalogue/modules/@code', array($modules,'legacy_url'));
+Flight::route('/modulecatalogue/*', array($modules,'legacy_url'), true);
