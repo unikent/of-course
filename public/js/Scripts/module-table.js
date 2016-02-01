@@ -2,8 +2,10 @@ function module_datatable(table, options){
 	// Options
 	var options = $.extend( {}, {
 		api_endpoint: "https://api-test.kent.ac.uk/api/v1/modules/collection/all",
+		base_url: "https://kent.ac.uk/courses/modules/module",
 		deferLoading: false,
 	}, options );
+
 	// configure table
 	table.DataTable({
 		"sPaginationType": "bootstrap",
@@ -45,8 +47,8 @@ function module_datatable(table, options){
 	 			$("#collection_title_"+table.attr("data-collection")).text(json.title);
 
 	 		 	for(var i in json.data){
-	 		 		json.data[i].title = '<a href="' + json.data[i].code + '">'  + json.data[i].title +'</a>';
-	 		 		json.data[i].code = '<a href="' + json.data[i].code + '">'  + json.data[i].code +'</a>';
+	 		 		json.data[i].title = '<a href="' + options.base_url + json.data[i].code + '">'  + json.data[i].title +'</a>';
+	 		 		json.data[i].code = '<a href="' + options.base_url + json.data[i].code + '">'  + json.data[i].code +'</a>';
 	 		 	}
 			    return json.data;
 			}

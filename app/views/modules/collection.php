@@ -12,8 +12,8 @@
 	</thead>
 	<?php foreach($modules->modules as $module){ ?>
 		<tr>
-			<td><a href="<?php echo $module->code ?>"><?php echo $module->code ?></a></td>
-			<td><a href="<?php echo $module->code ?>"><?php echo $module->title ?></a></td>
+			<td><a href="<?php echo Flight::url("modules/module/".$module->code); ?>"><?php echo $module->code ?></a></td>
+			<td><a href="<?php echo Flight::url("modules/module/".$module->code); ?>"><?php echo $module->title ?></a></td>
 			<td><?php echo $module->sds_code ?></td>
 		</tr>
 	<?php } ?>	
