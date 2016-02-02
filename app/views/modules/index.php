@@ -34,7 +34,7 @@
 
 		<?php foreach($collections as $code => $collection){ ?>
 			<section id="<?php echo $code;?>">
-			<a href='<?php echo Flight::url("modules/collection");?>' class="pull-right">Browses all collections &raquo;</a>
+			<a href='<?php echo Flight::url("modules/collection");?>' class="pull-right">Browse all collections &raquo;</a>
 				<h2 id="collection_title_<?php echo $collection['collection'];?>"><?php echo $collection['name'];?></h2>
 
 
