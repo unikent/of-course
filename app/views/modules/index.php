@@ -1,6 +1,6 @@
 <h1>Module Catalogue</h1>
 
-<p>The Module catalog contains information about academic modules taught at the university. <a href="<?php echo Flight::url("modules/disclaimer.html"); ?>">Disclaimer</a>.</p>
+<p>The Module catalog contains information about academic modules taught at the university. <a href="<?php echo Flight::url("modules/disclaimer"); ?>">Disclaimer</a>.</p>
 
 <div class="daedalus-tabs module_tabs">
 	<ul class="nav nav-tabs">
