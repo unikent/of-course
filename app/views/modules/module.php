@@ -152,9 +152,7 @@
 
 				<div class="side-panel">
 					<?php foreach ($module->deliveries as $delivery): ?>
-						<?php if (array_reduce((array)$delivery->delivery_sessions, function ($carry, $session){
-							return $carry || $session->running;
-						}, false)): ?>
+						<?php if (!empty($delivery->delivery_sessions)): ?>
 							<div class="key-facts-block tertiary-tier highlighted no-border">
 								<aside class="key-facts-container">
 									<h2><?php echo $delivery->campus; ?></h2>
@@ -170,8 +168,8 @@
 												<li><strong>Convenor:</strong> <?php echo $delivery->convenor; ?></li>
 											<?php endif; ?>
 											<li><strong>Years:</strong> <?php echo implode(', ', array_map(function ($session){
-												$to_year = intval($session->session_code) + 1;
-												return $session->session_code . '-' . substr($to_year, strlen($to_year)-2); 
+												$to_year = intval($session) + 1;
+												return $session . '-' . substr($to_year, strlen($to_year)-2); 
 											}, (array)$delivery->delivery_sessions));?></li>
 										</ul>
 									</div>
