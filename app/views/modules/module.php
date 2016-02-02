@@ -155,7 +155,7 @@
 						<?php if (array_reduce((array)$delivery->delivery_sessions, function ($carry, $session){
 							return $carry || $session->running;
 						}, false)): ?>
-							<div class="key-facts-block">
+							<div class="key-facts-block tertiary-tier highlighted no-border" style="padding:10px;">
 								<aside class="key-facts-container">
 									<h2><?php echo $delivery->campus; ?></h2>
 
@@ -164,9 +164,9 @@
 											<li>
 												<strong>Term:</strong> <?php echo $delivery->term; ?> - <a href="<?php echo $delivery->delivery_url; ?>">View timetable</a>
 											</li>
-											<li><strong>Level:</strong> <?php echo $delivery->credit_level; ?> </li>
+											<li><strong>Level:</strong> <a href="#" data-toggle="popover" data-trigger="focus" tabindex="0" role="button" id="level-info"><?php echo $delivery->credit_level; ?></a></li>
 											<li><strong>Credits (ECTS):</strong> <?php echo $delivery->credit_amount; ?></li>
-											<?php if (isset($delivery->convenor) && !empty(trim($delivery->convenor))): ?>
+											<?php if (isset($delivery->convenor) && !empty($delivery->convenor)): ?>
 												<li><strong>Convenor:</strong> <?php echo $delivery->convenor; ?></li>
 											<?php endif; ?>
 											<li><strong>Years:</strong> <?php echo implode(', ', array_map(function ($session){
@@ -225,8 +225,12 @@
 		  window.location.href = "<?php echo Flight::url('modules/');?>?search=" + $("#modulesearch").val();
 		});
 
+		$('#level-info').popover({
+		    content: 'Hello world',
+		    placement:'top',
+		    html:true
+		});
 
-		// any scripts
 	</script>
 </kentScripts>
 
