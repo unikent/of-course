@@ -155,7 +155,7 @@
 						<?php if (array_reduce((array)$delivery->delivery_sessions, function ($carry, $session){
 							return $carry || $session->running;
 						}, false)): ?>
-							<div class="key-facts-block tertiary-tier highlighted no-border" style="padding:10px;">
+							<div class="key-facts-block tertiary-tier highlighted no-border">
 								<aside class="key-facts-container">
 									<h2><?php echo $delivery->campus; ?></h2>
 
@@ -164,7 +164,7 @@
 											<li>
 												<strong>Term:</strong> <?php echo $delivery->term; ?> - <a href="<?php echo $delivery->delivery_url; ?>">View timetable</a>
 											</li>
-											<li><strong>Level:</strong> <a href="#" data-toggle="popover" data-trigger="focus" tabindex="0" role="button" id="level-info"><?php echo $delivery->credit_level; ?></a></li>
+											<li><strong>Level:</strong> <a href="#" data-toggle="popover" data-trigger="focus" tabindex="0" role="button" data-content="<?php echo $delivery->credit_level_desc; ?>" id="level-info"><?php echo $delivery->credit_level; ?></a></li>
 											<li><strong>Credits (ECTS):</strong> <?php echo $delivery->credit_amount; ?></li>
 											<?php if (isset($delivery->convenor) && !empty($delivery->convenor)): ?>
 												<li><strong>Convenor:</strong> <?php echo $delivery->convenor; ?></li>
@@ -226,7 +226,6 @@
 		});
 
 		$('#level-info').popover({
-		    content: 'Hello world',
 		    placement:'top',
 		    html:true
 		});
