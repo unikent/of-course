@@ -243,10 +243,10 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 								$pathParts = pathinfo($file);
 								$fileType = strtoupper($pathParts['extension']);
 								?>
-								<div class="key-facts-block">
-									<aside class="key-facts-container">
+								<div class="subject-leaflets-block">
+									<aside class="subject-leaflets-container">
 										<h2>Subject leaflets</h2>
-										<div class="key-facts">
+										<div class="subject-leaflets">
 											<ul>
 												<li>
 													<a href="<?php echo $course->subject_leaflet[0]->tracking_code ?>">
@@ -267,7 +267,7 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 											</ul>
 										</div>
 									</aside>
-								</div><!-- /.key-facts-block -->
+								</div><!-- /.subject-leaflets-block -->
 
 							<?php endif; ?>
 

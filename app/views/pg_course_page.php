@@ -287,10 +287,10 @@ else: ?>
 			<?php endif; ?>
 
 			<?php if(!empty($course->programme_leaflet)): ?>
-				<div class="key-facts-block">
-					<aside class="key-facts-container">
+				<div class="subject-leaflets-block">
+					<aside class="subject-leaflets-container">
 						<h2>Subject leaflets</h2>
-						<div class="key-facts">
+						<div class="subject-leaflets">
 							<ul>
 								<?php foreach ($course->programme_leaflet as $leaflet):
 									$file = $leaflet->tracking_code;
@@ -304,7 +304,7 @@ else: ?>
 							</ul>
 						</div>
 					</aside>
-				</div><!-- /.key-facts-block -->
+				</div><!-- /.subject-leaflets-block -->
 
 
 		<?php endif; ?>
