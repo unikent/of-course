@@ -57,3 +57,49 @@
 		width: 100%;
 	}
 }
+
+#level-info {
+	cursor: help;
+	outline:none;
+	&:hover,&:focus,&:active{
+		outline: none;
+	}
+}
+
+.daedalus .popover{
+	background-color:#333333;
+	border-radius: 0;
+
+	.popover-title{
+		padding-right: 30px;
+		background-color: #333333;
+		font-size: 14px;
+		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, sans-serif;
+		font-weight: bold;
+		color: white;
+		position: relative;
+		border:none;
+		&:after{
+			content: "\f00d";
+			font-family: "FontAwesome",sans-serif;
+			position: absolute;
+			right:6px;
+			top:6px;
+			font-size: 1.2em;
+			opacity: 0.4;
+		}
+	}
+
+	.popover-content, a{
+		color: white;
+		font-size: 14px;
+		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, sans-serif;
+	}
+	.arrow:after{
+		border-top-color: #333333;
+	}
+}
+
+.key-facts-block {
+	padding:20px;
+}
