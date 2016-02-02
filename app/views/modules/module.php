@@ -184,12 +184,12 @@
 
 </article>
 <kentScripts>
-	<script src='//localhost/pantheon/assets/javascript/daedalus/quickspot.js' type='text/javascript'></script>
+	<script src='//static.kent.ac.uk/pantheon/javascript/daedalus/quickspot.min.js' type='text/javascript'></script>
 	<script>
 		/** Quick search  */
 		var qs = quickspot.attach({
 			// Basic
-			"url":"https://api-test.kent.ac.uk/api/v1/modules/collection/all/limit/9999",
+			"url":"<?php echo KENT_API_URL; ?>v1/modules/collection/all/limit/9999",
 			"target":"modulesearch",
 			"search_on": ["title", "code", "sds_code"],
 			"disable_occurrence_weighting": true,
