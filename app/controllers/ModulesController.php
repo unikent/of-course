@@ -73,6 +73,14 @@ class ModulesController {
 	}
 
 	/**
+	 * Disclaimer copy
+	 *  
+	 */
+	public function disclaimer(){
+		return Flight::layout("modules/disclaimer", array(), "modules/layout");
+	}
+
+	/**
 	 * handle legacy URL
 	 *  
 	 */
