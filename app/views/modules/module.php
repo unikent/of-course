@@ -24,40 +24,51 @@
 		<div class="row-fluid">
 			<div class="span12">
 				<ul class="nav nav-tabs">
+					<?php $data_found = false; if (isset($module->synopsis) && !empty($module->synopsis)){ $data_found = true; } ?>
 					<li><a href="#overview">Overview</a></li>
+					<?php if ((isset($module->collections) && !empty($module->collections)) ||
+								(isset($module->restrictions) && !empty($module->restrictions)) ||
+								(isset($module->contact_hours) && !empty($module->contact_hours)) ||
+								(isset($module->availability) && !empty($module->availability)) ||
+								(isset($module->cost) && !empty($module->cost))){ $data_found = true; ?>
 					<li><a href="#details">Details</a></li>
-					<?php if (isset($module->method_of_assessment) && !empty($module->method_of_assessment)): ?>
+					<?php } ?>
+					<?php if (isset($module->method_of_assessment) && !empty($module->method_of_assessment)){ $data_found = true; ?>
 					<li><a href="#method_of_assessment">Method of assessment</a></li>
-					<?php endif; ?>
-					<?php if (isset($module->preliminary_reading) && !empty($module->preliminary_reading)): ?>
+					<?php } ?>
+					<?php if (isset($module->preliminary_reading) && !empty($module->preliminary_reading)){ $data_found = true; ?>
 					<li><a href="#preliminary_reading">Preliminary reading</a></li>
-					<?php endif; ?>
-					<?php if (isset($module->learning_outcome) && !empty($module->learning_outcome)): ?>
+					<?php } ?>
+					<?php if (isset($module->learning_outcome) && !empty($module->learning_outcome)){ $data_found = true; ?>
 					<li><a href="#learning_outcomes">Learning outcomes</a></li>
-					<?php endif; ?>
-					<?php if (isset($module->progression) && !empty($module->progression)): ?>
+					<?php } ?>
+					<?php if (isset($module->progression) && !empty($module->progression)){ $data_found = true; ?>
 					<li><a href="#progression">Progression</a></li>
-					<?php endif; ?>
-					<?php if (isset($module->pre_requisite) && !empty($module->pre_requisite)): ?>
+					<?php } ?>
+					<?php if (isset($module->pre_requisite) && !empty($module->pre_requisite)){ $data_found = true; ?>
 					<li><a href="#pre_requisits">Pre-requisits</a></li>
-					<?php endif; ?>
+					<?php } ?>
 				</ul>
-			</div>
-			<!-- /span -->
+			</div><!-- /span -->
 		</div><!-- /row -->
 
 		<div class="row-fluid">
 			<div class="span7">
 				<div class="tab-content">
 					<section id="overview">
-						<h2>Overview</h2>
 						<?php if (isset($module->synopsis) && !empty($module->synopsis)): ?>
+							<h2>Overview</h2>
 							<?php echo $module->synopsis; ?>
-						<?php else: ?>
-							<?php echo 'No overview available' ?>
+						<?php endif; ?>
+						<?php if (!$data_found): ?>
+							<p>Sorry, no data found for this module</p>
 						<?php endif; ?>
 					</section>
-
+					<?php if ((isset($module->collections) && !empty($module->collections)) ||
+								(isset($module->restrictions) && !empty($module->restrictions)) ||
+								(isset($module->contact_hours) && !empty($module->contact_hours)) ||
+								(isset($module->availability) && !empty($module->availability)) ||
+								(isset($module->cost) && !empty($module->cost))): ?>
 					<section id="details">
 						<h2>Details</h2>
 						<?php if (isset($module->collections) && !empty($module->collections)): ?>
@@ -91,6 +102,7 @@
 							<p><?php echo $module->cost ?></p>
 						<?php endif; ?>
 					</section>
+					<?php endif; ?>
 
 					<?php if (isset($module->method_of_assessment) && !empty($module->method_of_assessment)): ?>
 					<section id="method_of_assessment">
