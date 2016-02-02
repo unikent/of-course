@@ -18,7 +18,7 @@
 		</h1>
 
 	</header>
-
+	<?php if (!empty($module->deliveries)): ?>
 	<div class="daedalus-tabs">
 		<div class="row-fluid">
 			<div class="span12">
@@ -182,6 +182,9 @@
 			</div><!-- /span -->
 		</div><!-- /row -->
 	</div><!-- /tabs -->
+	<?php else: ?>
+	<p>Sorry, this module isn't running currently.</p>
+	<?php endif; ?>
 
 </article>
 <kentScripts>
