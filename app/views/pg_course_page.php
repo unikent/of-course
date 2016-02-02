@@ -286,8 +286,28 @@ else: ?>
 				</div>
 			<?php endif; ?>
 
+            <?php if(!empty($course->programme_leaflet)): ?>
+                <div class="key-facts-block">
+                    <aside class="key-facts-container">
+                        <h2>Subject leaflets</h2>
+                        <div class="key-facts">
+                            <ul>
+                                <?php foreach ($course->programme_leaflet as $leaflet):
+                                    $file = $leaflet->tracking_code;
+                                    $pathParts = pathinfo($file);
+                                    $fileType = strtoupper($pathParts['extension']);
+                                ?>
+                                <li>
+                                    <a href="<?php echo $leaflet->tracking_code ?>"><?php echo $leaflet->name ?> (<?php echo $fileType ?>)</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
+                </div><!-- /.key-facts-block -->
+                <?php endforeach; ?>
 
-		</div>
+        <?php endif; ?>
+        </div>
 	</div>
 	<!-- /span -->
 	</div>
