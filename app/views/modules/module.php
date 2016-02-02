@@ -201,7 +201,7 @@
 			// Extend
 			"click_handler":function(itm){
 				//Send em to page
-				document.location = '/courses/undergraduate/'+itm.id+'/'+itm.slug;
+				document.location = '<?php echo Flight::url("modules/module/"); ?>'+itm.code;
 			},
 			"display_handler": function(itm,qs){
 				// Highlight searched word
@@ -211,13 +211,18 @@
 				return "<a class='quickspot-result selected'>Press enter to search...</a>";
 			},
 			"no_results_click": function (value, qs){
-				var url = "https://www.kent.ac.uk/search/courses?q=" + value;
+				var url = "<?php echo Flight::url('modules/');?>?search=" + value;
 			    window.location.href = url;
 			},
 			"data_pre_parse": function(data, options){
 				return data.modules;
 			}
 		});
+		// Handle button
+		$('.quickspot-container button.btn').click(function(){ 
+		  window.location.href = "<?php echo Flight::url('modules/');?>?search=" + $("#modulesearch").val();
+		});
+
 
 		// any scripts
 	</script>
