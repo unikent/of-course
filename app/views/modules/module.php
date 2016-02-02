@@ -227,7 +227,7 @@
 		$('#level-info').popover({
 		    placement:'top',
 		    html:true
-		});
+		}).click(function(e){ e.preventDefault(); });
 
 	</script>
 </kentScripts>
