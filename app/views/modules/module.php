@@ -26,11 +26,21 @@
 				<ul class="nav nav-tabs">
 					<li><a href="#overview">Overview</a></li>
 					<li><a href="#details">Details</a></li>
+					<?php if (isset($module->method_of_assessment) && !empty($module->method_of_assessment)): ?>
 					<li><a href="#method_of_assessment">Method of assessment</a></li>
+					<?php endif; ?>
+					<?php if (isset($module->preliminary_reading) && !empty($module->preliminary_reading)): ?>
 					<li><a href="#preliminary_reading">Preliminary reading</a></li>
+					<?php endif; ?>
+					<?php if (isset($module->learning_outcome) && !empty($module->learning_outcome)): ?>
 					<li><a href="#learning_outcomes">Learning outcomes</a></li>
+					<?php endif; ?>
+					<?php if (isset($module->progression) && !empty($module->progression)): ?>
 					<li><a href="#progression">Progression</a></li>
+					<?php endif; ?>
+					<?php if (isset($module->pre_requisite) && !empty($module->pre_requisite)): ?>
 					<li><a href="#pre_requisits">Pre-requisits</a></li>
+					<?php endif; ?>
 				</ul>
 			</div>
 			<!-- /span -->
@@ -45,7 +55,7 @@
 							<?php echo $module->synopsis; ?>
 						<?php else: ?>
 							<?php echo 'No overview available' ?>
-						<?php endif ?>
+						<?php endif; ?>
 					</section>
 
 					<section id="details">
@@ -57,14 +67,14 @@
 									<li><a href="<?php echo Flight::url("modules/collection/{$collection->code}"); ?>" /><?php echo $collection->title ?></a></li>
 								<?php endforeach ?>
 							</ul>
-						<?php endif ?>
+						<?php endif; ?>
 
 						<?php if (isset($module->restrictions) && !empty($module->restrictions)): ?>
 							<h3>Restrictions</h3>
 							<p>
 								<?php echo $module->restrictions ?>
 							</p>
-						<?php endif ?>
+						<?php endif; ?>
 
 
 						<?php if (isset($module->contact_hours) && !empty($module->contact_hours)): ?>
@@ -72,7 +82,7 @@
 							<p>
 								<?php echo $module->contact_hours ?>
 							</p>
-						<?php endif ?>
+						<?php endif; ?>
 
 
 						<?php if (isset($module->availability) && !empty($module->availability)): ?>
@@ -80,14 +90,14 @@
 							<p>
 								<?php echo $module->availability ?>
 							</p>
-						<?php endif ?>
+						<?php endif; ?>
 
 						<?php if (isset($module->cost) && !empty($module->cost)): ?>
 							<h3>Cost</h3>
 							<p>
 								<?php echo $module->cost ?>
 							</p>
-						<?php endif ?>
+						<?php endif; ?>
 					</section>
 
 					<section id="method_of_assessment">
@@ -97,7 +107,7 @@
 								<?php echo $module->method_of_assessment ?>
 							<?php else: ?>
 								<?php echo 'No information available' ?>
-							<?php endif ?>
+							<?php endif; ?>
 						</p>
 					</section>
 
@@ -124,7 +134,7 @@
 									<p><?php echo $module->learning_outcome; ?></p>
 						<?php else: ?>
 							<?php echo 'No information available' ?>
-						<?php endif ?>
+						<?php endif; ?>
 					</section>
 
 					<section id="progression">
@@ -135,7 +145,7 @@
 							</p>
 						<?php else: ?>
 							<?php echo 'No progression information available' ?>
-						<?php endif ?>
+						<?php endif; ?>
 					</section>
 
 					<section id="pre_requisits">
@@ -145,7 +155,7 @@
 								<?php echo $module->pre_requisite ?>
 							<?php else: ?>
 								<?php echo 'No pre-requisites' ?>
-							<?php endif ?>
+							<?php endif; ?>
 						</p>
 					</section>
 
