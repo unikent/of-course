@@ -77,6 +77,7 @@
 									<li><a href="<?php echo Flight::url("modules/collection/{$collection->code}"); ?>" /><?php echo $collection->title ?></a></li>
 								<?php endforeach ?>
 							</ul>
+							<br>
 						<?php endif; ?>
 
 						<?php if (isset($module->restrictions) && !empty($module->restrictions)): ?>
