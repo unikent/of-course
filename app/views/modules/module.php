@@ -71,54 +71,39 @@
 
 						<?php if (isset($module->restrictions) && !empty($module->restrictions)): ?>
 							<h3>Restrictions</h3>
-							<p>
-								<?php echo $module->restrictions ?>
-							</p>
+							<p><?php echo $module->restrictions ?></p>
 						<?php endif; ?>
 
 
 						<?php if (isset($module->contact_hours) && !empty($module->contact_hours)): ?>
 							<h3>Contact hours</h3>
-							<p>
-								<?php echo $module->contact_hours ?>
-							</p>
+							<p><?php echo $module->contact_hours ?></p>
 						<?php endif; ?>
 
 
 						<?php if (isset($module->availability) && !empty($module->availability)): ?>
 							<h3>Availability</h3>
-							<p>
-								<?php echo $module->availability ?>
-							</p>
+							<p><?php echo $module->availability ?></p>
 						<?php endif; ?>
 
 						<?php if (isset($module->cost) && !empty($module->cost)): ?>
 							<h3>Cost</h3>
-							<p>
-								<?php echo $module->cost ?>
-							</p>
+							<p><?php echo $module->cost ?></p>
 						<?php endif; ?>
 					</section>
 
+					<?php if (isset($module->method_of_assessment) && !empty($module->method_of_assessment)): ?>
 					<section id="method_of_assessment">
 						<h2>Method of assessment</h2>
-						<p>
-							<?php if (isset($module->method_of_assessment) && !empty($module->method_of_assessment)): ?>
-								<?php echo $module->method_of_assessment ?>
-							<?php else: ?>
-								<?php echo 'No information available' ?>
-							<?php endif; ?>
-						</p>
+						<p><?php echo $module->method_of_assessment ?></p>
 					</section>
+					<?php endif; ?>
 
+					<?php if ((isset($module->preliminary_reading) && !empty($module->preliminary_reading)) || (isset($module->reading_lists))): ?>
 					<section id="preliminary_reading">
 						<h2>Preliminary reading</h2>
 						<?php if (isset($module->preliminary_reading) && !empty($module->preliminary_reading)): ?>
-							<p>
-								<?php echo $module->preliminary_reading; ?>
-							</p>
-						<?php else: ?>
-							<p>No preliminary reading available</p>
+							<p><?php echo $module->preliminary_reading; ?></p>
 						<?php endif; ?>
 
 						<?php if(isset($module->reading_lists)): ?>
@@ -127,37 +112,28 @@
 							<?php endforeach; ?>
 						<?php endif; ?>
 					</section>
+					<?php endif; ?>
 
+					<?php if (isset($module->learning_outcome) && !empty($module->learning_outcome)): ?>
 					<section id="learning_outcomes">
 						<h2>Learning outcomes</h2>
-						<?php if (isset($module->learning_outcome) && !empty($module->learning_outcome)): ?>
-									<p><?php echo $module->learning_outcome; ?></p>
-						<?php else: ?>
-							<?php echo 'No information available' ?>
-						<?php endif; ?>
+						<p><?php echo $module->learning_outcome; ?></p>
 					</section>
+					<?php endif; ?>
 
+					<?php if (isset($module->progression) && !empty($module->progression)): ?>
 					<section id="progression">
 						<h2>Progression</h2>
-						<?php if (isset($module->progression) && !empty($module->progression)): ?>
-							<p>
-								<?php echo $module->progression ?>
-							</p>
-						<?php else: ?>
-							<?php echo 'No progression information available' ?>
-						<?php endif; ?>
+						<p><?php echo $module->progression ?></p>
 					</section>
+					<?php endif; ?>
 
+					<?php if (isset($module->pre_requisite) && !empty($module->pre_requisite)): ?>
 					<section id="pre_requisits">
 						<h2>Pre-requisites</h2>
-						<p>
-							<?php if (isset($module->pre_requisite) && !empty($module->pre_requisite)): ?>
-								<?php echo $module->pre_requisite ?>
-							<?php else: ?>
-								<?php echo 'No pre-requisites' ?>
-							<?php endif; ?>
-						</p>
+						<p><?php echo $module->pre_requisite ?></p>
 					</section>
+					<?php endif; ?>
 
 				</div>
 			</div> <!-- /span -->
