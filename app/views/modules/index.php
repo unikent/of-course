@@ -24,8 +24,8 @@
 				</thead>
 				<?php $n=0; foreach($modules->modules as $module){ ?>
 					<tr class="<?php $n++;echo $n % 2 == 0 ? 'even' : 'odd';?> <?php echo $module->running?'running':'inactive'; ?>">
-						<td><?php if($module->running){ ?><a href="<?php echo Flight::url("modules/module/".$module->code); ?>"><?php echo $module->code ?></a><? }else{ echo $module->code; }?></td>
-						<td><?php if($module->running){ ?><a href="<?php echo Flight::url("modules/module/".$module->code); ?>"><?php echo $module->title ?></a><? }else{ echo $module->title . ' - <em>Module not currently running</em>'; }?></td>
+						<td><?php if($module->running){ ?><a href="<?php echo Flight::url("modules/module/".$module->code); ?>"><?php echo $module->code ?></a><?php }else{ echo $module->code; }?></td>
+						<td><?php if($module->running){ ?><a href="<?php echo Flight::url("modules/module/".$module->code); ?>"><?php echo $module->title ?></a><?php }else{ echo $module->title . ' - <em>Module not currently running</em>'; }?></td>
 						<td><?php echo $module->sds_code ?></td>
 					</tr>
 				<?php } ?>	

@@ -222,6 +222,7 @@
 				return data.modules;
 			}
 		});
+		qs.datastore.filter(function(o){return o.running===true});
 		// Handle button
 		$('.quickspot-container button.btn').click(function(){ 
 		  window.location.href = "<?php echo Flight::url('modules/');?>?search=" + $("#modulesearch").val();
