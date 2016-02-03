@@ -221,8 +221,11 @@
 			"data_pre_parse": function(data, options){
 				return data.modules;
 			}
+			"ready":function(){
+				qs.datastore.filter(function(o){return o.running===true});
+			}
 		});
-		qs.datastore.filter(function(o){return o.running===true});
+
 		// Handle button
 		$('.quickspot-container button.btn').click(function(){ 
 		  window.location.href = "<?php echo Flight::url('modules/');?>?search=" + $("#modulesearch").val();
