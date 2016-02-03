@@ -1,5 +1,5 @@
 <?php
-	use unikent\libs\Logger;
+	use unikent\libs\Log;
 
 	/**
 	 * Layout: applies layout wrapper to content
@@ -157,7 +157,7 @@
 
 
 		// Debug data if wanted.
-		Logger::debug("[Cache] ".(string)$request."<br/>
+		Log::debug("[Cache] ".(string)$request."<br/>
 			<br/>
 
 			Received headers:

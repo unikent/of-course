@@ -88,9 +88,15 @@ Flight::route('/@level:undergrad|postgrad|ug|pg/@year:[0-9]+/@id:[0-9]+/@slug', 
  * Module page routes
  *
  */
-Flight::route('/modules/', array($modules, 'index'));
-Flight::route('/modules/@code', array($modules,'view'));
+Flight::route('/modules', array($modules, 'index'));
+Flight::route('/modules/collection', array($modules,'collections'));
+Flight::route('/modules/collection/@collection', array($modules,'collection'));
+Flight::route('/modules/disclaimer', array($modules,'disclaimer'));
+Flight::route('/modules/module/@code', array($modules,'view'));
+
+
 Flight::route('/modulecatalogue', array($modules,'legacy_url'));
 Flight::route('/modulecatalogue/index.html', array($modules,'legacy_url'));
 Flight::route('/modulecatalogue/modules/@code', array($modules,'legacy_url'));
+Flight::route('/modulecatalogue/disclaimer.html', function (){ return Flight::redirect('/modules/disclaimer' . $page, 301); });
 Flight::route('/modulecatalogue/*', array($modules,'legacy_url'), true);

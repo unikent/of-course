@@ -1,0 +1,106 @@
+@import (less) 'DT_bootstrap.css';
+
+.container .dataTables_filter {
+	padding: 10px;
+	background-color: #fbf7eb;
+	margin-bottom:10px;
+	label {
+		float:none;
+		margin-bottom: 0;
+
+		 input {
+			border-radius: 0;
+			margin-left:10px;
+		}
+	}
+}
+
+// QS top corner styles
+.qs-search-box {
+	padding:20px;
+	background-color:#fbf7eb;
+	padding-bottom:15px;
+}
+.qs-search-box .quickspot-container input {
+	height: 28px; 
+	border-radius:0;
+	margin:0;
+}
+.qs-search-box button.btn {
+	margin:0;
+}
+.qs-search-box .quickspot-container .quickspot-results{
+	top:36px;
+	width: 290px;
+}
+.qs-search-box .quickspot-results .quickspot-result span {
+	color:#937227;
+	font-size:0.9em;
+}
+.qs-search-box .text-right > a {
+	font-size: 0.85em;
+    padding-top: 4px;
+}
+
+@media (max-width: 768px) {
+	.qs-search-box .quickspot-container input {
+		height: 37px; 
+	}
+}
+@media (max-width: 580px) {
+	.qs-search-box {
+		float:none;
+	}
+
+	.qs-search-box .quickspot-container .quickspot-results {
+		
+		width: 100%;
+	}
+}
+
+#level-info {
+	cursor: help;
+	outline:none;
+	&:hover,&:focus,&:active{
+		outline: none;
+	}
+}
+
+.daedalus .popover{
+	background-color:#333333;
+	border-radius: 0;
+
+	.popover-title{
+		padding-right: 30px;
+		background-color: #333333;
+		font-size: 14px;
+		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, sans-serif;
+		font-weight: bold;
+		color: white;
+		position: relative;
+		border:none;
+		&:after{
+			content: "\f00d";
+			font-family: "FontAwesome",sans-serif;
+			position: absolute;
+			right:6px;
+			top:6px;
+			font-size: 1.2em;
+			opacity: 0.4;
+		}
+	}
+
+	.popover-content, a{
+		color: white;
+		font-size: 14px;
+		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, sans-serif;
+	}
+	.arrow:after{
+		border-top-color: #333333;
+	}
+}
+
+.key-facts-block {
+	padding:20px;
+	margin-bottom: 2em;
+}
