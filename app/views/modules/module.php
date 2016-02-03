@@ -45,7 +45,7 @@
 					<li><a href="#progression">Progression</a></li>
 					<?php } ?>
 					<?php if (isset($module->pre_requisite) && !empty($module->pre_requisite)){ $data_found = true; ?>
-					<li><a href="#pre_requisits">Pre-requisits</a></li>
+					<li><a href="#pre_requisits">Pre-requisites</a></li>
 					<?php } ?>
 				</ul>
 			</div><!-- /span -->
