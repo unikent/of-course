@@ -221,7 +221,7 @@
 			"data_pre_parse": function(data, options){
 				return data.modules;
 			},
-			"ready":function(){
+			"loaded":function(){
 				qs.datastore.filter(function(o){return o.running===true});
 			}
 		});
