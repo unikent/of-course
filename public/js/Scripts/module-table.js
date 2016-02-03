@@ -47,8 +47,13 @@ function module_datatable(table, options){
 	 			$("#collection_title_"+table.attr("data-collection")).text(json.title);
 
 	 		 	for(var i in json.data){
-	 		 		json.data[i].title = '<a href="' + options.base_url + json.data[i].code + '">'  + json.data[i].title +'</a>';
-	 		 		json.data[i].code = '<a href="' + options.base_url + json.data[i].code + '">'  + json.data[i].code +'</a>';
+
+					if(json.data[i].DT_RowClass !=='inactive') {
+						json.data[i].title = '<a href="' + options.base_url + json.data[i].code + '">' + json.data[i].title + '</a>';
+						json.data[i].code = '<a href="' + options.base_url + json.data[i].code + '">' + json.data[i].code + '</a>';
+					}else{
+						json.data[i].title = json.data[i].title +  ' - <em>Module not currently running</em>';
+					}
 	 		 	}
 			    return json.data;
 			}
