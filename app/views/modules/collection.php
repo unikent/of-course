@@ -22,6 +22,15 @@
 <kentScripts>
 	<script type="text/javascript" charset="utf8" src="<?php echo Flight::asset('js/build/moduletable.min.js'); ?>"></script>
 	<script>
+
+	$('body').on('click' , ".dataTables_paginate a", function(e){
+		if(!$(this).closest('li').is('disabled')){
+			$('html, body').animate({
+				scrollTop: $(".dataTables_wrapper").first().offset().top
+			}, 300);
+		}
+	});
+
 	// Init first table
 	module_datatable($(".dataTable_main"), {"deferLoading":true, "api_endpoint": "<?php echo KENT_API_URL;?>v1/modules/collection/<?php echo  $collection; ?>", base_url: "<?php echo Flight::url('modules/module/'); ?>" });
  </script>

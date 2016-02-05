@@ -62,6 +62,7 @@
 		</tbody>
 	</table>
 
+		<p>The University of Kent makes every effort to ensure that module information is accurate for the relevant academic session and to provide educational services as described. However, courses, services and other matters may be subject to change. <a href="https://www.kent.ac.uk/termsandconditions/">Please read our full disclaimer</a>.</p>
 
 	<?php
 	}
@@ -91,9 +92,6 @@
 					<?php } ?>
 					<?php if (isset($module->progression) && !empty($module->progression)){ $data_found = true; ?>
 					<li><a href="#progression">Progression</a></li>
-					<?php } ?>
-					<?php if (isset($module->pre_requisite) && !empty($module->pre_requisite)){ $data_found = true; ?>
-					<li><a href="#pre_requisits">Pre-requisites</a></li>
 					<?php } ?>
 				</ul>
 			</div><!-- /span -->
@@ -205,8 +203,6 @@
 	<?php else: ?>
 	<p>Sorry, this module isn't running currently.</p>
 	<?php endif; ?>
-	<div class="clearfix"></div>
-	<p><a class="pull-right" href="https://www.kent.ac.uk/termsandconditions/">Disclaimer</a></p>
 
 </article>
 <kentScripts>
