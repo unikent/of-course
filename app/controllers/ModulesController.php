@@ -19,9 +19,9 @@ class ModulesController {
 
  		// Home page collections
 		$collections = array(
-			"humanities" => array("name" => "Humanities (UG)", "collection" => "H1"),
-			"sciences" => array("name" => "Sciences (UG)", "collection" => "SPS1"),
-			"social" => array("name" => "Social Sciences (UG)", "collection" => "SS1"),
+			"humanities" => array("name" => "Humanities (UG)", "collection" => "H2"),
+			"sciences" => array("name" => "Sciences (UG)", "collection" => "SPS2"),
+			"social" => array("name" => "Social Sciences (UG)", "collection" => "SS2"),
 			"postgraduate" => array("name" => "Postgraduate", "collection" => "PG"),
 			"brussels" => array("name" => "Brussels", "collection" => "B"),
 			"paris " => array("name" => "Paris", "collection" => "P"),
@@ -65,19 +65,12 @@ class ModulesController {
 		$module = $this->getModule($module_code);
 
 		// If url uses "sds code", send it to sits code url
+		/*
 		if(strtoupper($module_code) === strtoupper($module->sds_code) && strtoupper($module->code) !==  strtoupper($module->sds_code)){
 			Flight::redirect("/modules/module/".strtolower($module->code));
 		}
-
+		*/
 		return Flight::layout("modules/module", array('module'=>$module), "modules/layout");
-	}
-
-	/**
-	 * Disclaimer copy
-	 *  
-	 */
-	public function disclaimer(){
-		return Flight::layout("modules/disclaimer", array(), "modules/layout");
 	}
 
 	/**
@@ -91,17 +84,19 @@ class ModulesController {
 			return Flight::redirect('/modules', 301);
 		}
 
-		// Redirect to collections... the 'splat' gets the wildcard (*) from the route
-		if ($page = @$module_code->splat) {
-			echo str_replace('.html', '', $page);
-			//TODO: update route once we have the search index
-			return Flight::redirect('/modules/?tab=' . $page, 301);
-		}
-
 		//redirect module pages
 		$module = $this->getModule($module_code);
-		Flight::redirect("module/".$module->module_sits_code, 301);
+		return Flight::redirect("modules/module/".$module->sds_code, 301);
 
+	}
+
+	public function legacy_collection_url($code =null){
+		// Redirect to module catalogue index page
+		if ($code === null) {
+			return Flight::redirect('/modules/collection', 301);
+		}
+
+		return Flight::redirect("modules/collection/".$code, 301);
 	}
 
 	/**

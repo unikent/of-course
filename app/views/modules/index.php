@@ -1,6 +1,6 @@
 <h1>Module Catalogue</h1>
 
-<p>The Module catalog contains information about academic modules taught at the university. <a href="<?php echo Flight::url("modules/disclaimer"); ?>">Disclaimer</a>.</p>
+<p>The Module catalogue contains information about academic modules taught at the university. <a href="<?php echo Flight::url("modules/disclaimer"); ?>">Disclaimer</a>.</p>
 
 <div class="daedalus-tabs module_tabs">
 	<ul class="nav nav-tabs">
@@ -19,14 +19,12 @@
 					<tr>
 						<th>Module Code</th>
 						<th>Module title</th>
-						<th>Alternate module code</th>
 					</tr>
 				</thead>
 				<?php $n=0; foreach($modules->modules as $module){ ?>
 					<tr class="<?php $n++;echo $n % 2 == 0 ? 'even' : 'odd';?> <?php echo $module->running?'running':'inactive'; ?>">
-						<td><?php if($module->running){ ?><a href="<?php echo Flight::url("modules/module/".$module->code); ?>"><?php echo $module->code ?></a><?php }else{ echo $module->code; }?></td>
-						<td><?php if($module->running){ ?><a href="<?php echo Flight::url("modules/module/".$module->code); ?>"><?php echo $module->title ?></a><?php }else{ echo $module->title . ' - <em>Module not currently running</em>'; }?></td>
-						<td><?php echo $module->sds_code ?></td>
+						<td><?php if($module->running){ ?><a href="<?php echo Flight::url("modules/module/".$module->sds_code); ?>"><?php echo $module->sds_code ?></a><?php }else{ echo $module->sds_code; }?></td>
+						<td><?php if($module->running){ ?><a href="<?php echo Flight::url("modules/module/".$module->sds_code); ?>"><?php echo $module->title ?></a><?php }else{ echo $module->title . ' - <em>Module not currently running</em>'; }?></td>
 					</tr>
 				<?php } ?>	
 			</table>
@@ -43,12 +41,10 @@
 						<tr>
 							<th>Module Code</th>
 							<th>Module title</th>
-							<th>Alternate module code</th>
 						</tr>
 					</thead>
 					<tr>
 						<td>Loading....</td>
-						<td></td>
 						<td></td>
 					</tr>
 				</table>

@@ -14,7 +14,7 @@ function module_datatable(table, options){
     			"orderable": false, 
     			"searchable": false,
     		 	"targets": 0, 
-    		 	"data": "code",
+    		 	"data": "sds_code",
     		 	"type": "html" 
     		},
     		{ 
@@ -23,13 +23,6 @@ function module_datatable(table, options){
     		 	"targets": 1, 
     		 	"data": "title",
     		 	"type": "html" 
-    		},
-    		{ 
-    			"orderable": false,
-    			"searchable": false,
-    			"targets": 2,
-    			"data": "sds_code",
-    			"type": "html" 
     		}
     	],
     	//"pageLength": 25,
@@ -49,8 +42,8 @@ function module_datatable(table, options){
 	 		 	for(var i in json.data){
 
 					if(json.data[i].DT_RowClass !=='inactive') {
-						json.data[i].title = '<a href="' + options.base_url + json.data[i].code + '">' + json.data[i].title + '</a>';
-						json.data[i].code = '<a href="' + options.base_url + json.data[i].code + '">' + json.data[i].code + '</a>';
+						json.data[i].title = '<a href="' + options.base_url + json.data[i].sds_code + '">' + json.data[i].title + '</a>';
+						json.data[i].sds_code = '<a href="' + options.base_url + json.data[i].sds_code + '">' + json.data[i].sds_code + '</a>';
 					}else{
 						json.data[i].title = json.data[i].title +  ' - <em>Module not currently running</em>';
 					}
@@ -60,6 +53,4 @@ function module_datatable(table, options){
 	 	}
  	});
 
-	//options
 }
- 	//http://datatables.net/forums/discussion/5714/solved-how-do-i-disable-the-cache-busting-query-parameter-that-datatables-attaches

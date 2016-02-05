@@ -14,10 +14,58 @@
 
 
 		<h1>
-			<?php echo $module->title; ?> - <?php echo $module->code; ?> (<?php echo $module->sds_code; ?>)
+			<?php echo $module->title; ?> - <?php echo $module->sds_code; ?>
 		</h1>
 
 	</header>
+	<?php if(!empty($module->deliveries)){
+	?>
+	<div class="clearfix"></div>
+	<table class="deliveries table table-striped">
+	<thead>
+		<tr>
+			<th><span class="hidden-phone">Location</span><span class="visible-phone">Details</span></th>
+			<th class="hidden-phone">Term</th>
+			<th class="hidden-phone">Level</th>
+			<th class="hidden-phone">Credits <a class="credits-help" href="#" data-toggle="popover" data-trigger="focus" tabindex="0" role="button" data-content="European Credit Transfer and Accumulation System Credits">(ECTS)</a></th>
+			<th class="hidden-phone">Convenor</th>
+			<th><?php echo $module->year . '-' . substr($module->year+1, 2);  ?></th>
+			<th><?php echo $module->year+1 . '-' . substr($module->year+2, 2);  ?></th>
+		</tr>
+	</thead>
+		<tbody>
+		<?php
+		foreach ($module->deliveries as $delivery){
+			if (!empty($delivery->delivery_sessions)){
+				?>
+				<tr class="delivery">
+					<td><span class="hidden-phone"><?php echo $delivery->campus; ?></span>
+						<div class="visible-phone">
+							<strong>Location: </strong><?php echo $delivery->campus; ?><br>
+							<strong>Term: </strong><a href="<?php echo $delivery->delivery_url; ?>" title="View Timetable"><?php echo $delivery->term; ?></a><br>
+							<strong>Level: </strong><a href="#" data-toggle="popover" data-trigger="focus" tabindex="0" role="button" data-content="<?php echo $delivery->credit_level_desc; ?>" id="level-info"><?php echo $delivery->credit_level; ?></a><br>
+							<strong>Credits <a class="credits-help" href="#" data-toggle="popover" data-trigger="focus" tabindex="0" role="button" data-content="European Credit Transfer and Accumulation System Credits">(ECTS)</a>: </strong><?php echo $delivery->credit_amount; ?><br>
+							<strong>Convenor: </strong><?php echo $delivery->convenor; ?><br>
+						</div>
+					</td>
+					<td class="hidden-phone"><a href="<?php echo $delivery->delivery_url; ?>" title="View Timetable"><?php echo $delivery->term; ?></a></td>
+					<td class="hidden-phone"><a href="#" data-toggle="popover" data-trigger="focus" tabindex="0" role="button" data-content="<?php echo $delivery->credit_level_desc; ?>" id="level-info"><?php echo $delivery->credit_level; ?></a></td>
+					<td class="hidden-phone"><?php echo $delivery->credit_amount; ?></td>
+					<td class="hidden-phone"><?php echo $delivery->convenor; ?></td>
+					<td class="text-center"><i class="kf-<?php echo in_array($module->year,$delivery->delivery_sessions)?'check':'close';?>"></i></td>
+					<td class="text-center"><i class="kf-<?php echo in_array($module->year+1,$delivery->delivery_sessions)?'check':'close';?>"></i></td>
+				</tr>
+				<?php
+			}
+		}
+		?>
+		</tbody>
+	</table>
+
+
+	<?php
+	}
+	?>
 	<?php if (!empty($module->deliveries)): ?>
 	<div class="daedalus-tabs">
 		<div class="row-fluid">
@@ -64,7 +112,6 @@
 						<?php endif; ?>
 					</section>
 					<?php if ((isset($module->collections) && !empty($module->collections)) ||
-								(isset($module->restrictions) && !empty($module->restrictions)) ||
 								(isset($module->contact_hours) && !empty($module->contact_hours)) ||
 								(isset($module->availability) && !empty($module->availability)) ||
 								(isset($module->cost) && !empty($module->cost))): ?>
@@ -79,12 +126,6 @@
 							</ul>
 							<br>
 						<?php endif; ?>
-
-						<?php if (isset($module->restrictions) && !empty($module->restrictions)): ?>
-							<h3>Restrictions</h3>
-							<p><?php echo $module->restrictions ?></p>
-						<?php endif; ?>
-
 
 						<?php if (isset($module->contact_hours) && !empty($module->contact_hours)): ?>
 							<h3>Contact hours</h3>
@@ -140,44 +181,23 @@
 					</section>
 					<?php endif; ?>
 
-					<?php if (isset($module->pre_requisite) && !empty($module->pre_requisite)): ?>
-					<section id="pre_requisits">
-						<h2>Pre-requisites</h2>
-						<p><?php echo $module->pre_requisite ?></p>
-					</section>
-					<?php endif; ?>
-
 				</div>
 			</div> <!-- /span -->
 			<div class="span5">
 
 				<div class="side-panel">
-					<?php foreach ($module->deliveries as $delivery): ?>
-						<?php if (!empty($delivery->delivery_sessions)): ?>
-							<div class="key-facts-block tertiary-tier highlighted no-border">
-								<aside class="key-facts-container">
-									<h2><?php echo $delivery->campus; ?></h2>
-
-									<div class="key-facts">
-										<ul>
-											<li>
-												<strong>Term:</strong> <?php echo $delivery->term; ?> - <a href="<?php echo $delivery->delivery_url; ?>">View timetable</a>
-											</li>
-											<li><strong>Level:</strong> <a href="#" data-toggle="popover" data-trigger="focus" tabindex="0" role="button" data-content="<?php echo $delivery->credit_level_desc; ?>" id="level-info"><?php echo $delivery->credit_level; ?></a></li>
-											<li><strong>Credits (ECTS):</strong> <?php echo $delivery->credit_amount; ?></li>
-											<?php if (isset($delivery->convenor) && !empty($delivery->convenor)): ?>
-												<li><strong>Convenor:</strong> <?php echo $delivery->convenor; ?></li>
-											<?php endif; ?>
-											<li><strong>Years:</strong> <?php echo implode(', ', array_map(function ($session){
-												$to_year = intval($session) + 1;
-												return $session . '-' . substr($to_year, strlen($to_year)-2); 
-											}, (array)$delivery->delivery_sessions));?></li>
-										</ul>
-									</div>
-								</aside>
-							</div>
-						<?php endif; ?>
-					<?php endforeach; ?>
+					<div class="key-facts-block tertiary-tier highlighted no-border">
+						<aside class="key-facts-container">
+							<h2>Pre-requisites</h2>
+							<p><?php echo empty($module->pre_requisite)?'None':$module->pre_requisite; ?></p>
+						</aside>
+					</div>
+					<div class="key-facts-block tertiary-tier highlighted no-border">
+						<aside class="key-facts-container">
+							<h2>Restrictions</h2>
+							<p><?php echo empty($module->restrictions)?'None':$module->restrictions; ?></p>
+						</aside>
+					</div>
 				</div>
 			</div><!-- /span -->
 		</div><!-- /row -->
@@ -185,6 +205,8 @@
 	<?php else: ?>
 	<p>Sorry, this module isn't running currently.</p>
 	<?php endif; ?>
+	<div class="clearfix"></div>
+	<p><a class="pull-right" href="https://www.kent.ac.uk/termsandconditions/">Disclaimer</a></p>
 
 </article>
 <kentScripts>
@@ -195,7 +217,7 @@
 			// Basic
 			"url":"<?php echo KENT_API_URL; ?>v1/modules/collection/all/limit/9999",
 			"target":"modulesearch",
-			"search_on": ["title", "code", "sds_code"],
+			"search_on": ["title", "sds_code"],
 			"disable_occurrence_weighting": true,
 			"prevent_headers":              true,
 			"key_value": "title",
@@ -205,11 +227,11 @@
 			// Extend
 			"click_handler":function(itm){
 				//Send em to page
-				document.location = '<?php echo Flight::url("modules/module/"); ?>'+itm.code;
+				document.location = '<?php echo Flight::url("modules/module/"); ?>'+itm.sds_code;
 			},
 			"display_handler": function(itm,qs){
 				// Highlight searched word
-				return itm.title + "<br/><span>" +itm.code + " / " + itm.sds_code +"</span>";
+				return itm.title + "<br/><span>" + itm.sds_code +"</span>";
 			},
 			"no_results": function (qs, val){
 				return "<a class='quickspot-result selected'>Press enter to search...</a>";
@@ -231,10 +253,14 @@
 		  window.location.href = "<?php echo Flight::url('modules/');?>?search=" + $("#modulesearch").val();
 		});
 
-		$('#level-info').popover({
+		$('#level-info, .credits-help').popover({
 		    placement:'top',
 		    html:true
-		}).click(function(e){ e.preventDefault(); });
+		}).click(function(e){
+			e.preventDefault();
+			$('#level-info, .credits-help').not(this).popover('hide');
+		});
+
 
 	</script>
 </kentScripts>
