@@ -27,7 +27,7 @@
 			<th><span class="hidden-phone">Location</span><span class="visible-phone">Details</span></th>
 			<th class="hidden-phone">Term</th>
 			<th class="hidden-phone">Level</th>
-			<th class="hidden-phone">Credits <a class="credits-help" href="#" data-toggle="popover" data-trigger="focus" tabindex="0" role="button" data-content="European Credit Transfer and Accumulation System Credits">(ECTS)</a></th>
+			<th class="hidden-phone">Credits <a class="credits-help" href="#" data-toggle="popover" data-trigger="focus" tabindex="0" role="button" data-content="ECTS credits are recognised throughout the EU and allow you to transfer credit easily from one university to another">(ECTS)</a></th>
 			<th class="hidden-phone">Convenor</th>
 			<th><?php echo $module->year . '-' . substr($module->year+1, 2);  ?></th>
 			<th><?php echo $module->year+1 . '-' . substr($module->year+2, 2);  ?></th>
@@ -44,7 +44,7 @@
 							<strong>Location: </strong><?php echo $delivery->campus; ?><br>
 							<strong>Term: </strong><a href="<?php echo $delivery->delivery_url; ?>" title="View Timetable"><?php echo $delivery->term; ?></a><br>
 							<strong>Level: </strong><a href="#" data-toggle="popover" data-trigger="focus" tabindex="0" role="button" data-content="<?php echo $delivery->credit_level_desc; ?>" id="level-info"><?php echo $delivery->credit_level; ?></a><br>
-							<strong>Credits <a class="credits-help" href="#" data-toggle="popover" data-trigger="focus" tabindex="0" role="button" data-content="European Credit Transfer and Accumulation System Credits">(ECTS)</a>: </strong><?php echo $delivery->credit_amount; ?><br>
+							<strong>Credits <a class="credits-help" href="#" data-toggle="popover" data-trigger="focus" tabindex="0" role="button" data-content="ECTS credits are recognised throughout the EU and allow you to transfer credit easily from one university to another">(ECTS)</a>: </strong><?php echo $delivery->credit_amount; ?><br>
 							<strong>Convenor: </strong><?php echo $delivery->convenor; ?><br>
 						</div>
 					</td>
