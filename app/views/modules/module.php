@@ -39,9 +39,9 @@
 			if (!empty($delivery->delivery_sessions)){
 				?>
 				<tr class="delivery">
-					<td><span class="hidden-phone"><?php echo $delivery->campus; ?></span>
+					<td><span class="hidden-phone"><?php echo $delivery->campus; ?><?php if ($delivery->module_version > 1 ){ ?><br>(version <?php echo $delivery->module_version; ?>)<?php } ?></span>
 						<div class="visible-phone">
-							<strong>Location: </strong><?php echo $delivery->campus; ?><br>
+							<strong>Location: </strong><?php echo $delivery->campus; ?><?php if ($delivery->module_version > 1 ){ ?> (version <?php echo $delivery->module_version; ?>)<?php } ?><br>
 							<strong>Term: </strong><a href="<?php echo $delivery->delivery_url; ?>" title="View Timetable"><?php echo $delivery->term; ?></a><br>
 							<strong>Level: </strong><a href="#" data-toggle="popover" data-trigger="focus" tabindex="0" role="button" data-content="<?php echo $delivery->credit_level_desc; ?>" id="level-info"><?php echo $delivery->credit_level; ?></a><br>
 							<strong>Credits <a class="credits-help" href="#" data-toggle="popover" data-trigger="focus" tabindex="0" role="button" data-content="European Credit Transfer and Accumulation System Credits">(ECTS)</a>: </strong><?php echo $delivery->credit_amount; ?><br>

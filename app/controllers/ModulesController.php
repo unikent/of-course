@@ -1,7 +1,6 @@
 <?php
 
 use unikent\libs\Cache;
-use unikent\libs\Logger;
 
 /**
  * Module controller

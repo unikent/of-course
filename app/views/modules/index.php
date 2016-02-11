@@ -87,14 +87,6 @@
 		module_datatable(table, {"api_endpoint": "<?php echo KENT_API_URL;?>v1/modules/collection/" + table.attr("data-collection"), base_url: "<?php echo Flight::url('modules/module/'); ?>" });
 	});
 
-	$('body').on('click' , ".dataTables_paginate a", function(e){
-		if(!$(this).closest('li').is('disabled')){
-			$('html, body').animate({
-				scrollTop: $(".daedalus-tabs").first().offset().top
-			}, 300);
-		}
-	});
-
 	// Init first table
 	module_datatable($(".dataTable_all"), {"data": all_modules, "api_endpoint": "<?php echo KENT_API_URL;?>v1/modules/collection/all", base_url: "<?php echo Flight::url('modules/module/'); ?>" });
 

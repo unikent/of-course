@@ -6,6 +6,7 @@ function module_datatable(table, options){
 		data:false
 	}, options );
 
+	var oldStart=0;
 	// configure table
 	table.DataTable({
 		data: options.data,
@@ -15,16 +16,27 @@ function module_datatable(table, options){
 	 		{
     		 	"targets": 0, 
     		 	"render": function(data,type,row){
-					return '<a href="' + options.base_url + row.sds_code + '">' + row.sds_code + '</a>';
+					return (row.running?'<a href="' + options.base_url + row.sds_code + '">':'') + row.sds_code + (row.running?'</a>':'');
 				}
     		},
     		{
     		 	"targets": 1, 
     		 	"render": function(data,type,row){
-					return '<a href="' + options.base_url + row.sds_code + '">' + row.title + '</a>'
+					return (row.running?'<a href="' + options.base_url + row.sds_code + '">':'') + row.title + (row.running?'</a>':' - <em>this module is not currently running</em>');
 				}
     		}
     	],
+		"fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+			$(nRow).addClass( aData.running?'running':'inactive');
+			return nRow;
+		},
+		"fnDrawCallback": function (o) {
+			if ( o._iDisplayStart != oldStart ) {
+				var targetOffset = $(".daedalus-tabs").first().offset().top;
+				$('html,body').animate({scrollTop: targetOffset}, 600);
+				oldStart = o._iDisplayStart;
+			}
+		},
     	//"pageLength": 25,
     	"pageLength": 25,
 		/// set count
