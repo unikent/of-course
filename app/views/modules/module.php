@@ -62,8 +62,7 @@
 		</tbody>
 	</table>
 
-		<p>The University of Kent makes every effort to ensure that module information is accurate for the relevant academic session and to provide educational services as described. However, courses, services and other matters may be subject to change. <a href="https://www.kent.ac.uk/termsandconditions/">Please read our full disclaimer</a>.</p>
-
+		<p><em>Information below is for the <strong><?php echo $module->year . '-' . substr($module->year+1, 2);  ?></strong> Session.</em></p>
 	<?php
 	}
 	?>
@@ -200,10 +199,14 @@
 			</div><!-- /span -->
 		</div><!-- /row -->
 	</div><!-- /tabs -->
+
+	<br>
+	<small>The University of Kent makes every effort to ensure that module information is accurate for the relevant academic session and to provide educational services as described. However, courses, services and other matters may be subject to change. <a href="https://www.kent.ac.uk/termsandconditions/">Please read our full disclaimer</a>.</small>
+
+
 	<?php else: ?>
 	<p>Sorry, this module isn't running currently.</p>
 	<?php endif; ?>
-
 </article>
 <kentScripts>
 	<script src='//static.kent.ac.uk/pantheon/javascript/daedalus/quickspot.min.js' type='text/javascript'></script>
@@ -211,7 +214,7 @@
 		/** Quick search  */
 		var qs = quickspot.attach({
 			// Basic
-			"url":"<?php echo KENT_API_URL; ?>v1/modules/collection/all/limit/9999",
+			"url":"<?php echo KENT_API_URL; ?>v1/modules/collection/all",
 			"target":"modulesearch",
 			"search_on": ["title", "sds_code"],
 			"disable_occurrence_weighting": true,
@@ -245,7 +248,7 @@
 		});
 
 		// Handle button
-		$('.quickspot-container button.btn').click(function(){ 
+		$('.quickspot-container button.btn').click(function(){
 		  window.location.href = "<?php echo Flight::url('modules/');?>?search=" + $("#modulesearch").val();
 		});
 

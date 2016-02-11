@@ -19,12 +19,12 @@ class ModulesController {
 
  		// Home page collections
 		$collections = array(
-			"humanities" => array("name" => "Humanities (UG)", "collection" => "H2"),
-			"sciences" => array("name" => "Sciences (UG)", "collection" => "SPS2"),
-			"social" => array("name" => "Social Sciences (UG)", "collection" => "SS2"),
+			//"humanities" => array("name" => "Humanities (UG)", "collection" => "H2"),
+			//"sciences" => array("name" => "Sciences (UG)", "collection" => "SPS2"),
+			//"social" => array("name" => "Social Sciences (UG)", "collection" => "SS2"),
 			"postgraduate" => array("name" => "Postgraduate", "collection" => "PG"),
 			"brussels" => array("name" => "Brussels", "collection" => "B"),
-			"paris " => array("name" => "Paris", "collection" => "P"),
+			"paris" => array("name" => "Paris", "collection" => "P"),
 			"wild" => array("name" => "Wild Modules", "collection" => "W")
 		);
 
@@ -63,6 +63,12 @@ class ModulesController {
 	public function view($module_code)
 	{
 		$module = $this->getModule($module_code);
+
+
+		// Handle error
+		if(isset($module->error)){
+			return $this->module_404($module->error);
+		}
 
 		// If url uses "sds code", send it to sits code url
 		/*
@@ -109,13 +115,27 @@ class ModulesController {
 		return Flight::layout("modules/error", array('error'=> $error, 'collections' => $list), "modules/layout");
 	}
 
+	/**
+	 * 404 helper for bad module.
+	 *
+	 */
+	protected function module_404($error){
+		Flight::response()->status(404);
+		return Flight::layout("modules/error", array('error'=> $error), "modules/layout");
+	}
+
 
 	/**
 	 * Get module data from API
 	 *  
 	 */
 	protected function getModule($code){
-		$data = Cache::load(KENT_API_URL . "v1/modules/module/" . $code);
+		$data = Cache::load(KENT_API_URL . "v1/modules/module/" . $code,15);
+
+		if($data == false){
+			return (object) array("error" => "Unable to find specified module.");
+		}
+
 		return json_decode($data['data']);
 	}
 
@@ -126,7 +146,7 @@ class ModulesController {
 	protected function getCollectionList(){
 
 		// Grab first page of datatable
-		$data = Cache::load(KENT_API_URL . "v1/modules/collection/");
+		$data = Cache::load(KENT_API_URL . "v1/modules/collection/", 15);
 		return json_decode($data['data']);
 	}
 
@@ -136,7 +156,7 @@ class ModulesController {
 	 */
 	protected function getModuleList($collection = 'all'){
 		// Grab first page of datatable
-		$data = Cache::load(KENT_API_URL . "v1/modules/collection/" . $collection);
+		$data = Cache::load(KENT_API_URL . "v1/modules/collection/" . $collection, 15);
 
 		if($data == false){
 			return (object) array("error" => "Unable to find specified collection.");

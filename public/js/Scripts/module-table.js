@@ -3,52 +3,43 @@ function module_datatable(table, options){
 	var options = $.extend( {}, {
 		api_endpoint: "https://api-test.kent.ac.uk/api/v1/modules/collection/all",
 		base_url: "https://kent.ac.uk/courses/modules/module",
-		deferLoading: false,
+		data:false
 	}, options );
 
 	// configure table
 	table.DataTable({
+		data: options.data,
+		order:[[0, 'asc']],
 		"sPaginationType": "bootstrap",
 	 	"columnDefs": [
-	 		{ 
-    			"orderable": false, 
-    			"searchable": false,
+	 		{
     		 	"targets": 0, 
-    		 	"data": "sds_code",
-    		 	"type": "html" 
+    		 	"render": function(data,type,row){
+					return '<a href="' + options.base_url + row.sds_code + '">' + row.sds_code + '</a>';
+				}
     		},
-    		{ 
-    			"orderable": false, 
-    			"searchable": false,
+    		{
     		 	"targets": 1, 
-    		 	"data": "title",
-    		 	"type": "html" 
+    		 	"render": function(data,type,row){
+					return '<a href="' + options.base_url + row.sds_code + '">' + row.title + '</a>'
+				}
     		}
     	],
     	//"pageLength": 25,
     	"pageLength": 25,
-		"deferLoading": (options.deferLoading) ? table.attr("data-count") : null,
 		/// set count
-		"serverSide": true,
-		"processing": true,
 	 	"sDom": "ft<'muted pull-right'i><'clearfix'>p", 
-	 	"ajax": {
+	 	"ajax": options.data?false:{
 	 		"cache": true,
-	 		"url": options.api_endpoint + "?format=datatables",
+	 		"url": options.api_endpoint,
 	 		"dataSrc": function ( json ) {
 	 			// Set name from handbook title
 	 			$("#collection_title_"+table.attr("data-collection")).text(json.title);
-
-	 		 	for(var i in json.data){
-
-					if(json.data[i].DT_RowClass !=='inactive') {
-						json.data[i].title = '<a href="' + options.base_url + json.data[i].sds_code + '">' + json.data[i].title + '</a>';
-						json.data[i].sds_code = '<a href="' + options.base_url + json.data[i].sds_code + '">' + json.data[i].sds_code + '</a>';
-					}else{
-						json.data[i].title = json.data[i].title +  ' - <em>Module not currently running</em>';
-					}
+				var m = [];
+	 		 	for(var i in json.modules){
+					m.push(json.modules[i]);
 	 		 	}
-			    return json.data;
+			    return m;
 			}
 	 	}
  	});
