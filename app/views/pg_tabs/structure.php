@@ -39,7 +39,7 @@ foreach ($course->modules as $module) {
         ?>
         <?php foreach ($first_modules as $module): ?>
         <div class="daedalus-show-hide show-hide minimal">
-            <p class="show-hide-title"><?php echo $module->module_code ?> - <?php echo $module->module_title ?> (<?php echo $module->credit_amount; ?> credits)</p>
+            <p class="show-hide-title"><?php echo $module->sds_code ?> - <?php echo $module->module_title ?> (<?php echo $module->credit_amount; ?> credits)</p>
 
             <div class="show-hide-content">
                 <p><?php echo $module->synopsis ?></p>
@@ -49,7 +49,7 @@ foreach ($course->modules as $module) {
 
 
                 <p class="module-read-more"><a
-                        href="http://www.kent.ac.uk/courses/modules/module/<?php echo $module->module_code ?>">Read
+                        href="http://www.kent.ac.uk/courses/modules/module/<?php echo $module->sds_code ?>">Read
                         more <i class="icon-arrow-right"></i></a></p>
             </div>
         </div>
@@ -62,7 +62,7 @@ foreach ($course->modules as $module) {
         <div id="more-modules" class="collapse">
             <?php foreach ($other_modules as $module): ?>
                 <div class="daedalus-show-hide show-hide minimal">
-                    <p class="show-hide-title"><?php echo $module->module_code ?>
+                    <p class="show-hide-title"><?php echo $module->sds_code ?>
                         - <?php echo $module->module_title ?> (<?php echo $module->credit_amount; ?> credits)</p>
 
                     <div class="show-hide-content">
@@ -72,7 +72,7 @@ foreach ($course->modules as $module) {
                             (<?php echo $module->ects_credit ?> ECTS credits).</p>
 
                         <p class="module-read-more"><a
-                                href="http://www.kent.ac.uk/courses/modules/module/<?php echo $module->module_code ?>">Read
+                                href="http://www.kent.ac.uk/courses/modules/module/<?php echo $module->sds_code ?>">Read
                                 more <i class="icon-arrow-right"></i></a></p>
                     </div>
                 </div>
