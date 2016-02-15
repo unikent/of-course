@@ -1,6 +1,6 @@
 <h1>Module Catalogue</h1>
 
-<p>The Module catalogue contains information about academic modules taught at the university. <a href="<?php echo Flight::url("modules/disclaimer"); ?>">Disclaimer</a>.</p>
+<p>The Module catalogue contains information about academic modules taught at the university.</p>
 
 <div class="daedalus-tabs module_tabs">
 	<ul class="nav nav-tabs">
@@ -48,6 +48,8 @@
 		<?php } ?>
 	</div>
 </div>
+<br>
+<small>The University of Kent makes every effort to ensure that module information is accurate for the relevant academic session and to provide educational services as described. However, courses, services and other matters may be subject to change. <a href="https://www.kent.ac.uk/termsandconditions/">Please read our full disclaimer</a>.</small>
 
 <?php /* hidden till we decide on images/links
 

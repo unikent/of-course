@@ -42,13 +42,13 @@
 					<td><span class="hidden-phone"><?php echo $delivery->campus; ?><?php if ($delivery->module_version > 1 ){ ?><br>(version <?php echo $delivery->module_version; ?>)<?php } ?></span>
 						<div class="visible-phone">
 							<strong>Location: </strong><?php echo $delivery->campus; ?><?php if ($delivery->module_version > 1 ){ ?> (version <?php echo $delivery->module_version; ?>)<?php } ?><br>
-							<strong>Term: </strong><a href="<?php echo $delivery->delivery_url; ?>" title="View Timetable"><?php echo $delivery->term; ?></a><br>
+							<strong>Term: </strong><?php echo $delivery->term; ?> <a href="<?php echo $delivery->delivery_url; ?>" title="View Timetable"><small>View Timetable</small></a><br>
 							<strong>Level: </strong><a href="#" data-toggle="popover" data-trigger="focus" tabindex="0" role="button" data-content="<?php echo $delivery->credit_level_desc; ?>" id="level-info"><?php echo $delivery->credit_level; ?></a><br>
 							<strong>Credits <a class="credits-help" href="#" data-toggle="popover" data-trigger="focus" tabindex="0" role="button" data-content="ECTS credits are recognised throughout the EU and allow you to transfer credit easily from one university to another">(ECTS)</a>: </strong><?php echo $delivery->credit_amount; ?><br>
 							<strong>Convenor: </strong><?php echo $delivery->convenor; ?><br>
 						</div>
 					</td>
-					<td class="hidden-phone"><a href="<?php echo $delivery->delivery_url; ?>" title="View Timetable"><?php echo $delivery->term; ?></a></td>
+					<td class="hidden-phone"><?php echo $delivery->term; ?><br><a href="<?php echo $delivery->delivery_url; ?>" title="View Timetable"><small>View Timetable</small></a></td>
 					<td class="hidden-phone"><a href="#" data-toggle="popover" data-trigger="focus" tabindex="0" role="button" data-content="<?php echo $delivery->credit_level_desc; ?>" id="level-info"><?php echo $delivery->credit_level; ?></a></td>
 					<td class="hidden-phone"><?php echo $delivery->credit_amount; ?></td>
 					<td class="hidden-phone"><?php echo $delivery->convenor; ?></td>
@@ -62,7 +62,7 @@
 		</tbody>
 	</table>
 
-		<p><em>Information below is for the <strong><?php echo $module->year . '-' . substr($module->year+1, 2);  ?></strong> Session.</em></p>
+		<p><em>Information below is for the <strong><?php echo $module->year . '-' . substr($module->year+1, 2);  ?></strong> session.</em></p>
 	<?php
 	}
 	?>
