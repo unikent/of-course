@@ -47,6 +47,18 @@ the url structure is:
 
 eg  http://www.kent.ac.uk/courses/postgraduate/search/subject_category/testtest/
 
+## Load Testing 
+This app uses [Siege](https://www.joedog.org/siege-home/) to load test the frintend and (some )API endpoints. The endpoints have been statically generated into the tests/siege folder. To use:
+
+1. Install by running `sudo apt-get install siege`
+   * Alternatively via Homebrew: `brew install siege`
+   * On windows [download Siege from here](https://code.google.com/archive/p/siege-windows/).
+2. Run `siege -c10 -d5 -t60S -i -f tests/siege/modules-indexes.txt` where:
+  * -c is the number of concurrent users
+  * -d is the delay between hitting a URL in seconds
+  * -t is the time to run the load test for (S=seconds, M=minutes)
+  * -i randomises the URL the test grabs from the text file, simulating real traffic
+
 
 ## Licensing
 

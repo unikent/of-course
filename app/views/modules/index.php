@@ -1,6 +1,6 @@
 <h1>Module Catalogue</h1>
 
-<p>The Module catalog contains information about academic modules taught at the university. <a href="<?php echo Flight::url("modules/disclaimer"); ?>">Disclaimer</a>.</p>
+<p>The Module catalogue contains information about academic modules taught at the university.</p>
 
 <div class="daedalus-tabs module_tabs">
 	<ul class="nav nav-tabs">
@@ -14,27 +14,21 @@
 		<section id="all">
 			<h2>Overview</h2>
 			
-			<table class="dataTable_all table table-striped" data-count="<?php echo $modules->total; ?>" data-ready="true">
+			<table class="dataTable_all table table-striped" data-ready="true">
 				<thead>
 					<tr>
 						<th>Module Code</th>
 						<th>Module title</th>
-						<th>Alternate module code</th>
 					</tr>
 				</thead>
-				<?php foreach($modules->modules as $module){ ?>
-					<tr>
-						<td><a href="<?php echo Flight::url("modules/module/".$module->code); ?>"><?php echo $module->code ?></a></td>
-						<td><a href="<?php echo Flight::url("modules/module/".$module->code); ?>"><?php echo $module->title ?></a></td>
-						<td><?php echo $module->sds_code ?></td>
-					</tr>
-				<?php } ?>	
+				<tbody>
+				</tbody>
 			</table>
 		</section>
 
 		<?php foreach($collections as $code => $collection){ ?>
 			<section id="<?php echo $code;?>">
-			<a href='<?php echo Flight::url("modules/collection");?>' class="pull-right">Browses all collections &raquo;</a>
+
 				<h2 id="collection_title_<?php echo $collection['collection'];?>"><?php echo $collection['name'];?></h2>
 
 
@@ -43,12 +37,10 @@
 						<tr>
 							<th>Module Code</th>
 							<th>Module title</th>
-							<th>Alternate module code</th>
 						</tr>
 					</thead>
 					<tr>
 						<td>Loading....</td>
-						<td></td>
 						<td></td>
 					</tr>
 				</table>
@@ -56,6 +48,8 @@
 		<?php } ?>
 	</div>
 </div>
+<br>
+<small>The University of Kent makes every effort to ensure that module information is accurate for the relevant academic session and to provide educational services as described. However, courses, services and other matters may be subject to change. <a href="https://www.kent.ac.uk/termsandconditions/">Please read our full disclaimer</a>.</small>
 
 <?php /* hidden till we decide on images/links
 
@@ -79,7 +73,10 @@
 */ ?>
 
 <kentScripts>
-	<script type="text/javascript" charset="utf8" src="<?php echo Flight::asset('js/build/moduletable.min.js'); ?>"></script>
+	<script type="text/javascript" charset="utf-8" src="<?php echo Flight::asset('js/build/moduletable.min.js'); ?>"></script>
+	<script type="text/javascript" charset="utf-8">
+		var all_modules = <?php echo json_encode(array_values((array)$modules->modules)); ?>;
+	</script>
 <script>
 	$(".module_tabs .nav a").click(function(){
 		var tab_name = $(this).attr("href").substring(1);
@@ -93,7 +90,7 @@
 	});
 
 	// Init first table
-	module_datatable($(".dataTable_all"), {"deferLoading":true, "api_endpoint": "<?php echo KENT_API_URL;?>v1/modules/collection/all", base_url: "<?php echo Flight::url('modules/module/'); ?>" });
+	module_datatable($(".dataTable_all"), {"data": all_modules, "api_endpoint": "<?php echo KENT_API_URL;?>v1/modules/collection/all", base_url: "<?php echo Flight::url('modules/module/'); ?>" });
 
 	// Trigger click on load (if hash is in use), so tabbed tables work
 	var hash = window.location.hash;
