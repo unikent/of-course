@@ -11,15 +11,15 @@ $(document).ready(function(){
 		$('html, body').stop().animate({
             scrollTop: $($(this).val()).offset().top
         }, 500);
-		if($(this).val()==='#fees-tables-link'){
-			$('.fees-tables').slideDown();
-		}
+		//if($(this).val()==='#fees-tables-link'){
+		//	$('.fees-tables').slideDown();
+		//}
 	});
 	// Add class & add to page
 	select_tmp.addClass("programme-scroll-menu");
 	$(".daedalus-tabs .nav-tabs").append(select_tmp);
 
-	$('.fees-tables').hide();
+	//$('.fees-tables').hide();
 	$('.fees-toggle').click(function() {
 		$('.fees-tables').slideToggle();
 	});

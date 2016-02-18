@@ -114,6 +114,37 @@ class CoursesController {
 			if($year && ($year !== static::$current_year)){
 				$meta['title'] = "{$course->programme_title} | Postgraduate Programmes {$year} | The University of Kent";
 			}
+
+			$course->module_list = array();
+
+			if(is_array($course->modules)){
+				foreach ($course->modules as $delivery_modules) {
+					if(!is_object($delivery_modules->stages)) continue;
+
+					foreach ($delivery_modules->stages as $stage) {
+						if(!is_object($stage->clusters)) continue;
+
+						foreach ($stage->clusters as $clusters) {
+							if(!is_array($clusters)) continue;
+
+							foreach ($clusters as $cluster) {
+								if(!is_object($cluster->modules)) continue;
+
+								foreach ($cluster->modules as $modules) {
+									if(!is_array($modules)) continue;
+									foreach ($modules as $module) {
+
+										//skip blanks
+										if ($module->module_code == '') continue;
+										// index on module code, so duplicates will just overwrite each other
+										$course->module_list[$module->module_code] = $module;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
 			break;
 
 			default:

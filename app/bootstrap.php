@@ -15,6 +15,7 @@ require 'lib/utils.php';
 
 // Configure cache
 Config::set("cachedir", CACHE_DIRECTORY);
+Config::set("disable_curl_proxy", defined("DISABLE_CURL_PROXY") ? DISABLE_CURL_PROXY : false);
 
 // Autoload everything else
 Flight::path('controllers/');

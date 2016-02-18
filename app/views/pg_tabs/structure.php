@@ -27,60 +27,29 @@ foreach ($course->modules as $module) {
     if ($show_modules):
 
 
-        // get modules from all deliveries as unique lists
-        $module_list = array();
 
-        //TODO: refactor this!
-        if(is_array($course->modules)){
-            foreach ($course->modules as $delivery_modules) {
-                if(!is_object($delivery_modules->stages)) continue;
-
-                foreach ($delivery_modules->stages as $stage) {
-                    if(!is_object($stage->clusters)) continue;
-  
-                    foreach ($stage->clusters as $clusters) {
-                        if(!is_array($clusters)) continue;
-
-                        foreach ($clusters as $cluster) {
-                            if(!is_object($cluster->modules)) continue;
-
-                            foreach ($cluster->modules as $modules) {
-                                if(!is_array($modules)) continue;
-                                foreach ($modules as $module) {
-
-                                    //skip blanks
-                                    if ($module->module_code == '') continue;
-                                    // index on module code, so duplicates will just overwrite each other
-                                    $module_list[$module->module_code] = $module;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
 
         ?>
 
 
         <?php
         $show_count = 10;
-        $first_modules = array_slice($module_list, 0, $show_count);
-        $other_modules = array_slice($module_list, $show_count);
+        $first_modules = array_slice($course->module_list, 0, $show_count);
+        $other_modules = array_slice($course->module_list, $show_count);
         ?>
         <?php foreach ($first_modules as $module): ?>
         <div class="daedalus-show-hide show-hide minimal">
-            <p class="show-hide-title"><?php echo $module->module_code ?> - <?php echo $module->module_title ?> (<?php echo $module->credit_amount; ?> credits)</p>
+            <p class="show-hide-title"><?php echo $module->sds_code ?> - <?php echo $module->module_title ?> (<?php echo $module->credit_amount; ?> credits)</p>
 
             <div class="show-hide-content">
                 <p><?php echo $module->synopsis ?></p>
-
+				<p><strong>Also Known as:</strong> <?php echo $module->sds_code; ?></p>
                 <p><strong>Credits:</strong> <?php echo $module->credit_amount ?> credits
                     (<?php echo $module->ects_credit ?> ECTS credits).</p>
 
 
                 <p class="module-read-more"><a
-                        href="http://www.kent.ac.uk/courses/modulecatalogue/modules/<?php echo $module->module_code ?>">Read
+                        href="http://www.kent.ac.uk/courses/modules/module/<?php echo $module->sds_code ?>">Read
                         more <i class="icon-arrow-right"></i></a></p>
             </div>
         </div>
@@ -93,17 +62,17 @@ foreach ($course->modules as $module) {
         <div id="more-modules" class="collapse">
             <?php foreach ($other_modules as $module): ?>
                 <div class="daedalus-show-hide show-hide minimal">
-                    <p class="show-hide-title"><?php echo $module->module_code ?>
+                    <p class="show-hide-title"><?php echo $module->sds_code ?>
                         - <?php echo $module->module_title ?> (<?php echo $module->credit_amount; ?> credits)</p>
 
                     <div class="show-hide-content">
                         <p><?php echo $module->synopsis ?></p>
-
+						<p><strong>Also Known as:</strong> <?php echo $module->sds_code; ?></p>
                         <p><strong>Credits:</strong> <?php echo $module->credit_amount ?> credits
                             (<?php echo $module->ects_credit ?> ECTS credits).</p>
 
                         <p class="module-read-more"><a
-                                href="http://www.kent.ac.uk/courses/modulecatalogue/modules/<?php echo $module->module_code ?>">Read
+                                href="http://www.kent.ac.uk/courses/modules/module/<?php echo $module->sds_code ?>">Read
                                 more <i class="icon-arrow-right"></i></a></p>
                     </div>
                 </div>

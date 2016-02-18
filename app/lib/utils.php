@@ -1,5 +1,5 @@
 <?php
-	use unikent\libs\Logger;
+	use unikent\libs\Log;
 
 	/**
 	 * Layout: applies layout wrapper to content
@@ -8,9 +8,10 @@
 	 * @param $params Data for view
 	 * @output Renders HTML to browser
 	 */
-	Flight::map('layout', function($view, $params = array()){
+	Flight::map('layout', function($view, $params = array(), $layout = 'layout'){
 		Flight::render($view, $params, 'content');
-		Flight::pantheon_render('layout', $params);
+		// allow alternate layout to be passed as param
+		Flight::pantheon_render($layout, $params);
 	});
 
 	/**
@@ -19,12 +20,13 @@
 	Flight::map('pantheon_render', function($outer_view, $params){
 
 		// define $template as a closure for getting the pantheon wrapper
-		$template = function() use ($params)
+		$template = function() use ($outer_view, $params)
 		{
 			if (defined("TEMPLATING_ENGINE"))
 			{
 				// Overwrite pantheon route with "URL route"
-				if(!LOCAL) define("RELATIVE_SITE_ROOT", parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH) . '/');
+				// Remove any spaces that may cause issues for the pantheon renderer
+				if(!LOCAL) define("RELATIVE_SITE_ROOT", str_replace(array(' ','%20',','),'_', parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH)) . '/');
 
 				// call pantheon
 				require TEMPLATING_ENGINE . '/template.loader.php';
@@ -34,17 +36,19 @@
 				if ($_POST === null) $_POST = array();
 
 				// Shim logging data
-				foreach(Logger::get('warning') as $warn){
-					inspect($warn);
-				}
-				foreach(Logger::get('debug') as $warn){
-					debug($warn);
+				
+				$logs = unikent\libs\Log::get();
+				foreach($logs as $log){
+					// only log debugs when debug is enabled.
+					if($log->level == 'debug' && !isset($_GET['debug_performance'])) continue;
+					// Pass logs to pantheon
+					inspect("[".strtoupper($log->level)."]".$log->message, $log->file, $log->line);
 				}
 
 				// run pantheon and store its output in a buffer
 				ob_start();
 
-				Flight::render('layout', $params);
+				Flight::render($outer_view, $params);
 
 				require TEMPLATING_ENGINE . '/run.php';
 				$content = ob_get_contents();
@@ -53,7 +57,7 @@
 				// Render with correct headers
 				Flight::response()->write($content)->send();
 			}else{
-				Flight::render('layout');
+				Flight::render($outer_view);
 			}
 		};
 
@@ -153,7 +157,7 @@
 
 
 		// Debug data if wanted.
-		Logger::debug("[Cache] ".(string)$request."<br/>
+		Log::debug("[Cache] ".(string)$request."<br/>
 			<br/>
 
 			Received headers:
@@ -181,7 +185,7 @@
 			// Get request
 			$request = CoursesController::$pp->request;
 			// If its okay, get responce
-			if($request !== null ){
+			if($request !== null && $request !== false ){
 				$response = $request->getResponse();
 				// Grab last modified, and return it if its not invalid.
 				$last_modified = $response->getLastModified();
