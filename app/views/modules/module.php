@@ -29,8 +29,8 @@
 			<th class="hidden-phone">Level</th>
 			<th class="hidden-phone">Credits <a class="credits-help" href="#" data-toggle="popover" data-trigger="focus" tabindex="0" role="button" data-content="ECTS credits are recognised throughout the EU and allow you to transfer credit easily from one university to another">(ECTS)</a></th>
 			<th class="hidden-phone">Convenor</th>
+			<th><?php echo $module->year-1 . '-' . substr($module->year, 2);  ?></th>
 			<th><?php echo $module->year . '-' . substr($module->year+1, 2);  ?></th>
-			<th><?php echo $module->year+1 . '-' . substr($module->year+2, 2);  ?></th>
 		</tr>
 	</thead>
 		<tbody>
@@ -62,7 +62,7 @@
 		</tbody>
 	</table>
 
-		<p><em>Information below is for the <strong><?php echo $module->year . '-' . substr($module->year+1, 2);  ?></strong> session.</em></p>
+		<p><em>Information below is for the <strong><?php echo $module->year-1 . '-' . substr($module->year, 2);  ?></strong> session.</em></p>
 	<?php
 	}
 	?>
