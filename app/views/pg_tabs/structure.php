@@ -43,7 +43,6 @@ foreach ($course->modules as $module) {
 
             <div class="show-hide-content">
                 <p><?php echo $module->synopsis ?></p>
-				<p><strong>Also Known as:</strong> <?php echo $module->sds_code; ?></p>
                 <p><strong>Credits:</strong> <?php echo $module->credit_amount ?> credits
                     (<?php echo $module->ects_credit ?> ECTS credits).</p>
 
@@ -67,7 +66,6 @@ foreach ($course->modules as $module) {
 
                     <div class="show-hide-content">
                         <p><?php echo $module->synopsis ?></p>
-						<p><strong>Also Known as:</strong> <?php echo $module->sds_code; ?></p>
                         <p><strong>Credits:</strong> <?php echo $module->credit_amount ?> credits
                             (<?php echo $module->ects_credit ?> ECTS credits).</p>
 

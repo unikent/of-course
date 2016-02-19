@@ -12,7 +12,6 @@
                         
                         <div class="show-hide-content">
                             <p><?php echo $module->synopsis ?></p>
-							<p><strong>Also Known as:</strong> <?php echo $module->sds_code; ?></p>
                             <p><strong>Credits:</strong> <?php echo $module->credit_amount ?> credits (<?php echo $module->ects_credit ?> ECTS credits).</p>
                             <p class="module-read-more"><a href="http://www.kent.ac.uk/courses/modules/module/<?php echo $module->sds_code ?>">Read more <i class="icon-arrow-right"></i></a></p>
                         </div>
@@ -31,7 +30,6 @@
                         
                         <div class="show-hide-content">
                             <p><?php echo $module->synopsis ?></p>
-							<p><strong>Also Known as:</strong> <?php echo $module->sds_code; ?></p>
                             <p><strong>Credits:</strong> <?php echo $module->credit_amount ?> credits (<?php echo $module->ects_credit ?> ECTS credits).</p>
                             <p class="module-read-more"><a href="http://www.kent.ac.uk/courses/modules/module/<?php echo $module->sds_code ?>">Read more <i class="icon-arrow-right"></i></a></p>
                         </div>
