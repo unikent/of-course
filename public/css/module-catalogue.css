@@ -204,13 +204,17 @@ div.DTFC_LeftFootWrapper table {
     width: 100%;
   }
 }
-#level-info {
+#level-info,
+.credits-help {
   cursor: help;
   outline: none;
 }
 #level-info:hover,
+.credits-help:hover,
 #level-info:focus,
-#level-info:active {
+.credits-help:focus,
+#level-info:active,
+.credits-help:active {
   outline: none;
 }
 .daedalus .popover {
@@ -248,4 +252,21 @@ div.DTFC_LeftFootWrapper table {
 .key-facts-block {
   padding: 20px;
   margin-bottom: 2em;
+}
+tr.inactive td,
+.table-striped tbody > tr:nth-child(odd).inactive > td {
+  background: #e8e8e8;
+  color: #666;
+}
+.kf-check {
+  color: #2B5A23;
+}
+.kf-close {
+  color: #880000;
+}
+table.deliveries {
+  margin: 25px 0 !important;
+}
+table.deliveries tr td {
+  vertical-align: middle;
 }
