@@ -34,6 +34,8 @@ foreach ($course->modules as $module) {
 
         <?php
         $show_count = 10;
+		$course->module_list = empty($course->module_list)?array():$course->module_list;
+
         $first_modules = array_slice($course->module_list, 0, $show_count);
         $other_modules = array_slice($course->module_list, $show_count);
         ?>
