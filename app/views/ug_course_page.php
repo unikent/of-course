@@ -274,7 +274,7 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 						</div><!-- /.side-panel -->
 					</div><!-- /.span5 -->
 				</div><!-- /.row-fluid -->
-			</div><!-- /.daedalus-tabs --?
+			</div><!-- /.daedalus-tabs -->
 			<?php endif; ?>
 
 				<?php if ($course->kiscourseid != '' && $course->programme_suspended != 'true'): ?>
