@@ -3,7 +3,7 @@
 <?php if($year !== CoursesController::$current_year): ?>
 	<meta name="robots" content="noindex, nofollow" />
 	<div class='alert alert-daedalus'>
-		This course search is for undergraduate programmes starting in September <?php echo $year; ?>. <a href="<?php echo Flight::request()->base; ?>/undergraduate/search">Search for programmes starting in September 2016 here.</a>
+		This course search is for undergraduate programmes starting in September <?php echo $year; ?>. <a href="<?php echo Flight::request()->base; ?>/undergraduate/search">Search for programmes starting in September 2017 here.</a>
 	</div>
 <?php endif; ?>
 
