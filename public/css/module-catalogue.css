@@ -315,3 +315,6 @@ table.deliveries tr td {
     padding-right: 0;
   }
 }
+#subject-search {
+  width: 100%;
+}
