@@ -67,6 +67,7 @@ class ModulesController {
 	{
 		$module = $this->getModule($module_code);
 
+		$subjects = $this->getSubjectsList();
 
 		// Handle error
 		if(isset($module->error)){
@@ -79,7 +80,7 @@ class ModulesController {
 			Flight::redirect("/modules/module/".strtolower($module->code));
 		}
 		*/
-		return Flight::layout("modules/module", array('module'=>$module), "modules/layout");
+		return Flight::layout("modules/module", array('module'=>$module, "subjects"=>$subjects), "modules/layout");
 	}
 
 	/**
