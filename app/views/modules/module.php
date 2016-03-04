@@ -257,6 +257,7 @@
 				$('#subject-search').change(function(){
 					var val = $('#subject-search').val();
 					qs.datastore.clear_filters();
+					qs.lastValue = '';
 					qs.datastore.filter(function(o){return o.running===true && (val.length > 0 ? o.sds_code.indexOf(val) === 0 : true ) });
 				});
 
