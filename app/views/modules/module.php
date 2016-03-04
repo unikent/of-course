@@ -2,6 +2,14 @@
 	<header>
 		
 		<div class="qs-search-box pull-right">
+			<select id="subject-search" class=" input-large">
+				<option value="">All subjects</option>
+				<?php foreach ($subjects as $k => $v){
+					?>
+					<option value="<?php echo $k; ?>"><?php echo $v; ?></option>
+					<?php
+				}?>
+			</select>
 			<div class="quickspot-container">
 				<label for="modulesearch" class="screenreader-only">Search modules by code or keyword</label>
 				<input class="input-xlarge" id="modulesearch" type="text" name="search" placeholder="Search modules by code or keyword" autocomplete="off" tabindex="0">
@@ -243,7 +251,16 @@
 				return data.modules;
 			},
 			"loaded":function(){
-				qs.datastore.filter(function(o){return o.running===true});
+				var val = $('#subject-search').val();
+
+				qs.datastore.filter(function(o){return o.running===true && (val.length > 0 ? o.sds_code.indexOf(val) === 0 : true ) });
+				$('#subject-search').change(function(){
+					var val = $('#subject-search').val();
+					qs.datastore.clear_filters();
+					qs.lastValue = '';
+					qs.datastore.filter(function(o){return o.running===true && (val.length > 0 ? o.sds_code.indexOf(val) === 0 : true ) });
+				});
+
 			}
 		});
 

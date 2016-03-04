@@ -27,7 +27,9 @@ class ModulesController {
 			"wild" => array("name" => "Wild Modules", "collection" => "W")
 		);
 
-		return Flight::layout("modules/index", array('modules' => $list, 'collections' => $collections), "modules/layout");
+		$subjects = $this->getSubjectsList();
+
+		return Flight::layout("modules/index", array('modules' => $list, 'collections' => $collections, 'subjects'=>$subjects), "modules/layout");
 	}
 
 	/**
@@ -41,8 +43,10 @@ class ModulesController {
 		if(isset($list->error)){
 			return $this->collection_404($list->error);
 		}
-	
-		return Flight::layout("modules/collection", array('modules' => $list, "collection" => $collection), "modules/layout");
+
+		$subjects = $this->getSubjectsList();
+
+		return Flight::layout("modules/collection", array('modules' => $list, "collection" => $collection, "subjects" => $subjects), "modules/layout");
 	}
 
 	/**
@@ -63,6 +67,7 @@ class ModulesController {
 	{
 		$module = $this->getModule($module_code);
 
+		$subjects = $this->getSubjectsList();
 
 		// Handle error
 		if(isset($module->error)){
@@ -75,7 +80,7 @@ class ModulesController {
 			Flight::redirect("/modules/module/".strtolower($module->code));
 		}
 		*/
-		return Flight::layout("modules/module", array('module'=>$module), "modules/layout");
+		return Flight::layout("modules/module", array('module'=>$module, "subjects"=>$subjects), "modules/layout");
 	}
 
 	/**
@@ -162,5 +167,16 @@ class ModulesController {
 		}
 
 		return json_decode($data['data']);
+	}
+
+	protected function getSubjectsList($group = 'all'){
+		$data = Cache::load(KENT_API_URL . "v1/modules/subjects/" . $group, 15);
+
+		if($data == false){
+			return (object) array("error" => "Unable to find specified subject group.");
+		}
+		$data = json_decode($data['data']);
+
+		return $data->subjects;
 	}
 }
