@@ -270,3 +270,51 @@ table.deliveries {
 table.deliveries tr td {
   vertical-align: middle;
 }
+.advanced-search-boxes {
+  padding: 10px 0 0;
+  overflow: hidden;
+  box-sizing: border-box;
+  background-color: #f9f4e7;
+}
+.advanced-search-boxes .advanced-search-filters .advanced-text-search {
+  width: 100%;
+  display: inline-block;
+  box-sizing: border-box;
+  min-height: 30px;
+}
+.advanced-search-boxes .advanced-search-filters select {
+  box-sizing: border-box;
+  width: 100%;
+}
+.advanced-search-boxes .advanced-search-filters .search-filter,
+.advanced-search-boxes .advanced-search-filters .search-select {
+  float: left;
+  display: inline-block;
+  width: 100%;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+@media (min-width: 600px) {
+  .advanced-search-boxes .advanced-search-filters .search-filter {
+    width: 275px;
+    white-space: nowrap;
+    overflow: hidden;
+    padding-right: 0;
+    position: relative;
+  }
+  .advanced-search-boxes .advanced-search-filters .search-filter span {
+    position: absolute;
+    padding-top: 5px;
+  }
+  .advanced-search-boxes .advanced-search-filters .search-filter .advanced-text-search {
+    width: 202px;
+    margin-left: 63px;
+  }
+  .advanced-search-boxes .advanced-search-filters .search-select {
+    width: 295px;
+    padding-right: 0;
+  }
+}
+#subject-search {
+  width: 100%;
+}

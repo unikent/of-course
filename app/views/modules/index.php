@@ -12,13 +12,32 @@
 	</ul>
 	<div class="tab-content">
 		<section id="all">
-			<h2>Overview</h2>
-			
+			<div class="advanced-search-boxes">
+				<div class="advanced-search-filters">
+					<div class="search-filter">
+						<span>Filter by: </span><input class="advanced-text-search" type="text" placeholder="keyword">
+					</div>
+					<div class="search-select subject-search-div">
+						<select class="subject-search input-large " data-col="4">
+							<option value="">All subjects</option>
+							<?php foreach ($subjects as $k => $v){
+								?>
+							<option value="<?php echo $k; ?>"><?php echo $v; ?></option>
+							<?php
+							}?>
+						</select>
+					</div>
+				</div>
+
+			</div>
+
 			<table class="dataTable_all table table-striped" data-ready="true">
 				<thead>
 					<tr>
 						<th>Module Code</th>
 						<th>Module title</th>
+						<th class="hide">Sort-key</th>
+						<th class="hide">Sort</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -31,17 +50,38 @@
 
 				<h2 id="collection_title_<?php echo $collection['collection'];?>"><?php echo $collection['name'];?></h2>
 
+				<div class="advanced-search-boxes">
+					<div class="advanced-search-filters">
+						<div class="search-filter">
+							<span>Filter by: </span><input class="advanced-text-search" type="text" placeholder="keyword">
+						</div>
+						<div class="search-select subject-search-div">
+							<select class="subject-search input-large " data-col="4">
+								<option value="">All subjects</option>
+								<?php foreach ($subjects as $k => $v){
+									?>
+									<option value="<?php echo $k; ?>"><?php echo $v; ?></option>
+									<?php
+								}?>
+							</select>
+						</div>
+					</div>
 
+				</div>
 				<table class="dataTable_<?php echo $code;?> table table-striped" data-collection="<?php echo $collection['collection'];?>">
 					<thead>
 						<tr>
 							<th>Module Code</th>
 							<th>Module title</th>
+							<th class="hide">Sort-key</th>
+							<th class="hide">Sort</th>
 						</tr>
 					</thead>
 					<tr>
 						<td>Loading....</td>
 						<td></td>
+						<td class="hide"></td>
+						<td class="hide"></td>
 					</tr>
 				</table>
 			</section>
@@ -78,6 +118,9 @@
 		var all_modules = <?php echo json_encode(array_values((array)$modules->modules)); ?>;
 	</script>
 <script>
+
+	var module_list_data = {};
+
 	$(".module_tabs .nav a").click(function(){
 		var tab_name = $(this).attr("href").substring(1);
 		var table = $(".dataTable_" +  tab_name);
@@ -86,11 +129,11 @@
 		if(table.attr('data-ready') == 'true') return;
 		table.attr('data-ready', 'true');
 
-		module_datatable(table, {"api_endpoint": "<?php echo KENT_API_URL;?>v1/modules/collection/" + table.attr("data-collection"), base_url: "<?php echo Flight::url('modules/module/'); ?>" });
+		module_datatable(table, {"api_endpoint": "<?php echo KENT_API_URL;?>v1/modules/collection/" + table.attr("data-collection"), base_url: "<?php echo Flight::url('modules/module/'); ?>",keyword_filter:$('#' + tab_name + ' .advanced-text-search:first'),subject_filter:$('#' + tab_name + ' .subject-search:first'),id:tab_name });
 	});
 
 	// Init first table
-	module_datatable($(".dataTable_all"), {"data": all_modules, "api_endpoint": "<?php echo KENT_API_URL;?>v1/modules/collection/all", base_url: "<?php echo Flight::url('modules/module/'); ?>" });
+	module_datatable($(".dataTable_all"), {"data": all_modules, "api_endpoint": "<?php echo KENT_API_URL;?>v1/modules/collection/all", base_url: "<?php echo Flight::url('modules/module/'); ?>",keyword_filter:$('#all .advanced-text-search:first'),subject_filter:$('#all .subject-search:first'),id:'all'});
 
 	// Trigger click on load (if hash is in use), so tabbed tables work
 	var hash = window.location.hash;

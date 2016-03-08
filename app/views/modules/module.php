@@ -2,6 +2,14 @@
 	<header>
 		
 		<div class="qs-search-box pull-right">
+			<select id="subject-search" class=" input-large">
+				<option value="">All subjects</option>
+				<?php foreach ($subjects as $k => $v){
+					?>
+					<option value="<?php echo $k; ?>"><?php echo $v; ?></option>
+					<?php
+				}?>
+			</select>
 			<div class="quickspot-container">
 				<label for="modulesearch" class="screenreader-only">Search modules by code or keyword</label>
 				<input class="input-xlarge" id="modulesearch" type="text" name="search" placeholder="Search modules by code or keyword" autocomplete="off" tabindex="0">
@@ -28,7 +36,7 @@
 			<th class="hidden-phone">Term</th>
 			<th class="hidden-phone">Level</th>
 			<th class="hidden-phone">Credits <a class="credits-help" href="#" data-toggle="popover" data-trigger="focus" tabindex="0" role="button" data-content="ECTS credits are recognised throughout the EU and allow you to transfer credit easily from one university to another">(ECTS)</a></th>
-			<th class="hidden-phone">Convenor</th>
+			<th class="hidden-phone">Current Convenor</th>
 			<th><?php echo $module->year-1 . '-' . substr($module->year, 2);  ?></th>
 			<th><?php echo $module->year . '-' . substr($module->year+1, 2);  ?></th>
 		</tr>
@@ -45,7 +53,7 @@
 							<strong>Term: </strong><?php echo $delivery->term; ?> <a href="<?php echo $delivery->delivery_url; ?>" title="View Timetable"><small>View Timetable</small></a><br>
 							<strong>Level: </strong><a href="#" data-toggle="popover" data-trigger="focus" tabindex="0" role="button" data-content="<?php echo $delivery->credit_level_desc; ?>" id="level-info"><?php echo $delivery->credit_level; ?></a><br>
 							<strong>Credits <a class="credits-help" href="#" data-toggle="popover" data-trigger="focus" tabindex="0" role="button" data-content="ECTS credits are recognised throughout the EU and allow you to transfer credit easily from one university to another">(ECTS)</a>: </strong><?php echo $delivery->credit_amount; ?><br>
-							<strong>Convenor: </strong><?php echo $delivery->convenor; ?><br>
+							<strong>Current Convenor: </strong><?php echo $delivery->convenor; ?><br>
 						</div>
 					</td>
 					<td class="hidden-phone"><?php echo $delivery->term; ?><br><a href="<?php echo $delivery->delivery_url; ?>" title="View Timetable"><small>View Timetable</small></a></td>
@@ -243,7 +251,16 @@
 				return data.modules;
 			},
 			"loaded":function(){
-				qs.datastore.filter(function(o){return o.running===true});
+				var val = $('#subject-search').val();
+
+				qs.datastore.filter(function(o){return o.running===true && (val.length > 0 ? o.sds_code.indexOf(val) === 0 : true ) });
+				$('#subject-search').change(function(){
+					var val = $('#subject-search').val();
+					qs.datastore.clear_filters();
+					qs.lastValue = '';
+					qs.datastore.filter(function(o){return o.running===true && (val.length > 0 ? o.sds_code.indexOf(val) === 0 : true ) });
+				});
+
 			}
 		});
 

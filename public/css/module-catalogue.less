@@ -1,3 +1,4 @@
+@import "variables.less";
 @import (less) 'DT_bootstrap.css';
 
 .container .dataTables_filter {
@@ -123,4 +124,59 @@ table.deliveries{
 			vertical-align: middle;
 		}
 	}
+}
+
+.advanced-search-boxes {
+	padding: 10px 0 0;
+	overflow: hidden;
+	box-sizing: border-box;
+	background-color: @cream;
+
+	.advanced-search-filters {
+
+		.advanced-text-search {
+			width: 100%;
+			display: inline-block;
+			box-sizing: border-box;
+			min-height: 30px;
+		}
+
+		select{
+			box-sizing: border-box;
+			width:100%;
+		}
+
+		.search-filter,.search-select{
+			float:left;
+			display: inline-block;
+			width: 100%;
+			padding: 0 10px;
+			box-sizing: border-box;
+		}
+
+		@media (min-width: 600px) {
+			.search-filter{
+				span{
+					position: absolute;
+					padding-top: 5px;
+				}
+				.advanced-text-search {
+					width:202px;
+					margin-left:63px;
+				}
+				width: 275px;
+				white-space: nowrap;
+				overflow: hidden;
+				padding-right: 0;
+				position: relative;
+			}
+			.search-select {
+				width: 295px;
+				padding-right:0;
+			}
+		}
+	}
+}
+#subject-search{
+	width: 100%;
 }
