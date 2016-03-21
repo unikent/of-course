@@ -67,7 +67,7 @@
 					<option value="">All course options</option>
 					<option <?php if ( ($search_type == 'programme_type' || $search_type == 'course_options') && urldecode(strtolower(trim($search_string))) == 'year abroad' ) echo 'selected'; ?>>Year abroad</option>
 					<option <?php if ( ($search_type == 'programme_type' || $search_type == 'course_options') && urldecode(strtolower(trim($search_string))) == 'year in industry' ) echo 'selected'; ?>>Year in industry</option>
-					<option <?php if ( ($search_type == 'programme_type' || $search_type == 'course_options') && urldecode(strtolower(trim($search_string))) == 'foundation year' ) echo 'selected'; ?>>Foundation year</option>
+					<option <?php if ( ($search_type == 'programme_type' || $search_type == 'course_options') && (urldecode(strtolower(trim($search_string))) == 'foundation year' || urldecode(strtolower(trim($search_string))) == 'IFP') ) echo 'selected'; ?>>Foundation year</option>
 				</select>
 			</div>
 		</div>
