@@ -11,7 +11,7 @@
 		<?php } ?>
 	</ul>
 	<div class="tab-content">
-		<section id="all">
+		<section class="loaded" id="all">
 			<div class="advanced-search-boxes">
 				<div class="advanced-search-filters">
 					<div class="search-filter">
@@ -22,7 +22,7 @@
 							<option value="">All subjects</option>
 							<?php foreach ($subjects as $k => $v){
 								?>
-							<option value="<?php echo $k; ?>"><?php echo $v; ?></option>
+							<option value="<?php echo $k; ?>"><?php echo $v; ?> - (<?php echo $k; ?>)</option>
 							<?php
 							}?>
 						</select>
@@ -50,6 +50,8 @@
 
 				<h2 id="collection_title_<?php echo $collection['collection'];?>"><?php echo $collection['name'];?></h2>
 
+				<a class="btn btn-primary loader" href="#<?php echo $code;?>">Load this module collection</a>
+
 				<div class="advanced-search-boxes">
 					<div class="advanced-search-filters">
 						<div class="search-filter">
@@ -60,7 +62,7 @@
 								<option value="">All subjects</option>
 								<?php foreach ($subjects as $k => $v){
 									?>
-									<option value="<?php echo $k; ?>"><?php echo $v; ?></option>
+									<option value="<?php echo $k; ?>"><?php echo $v; ?> - (<?php echo $k; ?>)</option>
 									<?php
 								}?>
 							</select>
@@ -121,7 +123,7 @@
 
 	var module_list_data = {};
 
-	$(".module_tabs .nav a").click(function(){
+	$(".module_tabs .nav a, .module_tabs .loader").click(function(){
 		var tab_name = $(this).attr("href").substring(1);
 		var table = $(".dataTable_" +  tab_name);
 
@@ -130,6 +132,8 @@
 		table.attr('data-ready', 'true');
 
 		module_datatable(table, {"api_endpoint": "<?php echo KENT_API_URL;?>v1/modules/collection/" + table.attr("data-collection"), base_url: "<?php echo Flight::url('modules/module/'); ?>",keyword_filter:$('#' + tab_name + ' .advanced-text-search:first'),subject_filter:$('#' + tab_name + ' .subject-search:first'),id:tab_name });
+
+		$($(this).attr("href")).addClass('loaded').find('.loader').remove();
 	});
 
 	// Init first table
