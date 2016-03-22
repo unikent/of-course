@@ -280,11 +280,34 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 				<?php if ($course->kiscourseid != '' && $course->programme_suspended != 'true'): ?>
 					<section class="panel tertiary-tier highlighted no-border kiss-widget-section">
 						<h2>Key Information Sets</h2>
+						<?php if ($has_fulltime){ ?>
+
+						<?php if ($has_parttime){ ?>
+						<h4>Full Time</h4>
+						<?php } ?>
+
 						<div class="row-fluid">
-							<div class="span8">
+							<div class="span12">
 								<?php $ukprn = (isset($course->kis_institution_id) && $course->kis_institution_id != '') ? $course->kis_institution_id : $course->globals->ukprn; ?>
 								<iframe id="unistats-widget-frame" title="Unistats KIS Widget" src="//widget.unistats.ac.uk/Widget/<?php echo $ukprn ?>/<?php echo str_replace(array('/', '|', ':', '&', '.', '>', '+', '#', ';', '?', '@', '='), '_', $course->kiscourseid); ?>/horizontal/small/en-GB/Full%20Time" scrolling="no" style="overflow: hidden; border: 0px none transparent; width: 615px; height: 150px;"> </iframe>
-								<br><br>
+							</div>
+						</div>
+						<br>
+						<?php } ?>
+						<?php if ($has_parttime){ ?>
+							<?php if ($has_fulltime){ ?>
+								<h4>Part Time</h4>
+							<?php } ?>
+						<div class="row-fluid">
+							<div class="span12">
+								<?php $ukprn = (isset($course->kis_institution_id) && $course->kis_institution_id != '') ? $course->kis_institution_id : $course->globals->ukprn; ?>
+								<iframe id="unistats-widget-frame" title="Unistats KIS Widget" src="//widget.unistats.ac.uk/Widget/<?php echo $ukprn ?>/<?php echo str_replace(array('/', '|', ':', '&', '.', '>', '+', '#', ';', '?', '@', '='), '_', $course->kiscourseid); ?>/horizontal/small/en-GB/Part%20Time" scrolling="no" style="overflow: hidden; border: 0px none transparent; width: 615px; height: 150px;"> </iframe>
+							</div>
+						</div>
+						<br>
+						<?php } ?>
+						<div class="row-fluid">
+							<div class="span8">
 								<?php echo $course->kis_explanatory_textarea ?>
 							</div>
 							<div class="span4">
