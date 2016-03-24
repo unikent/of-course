@@ -773,7 +773,7 @@ class CoursesController {
 			}
 		}
 
-		if($level=="postgraduate" || ($level=="undergraduate" && $delivery->attendance_pattern == 'part-time' && $course->how_to_apply_atypical_courses != '')) {
+		if($level=="postgraduate" || ($level=="undergraduate" && $delivery->attendance_pattern == 'part-time' && (strlen($course->how_to_apply_atypical_courses) == 0))) {
 			// go directly to evision if there is only one valid delivery for this course
 			if (count($validDeliveries) == 1) {
 				$delivery = $validDeliveries[0];
