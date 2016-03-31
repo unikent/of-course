@@ -13,7 +13,7 @@
 				<option value="">All subjects</option>
 				<?php foreach ($subjects as $k => $v){
 					?>
-					<option value="<?php echo $k; ?>"><?php echo $v; ?></option>
+					<option value="<?php echo $k; ?>"><?php echo $v; ?> - (<?php echo $k; ?>)</option>
 					<?php
 				}?>
 			</select>

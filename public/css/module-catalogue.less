@@ -1,6 +1,111 @@
 @import "variables.less";
 @import (less) 'DT_bootstrap.css';
 
+
+/* login page */
+.btn.btn-primary {
+	color: #fff;
+	background: #1f4f82;
+}
+
+a.btn{
+	border: 1px solid #b3b3b3;
+	border-bottom: 1px solid #b3b3b3;
+}
+
+.btn{
+	font-size: 1.1em;
+	font-weight: normal;
+	text-shadow: none;
+	/*padding: 0.6em 2.2em;*/
+	background-image: none;
+	color: #1f4f82;
+	border-radius: 0;
+	box-shadow: none;
+
+	&:hover,
+	&:focus {
+		text-decoration: underline;
+		background-color: #FFFFFF;
+		color: #1f4f82;
+	}
+
+	.secondary-action {
+		background: #f5f5f5;
+		color: #1f4f82;
+
+		&:hover, &:focus {
+			color: #1f4f82;
+			background: #ffffff;
+			text-decoration: underline;
+		}
+	}
+
+	&.btn-primary{
+		background: #1F4F82;
+		color: #ffffff;
+
+		&:hover,
+		&:focus {
+			color: #ffffff;
+			background-color: #173b60;
+		}
+	}
+
+	&.btn-block{
+		display: block;
+	}
+
+
+
+
+
+}
+
+.btn-primary {
+	background:#1F4F82;
+	border: 1px solid #1F4F82;
+}
+
+.btn-large,.btn-default {
+	border-radius:2px;
+}
+
+.btn-large {
+	padding:11px 29px;
+}
+
+a.btn:hover {
+	border-color:#CCC #CCC #B3B3B3;
+}
+
+.btn-primary:hover,.btn-primary:focus,.btn-primary:active,.btn-primary.active,.btn-primary.disabled,.btn-primary[disabled] {
+	background-color:#173B60;
+	text-decoration:underline;
+}
+
+.btn-default {
+	color:#173B60;
+}
+
+.btn-success {
+	color:#fff;
+	background:#468847;
+}
+
+.btn-success:hover,.btn-success:focus,.btn-success:active,.btn-success.active,.btn-success.disabled,.btn-success[disabled] {
+	background-color:#356638;
+	color:#fff;
+	text-decoration:underline;
+}
+
+.btn-default:hover,.btn-default:focus,.btn-default:active,.btn-default.active,.btn-default.disabled,.btn-default[disabled] {
+	background-color:#fff;
+	color:#173B60;
+	text-decoration:underline;
+}
+
+
 .container .dataTables_filter {
 	padding: 10px;
 	background-color: #fbf7eb;
@@ -179,4 +284,34 @@ table.deliveries{
 }
 #subject-search{
 	width: 100%;
+}
+
+.tab-pane{
+	.advanced-search-boxes{
+		display: none;
+	}
+	.table{
+		display: none;
+	}
+	
+	&.loaded{
+		.advanced-search-boxes{
+			display: block;
+		}
+		.table{
+			display: table;
+		}
+	}
+
+	@media (min-width: 480px) {
+		.advanced-search-boxes{
+			display: block;
+		}
+		.table{
+			display: table;
+		}
+		.loader{
+			display:none;
+		}
+	}
 }
