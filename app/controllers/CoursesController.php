@@ -773,18 +773,19 @@ class CoursesController {
 			}
 		}
 
-		if($level=="postgraduate" || ($level=="undergraduate" && $delivery->attendance_pattern == 'part-time' && (strlen($course->how_to_apply_atypical_courses) == 0))) {
-			// go directly to evision if there is only one valid delivery for this course
-			if (count($validDeliveries) == 1) {
-				$delivery = $validDeliveries[0];
-				$url = (!empty($delivery->current_ipo)) ? "https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&code1=" . $delivery->mcr . "&code2=" . $delivery->current_ipo : '';
 
-				if (!empty($url)) {
-					header('Location: ' . $url);
-					exit;
-				}
-			}
-		}
+		//if($level=="postgraduate" || ($level=="undergraduate" && $delivery->attendance_pattern == 'part-time' && (strlen($course->how_to_apply_atypical_courses) == 0))) {
+		//	// go directly to evision if there is only one valid delivery for this course
+		//	if (count($validDeliveries) == 1) {
+		//		$delivery = $validDeliveries[0];
+		//		$url = (!empty($delivery->current_ipo)) ? "https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&code1=" . $delivery->mcr . "&code2=" . $delivery->current_ipo : '';
+		//
+		//		if (!empty($url)) {
+		//			header('Location: ' . $url);
+		//			exit;
+		//		}
+		//	}
+		//}
 
 
 		switch($level){
