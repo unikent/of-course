@@ -249,6 +249,7 @@
 	// 500 error handler
 	Flight::map('error', function($error, $data = array()){
 
+		/** @var Exception $error */
 		// Attempt to resolve URL details, location, path and other stuff
 		// that will allow us to be more helpful.
 		$data = validate_404_data($data);
@@ -264,7 +265,7 @@
 				".print_r($data, true)."
 
 				Error data:
-				".print_r($error, true)."
+				". get_class($error) . " '{$error->getMessage()}' in {$error->getFile()}({$error->getLine()})\n
 			";
 
 			mail(FAIL_ALERT_EMAIL, "Of-Course: 500 error", $message);
