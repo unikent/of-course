@@ -489,7 +489,7 @@ class CoursesController {
 			return json_encode($js);
 		}, 2);
 
-		if($out === false) Flight::halt(501, "Fatal error in getting programmes index.");
+		if($output === false) Flight::halt(501, "Fatal error in getting programmes index.");
 
 		// 1h Cache.
 		Flight::response()->cache(time()+3600);
@@ -506,7 +506,8 @@ class CoursesController {
 
 		try
 		{
-			$subjects = static::$pp->get_subjectcategories($level);
+			$subjects = (array) static::$pp->get_subjectcategories($level);
+			ksort($subjects,SORT_NUMERIC);
 		}
 		catch(\Exception $e)
 		{
@@ -552,7 +553,7 @@ class CoursesController {
 		// Get feed
 		try
 		{
-			$subjects = static::$pp->get_subject_index($year, $type);
+			$subjects = static::$pp->get_subject_index($year, $level);
 		}
 		catch(\Exception $e)
 		{
