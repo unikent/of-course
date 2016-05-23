@@ -128,6 +128,10 @@
 		return $content;
 	});
 
+	Flight::map("validYear", function($year){
+		return ($year == 'current' || (int)$year > 2013);
+	});
+
 	/**
 	 * setup: Sets data for views
 	 *
@@ -137,6 +141,7 @@
 	 * @param $simpleview true|false
 	 */
 	Flight::map('setup', function($year, $level, $preview = false, $simpleview = false){
+
 		// Set data for view
 		Flight::view()->set('level', (!$level) ? 'undergraduate' : $level);
 		Flight::view()->set('year', $year);
@@ -226,7 +231,7 @@
 			// Avoid WSOD
 			Flight::halt('404', $page404);
 		}*/
-
+		
 		// Attempt to resolve URL details, location, path and other stuff
 		// that will allow us to be more helpful.
 		$data = validate_404_data($data);
