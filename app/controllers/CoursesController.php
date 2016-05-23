@@ -507,7 +507,9 @@ class CoursesController {
 		try
 		{
 			$subjects = (array) static::$pp->get_subjectcategories($level);
-			ksort($subjects,SORT_NUMERIC);
+			usort($subjects, function ($a, $b) {
+ +				return $a->name > $b->name;
+ +			});
 		}
 		catch(\Exception $e)
 		{
