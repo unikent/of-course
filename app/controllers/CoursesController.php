@@ -508,8 +508,8 @@ class CoursesController {
 		{
 			$subjects = (array) static::$pp->get_subjectcategories($level);
 			usort($subjects, function ($a, $b) {
- +				return $a->name > $b->name;
- +			});
+ 				return $a->name > $b->name;
+ 			});
 		}
 		catch(\Exception $e)
 		{
