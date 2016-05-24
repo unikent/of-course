@@ -46,7 +46,6 @@ class CoursesController {
 	* @param string Slug - programme name
 	*/
 	public function view($level, $year, $id, $slug = ''){
-
 		$meta = array();
 
 		// Use webservices to get course data for programme.
@@ -288,10 +287,14 @@ class CoursesController {
 	* @param string string to search
 	*/
 	public function search($level, $year, $search_type = '', $search_string = '')
-	{
+	{	
+		if(!Flight::validYear($year)){
+			return Flight::notFound();
+		} 
 
 		switch($level){
 			case 'postgraduate':
+			$title = 'Courses A-Z';
 			$template = 'pg_search';
 			$meta = array(
 				'title' => 'Courses A-Z | Postgraduate Courses | The University of Kent',
@@ -300,6 +303,7 @@ class CoursesController {
 			break;
 
 			default:
+			$title = 'Courses A-Z';
 			$template = 'ug_search';
 			$meta = array(
 				'title' => 'Courses A-Z | Undergraduate Courses | The University of Kent',
@@ -307,8 +311,6 @@ class CoursesController {
 			);
 			break;
 		}
-
-
 
 		Flight::setup($year, $level);
 
@@ -334,7 +336,7 @@ class CoursesController {
 		if(isset($_GET['debug_performance'])){ Logger::warn($programmes); }
 
 		//Render full page
-		return Flight::layout($template, array('meta' => $meta, 'programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'search_type' => $search_type, 'search_string' => $search_string, 'awards' => $award_names, 'disable_search_bar' => true));
+		return Flight::layout($template, array('meta' => $meta, 'programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'search_type' => $search_type, 'search_string' => $search_string, 'awards' => $award_names, 'disable_search_bar' => true, 'title' => $title));
 
 	}
 	/**
@@ -405,25 +407,16 @@ class CoursesController {
 	* @param yyyy Year to show
 	*/
 	public function study_abroad($level, $year)
-	{
-		switch($level){
-			case 'postgraduate':
-			$template = 'study_abroad';
-			$meta = array(
-				'title' => 'Postgraduate courses with international study | Postgraduate Courses | The University of Kent',
-				'description' => 'Search all of the study abroad option courses offered by the University of Kent',
-			);
-			break;
-
-			default:
-			$template = 'study_abroad';
-			$meta = array(
-				'title' => 'Postgraduate courses with international study | Postgraduate Courses | The University of Kent',
-				'description' => 'Search all of the study abroad option courses offered by the University of Kent',
-			);
-			break;
-		}
-
+	{	
+		if(!Flight::validYear($year)){
+			return Flight::notFound();
+		} 
+		$title = 'Postgraduate courses with international study';
+		$template = 'pg_search';
+		$meta = array(
+			'title' => 'Postgraduate courses with international study | Postgraduate Courses | The University of Kent',
+			'description' => 'Search all of the study abroad option courses offered by the University of Kent',
+		);
 
 		Flight::setup($year, $level);
 
@@ -449,10 +442,7 @@ class CoursesController {
 		if(isset($_GET['debug_performance'])){ Logger::warn($programmes); }
 
 		//Render full page
-		return Flight::layout($template, array('meta' => $meta, 'programmes' => $programmes, 'level' => $level));
-
-		return Flight::layout($template, array('meta' => $meta, 'programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'awards' => $award_names));
-
+		return Flight::layout($template, array('meta' => $meta, 'programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'search_type' => $search_type, 'search_string' => $search_string, 'awards' => $award_names, 'disable_search_bar' => true, 'title' => $title, 'only_study_abroad' => true));
 	}
 
 	/**
@@ -489,7 +479,7 @@ class CoursesController {
 			return json_encode($js);
 		}, 2);
 
-		if($out === false) Flight::halt(501, "Fatal error in getting programmes index.");
+		if($output === false) Flight::halt(501, "Fatal error in getting programmes index.");
 
 		// 1h Cache.
 		Flight::response()->cache(time()+3600);
@@ -506,7 +496,10 @@ class CoursesController {
 
 		try
 		{
-			$subjects = static::$pp->get_subjectcategories($level);
+			$subjects = (array) static::$pp->get_subjectcategories($level);
+			usort($subjects, function ($a, $b) {
+ 				return $a->name > $b->name;
+ 			});
 		}
 		catch(\Exception $e)
 		{
@@ -552,7 +545,7 @@ class CoursesController {
 		// Get feed
 		try
 		{
-			$subjects = static::$pp->get_subject_index($year, $type);
+			$subjects = static::$pp->get_subject_index($year, $level);
 		}
 		catch(\Exception $e)
 		{

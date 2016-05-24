@@ -8,7 +8,9 @@
 <?php endif; ?>
 
 <div class="advanced-search">
-	<h1>Courses A-Z</h1>
+
+	<h1><?php echo $title; ?></h1>
+
 	<a id="showMore">Choose a course that's right for you. Learn more <i class="icon-chevron-right"></i></a>
 	<div id="more" class="clearfix" style="display: none;" aria-expanded="false"></div>
 	<div class="row-fluid">
@@ -109,6 +111,7 @@
 	<tbody>
 
 		<?php foreach($programmes as $p):?>
+			<?php if(!(isset($only_study_abroad) && $only_study_abroad === true) || $p->study_abroad_option != ''):?>
 			<tr>
 				<td>
 					<div class="advanced-search-name-award"><a href='<?php echo Flight::url("{$level}/{$year_for_url}{$p->id}/{$p->slug}"); ?>'><?php echo $p->name;?> <?php echo $p->programmme_status_text; ?></a><br /><span class="advanced-search-award"><?php echo $p->award;?></span></div>
@@ -159,6 +162,7 @@
 				<td class="hide"><?php echo strtolower($p->name);?> <?php echo strtolower($p->award);?></td>
 				<td class="hide"></td>
 			</tr>
+			<?php endif;?>
 		<?php endforeach; ?>
 
 
