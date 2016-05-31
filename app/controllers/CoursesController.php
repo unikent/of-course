@@ -287,10 +287,10 @@ class CoursesController {
 	* @param string string to search
 	*/
 	public function search($level, $year, $search_type = '', $search_string = '')
-	{	
+	{
 		if(!Flight::validYear($year)){
 			return Flight::notFound();
-		} 
+		}
 
 		switch($level){
 			case 'postgraduate':
@@ -407,10 +407,10 @@ class CoursesController {
 	* @param yyyy Year to show
 	*/
 	public function study_abroad($level, $year)
-	{	
+	{
 		if(!Flight::validYear($year)){
 			return Flight::notFound();
-		} 
+		}
 		$title = 'Postgraduate courses with international study';
 		$template = 'pg_search';
 		$meta = array(
@@ -484,7 +484,7 @@ class CoursesController {
 		// 1h Cache.
 		Flight::response()->cache(time()+3600);
 
-		// Try & cache	
+		// Try & cache
 		echo $output;
 	}
 
@@ -498,8 +498,8 @@ class CoursesController {
 		{
 			$subjects = (array) static::$pp->get_subjectcategories($level);
 			usort($subjects, function ($a, $b) {
- 				return $a->name > $b->name;
- 			});
+				return $a->name > $b->name;
+			});
 		}
 		catch(\Exception $e)
 		{
@@ -766,18 +766,19 @@ class CoursesController {
 			}
 		}
 
-		if($level=="postgraduate" || ($level=="undergraduate" && $delivery->attendance_pattern == 'part-time' && (strlen($course->how_to_apply_atypical_courses) == 0))) {
-			// go directly to evision if there is only one valid delivery for this course
-			if (count($validDeliveries) == 1) {
-				$delivery = $validDeliveries[0];
-				$url = (!empty($delivery->current_ipo)) ? "https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&code1=" . $delivery->mcr . "&code2=" . $delivery->current_ipo : '';
 
-				if (!empty($url)) {
-					header('Location: ' . $url);
-					exit;
-				}
-			}
-		}
+		//if($level=="postgraduate" || ($level=="undergraduate" && $delivery->attendance_pattern == 'part-time' && (strlen($course->how_to_apply_atypical_courses) == 0))) {
+		//	// go directly to evision if there is only one valid delivery for this course
+		//	if (count($validDeliveries) == 1) {
+		//		$delivery = $validDeliveries[0];
+		//		$url = (!empty($delivery->current_ipo)) ? "https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&code1=" . $delivery->mcr . "&code2=" . $delivery->current_ipo : '';
+		//
+		//		if (!empty($url)) {
+		//			header('Location: ' . $url);
+		//			exit;
+		//		}
+		//	}
+		//}
 
 
 		switch($level){
@@ -841,7 +842,7 @@ class CoursesController {
 	}
 
 	private function getCourseAwardList($course)
-	{	
+	{
 		// no award - should this be possible?
 		if(empty($course->award)) return '';
 
@@ -856,7 +857,7 @@ class CoursesController {
 	}
 
 	private function getCourseAwardListLinked($course)
-	{	
+	{
 		// no award - should this be possible?
 		if(empty($course->award)) return '';
 

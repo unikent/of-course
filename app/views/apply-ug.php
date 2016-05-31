@@ -35,12 +35,11 @@ if (empty($deliveries)) {
 
     <div class="apply-form apply-form-ug hidden">
         <p>Learn more about <a href="//www.kent.ac.uk/courses/undergraduate/apply/how.html">the application process</a> or begin your application below by registering.</p>
-        <p>You don't need to complete your application all in one go - simply begin by registering. You can save and come back to your application at any time.
-            You'll need to select your course options below:</p>
+		<?php if (count($deliveries) > 1 ){ ?><p>You'll need to select your course options below:</p><?php } ?>
 
         <div>
             <fieldset class="highlight-fieldset indent">
-                <legend>Course options</legend>
+                <?php if (count($deliveries) > 1 ){ ?><legend>Course options</legend><?php } ?>
                 <?php
                 if (!$has_parttime){
                     ?>
