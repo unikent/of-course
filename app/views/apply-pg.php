@@ -101,7 +101,7 @@ if (isset($course->how_to_apply) && trim($course->how_to_apply) != '' && !empty(
 
 		<p>Learn more about <a href="//www.kent.ac.uk/courses/postgraduate/apply/">the application process</a> or begin your application below by registering.</p>
 		<p>You don't need to complete your application all in one go - simply begin by registering. You can save and come back to your application at any time.
-			You'll need to select your course options below:</p>
+			<?php if (count($deliveries) > 1 ){ ?>You'll need to select your course options below:<?php } ?></p>
 
 		<?php /* one award but lots of deliveries - edge case  OR $noneUniqueDeliveries are found which means they could no normally be selected */
 		if ($noneUniqueDeliveryFound){ ?>
@@ -139,7 +139,7 @@ if (isset($course->how_to_apply) && trim($course->how_to_apply) != '' && !empty(
 
 			<div>
 				<fieldset class="highlight-fieldset indent">
-					<legend>Course options</legend>
+					<?php if (count($deliveries) > 1 ){ ?><legend>Course options</legend><?php } ?>
 					<?php
 					if (!$has_parttime){
 						?>
