@@ -63,7 +63,7 @@ if (empty($deliveries)) {
                                     <option value="full-time-ug-<?php echo $full_type ?>">Full-time</option>
                                 <?php } ?>
                                 <?php if ($has_parttime){ ?>
-                                    <option value="part-time">Part-time</option>
+                                    <option value="part-time" <?php if(isset($_GET['part_time'])){ ?>selected<?php }?>>Part-time</option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -76,12 +76,7 @@ if (empty($deliveries)) {
 
                 <div class="full-time-text">
                     <?php
-                    if (defined('CLEARING') && CLEARING && $course->current_year > $course->year){
-                        ?>
-                        <h3>Full-time applicants</h3>
-                        <p><a href="<?php echo $course->globals->clearing_vacancies_link; ?>">Is this course in Clearing?</a></p>
-                    <?php
-                    } elseif (trim($course->mode_of_study) != 'Part-time only'){
+                    if (trim($course->mode_of_study) != 'Part-time only'){
                         echo $course->how_to_apply;
                         if ($course->location[0]->name == 'Medway'){
                             echo $course->how_to_apply_medway_fulltime;
@@ -120,20 +115,20 @@ if (empty($deliveries)) {
 
         <?php } ?>
 
-        <?php if (!defined('CLEARING') || !CLEARING || !($course->current_year > $course->year)){ ?>
-            <p class="btn-indent daedalus-tab-action daedaus-js-display">
-                <a href="http://www.ucas.com/apply"
-                   type="button"
-                   id="apply-link-ucas"
-                   class="btn btn-large btn-primary next-btn"
-                   tabindex="0"
-                   role="button"
-                   title="UCAS"
-                   onclick="_pat.event('course-page', 'apply-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>] at <?php echo $schoolName ?>');">Apply through UCAS
-                    <i class="icon-chevron-right icon-white"></i>
-                </a>
-            </p>
-        <?php } ?>
+
+		<p class="btn-indent daedalus-tab-action daedaus-js-display">
+			<a href="http://www.ucas.com/apply"
+			   type="button"
+			   id="apply-link-ucas"
+			   class="btn btn-large btn-primary next-btn"
+			   tabindex="0"
+			   role="button"
+			   title="UCAS"
+			   onclick="_pat.event('course-page', 'apply-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>] at <?php echo $schoolName ?>');">Apply through UCAS
+				<i class="icon-chevron-right icon-white"></i>
+			</a>
+		</p>
+
 
         <p class="btn-indent daedalus-tab-action daedaus-js-display">
             <a type="button" id="apply-link-dummy" class="btn btn-large next-btn apply-link-courses disabled"
@@ -146,12 +141,7 @@ if (empty($deliveries)) {
 
     <noscript>
         <?php
-        if (defined('CLEARING') && CLEARING && $course->current_year > $course->year){
-            ?>
-            <h3>Full-time applicants</h3>
-            <p><a href="<?php echo $course->globals->clearing_vacancies_link; ?>">Is this course in Clearing?</a></p>
-        <?php
-        } elseif (trim($course->mode_of_study) != 'Part-time only'){
+        if (trim($course->mode_of_study) != 'Part-time only'){
             echo $course->how_to_apply;
             if ($course->location[0]->name == 'Medway'){
                 echo $course->how_to_apply_medway_fulltime;

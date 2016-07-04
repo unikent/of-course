@@ -7,6 +7,9 @@ The application communicates with the back end system via the [programmes-plant-
 
 Depends upon our [Programmes Plant API PHP library](https://github.com/unikent/programmes-plant-api-php) which is installed using [Composer](http://getcomposer.org/).
 
+## Usage
+Please refer to the current [brand guidelines](https://www.kent.ac.uk/brand) for use of the existing brand.
+
 ## Quick Deploy.
 
 1. Checkout the [`master` of this app](http://github.com/unikent/of-course) from GitHub.
