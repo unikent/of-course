@@ -88,7 +88,7 @@ foreach ($course->modules as $module) {
 <section class="info-section">
 
     <?php if (!empty($course->assessment)): ?>
-        <h3>Assessment</h3>
+        <h3>Teaching and Assessment</h3>
         <section class="info-subsection">
             <?php echo $course->assessment ?>
         </section>
