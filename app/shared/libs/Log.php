@@ -111,9 +111,9 @@ class LogItem {
 		$this->level = $level;
 		$this->timestamp = time();
 
-		// Make message a string
+		// Make message a string (wrap in pre, to enable formatting on output)
 		if (is_object($message) || is_array($message)) {
-			$message = print_r($message, true);
+			$message = '<pre>'.print_r($message, true).'</pre>';
 		}
 
 		$this->message = $message;

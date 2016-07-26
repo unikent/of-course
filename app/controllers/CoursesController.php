@@ -1,6 +1,6 @@
 <?php
 use unikent\libs\Cache;
-use unikent\libs\Logger;
+use unikent\libs\Log;
 
 class CoursesController {
 
@@ -77,7 +77,7 @@ class CoursesController {
 		Flight::cachecheck();
 
 		// Debug option
-		if(isset($_GET['debug_performance'])){ Logger::warn($course); }
+		if(isset($_GET['debug_performance'])){ Log::warning($course); }
 
 		// Fix slug paths
 		if($course->slug != $slug)
@@ -182,7 +182,7 @@ class CoursesController {
 		Flight::cachecheck();
 
 		// Debug option
-		if(isset($_GET['debug_performance'])){Logger::warn($course); }
+		if(isset($_GET['debug_performance'])){Log::warning($course); }
 
 		Flight::setup($course->year, null, true);
 
@@ -218,7 +218,7 @@ class CoursesController {
 		Flight::cachecheck();
 
 		// Debug option
-		if(isset($_GET['debug_performance'])){ Logger::warn($course); }
+		if(isset($_GET['debug_performance'])){ Log::warning($course); }
 
 		Flight::setup($course->year, null, false, true);
 
@@ -333,7 +333,7 @@ class CoursesController {
 		}
 
 		//debug option
-		if(isset($_GET['debug_performance'])){ Logger::warn($programmes); }
+		if(isset($_GET['debug_performance'])){ Log::warning($programmes); }
 
 		//Render full page
 		return Flight::layout($template, array('meta' => $meta, 'programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'search_type' => $search_type, 'search_string' => $search_string, 'awards' => $award_names, 'disable_search_bar' => true, 'title' => $title));
@@ -386,7 +386,7 @@ class CoursesController {
 		}
 
 		//debug option
-		if(isset($_GET['debug_performance'])){ Logger::warn($programmes); }
+		if(isset($_GET['debug_performance'])){ Log::warning($programmes); }
 
 		//Render full page
 		return Flight::layout($template, array('meta' => $meta, 'programmes' => $programmes, 'level' => $level));
@@ -439,7 +439,7 @@ class CoursesController {
 		}
 
 		//debug option
-		if(isset($_GET['debug_performance'])){ Logger::warn($programmes); }
+		if(isset($_GET['debug_performance'])){ Log::warning($programmes); }
 
 		//Render full page
 		return Flight::layout($template, array('meta' => $meta, 'programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'search_type' => $search_type, 'search_string' => $search_string, 'awards' => $award_names, 'disable_search_bar' => true, 'title' => $title, 'only_study_abroad' => true));
@@ -597,7 +597,7 @@ class CoursesController {
 		});
 
 		//debug option
-		if(isset($_GET['debug_performance'])){ Logger::warn($leaflets); }
+		if(isset($_GET['debug_performance'])){ Log::warning($leaflets); }
 
 		//Render full page
 		Flight::layout('leaflets', array('leaflets' => $leaflets, 'type' => $level));
@@ -737,7 +737,7 @@ class CoursesController {
 		Flight::cachecheck();
 
 		// Debug option
-		if(isset($_GET['debug_performance'])){ Logger::warn($course); }
+		if(isset($_GET['debug_performance'])){ Log::warning($course); }
 
 		// Render programme page
 		Flight::setup($year, $level);
