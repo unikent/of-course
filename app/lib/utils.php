@@ -1,5 +1,6 @@
 <?php
 	use unikent\libs\Log;
+	use unikent\kent_theme\KentThemeHelper;
 
 	/**
 	 * Layout: applies layout wrapper to content
@@ -11,59 +12,14 @@
 	Flight::map('layout', function($view, $params = array(), $layout = 'layout'){
 		Flight::render($view, $params, 'content');
 		// allow alternate layout to be passed as param
-		Flight::pantheon_render($layout, $params);
+		Flight::render($layout, $params);
 	});
 
-	/**
-	 * Render using pantheon
-	 */
-	Flight::map('pantheon_render', function($outer_view, $params){
-
-		// define $template as a closure for getting the pantheon wrapper
-		$template = function() use ($outer_view, $params)
-		{
-			if (defined("TEMPLATING_ENGINE"))
-			{
-				// Overwrite pantheon route with "URL route"
-				// Remove any spaces that may cause issues for the pantheon renderer
-				if(!LOCAL) define("RELATIVE_SITE_ROOT", str_replace(array(' ','%20',','),'_', parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH)) . '/');
-
-				// call pantheon
-				require TEMPLATING_ENGINE . '/template.loader.php';
-
-				// workaround for pantheon setting get and post to null if they're empty
-				if ($_GET === null) $_GET = array();
-				if ($_POST === null) $_POST = array();
-
-				// Shim logging data
-				
-				$logs = unikent\libs\Log::get();
-				foreach($logs as $log){
-					// only log debugs when debug is enabled.
-					if($log->level == 'debug' && !isset($_GET['debug_performance'])) continue;
-					// Pass logs to pantheon
-					inspect("[".strtoupper($log->level)."]".$log->message, $log->file, $log->line);
-				}
-
-				// run pantheon and store its output in a buffer
-				ob_start();
-
-				Flight::render($outer_view, $params);
-
-				require TEMPLATING_ENGINE . '/run.php';
-				$content = ob_get_contents();
-				ob_end_clean();
-
-				// Render with correct headers
-				Flight::response()->write($content)->send();
-			}else{
-				Flight::render($outer_view);
-			}
-		};
-
-		// go go gadget pantheon
-		return $template();
+	Flight::map("fetch", function($view, $params = array()){
+		return Flight::view()->fetch($view, $params);
 	});
+
+	
 
 	/**
 	 * URL: generate url with base path appended.

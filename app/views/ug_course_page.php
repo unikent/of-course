@@ -1,4 +1,6 @@
 <?php
+use \unikent\kent_theme\kentThemeHelper;
+
 $schoolName = $course->administrative_school[0]->name;
 $has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
 $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
@@ -7,308 +9,110 @@ $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year'
 // Make pos available
 $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_code : '';
 
+Flight::view()->set('course', $course);
+
 ?>
 
-<article class="container ug">
-	<header>
-		<h1>
-			<?php echo $course->programme_title; ?> - <?php echo $course->award_list_linked; ?>
-			<?php echo $course->programmme_status_text; ?>
-		</h1>
-		<h2 class='location-header' ><?php echo $course->locations_str; ?></h2>
-	</header>
+<div class="content-page">
+	<div class="content-body">
+	<div class="content-header">
+<?php
+KentThemeHelper::breadcrumb(array(
+		'Courses'=>'/',
+		'Undergraduate 2016'=>'/',
+		$course->programme_title =>''
+	));
+?>	
+</div>
 
-	<?php if ($course->programme_suspended == 'true' || $course->programme_withdrawn == 'true' || $course->holding_message != ''):
-		//suppress content if holding message text filled in
-		echo $course->holding_message;
-	else: ?>
+		<div class="content-header">
+			<header>
+				<h1>
+					<?php echo $course->programme_title; ?> - <?php echo $course->award_list_linked; ?>
+					<?php echo $course->programmme_status_text; ?>
+				</h1>
+				<p class='location-header' ><?php echo $course->locations_str; ?></p>
+			</header>
 
-	<div class="daedalus-tabs">
-		<div class="row-fluid">
-			<div class="span12">
-				<ul class="nav nav-tabs">
-					<li><a href="#overview">Overview</a></li>
-					<li><a href="#structure">Course structure</a></li>
-					<li><a href="#teaching">Teaching &amp; Assessment</a></li>
-					<li><a href="#careers">Careers</a></li>
-					<?php if ((isset($preview) && $preview == true) || (!defined('CLEARING') || (defined('CLEARING') && !CLEARING)) || (defined('CLEARING') && CLEARING && $course->current_year == $course->year)): ?>
-						<li><a href="#entry">Entry requirements</a></li>
-					<?php endif; ?>
-						<li><a href="#funding">Funding</a></li>
-						<li class="hidden"><a href="#fees-tables-link">Fees</a></li>
-						<li class='screenreader-only'><a href="#enquiries">Enquiries</a></li>
-				</ul>
-			</div><!-- /span -->
-		</div><!-- /row -->
+			<?php if ($course->programme_suspended == 'true' || $course->programme_withdrawn == 'true' || $course->holding_message != ''):
+				//suppress content if holding message text filled in
+				echo $course->holding_message;
+			else: ?>
 
-		<div class="row-fluid">
-			<div class="span7">
-				<div class="tab-content">
-					<section id="overview"><?php Flight::render('ug_tabs/overview', array('course' => $course)); ?></section>
-					<section id="structure"><?php Flight::render('ug_tabs/structure', array('course' => $course)); ?></section>
-					<section id="teaching"><?php Flight::render('ug_tabs/teaching', array('course' => $course)); ?></section>
-					<section id="careers"><?php Flight::render('ug_tabs/careers', array('course' => $course)); ?></section>
-					<?php if ((isset($preview) && $preview == true) || (!defined('CLEARING') || (defined('CLEARING') && !CLEARING)) || (defined('CLEARING') && CLEARING && $course->current_year == $course->year)): ?>
-						<section id="entry"><?php Flight::render('ug_tabs/entry', array('course' => $course)); ?></section>
-					<?php endif; ?>
 
-					<section id="funding"><?php Flight::render('ug_tabs/fees', array('course' => $course)); ?></section>
-					<section id="enquiries"><?php Flight::render('ug_tabs/enquiries', array('course' => $course)); ?></section>
-				</div><!-- /.tab-content -->
-			</div><!-- /.span7 -->
+			<?php Flight::render("ug/key-features"); ?>
 
-			<div class="span5">
-				<div class="side-panel">
-					<div class="admission-links">
-						<?php if(defined('CLEARING') && CLEARING){
-							?>
-							<div class="clearing-panel">
-								<h2>Clearing <?php echo ($course->current_year - 1); ?> - Full-time applicants</h2>
-								<a href="https://www.kent.ac.uk/clearing/" class="btn btn-large apply-adm-link"
-								   type="button"
-								   role="button"
-								   aria-controls="apply">Check clearing vacancies</a>
-							</div>
-							<?php
-							$has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
-							if($has_parttime){
-							?>
-							<a href="<?php echo Flight::request()->base; ?>/undergraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?>apply-online/<?php echo $course->instance_id ?>?part_time=1"
-							   class=""
-							   onclick="_pat.event('course-page', 'apply-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?> at <?php echo $schoolName ?>');">Part-time applicants</a>
-							<br><br>
-							<?php } ?>
-							<a href="#!enquiries"
-							   class="enquire-adm-link"
-							   role="tab"
-							   aria-controls="enquiries">Contact us</a>
-							or <a href="#!enquiries" class="pros-adm-link" role="tab" aria-controls="enquiries">order a prospectus
-							</a>
-							<?php
-						}else{?>
-						<?php if (isset($course->globals->disable_apply) && $course->globals->disable_apply=='true'): ?>
-							<a href="<?php echo Flight::request()->base; ?>/undergraduate/<?php echo $course->instance_id ?>/"
-								class="btn btn-large apply-adm-link"
-								type="button"
-								role="button"
-								>View <?php echo $course->current_year ?> programme</a>
-						<?php else:?>
-							<a href="<?php echo Flight::request()->base; ?>/undergraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?>apply-online/<?php echo $course->instance_id ?>"
-								class="btn btn-large apply-adm-link"
-								type="button"
-								role="button"
-								aria-controls="apply"
-								onclick="_pat.event('course-page', 'apply-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?> at <?php echo $schoolName ?>');">Apply</a>
-						<?php endif; ?>
-						<a href="#!enquiries"
-							class="enquire-adm-link"
-							role="tab"
-							aria-controls="enquiries">Contact us</a>
-							or <a href="#!enquiries" class="pros-adm-link" role="tab" aria-controls="enquiries">order a prospectus
-						</a>
-						<?php } ?>
-					</div><!-- /.admission-links -->
+		</div>
 
-					<div class="key-facts-block">
-						<aside class="key-facts-container">
-							<h2>Key facts</h2>
-							<div class="key-facts">
-								<ul>
-									<li>
-										<?php if (!empty($course->additional_school[0])): ?>
-											<strong>Schools:</strong>
-											<a href="<?php echo $course->url_for_administrative_school ?>"><?php echo $course->administrative_school[0]->name ?></a>,
-											<a href="<?php echo $course->url_for_additional_school ?>"><?php echo $course->additional_school[0]->name ?></a>
-										<?php else: ?>
-											<strong>School:</strong>
-											<a href="<?php echo $course->url_for_administrative_school ?>"><?php echo $course->administrative_school[0]->name ?></a>
-										<?php endif; ?>
-									</li>
-									<?php
-									// If there a second subject area?
-									$second_subject = (isset($course->subject_area_2[0]) && $course->subject_area_2[0] != null);
-									?>
-									<li><strong>Subject area<?php if ($second_subject) echo 's'; ?>:</strong>
-										<?php
-										echo $course->subject_area_1[0]->name;
-										echo ($second_subject) ? ' | ' . $course->subject_area_2[0]->name : '';
-										?>
-									</li>
-									<li><strong>Award:</strong> <?php echo $course->award[0]->name; ?> </li>
-									<li><strong>Award type:</strong> <?php echo $course->honours_type; ?> </li>
+		<div class="content-header" style="margin-top:3rem; margin-bottom:3rem;">
+			<ul class="nav nav-tabs hidden-sm-down" role="tablist">
+				<li class="nav-item"><a href="#overview" data-toggle="tab" role="tab" class="nav-link active"> Overview</a></li>
+				<li class="nav-item"><a href="#structure" data-toggle="tab" role="tab" class="nav-link">Course structure</a></li>
+				<li class="nav-item"><a href="#teaching" data-toggle="tab" role="tab" class="nav-link">Teaching &amp; Assessment</a></li>
+				<li class="nav-item"><a href="#careers" data-toggle="tab" role="tab" class="nav-link">Careers</a></li>
+				<?php if ((isset($preview) && $preview == true) || (!defined('CLEARING') || (defined('CLEARING') && !CLEARING)) || (defined('CLEARING') && CLEARING && $course->current_year == $course->year)): ?>
+					<li class="nav-item"><a href="#entry" data-toggle="tab" role="tab" class="nav-link">Entry requirements</a></li>
+				<?php endif; ?>
+					<li class="nav-item"><a href="#funding" data-toggle="tab" role="tab" class="nav-link">Funding</a></li>
 
-									<?php if (!empty($course->ucas_code)): ?>
-										<li><strong>UCAS code:</strong> <?php echo $course->ucas_code; ?></li>
-									<?php endif; ?>
+					<li class='sr-only' ><a href="#fees-tables-link" data-toggle="tab" role="tab" class="nav-link">Fees</a></li>
+					<li class='sr-only'><a href="#enquiries" data-toggle="tab" role="tab" class="nav-link">Enquiries</a></li>
+			</ul>
+		</div>
 
-									<li><strong>Location:</strong>
-										<?php
-										$locations = (empty($course->location[0]->url)?'':"<a href='{$course->location[0]->url}'>") . $course->location[0]->name . (empty($course->location[0]->url)?'':"</a>");
-										$additional_locations = '';
+		<div class="content-container">
+			<div class="content-main">
+					<div class="tab-content">
+						<?php 
+							Flight::render("partials/tab", array("title"=>"Overview", "id" => "overview", "selected" => true, "content" => Flight::fetch("ug/tabs/overview"))); 
+							Flight::render("partials/tab", array("title"=>"Course structure", "id" => "structure", "selected" => false, "content" => Flight::fetch("ug/tabs/structure"))); 
+							Flight::render("partials/tab", array("title"=>"Teaching &amp; Assessment", "id" => "teaching", "selected" => false, "content" => Flight::fetch("ug/tabs/teaching"))); 
+							Flight::render("partials/tab", array("title"=>"Careers", "id" => "careers",  "selected" => false, "content" => Flight::fetch("ug/tabs/careers"))); 
 
-										if ($course->additional_locations != "") {
-											foreach ($course->additional_locations as $key => $additional_location) {
-												if ($additional_location != '') {
-													if ($key == (sizeof($course->additional_locations) - 1)) {
-														$additional_locations .= " and <a href='$additional_location->url'>$additional_location->name</a>";
-													} else {
-														$additional_locations .= ", <a href='$additional_location->url'>$additional_location->name</a>";
-													}
-												}
-											}
-										}
-										echo $locations . $additional_locations
-										?>
-									</li>
+							if ((isset($preview) && $preview == true) || (!defined('CLEARING') || (defined('CLEARING') && !CLEARING)) || (defined('CLEARING') && CLEARING && $course->current_year == $course->year)){
+								Flight::render("partials/tab", array("title"=>"Entry requirements", "id" => "entry",  "selected" => false, "content" => Flight::fetch("ug/tabs/entry"))); 
+							}
 
-									<li><strong>Mode of study:</strong> <?php echo $course->mode_of_study; ?></li>
-
-									<?php if (!empty($course->duration)): ?>
-										<li><strong>Duration:</strong> <?php echo $course->duration; ?></li>
-									<?php endif; ?>
-
-									<?php if (!empty($course->start)): ?>
-										<li><strong>Start: </strong> <?php echo $course->start; ?> </li>
-									<?php endif; ?>
-
-									<?php if (!empty($course->accredited_by)): ?>
-										<li><strong>Accredited by</strong>: <?php echo $course->accredited_by; ?></li>
-									<?php endif; ?>
-
-									<?php if (!empty($course->total_kent_credits_awarded_on_completion)): ?>
-										<li><strong>Total Kent credits:</strong> <?php echo $course->total_kent_credits_awarded_on_completion; ?></li>
-									<?php endif; ?>
-
-									<?php if (!empty($course->total_ects_credits_awarded_on_completion)): ?>
-										<li><strong>Total ECTS credits:</strong> <?php echo $course->total_ects_credits_awarded_on_completion; ?></li>
-									<?php endif; ?>
-
-									<?php if (strpos($course->programme_type, "year abroad") !== false): ?>
-										<li><strong>Year abroad:</strong> Yes</li>
-									<?php endif; ?>
-
-									<?php if (strpos($course->programme_type, "year in industry") !== false): ?>
-										<li><strong>Year in Industry:</strong> Yes</li>
-									<?php endif; ?>
-								</ul>
-							</div><!-- /.key-facts -->
-						</aside>
-					</div><!-- /.key-facts-block -->
-					<?php if (isset($course->staff_profile) && !empty(trim($course->staff_profile)) ){ ?>
-					<div class="key-facts-block">
-						<div class="key-facts-container">
-							<h2><a href="<?php echo $course->staff_profile; ?>">Staff profiles <i class="icon-chevron-right"></i></a></h2>
-						</div>
+							Flight::render("partials/tab", array("title"=>"Funding", "id" => "funding",  "selected" => false, "content" => Flight::fetch("ug/tabs/fees"))); 
+							Flight::render("partials/tab", array("title"=>"Enquiries", "id" => "enquiries", "selected" => false, "content" => Flight::fetch("ug/tabs/enquiries"))); 
+						?>
 					</div>
-					<?php } ?>
-					<?php if (isset($course->no_fee_output) && $course->no_fee_output === 'true'): ?>
-						<!-- Do nothing -->
-					<?php else: ?>
-						<div class="key-facts-block">
-							<div class="key-facts-container">
-								<h2><a id="fees-tables-link" class="fees-toggle" role="button" aria-controls="fees-tables"
-										tabindex='0' title='Click to toggle basic fee information'
-										onClick="_pat.event('course-page','expand-fees-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?> - <?php echo $course->award[0]->name ?>');">Fees
-										<i class="icon-chevron-down toggler"></i></a></h2>
-										<div id="fees-tables" class="fees-tables" aria-expanded="true"
-										aria-labelledby="fees-tables-link">
+			</div>
+			<div class="content-aside">
+				<?php Flight::render("ug/sidebar"); ?>
+			</div>
+		</div>
+	</div>
+</div>
 
-										<?php if (isset($course->globals->fees_caveat_text_ug) && !empty($course->globals->fees_caveat_text_ug)) echo $course->globals->fees_caveat_text_ug ?>
-											<table class="table">
-												<thead>
-													<tr>
-														<th></th>
-														<th>UK/EU</th>
-														<th>Overseas</th>
-													</tr>
-												</thead>
-												<tbody>
-													<?php
-													$fees = $course->deliveries[0]->fees;
-													?>
-													<?php if ($has_fulltime): ?>
-														<tr>
-															<td><strong>Full-time</strong></td>
-															<td><?php echo (is_numeric($fees->home_full_time) ? '&'.$fees->currency.';' : '') . $fees->home_full_time; ?></td>
-															<td><?php echo (is_numeric($fees->int_full_time) ? '&'.$fees->currency.';' : '') . $fees->int_full_time; ?></td>
-														</tr>
-													<?php endif; ?>
-													<?php if ($has_parttime): ?>
-														<tr>
-															<td><strong>Part-time</strong></td>
-															<td><?php echo (is_numeric($fees->home_part_time) ? '&'.$fees->currency.';' : '') . $fees->home_part_time; ?></td>
-															<td><?php echo (is_numeric($fees->int_part_time) ? '&'.$fees->currency.';' : '') . $fees->int_part_time; ?></td>
-														</tr>
-													<?php endif; ?>
-												</tbody>
-											</table>
 
-											<?php
-											if ($has_foundation && isset($course->globals->fees_foundation_year_exception_text_ug)) {
-												echo $course->globals->fees_foundation_year_exception_text_ug;
-											}
-											?>
 
-											<?php
 
-											if (
-											isset($course->globals->fees_year_in_industryabroad_text_ug) && // If YII/YA text is set AND
-											(
-											(!empty($course->year_in_industry)) || // YII or YA has some text
-											(!empty($course->year_abroad))
-											) // then
-											) {
-												echo $course->globals->fees_year_in_industryabroad_text_ug;
-											}
-											?>
+<div class="card card-overlay">
+	<div class="card-body">
+		<div class="card-title-wrap card-title-wrap-link">
+			<a href="https://www.kent.ac.uk/research/" class="card-title-link"><h2 class="card-title">Student Profile</h2></a>
+			<h2 class="card-title" style="color:#fff">Helen Shrew</h2>
+			<p class="card-text">Some text here about the student profile etc..</p>
+		</div>
+		<div class="card-media-wrap">
+			<img src="<?php echo Flight::url("/images/undergrad-discussion-library-16x9.jpg");?>" class="card-img" alt="Students chatting in the library">
+		</div>
+	<div class="card-img-overlay-bottom text-xs-right">
+		<h3 class="card-subtitle"><?php echo $course->programme_title; ?> - <?php echo $course->award_list_linked; ?></h3>
+	</div>
 
-											<?php
-											if (isset($course->globals->fees_exception_text_ug)) echo $course->globals->fees_exception_text_ug;
-											?>
-										</div>
-									</div>
-								</div>
-							<?php endif; ?>
+	</div>
+</div>
 
-							<?php if(!empty($course->subject_leaflet[0])):
 
-								$file = $course->subject_leaflet[0]->tracking_code;
-								$pathParts = pathinfo($file);
-								$fileType = strtoupper($pathParts['extension']);
-								?>
-								<div class="subject-leaflets-block">
-									<aside class="subject-leaflets-container">
-										<h2>Subject leaflets</h2>
-										<div class="subject-leaflets">
-											<ul>
-												<li>
-													<a href="<?php echo $course->subject_leaflet[0]->tracking_code ?>">
-														<?php echo $course->subject_leaflet[0]->name ?> (<?php echo $fileType ?>)
-													</a>
-												</li>
-												<?php if(!empty($course->subject_leaflet_2[0])):
-													$file = $course->subject_leaflet_2[0]->tracking_code;
-													$pathParts = pathinfo($file);
-													$fileType = strtoupper($pathParts['extension']);
-													?>
-													<li>
-														<a href="<?php echo $course->subject_leaflet_2[0]->tracking_code ?>">
-															<?php echo $course->subject_leaflet_2[0]->name ?> (<?php echo $fileType ?>)
-														</a>
-													</li>
-												<?php endif; ?>
-											</ul>
-										</div>
-									</aside>
-								</div><!-- /.subject-leaflets-block -->
 
-							<?php endif; ?>
+<?php endif; ?>
 
-						</div><!-- /.side-panel -->
-					</div><!-- /.span5 -->
-				</div><!-- /.row-fluid -->
-			</div><!-- /.daedalus-tabs -->
-			<?php endif; ?>
+<div class="content-page">
+	<div class="content-body">
+		<div class="content-header">
+
 
 				<?php if ($course->kiscourseid != '' && $course->programme_suspended != 'true'): ?>
 					<section class="panel tertiary-tier highlighted no-border kiss-widget-section">
@@ -353,6 +157,28 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 					</section>
 
 				<?php endif; ?>
+
+</div></div></div>
+
+<div class="card card-overlay">
+				<div class="card-body">
+					<div class="card-media-wrap">
+						<img class="card-img" src="<?php echo FLight::url("images/students.jpg");?>">
+					</div>
+					<div class="card-img-overlay-centered card-img-overlay-tinted">
+						<div class="text-xs-center">
+							<h2 class="card-subtitle">Stunning locations & comfortable accomodation</h2>
+							
+							<br>
+							<p><a href="#dostuff" class="btn btn-primary">Book a visit today</a></p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
 
 				<section id="learnmore" class="learnmore-section"></section>
 
