@@ -27,11 +27,9 @@ KentThemeHelper::header(
 ?>
 <?php echo $content; ?>
 
-
-
-			  <a href="#bodycontent" tabindex="0" class='scroll-to-top' style="cursor: pointer;">
-				<i class="icon-chevron-up icon-white"></i>
-			  </a>
+	  <a href="#bodycontent" tabindex="0" class='scroll-to-top' style="cursor: pointer;">
+		<i class="icon-chevron-up icon-white"></i>
+	  </a>
 
 
 <!--

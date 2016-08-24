@@ -109,7 +109,6 @@ class CoursesController {
 
 		switch($level){
 			case 'postgraduate':
-			$template = 'pg_course_page';
 			if($year && ($year !== static::$current_year)){
 				$meta['title'] = "{$course->programme_title} | Postgraduate Programmes {$year} | The University of Kent";
 			}
@@ -147,7 +146,7 @@ class CoursesController {
 			break;
 
 			default:
-			$template = 'ug_course_page';
+
 			if($year && ($year !== static::$current_year)){
 				$meta['title'] = "{$course->programme_title} ($course->ucas_code) | Undergraduate Programmes {$year} | The University of Kent";
 			}
@@ -159,14 +158,15 @@ class CoursesController {
 			"school_name" => $course->administrative_school[0]->name,
 			"has_parttime" => (strpos(strtolower($course->mode_of_study), 'part-time') !== false),
 			"has_fulltime" => (strpos(strtolower($course->mode_of_study), 'full-time') !== false),
-			'meta' => $meta
+			'meta' => $meta,
+			'layout' => $level === 'postgraduate' ? 'pg' : 'ug'
 		);
 		
 		// Course object should be global for views
 		Flight::view()->set('course', $course);
 
 		// Pass additional data
-		return Flight::layout($template, $data);
+		return Flight::layout('course', $data);
 	}
 
 	/**

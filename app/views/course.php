@@ -19,19 +19,37 @@ use \unikent\kent_theme\kentThemeHelper;
 	<div class="content-body">
 		<div class="content-header">
 			<?php
-
-			KentThemeHelper::breadcrumb(array(
+				KentThemeHelper::breadcrumb(array(
 					'Courses'=>'/',
 					ucfirst($level).' '. $year =>'/',
 					$course->programme_title =>''
 				));
 			?>	
+
+			<?php if (isset($course->globals->disable_apply) && $course->globals->disable_apply=='true'): ?>
+				<a href="<?php echo Flight::request()->base; ?>/undergraduate/<?php echo $course->instance_id ?>/"
+					class="btn btn-primary pull-right"
+					type="button"
+					role="button"
+					>View <?php echo $course->current_year ?> programme</a>
+			<?php else:?>
+				<a href="<?php echo Flight::request()->base; ?>/undergraduate/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?>apply-online/<?php echo $course->instance_id ?>"
+					class="btn btn-primary pull-right"
+					type="button"
+					role="button"
+					aria-controls="apply"
+					onclick="_pat.event('course-page', 'apply-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $course->programme_title ?> at <?php echo $schoolName ?>');">Apply now</a>
+			<?php endif; ?>
+
 			<header>
 				<h1>
 					<?php echo $course->programme_title; ?> - <?php echo $course->award_list_linked; ?>
 					<?php echo $course->programmme_status_text; ?>
 				</h1>
 				<p class='location-header' ><?php echo $course->locations_str; ?></p>
+
+
+
 			</header>
 		</div>
 	</div>
