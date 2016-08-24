@@ -1,16 +1,10 @@
 <?php
 use \unikent\kent_theme\kentThemeHelper;
 
-$schoolName = $course->administrative_school[0]->name;
-$has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
-$has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
 $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year') !== false);
 
 // Make pos available
 $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_code : '';
-
-Flight::view()->set('course', $course);
-
 ?>
 
 <div class="content-page">
@@ -39,6 +33,14 @@ KentThemeHelper::breadcrumb(array(
 				echo $course->holding_message;
 			else: ?>
 
+			<p class="lead">
+			<?php
+			// @todo - This is a new field that will be added to the PP in the near future. To demo the behavior
+			// I'm currently just hacking in a "correct-ish" looking value by grabbing the first p of the overview if i can
+			if (preg_match('%<p[^>]*>(.*?)</p>%i', $course->programme_overview_text, $regs)) {
+				echo $regs[1];
+			} ?>
+			</p>
 
 			<?php Flight::render("ug/key-features"); ?>
 
@@ -84,7 +86,6 @@ KentThemeHelper::breadcrumb(array(
 		</div>
 	</div>
 </div>
-
 
 
 
@@ -160,93 +161,49 @@ KentThemeHelper::breadcrumb(array(
 
 </div></div></div>
 
-<div class="card card-overlay">
-				<div class="card-body">
-					<div class="card-media-wrap">
-						<img class="card-img" src="<?php echo FLight::url("images/students.jpg");?>">
-					</div>
-					<div class="card-img-overlay-centered card-img-overlay-tinted">
-						<div class="text-xs-center">
-							<h2 class="card-subtitle">Stunning locations & comfortable accomodation</h2>
-							
-							<br>
-							<p><a href="#dostuff" class="btn btn-primary">Book a visit today</a></p>
-						</div>
-					</div>
-				</div>
+<div class="card card-overlay m-b-0 p-b-0" >
+	<div class="card-body">
+		<div class="card-media-wrap">
+			<img class="card-img" src="<?php echo FLight::url("images/students.jpg");?>">
+		</div>
+		<div class="card-img-overlay-centered card-img-overlay-tinted">
+			<div class="text-xs-center">
+				<h2 class="card-subtitle">Stunning locations & comfortable accomodation</h2>
+				
+				<br>
+				<p><a href="#dostuff" class="btn btn-primary">Book a visit today</a></p>
 			</div>
+		</div>
+	</div>
+</div>
 
 
+<?php if (!empty($course->related_courses)): ?>
+
+	<div class="card-panel card-panel-primary-tint cards-backed m-t-0">
+		<div class="card-panel-header">
+			<h2 class="card-panel-title">Related to this course</h2>
+		</div>
+		<div class="card-panel-body">
+			<?php foreach ($course->related_courses as $related_course): ?>
+
+				<div class="card card-linked">
+					<a href="<?php echo Flight::url("{$level}/{$related_course->id}/{$related_course->slug}"); ?>" class="card-title-link"><h3 class="card-title"><?php echo $related_course->name ?> <?php echo !empty($related_course->programmme_status_text) ? $related_course->programmme_status_text : ''; ?> <?php echo $related_course->award; ?></h3></a>
+					<p class="card-meta"><?php echo $related_course->mode_of_study; ?></p>
+					<p class="card-meta"><?php echo $related_course->campus; ?></p>
+					<hr>
+					<p class="card-text">Economics examines some of the profound issues in our life and times, including: economic...</p>
+					<a href="<?php echo Flight::url("{$level}/{$related_course->id}/{$related_course->slug}"); ?>" class="faux-link-overlay" aria-hidden="true"><?php echo $related_course->name ?> <?php echo !empty($related_course->programmme_status_text) ? $related_course->programmme_status_text : ''; ?> <?php echo $related_course->award; ?></a>
+				</div>
+			<?php endforeach; ?>
+
+		</div>
+	</div>
+<?php endif; ?>
 
 
-
-				<section id="learnmore" class="learnmore-section"></section>
-
-				<?php if (!empty($course->related_courses)): ?>
-					<section class="related-course-section">
-						<h2>Related to this course</h2>
-
-						<div id="myCarousel" class="carousel slide" data-interval="false">
-							<!-- Carousel items -->
-							<div class="<?php echo count($course->related_courses) > 4 ? 'carousel-inner' : 'carousel-inner-left'; ?>">
-								<?php $count = 0; ?>
-								<?php for ($i = 0; $i < (round((count($course->related_courses) / 4) + 0.5, 0, PHP_ROUND_HALF_DOWN)); $i++): ?>
-									<?php $related_courses = array_slice($course->related_courses, $i * 4) ?>
-									<div class="<?php if ($count == 0) echo 'active ' ?>item">
-
-										<?php foreach ($related_courses as $related_course): ?>
-											<div class="span2 related-course">
-												<div class="cell">
-													<div class="mask">
-														<a href="<?php echo Flight::url("{$level}/{$related_course->id}/{$related_course->slug}"); ?>">
-															<span><?php echo $related_course->name ?> <?php echo !empty($related_course->programmme_status_text) ? $related_course->programmme_status_text : ''; ?></span>
-															<span class="related-award"><?php echo $related_course->award; ?></span>
-														</a>
-													</div>
-												</div>
-											</div>
-											<?php $count++;
-											if ($count % 4 == 0) break; ?>
-										<?php endforeach; ?>
-
-									</div>
-								<?php endfor; ?>
-							</div>
-							<!-- Carousel nav -->
-							<?php if (count($course->related_courses) > 4): ?>
-								<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-								<a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
-							<?php endif; ?>
-						</div>
-
-						<ul class="related-course-list">
-							<?php foreach ($course->related_courses as $related_course): ?>
-								<li>
-									<a href="<?php echo Flight::url("{$level}/{$related_course->id}/{$related_course->slug}"); ?>">
-										<span><?php echo $related_course->name ?> <?php echo !empty($related_course->programmme_status_text) ? $related_course->programmme_status_text : ''; ?></span>
-										<span class="related-award"><?php echo $related_course->award; ?></span>
-									</a>
-								</li>
-							<?php endforeach; ?>
-						</ul>
-
-					</section>
-				<?php endif; ?>
-
-
-				<?php if (!empty($course->globals->general_disclaimer)): ?>
-					<footer class="general_disclaimer" style='font-size:0.8em;'>
-						<?php echo $course->globals->general_disclaimer; ?>
-					</footer>
-				<?php endif; ?>
-
-			</article>
-			<kentScripts>
-				<script>
-					$("#enquiries .info-section a").click(function () {
-						var link = $(this)[0];
-						if (link.protocol !== 'mailto:') return;
-						_pat.event("course-page", "enquire-by-email-ug", link.pathname + " via <?php echo "[{$course->instance_id} in {$course->year}] {$course->programme_title} ( {$course->award[0]->name} )" ?>");
-					});
-				</script>
-			</kentScripts>
+<?php if (!empty($course->globals->general_disclaimer)): ?>
+	<footer class="general_disclaimer" style='font-size:0.8em;'>
+		<?php echo $course->globals->general_disclaimer; ?>
+	</footer>
+<?php endif; ?>

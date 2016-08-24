@@ -154,7 +154,19 @@ class CoursesController {
 			break;
 		}
 
-		return Flight::layout($template, array('meta' => $meta, 'course' => $course));
+		// Additional data
+		$data = array(
+			"school_name" => $course->administrative_school[0]->name,
+			"has_parttime" => (strpos(strtolower($course->mode_of_study), 'part-time') !== false),
+			"has_fulltime" => (strpos(strtolower($course->mode_of_study), 'full-time') !== false),
+			'meta' => $meta
+		);
+		
+		// Course object should be global for views
+		Flight::view()->set('course', $course);
+
+		// Pass additional data
+		return Flight::layout($template, $data);
 	}
 
 	/**

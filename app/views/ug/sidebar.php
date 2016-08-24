@@ -16,18 +16,20 @@
 	<h3>Resources </h3>
 	<ul>
 		<li><a href="#">Order a prospectus</a></li>
-		<li><a href="#">Link 1</a></li>
-		<li><a href="#">Link 2</a></li>
+
+		<?php 
+		if(!empty($course->subject_leaflet[0])){
+			$ext = strtoupper(pathinfo($course->subject_leaflet[0]->tracking_code,PATHINFO_EXTENSION));
+			echo '<li><a href="'.$course->subject_leaflet[0]->tracking_code.'">'.$course->subject_leaflet[0]->name.' ('. $ext .')</a></li>';
+		}
+		if(!empty($course->subject_leaflet_2[0])){
+			$ext = strtoupper(pathinfo($course->subject_leaflet_2[0]->tracking_code,PATHINFO_EXTENSION));
+			echo '<li><a href="'.$course->subject_leaflet_2[0]->tracking_code.'">'.$course->subject_leaflet_2[0]->name.' ('. $ext .')</a></li>';
+		}
+		?>
+
 	</ul>
 </nav>
-
-
-
-
-
-
-
-
 
 
 
@@ -84,81 +86,9 @@
 						<?php } ?>
 					</div><!-- /.admission-links -->
 
-					<div class="key-facts-block">
-						<aside class="key-facts-container">
-							<h2>Key facts</h2>
-							<div class="key-facts">
-								<ul>
-									<li>
-										
-									</li>
-									<?php
-									// If there a second subject area?
-									$second_subject = (isset($course->subject_area_2[0]) && $course->subject_area_2[0] != null);
-									?>
-									<li><strong>Subject area<?php if ($second_subject) echo 's'; ?>:</strong>
-										<?php
-										echo $course->subject_area_1[0]->name;
-										echo ($second_subject) ? ' | ' . $course->subject_area_2[0]->name : '';
-										?>
-									</li>
-									<li><strong>Award:</strong> <?php echo $course->award[0]->name; ?> </li>
-									<li><strong>Award type:</strong> <?php echo $course->honours_type; ?> </li>
 
 
-									<li><strong>Location:</strong>
-										<?php
-										$locations = (empty($course->location[0]->url)?'':"<a href='{$course->location[0]->url}'>") . $course->location[0]->name . (empty($course->location[0]->url)?'':"</a>");
-										$additional_locations = '';
 
-										if ($course->additional_locations != "") {
-											foreach ($course->additional_locations as $key => $additional_location) {
-												if ($additional_location != '') {
-													if ($key == (sizeof($course->additional_locations) - 1)) {
-														$additional_locations .= " and <a href='$additional_location->url'>$additional_location->name</a>";
-													} else {
-														$additional_locations .= ", <a href='$additional_location->url'>$additional_location->name</a>";
-													}
-												}
-											}
-										}
-										echo $locations . $additional_locations
-										?>
-									</li>
-
-									<li><strong>Mode of study:</strong> <?php echo $course->mode_of_study; ?></li>
-
-									<?php if (!empty($course->duration)): ?>
-										<li><strong>Duration:</strong> <?php echo $course->duration; ?></li>
-									<?php endif; ?>
-
-									<?php if (!empty($course->start)): ?>
-										<li><strong>Start: </strong> <?php echo $course->start; ?> </li>
-									<?php endif; ?>
-
-									<?php if (!empty($course->accredited_by)): ?>
-										<li><strong>Accredited by</strong>: <?php echo $course->accredited_by; ?></li>
-									<?php endif; ?>
-
-									<?php if (!empty($course->total_kent_credits_awarded_on_completion)): ?>
-										<li><strong>Total Kent credits:</strong> <?php echo $course->total_kent_credits_awarded_on_completion; ?></li>
-									<?php endif; ?>
-
-									<?php if (!empty($course->total_ects_credits_awarded_on_completion)): ?>
-										<li><strong>Total ECTS credits:</strong> <?php echo $course->total_ects_credits_awarded_on_completion; ?></li>
-									<?php endif; ?>
-
-									<?php if (strpos($course->programme_type, "year abroad") !== false): ?>
-										<li><strong>Year abroad:</strong> Yes</li>
-									<?php endif; ?>
-
-									<?php if (strpos($course->programme_type, "year in industry") !== false): ?>
-										<li><strong>Year in Industry:</strong> Yes</li>
-									<?php endif; ?>
-								</ul>
-							</div><!-- /.key-facts -->
-						</aside>
-					</div><!-- /.key-facts-block -->
 					<?php if (isset($course->staff_profile) && !empty(trim($course->staff_profile)) ){ ?>
 					<div class="key-facts-block">
 						<div class="key-facts-container">
@@ -235,38 +165,5 @@
 								</div>
 							<?php endif; ?>
 
-							<?php if(!empty($course->subject_leaflet[0])):
-
-								$file = $course->subject_leaflet[0]->tracking_code;
-								$pathParts = pathinfo($file);
-								$fileType = strtoupper($pathParts['extension']);
-								?>
-								<div class="subject-leaflets-block">
-									<aside class="subject-leaflets-container">
-										<h2>Subject leaflets</h2>
-										<div class="subject-leaflets">
-											<ul>
-												<li>
-													<a href="<?php echo $course->subject_leaflet[0]->tracking_code ?>">
-														<?php echo $course->subject_leaflet[0]->name ?> (<?php echo $fileType ?>)
-													</a>
-												</li>
-												<?php if(!empty($course->subject_leaflet_2[0])):
-													$file = $course->subject_leaflet_2[0]->tracking_code;
-													$pathParts = pathinfo($file);
-													$fileType = strtoupper($pathParts['extension']);
-													?>
-													<li>
-														<a href="<?php echo $course->subject_leaflet_2[0]->tracking_code ?>">
-															<?php echo $course->subject_leaflet_2[0]->name ?> (<?php echo $fileType ?>)
-														</a>
-													</li>
-												<?php endif; ?>
-											</ul>
-										</div>
-									</aside>
-								</div><!-- /.subject-leaflets-block -->
-
-							<?php endif; ?>
-
+							
 						</div><!-- /.side-panel -->
