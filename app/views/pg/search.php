@@ -1,3 +1,6 @@
+<div class="container">
+
+
 <?php $year_for_url = empty($year) ? '' : ((strcmp($year, CoursesController::$current_year) == 0) ? '' : $year . '/'); ?>
 
 <?php if($year !== CoursesController::$current_year): ?>
@@ -170,7 +173,7 @@
 </table>
 </div>
 
-<kentScripts>
+
 <script type='text/javascript'>
 $(document).ready(function(){
 
@@ -191,4 +194,6 @@ $(document).ready(function(){
 });
 </script>
 
-</kentScripts>
+
+
+</div>

@@ -307,7 +307,7 @@ class CoursesController {
 		switch($level){
 			case 'postgraduate':
 			$title = 'Courses A-Z';
-			$template = 'pg_search';
+			$template = 'pg/search';
 			$meta = array(
 				'title' => 'Courses A-Z | Postgraduate Courses | The University of Kent',
 				'description' => 'Search all of the postgraduate courses offered by the University of Kent',
@@ -316,7 +316,7 @@ class CoursesController {
 
 			default:
 			$title = 'Courses A-Z';
-			$template = 'ug_search';
+			$template = 'ug/search';
 			$meta = array(
 				'title' => 'Courses A-Z | Undergraduate Courses | The University of Kent',
 				'description' => 'Search all of the undergraduate courses offered by the University of Kent',

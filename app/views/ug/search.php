@@ -1,5 +1,8 @@
 <?php $year_for_url = empty($year) ? '' : ((strcmp($year, CoursesController::$current_year) == 0) ? '' : $year . '/'); ?>
 
+
+<div class="container">
+
 <?php if($year !== CoursesController::$current_year): ?>
 	<meta name="robots" content="noindex, nofollow" />
 	<div class='alert alert-daedalus'>
@@ -135,8 +138,6 @@
 </div>
 
 
-
-<kentScripts>
 <script type='text/javascript'>
 
 $(document).ready(function(){
@@ -157,4 +158,4 @@ $(document).ready(function(){
 
 </script>
 
-</kentScripts>
+</div>

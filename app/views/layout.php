@@ -20,7 +20,8 @@ KentThemeHelper::header(
 		'head_markup'=> '<link rel="feed" type="application/xcri+xml" href="/courses/xcri"/><link rel="canonical" href="'.$meta['canonical'].'" />',
 		'home_page' => false,
 		'slim'=> true,
-		'brand_header' => true
+		'brand_header' => true,
+		'theme' => $level == 'postgraduate' ? 'postgraduate' : false
 	)
 );
 
@@ -32,13 +33,6 @@ KentThemeHelper::header(
 	  </a>
 
 
-<!--
-	<link media='screen' type='text/css' rel='stylesheet' href='<?php echo Flight::asset('css/courses.css'); ?>' />
-	<link media='screen' type='text/css' rel='stylesheet' href='<?php echo Flight::asset('css/courses-form.css'); ?>' />
-	<link media='print' type='text/css' rel='stylesheet' href='<?php echo Flight::asset('css/print.css'); ?>' />
 
-	<script type="text/javascript" charset="utf8" src="<?php echo Flight::asset('js/build/coursetable.min.js'); ?>"></script>
-	<script type="text/javascript" charset="utf-8" language="javascript" src="<?php echo Flight::asset('js/build/of-course.min.js'); ?>"></script>
--->
 
 <?php KentThemeHelper::footer(); ?>
