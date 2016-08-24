@@ -1,37 +1,17 @@
 <?php
-use \unikent\kent_theme\kentThemeHelper;
+
 
 $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year') !== false);
 
 // Make pos available
 $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_code : '';
+
 ?>
+
 
 <div class="content-page">
 	<div class="content-body">
-	<div class="content-header">
-<?php
-KentThemeHelper::breadcrumb(array(
-		'Courses'=>'/',
-		'Undergraduate 2016'=>'/',
-		$course->programme_title =>''
-	));
-?>	
-</div>
-
 		<div class="content-header">
-			<header>
-				<h1>
-					<?php echo $course->programme_title; ?> - <?php echo $course->award_list_linked; ?>
-					<?php echo $course->programmme_status_text; ?>
-				</h1>
-				<p class='location-header' ><?php echo $course->locations_str; ?></p>
-			</header>
-
-			<?php if ($course->programme_suspended == 'true' || $course->programme_withdrawn == 'true' || $course->holding_message != ''):
-				//suppress content if holding message text filled in
-				echo $course->holding_message;
-			else: ?>
 
 			<p class="lead">
 			<?php
@@ -42,6 +22,7 @@ KentThemeHelper::breadcrumb(array(
 			} ?>
 			</p>
 
+			<?php Flight::render("partials/notices"); ?>
 			<?php Flight::render("ug/key-features"); ?>
 
 		</div>
@@ -106,9 +87,6 @@ KentThemeHelper::breadcrumb(array(
 	</div>
 </div>
 
-
-
-<?php endif; ?>
 
 <div class="content-page">
 	<div class="content-body">
@@ -201,9 +179,10 @@ KentThemeHelper::breadcrumb(array(
 	</div>
 <?php endif; ?>
 
-
-<?php if (!empty($course->globals->general_disclaimer)): ?>
-	<footer class="general_disclaimer" style='font-size:0.8em;'>
-		<?php echo $course->globals->general_disclaimer; ?>
-	</footer>
-<?php endif; ?>
+<div class="container">
+	<?php if (!empty($course->globals->general_disclaimer)): ?>
+		<footer class="general_disclaimer" style='font-size:0.8em;'>
+			<?php echo $course->globals->general_disclaimer; ?>
+		</footer>
+	<?php endif; ?>
+</div>
