@@ -202,7 +202,7 @@ class CoursesController {
 		$course->award_list	= $this->getCourseAwardList($course);
 		$course->award_list_linked = $this->getCourseAwardListLinked($course);
 
-		return Flight::layout($course->programme_level.'_course_page', array('course'=> $course));
+		return Flight::layout($course->programme_level.'/course', array('course'=> $course));
 	}
 
 	/**

@@ -137,7 +137,7 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 			<p class="card-text">Some text here about the student profile etc..</p>
 		</div>
 		<div class="card-media-wrap">
-			<img src="<?php echo Flight::url("/images/undergrad-discussion-library-16x9.jpg");?>" class="card-img" alt="Students chatting in the library">
+			<img src="/media/images/undergrad-discussion-library-16x9.jpg" class="card-img" alt="Students chatting in the library">
 		</div>
 	<div class="card-img-overlay-bottom text-xs-right">
 		<h3 class="card-subtitle"><?php echo $course->programme_title; ?> - <?php echo $course->award_list_linked; ?></h3>
@@ -201,7 +201,7 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 <div class="card card-overlay m-b-0 p-b-0" >
 	<div class="card-body">
 		<div class="card-media-wrap">
-			<img class="card-img" src="<?php echo FLight::url("images/students.jpg");?>">
+			<img class="card-img" src="/media/images/students.jpg">
 		</div>
 		<div class="card-img-overlay-centered card-img-overlay-tinted">
 			<div class="text-xs-center">

@@ -4,7 +4,7 @@ use \unikent\kent_theme\kentThemeHelper;
 <div class="card card-overlay header-card-overlay">
 	<div class="card-body">
 		<div class="card-media-wrap">
-			<img class="card-img" src="<?php echo Flight::url("/images/banner.jpg");?>">
+			<img class="card-img" src="/media/images/paintbrush-16x9.jpg">
 			<div class="card-img-overlay-bottom card-img-overlay-link">
 				<div class="attribution">
 					<i class="kf-camera"></i>
