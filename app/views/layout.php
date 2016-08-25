@@ -5,12 +5,12 @@ KentThemeHelper::header(
 	array(
 		'title' => "Kent Theme Demo",
 		'menu' => array(
-			'Home' => '#',
-			'Course Listing' => '#',
-			'Chooseing your course' => '#',
-			'How to apply' => '#',
-			'Planning your career' => '#',
-			'Student Profiles' => '#',
+			'Home' => 'https://beta-test.kent.ac.uk/courses/',
+			'Course Listing' => 'https://beta-test.kent.ac.uk/courses/undergraduate/search',
+			'Chooseing your course' => 'https://beta-test.kent.ac.uk',
+			'How to apply' => 'https://beta-test.kent.ac.uk',
+			'Planning your career' => 'https://beta-test.kent.ac.uk',
+			'Student Profiles' => 'https://beta-test.kent.ac.uk',
 
 		),
 		'meta' => array(
