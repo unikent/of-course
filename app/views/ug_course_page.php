@@ -194,6 +194,13 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 							</div><!-- /.key-facts -->
 						</aside>
 					</div><!-- /.key-facts-block -->
+					<?php if (isset($course->staff_profile) && !empty($course->staff_profile) ){ ?>
+						<div class="key-facts-block">
+							<div class="key-facts-container">
+								<h2><a href="<?php echo $course->staff_profile; ?>">Staff profiles <i class="icon-chevron-right"></i></a></h2>
+							</div>
+						</div>
+					<?php } ?>
 					<?php if (isset($course->no_fee_output) && $course->no_fee_output === 'true'): ?>
 						<!-- Do nothing -->
 					<?php else: ?>
