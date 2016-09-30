@@ -8,7 +8,30 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 <div class="content-page">
 	<div class="content-body">
 		<div class="content-header">
-
+			<div class="spaced-links-container">
+				<div class="spaced-links-inner-container">
+					<div class="btn-link-accent spaced-links-item"><i class="kf-pin"></i> <?php echo $course->locations_str; ?></div>
+					<div class="btn-link-accent spaced-links-item"><i class="kf-info-circle"></i> Contact Us</div>
+					<a href="<?php echo $course->prospectus_link ?>" class="spaced-links-item"><div class="btn-link-accent"><i class="kf-user"></i> Prospectus</div></a>
+				</div>
+				<div class="spaced-links-inner-container">
+					<button class="btn btn-tertiary spaced-links-item-btn">Opendays: Book Now</button>
+					<?php if (isset($course->globals->disable_apply) && $course->globals->disable_apply=='true'): ?>
+						<a href="<?php echo Flight::request()->base; ?>/<?php echo $level; ?>/<?php echo $course->instance_id ?>/"
+						   class="btn btn-primary pull-right spaced-links-item-btn"
+						   type="button"
+						   role="button"
+						>View <?php echo $course->current_year ?> programme</a>
+					<?php else:?>
+						<a href="<?php echo Flight::request()->base; ?>/<?php echo $level; ?>/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?>apply-online/<?php echo $course->instance_id ?>"
+						   class="btn btn-primary spaced-links-item-btn"
+						   type="button"
+						   role="button"
+						   aria-controls="apply"
+						>Apply now</a>
+					<?php endif; ?>
+				</div>
+			</div>
 			<p class="lead">
 			<?php
 			// @todo - This is a new field that will be added to the PP in the near future. To demo the behavior
@@ -19,30 +42,15 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 			</p>
 
 			<?php Flight::render("partials/notices"); ?>
-			<?php Flight::render("ug/key-features"); ?>
+<!--			--><?php //Flight::render("ug/key-features"); ?>
 
-		</div>
-
-		<div class="content-header" style="margin-top:3rem; margin-bottom:3rem;">
-			<ul class="nav nav-tabs hidden-sm-down" role="tablist">
-				<li class="nav-item"><a href="#overview" data-toggle="tab" role="tab" class="nav-link active"> Overview</a></li>
-				<li class="nav-item"><a href="#structure" data-toggle="tab" role="tab" class="nav-link">Course structure</a></li>
-				<li class="nav-item"><a href="#teaching" data-toggle="tab" role="tab" class="nav-link">Teaching &amp; Assessment</a></li>
-				<li class="nav-item"><a href="#careers" data-toggle="tab" role="tab" class="nav-link">Careers</a></li>
-				<?php if ((isset($preview) && $preview == true) || (!defined('CLEARING') || (defined('CLEARING') && !CLEARING)) || (defined('CLEARING') && CLEARING && $course->current_year == $course->year)): ?>
-					<li class="nav-item"><a href="#entry" data-toggle="tab" role="tab" class="nav-link">Entry requirements</a></li>
-				<?php endif; ?>
-					<li class="nav-item"><a href="#funding" data-toggle="tab" role="tab" class="nav-link">Funding</a></li>
-
-					<li class='sr-only' ><a href="#fees-tables-link" class="nav-link">Fees</a></li>
-
-
-					<li class='sr-only'><a href="#enquiries" data-toggle="tab" role="tab" class="nav-link">Enquiries</a></li>
-			</ul>
 		</div>
 
 		<div class="content-container">
 			<div class="content-main">
+				<div class="hidden-lg-up">
+					<?php Flight::render("ug/sidebar"); ?>
+				</div>
 					<div class="tab-content">
 						<?php 
 							Flight::render("partials/tab", array("title"=>"Overview", "id" => "overview", "selected" => true, "content" => Flight::fetch("ug/tabs/overview"))); 
@@ -60,7 +68,9 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 					</div>
 			</div>
 			<div class="content-aside">
-				<?php Flight::render("ug/sidebar"); ?>
+				<div class="hidden-md-down">
+					<?php Flight::render("ug/sidebar"); ?>
+				</div>
 			</div>
 		</div>
 	</div>
