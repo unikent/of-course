@@ -1,3 +1,6 @@
+<?php
+use \unikent\kent_theme\kentThemeHelper;
+?>
 <h1>Module Catalogue</h1>
 
 <p>The Module catalogue contains information about academic modules taught at the university.</p>

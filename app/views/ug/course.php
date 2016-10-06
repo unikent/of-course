@@ -10,12 +10,12 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 		<div class="content-header">
 			<div class="spaced-links-container">
 				<div class="spaced-links-inner-container">
-					<div class="btn-link-accent spaced-links-item"><i class="kf-pin"></i> <?php echo $course->locations_str; ?></div>
-					<div class="btn-link-accent spaced-links-item"><i class="kf-info-circle"></i> Contact Us</div>
-					<a href="<?php echo $course->prospectus_link ?>" class="spaced-links-item"><div class="btn-link-accent"><i class="kf-user"></i> Prospectus</div></a>
+					<a href="https://www.kent.ac.uk/locations/<?php echo $course->location_str ?>" class="btn-link-accent spaced-links-item"><i class="kf-pin"></i> <?php echo $course->locations_str; ?></a>
+                    <a href="#contact-modal" class="spaced-links-item btn-link-accent" id="prospectusButton" data-toggle="modal" data-target="#contact-modal"><i class="kf-info-circle"></i> Contact Us</a>
+                    <a href="#prospectus-modal" class="spaced-links-item btn-link-accent" id="prospectusButton" data-toggle="modal" data-target="#prospectus-modal"><i class="kf-user"></i> Prospectus</a>
 				</div>
 				<div class="spaced-links-inner-container">
-					<button class="btn btn-tertiary spaced-links-item-btn">Opendays: Book Now</button>
+					<a href="https://www.kent.ac.uk/courses/visit/openday/" class="btn btn-tertiary spaced-links-item-btn">Opendays: Book Now</a>
 					<?php if (isset($course->globals->disable_apply) && $course->globals->disable_apply=='true'): ?>
 						<a href="<?php echo Flight::request()->base; ?>/<?php echo $level; ?>/<?php echo $course->instance_id ?>/"
 						   class="btn btn-primary pull-right spaced-links-item-btn"
@@ -23,12 +23,14 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 						   role="button"
 						>View <?php echo $course->current_year ?> programme</a>
 					<?php else:?>
-						<a href="<?php echo Flight::request()->base; ?>/<?php echo $level; ?>/<?php echo $course->year != $course->current_year ? $course->year . '/' : '' ?>apply-online/<?php echo $course->instance_id ?>"
-						   class="btn btn-primary spaced-links-item-btn"
-						   type="button"
-						   role="button"
-						   aria-controls="apply"
-						>Apply now</a>
+						<button class="btn btn-primary spaced-links-item-btn"
+							type="button"
+							role="button"
+							aria-controls="apply"
+							id="applyButton"
+							data-toggle="modal"
+						  	data-target="#apply-modal"
+						>Apply now</button>
 					<?php endif; ?>
 				</div>
 			</div>
@@ -42,36 +44,31 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 			</p>
 
 			<?php Flight::render("partials/notices"); ?>
-<!--			--><?php //Flight::render("ug/key-features"); ?>
 
 		</div>
 
-		<div class="content-container">
+		<div class="content-container relative">
+			<div class="content-aside top-sidebar">
+				<?php Flight::render("ug/sidebar"); ?>
+			</div>
 			<div class="content-main">
-				<div class="hidden-lg-up">
-					<?php Flight::render("ug/sidebar"); ?>
-				</div>
-					<div class="tab-content">
-						<?php 
-							Flight::render("partials/tab", array("title"=>"Overview", "id" => "overview", "selected" => true, "content" => Flight::fetch("ug/tabs/overview"))); 
-							Flight::render("partials/tab", array("title"=>"Course structure", "id" => "structure", "selected" => false, "content" => Flight::fetch("ug/tabs/structure"))); 
-							Flight::render("partials/tab", array("title"=>"Teaching &amp; Assessment", "id" => "teaching", "selected" => false, "content" => Flight::fetch("ug/tabs/teaching"))); 
-							Flight::render("partials/tab", array("title"=>"Careers", "id" => "careers",  "selected" => false, "content" => Flight::fetch("ug/tabs/careers"))); 
+				<div class="tab-content">
+					<?php
+						Flight::render("partials/tab", array("title"=>"Overview", "id" => "overview", "selected" => true, "content" => Flight::fetch("ug/tabs/overview")));
+						Flight::render("partials/tab", array("title"=>"Course structure", "id" => "structure", "selected" => false, "content" => Flight::fetch("ug/tabs/structure")));
+						Flight::render("partials/tab", array("title"=>"Teaching &amp; Assessment", "id" => "teaching", "selected" => false, "content" => Flight::fetch("ug/tabs/teaching")));
+						Flight::render("partials/tab", array("title"=>"Careers", "id" => "careers",  "selected" => false, "content" => Flight::fetch("ug/tabs/careers")));
 
-							if ((isset($preview) && $preview == true) || (!defined('CLEARING') || (defined('CLEARING') && !CLEARING)) || (defined('CLEARING') && CLEARING && $course->current_year == $course->year)){
-								Flight::render("partials/tab", array("title"=>"Entry requirements", "id" => "entry",  "selected" => false, "content" => Flight::fetch("ug/tabs/entry"))); 
-							}
+						if ((isset($preview) && $preview == true) || (!defined('CLEARING') || (defined('CLEARING') && !CLEARING)) || (defined('CLEARING') && CLEARING && $course->current_year == $course->year)){
+							Flight::render("partials/tab", array("title"=>"Entry requirements", "id" => "entry",  "selected" => false, "content" => Flight::fetch("ug/tabs/entry")));
+						}
 
-							Flight::render("partials/tab", array("title"=>"Funding", "id" => "funding",  "selected" => false, "content" => Flight::fetch("ug/tabs/fees"))); 
-							Flight::render("partials/tab", array("title"=>"Enquiries", "id" => "enquiries", "selected" => false, "content" => Flight::fetch("ug/tabs/enquiries"))); 
-						?>
-					</div>
-			</div>
-			<div class="content-aside">
-				<div class="hidden-md-down">
-					<?php Flight::render("ug/sidebar"); ?>
+						Flight::render("partials/tab", array("title"=>"Funding", "id" => "funding",  "selected" => false, "content" => Flight::fetch("ug/tabs/fees")));
+						Flight::render("partials/tab", array("title"=>"Enquiries", "id" => "enquiries", "selected" => false, "content" => Flight::fetch("ug/tabs/enquiries")));
+					?>
 				</div>
 			</div>
+
 		</div>
 	</div>
 </div>
@@ -97,6 +94,7 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 				<tbody>
 					<?php
 						$fees = $course->deliveries[0]->fees;
+
 					?>
 					<?php if ($has_fulltime): ?>
 						<tr>
@@ -223,4 +221,31 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 		</div>
 	</div>
 </div>
+
+
+<?php
+$schoolName = $course->administrative_school[0]->name;
+$has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
+$has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
+$full_type = 'ucas';
+if (empty($deliveries)) {
+	$has_fulltime = $has_parttime = FALSE;
+} else {
+	foreach ($deliveries as $delivery) {
+		if ($delivery->attendance_pattern == 'part-time') {
+			$has_parttime = $has_parttime && true;
+		} else {
+			$has_fulltime = $has_fulltime && true;
+			$full_type = (substr($delivery->mcr, -2) == 'FD') ? 'direct' : 'ucas';
+		}
+	}
+}
+?>
+
+
+<?php Flight::render("partials/modals/apply"); ?>
+<?php Flight::render("partials/modals/contact"); ?>
+<?php Flight::render("partials/modals/prospectus"); ?>
+
+
 

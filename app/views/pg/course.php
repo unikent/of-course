@@ -17,7 +17,7 @@
 		</div>
 
 	<div class="content-header" style="margin-top:3rem; margin-bottom:3rem;">
-			<ul class="nav nav-tabs hidden-sm-down" role="tablist">
+			<ul class="nav nav-tabs" role="tablist">
 				<li class="nav-item"><a href="#overview" data-toggle="tab" role="tab" class="nav-link active">Overview</a></li>
 				<?php if (strpos($course->programme_type, 'taught') !== false || (strpos($course->programme_type, 'research') !== false && !empty($course->programme_overview))): ?>
 					<li class="nav-item"><a href="#structure" data-toggle="tab" role="tab" class="nav-link">Course structure</a></li>

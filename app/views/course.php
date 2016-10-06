@@ -6,36 +6,37 @@ use \unikent\kent_theme\kentThemeHelper;
 	<div class="card-body">
 		<div class="card-media-wrap">
 			<img class="card-img" src="/media/images/paintbrush-16x9.jpg">
-			<div class="card-title-overlap overlap-container">
-				<?php
-				KentThemeHelper::breadcrumb(array(
-					'Courses'=>'/',
-					ucfirst($level).' '. $year =>'/',
-					$course->programme_title =>''
-				));
-				?>
-				<h1>
-					<?php echo $course->programme_title; ?> - <?php echo $course->award_list_linked; ?>
-					<?php echo $course->programmme_status_text; ?>
-				</h1>
-				<p class="card-subtitle">UCAS code <?php echo $course->ucas_code?></p>
-			</div>
-			<div class="card-img-overlay-bottom card-img-overlay-link card-overlay-inline-sm card-overlay-inline-nopad header-card-overlap-search">
-				<form lpformnum="1">
-					<div class="form-group quickspot-container">
-						<label for="search" class="sr-only">Search courses and subjects</label>
-						<div class="input-group input-group-lg">
-							<input type="search" class="form-control" id="course-search" autocomplete="off" data-quickspot-config="courses" data-quickspot-target="quickspot-results-container" placeholder="Search courses and subjects">
-							<span class="input-group-btn">
-								<button type="submit" class="btn btn-accent btn-icon">
-									<span class="kf-fw kf-search"></span></button>
-							</span>
-						</div>
-						<div id="quickspot-results-container"></div>
-					</div>
-				</form>
-			</div>
 		</div>
+		<div class="card-title-overlap overlap-container">
+			<?php
+			KentThemeHelper::breadcrumb(array(
+				'Courses'=>'/',
+				ucfirst($level).' '. $year =>'/',
+				$course->programme_title =>''
+			));
+			?>
+			<h1>
+				<?php echo $course->programme_title; ?> - <?php echo $course->award_list_linked; ?>
+				<?php echo $course->programmme_status_text; ?>
+			</h1>
+			<p class="card-subtitle">UCAS code <?php echo $course->ucas_code?></p>
+		</div>
+        <div class="card-img-overlay-bottom card-img-overlay-link card-overlay-inline-sm card-overlay-inline-nopad header-card-overlap-search">
+            <form class="quickspot-container">
+                <div class="form-group">
+                    <label for="course-search" class="sr-only">Search courses</label>
+                    <div class="input-group input-group-lg">
+                        <input type="search" class="form-control" id="course-search" placeholder="Search courses..." autocomplete="off" data-quickspot-config="all_courses" data-quickspot-target="quickspot-results-container">
+                        <span class="input-group-btn">
+									<button type="submit" class="btn btn-accent btn-icon"><span class="sr-only">Search courses</span> <span class="kf-fw kf-search"></span></button>
+                            </span>
+                    </div>
+
+                    <div id="quickspot-results-container" tabindex="100" class="quickspot-results-container" style="display: none;">
+                    </div>
+                </div>
+            </form>
+        </div>
 	</div>
 </div>
 
