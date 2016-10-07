@@ -17,7 +17,8 @@ KentThemeHelper::header(
 			'title' => (isset($meta) && isset($meta['title']) ? $meta['title'] : 'University of kent courses'),
 			'description' => $meta['description'],
 		),
-		'head_markup'=> '<link rel="feed" type="application/xcri+xml" href="/courses/xcri"/><link rel="canonical" href="'.$meta['canonical'].'" />',
+		'head_markup'=> '<link rel="feed" type="application/xcri+xml" href="/courses/xcri"/><link rel="canonical" href="'.$meta['canonical'].'" />
+		<link media="screen" type="text/css" rel="stylesheet" href="'.Flight::asset("css/courses.css").'" />',
 		'home_page' => false,
 		'slim'=> true,
 		'brand_header' => true,
