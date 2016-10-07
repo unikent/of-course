@@ -1,5 +1,5 @@
 <!-- prospectus modal -->
-<div class="modal modal-course modal-nojs fade" id="prospectus-modal" tabindex="-1" role="dialog" aria-labelledby="Prospectus Label" aria-hidden="true">
+<div class="modal modal-course fade" id="prospectus-modal" tabindex="-1" role="dialog" aria-labelledby="Prospectus Label" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
