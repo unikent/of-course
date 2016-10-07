@@ -151,7 +151,11 @@ window.addEventListener("load", function(){
 			if($(this).val() !== ''){
 				// Apply QS filter
 				var col = $(this).data("filter-col");
-				qs.filter($(this).val(), col);
+				if(col === "mode_of_study" && $(this).val() == "Distance"){
+					qs.filter($(this).val(), "attendance_mode"); // distance actually filters a differnt col, so add excpetion
+				}else{
+					qs.filter($(this).val(), col);
+				}
 
 				// Add filter text
 				filter_title += $(this).val() + ', ';
