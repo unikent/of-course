@@ -2,6 +2,7 @@
   "name": "of-course",
   "version": "0.1.0",
   "devDependencies": {
+    "grunt": "^1.0.1",
     "grunt-cli": "~0.1.5",
     "grunt-contrib-clean": "~0.4.1",
     "grunt-contrib-concat": "~0.3.0",
