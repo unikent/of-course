@@ -228,10 +228,10 @@ $schoolName = $course->administrative_school[0]->name;
 $has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
 $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
 $full_type = 'ucas';
-if (empty($deliveries)) {
+if (empty($course->deliveries)) {
 	$has_fulltime = $has_parttime = FALSE;
 } else {
-	foreach ($deliveries as $delivery) {
+	foreach ($course->deliveries as $delivery) {
 		if ($delivery->attendance_pattern == 'part-time') {
 			$has_parttime = $has_parttime && true;
 		} else {
@@ -242,10 +242,10 @@ if (empty($deliveries)) {
 }
 ?>
 
-
-<?php Flight::render("partials/modals/apply"); ?>
 <?php Flight::render("partials/modals/contact"); ?>
 <?php Flight::render("partials/modals/prospectus"); ?>
+<?php Flight::render("partials/modals/apply"); ?>
+
 
 
 

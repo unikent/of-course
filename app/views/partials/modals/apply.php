@@ -3,10 +3,12 @@ $schoolName = $course->administrative_school[0]->name;
 $has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
 $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== false);
 $full_type = 'ucas';
-if (empty($deliveries)) {
+
+
+if (empty($course->deliveries)) {
     $has_fulltime = $has_parttime = FALSE;
 } else {
-    foreach ($deliveries as $delivery) {
+    foreach ($course->deliveries as $delivery) {
         if ($delivery->attendance_pattern == 'part-time') {
             $has_parttime = $has_parttime && true;
         } else {
@@ -110,7 +112,7 @@ if (empty($deliveries)) {
                             </div>
                         </div>
                         <aside class="content-aside">
-                                <?php foreach ($deliveries as $delivery){ ?>
+                                <?php foreach ($course->deliveries as $delivery){ ?>
 
                                         <a
                                            id="apply-link-<?php echo strtolower(str_replace(array('/', ' ', '(', ')'), '', $delivery->award_name)) ?>-<?php echo $delivery->attendance_pattern ?>-<?php echo $course->year ?>"
@@ -145,5 +147,6 @@ if (empty($deliveries)) {
 
 
 <?php
+
 }
 ?>
