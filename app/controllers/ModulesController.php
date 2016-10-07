@@ -134,7 +134,7 @@ class ModulesController {
 	 *  
 	 */
 	protected function getModule($code){
-		$data = Cache::load(KENT_API_URL . "v1/modules/module/" . $code,15);
+		$data = Cache::load(API_URL . "v1/modules/module/" . $code,15);
 
 		if($data == false){
 			return (object) array("error" => "Unable to find specified module.");
@@ -150,7 +150,7 @@ class ModulesController {
 	protected function getCollectionList(){
 
 		// Grab first page of datatable
-		$data = Cache::load(KENT_API_URL . "v1/modules/collection/", 15);
+		$data = Cache::load(API_URL . "v1/modules/collection/", 15);
 		return json_decode($data['data']);
 	}
 
@@ -160,7 +160,7 @@ class ModulesController {
 	 */
 	protected function getModuleList($collection = 'all'){
 		// Grab first page of datatable
-		$data = Cache::load(KENT_API_URL . "v1/modules/collection/" . $collection, 15);
+		$data = Cache::load(API_URL . "v1/modules/collection/" . $collection, 15);
 
 		if($data == false){
 			return (object) array("error" => "Unable to find specified collection.");
@@ -170,7 +170,7 @@ class ModulesController {
 	}
 
 	protected function getSubjectsList($group = 'all'){
-		$data = Cache::load(KENT_API_URL . "v1/modules/subjects/" . $group, 15);
+		$data = Cache::load(API_URL . "v1/modules/subjects/" . $group, 15);
 
 		if($data == false){
 			return (object) array("error" => "Unable to find specified subject group.");

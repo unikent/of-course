@@ -214,7 +214,7 @@
 		/** Quick search  */
 		var qs = quickspot.attach({
 			// Basic
-			"url":"<?php echo KENT_API_URL; ?>v1/modules/collection/all",
+			"url":"<?php echo API_URL; ?>v1/modules/collection/all",
 			"target":"modulesearch",
 			"search_on": ["title", "sds_code"],
 			"disable_occurrence_weighting": true,
