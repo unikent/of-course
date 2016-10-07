@@ -1,40 +1,19 @@
 <div class="container">
+	<h1>Postgraduate Courses</h1>
 
-
-<?php $year_for_url = empty($year) ? '' : ((strcmp($year, CoursesController::$current_year) == 0) ? '' : $year . '/'); ?>
-
-<?php if($year !== CoursesController::$current_year): ?>
-	<meta name="robots" content="noindex, nofollow" />
-	<div class='alert alert-daedalus'>
-		You're not searching for programmes in the current upcoming year. <a href="<?php echo Flight::request()->base; ?>/postgraduate/search">Search for current programmes here.</a>
-	</div>
-<?php endif; ?>
-
-<div class="advanced-search">
-
-	<h1><?php echo $title; ?></h1>
-
-	<a id="showMore">Choose a course that's right for you. Learn more <i class="icon-chevron-right"></i></a>
-	<div id="more" class="clearfix" style="display: none;" aria-expanded="false"></div>
-	<div class="row-fluid">
-		<div class="span12">
-			<ul class="nav nav-tabs">
-				<li><a href="<?php echo Flight::request()->base; ?>/undergraduate/search">Undergraduate</a></li>
-				<li class="active"><a href="<?php echo Flight::request()->base; ?>/postgraduate/search">Postgraduate</a></li>
-			</ul>
-		</div><!-- /span -->
-	</div><!-- /row -->
-
-	<div class="row advanced-search-boxes">
-
-		<div class="advanced-search-filters pg">
-			<div id="advanced-text-search-hint-box" class="visible-phone"><span id="advanced-text-search-hint" class="hide"><a href="#programme-list">Results filtered below...</a></span></div>
-			<div class="row">
-				<div class="search-filter">
-					<span>Filter by: </span><input class="advanced-text-search" type="text" placeholder="keyword" />
-				</div>
+	<ul class="nav nav-tabs  p-t-1">
+		<li class="nav-item">
+			<a class="nav-link" href="<?php echo Flight::url("undergraduate/search"); ?>">Undergraduate</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link  active">Postgraduate</a>
+		</li>
+	</ul>
+</div>
+<div class="panel-secondary ">
+		<div class="container form-inline p-t-2 p-b-2 filter-box">
 				<div class="search-select campus-search-div">
-					<select class="campus-search input-medium <?php if(strcmp($search_type, 'campus')  == 0) echo 'highlighted'; ?>">
+					<select class="campus-search form-control <?php if(strcmp($search_type, 'campus')  == 0) echo 'highlighted'; ?>" data-filter-col="campus">
 						<option value="">All locations</option>
 						<option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Canterbury'))  == 0) echo 'selected'; ?>>Canterbury</option>
 						<option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Medway'))  == 0) echo 'selected'; ?>>Medway</option>
@@ -49,15 +28,15 @@
 					</select>
 				</div>
 				<div class="search-select attendance-mode-search-div">
-					<select class="study-mode-search input-medium <?php if(strcmp($search_type, 'study_mode')  == 0) echo 'highlighted'; ?>">
+					<select class="study-mode-search form-control <?php if(strcmp($search_type, 'study_mode')  == 0) echo 'highlighted'; ?>" data-filter-col="mode_of_study">
 						<option value="">All study modes</option>
 						<option <?php if(strcmp($search_type, 'study_mode')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Full-time'))  == 0) echo 'selected'; ?>>Full-time</option>
 						<option <?php if(strcmp($search_type, 'study_mode')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Part-time'))  == 0) echo 'selected'; ?>>Part-time</option>
-						<option <?php if(strcmp($search_type, 'study_mode')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Distance learning'))  == 0) echo 'selected'; ?>>Distance learning</option>
+						<option value="Distance" <?php if(strcmp($search_type, 'study_mode')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Distance learning'))  == 0) echo 'selected'; ?>>Distance learning</option>
 					</select>
 				</div>
 				<div class="search-select subject-categories-search-div">
-					<select class="subject-categories-search input-large <?php if(strcmp($search_type, 'subject_category')  == 0) echo 'highlighted'; ?>">
+					<select class="subject-categories-search form-control <?php if(strcmp($search_type, 'subject_category')  == 0) echo 'highlighted'; ?>" data-filter-col="__subjects">
 						<option value="">All subject categories</option>
 						<?php
 
@@ -75,7 +54,7 @@
 				</select>
 			</div>
 			<div class="search-select award-search-div">
-				<select class="award-search input-medium <?php if(strcmp($search_type, 'award')  == 0) echo 'highlighted'; ?>">
+				<select class="award-search form-control <?php if(strcmp($search_type, 'award')  == 0) echo 'highlighted'; ?>" data-filter-col="award">
 					<option value="">All awards</option>
 					<?php foreach($awards as $award): ?>
 						<option <?php if(strcmp($search_type, 'award')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower($award))  == 0) echo 'selected'; ?>><?php echo $award ?></option>
@@ -83,117 +62,109 @@
 				</select>
 			</div>
 			<div class="search-select programme-type-search-div">
-				<select class="programme-type-search input-medium <?php if(strcmp($search_type, 'programme_type')  == 0) echo 'highlighted'; ?>">
+				<select class="programme-type-search form-control <?php if(strcmp($search_type, 'programme_type')  == 0) echo 'highlighted'; ?>" data-filter-col="programme_type">
 					<option value="">All course types</option>
-					<option <?php if(strcmp($search_type, 'programme_type') == 0  && strcmp(urldecode(strtolower($search_string)), 'research') == 0) echo 'selected'; ?>>Research</option>
-					<option <?php if(strcmp($search_type, 'programme_type') == 0  && strcmp(urldecode(strtolower($search_string)), 'taught') == 0) echo 'selected'; ?>>Taught</option>
-					<option <?php if(strcmp($search_type, 'programme_type') == 0  && strcmp(urldecode(strtolower($search_string)), 'taught-research') == 0) echo 'selected'; ?>>Taught-research</option>
+					<option value="research" <?php if(strcmp($search_type, 'programme_type') == 0  && strcmp(urldecode(strtolower($search_string)), 'research') == 0) echo 'selected'; ?>>Research</option>
+					<option value="taught" <?php if(strcmp($search_type, 'programme_type') == 0  && strcmp(urldecode(strtolower($search_string)), 'taught') == 0) echo 'selected'; ?>>Taught</option>
+					<option value="taught-research" <?php if(strcmp($search_type, 'programme_type') == 0  && strcmp(urldecode(strtolower($search_string)), 'taught-research') == 0) echo 'selected'; ?>>Taught-research</option>
 				</select>
 			</div>
-		</div>
+
 	</div>
 
+	<div class="search-filter container form-inline">
+		<h2 id="filter_title">All courses</h2>
+
+		<div id="course-filter-container"><input id="course-filter" class="advanced-text-search form-control" type="text" placeholder="Search courses" /></div>
+	</div>
+
+
 </div>
 
 
 
-<table id="programme-list" class="table table-striped-search advanced-search-table">
-	<thead>
-		<tr>
-			<th>Name <i class="icon-resize-vertical"></i></th>
-			<th style="width:120px">Course type <i class="icon-resize-vertical"></i></th>
-			<th style="width:120px" class="hidden-phone">Campus <i class="icon-resize-vertical"></i></th>
-			<th style="width:150px" class="hidden-phone">Full-time/Part-time <i class="icon-resize-vertical"></i></th>
-			<th class="hide">Subject categories</th>
-			<th class="hide">Search keywords</th>
-			<th class="hide">Award</th>
-			<th class="hide">Sort-key</th>
-			<th class="hide">Sort</th>
-		</tr>
-	</thead>
-	<tbody>
-
+<?php 
+$programmes = (array)$programmes;
+usort($programmes, function($a,$b){ return $a->name > $b->name;});
+?>
+<div class="card-panel cards-list cards-backed card-panel-secondary course-listing">
+	<div class="card-panel-body quickspot-output">
+	</div>
+	<div class="card-panel-body standard-output">
 		<?php foreach($programmes as $p):?>
-			<?php if(!(isset($only_study_abroad) && $only_study_abroad === true) || $p->study_abroad_option != ''):?>
-			<tr>
-				<td>
-					<div class="advanced-search-name-award"><a href='<?php echo Flight::url("{$level}/{$year_for_url}{$p->id}/{$p->slug}"); ?>'><?php echo $p->name;?> <?php echo $p->programmme_status_text; ?></a><br /><span class="advanced-search-award"><?php echo $p->award;?></span></div>
-					</td>
-					<td>
-					<?php echo ucwords($p->programme_type);?>
-				</td>
-				<td class="hidden-phone">
-					<?php if ($p->additional_locations != ''): ?>
-						<?php if ( strstr($p->additional_locations, ',') ): ?>
-							<?php echo $p->campus.', '.$p->additional_locations ?>
-						<?php else: ?>
-							<?php echo $p->campus.' and '.$p->additional_locations ?>
-						<?php endif ?>
-					<?php else: ?>
-						<?php echo $p->campus ?>
-					<?php endif ?>
-				</td>
-				<td class="hidden-phone">
-					<?php echo $p->mode_of_study;?>
-					<span style="display:none">
-						<?php
-						$distance = strtok($p->attendance_mode, ' ');
-						if (strpos($distance, 'Distance') !== false) {
-							$distance = "Distance learning";
-						}
-						echo $distance;
-						?>
-					</span>
-				</td>
-				<td class="hide">
-					<?php foreach((array)$p->subject_categories as $key => $sc): ?>
-						<?php
-						if(!empty($sc)){
-							echo $sc;
-							// dont echo a seperator if its the last subject category
-							if($key !== count($p->subject_categories) - 1) echo ';';
-						}
-						?>
-					<?php endforeach; ?>
-				</td>
-				<td class="hide">
-					<?php echo $p->search_keywords;?>
-				</td>
-				<td class="hide">
-					<?php echo $p->award;?>
-				</td>
-				<td class="hide"><?php echo strtolower($p->name);?> <?php echo strtolower($p->award);?></td>
-				<td class="hide"></td>
-			</tr>
-			<?php endif;?>
+			<div class="card card-linked chevron-link">
+
+				<a href="<?php echo Flight::url("{$level}/{$year_for_url}{$p->id}/{$p->slug}"); ?>" class="card-title-link ">
+					<h3 style="display:inline;"><?php echo $p->name;?> <?php echo $p->programmme_status_text; ?> - <span class="advanced-search-award"><?php echo $p->award;?></span></h3>
+				</a>
+				
+				<span class="kf-clock tag text-accent"> <?php echo $p->mode_of_study;?></span>
+				<span class="kf-pin tag text-accent"> <?php echo $p->campus;?></span> 
+				
+				<a href="<?php echo Flight::url("{$level}/{$year_for_url}{$p->id}/{$p->slug}"); ?>" class="faux-link-overlay" aria-hidden="true"><?php echo $p->name;?></a>
+			</div>
 		<?php endforeach; ?>
-
-
-	</tbody>
-</table>
+	</div>					 
 </div>
 
+<script>
 
-<script type='text/javascript'>
-$(document).ready(function(){
+window.addEventListener("load", function(){
 
-	var programme_list = new CourseFilterTable({
-		table: $('#programme-list'),
-		globalFilter: $('input.advanced-text-search'),
-		columnFilters: {
-			"2": $('select.campus-search'),
-			"3": $('select.study-mode-search'),
-			"4" : $('select.subject-categories-search'),
-			"6": $('select.award-search'),
-			"1": $('select.programme-type-search')
-		}
-	});
+	// Create config for QS instance, extend courses_inline
+	var qs = window.KENT.modules.quickspot.attach(
+		$.extend({}, window.KENT.quickspot.config.pg_courses_inline, {
+			'search_on': ['name', 'award'],
+			'url':	'https://api.kent.ac.uk/api/programmes/current/postgraduate/programmes',
+			/*'parse_results': function (results, options){
+				console.log(results);
+				return results;
+			},*/
+			target: "course-filter",
+			results_container: document.querySelector(".quickspot-output"),
+			// Add searchable subjects
+			"data_pre_parse": function(courses){
+				for(var c in courses){
+					courses[c].__subjects = '';
+					for(var s in courses[c].subject_categories){
+						courses[c].__subjects += ' ' + courses[c].subject_categories[s];
+					}
+				}
+				return courses;
+			},
+			"ready": function(qs){
+				apply_filters();
+				qs.showAll();
+				$(".standard-output").hide();
+			}
+		})
+	);
 
-	pantheon.load_section('#more', '/courses/menu/top/index-pg.html');
+	// Apply search filters
+	function apply_filters(){
 
-});
+		var filter_title = '';
+
+		// remove previous filters
+		qs.clearFilters();
+		$(".filter-box select").each(function(select){
+			if($(this).val() !== ''){
+				// Apply QS filter
+				var col = $(this).data("filter-col");
+				qs.filter($(this).val(), col);
+
+				// Add filter text
+				filter_title += $(this).val() + ', ';
+			}
+		});
+		qs.refresh();
+		// Update text
+		document.getElementById("filter_title").innerText = (filter_title == '') ? "All courses" : filter_title.charAt(0).toUpperCase() + filter_title.slice(1, -2) + ' courses';
+	};
+
+	// apply filter on change.
+	$(".filter-box select").change(apply_filters);
+
+}, false);
+
 </script>
-
-
-
-</div>

@@ -1,0 +1,31 @@
+.course-listing {
+	padding-top:1rem;
+}
+.filter-box .search-select select, #course-filter-container input{
+	width: 100%;
+}
+
+@media (min-width: 768px){
+	.filter-box .search-select {
+		display: inline;
+	}
+	.filter-box .search-select select{
+		width: 19%;
+	}
+	#course-filter-container {
+		position: relative;
+	}
+	#course-filter-container::before {
+		content: "";
+		font-family: "kentfont", sans-serif;
+		font-size: 20px;
+		position: absolute;
+		left: 10px;
+		top: 6px;
+		color: #A5A5A5;
+	}
+	#course-filter-container input {
+		width:50%;
+		padding-left:35px;
+	}
+}

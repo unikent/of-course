@@ -1,32 +1,4 @@
-<style>
-	.course-listing {
-		padding-top:1rem;
-	}
-	.filter-box .search-select {
-		display:inline;
-	}
-	.filter-box .search-select select{
-		width: 20%;
-	}
-	#course-filter-container {
-		position: relative;
-	}
-	#course-filter-container::before {
-		content: "";
-		font-family: "kentfont", sans-serif;
-		font-size: 20px;
-		position: absolute;
-		left: 10px;
-		top: 6px;
-		color: #A5A5A5;
-	}
-	#course-filter-container input {
-		width:50%;
-		padding-left:35px;
-	}
-</style>
-
-<div class="container p-t-2">
+<div class="container">
 	<h1>Undergraduate Courses</h1>
 
 	<ul class="nav nav-tabs  p-t-1">
@@ -110,14 +82,11 @@ usort($programmes, function($a,$b){ return $a->name > $b->name;});
 				<a href="<?php echo Flight::url("{$level}/{$year_for_url}{$p->id}/{$p->slug}"); ?>" class="card-title-link ">
 					<h3 style="display:inline;"><?php echo $p->name;?> <?php echo $p->programmme_status_text; ?> - <span class="advanced-search-award"><?php echo $p->award;?></span></h3>
 				</a>
-
-				<div class="card-meta-accent">
-					<span class="kf-clock"> <?php echo $p->mode_of_study;?></span>
-					<span class="kf-pin"> <?php echo $p->campus;?></span> 
-				</div>
-
 				
-				<a href="<?php echo Flight::url("{$level}/{$year_for_url}{$p->id}/{$p->slug}"); ?>" class="faux-link-overlay" aria-hidden="true">May 2016 – July 2016</a>
+				<span class="kf-clock tag text-accent"> <?php echo $p->mode_of_study;?></span>
+				<span class="kf-pin tag text-accent"> <?php echo $p->campus;?></span> 
+				
+				<a href="<?php echo Flight::url("{$level}/{$year_for_url}{$p->id}/{$p->slug}"); ?>" class="faux-link-overlay" aria-hidden="true"><?php echo $p->name;?></a>
 			</div>
 		<?php endforeach; ?>
 	</div>					 
