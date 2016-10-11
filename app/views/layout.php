@@ -17,7 +17,8 @@ KentThemeHelper::header(
 			'title' => (isset($meta) && isset($meta['title']) ? $meta['title'] : 'University of kent courses'),
 			'description' => $meta['description'],
 		),
-		'head_markup'=> '<link rel="feed" type="application/xcri+xml" href="/courses/xcri"/><link rel="canonical" href="'.$meta['canonical'].'" />',
+		'head_markup'=> '<link rel="feed" type="application/xcri+xml" href="/courses/xcri"/><link rel="canonical" href="'.$meta['canonical'].'" />
+		<link media="screen" type="text/css" rel="stylesheet" href="'.Flight::asset("css/courses.css").'" />',
 		'home_page' => false,
 		'slim'=> true,
 		'brand_header' => true,
@@ -32,6 +33,9 @@ KentThemeHelper::header(
 		<i class="icon-chevron-up icon-white"></i>
 	  </a>
 
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>
+	<script type="text/javascript" charset="utf8" src="<?php echo Flight::asset('js/build/coursetable.min.js'); ?>"></script>
+	<script type="text/javascript" charset="utf-8" language="javascript" src="<?php echo Flight::asset('js/build/of-course.min.js'); ?>"></script>
 
 
 
