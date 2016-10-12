@@ -45,6 +45,6 @@
 
 		var module_list_data = {};
 		// Init first table
-	module_datatable($(".dataTable_main"), {"data": collection, "api_endpoint": "<?php echo KENT_API_URL;?>v1/modules/collection/<?php echo  $collection; ?>", base_url: "<?php echo Flight::url('modules/module/'); ?>",keyword_filter:$('.advanced-text-search:first'),subject_filter:$('.subject-search:first'),id:'collection' });
+	module_datatable($(".dataTable_main"), {"data": collection, "api_endpoint": "<?php echo API_URL;?>v1/modules/collection/<?php echo  $collection; ?>", base_url: "<?php echo Flight::url('modules/module/'); ?>",keyword_filter:$('.advanced-text-search:first'),subject_filter:$('.subject-search:first'),id:'collection' });
  </script>
 </kentScripts>

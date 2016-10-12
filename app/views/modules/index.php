@@ -134,13 +134,13 @@ use \unikent\kent_theme\kentThemeHelper;
 		if(table.attr('data-ready') == 'true') return;
 		table.attr('data-ready', 'true');
 
-		module_datatable(table, {"api_endpoint": "<?php echo KENT_API_URL;?>v1/modules/collection/" + table.attr("data-collection"), base_url: "<?php echo Flight::url('modules/module/'); ?>",keyword_filter:$('#' + tab_name + ' .advanced-text-search:first'),subject_filter:$('#' + tab_name + ' .subject-search:first'),id:tab_name });
+		module_datatable(table, {"api_endpoint": "<?php echo API_URL;?>v1/modules/collection/" + table.attr("data-collection"), base_url: "<?php echo Flight::url('modules/module/'); ?>",keyword_filter:$('#' + tab_name + ' .advanced-text-search:first'),subject_filter:$('#' + tab_name + ' .subject-search:first'),id:tab_name });
 
 		$($(this).attr("href")).addClass('loaded').find('.loader').remove();
 	});
 
 	// Init first table
-	module_datatable($(".dataTable_all"), {"data": all_modules, "api_endpoint": "<?php echo KENT_API_URL;?>v1/modules/collection/all", base_url: "<?php echo Flight::url('modules/module/'); ?>",keyword_filter:$('#all .advanced-text-search:first'),subject_filter:$('#all .subject-search:first'),id:'all'});
+	module_datatable($(".dataTable_all"), {"data": all_modules, "api_endpoint": "<?php echo API_URL;?>v1/modules/collection/all", base_url: "<?php echo Flight::url('modules/module/'); ?>",keyword_filter:$('#all .advanced-text-search:first'),subject_filter:$('#all .subject-search:first'),id:'all'});
 
 	// Trigger click on load (if hash is in use), so tabbed tables work
 	var hash = window.location.hash;
