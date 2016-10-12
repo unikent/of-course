@@ -1,28 +1,35 @@
-<!-- InstanceBegin template="/Templates/daedalus_v1.dwt" codeOutsideHTMLIsLocked="false" -->
-<!-- TEMPLATE_VERSION="Daedalus v1.0" -->
-<kentWrapper type="simple">
+<?php
+use \unikent\kent_theme\kentThemeHelper;
 
-	<kentMeta>
-		<!-- InstanceBeginEditable name="metadata" -->
-		<?php if(isset($meta) && isset($meta['title'])): ?>
-			<title><?php echo $meta['title']; ?></title>
-		<?php endif; ?>
+KentThemeHelper::header(
+	array(
+		'title' => "Kent Theme Demo",
+		'menu' => array(
+			'Home' => 'https://beta-test.kent.ac.uk/courses/',
+			'Modules Listing' => 'https://beta-test.kent.ac.uk/courses/modules',
+			'Chooseing your course' => 'https://beta-test.kent.ac.uk',
+			'How to apply' => 'https://beta-test.kent.ac.uk',
+			'Planning your career' => 'https://beta-test.kent.ac.uk',
+			'Student Profiles' => 'https://beta-test.kent.ac.uk',
 
-		<?php if(isset($meta) && isset($meta['description'])): ?>
-			<meta name="description" content="<?php echo $meta['description']; ?>" />
-		<?php endif; ?>
+		),
+		'meta' => array(
+			'title' => (isset($meta) && isset($meta['title']) ? $meta['title'] : 'University of Kent modules'),
+			'description' => $meta['description'],
+		),
+		'head_markup'=> '<link media="screen" type="text/css" rel="stylesheet" href="'.Flight::asset("css/module-catalogue.css").'" />',
+		'home_page' => false,
+		'slim'=> true,
+		'brand_header' => true,
+		'theme' => $level == 'postgraduate' ? 'postgraduate' : false
+	)
+);
 
-		<link media='screen' type='text/css' rel='stylesheet' href='<?php echo Flight::asset('css/module-catalogue.css'); ?>' />
-
-		<!-- InstanceEndEditable -->
-	</kentMeta>
-	<kentContent>
-		<!-- InstanceBeginEditable name="content" -->
-		
+?>
 		<?php echo $content; ?>
 
-		<!-- InstanceEndEditable -->
-	</kentContent>
-</kentWrapper>
-<!-- InstanceEnd -->
+	  <a href="#bodycontent" tabindex="0" class='scroll-to-top' style="cursor: pointer;">
+		<i class="icon-chevron-up icon-white"></i>
+	  </a>
 
+<?php KentThemeHelper::footer(); ?>
