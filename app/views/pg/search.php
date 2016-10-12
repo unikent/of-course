@@ -114,12 +114,6 @@ window.addEventListener("load", function(){
 	// Create config for QS instance, extend courses_inline
 	var qs = window.KENT.modules.quickspot.attach(
 		$.extend({}, window.KENT.quickspot.config.pg_courses_inline, {
-			'search_on': ['name', 'award'],
-			'url':	'https://api.kent.ac.uk/api/programmes/current/postgraduate/programmes',
-			/*'parse_results': function (results, options){
-				console.log(results);
-				return results;
-			},*/
 			target: "course-filter",
 			results_container: document.querySelector(".quickspot-output"),
 			// Add searchable subjects

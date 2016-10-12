@@ -21,6 +21,20 @@
 	padding-left:35px;
 }
 
+.course-listing .quickspot-result.selected .card {
+	background: #fdfdfd;
+}
+.course-listing .quickspot-result.selected .card::before{
+	position:absolute;
+	top:0;
+	left:0;
+	background: #05345C;
+	content: "";
+	width: 4px;
+	height:100%;
+	
+}
+
 @media (min-width: 768px){
 	.filter-box .search-select {
 		display: inline;
