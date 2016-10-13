@@ -34,6 +34,5 @@ KentThemeHelper::header(
 		<i class="icon-chevron-up icon-white"></i>
 	  </a>
 
-<?php KentThemeHelper::footer(); ?>
-
 <script src="<?php echo Flight::asset('js/build/of-course.min.js'); ?>"></script>
+<?php KentThemeHelper::footer(); ?>
