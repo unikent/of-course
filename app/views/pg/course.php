@@ -216,4 +216,4 @@ if (empty($course->deliveries)) {
 
 <?php Flight::render("partials/modals/contact"); ?>
 <?php Flight::render("partials/modals/prospectus"); ?>
-<?php Flight::render("partials/modals/apply-pg"); ?>
+<?php Flight::render("pg/apply-modal"); ?>

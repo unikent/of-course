@@ -35,4 +35,4 @@ KentThemeHelper::header(
 	  </a>
 
 <script src="<?php echo Flight::asset('js/build/of-course.min.js'); ?>"></script>
-<?php KentThemeHelper::footer(); ?>
+<?php KentThemeHelper::footer("<script src=\"" .  Flight::asset('js/build/of-course.min.js') . "\"></script>"); ?>
