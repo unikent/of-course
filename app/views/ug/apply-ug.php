@@ -133,7 +133,6 @@ if (empty($deliveries)) {
                                 <?php } ?>
 
 
-                                <p class="btn-indent daedalus-tab-action daedaus-js-display">
                                     <a href="http://www.ucas.com/apply"
                                        type="button"
                                        id="apply-link-ucas"
@@ -144,7 +143,6 @@ if (empty($deliveries)) {
                                        onclick="_pat.event('course-page', 'apply-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>] at <?php echo $schoolName ?>');">Apply through UCAS
                                         <i class="icon-chevron-right icon-white"></i>
                                     </a>
-                                </p>
                             </nav>
                         </aside>
                 </div>

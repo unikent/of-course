@@ -27,6 +27,8 @@ KentThemeHelper::header(
 );
 
 ?>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="<?php echo Flight::asset('js/build/of-course.min.js'); ?>"></script>
 <?php echo $content; ?>
 
 	  <a href="#bodycontent" tabindex="0" class='scroll-to-top' style="cursor: pointer;">
@@ -34,3 +36,4 @@ KentThemeHelper::header(
 	  </a>
 
 <?php KentThemeHelper::footer(); ?>
+
