@@ -19,7 +19,9 @@ use \unikent\kent_theme\kentThemeHelper;
 				<?php echo $course->programme_title; ?> - <?php echo $course->award_list_linked; ?>
 				<?php echo $course->programmme_status_text; ?>
 			</h1>
-			<p class="card-subtitle">UCAS code <?php echo $course->ucas_code?></p>
+			<?php if($course->programme_level == 'ug'): ?>
+				<p class="card-subtitle">UCAS code <?php echo $course->ucas_code?></p>
+			<?php endif; ?>
 		</div>
         <div class="card-img-overlay-bottom card-img-overlay-link card-overlay-inline-sm card-overlay-inline-nopad header-card-overlap-search">
             <form class="quickspot-container">

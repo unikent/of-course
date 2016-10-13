@@ -49,7 +49,7 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 
 		<div class="content-container relative">
 			<div class="content-aside top-sidebar">
-				<?php Flight::render("ug/sidebar"); ?>
+				<?php Flight::render("ug/top-sidebar"); ?>
 			</div>
 			<div class="content-main">
 				<div class="tab-content">
@@ -68,7 +68,9 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 					?>
 				</div>
 			</div>
-
+			<div class="content-aside">
+				<?php Flight::render("ug/sidebar"); ?>
+			</div>
 		</div>
 	</div>
 </div>

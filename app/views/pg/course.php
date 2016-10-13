@@ -49,7 +49,7 @@
 
 		<div class="content-container relative">
 			<div class="content-aside top-sidebar">
-				<?php Flight::render("pg/sidebar"); ?>
+				<?php Flight::render("pg/top-sidebar"); ?>
 			</div>
 			<div class="content-main">
 					<div class="tab-content">
@@ -77,7 +77,9 @@
 						?>
 					</div>
 			</div>
-
+			<div class="content-aside">
+				<?php Flight::render("pg/sidebar"); ?>
+			</div>
 		</div>
 	</div>
 </div>
@@ -214,4 +216,4 @@ if (empty($course->deliveries)) {
 
 <?php Flight::render("partials/modals/contact"); ?>
 <?php Flight::render("partials/modals/prospectus"); ?>
-<?php Flight::render("partials/modals/apply"); ?>
+<?php Flight::render("partials/modals/apply-pg"); ?>
