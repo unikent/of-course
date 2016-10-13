@@ -21,10 +21,10 @@
 	padding-left:35px;
 }
 
-.course-listing .quickspot-result.selected .card {
+.course-listing .quickspot-inline-result.selected .card {
 	background: #fdfdfd;
 }
-.course-listing .quickspot-result.selected .card::before{
+.course-listing .quickspot-inline-result.selected .card::before{
 	position:absolute;
 	top:0;
 	left:0;

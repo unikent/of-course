@@ -113,7 +113,7 @@ window.addEventListener("load", function(){
 
 	// Create config for QS instance, extend courses_inline
 	var qs = window.KENT.modules.quickspot.attach(
-		$.extend({}, window.KENT.quickspot.config.pg_courses_inline, {
+		$.extend({}, window.KENT.quickspot.config.ug_courses_inline, {
 			target: "course-filter",
 			results_container: document.querySelector(".quickspot-output"),
 			// Add searchable subjects
@@ -125,14 +125,9 @@ window.addEventListener("load", function(){
 					}
 				}
 				return courses;
-			},
-			"ready": function(qs){
-				apply_filters();
-				qs.showAll();
-				$(".standard-output").hide();
 			}
 		})
-	);
+	).on("quickspot:loaded", function(){ $(".standard-output").hide(); });
 
 	// Apply search filters
 	function apply_filters(){

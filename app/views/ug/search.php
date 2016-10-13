@@ -110,35 +110,35 @@ window.addEventListener("load", function(){
 					}
 				}
 				return courses;
-			},
-			"ready": function(qs){
-				apply_filters();
-				qs.showAll();
-				$(".standard-output").hide();
 			}
 		})
-	);
+	).on("quickspot:loaded", function(){ $(".standard-output").hide(); });
+
 
 	// Apply search filters
 	function apply_filters(){
 
-		var filter_title = '';
+		var filter_title = [];
+
+		// reeset result count
+		qs.options.max_results = 25;
 
 		// remove previous filters
 		qs.clearFilters();
 		$(".filter-box select").each(function(select){
 			if($(this).val() !== ''){
+
 				// Apply QS filter
 				var col = $(this).data("filter-col");
 				qs.filter($(this).val(), col);
 
 				// Add filter text
-				filter_title += $(this).val() + ', ';
+				filter_title.push($(this).val());
 			}
 		});
 		qs.refresh();
 		// Update text
-		document.getElementById("filter_title").innerText = (filter_title == '') ? "All courses" : '' + filter_title.slice(0, -2) + ' courses';
+		document.getElementById("filter_title").innerText = (filter_title.length === 0) ? "All courses" : filter_title.join(", ") + ' courses';
 	};
 
 	// apply filter on change.
