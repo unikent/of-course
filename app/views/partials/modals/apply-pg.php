@@ -116,7 +116,7 @@ foreach($course->deliveries as $delivery){
                                         </div>
 
                                         <?php foreach ($course->deliveries as $delivery){ ?>
-                                                <a  id="apply-link-delivery<?php echo $delivery->id ?>"
+                                                <a id="apply-link-delivery<?php echo $delivery->id ?>"
                                                    class="btn btn-large btn-primary next-btn apply-link-courses" tabindex="0"
                                                    title="Apply for <?php echo $delivery->description ?>"
                                                    href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=<?php echo $delivery->current_ipo ?>"
