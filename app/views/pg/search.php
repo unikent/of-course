@@ -11,7 +11,7 @@
 	</ul>
 </div>
 <div class="panel-secondary ">
-		<div class="container form-inline p-t-2 p-b-2 filter-box">
+		<div class="container form-inline p-t-2 p-b-2 filter-box" id="filter_box">
 				<div class="search-select campus-search-div">
 					<select class="campus-search form-control <?php if(strcmp($search_type, 'campus')  == 0) echo 'highlighted'; ?>" data-filter-col="campus">
 						<option value="">All locations</option>
@@ -32,7 +32,7 @@
 						<option value="">All study modes</option>
 						<option <?php if(strcmp($search_type, 'study_mode')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Full-time'))  == 0) echo 'selected'; ?>>Full-time</option>
 						<option <?php if(strcmp($search_type, 'study_mode')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Part-time'))  == 0) echo 'selected'; ?>>Part-time</option>
-						<option value="Distance" <?php if(strcmp($search_type, 'study_mode')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Distance learning'))  == 0) echo 'selected'; ?>>Distance learning</option>
+						<option value="Distance" data-filter-col="attendance_mode" <?php if(strcmp($search_type, 'study_mode')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Distance learning'))  == 0) echo 'selected'; ?>>Distance learning</option>
 					</select>
 				</div>
 				<div class="search-select subject-categories-search-div">
@@ -73,9 +73,20 @@
 	</div>
 
 	<div class="search-filter container form-inline">
-		<h2 id="filter_title">All courses</h2>
+		<h2><span id="filter_title">All</span> courses</h2>
 
-		<div id="course-filter-container"><input id="course-filter" class="advanced-text-search form-control" type="text" placeholder="Search courses" /></div>
+		<div id="course-filter-container">
+			<input 
+				id="course-filter"
+				class="advanced-text-search form-control" 
+				type="text" 
+				placeholder="Search courses" 
+				data-quickspot-config="pg_courses_inline"
+				data-quickspot-target="quickspot-output"
+				data-quickspot-filters="filter_box"
+				data-quickspot-filter-text-target="filter_title"
+			 />
+		 </div>
 	</div>
 
 
@@ -88,9 +99,7 @@ $programmes = (array)$programmes;
 usort($programmes, function($a,$b){ return $a->name > $b->name;});
 ?>
 <div class="card-panel cards-list cards-backed card-panel-secondary course-listing">
-	<div class="card-panel-body quickspot-output">
-	</div>
-	<div class="card-panel-body standard-output">
+	<div class="card-panel-body standard-output" id="quickspot-output">
 		<?php foreach($programmes as $p):?>
 			<div class="card card-linked chevron-link">
 
@@ -107,57 +116,3 @@ usort($programmes, function($a,$b){ return $a->name > $b->name;});
 	</div>					 
 </div>
 
-<script>
-
-window.addEventListener("load", function(){
-
-	// Create config for QS instance, extend courses_inline
-	var qs = window.KENT.modules.quickspot.attach(
-		$.extend({}, window.KENT.quickspot.config.ug_courses_inline, {
-			target: "course-filter",
-			results_container: document.querySelector(".quickspot-output"),
-			// Add searchable subjects
-			"data_pre_parse": function(courses){
-				for(var c in courses){
-					courses[c].__subjects = '';
-					for(var s in courses[c].subject_categories){
-						courses[c].__subjects += ' ' + courses[c].subject_categories[s];
-					}
-				}
-				return courses;
-			}
-		})
-	).on("quickspot:loaded", function(){ $(".standard-output").hide(); });
-
-	// Apply search filters
-	function apply_filters(){
-
-		var filter_title = '';
-
-		// remove previous filters
-		qs.clearFilters();
-		$(".filter-box select").each(function(select){
-			if($(this).val() !== ''){
-				// Apply QS filter
-				var col = $(this).data("filter-col");
-				if(col === "mode_of_study" && $(this).val() == "Distance"){
-					qs.filter($(this).val(), "attendance_mode"); // distance actually filters a differnt col, so add excpetion
-				}else{
-					qs.filter($(this).val(), col);
-				}
-
-				// Add filter text
-				filter_title += $(this).val() + ', ';
-			}
-		});
-		qs.refresh();
-		// Update text
-		document.getElementById("filter_title").innerText = (filter_title == '') ? "All courses" : filter_title.charAt(0).toUpperCase() + filter_title.slice(1, -2) + ' courses';
-	};
-
-	// apply filter on change.
-	$(".filter-box select").change(apply_filters);
-
-}, false);
-
-</script>
