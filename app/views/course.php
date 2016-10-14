@@ -16,7 +16,7 @@ use \unikent\kent_theme\kentThemeHelper;
 			));
 			?>
 			<h1>
-				<?php echo $course->programme_title; ?> - <?php echo $course->award_list_linked; ?>
+				<?php echo $course->programme_title; ?> - <?php echo $course->award_list; ?>
 				<?php echo $course->programmme_status_text; ?>
 			</h1>
 			<?php if($course->programme_level == 'ug'): ?>
