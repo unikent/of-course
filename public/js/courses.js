@@ -1,7 +1,6 @@
 // scroll menu (a select box) replaces tabs on mobile resolution. This code generates the select based on the tab navigation in use
 // CSS is used to hide/show the select itself
 $(document).ready(function(){
-    console.log('hi');
     $('#applyButton').click(function(){
         var $apply_form = $(".apply-form");
         var $apply_link_ucas = $("#apply-link-ucas");

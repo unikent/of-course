@@ -198,8 +198,7 @@ foreach($course->deliveries as $delivery){
 
                                         <?php foreach ($course->deliveries as $delivery){ ?>
 
-                                            <p class="btn-indent daedalus-tab-action daedalus-js-display">
-                                                <a type="button"
+                                                <a
                                                    id="apply-link-<?php echo strtolower(str_replace(' ', '', $delivery->award_name)) ?>-<?php echo $delivery->attendance_pattern ?>-<?php echo $course->year ?>"
                                                    class="btn btn-large btn-primary next-btn apply-link-courses" tabindex="0" role="button"
                                                    title="Apply for <?php echo $delivery->description ?>"
@@ -207,7 +206,6 @@ foreach($course->deliveries as $delivery){
                                                    onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>] at <?php echo $schoolName ?>');">Next
                                                     <i class="icon-chevron-right icon-white"></i>
                                                 </a>
-                                            </p>
 
                                         <?php } ?>
 

@@ -1,6 +1,6 @@
 <?php if ( !empty($course->careers_and_employability) || !empty($course->globals->careersemployability_text) ): ?>
 	<section class="info-subsection">
-		<h3>Careers</h3>
+		<h2>Careers</h2>
 		<?php echo $course->careers_and_employability ?>
 		<?php echo $course->globals->careersemployability_text ?>
 	</section>
