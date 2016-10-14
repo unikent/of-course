@@ -53,26 +53,6 @@ use \unikent\kent_theme\kentThemeHelper;
 
 
 <?php if (!empty($course->related_courses)): ?>
-	<div class="card-panel card-panel-tertiary cards-backed m-t-0">
-		<div class="card-panel-header">
-			<h2 class="card-panel-title">Relatedsss to this course</h2>
-		</div>
-		<div class="card-panel-body kent-slider" data-slider-config="related_courses">
-			<?php foreach ($course->related_courses as $related_course): ?>
-
-				<div class="card card-linked kent-slide">
-					<a href="<?php echo Flight::url("{$level}/{$related_course->id}/{$related_course->slug}"); ?>" class="card-title-link"><h3 class="card-title"><?php echo $related_course->name ?> <?php echo !empty($related_course->programmme_status_text) ? $related_course->programmme_status_text : ''; ?> <?php echo $related_course->award; ?></h3></a>
-					<p class="card-meta"><?php echo $related_course->mode_of_study; ?></p>
-					<p class="card-meta"><?php echo $related_course->campus; ?></p>
-					<hr>
-					<p class="card-text">Economics examines some of the profound issues in our life and times, including: economic...</p>
-					<a href="<?php echo Flight::url("{$level}/{$related_course->id}/{$related_course->slug}"); ?>" class="faux-link-overlay" aria-hidden="true"><?php echo $related_course->name ?> <?php echo !empty($related_course->programmme_status_text) ? $related_course->programmme_status_text : ''; ?> <?php echo $related_course->award; ?></a>
-				</div>
-			<?php endforeach; ?>
-
-		</div>
-	</div>
-
 	<div class="card-panel card-panel-primary-tint cards-backed m-t-0">
 		<div class="card-panel-header">
 			<h2 class="card-panel-title">Related to this course</h2>
