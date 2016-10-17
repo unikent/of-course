@@ -3,11 +3,11 @@ use \unikent\kent_theme\kentThemeHelper;
 
 KentThemeHelper::header(
 	array(
-		'title' => "Kent Theme Demo",
+		'title' => "Courses",
 		'menu' => array(
 			'Home' => 'https://beta-test.kent.ac.uk/courses/',
-			'Modules Listing' => 'https://beta-test.kent.ac.uk/courses/modules',
-			'Chooseing your course' => 'https://beta-test.kent.ac.uk',
+			'Modules listing' => 'https://beta-test.kent.ac.uk/courses/modules',
+			'Chooseing your modules' => 'https://beta-test.kent.ac.uk',
 			'How to apply' => 'https://beta-test.kent.ac.uk',
 			'Planning your career' => 'https://beta-test.kent.ac.uk',
 			'Student Profiles' => 'https://beta-test.kent.ac.uk',
@@ -28,8 +28,8 @@ KentThemeHelper::header(
 ?>
 		<?php echo $content; ?>
 
-	  <a href="#bodycontent" tabindex="0" class='scroll-to-top' style="cursor: pointer;">
+	
+<?php KentThemeHelper::footer('  <a href="#bodycontent" tabindex="0" class="scroll-to-top" style="cursor: pointer;">
 		<i class="icon-chevron-up icon-white"></i>
 	  </a>
-
-<?php KentThemeHelper::footer(); ?>
+'); ?>

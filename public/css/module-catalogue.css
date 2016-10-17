@@ -1,0 +1,81 @@
+.module-listing {
+	padding: 1rem 0;
+}
+#filter_box select, #filter_box input{
+	width: 100%;
+}
+.module-filter-container {
+	position: relative;
+}
+.module-filter-container::before {
+	content: "";
+	font-family: "kentfont", sans-serif;
+	font-size: 20px;
+	position: absolute;
+	left: 10px;
+	top: 5px;
+	color: #A5A5A5;
+}
+.module-filter-container input {
+	padding-left:35px;
+}
+
+.module-listing .quickspot-inline-result.selected .card {
+	background: #fdfdfd;
+}
+.module-listing .quickspot-inline-result.selected .card::before{
+	position:absolute;
+	top:0;
+	left:0;
+	background: #05345C;
+	content: "";
+	width: 4px;
+	height:100%;
+
+}
+
+@media (min-width: 768px){
+	#filter_box div {
+		display:inline-block;
+	}
+	#filter_box div select{
+		width: 200px;
+	}
+	#filter_box .module-filter-container {
+		width:40%;
+	}
+	#filter_box .module-filter-container input {
+		width: 100%;
+	}
+}
+
+
+table.deliveries i{
+	color: #05345C; 
+}
+
+.session-info {
+	margin-top:1rem;
+	margin-bottom:2rem;
+}
+.session-info::before {color: #937227;padding-right:.5rem}
+
+small.content-full  {
+	padding-top:2rem;
+}
+
+.content-aside h3 {
+	font-weight: bold;
+}
+
+.content-aside h3::before {
+	color: #937227;
+	padding-right:.5rem;
+
+}
+
+a[data-toggle="popover"]::after {
+	content: "\f059";
+	font-family: "kentfont";
+	margin-left: .3rem;
+}
