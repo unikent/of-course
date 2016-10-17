@@ -69,182 +69,181 @@ foreach($course->deliveries as $delivery){
                 <h3 class="modal-title">Apply Now</h3>
             </div>
             <div class="modal-body">
-                <div class="content-page">
-                    <div class="content-container">
-                        <div class="content-main">
 
-                            <?php
-                            // How to apply 53 is "How to apply (atypical courses)".
-                            // When this field is populated, show only its contents, not the standard apply text.
-                            if (isset($course->how_to_apply) && trim($course->how_to_apply) != '' && !empty($course->how_to_apply)){
-                                echo $course->how_to_apply;
-                            } elseif (count($course->deliveries) === 0) {
-                                ?>
+				<div class="content-container">
+					<div class="content-main">
 
-                                <p>We will be taking applications for this programme soon, please check back shortly.</p>
+						<?php
+						// How to apply 53 is "How to apply (atypical courses)".
+						// When this field is populated, show only its contents, not the standard apply text.
+						if (isset($course->how_to_apply) && trim($course->how_to_apply) != '' && !empty($course->how_to_apply)){
+							echo $course->how_to_apply;
+						} elseif (count($course->deliveries) === 0) {
+							?>
 
-                                <?php
-                            } else { ?>
+							<p>We will be taking applications for this programme soon, please check back shortly.</p>
 
-                                <div class="apply-form apply-form-pg hidden">
+							<?php
+						} else { ?>
 
-                                    <?php
-                                    if (isset($course->how_to_apply_supplementary)){
-                                        echo $course->how_to_apply_supplementary;
-                                    }
-                                    ?>
+							<div class="apply-form apply-form-pg hidden">
 
-                                    <p>Learn more about <a href="//www.kent.ac.uk/courses/postgraduate/apply/">the application process</a> or begin your application below by registering.</p>
-                                    <p>You don't need to complete your application all in one go - simply begin by registering. You can save and come back to your application at any time.
-                                        <?php if (count($course->deliveries) > 1 ){ ?>You'll need to select your course options below:<?php } ?></p>
+								<?php
+								if (isset($course->how_to_apply_supplementary)){
+									echo $course->how_to_apply_supplementary;
+								}
+								?>
 
-                                    <?php /* one award but lots of deliveries - edge case  OR $noneUniqueDeliveries are found which means they could no normally be selected */
-                                    if ($noneUniqueDeliveryFound){ ?>
+								<p>Learn more about <a href="//www.kent.ac.uk/courses/postgraduate/apply/">the application process</a> or begin your application below by registering.</p>
+								<p>You don't need to complete your application all in one go - simply begin by registering. You can save and come back to your application at any time.
+									<?php if (count($course->deliveries) > 1 ){ ?>You'll need to select your course options below:<?php } ?></p>
 
-                                        <div>
-                                            <fieldset class="highlight-fieldset indent">
-                                                <legend>Course options</legend>
-                                                <div class="form-group">
-                                                        <?php foreach ($course->deliveries as $delivery){ ?>
-                                                            <div class="form-check">
-                                                                <input id="delivery<?php echo $delivery->id; ?>" type="radio" class="form-check-input" name="delivery" value="delivery<?php echo $delivery->id; ?>">
-                                                                <?php echo str_ireplace(array('part-time', 'full-time'), array('<strong>part-time</strong>', '<strong>full-time</strong>'), $delivery->description); ?>
-                                                            </div>
-                                                        <?php } ?>
-                                                    </div>
-                                            </fieldset>
-                                        </div>
+								<?php /* one award but lots of deliveries - edge case  OR $noneUniqueDeliveries are found which means they could no normally be selected */
+								if ($noneUniqueDeliveryFound){ ?>
 
-                                        <?php foreach ($course->deliveries as $delivery){ ?>
-                                                <a id="apply-link-delivery<?php echo $delivery->id ?>"
-                                                   class="btn btn-large btn-primary next-btn apply-link-courses" tabindex="0"
-                                                   title="Apply for <?php echo $delivery->description ?>"
-                                                   href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=<?php echo $delivery->current_ipo ?>"
-                                                   onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>] at <?php echo $schoolName ?>');">Next
-                                                    <i class="icon-chevron-right icon-white"></i></a>
-                                        <?php } ?>
+									<div>
+										<fieldset class="highlight-fieldset indent">
+											<legend>Course options</legend>
+											<div class="form-group">
+													<?php foreach ($course->deliveries as $delivery){ ?>
+														<div class="form-check">
+															<input id="delivery<?php echo $delivery->id; ?>" type="radio" class="form-check-input" name="delivery" value="delivery<?php echo $delivery->id; ?>">
+															<?php echo str_ireplace(array('part-time', 'full-time'), array('<strong>part-time</strong>', '<strong>full-time</strong>'), $delivery->description); ?>
+														</div>
+													<?php } ?>
+												</div>
+										</fieldset>
+									</div>
 
-                                    <?php } else { ?>
+									<?php foreach ($course->deliveries as $delivery){ ?>
+											<a id="apply-link-delivery<?php echo $delivery->id ?>"
+											   class="btn btn-large btn-primary next-btn apply-link-courses" tabindex="0"
+											   title="Apply for <?php echo $delivery->description ?>"
+											   href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=<?php echo $delivery->current_ipo ?>"
+											   onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>] at <?php echo $schoolName ?>');">Next
+												<i class="icon-chevron-right icon-white"></i></a>
+									<?php } ?>
 
-                                        <div>
-                                            <fieldset class="highlight-fieldset indent">
-                                                <?php if (count($course->deliveries) > 1 ){ ?><legend>Course options</legend><?php } ?>
-                                                <?php
-                                                if (!$has_parttime){
-                                                    ?>
-                                                    <input type="hidden" id="type" value="full-time">
-                                                    <?php
-                                                } elseif (!$has_fulltime) {
-                                                    ?>
-                                                    <input type="hidden" id="type" value="part-time">
-                                                    <?php
-                                                }else{
-                                                    ?>
-                                                    <div class="form-group">
-                                                        <label for="type">Mode of study</label>
+								<?php } else { ?>
 
-                                                        <div class="controls">
-                                                            <select name="type" id="type" required="required">
-                                                                <?php
-                                                                if ($has_fulltime && $has_parttime){
-                                                                    ?>
-                                                                    <option value="pleaseselect">Please select</option>
-                                                                    <?php
-                                                                }
-                                                                if($has_fulltime){
-                                                                    ?>
-                                                                    <option value="full-time">Full-time</option>
-                                                                    <?php
-                                                                }
-                                                                if($has_parttime){
-                                                                    ?>
-                                                                    <option value="part-time">Part-time</option>
-                                                                    <?php
-                                                                }
-                                                                ?>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <?php
-                                                }
-                                                ?>
+									<div>
+										<fieldset class="highlight-fieldset indent">
+											<?php if (count($course->deliveries) > 1 ){ ?><legend>Course options</legend><?php } ?>
+											<?php
+											if (!$has_parttime){
+												?>
+												<input type="hidden" id="type" value="full-time">
+												<?php
+											} elseif (!$has_fulltime) {
+												?>
+												<input type="hidden" id="type" value="part-time">
+												<?php
+											}else{
+												?>
+												<div class="form-group">
+													<label for="type">Mode of study</label>
 
-                                                <?php if (sizeof($course->award) === 1){ ?>
-                                                    <input type="hidden" id="award" value="<?php echo strtolower(str_replace(' ', '', $course->award[0]->name)) ?>">
-                                                <?php }else{ ?>
-                                                    <div class="form-group">
-                                                        <label for="award">Award</label>
+													<div class="controls">
+														<select name="type" id="type" required="required">
+															<?php
+															if ($has_fulltime && $has_parttime){
+																?>
+																<option value="pleaseselect">Please select</option>
+																<?php
+															}
+															if($has_fulltime){
+																?>
+																<option value="full-time">Full-time</option>
+																<?php
+															}
+															if($has_parttime){
+																?>
+																<option value="part-time">Part-time</option>
+																<?php
+															}
+															?>
+														</select>
+													</div>
+												</div>
+												<?php
+											}
+											?>
 
-                                                        <div class="controls">
-                                                            <select name="award" id="award" required="required">
+											<?php if (sizeof($course->award) === 1){ ?>
+												<input type="hidden" id="award" value="<?php echo strtolower(str_replace(' ', '', $course->award[0]->name)) ?>">
+											<?php }else{ ?>
+												<div class="form-group">
+													<label for="award">Award</label>
 
-                                                                <option value="pleaseselect">Please select</option>
-                                                                <?php foreach ($course->award as $award){ ?>
-                                                                    <option
-                                                                        value="<?php echo strtolower(str_replace(' ', '', $award->name)) ?>"><?php echo $award->name ?></option>
-                                                                <?php } ?>
+													<div class="controls">
+														<select name="award" id="award" required="required">
 
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                <?php } ?>
+															<option value="pleaseselect">Please select</option>
+															<?php foreach ($course->award as $award){ ?>
+																<option
+																	value="<?php echo strtolower(str_replace(' ', '', $award->name)) ?>"><?php echo $award->name ?></option>
+															<?php } ?>
 
-                                                <input type="hidden" id="year" value="<?php echo $course->year; ?>">
+														</select>
+													</div>
+												</div>
+											<?php } ?>
 
-                                            </fieldset>
-                                        </div>
+											<input type="hidden" id="year" value="<?php echo $course->year; ?>">
+
+										</fieldset>
+									</div>
 
 
 
-                                        <?php foreach ($course->deliveries as $delivery){ ?>
+									<?php foreach ($course->deliveries as $delivery){ ?>
 
-                                                <a
-                                                   id="apply-link-<?php echo strtolower(str_replace(' ', '', $delivery->award_name)) ?>-<?php echo $delivery->attendance_pattern ?>-<?php echo $course->year ?>"
-                                                   class="btn btn-large btn-primary next-btn apply-link-courses" tabindex="0" role="button"
-                                                   title="Apply for <?php echo $delivery->description ?>"
-                                                   href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=<?php echo $delivery->current_ipo ?>"
-                                                   onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>] at <?php echo $schoolName ?>');">Next
-                                                    <i class="icon-chevron-right icon-white"></i>
-                                                </a>
+											<a
+											   id="apply-link-<?php echo strtolower(str_replace(' ', '', $delivery->award_name)) ?>-<?php echo $delivery->attendance_pattern ?>-<?php echo $course->year ?>"
+											   class="btn btn-large btn-primary next-btn apply-link-courses" tabindex="0" role="button"
+											   title="Apply for <?php echo $delivery->description ?>"
+											   href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=<?php echo $delivery->current_ipo ?>"
+											   onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>] at <?php echo $schoolName ?>');">Next
+												<i class="icon-chevron-right icon-white"></i>
+											</a>
 
-                                        <?php } ?>
+									<?php } ?>
 
-                                    <?php } ?>
+								<?php } ?>
 
-                                    <p class="btn-indent daedalus-tab-action daedaus-js-display">
-                                        <a type="button" id="apply-link-dummy" class="btn btn-large next-btn apply-link-courses disabled"
-                                           tabindex="0" role="button" data-toggle="tooltip" data-placement="right"
-                                           title="Please select your course options above">Next <i class="icon-chevron-right icon-white"></i></a>
-                                    </p>
+								<p class="btn-indent daedalus-tab-action daedaus-js-display">
+									<a type="button" id="apply-link-dummy" class="btn btn-large next-btn apply-link-courses disabled"
+									   tabindex="0" role="button" data-toggle="tooltip" data-placement="right"
+									   title="Please select your course options above">Next <i class="icon-chevron-right icon-white"></i></a>
+								</p>
 
-                                </div>
+							</div>
 
-                                <noscript>
-                                    <ul>
-                                        <?php
-                                        foreach ($course->deliveries as $delivery){ ?>
-                                            <li><p><a title="Apply for <?php echo $delivery->description ?>"
-                                                      href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=<?php echo $delivery->current_ipo ?>"
-                                                      onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>] at <?php echo $schoolName ?>');">Apply
-                                                        for <?php echo $course->year ?> entry to <?php echo $delivery->description ?></a></p></li>
-                                            <?php if(!empty($delivery->previous_ipo)){ ?>
-                                                <li><p><a title="Apply for <?php echo $delivery->description ?>"
-                                                          href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=<?php echo $delivery->previous_ipo ?>"
-                                                          onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>] at <?php echo $schoolName ?>');">Apply
-                                                            for <?php echo $course->year - 1 ?> entry to <?php echo $delivery->description ?></a></p>
-                                                </li>
-                                            <?php }
-                                        }
-                                        ?>
-                                    </ul>
-                                </noscript>
+							<noscript>
+								<ul>
+									<?php
+									foreach ($course->deliveries as $delivery){ ?>
+										<li><p><a title="Apply for <?php echo $delivery->description ?>"
+												  href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=<?php echo $delivery->current_ipo ?>"
+												  onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>] at <?php echo $schoolName ?>');">Apply
+													for <?php echo $course->year ?> entry to <?php echo $delivery->description ?></a></p></li>
+										<?php if(!empty($delivery->previous_ipo)){ ?>
+											<li><p><a title="Apply for <?php echo $delivery->description ?>"
+													  href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=<?php echo $delivery->previous_ipo ?>"
+													  onclick="_pat.event('course-page', 'apply-pg', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>] at <?php echo $schoolName ?>');">Apply
+														for <?php echo $course->year - 1 ?> entry to <?php echo $delivery->description ?></a></p>
+											</li>
+										<?php }
+									}
+									?>
+								</ul>
+							</noscript>
 
-                            <?php } ?>
-                        </div>
-                        <aside class="content-aside">
-                        </aside>
-                    </div>
-                </div>
+						<?php } ?>
+					</div>
+					<aside class="content-aside">
+					</aside>
+				</div>
             </div>
         </div>
     </div>

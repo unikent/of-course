@@ -4,15 +4,14 @@ $has_foundation = (strpos(strtolower($course->programme_type), 'foundation year'
 // Make pos available
 $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_code : '';
 ?>
-	<div class="content-page">
 		<div class="content-body">
 			<div class="content-container">
 				<div class="content-full">
 					<div class="spaced-links-container">
 						<div class="spaced-links-inner-container">
-							<a href="https://www.kent.ac.uk/locations/<?php echo $course->location_str ?>" class="btn-link-accent spaced-links-item"><i class="kf-pin"></i> <?php echo $course->locations_str; ?></a>
-							<a href="#contact-modal" class="spaced-links-item btn-link-accent" id="prospectusButton" data-toggle="modal" data-target="#contact-modal"><i class="kf-info-circle"></i> Contact Us</a>
-							<a href="#prospectus-modal" class="spaced-links-item btn-link-accent" id="prospectusButton" data-toggle="modal" data-target="#prospectus-modal"><i class="kf-user"></i> Prospectus</a>
+							<a href="https://www.kent.ac.uk/locations/<?php echo $course->location_str ?>" class="text-accent spaced-links-item"><i class="kf-pin"></i> <?php echo $course->locations_str; ?></a>
+							<a href="#contact-modal" class="spaced-links-item text-accent" id="prospectusButton" data-toggle="modal" data-target="#contact-modal"><i class="kf-info-circle"></i> Contact Us</a>
+							<a href="#prospectus-modal" class="spaced-links-item text-accent" id="prospectusButton" data-toggle="modal" data-target="#prospectus-modal"><i class="kf-user"></i> Prospectus</a>
 						</div>
 						<div class="spaced-links-inner-container">
 							<a href="https://www.kent.ac.uk/courses/visit/openday/" class="btn btn-tertiary spaced-links-item-btn">Open days: Book Now</a>
@@ -205,7 +204,6 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 <?php
 $schoolName = $course->administrative_school[0]->name;
