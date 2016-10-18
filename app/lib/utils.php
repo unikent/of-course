@@ -163,35 +163,12 @@
 	// 404 handler
 	// Use data to try and figure out best 404 info
 	Flight::map('notFound', function($data = array()){
-		/*
-		$pantheon_config = Util::getConfig();
-		if($pantheon_config["theme"] != "Daedalus"){
 
-			$page404 = Cache::get("courses-daedalus-chronos-error-page", function(){
-				$ch = curl_init();
-				curl_setopt($ch, CURLOPT_URL, "http://kent.ac.uk/404.html");//url
-				curl_setopt($ch, CURLOPT_HEADER, 0);
-				curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-				curl_setopt($ch, CURLOPT_TIMEOUT, 2);
-
-				$data = curl_exec($ch);
-
-				curl_close($ch);
-
-				return $data;
-			}, 120);
-
-			$page404 .= '<!-- loaded via chronos -->';
-
-			// Avoid WSOD
-			Flight::halt('404', $page404);
-		}*/
-		
 		// Attempt to resolve URL details, location, path and other stuff
 		// that will allow us to be more helpful.
 		$data = validate_404_data($data);
 
+		/*
 		// Attempt to get programmes so we can make some suggestions
 		try {
 			$data['programmes'] = CoursesController::$pp->get_programmes_index($data['year'], $data['level']);
@@ -199,12 +176,10 @@
 			$data['programmes'] = array();
 		}
 
-		// Set data & open views
-	  	Flight::setup($data['year'], $data['level']);
-	  	Flight::response()->status(404);
+		*/
+		$_GET['q'] = $data['slug'];
+		KentThemeHelper::_404();
 
-
-		return Flight::layout('404', $data);
 	});
 
 	// 500 error handler
@@ -215,9 +190,7 @@
 		// that will allow us to be more helpful.
 		$data = validate_404_data($data);
 
-		// Fail mode action. Email for help?
-		if(defined("FAIL_ALERT_EMAIL") && trim(FAIL_ALERT_EMAIL) != ''){
-			$message = "
+		$message = "
 				500 error generated from: {$data["url"]}
 				At: ".date(DATE_RFC822)."
 				On server: ".$_SERVER["HTTP_HOST"]."
@@ -229,15 +202,13 @@
 				". get_class($error) . " '{$error->getMessage()}' in {$error->getFile()}({$error->getLine()})\n
 			";
 
+		// Fail mode action. Email for help?
+		if(defined("FAIL_ALERT_EMAIL") && trim(FAIL_ALERT_EMAIL) != ''){
 			mail(FAIL_ALERT_EMAIL, "Of-Course: 500 error", $message);
 		}
 
-		// Pass error message along
-		$data['error'] = $error;
+		KentThemeHelper::_500('',$message);
 
-		// Handle error
-		Flight::response()->status(500);
-		return Flight::layout('500', $data);
 	});
 
 	/**
@@ -308,7 +279,7 @@
 	* @param $string
 	* @return string
 	*/
-	function pantheon_escape($string) {
+	function slug_escape($string) {
 		return urlencode(
 			str_replace(' ', '-',
 				str_replace(',', '', $string)

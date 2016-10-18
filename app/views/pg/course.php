@@ -1,83 +1,82 @@
-<div class="content-page">
-	<div class="content-body">
-		<div class="content-container">
-			<div class="content-full">
-				<div class="spaced-links-container">
-					<div class="spaced-links-inner-container">
-						<a href="https://www.kent.ac.uk/locations/<?php echo $course->location_str ?>" class="btn-link-accent spaced-links-item"><i class="kf-pin"></i> <?php echo $course->locations_str; ?></a>
-						<a href="#contact-modal" class="spaced-links-item btn-link-accent" id="prospectusButton" data-toggle="modal" data-target="#contact-modal"><i class="kf-info-circle"></i> Contact Us</a>
-						<a href="#prospectus-modal" class="spaced-links-item btn-link-accent" id="prospectusButton" data-toggle="modal" data-target="#prospectus-modal"><i class="kf-user"></i> Prospectus</a>
-					</div>
-					<div class="spaced-links-inner-container">
-						<a href="https://www.kent.ac.uk/courses/visit/openday/" class="btn btn-tertiary spaced-links-item-btn">Open days: Book Now</a>
-						<?php if (isset($course->globals->disable_apply) && $course->globals->disable_apply=='true'): ?>
-							<a href="<?php echo Flight::request()->base; ?>/<?php echo $level; ?>/<?php echo $course->instance_id ?>/"
-							   class="btn btn-primary pull-right spaced-links-item-btn"
-							   type="button"
-							   role="button"
-							>View <?php echo $course->current_year ?> programme</a>
-						<?php else:?>
-							<button class="btn btn-primary spaced-links-item-btn"
-									type="button"
-									role="button"
-									aria-controls="apply"
-									id="applyButton"
-									data-toggle="modal"
-									data-target="#apply-modal"
-							>Apply now</button>
-						<?php endif; ?>
-					</div>
+<div class="content-body">
+	<div class="content-container">
+		<div class="content-full">
+			<div class="spaced-links-container">
+				<div class="spaced-links-inner-container">
+					<a href="https://www.kent.ac.uk/locations/<?php echo $course->location_str ?>" class="text-accent spaced-links-item"><i class="kf-pin"></i> <?php echo $course->locations_str; ?></a>
+					<a href="#contact-modal" class="spaced-links-item text-accent" id="prospectusButton" data-toggle="modal" data-target="#contact-modal"><i class="kf-info-circle"></i> Contact Us</a>
+					<a href="#prospectus-modal" class="spaced-links-item text-accent" id="prospectusButton" data-toggle="modal" data-target="#prospectus-modal"><i class="kf-user"></i> Prospectus</a>
 				</div>
-
-				<p class="lead">
-					<?php
-					// @todo - This is a new field that will be added to the PP in the near future. To demo the behavior
-					// I'm currently just hacking in a "correct-ish" looking value by grabbing the first p of the overview if i can
-					if (preg_match('%<p[^>]*>(.*?)</p>%i', $course->schoolsubject_overview, $regs)) {
-						echo $regs[1];
-					} ?>
-				</p>
-
-				<?php Flight::render("partials/notices"); ?>
+				<div class="spaced-links-inner-container">
+					<a href="https://www.kent.ac.uk/courses/visit/openday/" class="btn btn-tertiary spaced-links-item-btn">Open days: Book Now</a>
+					<?php if (isset($course->globals->disable_apply) && $course->globals->disable_apply=='true'): ?>
+						<a href="<?php echo Flight::request()->base; ?>/<?php echo $level; ?>/<?php echo $course->instance_id ?>/"
+						   class="btn btn-primary pull-right spaced-links-item-btn"
+						   type="button"
+						   role="button"
+						>View <?php echo $course->current_year ?> programme</a>
+					<?php else:?>
+						<button class="btn btn-primary spaced-links-item-btn"
+								type="button"
+								role="button"
+								aria-controls="apply"
+								id="applyButton"
+								data-toggle="modal"
+								data-target="#apply-modal"
+						>Apply now</button>
+					<?php endif; ?>
+				</div>
 			</div>
+
+			<p class="lead">
+				<?php
+				// @todo - This is a new field that will be added to the PP in the near future. To demo the behavior
+				// I'm currently just hacking in a "correct-ish" looking value by grabbing the first p of the overview if i can
+				if (preg_match('%<p[^>]*>(.*?)</p>%i', $course->schoolsubject_overview, $regs)) {
+					echo $regs[1];
+				} ?>
+			</p>
+
+			<?php Flight::render("partials/notices"); ?>
 		</div>
+	</div>
 
-		<div class="content-container relative">
-			<div class="content-aside top-sidebar">
-				<?php Flight::render("pg/top-sidebar"); ?>
-			</div>
-			<div class="content-main">
-					<div class="tab-content">
-						<?php 
-							Flight::render("partials/tab", array("title"=>"Overview", "id" => "overview", "selected" => true, "content" => Flight::fetch("pg/tabs/overview"))); 
+	<div class="content-container relative">
+		<div class="content-aside top-sidebar">
+			<?php Flight::render("pg/top-sidebar"); ?>
+		</div>
+		<div class="content-main">
+				<div class="tab-content">
+					<?php
+						Flight::render("partials/tab", array("title"=>"Overview", "id" => "overview", "selected" => true, "content" => Flight::fetch("pg/tabs/overview")));
 
-							 if (strpos($course->programme_type, 'research') !== false){
-							 	if(!empty($course->programme_overview)){
-							 		Flight::render("partials/tab", array("title"=>"Course structure", "id" => "structure", "selected" => false, "content" => Flight::fetch("pg/tabs/structure_research"))); 
-							 	}
-							}else{
-								Flight::render("partials/tab", array("title"=>"Course structure", "id" => "structure", "selected" => false, "content" => Flight::fetch("pg/tabs/structure"))); 
+						 if (strpos($course->programme_type, 'research') !== false){
+							if(!empty($course->programme_overview)){
+								Flight::render("partials/tab", array("title"=>"Course structure", "id" => "structure", "selected" => false, "content" => Flight::fetch("pg/tabs/structure_research")));
 							}
+						}else{
+							Flight::render("partials/tab", array("title"=>"Course structure", "id" => "structure", "selected" => false, "content" => Flight::fetch("pg/tabs/structure")));
+						}
 
-							Flight::render("partials/tab", array("title"=>"Careers", "id" => "careers",  "selected" => false, "content" => Flight::fetch("pg/tabs/careers"))); 
-							Flight::render("partials/tab", array("title"=>"Study support", "id" => "study-support", "selected" => false, "content" => Flight::fetch("pg/tabs/study-support"))); 
-							Flight::render("partials/tab", array("title"=>"Entry requirements", "id" => "entry-requirements",  "selected" => false, "content" => Flight::fetch("pg/tabs/entry-requirements"))); 
+						Flight::render("partials/tab", array("title"=>"Careers", "id" => "careers",  "selected" => false, "content" => Flight::fetch("pg/tabs/careers")));
+						Flight::render("partials/tab", array("title"=>"Study support", "id" => "study-support", "selected" => false, "content" => Flight::fetch("pg/tabs/study-support")));
+						Flight::render("partials/tab", array("title"=>"Entry requirements", "id" => "entry-requirements",  "selected" => false, "content" => Flight::fetch("pg/tabs/entry-requirements")));
 
-							Flight::render("partials/tab", array("title"=>"Research areas", "id" => "research-areas",  "selected" => false, "content" => Flight::fetch("pg/tabs/research-areas"))); 
+						Flight::render("partials/tab", array("title"=>"Research areas", "id" => "research-areas",  "selected" => false, "content" => Flight::fetch("pg/tabs/research-areas")));
 
-							Flight::render("partials/tab", array("title"=>"Staff research", "id" => "staff-research",  "selected" => false, "content" => Flight::fetch("pg/tabs/staff-research"))); 
-							
+						Flight::render("partials/tab", array("title"=>"Staff research", "id" => "staff-research",  "selected" => false, "content" => Flight::fetch("pg/tabs/staff-research")));
 
-							Flight::render("partials/tab", array("title"=>"Enquiries", "id" => "enquiries", "selected" => false, "content" => Flight::fetch("pg/tabs/enquiries"))); 
-						?>
-					</div>
-			</div>
-			<div class="content-aside">
-				<?php Flight::render("pg/sidebar"); ?>
-			</div>
+
+						Flight::render("partials/tab", array("title"=>"Enquiries", "id" => "enquiries", "selected" => false, "content" => Flight::fetch("pg/tabs/enquiries")));
+					?>
+				</div>
+		</div>
+		<div class="content-aside">
+			<?php Flight::render("pg/sidebar"); ?>
 		</div>
 	</div>
 </div>
+
 
 
 <?php if (isset($course->no_fee_output) && $course->no_fee_output === 'true'): ?>

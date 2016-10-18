@@ -7,7 +7,7 @@ use \unikent\kent_theme\kentThemeHelper;
 		<div class="card-media-wrap">
 			<img class="card-img" src="/media/images/paintbrush-16x9.jpg">
 		</div>
-		<div class="card-title-overlap overlap-container">
+		<div class="card-title-overlap overlap-content-container">
 			<?php
 			KentThemeHelper::breadcrumb(array(
 				'Courses'=>'/courses',
@@ -73,10 +73,12 @@ use \unikent\kent_theme\kentThemeHelper;
 <?php endif; ?>
 
 
-<div class="container">
-	<?php if (!empty($course->globals->general_disclaimer)): ?>
-		<footer class="general_disclaimer" style='font-size:0.8em;'>
-			<?php echo $course->globals->general_disclaimer; ?>
-		</footer>
-	<?php endif; ?>
-</div>
+
+<?php if (!empty($course->globals->general_disclaimer)): ?>
+<footer class="content-container">
+	<div class="content-full">
+		<?php echo $course->globals->general_disclaimer; ?>
+	</div>
+</footer>
+<?php endif; ?>
+
