@@ -1,5 +1,7 @@
 
 	<header class="content-header">
+		<?php \unikent\kent_theme\kentThemeHelper::breadcrumb(array("Courses"=>"/courses/", "Modules"=>"/courses/modules", $module->title => "")); ?>
+
 		<h1><?php echo $module->title; ?>&nbsp;-&nbsp;<?php echo $module->sds_code; ?></h1>
 	</header>
 	<div class="content-body ">
@@ -83,7 +85,7 @@
 					<div class="tab-content">
 						
 						<?php
-						 	Flight::render("partials/tab", array("title"=>"Overview", "id" => "overview", "selected" => true, "content" => Flight::fetch("modules/tabs/overview")));
+						 	Flight::render("partials/tab", array("title"=>"Overview", "id" => "overview", "selected" => true, "content" => Flight::fetch("modules/tabs/overview", array("data_found"=>$data_found))));
 
 							if ((isset($module->collections) && !empty($module->collections)) ||
 								(isset($module->contact_hours) && !empty($module->contact_hours)) ||
@@ -138,5 +140,5 @@
 </div>
 
 	<?php } else { ?>
-		<p>Sorry, this module isn't running currently.</p>
+		<p>!!!Sorry, this module isn't running currently.</p>
 	<?php } ?>

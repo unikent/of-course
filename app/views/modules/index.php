@@ -3,6 +3,8 @@ use \unikent\kent_theme\kentThemeHelper;
 ?>
 
 <div class="container">
+	<?php \unikent\kent_theme\kentThemeHelper::breadcrumb(array("Courses"=>"/courses/", "Modules"=>"")); ?>
+
 	<h1>Module Catalogue</h1>
 
 	<p>The Module catalogue contains information about academic modules taught at the university.</p>

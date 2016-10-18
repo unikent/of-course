@@ -10,8 +10,8 @@ use \unikent\kent_theme\kentThemeHelper;
 		<div class="card-title-overlap overlap-container">
 			<?php
 			KentThemeHelper::breadcrumb(array(
-				'Courses'=>'/',
-				ucfirst($level).' '. $year =>'/',
+				'Courses'=>'/courses',
+				ucfirst($level).' '. $year =>'/courses/'.$level,
 				$course->programme_title =>''
 			));
 			?>
@@ -47,10 +47,8 @@ use \unikent\kent_theme\kentThemeHelper;
 		echo $course->holding_message;
 } else{
 	Flight::render($layout . "/course");
-
 }
 ?>
-
 
 <?php if (!empty($course->related_courses)): ?>
 	<div class="card-panel card-panel-primary-tint cards-backed m-t-0">
