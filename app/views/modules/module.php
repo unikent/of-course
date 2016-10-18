@@ -140,5 +140,5 @@
 </div>
 
 	<?php } else { ?>
-		<p>!!!Sorry, this module isn't running currently.</p>
+		<p>Sorry, this module isn't running currently.</p>
 	<?php } ?>
