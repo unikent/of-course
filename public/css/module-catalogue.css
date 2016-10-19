@@ -20,20 +20,6 @@
 	padding-left:35px;
 }
 
-.module-listing .quickspot-inline-result.selected .card {
-	background: #fdfdfd;
-}
-.module-listing .quickspot-inline-result.selected .card::before{
-	position:absolute;
-	top:0;
-	left:0;
-	background: #05345C;
-	content: "";
-	width: 4px;
-	height:100%;
-
-}
-
 @media (min-width: 768px){
 	#filter_box div {
 		display:inline-block;
