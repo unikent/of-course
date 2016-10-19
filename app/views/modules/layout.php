@@ -7,7 +7,7 @@ KentThemeHelper::header(
 		'menu' => array(
 			'Home' => 'https://beta-test.kent.ac.uk/courses/',
 			'Modules listing' => 'https://beta-test.kent.ac.uk/courses/modules',
-			'Chooseing your modules' => 'https://beta-test.kent.ac.uk',
+			'Choosing your modules' => 'https://beta-test.kent.ac.uk',
 			'How to apply' => 'https://beta-test.kent.ac.uk',
 			'Planning your career' => 'https://beta-test.kent.ac.uk',
 			'Student Profiles' => 'https://beta-test.kent.ac.uk',
