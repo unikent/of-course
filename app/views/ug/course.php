@@ -49,7 +49,7 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 					<?php Flight::render("ug/top-sidebar"); ?>
 				</div>
 				<div class="content-main">
-					<div class="tab-content">
+					<div class="tab-content vertical-nav">
 						<?php
 						Flight::render("partials/tab", array("title"=>"Overview", "id" => "overview", "selected" => true, "content" => Flight::fetch("ug/tabs/overview")));
 						Flight::render("partials/tab", array("title"=>"Course structure", "id" => "structure", "selected" => false, "content" => Flight::fetch("ug/tabs/structure")));

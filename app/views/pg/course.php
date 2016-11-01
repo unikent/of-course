@@ -46,7 +46,7 @@
 			<?php Flight::render("pg/top-sidebar"); ?>
 		</div>
 		<div class="content-main">
-				<div class="tab-content">
+				<div class="tab-content vertical-nav">
 					<?php
 						Flight::render("partials/tab", array("title"=>"Overview", "id" => "overview", "selected" => true, "content" => Flight::fetch("pg/tabs/overview")));
 
