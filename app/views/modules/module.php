@@ -9,7 +9,8 @@
 
 			<div class="content-container">
 				<div class="content-full">
-					<table class="deliveries table ">
+					<div class="panel panel-primary-tint mb-2">
+					<table class="deliveries table">
 						<thead>
 							<tr>
 								<th><span class="hidden-xs">Location</span><span class="hidden-sm-up">Details</span></th>
@@ -49,6 +50,7 @@
 							?>
 						</tbody>
 					</table>
+					</div>
 				</div>
 
 				<div class="content-full">
