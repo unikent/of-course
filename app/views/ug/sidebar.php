@@ -6,7 +6,7 @@
 		</ul>
 	</li>
 	<?php endif;?>
-	<li><i class="kf-calendar"></i> Start Date
+	<li><i class="kf-calendar"></i> Start date
 		<ul>
 			<li><?php echo $course->start ?></li>
 		</ul>
@@ -18,7 +18,7 @@
 			<?php endforeach; ?>
 		</ul>
 	</li>
-	<li><i class="kf-chevron-right"></i> Subject Website
+	<li><i class="kf-chevron-right"></i> Subject website
 		<ul>
 			<li><a href="<?php echo $course->url_for_administrative_school?>"><?php echo $course->administrative_school[0]->name ?></a> </li>
 			<?php if(!empty($course->url_for_additional_school)): ?>
