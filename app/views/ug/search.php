@@ -14,7 +14,7 @@
 	</ul>
 </div>
 <div class="panel-secondary ">
-		<div class="container form-inline p-t-2 p-b-2 filter-box" id="filter_box">
+		<div class="container form-inline pt-2 pb-2 filter-box" id="filter_box">
 			<div class="search-select subject-categories-search-div">
 					<select class="subject-categories-search form-control <?php if(strcmp($search_type, 'subject_category')  == 0) echo 'highlighted'; ?>" data-filter-col="__subjects">
 						<option value="">All subjects</option>

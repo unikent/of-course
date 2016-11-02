@@ -18,7 +18,7 @@ use \unikent\kent_theme\kentThemeHelper;
 	</ul>
 </div>
 <div class="panel-secondary">
-		<div class="container form-inline p-t-2 p-b-2 filter-box" id="filter_box">
+		<div class="container form-inline pt-2 pb-2 filter-box" id="filter_box">
 			<div class="module-filter-container">
 				<input 
 					id="module-filter" 

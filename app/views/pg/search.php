@@ -13,7 +13,7 @@
 	</ul>
 </div>
 <div class="panel-secondary ">
-		<div class="container form-inline p-t-2 p-b-2 filter-box" id="filter_box">
+		<div class="container form-inline pt-2 pb-2 filter-box" id="filter_box">
 				<div class="search-select campus-search-div">
 					<select class="campus-search form-control <?php if(strcmp($search_type, 'campus')  == 0) echo 'highlighted'; ?>" data-filter-col="campus">
 						<option value="">All locations</option>
