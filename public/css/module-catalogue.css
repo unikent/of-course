@@ -44,8 +44,6 @@ table.deliveries i{
 	margin-top:1rem;
 	margin-bottom:2rem;
 }
-.session-info::before {color: #937227;padding-right:.5rem}
-
 small.content-full  {
 	padding-top:2rem;
 }
@@ -54,10 +52,11 @@ small.content-full  {
 	font-weight: bold;
 }
 
+.session-info::before,
 .content-aside h3::before {
 	color: #937227;
 	padding-right:.5rem;
-
+    vertical-align: top;
 }
 
 a[data-toggle="popover"]::after {

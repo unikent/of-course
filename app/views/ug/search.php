@@ -4,7 +4,7 @@
 
 	<h1>Undergraduate Courses</h1>
 
-	<ul class="nav nav-tabs  p-t-1">
+	<ul class="nav nav-tabs  pt-1">
 		<li class="nav-item">
 			<a class="nav-link active">Undergraduate</a>
 		</li>

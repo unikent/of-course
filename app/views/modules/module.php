@@ -9,7 +9,8 @@
 
 			<div class="content-container">
 				<div class="content-full">
-					<table class="deliveries table ">
+					<div class="panel panel-primary-tint mb-2">
+					<table class="deliveries table">
 						<thead>
 							<tr>
 								<th><span class="hidden-xs">Location</span><span class="hidden-sm-up">Details</span></th>
@@ -49,6 +50,7 @@
 							?>
 						</tbody>
 					</table>
+					</div>
 				</div>
 
 				<div class="content-full">
@@ -109,7 +111,7 @@
 						?>
 					</div>
 				</div>
-				<div class="content-aside" style="margin-top:15rem;">
+				<div class="content-aside" style="margin-top:17rem;">
 					<h3 class="kf-check-circle">Pre-requisites</h3>
 					<p><?php echo empty($module->pre_requisite)?'None':$module->pre_requisite; ?></p>
 			
@@ -131,7 +133,7 @@
 		
 
 	</script>
-		<div class="content-container p-t-2">
+		<div class="content-container pt-3">
 			<small class="content-full">
 				University of Kent makes every effort to ensure that module information is accurate for the relevant academic session and to provide educational services as described. However, courses, services and other matters may be subject to change. <a href="https://www.kent.ac.uk/termsandconditions/">Please read our full disclaimer</a>.
 			</small>
