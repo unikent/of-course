@@ -46,11 +46,7 @@ use \unikent\kent_theme\kentThemeHelper;
 							</div>
 						</div>
 					</div>
-
-					<div class="inline-links text-xs-center text-sm-right">
-						<a href="//www.kent.ac.uk/courses/undergraduate/search">Courses A-Z</a>
-						<a href="//www.kent.ac.uk/courses/undergraduate/prospectus/index.html">Order a prospectus</a>
-					</div>
+				</div>
             </form>
         </div>
 	</div>
