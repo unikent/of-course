@@ -132,7 +132,7 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 			<div class="card-media-wrap">
 				<img class="card-img" src="/media/images/students.jpg">
 			</div>
-			<div class="card-img-overlay-centered card-img-overlay-tinted">
+			<div class="card-img-overlay-centered card-img-overlay-tinted card-overlay-inline-sm">
 				<div class="text-xs-center">
 					<h2 class="card-subtitle">Stunning locations & comfortable accomodation</h2>
 					<br>

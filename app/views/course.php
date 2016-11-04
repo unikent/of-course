@@ -61,7 +61,7 @@ use \unikent\kent_theme\kentThemeHelper;
 ?>
 
 <?php if (!empty($course->related_courses)): ?>
-	<div class="card-panel card-panel-tertiary cards-backed mt-0">
+	<div class="card-panel card-panel-primary-tint cards-backed mt-0">
 		<div class="card-panel-header">
 			<h2 class="card-panel-title">Related to this course</h2>
 		</div>
