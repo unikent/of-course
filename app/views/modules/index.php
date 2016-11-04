@@ -39,6 +39,9 @@ use \unikent\kent_theme\kentThemeHelper;
 						<?php }?>
 					</select>
 			</div>
+
+			<input type="hidden" name="quickspot_result_count" />
+			<input type="hidden" name="qucikspot_return_to_scroll_position" />
 		</div>
 </div>
 <div class="card-panel cards-list cards-backed card-panel-secondary module-listing">

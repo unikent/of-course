@@ -58,6 +58,9 @@
 				<option value="foundation year" <?php if ( ($search_type == 'programme_type' || $search_type == 'course_options') && (urldecode(strtolower(trim($search_string))) == 'foundation year' || urldecode(strtolower(trim($search_string))) == 'IFP') ) echo 'selected'; ?>>Foundation year</option>
 			</select>
 		</div>
+
+		<input type="hidden" name="quickspot_result_count" />
+		<input type="hidden" name="qucikspot_return_to_scroll_position" />
 	</div>
 
 	<div class="search-filter container form-inline">
