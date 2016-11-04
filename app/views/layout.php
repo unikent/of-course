@@ -1,18 +1,7 @@
 <?php
 use \unikent\kent_theme\kentThemeHelper;
 
-KentThemeHelper::header(
-	array(
-		'title' => "Courses",
-		'menu' => array(
-			'Home' => 'https://beta-test.kent.ac.uk/courses/',
-			'Course Listing' => 'https://beta-test.kent.ac.uk/courses/undergraduate/search',
-			'Choosing your course' => 'https://beta-test.kent.ac.uk',
-			'How to apply' => 'https://beta-test.kent.ac.uk',
-			'Planning your career' => 'https://beta-test.kent.ac.uk',
-			'Student Profiles' => 'https://beta-test.kent.ac.uk',
-
-		),
+$shared = array(
 		'meta' => array(
 			'title' => (isset($meta) && isset($meta['title']) ? $meta['title'] : 'University of kent courses'),
 			'description' => $meta['description'],
@@ -22,9 +11,46 @@ KentThemeHelper::header(
 		'home_page' => false,
 		'slim'=> true,
 		'brand_header' => true,
-		'theme' => $level == 'postgraduate' ? 'postgraduate' : false
-	)
+	);
+
+$undergraduate = array(
+	'title' => "Undergraduate Courses",
+	'menu' => array(
+		'Home' => 'https://beta-test.kent.ac.uk/courses/',
+		'Course Listing' => 'https://beta-test.kent.ac.uk/courses/undergraduate/search',
+		'Choosing your course' => 'https://beta-test.kent.ac.uk',
+		'How to apply' => 'https://beta-test.kent.ac.uk',
+		'Planning your career' => 'https://beta-test.kent.ac.uk',
+		'Student Profiles' => 'https://beta-test.kent.ac.uk',
+
+	),
+	'theme' => false
 );
+
+$postgraduate = array(
+	'title' => "Postgraduate Courses",
+	'menu' => array(
+		'Home' => 'https://beta-test.kent.ac.uk/courses/',
+		'Course Listing' => 'https://beta-test.kent.ac.uk/courses/undergraduate/search',
+		'Choosing your course' => 'https://beta-test.kent.ac.uk',
+		'How to apply' => 'https://beta-test.kent.ac.uk',
+		'Planning your career' => 'https://beta-test.kent.ac.uk',
+		'Student Profiles' => 'https://beta-test.kent.ac.uk',
+
+	),
+	'theme' => 'postgraduate'
+);
+
+
+if($level == 'postgraduate') {
+	KentThemeHelper::header(
+		array_merge($shared, $postgraduate)
+	);
+} else {
+	KentThemeHelper::header(
+		array_merge($shared, $undergraduate)
+	);
+}
 
 ?>
 
