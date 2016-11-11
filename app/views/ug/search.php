@@ -16,7 +16,7 @@
 <div class="panel-secondary ">
 		<div class="container form-inline pt-2 pb-2 filter-box" id="filter_box">
 			<div class="search-select subject-categories-search-div">
-					<select class="subject-categories-search form-control <?php if(strcmp($search_type, 'subject_category')  == 0) echo 'highlighted'; ?>" data-filter-col="__subjects">
+					<select class="custom-select subject-categories-search form-control <?php if(strcmp($search_type, 'subject_category')  == 0) echo 'highlighted'; ?>" data-filter-col="__subjects">
 						<option value="">All subjects</option>
 						<?php
 
@@ -35,14 +35,14 @@
 			</div>
 
 			<div class="search-select" >
-				<select class="campus-search form-control <?php if(strcmp($search_type, 'campus')  == 0) echo 'highlighted'; ?>" data-filter-col="campus">
+				<select class="custom-select campus-search form-control <?php if(strcmp($search_type, 'campus')  == 0) echo 'highlighted'; ?>" data-filter-col="campus">
 					<option value="">All locations</option>
 					<option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Canterbury'))  == 0) echo 'selected'; ?>>Canterbury</option>
 					<option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Medway'))  == 0) echo 'selected'; ?>>Medway</option>
 				</select>
 			</div>
 			<div class="search-select"  >
-				<select class="attendance-mode-search form-control <?php if ( $search_type == 'study_mode' || $search_type == 'attendance_mode' ) echo 'highlighted'; ?>" data-filter-col="mode_of_study">
+				<select class="custom-select attendance-mode-search form-control <?php if ( $search_type == 'study_mode' || $search_type == 'attendance_mode' ) echo 'highlighted'; ?>" data-filter-col="mode_of_study">
 					<option value="">Full / Part time</option>
 					<option <?php if ( ($search_type == 'study_mode' || $search_type == 'attendance_mode') && urldecode(strtolower($search_string)) == strtolower('Full-time') ) echo 'selected'; ?>>Full-time</option>
 					<option value="art-time" <?php if ( ($search_type == 'study_mode' || $search_type == 'attendance_mode') && urldecode(strtolower($search_string)) == strtolower('Part-time') ) echo 'selected'; ?>>Part-time</option>
@@ -51,7 +51,7 @@
 			</div>
 			
 		<div class="search-select course-options-search-div">
-			<select class="course-options-search form-control <?php if ( $search_type == 'programme_type' || $search_type == 'course_options' ) echo 'highlighted'; ?>" data-filter-col="programme_type">
+			<select class="custom-select course-options-search form-control <?php if ( $search_type == 'programme_type' || $search_type == 'course_options' ) echo 'highlighted'; ?>" data-filter-col="programme_type">
 				<option value="">All options</option>
 				<option value="year abroad" <?php if ( ($search_type == 'programme_type' || $search_type == 'course_options') && urldecode(strtolower(trim($search_string))) == 'year abroad' ) echo 'selected'; ?>>Year abroad</option>
 				<option value="year in industry" <?php if ( ($search_type == 'programme_type' || $search_type == 'course_options') && urldecode(strtolower(trim($search_string))) == 'year in industry' ) echo 'selected'; ?>>Year in industry</option>
