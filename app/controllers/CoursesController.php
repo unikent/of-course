@@ -309,7 +309,7 @@ class CoursesController {
 			$title = 'Courses A-Z';
 			$template = 'pg/search';
 			$meta = array(
-				'title' => 'Courses A-Z | Postgraduate Courses | The University of Kent',
+				'title' => 'Courses A-Z | Postgraduate courses | The University of Kent',
 				'description' => 'Search all of the postgraduate courses offered by the University of Kent',
 			);
 			break;
@@ -318,7 +318,7 @@ class CoursesController {
 			$title = 'Courses A-Z';
 			$template = 'ug/search';
 			$meta = array(
-				'title' => 'Courses A-Z | Undergraduate Courses | The University of Kent',
+				'title' => 'Courses A-Z | Undergraduate courses | The University of Kent',
 				'description' => 'Search all of the undergraduate courses offered by the University of Kent',
 			);
 			break;

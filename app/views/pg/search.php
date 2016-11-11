@@ -1,7 +1,7 @@
 <div class="container">
 	<?php \unikent\kent_theme\kentThemeHelper::breadcrumb(array("Courses"=>"/courses/", "Postgraduate"=>"")); ?>
 
-	<h1>Postgraduate Courses</h1>
+	<h1>Postgraduate courses</h1>
 
 	<ul class="nav nav-tabs  pt-1">
 		<li class="nav-item">

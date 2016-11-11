@@ -144,7 +144,7 @@ foreach($course->deliveries as $delivery){
 													<label for="type">Mode of study</label>
 
 													<div class="controls">
-														<select name="type" id="type" required="required">
+														<select class="custom-select" name="type" id="type" required="required">
 															<?php
 															if ($has_fulltime && $has_parttime){
 																?>
@@ -176,7 +176,7 @@ foreach($course->deliveries as $delivery){
 													<label for="award">Award</label>
 
 													<div class="controls">
-														<select name="award" id="award" required="required">
+														<select class="custom-select" name="award" id="award" required="required">
 
 															<option value="pleaseselect">Please select</option>
 															<?php foreach ($course->award as $award){ ?>
