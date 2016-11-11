@@ -13,8 +13,8 @@
 	</li>
 	<li><i class="kf-clock"></i> Duration
 		<ul>
-			<li><?php echo $course->attendance_text ?></li>
 		</ul>
+	<li><?php echo $course->attendance_text ?></li>
 	</li>
 	<li><i class="kf-chevron-right"></i> Subject website
 		<ul>

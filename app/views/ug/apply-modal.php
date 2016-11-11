@@ -59,7 +59,7 @@ if (empty($course->deliveries)) {
 										<div class="form-group type">
 											<label class="sr-only" for="type">Mode of study</label>
 											<div class="controls">
-												<select class="form-control" name="type" id="type" required="required">
+												<select class="custom-select" name="type" id="type" required="required">
 													<?php if ($has_fulltime && $has_parttime){ ?>
 														<option value="pleaseselect">Please select</option>
 													<?php } ?>
