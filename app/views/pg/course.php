@@ -8,7 +8,7 @@
 					<a href="#prospectus-modal" class="spaced-links-item text-accent" id="prospectusButton" data-toggle="modal" data-target="#prospectus-modal"><i class="kf-user"></i> Prospectus</a>
 				</div>
 				<div class="spaced-links-inner-container buttons">
-					<a href="https://www.kent.ac.uk/courses/visit/openday/" class="btn btn-tertiary spaced-links-item-btn">Book an open day</a>
+					<a href="<?php echo $course->globals->open_days_button_link; ?>" class="btn btn-tertiary spaced-links-item-btn"><?php echo $course->globals->open_days_button_text; ?></a>
 					<?php if (isset($course->globals->disable_apply) && $course->globals->disable_apply=='true'): ?>
 						<a href="<?php echo Flight::request()->base; ?>/<?php echo $level; ?>/<?php echo $course->instance_id ?>/"
 						   class="btn btn-primary pull-right spaced-links-item-btn"
