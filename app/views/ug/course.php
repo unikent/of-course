@@ -71,7 +71,7 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 			</div>
 		</div>
 
-	<div class="card card-overlay"">
+	<div class="card card-overlay pt-4">
 	<div class="card-body">
 		<div class="card-title-wrap card-title-wrap-link">
 			<a href="https://www.kent.ac.uk/research/" class="card-title-link">
