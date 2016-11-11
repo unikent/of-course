@@ -15,7 +15,7 @@
 <div class="panel-secondary ">
 		<div class="container form-inline pt-2 pb-2 filter-box" id="filter_box">
 				<div class="search-select campus-search-div">
-					<select class="campus-search form-control <?php if(strcmp($search_type, 'campus')  == 0) echo 'highlighted'; ?>" data-filter-col="campus">
+					<select class="custom-select campus-search form-control <?php if(strcmp($search_type, 'campus')  == 0) echo 'highlighted'; ?>" data-filter-col="campus">
 						<option value="">All locations</option>
 						<option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Canterbury'))  == 0) echo 'selected'; ?>>Canterbury</option>
 						<option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Medway'))  == 0) echo 'selected'; ?>>Medway</option>
@@ -30,7 +30,7 @@
 					</select>
 				</div>
 				<div class="search-select attendance-mode-search-div">
-					<select class="study-mode-search form-control <?php if(strcmp($search_type, 'study_mode')  == 0) echo 'highlighted'; ?>" data-filter-col="mode_of_study">
+					<select class="custom-select study-mode-search form-control <?php if(strcmp($search_type, 'study_mode')  == 0) echo 'highlighted'; ?>" data-filter-col="mode_of_study">
 						<option value="">All study modes</option>
 						<option <?php if(strcmp($search_type, 'study_mode')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Full-time'))  == 0) echo 'selected'; ?>>Full-time</option>
 						<option <?php if(strcmp($search_type, 'study_mode')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Part-time'))  == 0) echo 'selected'; ?>>Part-time</option>
@@ -38,7 +38,7 @@
 					</select>
 				</div>
 				<div class="search-select subject-categories-search-div">
-					<select class="subject-categories-search form-control <?php if(strcmp($search_type, 'subject_category')  == 0) echo 'highlighted'; ?>" data-filter-col="__subjects">
+					<select class="custom-select subject-categories-search form-control <?php if(strcmp($search_type, 'subject_category')  == 0) echo 'highlighted'; ?>" data-filter-col="__subjects">
 						<option value="">All subject categories</option>
 						<?php
 
@@ -56,7 +56,7 @@
 				</select>
 			</div>
 			<div class="search-select award-search-div">
-				<select class="award-search form-control <?php if(strcmp($search_type, 'award')  == 0) echo 'highlighted'; ?>" data-filter-col="award">
+				<select class="custom-select award-search form-control <?php if(strcmp($search_type, 'award')  == 0) echo 'highlighted'; ?>" data-filter-col="award">
 					<option value="">All awards</option>
 					<?php foreach($awards as $award): ?>
 						<option <?php if(strcmp($search_type, 'award')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower($award))  == 0) echo 'selected'; ?>><?php echo $award ?></option>
@@ -64,7 +64,7 @@
 				</select>
 			</div>
 			<div class="search-select programme-type-search-div">
-				<select class="programme-type-search form-control <?php if(strcmp($search_type, 'programme_type')  == 0) echo 'highlighted'; ?>" data-filter-col="programme_type">
+				<select class="custom-select programme-type-search form-control <?php if(strcmp($search_type, 'programme_type')  == 0) echo 'highlighted'; ?>" data-filter-col="programme_type">
 					<option value="">All course types</option>
 					<option value="research" <?php if(strcmp($search_type, 'programme_type') == 0  && strcmp(urldecode(strtolower($search_string)), 'research') == 0) echo 'selected'; ?>>Research</option>
 					<option value="taught" <?php if(strcmp($search_type, 'programme_type') == 0  && strcmp(urldecode(strtolower($search_string)), 'taught') == 0) echo 'selected'; ?>>Taught</option>
