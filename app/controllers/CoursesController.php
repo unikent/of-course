@@ -328,6 +328,7 @@ class CoursesController {
 
 		try {
 			$programmes = static::$pp->get_programmes_index($year, $level);//5 minute cache
+
 			$campuses = static::$pp->get_campuses();
 			$subject_categories = static::$pp->get_subjectcategories($level);
 			$awards = static::$pp->get_awards($level);

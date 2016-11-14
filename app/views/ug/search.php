@@ -1,6 +1,6 @@
 <div class="container">
 
-	<?php \unikent\kent_theme\kentThemeHelper::breadcrumb(array("Courses"=>"/courses/", "Undergraduate"=>"")); ?>
+	<?php \unikent\kent_theme\kentThemeHelper::breadcrumb(array("Courses"=>"/courses/", "Undergraduate" . ($year!=='current'? ' ' . $year : '')=>"")); ?>
 
 	<h1>Undergraduate courses</h1>
 
