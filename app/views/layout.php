@@ -61,4 +61,4 @@ if($level == 'postgraduate') {
 	</a>
 
 
-<?php KentThemeHelper::footer("<script src=\"" .  Flight::asset('js/build/of-course.min.js')."\"></script>"); ?>
+<?php KentThemeHelper::footer("<script src=\"" .  Flight::asset('js/courses.js')."\"></script>"); ?>

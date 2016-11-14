@@ -92,36 +92,35 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 		<div class="content-full">
 			<?php if ($course->kiscourseid != '' && $course->programme_suspended != 'true'): ?>
 				<section class="panel tertiary-tier highlighted no-border kiss-widget-section">
+					<div class="row">
 					<?php if ($has_fulltime){ ?>
-						<?php if ($has_parttime){ ?>
-							<h4>Full Time</h4>
-						<?php } ?>
-						<div class="row-fluid">
-							<div class="span12">
-								<?php $ukprn = (isset($course->kis_institution_id) && $course->kis_institution_id != '') ? $course->kis_institution_id : $course->globals->ukprn; ?>
-								<iframe id="unistats-widget-frame" title="Unistats KIS Widget" src="//widget.unistats.ac.uk/Widget/<?php echo $ukprn ?>/<?php echo str_replace(array('/', '|', ':', '&', '.', '>', '+', '#', ';', '?', '@', '='), '_', $course->kiscourseid); ?>/horizontal/small/en-GB/Full%20Time" scrolling="no" style="overflow: hidden; border: 0px none transparent; width: 615px; height: 150px;"> </iframe>
-							</div>
+
+
+						<div class="col-xs-12 col-sm-6 col-lg-12">
+							<?php if ($has_parttime){ ?>
+								<h4>Full Time</h4>
+							<?php } ?>
+							<?php $ukprn = (isset($course->kis_institution_id) && $course->kis_institution_id != '') ? $course->kis_institution_id : $course->globals->ukprn; ?>
+							<iframe id="unistats-widget-frame-ft" title="Unistats KIS Widget" src="//widget.unistats.ac.uk/Widget/<?php echo $ukprn ?>/<?php echo str_replace(array('/', '|', ':', '&', '.', '>', '+', '#', ';', '?', '@', '='), '_', $course->kiscourseid); ?>/horizontal/small/en-GB/Full%20Time" scrolling="no" style="overflow: hidden; border: 0px none transparent; width: 615px; height: 150px;"> </iframe>
 						</div>
-						<br>
 					<?php } ?>
 					<?php if ($has_parttime){ ?>
-						<?php if ($has_fulltime){ ?>
-							<h4>Part Time</h4>
-						<?php } ?>
-						<div class="row-fluid">
-							<div class="span12">
-								<?php $ukprn = (isset($course->kis_institution_id) && $course->kis_institution_id != '') ? $course->kis_institution_id : $course->globals->ukprn; ?>
-								<iframe id="unistats-widget-frame" title="Unistats KIS Widget" src="//widget.unistats.ac.uk/Widget/<?php echo $ukprn ?>/<?php echo str_replace(array('/', '|', ':', '&', '.', '>', '+', '#', ';', '?', '@', '='), '_', $course->kiscourseid); ?>/horizontal/small/en-GB/Part%20Time" scrolling="no" style="overflow: hidden; border: 0px none transparent; width: 615px; height: 150px;"> </iframe>
-							</div>
+						<div class="col-xs-12 col-sm-6 col-lg-12">
+							<?php if ($has_fulltime){ ?>
+								<h4>Part Time</h4>
+							<?php } ?>
+							<?php $ukprn = (isset($course->kis_institution_id) && $course->kis_institution_id != '') ? $course->kis_institution_id : $course->globals->ukprn; ?>
+							<iframe id="unistats-widget-frame-pt" title="Unistats KIS Widget" src="//widget.unistats.ac.uk/Widget/<?php echo $ukprn ?>/<?php echo str_replace(array('/', '|', ':', '&', '.', '>', '+', '#', ';', '?', '@', '='), '_', $course->kiscourseid); ?>/horizontal/small/en-GB/Part%20Time" scrolling="no" style="overflow: hidden; border: 0px none transparent; width: 615px; height: 150px;"> </iframe>
 						</div>
-						<br>
+
 					<?php } ?>
-					<div class="small">
+					<div class="col-xs-12 pt-1 small">
 							<?php echo $course->kis_explanatory_textarea ?>
 
 							<?php if (!empty($course->globals->general_contact_blurb)): ?>
 								<?php echo $course->globals->general_contact_blurb; ?>
 							<?php endif ?>
+					</div>
 					</div>
 				</section>
 			<?php endif; ?>

@@ -104,4 +104,33 @@ $(document).ready(function(){
         }
     });
 
+	$(window).on('viewport:resize', function(){
+		KIS_Widget_React()
+	});
+
+	KIS_Widget_React();
 });
+
+function KIS_Widget_React(){
+	$fulltime = $('#unistats-widget-frame-ft');
+	$parttime = $('#unistats-widget-frame-pt');
+
+	if(ResponsiveBootstrapToolkit.is('<lg')){
+
+		if($fulltime.length > 0 && $fulltime.prop('src').includes('horizontal')){
+			$fulltime.prop('src', $fulltime.prop('src').replace('horizontal', 'vertical')).css('height', '500px').css('width', '190px');
+		}
+		if($parttime.length > 0 && $parttime.prop('src').includes('horizontal')) {
+			$parttime.prop('src', $parttime.prop('src').replace('horizontal', 'vertical')).css('height', '500px').css('width', '190px');
+		}
+
+	}else{
+
+		if($fulltime.length > 0 && $fulltime.prop('src').includes('vertical')) {
+			$fulltime.prop('src', $fulltime.prop('src').replace('vertical', 'horizontal')).css('width', '615px').css('height', '150px');
+		}
+		if($parttime.length > 0 && $parttime.prop('src').includes('vertical')) {
+			$parttime.prop('src', $parttime.prop('src').replace('vertical', 'horizontal')).css('width', '615px').css('height', '150px');
+		}
+	}
+}
