@@ -1,6 +1,14 @@
 .course-listing {
 	padding-top:1rem;
 }
+
+tr.module-row{
+    cursor: pointer;
+}
+tr.module-row .more{
+    font-size: .9rem;
+    padding: 1rem .5rem;
+}
 .filter-box .search-select select, #course-filter-container input{
 	width: 100%;
 }
@@ -31,4 +39,8 @@
 	#course-filter-container input {
 		width:50%;
 	}
+}
+
+.sidebar li i{
+    line-height: 1.5rem;
 }

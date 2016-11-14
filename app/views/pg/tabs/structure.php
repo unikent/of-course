@@ -24,53 +24,31 @@ foreach ($course->modules as $module) {
 	<?php
 	if ($show_modules):
 		?>
-
+	<table class="table table-hover">
+		<thead>
+		<tr>
+			<th width="70%">Possible modules may include</th>
+			<th class="text-xs-center">Credits</th>
+			<th class="text-xs-center">ECTS Credits</th>
+		</tr>
+		</thead>
+		<tbody>
 		<?php
-		$show_count = 10;
 		$course->module_list = empty($course->module_list)?array():$course->module_list;
-
-		$first_modules = array_slice($course->module_list, 0, $show_count);
-		$other_modules = array_slice($course->module_list, $show_count);
-		?>
-		<?php foreach ($first_modules as $module): ?>
-		<div class="daedalus-show-hide show-hide minimal">
-			<p class="show-hide-title"><?php echo $module->sds_code ?> - <?php echo $module->module_title ?> (<?php echo $module->credit_amount; ?> credits)</p>
-
-			<div class="show-hide-content">
-				<p><?php echo $module->synopsis ?></p>
-				<p><strong>Credits:</strong> <?php echo $module->credit_amount ?> credits
-					(<?php echo $module->ects_credit ?> ECTS credits).</p>
-				<p class="module-read-more"><a
-						href="http://www.kent.ac.uk/courses/modules/module/<?php echo $module->sds_code ?>">Read
-						more <i class="icon-arrow-right"></i></a></p>
-			</div>
-		</div>
-	<?php endforeach; ?>
-
-		<?php if (sizeof($other_modules) != 0): ?>
-
-		<a data-toggle="collapse" href="#more-modules">Show more...</a>
-		<br/>
-		<div id="more-modules" class="collapse">
-			<?php foreach ($other_modules as $module): ?>
-				<div class="daedalus-show-hide show-hide minimal">
-					<p class="show-hide-title"><?php echo $module->sds_code ?>
-						- <?php echo $module->module_title ?> (<?php echo $module->credit_amount; ?> credits)</p>
-
-					<div class="show-hide-content">
-						<p><?php echo $module->synopsis ?></p>
-						<p><strong>Credits:</strong> <?php echo $module->credit_amount ?> credits
-							(<?php echo $module->ects_credit ?> ECTS credits).</p>
-
-						<p class="module-read-more"><a
-								href="http://www.kent.ac.uk/courses/modules/module/<?php echo $module->sds_code ?>">Read
-								more <i class="icon-arrow-right"></i></a></p>
-					</div>
+		foreach ($course->module_list as $module): ?>
+		<tr class="module-row" data-toggle="collapse" data-target="#<?php echo $module->sds_code; ?>-more">
+			<td><span class="text-primary"><?php echo $module->sds_code ?> - <?php echo $module->module_title ?></span>
+				<div id="<?php echo $module->sds_code; ?>-more" class="more collapse">
+					<p><?php echo preg_replace("/\n/",'</p><p>',preg_replace('/[\r\n]+/', "\n", preg_replace('/<br\s*\/?>/',"\n",$module->synopsis))); ?></p>
+					<a class="chevron-link" href="http://www.kent.ac.uk/courses/modules/module/<?php echo $module->sds_code ?>">Read more</a>
 				</div>
-			<?php endforeach; ?>
-		</div>
-	<?php endif; ?>
-
+			</td>
+			<td class="text-xs-center"><?php echo $module->credit_amount; ?></td>
+			<td class="text-xs-center"><?php echo $module->ects_credit ?></td>
+		</tr>
+	<?php endforeach; ?>
+		</tbody>
+	</table>
 	<?php endif; ?>
 </section>
 <section class="info-section">

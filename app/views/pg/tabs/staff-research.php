@@ -16,11 +16,11 @@
 		<h3><?php echo $staff->title != '' ? $staff->title . ' '  : '' ?><?php echo $staff->forename ?> <?php echo $staff->surname ?><?php echo $staff->role != '' ? ': ' . $staff->role : '' ?></h3>
 		
 		<?php if ( ! empty ($staff->blurb) ): ?>
-		<div class="staff-profile">
+		<div class="staff-profile mb-3">
 			<?php echo $staff->blurb ?>
 
 			<?php if($staff->profile_url != ''): ?>
-				<a href="<?php echo $staff->profile_url ?>">Profile</a>
+				<a class="chevron-link" href="<?php echo $staff->profile_url ?>">View Profile</a>
 			<?php endif; ?>
 		</div>
 		<?php endif; ?>
