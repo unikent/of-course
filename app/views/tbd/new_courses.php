@@ -4,9 +4,9 @@
     
 
       <?php if ($level == 'undergraduate'): ?>
-        <h1>New Undergraduate Courses A-Z</h1>
+        <h1>New undergraduate courses A-Z</h1>
       <?php elseif ($level == 'postgraduate'): ?>
-        <h1>New Postgraduate Courses A-Z</h1>
+        <h1>New postgraduate courses A-Z</h1>
       <?php endif; ?>
     
     <p>We have an exciting range of new courses available below.</p>

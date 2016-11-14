@@ -13,10 +13,8 @@
 	</li>
 	<li><i class="kf-clock"></i> Duration
 		<ul>
-			<?php foreach(explode(',', $course->duration) as $duration): ?>
-				<li><?php echo trim($duration) ?></li>
-			<?php endforeach; ?>
 		</ul>
+	<li><?php echo $course->attendance_text ?></li>
 	</li>
 	<li><i class="kf-chevron-right"></i> Subject website
 		<ul>

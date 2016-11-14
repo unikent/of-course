@@ -14,7 +14,7 @@ $shared = array(
 	);
 
 $undergraduate = array(
-	'title' => "Undergraduate Courses",
+	'title' => "Undergraduate courses",
 	'menu' => array(
 		'Home' => 'https://beta-test.kent.ac.uk/courses/',
 		'Course Listing' => 'https://beta-test.kent.ac.uk/courses/undergraduate/search',
@@ -28,7 +28,7 @@ $undergraduate = array(
 );
 
 $postgraduate = array(
-	'title' => "Postgraduate Courses",
+	'title' => "Postgraduate courses",
 	'menu' => array(
 		'Home' => 'https://beta-test.kent.ac.uk/courses/',
 		'Course Listing' => 'https://beta-test.kent.ac.uk/courses/undergraduate/search',

@@ -12,10 +12,3 @@
 		<?php echo $course->did_you_know_fact_box ?>
 	</div>
 <?php endif; ?>
-<ul>
-	<li>
-		<a href="#!enquiries" class="only" role="tab" aria-controls="enquire">
-			<span>Contact us or order a prospectus</span>
-		</a>
-	</li>
-</ul>

@@ -71,7 +71,7 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 			</div>
 		</div>
 
-	<div class="card card-overlay"">
+	<div class="card card-overlay pt-4">
 	<div class="card-body">
 		<div class="card-title-wrap card-title-wrap-link">
 			<a href="https://www.kent.ac.uk/research/" class="card-title-link">
@@ -124,20 +124,6 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 					</div>
 				</section>
 			<?php endif; ?>
-		</div>
-	</div>
-	<div class="card card-overlay">
-		<div class="card-body">
-			<div class="card-media-wrap">
-				<img class="card-img" src="/media/images/students.jpg">
-			</div>
-			<div class="card-img-overlay-centered card-img-overlay-tinted card-overlay-inline-sm">
-				<div class="text-xs-center">
-					<h2 class="card-subtitle">Stunning locations & comfortable accomodation</h2>
-					<br>
-					<p><a href="#dostuff" class="btn btn-primary">Book a visit today</a></p>
-				</div>
-			</div>
 		</div>
 	</div>
 <?php

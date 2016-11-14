@@ -40,9 +40,9 @@ use \unikent\kent_theme\kentThemeHelper;
 						<div class="quickspot-results"></div>
 						<div>
 							<div class="course-links">
-								<a class="chevron-link" href="/courses/undergraduate/search">All Undergraduate</a>
-								<a class="chevron-link" href="/courses/postgraduate/search">All Postgraduate </a>
-								<a class="chevron-link" href="/courses/part-time/index.html">Short Courses</a>
+								<a class="chevron-link" href="/courses/undergraduate/search">All undergraduate</a>
+								<a class="chevron-link" href="/courses/postgraduate/search">All postgraduate </a>
+								<a class="chevron-link" href="/courses/part-time/index.html">Short courses</a>
 							</div>
 						</div>
 					</div>

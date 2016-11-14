@@ -77,7 +77,7 @@
 	</div>
 </div>
 
-<div class="card card-overlay"">
+<div class="card card-overlay pt-4">
 	<div class="card-body">
 		<div class="card-title-wrap card-title-wrap-link">
 			<a href="https://www.kent.ac.uk/research/" class="card-title-link"><h2 class="card-title">Student Profile</h2></a>
@@ -91,25 +91,6 @@
 		<h3 class="card-subtitle"><?php echo $course->programme_title; ?> - <?php echo $course->award_list; ?></h3>
 	</div>
 
-	</div>
-</div>
-
-
-
-
-<div class="card card-overlay" >
-	<div class="card-body">
-		<div class="card-media-wrap">
-			<img class="card-img" src="/media/images/students.jpg">
-		</div>
-		<div class="card-img-overlay-centered card-img-overlay-tinted">
-			<div class="text-xs-center">
-				<h2 class="card-subtitle">Stunning locations & comfortable accomodation</h2>
-				
-				<br>
-				<p><a href="#dostuff" class="btn btn-primary">Book a visit today</a></p>
-			</div>
-		</div>
 	</div>
 </div>
 

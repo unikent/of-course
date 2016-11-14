@@ -161,7 +161,7 @@ class CoursesController {
 			'meta' => $meta,
 			'layout' => $level === 'postgraduate' ? 'pg' : 'ug'
 		);
-		
+
 		// Course object should be global for views
 		Flight::view()->set('course', $course);
 
@@ -309,7 +309,7 @@ class CoursesController {
 			$title = 'Courses A-Z';
 			$template = 'pg/search';
 			$meta = array(
-				'title' => 'Courses A-Z | Postgraduate Courses | The University of Kent',
+				'title' => 'Courses A-Z | Postgraduate courses | The University of Kent',
 				'description' => 'Search all of the postgraduate courses offered by the University of Kent',
 			);
 			break;
@@ -318,7 +318,7 @@ class CoursesController {
 			$title = 'Courses A-Z';
 			$template = 'ug/search';
 			$meta = array(
-				'title' => 'Courses A-Z | Undergraduate Courses | The University of Kent',
+				'title' => 'Courses A-Z | Undergraduate courses | The University of Kent',
 				'description' => 'Search all of the undergraduate courses offered by the University of Kent',
 			);
 			break;
@@ -371,7 +371,7 @@ class CoursesController {
 			case 'postgraduate':
 			$template = 'new_courses';
 			$meta = array(
-				'title' => 'New Courses A-Z | Postgraduate Courses | The University of Kent',
+				'title' => 'New Courses A-Z | Postgraduate courses | The University of Kent',
 				'description' => 'Search all of the new postgraduate courses offered by the University of Kent',
 			);
 			break;
@@ -379,7 +379,7 @@ class CoursesController {
 			default:
 			$template = 'new_courses';
 			$meta = array(
-				'title' => 'New Courses A-Z | Undergraduate Courses | The University of Kent',
+				'title' => 'New Courses A-Z | Undergraduate courses | The University of Kent',
 				'description' => 'Search all of the new undergraduate courses offered by the University of Kent',
 			);
 			break;
@@ -426,7 +426,7 @@ class CoursesController {
 		$title = 'Postgraduate courses with international study';
 		$template = 'pg_search';
 		$meta = array(
-			'title' => 'Postgraduate courses with international study | Postgraduate Courses | The University of Kent',
+			'title' => 'Postgraduate courses with international study | Postgraduate courses | The University of Kent',
 			'description' => 'Search all of the study abroad option courses offered by the University of Kent',
 		);
 
