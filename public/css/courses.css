@@ -5,10 +5,16 @@
 tr.module-row{
     cursor: pointer;
 }
-tr.module-row .more{
+
+tr td.more{
     font-size: .9rem;
-    padding: 1rem .5rem;
+    padding: 0 1rem 1rem;
 }
+tr.collapsing td,
+tr.collapse.in td{
+    border-top:0;
+}
+
 .filter-box .search-select select, #course-filter-container input{
 	width: 100%;
 }
