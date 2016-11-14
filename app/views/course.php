@@ -11,7 +11,7 @@ use \unikent\kent_theme\kentThemeHelper;
 			<?php
 			KentThemeHelper::breadcrumb(array(
 				'Courses'=>'/courses',
-				ucfirst($level).' '. $course->current_year =>'/courses/'.$level,
+				ucfirst($level).' '. $course->year =>'/courses/'.$level,
 				$course->programme_title =>''
 			));
 			?>
