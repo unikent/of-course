@@ -10,7 +10,7 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 					<div class="spaced-links-container">
 						<div class="spaced-links-inner-container links">
 							<a href="https://www.kent.ac.uk/locations/<?php echo $course->location_str ?>" class="text-accent spaced-links-item"><i class="kf-pin"></i> <?php echo $course->locations_str; ?></a>
-							<a href="#contact-modal" class="spaced-links-item text-accent" id="prospectusButton" data-toggle="modal" data-target="#contact-modal"><i class="kf-info-circle"></i> Contact Us</a>
+							<a href="#contact-modal" class="spaced-links-item text-accent" id="contactButton" data-toggle="modal" data-target="#contact-modal"><i class="kf-info-circle"></i> Contact Us</a>
 							<a href="#prospectus-modal" class="spaced-links-item text-accent" id="prospectusButton" data-toggle="modal" data-target="#prospectus-modal"><i class="kf-user"></i> Prospectus</a>
 						</div>
 						<div class="spaced-links-inner-container buttons">
@@ -62,9 +62,7 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 						if ((isset($preview) && $preview == true) || (!defined('CLEARING') || (defined('CLEARING') && !CLEARING)) || (defined('CLEARING') && CLEARING && $course->current_year == $course->year)){
 							Flight::render("partials/tab", array("title"=>"Entry requirements", "id" => "entry",  "selected" => false, "content" => Flight::fetch("ug/tabs/entry")));
 						}
-
 						Flight::render("partials/tab", array("title"=>"Funding", "id" => "funding",  "selected" => false, "content" => Flight::fetch("ug/tabs/fees")));
-						Flight::render("partials/tab", array("title"=>"Enquiries", "id" => "enquiries", "selected" => false, "content" => Flight::fetch("ug/tabs/enquiries")));
 						?>
 					</div>
 				</div>
@@ -147,6 +145,6 @@ if (empty($course->deliveries)) {
 	}
 }
 ?>
-<?php Flight::render("partials/modals/contact"); ?>
-<?php Flight::render("partials/modals/prospectus"); ?>
+<?php Flight::render("ug/contact-modal"); ?>
+<?php Flight::render("ug/prospectus-modal"); ?>
 <?php Flight::render("ug/apply-modal"); ?>

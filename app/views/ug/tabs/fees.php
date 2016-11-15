@@ -1,8 +1,7 @@
-<h2>Fees</h2>
-
 <?php if (isset($course->no_fee_output) && $course->no_fee_output === 'true'): ?>
     <!-- Do nothing -->
 <?php else: ?>
+	<h2>Fees</h2>
     <?php if (isset($course->globals->fees_caveat_text_ug) && !empty($course->globals->fees_caveat_text_ug)) echo ' <h3 class="card-title">'.$course->globals->fees_caveat_text_ug.'</h3>' ?>
     <table class="table">
         <thead>
@@ -33,8 +32,7 @@
         <?php endif; ?>
         </tbody>
     </table>
-    <div class="card-panel-single">
-        <div class="card" style="font-size:0.7rem;">
+    <div class="smaller mb-2">
             <?php
             if ($has_foundation && isset($course->globals->fees_foundation_year_exception_text_ug)) {
                 echo $course->globals->fees_foundation_year_exception_text_ug;
@@ -50,7 +48,6 @@
 
             if (isset($course->globals->fees_exception_text_ug)) echo $course->globals->fees_exception_text_ug;
             ?>
-        </div>
     </div>
 <?php endif; ?>
 
