@@ -1,4 +1,4 @@
-<h2>Fees and funding</h2>
+<h2>Fees</h2>
 
 <?php if (isset($course->no_fee_output) && $course->no_fee_output === 'true'): ?>
     <!-- Do nothing -->
@@ -55,5 +55,6 @@
 <?php endif; ?>
 
 <section class="info-section">
+	<h2>Funding</h2>
 	<?php echo $course->funding;?>
 </section>
