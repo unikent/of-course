@@ -73,7 +73,6 @@ use \unikent\kent_theme\kentThemeHelper;
 					<p class="card-meta"><?php echo $related_course->mode_of_study; ?></p>
 					<p class="card-meta"><?php echo $related_course->campus; ?></p>
 					<hr>
-					<p class="card-text">Economics examines some of the profound issues in our life and times, including: economic...</p>
 					<a href="<?php echo Flight::url("{$level}/{$related_course->id}/{$related_course->slug}"); ?>" class="faux-link-overlay" aria-hidden="true"><?php echo $related_course->name ?> <?php echo !empty($related_course->programmme_status_text) ? $related_course->programmme_status_text : ''; ?> <?php echo $related_course->award; ?></a>
 				</div>
 			<?php endforeach; ?>
