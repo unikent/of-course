@@ -1,3 +1,4 @@
+
 <div class="panel panel-tertiary row">
 
 	<div class="col-sm-4">
@@ -17,7 +18,7 @@
 	</div>
 	<div class="col-sm-4">
 		 <strong>Duration an start</strong><br/> 
-			 <?php echo $course->attendance_text; ?><br/>
+			 <?php echo $course->how_to_apply->attendance_text; ?><br/>
 			 Starts <?php echo $course->start; ?>
  			<br/>
 			 
