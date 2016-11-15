@@ -1,9 +1,5 @@
 <h2>Fees and funding</h2>
 
-<section class="info-section">
-	<?php echo $course->funding;?>
-</section>
-
 <?php if (isset($course->no_fee_output) && $course->no_fee_output === 'true'): ?>
     <!-- Do nothing -->
 <?php else: ?>
@@ -57,3 +53,7 @@
         </div>
     </div>
 <?php endif; ?>
+
+<section class="info-section">
+	<?php echo $course->funding;?>
+</section>
