@@ -9,7 +9,7 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 				<div class="content-full">
 					<div class="spaced-links-container">
 						<div class="spaced-links-inner-container links">
-							<a href="https://www.kent.ac.uk/locations/<?php echo $course->location_str ?>" class="text-accent spaced-links-item"><i class="kf-pin"></i> <?php echo $course->locations_str; ?></a>
+							<span class="spaced-links-item"><i class="kf-pin"></i> <?php echo $course->locations_str; ?></span>
 							<a href="#contact-modal" class="spaced-links-item text-accent" id="contactButton" data-toggle="modal" data-target="#contact-modal"><i class="kf-info-circle"></i> Contact Us</a>
 							<a href="#prospectus-modal" class="spaced-links-item text-accent" id="prospectusButton" data-toggle="modal" data-target="#prospectus-modal"><i class="kf-user"></i> Prospectus</a>
 						</div>
@@ -35,7 +35,8 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 					</div>
 
 					<?php
-					if(empty(trim($course->programme_synopsis))){
+					$syn = trim($course->programme_synopsis);
+					if(empty($syn)){
 						if (preg_match('%<p[^>]*>(.*?)</p>%i', $course->programme_overview_text, $regs)) {
 							echo '<p class="lead">' . $regs[1] . '</p>';
 						}

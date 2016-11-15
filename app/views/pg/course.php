@@ -3,7 +3,7 @@
 		<div class="content-full">
 			<div class="spaced-links-container">
 				<div class="spaced-links-inner-container links">
-					<a href="https://www.kent.ac.uk/locations/<?php echo $course->location_str ?>" class="text-accent spaced-links-item"><i class="kf-pin"></i> <?php echo $course->locations_str; ?></a>
+					<span class="spaced-links-item"><i class="kf-pin"></i> <?php echo $course->locations_str; ?></span>
 					<a href="#contact-modal" class="spaced-links-item text-accent" id="contactButton" data-toggle="modal" data-target="#contact-modal"><i class="kf-info-circle"></i> Contact Us</a>
 					<a href="#prospectus-modal" class="spaced-links-item text-accent" id="prospectusButton" data-toggle="modal" data-target="#prospectus-modal"><i class="kf-user"></i> Prospectus</a>
 				</div>
@@ -29,7 +29,8 @@
 			</div>
 
 			<?php
-			if(empty(trim($course->programme_synopsis))){
+			$syn = trim($course->programme_synopsis);
+			if(empty($syn)){
 				if (preg_match('%<p[^>]*>(.*?)</p>%i', $course->schoolsubject_overview, $regs)) {
 					echo '<p class="lead">' . $regs[1] . '</p>';
 				}
@@ -61,43 +62,43 @@
 
 						if (!empty($course->careers_and_employability) || !empty($course->globals->careersemployability_text) || !empty($course->professional_recognition)) {
 							Flight::render("partials/tab",
-										   [
+										   array(
 											   "title" => "Careers",
 											   "id" => "careers",
 											   "selected" => false,
 											   "content" => Flight::fetch("pg/tabs/careers")
-										   ]);
+										   ));
 						}
 
 						if (!empty($course->key_information_miscellaneous)) {
 							Flight::render("partials/tab",
-										   [
+										   array(
 											   "title" => "Study support",
 											   "id" => "study-support",
 											   "selected" => false,
 											   "content" => Flight::fetch("pg/tabs/study-support")
-										   ]);
+										   ));
 						}
 					 	if (!(isset($course->no_fee_output) && $course->no_fee_output === 'true')) {
 							Flight::render("partials/tab",
-										   [
+										   array(
 											   "title" => "Fees and funding",
 											   "id" => "fees",
 											   "selected" => false,
 											   "content" => Flight::fetch("pg/tabs/fees")
-										   ]);
+										   ));
 						}
 
 						Flight::render("partials/tab", array("title"=>"Entry requirements", "id" => "entry-requirements",  "selected" => false, "content" => Flight::fetch("pg/tabs/entry-requirements")));
 
 						if (!empty($course->research_groups)) {
 							Flight::render("partials/tab",
-										   [
+										   array(
 											   "title" => "Research areas",
 											   "id" => "research-areas",
 											   "selected" => false,
 											   "content" => Flight::fetch("pg/tabs/research-areas")
-										   ]);
+										   ));
 						}
 
 						Flight::render("partials/tab", array("title"=>"Staff research", "id" => "staff-research",  "selected" => false, "content" => Flight::fetch("pg/tabs/staff-research")));
