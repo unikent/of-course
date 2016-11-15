@@ -10,7 +10,7 @@
             </div>
             <div class="modal-body">
 				<div class="content-container">
-					< class="content-full">
+					<div class="content-full">
 				<?php
 				$year_for_url = empty($year) ? '' : ((strcmp($year, CoursesController::$current_year) == 0) ? '' : $year . '/');
 				$has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
