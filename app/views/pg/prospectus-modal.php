@@ -109,7 +109,7 @@
 						<a href="https://www.kent.ac.uk/courses/postgraduate/pdf/prospectus.pdf"
 							<?php echo sprintf($eventjs, 'download-prospectus-pg', $course_name_fortracking); ?>
 						>
-							Download a full prospectus (PDF)
+							Download a prospectus (PDF)
 						</a>
 					</li>
 					<?php if(!empty($course->programme_leaflet)): ?>
