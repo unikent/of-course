@@ -33,14 +33,17 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 							<?php endif; ?>
 						</div>
 					</div>
-					<p class="lead">
-						<?php
-						// @todo - This is a new field that will be added to the PP in the near future. To demo the behavior
-						// I'm currently just hacking in a "correct-ish" looking value by grabbing the first p of the overview if i can
+
+					<?php
+					if(empty(trim($course->programme_synopsis))){
 						if (preg_match('%<p[^>]*>(.*?)</p>%i', $course->programme_overview_text, $regs)) {
-							echo $regs[1];
-						} ?>
-					</p>
+							echo '<p class="lead">' . $regs[1] . '</p>';
+						}
+					}else{
+						echo '<div class="lead">' . $course->programme_synopsis . '</div>';
+					}
+					?>
+
 					<?php Flight::render("partials/notices"); ?>
 				</div>
 			</div>
