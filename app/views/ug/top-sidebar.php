@@ -7,9 +7,4 @@
         <li class="nav-item"><a href="#entry" data-toggle="tab" role="tab" class="nav-link">Entry requirements</a></li>
     <?php endif; ?>
     <li class="nav-item"><a href="#funding" data-toggle="tab" role="tab" class="nav-link">Fees and funding</a></li>
-
-    <li class='sr-only' ><a href="#fees-tables-link" class="nav-link">Fees</a></li>
-
-
-    <li class='sr-only'><a href="#enquiries" data-toggle="tab" role="tab" class="nav-link">Enquiries</a></li>
 </ul>
