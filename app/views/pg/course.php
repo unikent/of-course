@@ -4,7 +4,7 @@
 			<div class="spaced-links-container">
 				<div class="spaced-links-inner-container links">
 					<a href="https://www.kent.ac.uk/locations/<?php echo $course->location_str ?>" class="text-accent spaced-links-item"><i class="kf-pin"></i> <?php echo $course->locations_str; ?></a>
-					<a href="#contact-modal" class="spaced-links-item text-accent" id="prospectusButton" data-toggle="modal" data-target="#contact-modal"><i class="kf-info-circle"></i> Contact Us</a>
+					<a href="#contact-modal" class="spaced-links-item text-accent" id="contactButton" data-toggle="modal" data-target="#contact-modal"><i class="kf-info-circle"></i> Contact Us</a>
 					<a href="#prospectus-modal" class="spaced-links-item text-accent" id="prospectusButton" data-toggle="modal" data-target="#prospectus-modal"><i class="kf-user"></i> Prospectus</a>
 				</div>
 				<div class="spaced-links-inner-container buttons">
@@ -28,14 +28,15 @@
 				</div>
 			</div>
 
-			<p class="lead">
-				<?php
-				// @todo - This is a new field that will be added to the PP in the near future. To demo the behavior
-				// I'm currently just hacking in a "correct-ish" looking value by grabbing the first p of the overview if i can
+			<?php
+			if(empty(trim($course->programme_synopsis))){
 				if (preg_match('%<p[^>]*>(.*?)</p>%i', $course->schoolsubject_overview, $regs)) {
-					echo $regs[1];
-				} ?>
-			</p>
+					echo '<p class="lead">' . $regs[1] . '</p>';
+				}
+			}else{
+				echo '<div class="lead">' . $course->programme_synopsis . '</div>';
+			}
+			?>
 
 			<?php Flight::render("partials/notices"); ?>
 		</div>
@@ -58,16 +59,49 @@
 							Flight::render("partials/tab", array("title"=>"Course structure", "id" => "structure", "selected" => false, "content" => Flight::fetch("pg/tabs/structure")));
 						}
 
-						Flight::render("partials/tab", array("title"=>"Careers", "id" => "careers",  "selected" => false, "content" => Flight::fetch("pg/tabs/careers")));
-						Flight::render("partials/tab", array("title"=>"Study support", "id" => "study-support", "selected" => false, "content" => Flight::fetch("pg/tabs/study-support")));
+						if (!empty($course->careers_and_employability) || !empty($course->globals->careersemployability_text) || !empty($course->professional_recognition)) {
+							Flight::render("partials/tab",
+										   [
+											   "title" => "Careers",
+											   "id" => "careers",
+											   "selected" => false,
+											   "content" => Flight::fetch("pg/tabs/careers")
+										   ]);
+						}
+
+						if (!empty($course->key_information_miscellaneous)) {
+							Flight::render("partials/tab",
+										   [
+											   "title" => "Study support",
+											   "id" => "study-support",
+											   "selected" => false,
+											   "content" => Flight::fetch("pg/tabs/study-support")
+										   ]);
+						}
+					 	if (!(isset($course->no_fee_output) && $course->no_fee_output === 'true')) {
+							Flight::render("partials/tab",
+										   [
+											   "title" => "Fees and funding",
+											   "id" => "fees",
+											   "selected" => false,
+											   "content" => Flight::fetch("pg/tabs/fees")
+										   ]);
+						}
+
 						Flight::render("partials/tab", array("title"=>"Entry requirements", "id" => "entry-requirements",  "selected" => false, "content" => Flight::fetch("pg/tabs/entry-requirements")));
 
-						Flight::render("partials/tab", array("title"=>"Research areas", "id" => "research-areas",  "selected" => false, "content" => Flight::fetch("pg/tabs/research-areas")));
+						if (!empty($course->research_groups)) {
+							Flight::render("partials/tab",
+										   [
+											   "title" => "Research areas",
+											   "id" => "research-areas",
+											   "selected" => false,
+											   "content" => Flight::fetch("pg/tabs/research-areas")
+										   ]);
+						}
 
 						Flight::render("partials/tab", array("title"=>"Staff research", "id" => "staff-research",  "selected" => false, "content" => Flight::fetch("pg/tabs/staff-research")));
 
-
-						Flight::render("partials/tab", array("title"=>"Enquiries", "id" => "enquiries", "selected" => false, "content" => Flight::fetch("pg/tabs/enquiries")));
 					?>
 				</div>
 		</div>
@@ -113,6 +147,6 @@ if (empty($course->deliveries)) {
 }
 ?>
 
-<?php Flight::render("partials/modals/contact"); ?>
-<?php Flight::render("partials/modals/prospectus"); ?>
+<?php Flight::render("pg/contact-modal"); ?>
+<?php Flight::render("pg/prospectus-modal"); ?>
 <?php Flight::render("pg/apply-modal"); ?>
