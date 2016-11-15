@@ -9,7 +9,7 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 				<div class="content-full">
 					<div class="spaced-links-container">
 						<div class="spaced-links-inner-container links">
-							<span class="text-accent spaced-links-item"><i class="kf-pin"></i> <?php echo $course->locations_str; ?></span>
+							<span class="text-accent spaced-links-item"><i class="kf-pin"></i> <?php echo $course->locations_str_linked; ?></span>
 							<a href="#contact-modal" class="spaced-links-item text-accent" id="contactButton" data-toggle="modal" data-target="#contact-modal"><i class="kf-info-circle"></i> Contact Us</a>
 							<a href="#prospectus-modal" class="spaced-links-item text-accent" id="prospectusButton" data-toggle="modal" data-target="#prospectus-modal"><i class="kf-user"></i> Prospectus</a>
 						</div>

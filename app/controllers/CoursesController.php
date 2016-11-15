@@ -93,6 +93,7 @@ class CoursesController {
 		// Render programme page
 		Flight::setup($year, $level);
 		$course->locations_str = $this->getCourseLocations($course);
+		$course->locations_str_linked = $this->getCourseLocationsLinked($course);
 		$course->award_list	= $this->getCourseAwardList($course);
 		$course->award_list_linked = $this->getCourseAwardListLinked($course);
 
@@ -840,6 +841,22 @@ class CoursesController {
 
 	//to display locations under course heading
 	private function getCourseLocations($course)
+	{
+		$additional_locations =  is_array($course->additional_locations) ? $course->additional_locations : array();
+		$locations = array_merge($course->location, $additional_locations);
+		$locations_count = sizeof($locations);
+
+		$locations_str = '';
+		foreach($locations as $key => $loc){
+			$locations_str .= $loc->url;
+			$locations_str .= ($key === $locations_count-2) ? ' and ' : (($key === $locations_count-1) ? '' : ', ');
+		}
+
+		return $locations_str;
+	}
+
+	//to display locations under course heading
+	private function getCourseLocationsLinked($course)
 	{
 		$additional_locations =  is_array($course->additional_locations) ? $course->additional_locations : array();
 		$locations = array_merge($course->location, $additional_locations);
