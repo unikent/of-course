@@ -33,7 +33,9 @@ tr.collapse.in td{
 .filter-box .search-select select, #course-filter-container input{
 	width: 100%;
 }
-
+.filter-box .search-select select {
+	margin-bottom:.5rem;
+}
 #course-filter-container {
 	position: relative;
 }
