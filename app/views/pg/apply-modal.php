@@ -64,68 +64,72 @@ foreach($course->deliveries as $delivery){
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">×</span>
 				</button>
-				<div class="content-header">
-					<h2 class="modal-title">Apply Now</h2>
-					<?php if (!$noneUniqueDeliveryFound){ ?>
-							<?php
-							if (!$has_parttime){
-								?>
-								<input type="hidden" id="type" value="full-time">
-								<?php
-							} elseif (!$has_fulltime) {
-								?>
-								<input type="hidden" id="type" value="part-time">
-								<?php
-							}else{
-								?>
-								<div class="form-group">
-									<div class="controls">
-										<select class="custom-select" name="type" id="type" required="required">
-											<?php
-											if ($has_fulltime && $has_parttime){
-												?>
-												<option value="pleaseselect">Please select</option>
-												<?php
-											}
-											if($has_fulltime){
-												?>
-												<option value="full-time selected">Full-time - <?php $course->year; ?></option>
-												<?php
-											}
-											if($has_parttime){
-												?>
-												<option value="part-time">Part-time - <?php $course->year; ?></option>
-												<?php
-											}
-											?>
-										</select>
-									</div>
-								</div>
-								<?php
-							}
-							?>
-							<?php if (sizeof($course->award) === 1){ ?>
-								<input type="hidden" id="award" value="<?php echo strtolower(str_replace(' ', '', $course->award[0]->name)) ?>">
-							<?php }else{ ?>
-								<div class="form-group">
-									<div class="controls">
-										<select class="custom-select" name="award" id="award" required="required">
-											<option value="pleaseselect">Please select</option>
-											<?php foreach ($course->award as $award){ ?>
-												<option
-													value="<?php echo strtolower(str_replace(' ', '', $award->name)) ?>"><?php echo $award->name ?></option>
-											<?php } ?>
-										</select>
-									</div>
-								</div>
+				<div class="container px-2">
+					<div class="row">
+						<div class="col-md-10">
+							<h2 class="modal-title">Apply Now</h2>
+							<?php if (!$noneUniqueDeliveryFound){ ?>
+									<?php
+									if (!$has_parttime){
+										?>
+										<input type="hidden" id="type" value="full-time">
+										<?php
+									} elseif (!$has_fulltime) {
+										?>
+										<input type="hidden" id="type" value="part-time">
+										<?php
+									}else{
+										?>
+										<div class="form-group">
+											<div class="controls">
+												<select class="custom-select" name="type" id="type" required="required">
+													<?php
+													if ($has_fulltime && $has_parttime){
+														?>
+														<option value="pleaseselect">Please select</option>
+														<?php
+													}
+													if($has_fulltime){
+														?>
+														<option value="full-time selected">Full-time<?php $course->year; ?></option>
+														<?php
+													}
+													if($has_parttime){
+														?>
+														<option value="part-time">Part-time<?php $course->year; ?></option>
+														<?php
+													}
+													?>
+												</select>
+											</div>
+										</div>
+										<?php
+									}
+									?>
+									<?php if (sizeof($course->award) === 1){ ?>
+										<input type="hidden" id="award" value="<?php echo strtolower(str_replace(' ', '', $course->award[0]->name)) ?>">
+									<?php }else{ ?>
+										<div class="form-group">
+											<div class="controls">
+												<select class="custom-select" name="award" id="award" required="required">
+													<option value="pleaseselect">Please select</option>
+													<?php foreach ($course->award as $award){ ?>
+														<option
+															value="<?php echo strtolower(str_replace(' ', '', $award->name)) ?>"><?php echo $award->name ?></option>
+													<?php } ?>
+												</select>
+											</div>
+										</div>
+									<?php } ?>
+									<input type="hidden" id="year" value="<?php echo $course->year; ?>">
 							<?php } ?>
-							<input type="hidden" id="year" value="<?php echo $course->year; ?>">
-					<?php } ?>
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="modal-body">
-				<div class="content-container">
-					<div class="content-main">
+			<div class="modal-body container px-2 py-1">
+				<div class="row">
+					<div class="col-lg-8">
 						<?php
 						// How to apply 53 is "How to apply (atypical courses)".
 						// When this field is populated, show only its contents, not the standard apply text.
@@ -190,7 +194,7 @@ foreach($course->deliveries as $delivery){
 							</noscript>
 						<?php } ?>
 					</div>
-					<aside class="content-aside">
+					<div class="col-lg-4">
 							<a type="button" id="apply-link-dummy" class="btn btn-large btn-secondary chevron-link next-btn apply-link-courses disabled"
 							   tabindex="0" role="button" data-toggle="tooltip" data-placement="right"
 							   title="Please select your course options above">Apply </a>
@@ -215,7 +219,7 @@ foreach($course->deliveries as $delivery){
 						<?php } ?>
 
 						<p>Our application system (Kent Vision) allows you to save and return to your application at any time.</p>
-					</aside>
+					</div>
 				</div>
 			</div>
 		</div>
