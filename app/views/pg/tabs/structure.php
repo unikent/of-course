@@ -36,15 +36,17 @@ foreach ($course->modules as $module) {
 		<?php
 		$course->module_list = empty($course->module_list)?array():$course->module_list;
 		foreach ($course->module_list as $module): ?>
-			<tr class="module-row" data-toggle="collapse" data-target="#<?php echo $module->sds_code; ?>-more">
-				<td><span class="text-primary"><?php echo $module->sds_code ?> - <?php echo $module->module_title ?></span></td>
+			<tr class="module-row collapsed" data-toggle="collapse" data-target="#<?php echo $module->sds_code; ?>-more">
+				<td><span id="<?php echo $module->sds_code ?>" class="module-title"><?php echo $module->sds_code ?> - <?php echo $module->module_title ?></span></td>
 				<td class="text-xs-center"><?php echo $module->credit_amount; ?></td>
 				<td class="text-xs-center"><?php echo $module->ects_credit ?></td>
 			</tr>
-			<tr id="<?php echo $module->sds_code; ?>-more" class="collapse" data-toggle="collapse" data-target="#<?php echo $module->sds_code; ?>-more">
+			<tr id="<?php echo $module->sds_code; ?>-more" class="collapse">
 				<td class="more" colspan="3">
-					<p><?php echo preg_replace("/\n/",'</p><p>',preg_replace('/[\r\n]+/', "\n", preg_replace('/<br\s*\/?>/',"\n",$module->synopsis))); ?></p>
-					<a class="chevron-link" href="http://www.kent.ac.uk/courses/modules/module/<?php echo $module->sds_code ?>">Read more</a>
+					<div data-toggle="collapse" data-target="#<?php echo $module->sds_code; ?>-more">
+						<p><?php echo preg_replace("/\n/",'</p><p>',preg_replace('/[\r\n]+/', "\n", preg_replace('/<br\s*\/?>/',"\n",$module->synopsis))); ?></p>
+					</div>
+					<a aria-labelledby="#<?php echo $module->sds_code ?>" class="chevron-link d-block" href="/courses/modules/module/<?php echo $module->sds_code ?>">Read more</a>
 				</td>
 			</tr>
 	<?php endforeach; ?>

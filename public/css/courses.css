@@ -5,11 +5,26 @@
 tr.module-row{
     cursor: pointer;
 }
+tr.module-row .module-title{
+    color:  #005689;
+}
+
+tr.module-row .module-title:before{
+    padding-right: .5rem;
+    font-family: "kentfont", sans-serif;
+    content: "\f106"
+}
+
+tr.module-row.collapsed .module-title:before{
+    content: "\f107";
+}
+
 
 tr td.more{
     font-size: .9rem;
     padding: 0 1rem 1rem;
 }
+
 tr.collapsing td,
 tr.collapse.in td{
     border-top:0;
