@@ -18,11 +18,7 @@
 	<?php endif; ?>
 
 <?php endif;?>
-<?php if(isset($course) && $course->current_year > $course->year): ?>
-	<div class="alert alert-warning">
-		This is a <?php echo $course->year;?> entry programme. Would you like to <a href='<?php echo $meta['active_instance']; ?>'> view <?php echo $course->programme_title;?> for <?php echo $course->current_year;?> entry?</a>
-	</div>
-<?php elseif(isset($course) && $course->current_year < $course->year): ?>
+<?php if(isset($course) && $course->current_year < $course->year): ?>
 	<div class="alert alert-warning">
 		You are currently viewing a programme for an upcoming academic year. This data is preview ONLY and may not be representative of any course offered by this institution.
 	</div>

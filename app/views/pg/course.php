@@ -23,7 +23,7 @@
 								id="applyButton"
 								data-toggle="modal"
 								data-target="#apply-modal"
-						>Apply now</button>
+						>Apply now for <?php echo $course->year?></button>
 					<?php endif; ?>
 				</div>
 			</div>

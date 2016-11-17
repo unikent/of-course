@@ -9,6 +9,11 @@
 	<li><i class="kf-calendar"></i> Start date
 		<ul>
 			<li><?php echo $course->start ?></li>
+			<?php if(isset($course) && $course->current_year > $course->year): ?>
+				<li>
+					<a href='<?php echo $meta['active_instance']; ?>'> Starting in <?php echo $course->current_year;?>?</a>
+				</li>
+			<?php endif ?>
 		</ul>
 	</li>
 	<li><i class="kf-clock"></i> Duration
