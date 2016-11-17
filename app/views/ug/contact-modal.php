@@ -6,11 +6,17 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
-                <h3 class="modal-title">Contact us</h3>
+				<div class="container">
+					<div class="row">
+						<div class="col-md-10">
+               				 <h2 class="modal-title">Contact us</h2>
+						</div>
+					</div>
+				</div>
             </div>
-            <div class="modal-body">
-				<div class="content-container">
-					<div class="content-full">
+            <div class="modal-body container">
+					<div class="row">
+						<div class="col-md-12">
 				<?php
 				$year_for_url = empty($year) ? '' : ((strcmp($year, CoursesController::$current_year) == 0) ? '' : $year . '/');
 				$has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
@@ -58,6 +64,7 @@
 			<h3>General Enquiries</h3>
 			<?php echo $course->enquiries ?>
 						</div>
+					</div>
 					</div>
             </div>
         </div>
