@@ -65,7 +65,7 @@ use \unikent\kent_theme\kentThemeHelper;
 		<div class="card-panel-header">
 			<h2 class="card-panel-title">Related to this course</h2>
 		</div>
-		<div class="card-panel-body kent-slider" data-slider-config="related_courses">
+		<div class="card-panel-body kent-slider" data-slider-config="card_panel">
 			<?php foreach ($course->related_courses as $related_course): ?>
 
 				<div class="card card-linked kent-slide ">
