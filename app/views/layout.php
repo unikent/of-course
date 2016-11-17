@@ -14,21 +14,22 @@ $shared = array(
 	);
 
 $undergraduate = array(
-	'title' => "Undergraduate courses",
+	'title' => "Undergraduate courses " . (isset($course) ? $course->year : ''),
 	'menu' => array(
-		'Home' => 'https://beta-test.kent.ac.uk/courses/',
-		'Course Listing' => 'https://beta-test.kent.ac.uk/courses/undergraduate/search',
-		'Choosing your course' => 'https://beta-test.kent.ac.uk',
-		'How to apply' => 'https://beta-test.kent.ac.uk',
-		'Planning your career' => 'https://beta-test.kent.ac.uk',
-		'Student Profiles' => 'https://beta-test.kent.ac.uk',
+		'Course listing' => '/courses/undergraduate/search',
+		'Academic life' => '/courses/undergraduate/academic-life',
+		'Student experience' => '/courses/undergraduate/student-experience',
+		'How to apply' => '/courses/undergraduate/how-to-apply',
+		'Accommodation' => '/courses/undergraduate/accommodation',
+		'Visit us' => '/courses/undergraduate/visit-us',
+		'Fees and funding' => '/courses/undergraduate/fees-and-funding',
 
 	),
 	'theme' => false
 );
 
 $postgraduate = array(
-	'title' => "Postgraduate courses",
+	'title' => "Postgraduate courses " . (isset($course) ? $course->year : ''),
 	'menu' => array(
 		'Home' => 'https://beta-test.kent.ac.uk/courses/',
 		'Course Listing' => 'https://beta-test.kent.ac.uk/courses/undergraduate/search',
