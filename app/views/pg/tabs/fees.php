@@ -1,7 +1,7 @@
 <?php if (isset($course->no_fee_output) && $course->no_fee_output === 'true'): ?>
 	<!-- Do nothing -->
 <?php else: ?>
-	<h2>Fees and funding</h2>
+	<h2>Fees</h2>
 	<!-- fees panel -->
 	<?php if (isset($course->globals->fees_override_pgr) && !empty($course->globals->fees_override_pgr) && strpos($course->programme_type, 'research') !== false) {
 		echo $course->globals->fees_override_pgr;
@@ -59,3 +59,7 @@
 		?>
 	<?php } ?>
 <?php endif; ?>
+<?php if(!empty($course->fees_and_funding)){ ?>
+<h2>Funding</h2>
+	<?php echo $course->fees_and_funding; ?>
+<?php } ?>

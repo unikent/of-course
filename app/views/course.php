@@ -65,15 +65,14 @@ use \unikent\kent_theme\kentThemeHelper;
 		<div class="card-panel-header">
 			<h2 class="card-panel-title">Related to this course</h2>
 		</div>
-		<div class="card-panel-body kent-slider" data-slider-config="related_courses">
+		<div class="card-panel-body kent-slider" data-slider-config="card_panel">
 			<?php foreach ($course->related_courses as $related_course): ?>
 
 				<div class="card card-linked kent-slide ">
 					<a href="<?php echo Flight::url("{$level}/{$related_course->id}/{$related_course->slug}"); ?>" class="card-title-link"><h3 class="card-title"><?php echo $related_course->name ?> <?php echo !empty($related_course->programmme_status_text) ? $related_course->programmme_status_text : ''; ?> <?php echo $related_course->award; ?></h3></a>
-					<p class="card-meta"><?php echo $related_course->mode_of_study; ?></p>
-					<p class="card-meta"><?php echo $related_course->campus; ?></p>
-					<hr>
 					<a href="<?php echo Flight::url("{$level}/{$related_course->id}/{$related_course->slug}"); ?>" class="faux-link-overlay" aria-hidden="true"><?php echo $related_course->name ?> <?php echo !empty($related_course->programmme_status_text) ? $related_course->programmme_status_text : ''; ?> <?php echo $related_course->award; ?></a>
+					<p class="card-meta text-accent"><i class="kf-clock kf-fw"></i> <?php echo $related_course->mode_of_study; ?></p>
+					<p class="card-meta text-accent"><i class="kf-pin kf-fw"></i> <?php echo $related_course->campus; ?></p>
 				</div>
 			<?php endforeach; ?>
 
