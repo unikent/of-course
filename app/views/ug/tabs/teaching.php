@@ -1,4 +1,4 @@
-<h2>Teaching &amp; Assessment</h2>
+<h2>Teaching and assessment</h2>
 <?php echo $course->teaching_and_assessment; ?>
 
 <?php if(!empty($course->programme_aims)): ?>
