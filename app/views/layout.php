@@ -40,6 +40,35 @@ $postgraduate = array(
 	'theme' => 'postgraduate'
 );
 
+if(isset($profile) && !empty($profile)){
+
+	$undergraduate = array(
+		'title' => "Undergraduate Student Profiles",
+		'menu' => array(
+			'Courses' => '/courses/undergraduate/search',
+			'Academic life' => '/courses/undergraduate/academic-life',
+			'Student experience' => '/courses/undergraduate/student-experience',
+			'How to apply' => '/courses/undergraduate/how-to-apply',
+			'Accommodation' => '/courses/undergraduate/accommodation',
+			'Visit us' => '/courses/undergraduate/visit-us',
+			'Fees and funding' => '/courses/undergraduate/fees-and-funding',
+
+		),
+		'theme' => false
+	);
+
+	$postgraduate = array(
+		'title' => "Postgraduate Student Profiles",
+		'menu' => array(
+			'Courses' => '/courses/postgraduate/search',
+			'Why Kent?' => '/courses/postgraduate/why-kent/',
+			'Taught / Master\'s' => '/courses/postgraduate/taught-masters/',
+			'Research / PhDs' => '/courses/postgraduate/research-phds/',
+			'Funding' => '/courses/postgraduate/fees-and-funding/',
+		),
+		'theme' => 'postgraduate'
+	);
+}
 
 if($level == 'postgraduate') {
 	KentThemeHelper::header(

@@ -3,7 +3,7 @@ use \unikent\kent_theme\kentThemeHelper;
 
 KentThemeHelper::header(
 	array(
-		'title' => "Courses",
+		'title' => "Module Catalogue",
 		'menu' => array(
 			'Home' => 'https://beta-test.kent.ac.uk/courses/',
 			'Modules listing' => 'https://beta-test.kent.ac.uk/courses/modules',

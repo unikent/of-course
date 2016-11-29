@@ -901,6 +901,38 @@ class CoursesController {
 		return rtrim($award_list, ', ');
 	}
 
+	public function profiles($level){
+		try{
+			$profile = static::$pp->make_request($level . '/profile');
+		}catch(\Exception $e){
+			return Flight::notFound();
+		}
+
+		$level_pretty = $level=='undergraduate'? 'Undergraduate' : 'Postgraduate';
+
+		$meta = array(
+			'title' => $level_pretty  . ' Student Profiles | The University of Kent',
+			'description' => ''
+		);
+
+		return Flight::layout('profiles', array('meta' => $meta, 'profile'=> $profile));
+	}
+
+	public function profile($level,$idOrSlug){
+		try{
+			$profile = static::$pp->make_request( $level . '/profile/' . $idOrSlug);
+		}catch(\Exception $e){
+			return Flight::notFound();
+		}
+
+		$meta = array(
+			'title' => 'Student Profile | ' . $profile->name . ' | The University of Kent',
+			'description' => $profile->lead,
+		);
+
+		return Flight::layout('profile', array('meta' => $meta, 'level'=> $level, 'profile'=> $profile));
+	}
+
 
 
 }
