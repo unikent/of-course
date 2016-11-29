@@ -67,3 +67,14 @@ tr.collapse.in td{
 .sidebar li i{
     line-height: 1.5rem;
 }
+
+.card.card-overlay.student-profiles{
+    margin-top:4rem;
+    margin-bottom: 1.5rem;
+}
+
+.student-profiles .slick-list,
+.student-profiles .slick-track
+{
+    overflow: visible;
+}

@@ -73,23 +73,7 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 			</div>
 		</div>
 
-	<div class="card card-overlay pt-4">
-	<div class="card-body">
-		<div class="card-title-wrap card-title-wrap-link">
-			<a href="https://www.kent.ac.uk/research/" class="card-title-link">
-				<h2 class="card-title">Student Profile</h2>
-			</a>
-			<h2 class="card-title" style="color:#fff">Helen Shrew</h2>
-			<p class="card-text">Some text here about the student profile etc..</p>
-		</div>
-		<div class="card-media-wrap">
-			<img src="/media/images/undergrad-discussion-library-16x9.jpg" class="card-img" alt="Students chatting in the library">
-		</div>
-		<div class="card-img-overlay-bottom text-xs-right">
-			<h3 class="card-subtitle"><?php echo $course->programme_title; ?> - <?php echo $course->award_list_linked; ?></h3>
-		</div>
-	</div>
-	</div>
+<?php Flight::render("partials/profile-feature"); ?>
 	<div class="content-container">
 		<div class="content-full">
 			<?php if ($course->kiscourseid != '' && $course->programme_suspended != 'true'): ?>
