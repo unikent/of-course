@@ -18,7 +18,7 @@ if(!empty($profile->video)){
 ?>
 <div class="card card-overlay header-card-overlay  ">
 	<div class="card-body">
-		<div class="card-media-wrap<?php echo $profile->video?' video-launcher':''; ?>'"<?php echo $profile->video?' data-mode="fullscreen"':''; ?>>
+		<div class="card-media-wrap<?php echo $profile->video?' video-launcher':''; ?>"<?php echo $profile->video?' data-mode="fullscreen"':''; ?>>
 			<?php if($profile->video){ ?>
 			<div class="video-player">
 				<div data-video-id="<?php echo $profile->video; ?>" data-type="youtube">&nbsp;</div>
