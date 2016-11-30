@@ -36,10 +36,10 @@ tr.collapse.in td{
 .filter-box .search-select select {
 	margin-bottom:.5rem;
 }
-#course-filter-container {
+#course-filter-container, #profile-filter-container {
 	position: relative;
 }
-#course-filter-container::before {
+#course-filter-container::before, #profile-filter-container::before {
 	content: "";
 	font-family: "kentfont", sans-serif;
 	font-size: 20px;
@@ -77,4 +77,24 @@ tr.collapse.in td{
 .student-profiles .slick-track
 {
     overflow: visible;
+}
+
+.profile-filter-box #profile-filter-container input {
+	padding-left:35px;
+}
+
+@media (min-width: 768px){
+	.profile-filter-box#filter_box div {
+		display:inline-block;
+		vertical-align: top;
+	}
+	.profile-filter-box#filter_box div select{
+		width: 200px;
+	}
+	.profile-filter-box#filter_box #profile-filter-container {
+		width:40%;
+	}
+	.profile-filter-box#filter_box #profile-filter-container input {
+		width: 100%;
+	}
 }
