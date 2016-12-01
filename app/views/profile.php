@@ -25,10 +25,31 @@ if(!empty($profile->video)){
 			</div>
 			<?php } ?>
 			<img class="card-img" src="<?php echo $banner_image; ?>" alt="<?php echo $banner_image_alt; ?>">
-			<div class="attribution">
-				<i class="kf-camera"></i>
-				<span><a href="" aria-expanded="true">Image title</a>. <a href="" class="active" aria-expanded="true">Attribution License</a></span>
-			</div>
+			<?php if(!empty($profile->banner_image_id) && (!empty($profile->banner_image_id->attribution_text) || !empty($profile->banner_image_id->licence_link))){
+
+				$attribution = '<div class="attribution"><i class="kf-camera"></i><span class="attribution-text">';
+				if(!empty($profile->banner_image_id->title)) {
+					$attribution .= $profile->banner_image_id->title . ' : ';
+				}
+				if(!empty($profile->banner_image_id->attribution_text)){
+						$attribution .= 'Picture by ';
+						if(!empty($profile->banner_image_id->attribution_link)) {
+							$attribution .= '<a href="' . $profile->banner_image_id->attribution_link . '">';
+						}
+					$attribution .= $profile->banner_image_id->attribution_text;
+					if(!empty($profile->banner_image_id->attribution_link)) {
+						$attribution .= '</a>';
+					}
+					$attribution .= '.';
+				}
+				if(!empty($profile->banner_image_id->licence_link)) {
+					$attribution .= ' <a href="' . $profile->banner_image_id->licence_link . '">Licence</a>';
+				}
+				$attribution .= '</span></div>';
+			 echo $attribution;
+
+			}
+			?>
 		</div>
 		<div class="card-title-wrap force-block content-contained pull-bottom ">
 			<h1 class="card-title">Student Profile
