@@ -2,7 +2,7 @@
 
 	<?php \unikent\kent_theme\kentThemeHelper::breadcrumb(array("Profiles"=>"/profiles/", $level_pretty=>"")); ?>
 
-	<h1><?php echo $level_pretty; ?> profiles</h1>
+	<h1><?php echo $level_pretty; ?> student profiles</h1>
 
 	<ul class="nav nav-tabs  pt-1">
 		<li class="nav-item">
@@ -21,7 +21,7 @@
 					id="profile-filter" 
 					class="form-control" 
 					type="text" 
-					placeholder="Search courses"
+					placeholder="Search student profiles"
 					data-quickspot-config="<?php echo $level_code;?>_profiles_inline"
 					data-quickspot-target="quickspot-output"
 					data-quickspot-filters="filter_box"
