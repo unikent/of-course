@@ -903,19 +903,34 @@ class CoursesController {
 
 	public function profiles($level){
 		try{
-			$profile = static::$pp->make_request($level . '/profile');
+			$profiles = static::$pp->make_request($level . '/profile');
+			$cats = static::$pp->get_subjectcategories($level);
 		}catch(\Exception $e){
 			return Flight::notFound();
 		}
 
-		$level_pretty = $level=='undergraduate'? 'Undergraduate' : 'Postgraduate';
+		switch ($level) {
+			case "undergraduate":
+				$level_pretty = 'Undergraduate';
+				$level_code = 'ug';
+			break;
+			default:
+				$level_pretty = 'Postgraduate';
+				$level_code = 'pg';
+		}
 
 		$meta = array(
 			'title' => $level_pretty  . ' Student Profiles | The University of Kent',
 			'description' => ''
 		);
 
-		return Flight::layout('profiles', array('meta' => $meta, 'profile'=> $profile));
+		return Flight::layout('profiles', array('meta' => $meta, 
+				'profiles'=> $profiles,
+			 	'level' => $level, 
+			 	'level_code'=>$level_code,
+			 	'level_pretty'=>$level_pretty,
+			  	'categories' => $cats
+		));
 	}
 
 	public function profile($level,$idOrSlug){
