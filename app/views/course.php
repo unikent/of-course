@@ -13,6 +13,31 @@ use \unikent\kent_theme\kentThemeHelper;
 				$banner_image_alt = 'Students preparing for their graduation ceremony at Canterbury Cathedral';
 			}?>
 			<img class="card-img<?php echo (isset($course->banner_image) && !empty($course->banner_image) && in_array($course->banner_image->focus, array('top','bottom')))? '-' . $course->banner_image->focus : ''; ?>" src="<?php echo $banner_image; ?>" alt="<?php echo $banner_image_alt; ?>">
+			<?php if(isset($course->banner_image) && !empty($course->banner_image) && (!empty($course->banner_image->attribution->author) || !empty($course->banner_image->attribution->license))){
+
+				$attribution = '<div class="attribution"><i class="kf-camera"></i><span class="attribution-text">';
+				if(!empty($course->banner_image->title)) {
+					$attribution .= $course->banner_image->title . ' : ';
+				}
+				if(!empty($course->banner_image->attribution->author)){
+					$attribution .= 'Picture by ';
+					if(!empty($course->banner_image->attribution->link)) {
+						$attribution .= '<a href="' . $course->banner_image->attribution->link . '">';
+					}
+					$attribution .= $course->banner_image->attribution->author;
+					if(!empty($course->banner_image->attribution->link)) {
+						$attribution .= '</a>';
+					}
+					$attribution .= '.';
+				}
+				if(!empty($course->banner_image->attribution->license)) {
+					$attribution .= ' <a href="' . $course->banner_image->attribution->license . '">Licence</a>';
+				}
+				$attribution .= '</span></div>';
+				echo $attribution;
+
+			}
+			?>
 		</div>
 		<div class="card-title-overlap overlap-content-container">
 			<?php
