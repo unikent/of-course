@@ -2,7 +2,7 @@
 <div class="card card-overlay student-profiles">
 	<div class="card-body kent-slider kent-slider-dark">
 		<?php foreach($course->student_profiles as $profile){
-			$banner_image = (empty($profile->banner_image_id)) ? Flight::asset('images/default-profile-feature.jpg') : $profile->banner_image_id->url;
+			$banner_image = (empty($profile->banner_image_id)) ? Flight::asset('images/default-profile-feature.jpg') : $profile->banner_image_id->sizes->full->url;
 			$banner_image_alt = (empty($profile->banner_image_id)) ?'Students preparing for their graduation ceremony at Canterbury Cathedral' : $profile->banner_image_id->caption;
 		?>
 		<div class="kent-slide">

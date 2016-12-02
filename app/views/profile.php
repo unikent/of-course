@@ -1,7 +1,7 @@
 <?php 
 use \unikent\kent_theme\kentThemeHelper;
 
-$banner_image = (empty($profile->banner_image_id)) ? Flight::asset('images/default-profile-feature.jpg') : $profile->banner_image_id->url;
+$banner_image = (empty($profile->banner_image_id)) ? Flight::asset('images/default-profile-feature.jpg') : $profile->banner_image_id->sizes->full->url;
 $banner_image_alt = (empty($profile->banner_image_id)) ?'Students preparing for their graduation ceremony at Canterbury Cathedral' : $profile->banner_image_id->caption;
 
 
@@ -25,25 +25,25 @@ if(!empty($profile->video)){
 			</div>
 			<?php } ?>
 			<img class="card-img<?php echo (!empty($profile->banner_image_id) && in_array($profile->banner_image_id->focus, array('top','bottom')))? '-' . $profile->banner_image_id->focus : ''; ?>" src="<?php echo $banner_image; ?>" alt="<?php echo $banner_image_alt; ?>">
-			<?php if(!empty($profile->banner_image_id) && (!empty($profile->banner_image_id->attribution_text) || !empty($profile->banner_image_id->licence_link))){
+			<?php if(!empty($profile->banner_image_id) && (!empty($profile->banner_image_id->attribution->author) || !empty($profile->banner_image_id->attribution->license))){
 
 				$attribution = '<div class="attribution"><i class="kf-camera"></i><span class="attribution-text">';
 				if(!empty($profile->banner_image_id->title)) {
 					$attribution .= $profile->banner_image_id->title . ' : ';
 				}
-				if(!empty($profile->banner_image_id->attribution_text)){
+				if(!empty($profile->banner_image_id->attribution->author)){
 						$attribution .= 'Picture by ';
-						if(!empty($profile->banner_image_id->attribution_link)) {
-							$attribution .= '<a href="' . $profile->banner_image_id->attribution_link . '">';
+						if(!empty($profile->banner_image_id->attribution->link)) {
+							$attribution .= '<a href="' . $profile->banner_image_id->attribution->link . '">';
 						}
-					$attribution .= $profile->banner_image_id->attribution_text;
-					if(!empty($profile->banner_image_id->attribution_link)) {
+					$attribution .= $profile->banner_image_id->attribution->author;
+					if(!empty($profile->banner_image_id->attribution->link)) {
 						$attribution .= '</a>';
 					}
 					$attribution .= '.';
 				}
-				if(!empty($profile->banner_image_id->licence_link)) {
-					$attribution .= ' <a href="' . $profile->banner_image_id->licence_link . '">Licence</a>';
+				if(!empty($profile->banner_image_id->attribution->license)) {
+					$attribution .= ' <a href="' . $profile->banner_image_id->attribution->license . '">Licence</a>';
 				}
 				$attribution .= '</span></div>';
 			 echo $attribution;
