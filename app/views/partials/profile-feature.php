@@ -13,7 +13,7 @@
 				<p class="card-text"><?php echo $profile->course; ?></p>
 			</div>
 			<div class="card-media-wrap">
-				<img src="<?php echo $banner_image ?>" class="card-img" alt="<?php echo $banner_image_alt; ?>">
+				<img src="<?php echo $banner_image ?>" class="card-img<?php echo (!empty($profile->banner_image_id) && in_array($profile->banner_image_id->focus, array('top','bottom')))? '-' . $profile->banner_image_id->focus : ''; ?>" alt="<?php echo $banner_image_alt; ?>">
 			</div>
 			<?php if(!empty($profile->quote)){ ?>
 			<div class="card-img-overlay-bottom-shaded card-overlay-inline-md">

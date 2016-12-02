@@ -24,7 +24,7 @@ if(!empty($profile->video)){
 				<div data-video-id="<?php echo $profile->video; ?>" data-type="youtube">&nbsp;</div>
 			</div>
 			<?php } ?>
-			<img class="card-img" src="<?php echo $banner_image; ?>" alt="<?php echo $banner_image_alt; ?>">
+			<img class="card-img<?php echo (!empty($profile->banner_image_id) && in_array($profile->banner_image_id->focus, array('top','bottom')))? '-' . $profile->banner_image_id->focus : ''; ?>" src="<?php echo $banner_image; ?>" alt="<?php echo $banner_image_alt; ?>">
 			<?php if(!empty($profile->banner_image_id) && (!empty($profile->banner_image_id->attribution_text) || !empty($profile->banner_image_id->licence_link))){
 
 				$attribution = '<div class="attribution"><i class="kf-camera"></i><span class="attribution-text">';
