@@ -85,7 +85,7 @@ if(!empty($profile->video)){
 		<h2 class="sr-only">Quote <?php echo $profile->name; ?></h2>
 		<blockquote class="text-accent">
 			<?php if(!empty($profile->profile_image_id)){ ?>
-			<img src="<?php echo $profile->profile_image_id->url; ?>" class="rounded-circle" alt="<?php echo $profile->name; ?>">
+			<img src="<?php echo $profile->profile_image_id->sizes->full->url; ?>" class="rounded-circle" alt="<?php echo $profile->name; ?>">
 			<?php } ?>
 			<?php echo $profile->quote; ?>
 			<cite><?php echo $profile->name; ?></cite>
