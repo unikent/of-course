@@ -5,7 +5,14 @@ use \unikent\kent_theme\kentThemeHelper;
 <div class="card card-overlay header-card-overlay">
 	<div class="card-body">
 		<div class="card-media-wrap">
-			<img class="card-img" src="/media/images/paintbrush-16x9.jpg">
+			<?php if(isset($course->banner_image) && !empty($course->banner_image)){
+				$banner_image = $course->banner_image->sizes->full->url;
+				$banner_image_alt = $course->banner_image->alt_text;
+			}else{
+				$banner_image = Flight::asset('images/default-profile-feature.jpg');
+				$banner_image_alt = 'Students preparing for their graduation ceremony at Canterbury Cathedral';
+			}?>
+			<img class="card-img<?php echo (isset($course->banner_image) && !empty($course->banner_image) && in_array($course->banner_image->focus, array('top','bottom')))? '-' . $course->banner_image->focus : ''; ?>" src="<?php echo $banner_image; ?>" alt="<?php echo $banner_image_alt; ?>">
 		</div>
 		<div class="card-title-overlap overlap-content-container">
 			<?php
