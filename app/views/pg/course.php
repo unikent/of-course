@@ -23,7 +23,7 @@
 								id="applyButton"
 								data-toggle="modal"
 								data-target="#apply-modal"
-						>Apply now for <?php echo $course->year?></button>
+						>Apply now</button>
 					<?php endif; ?>
 				</div>
 			</div>
@@ -40,6 +40,7 @@
 			?>
 
 			<?php Flight::render("partials/notices"); ?>
+
 		</div>
 	</div>
 
