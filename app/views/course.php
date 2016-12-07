@@ -53,8 +53,20 @@ use \unikent\kent_theme\kentThemeHelper;
 </div>
 
 <?php if ($course->programme_suspended == 'true' || $course->programme_withdrawn == 'true' || $course->holding_message != ''){
-		//suppress content if holding message text filled in
-		echo $course->holding_message;
+?>
+
+<div class="content-body">
+	<div class="content-container">
+		<div class="content-full">
+		<?php
+			//suppress content if holding message text filled in
+			echo $course->holding_message;
+		?>
+		</div>
+	</div>
+</div>
+
+<?php
 } else{
 	Flight::render($layout . "/course");
 }
