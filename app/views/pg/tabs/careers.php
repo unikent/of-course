@@ -12,3 +12,7 @@
 		<?php echo $course->professional_recognition ?>
 	</section>
 <?php endif; ?>
+
+<?php if(!empty($course->careers_profile) && is_array($course->careers_profile)){
+	Flight::render("partials/profile-quote");
+} ?>
