@@ -1,5 +1,6 @@
 <?php
-$profile = $course->careers_profile[0];
+foreach($course->careers_profile as $profile){
+
 if(!empty($profile->quote)){
 	$profile_image = (!empty($profile->profile_image_id)) ? $profile->profile_image_id->sizes->full->url :  false;
 ?>
@@ -10,4 +11,4 @@ if(!empty($profile->quote)){
 	<span><?php echo $profile->course; ?></span>
 	</cite>
 </blockquote>
-<?php  }
+<?php  }}
