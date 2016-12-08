@@ -5,6 +5,10 @@
 <?php echo $course->globals->careersemployability_text; ?>
 <?php endif; ?>
 
+<?php if(!empty($course->careers_profile) && is_array($course->careers_profile)){
+	Flight::render("partials/profile-quote");
+} ?>
+
 <?php if(!empty($course->professional_recognition)): ?>
 <section class="info-section">
 	<h3>Professional recognition</h3>
