@@ -1,8 +1,8 @@
 <h2>Overview</h2>
 
 <?php
-
-if(empty(trim($course->programme_synopsis))){
+$syn = trim($course->programme_synopsis);
+if(empty($syn)){
 	preg_match('%<p[^>]*>(.*?)</p>%i', $course->schoolsubject_overview, $regs);
 	echo str_replace($regs[0], '', $course->schoolsubject_overview);
 } else {
