@@ -50,10 +50,10 @@ if (empty($course->deliveries)) {
 												<option value="pleaseselect">Please select</option>
 											<?php } ?>
 											<?php if ($has_fulltime){ ?>
-												<option value="full-time-ug-<?php echo $full_type ?>" selected>Full-time</option>
+												<option value="full-time-ug-<?php echo $full_type ?>" selected>Full-time - <?php echo $course->year ?></option>
 											<?php } ?>
 											<?php if ($has_parttime){ ?>
-												<option value="part-time" <?php if(isset($_GET['part_time'])){ ?>selected<?php }?>>Part-time</option>
+												<option value="part-time" <?php if(isset($_GET['part_time'])){ ?>selected<?php }?>>Part-time - <?php echo $course->year ?></option>
 											<?php } ?>
 										</select>
 									</div>
