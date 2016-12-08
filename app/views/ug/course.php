@@ -34,7 +34,20 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 						</div>
 					</div>
 
-					
+					<div class="lead">
+						<?php
+						$syn = trim($course->programme_synopsis);
+						if(empty($syn)):
+							if (preg_match('%<p[^>]*>(.*?)</p>%i', $course->programme_overview_text, $regs)):?>
+								<p class="lead">
+									<?php echo$regs[1] ?>
+								</p>
+							<?php endif; ?>
+						<?php else: ?>
+							<?php echo $course->programme_synopsis  ?>
+						<?php endif; ?>
+
+					</div>
 					<?php Flight::render("partials/notices"); ?>
 				</div>
 			</div>
