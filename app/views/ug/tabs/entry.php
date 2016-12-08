@@ -68,23 +68,12 @@
 	<section class="info-section">
     <h3>International students<a href="/courses/undergrad/apply/entry.html"></a></h3>
     <?php echo $course->international_students_intro_text ?>
-    <table class="table table-striped ug-entry-requirements">
-	<thead>
-      <tr>
-        <th>Qualification</th>
-        <th>Typical offer/minimum requirement</th>
-      </tr>
-	</thead>
-    <tbody>
 
 	<?php if(!empty($course->english_language_requirements)): ?>
-		<tr>
-			<td>English Language Requirements</td>
-			<td><?php echo $course->english_language_requirements ?></td>
-		</tr>
+		<h4>English Language Requirements</h4>
+		<?php echo $course->english_language_requirements ?><
 	<?php endif; ?>
-    </tbody>
-    </table>
+
 	</section>
 	
 	<section class="info-section">
