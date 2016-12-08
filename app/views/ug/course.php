@@ -34,39 +34,7 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 						</div>
 					</div>
 
-					<div class="lead split">
-						<?php
-						$syn = trim($course->programme_synopsis);
-						if(empty($syn)):
-							if (preg_match('%<p[^>]*>(.*?)</p>%i', $course->programme_overview_text, $regs)):?>
-								<p class="lead">
-									<?php echo$regs[1] ?>
-								</p>
-							<?php endif; ?>
-						<?php else: ?>
-							<?php echo $course->programme_synopsis  ?>
-						<?php endif; ?>
-
-						<svg width="2rem" height="6rem" xmlns="http://www.w3.org/2000/svg">
-							<path fill="none" stroke="#937227" d="M30, 0L0,100Z" stroke-width="2" opacity="1"></path>
-						</svg>
-						<div class="current-year">
-							<div class="entry-year"> <?php echo $course->year ?></div>
-							<?php
-							if(sizeof($years->years) > 1):
-								if(isset($course) && $course->current_year > $course->year):
-									?>
-									<div class="current">
-										<a href='<?php echo $meta['active_instance']; ?>'> See <?php echo $course->current_year;?> entry</a>
-									</div>
-								<?php else: ?>
-									<div class="current">
-										<a href='<?php echo $meta['active_instance']; ?>'> See <?php echo array_diff($years->years, [$course->current_year])[0];?> entry</a>
-									</div>
-								<?php endif?>
-							<?php endif ?>
-						</div>
-					</div>
+					
 					<?php Flight::render("partials/notices"); ?>
 				</div>
 			</div>
