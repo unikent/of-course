@@ -29,22 +29,25 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 										id="applyButton"
 										data-toggle="modal"
 										data-target="#apply-modal"
-								>Apply now for <?php echo $course->year ?></button>
+								>Apply now</button>
 							<?php endif; ?>
 						</div>
 					</div>
 
-					<?php
-					$syn = trim($course->programme_synopsis);
-					if(empty($syn)){
-						if (preg_match('%<p[^>]*>(.*?)</p>%i', $course->programme_overview_text, $regs)) {
-							echo '<p class="lead">' . $regs[1] . '</p>';
-						}
-					}else{
-						echo '<div class="lead">' . $course->programme_synopsis . '</div>';
-					}
-					?>
+					<div class="lead">
+						<?php
+						$syn = trim($course->programme_synopsis);
+						if(empty($syn)):
+							if (preg_match('%<p[^>]*>(.*?)</p>%i', $course->programme_overview_text, $regs)):?>
+								<p>
+									<?php echo$regs[1] ?>
+								</p>
+							<?php endif; ?>
+						<?php else: ?>
+							<?php echo $course->programme_synopsis  ?>
+						<?php endif; ?>
 
+					</div>
 					<?php Flight::render("partials/notices"); ?>
 				</div>
 			</div>

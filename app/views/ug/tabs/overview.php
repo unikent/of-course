@@ -1,6 +1,14 @@
 <h2>Overview</h2>
 
-<?php echo $course->programme_overview_text; ?>
+<?php
+
+	if(empty(trim($course->programme_synopsis))){
+		preg_match('%<p[^>]*>(.*?)</p>%i', $course->programme_overview_text, $regs);
+		echo str_replace($regs[0], '', $course->programme_overview_text);
+	} else {
+		echo $course->programme_overview_text;
+	}
+?>
 
 <?php if( !empty($course->about_school) ): ?>
 	<?php echo $course->about_school; ?>
