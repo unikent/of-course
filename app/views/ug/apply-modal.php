@@ -30,7 +30,7 @@ if (empty($course->deliveries)) {
 				<div class="container px-2">
 					<div class="row">
 						<div class="col-md-10">
-					<h2 class="modal-title">Apply Now</h2>
+					<h2 class="modal-title">Apply now</h2>
 						<?php
 							if (!$has_parttime){
 								?>
@@ -50,10 +50,10 @@ if (empty($course->deliveries)) {
 												<option value="pleaseselect">Please select</option>
 											<?php } ?>
 											<?php if ($has_fulltime){ ?>
-												<option value="full-time-ug-<?php echo $full_type ?>" selected>Full-time</option>
+												<option value="full-time-ug-<?php echo $full_type ?>" selected>Full-time - <?php echo $course->year ?></option>
 											<?php } ?>
 											<?php if ($has_parttime){ ?>
-												<option value="part-time" <?php if(isset($_GET['part_time'])){ ?>selected<?php }?>>Part-time</option>
+												<option value="part-time" <?php if(isset($_GET['part_time'])){ ?>selected<?php }?>>Part-time - <?php echo $course->year ?></option>
 											<?php } ?>
 										</select>
 									</div>
@@ -65,7 +65,7 @@ if (empty($course->deliveries)) {
 					</div>
 				</div>
 			</div>
-            <div class="modal-body container px-2 py-1">
+            <div class="modal-body container px-2 py-2">
 				<div class="row">
 					<div class="col-lg-8">
 						<?php if ($course->how_to_apply_atypical_courses != ''){
