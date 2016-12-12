@@ -15,6 +15,7 @@ $shared = array(
 
 $undergraduate = array(
 	'title' => "Undergraduate courses " . (isset($course) ? $course->year : ''),
+    'title_link' => Flight::url('undergraduate'),
 	'menu' => array(
 		'Courses' => '/courses/undergraduate/search',
 		'Academic life' => '/courses/undergraduate/academic-life',
@@ -30,6 +31,7 @@ $undergraduate = array(
 
 $postgraduate = array(
 	'title' => "Postgraduate courses " . (isset($course) ? $course->year : ''),
+	'title_link' => Flight::url('postgraduate'),
 	'menu' => array(
 		'Courses' => '/courses/postgraduate/search',
 		'Why Kent?' => '/courses/postgraduate/why-kent/',
@@ -44,6 +46,7 @@ if(isset($profile) && !empty($profile)){
 
 	$undergraduate = array(
 		'title' => "Undergraduate Student Profiles",
+		'title_link' => Flight::url('undergraduate'),
 		'menu' => array(
 			'Courses' => '/courses/undergraduate/search',
 			'Academic life' => '/courses/undergraduate/academic-life',
@@ -59,6 +62,7 @@ if(isset($profile) && !empty($profile)){
 
 	$postgraduate = array(
 		'title' => "Postgraduate Student Profiles",
+		'title_link' => Flight::url('postgraduate'),
 		'menu' => array(
 			'Courses' => '/courses/postgraduate/search',
 			'Why Kent?' => '/courses/postgraduate/why-kent/',
