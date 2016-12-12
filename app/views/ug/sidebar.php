@@ -23,7 +23,7 @@
 			<?php endforeach; ?>
 		</ul>
 	</li>
-	<li><i class="kf-chevron-right"></i> Subject website
+	<li><i class="kf-university"></i> Subject website
 		<ul>
 			<li><a href="<?php echo $course->url_for_administrative_school?>"><?php echo $course->administrative_school[0]->name ?></a> </li>
 			<?php if(!empty($course->url_for_additional_school)): ?>

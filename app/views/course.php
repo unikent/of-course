@@ -55,7 +55,7 @@ use \unikent\kent_theme\kentThemeHelper;
 				<p class="card-subtitle">UCAS code <?php echo $course->ucas_code?></p>
 			<?php endif; ?>
 		</div>
-        <div class="card-img-overlay-bottom card-img-overlay-link card-overlay-inline-sm card-overlay-inline-nopad header-card-overlap-search">
+        <div class="card-img-overlay-link header-card-overlap-search">
             <form class="quickspot-container" action="/search">
                 <div class="form-group">
                     <label for="course-search" class="sr-only">Search courses</label>
