@@ -71,7 +71,7 @@
 
 	<?php if(!empty($course->english_language_requirements)): ?>
 		<h4>English Language Requirements</h4>
-		<?php echo $course->english_language_requirements ?><
+		<?php echo $course->english_language_requirements ?>
 	<?php endif; ?>
 
 	</section>

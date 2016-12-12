@@ -11,7 +11,7 @@
 			<li><?php echo $course->start ?></li>
 			<?php if(isset($course) && $course->current_year > $course->year): ?>
 				<li>
-					<a href='<?php echo $meta['active_instance']; ?>'> Starting in <?php echo $course->current_year;?>?</a>
+					<a href='<?php echo $meta['active_instance']; ?>'> See <?php echo $course->current_year;?> entry</a>
 				</li>
 			<?php endif ?>
 		</ul>
