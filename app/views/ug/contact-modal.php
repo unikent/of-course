@@ -6,15 +6,15 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
-				<div class="container">
+				<div class="container-fluid">
 					<div class="row">
-						<div class="col-md-10">
+						<div class="col-xs-10">
                				 <h2 class="modal-title">Contact us</h2>
 						</div>
 					</div>
 				</div>
             </div>
-            <div class="modal-body container">
+            <div class="modal-body container-fluid">
 					<div class="row">
 						<div class="col-md-12">
 				<?php
