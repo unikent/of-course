@@ -98,3 +98,8 @@ tr.collapse.in td{
 		width: 100%;
 	}
 }
+
+.download-links a {
+	display:block;
+	margin-bottom:.5rem;
+}
