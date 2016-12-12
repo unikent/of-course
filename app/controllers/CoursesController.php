@@ -73,6 +73,7 @@ class CoursesController {
 			return Flight::error($e, $data);
 		}
 
+		$years = static::$pp->make_request("$level/year");
 		// Attempt to cache responce with browser + debug some extra information.
 		Flight::cachecheck();
 
@@ -160,7 +161,8 @@ class CoursesController {
 			"has_parttime" => (strpos(strtolower($course->mode_of_study), 'part-time') !== false),
 			"has_fulltime" => (strpos(strtolower($course->mode_of_study), 'full-time') !== false),
 			'meta' => $meta,
-			'layout' => $level === 'postgraduate' ? 'pg' : 'ug'
+			'layout' => $level === 'postgraduate' ? 'pg' : 'ug',
+			'years' => $years
 		);
 
 		// Course object should be global for views
