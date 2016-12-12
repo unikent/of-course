@@ -202,6 +202,9 @@
 				". get_class($error) . " '{$error->getMessage()}' in {$error->getFile()}({$error->getLine()})\n
 			";
 
+		// Log the error to the error_log
+		error_log(get_class($error) . " '{$error->getMessage()}' in {$error->getFile()}({$error->getLine()})\n");
+
 		// Fail mode action. Email for help?
 		if(defined("FAIL_ALERT_EMAIL") && trim(FAIL_ALERT_EMAIL) != ''){
 			mail(FAIL_ALERT_EMAIL, "Of-Course: 500 error", $message);

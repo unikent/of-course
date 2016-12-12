@@ -3,7 +3,6 @@
 <?php echo $course->entry_requirements; ?>
 
 <section class="info-section">
-	<h3>General entry requirements</h3>
 	<?php echo $course->globals->pg_general_entry_requirements ?>
 </section>
 
