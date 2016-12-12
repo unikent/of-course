@@ -110,27 +110,30 @@
 						<?php
 						$file = 'https://www.kent.ac.uk/courses/postgraduate/pdf/prospectus.pdf';
 						?>
-						<h3>Resources</h3>
-						<ul>
-							<li>
-								<a href="https://www.kent.ac.uk/courses/postgraduate/pdf/prospectus.pdf"
-									<?php echo sprintf($eventjs, 'download-prospectus-pg', $course_name_fortracking); ?>
-								>
-									Download a full prospectus (PDF)
-								</a>
-							</li>
-							<?php if(!empty($course->programme_leaflet)): ?>
-						<?php foreach ($course->programme_leaflet as $leaflet):
-							$file = $leaflet->tracking_code;
-							$pathParts = pathinfo($file);
-							$fileType = strtoupper($pathParts['extension']);
-							?>
-							<li>
-								<a href="<?php echo $leaflet->tracking_code ?>">Download a <?php echo $leaflet->name ?> subject leaflet (<?php echo $fileType ?>)</a>
-							</li>
-							<?php endforeach; ?>
-						<?php endif; ?>
-						</ul>
+
+						<div class="panel panel-outline-primary">
+							<h3>Resources</h3>
+							<nav class="download-links">
+								
+									<a class="kf-download" href="https://www.kent.ac.uk/courses/postgraduate/pdf/prospectus.pdf"
+										<?php echo sprintf($eventjs, 'download-prospectus-pg', $course_name_fortracking); ?>
+									>
+										Download a full prospectus (PDF)
+									</a>
+								
+								<?php if(!empty($course->programme_leaflet)): ?>
+							<?php foreach ($course->programme_leaflet as $leaflet):
+								$file = $leaflet->tracking_code;
+								$pathParts = pathinfo($file);
+								$fileType = strtoupper($pathParts['extension']);
+								?>
+								
+									<a class="kf-download" href="<?php echo $leaflet->tracking_code ?>"> Download a <?php echo $leaflet->name ?> subject leaflet (<?php echo $fileType ?>)</a>
+								
+								<?php endforeach; ?>
+							<?php endif; ?>
+							</nav>
+						</div>
 					</div>
 				</div>
 			</div>
