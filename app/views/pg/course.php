@@ -17,8 +17,12 @@
 											</span>
 							<?php else: ?>
 								<span class="current">
-												<a href='<?php echo $meta['active_instance']; ?>'> <?php echo $y = array_diff($years->years, array($course->current_year)); echo $y[0];?> entry</a>
-											</span>
+                                 <?php
+                                 $y = array_diff($years->years, array($course->current_year));
+                                 $y = $y[0]?>
+                                    <a href="<?php echo "/courses/$y/$course->level/$course->id"; ?>"><?php echo $y; ?> entry</a>
+
+								</span>
 							<?php endif?>
 						<?php endif ?>
 						</span>
