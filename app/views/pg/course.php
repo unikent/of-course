@@ -17,7 +17,7 @@
 											</span>
 							<?php else: ?>
 								<span class="current">
-												<a href='<?php echo $meta['active_instance']; ?>'> <?php echo array_diff($years->years, [$course->current_year])[0];?> entry</a>
+												<a href='<?php echo $meta['active_instance']; ?>'> <?php echo $y = array_diff($years->years, array($course->current_year)); echo $y[0];?> entry</a>
 											</span>
 							<?php endif?>
 						<?php endif ?>
@@ -65,7 +65,8 @@
 					<div class="current-year">
 						<div class="entry-year"> <?php echo $course->year ?></div>
 						<?php
-						$other_year = array_diff($years->years, [$course->current_year])[0];
+						$other_year = array_diff($years->years, array($course->current_year));
+                        $other_year = $other_year[0];
 						if(sizeof($years->years) > 1):
 							if(isset($course) && $course->current_year > $course->year):
 								?>
