@@ -23,7 +23,7 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 										</span>
 									<?php else: ?>
 										<span class="current">
-											<a href='<?php echo $meta['active_instance']; ?>'> <?php echo array_diff($years->years, [$course->current_year])[0];?> entry</a>
+											<a href='<?php echo '/courses/array_diff($years->years, [$course->current_year])[0]/$course->level/$course->id'; ?>'> <?php echo array_diff($years->years, [$course->current_year])[0];?> entry</a>
 										</span>
 									<?php endif?>
 								<?php endif ?>
@@ -69,6 +69,7 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 							<div class="current-year">
 								<div class="entry-year"> <?php echo $course->year ?></div>
 								<?php
+								$other_year = array_diff($years->years, [$course->current_year])[0];
 								if(sizeof($years->years) > 1):
 									if(isset($course) && $course->current_year > $course->year):
 										?>
@@ -77,7 +78,7 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 										</div>
 									<?php else: ?>
 										<div class="current">
-											<a href='<?php echo $meta['active_instance']; ?>'> See <?php echo array_diff($years->years, [$course->current_year])[0];?> entry</a>
+											<a href='<?php echo "/courses/$level/$other_year/$course->instance_id"; ?>'> See <?php echo $other_year?> entry</a>
 										</div>
 									<?php endif?>
 								<?php endif ?>

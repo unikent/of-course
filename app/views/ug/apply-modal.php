@@ -27,9 +27,9 @@ if (empty($course->deliveries)) {
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">×</span>
 				</button>
-				<div class="container px-2">
+				<div class="container-fluid">
 					<div class="row">
-						<div class="col-md-10">
+						<div class="col-xs-10">
 					<h2 class="modal-title">Apply now</h2>
 						<?php
 							if (!$has_parttime){
@@ -65,7 +65,7 @@ if (empty($course->deliveries)) {
 					</div>
 				</div>
 			</div>
-            <div class="modal-body container px-2 py-2">
+            <div class="modal-body container-fluid">
 				<div class="row">
 					<div class="col-lg-8">
 						<?php if ($course->how_to_apply_atypical_courses != ''){
