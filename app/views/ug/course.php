@@ -23,7 +23,10 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 										</span>
 									<?php else: ?>
 										<span class="current">
-											<a href='<?php echo '/courses/array_diff($years->years, [$course->current_year])[0]/$course->level/$course->id'; ?>'> <?php $y = array_diff($years->years, array($course->current_year)); echo $y[0];?> entry</a>
+                                            <?php
+                                            $y = array_diff($years->years, array($course->current_year));
+                                            $y = $y[0]?>
+											<a href="<?php echo "/courses/$y/$course->level/$course->id"; ?>"><?php echo $y; ?> entry</a>
 										</span>
 									<?php endif?>
 								<?php endif ?>
