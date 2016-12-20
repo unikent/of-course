@@ -32,7 +32,7 @@
         <?php endif; ?>
         </tbody>
     </table>
-    <div class="smaller mb-2">
+    <div class="mb-2">
             <?php
             if ($has_foundation && isset($course->globals->fees_foundation_year_exception_text_ug)) {
                 echo $course->globals->fees_foundation_year_exception_text_ug;
