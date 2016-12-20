@@ -142,7 +142,7 @@ if (empty($course->deliveries)) {
 								   onclick="_pat.event('course-page', 'apply-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>] at <?php echo $schoolName ?>');">Apply through UCAS
 									<i class="icon-chevron-right icon-white"></i>
 								</a>
-						<p class="ucas-code">UCAS code <?php echo $course->ucas_code?></p>
+						<?php if(!empty($course->ucas_code)):?><p class="ucas-code">UCAS code <?php echo $course->ucas_code?></p><?php endif;?>
 					</div>
 				</div>
             </div>
