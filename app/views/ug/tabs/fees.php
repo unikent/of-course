@@ -32,11 +32,14 @@
         <?php endif; ?>
         </tbody>
     </table>
-    <div class="smaller mb-2">
+    <div class="mb-2">
             <?php
+            if (isset($course->globals->fees_exception_text_ug)) echo $course->globals->fees_exception_text_ug;
+
             if ($has_foundation && isset($course->globals->fees_foundation_year_exception_text_ug)) {
                 echo $course->globals->fees_foundation_year_exception_text_ug;
             }
+
             if (isset($course->globals->fees_year_in_industryabroad_text_ug) && // If YII/YA text is set AND
                 (
                     (!empty($course->year_in_industry)) || // YII or YA has some text
@@ -45,8 +48,6 @@
             ) {
                 echo $course->globals->fees_year_in_industryabroad_text_ug;
             }
-
-            if (isset($course->globals->fees_exception_text_ug)) echo $course->globals->fees_exception_text_ug;
             ?>
     </div>
 <?php endif; ?>

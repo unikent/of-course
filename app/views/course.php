@@ -51,7 +51,7 @@ use \unikent\kent_theme\kentThemeHelper;
 				<?php echo $course->programme_title; ?> - <?php echo $course->award_list; ?>
 				<?php echo $course->programmme_status_text; ?>
 			</h1>
-			<?php if($course->programme_level == 'ug'): ?>
+			<?php if($course->programme_level == 'ug' && !empty($course->ucas_code)): ?>
 				<p class="card-subtitle">UCAS code <?php echo $course->ucas_code?></p>
 			<?php endif; ?>
 		</div>
