@@ -53,6 +53,11 @@
 <?php endif; ?>
 
 <section class="info-section">
+    <?php if(!empty($course->additional_costs)): ?>
+        <h2>Additional Costs</h2>
+        <?php echo $course->additional_costs; ?>
+    <?php endif; ?>
+
 	<h2>Funding</h2>
 	<?php echo $course->funding;?>
 </section>
