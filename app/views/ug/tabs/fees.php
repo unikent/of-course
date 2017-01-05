@@ -54,7 +54,7 @@
 
 <section class="info-section">
     <?php if(!empty($course->additional_costs)): ?>
-        <h2>Additional Costs</h2>
+        <h2>Additional costs</h2>
         <?php echo $course->additional_costs; ?>
     <?php endif; ?>
 
