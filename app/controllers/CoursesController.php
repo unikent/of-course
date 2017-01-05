@@ -194,6 +194,8 @@ class CoursesController {
 			return Flight::error($e);
 		}
 
+		$years = static::$pp->make_request("$level/year");
+
 		Flight::cachecheck();
 
 		// Debug option
@@ -205,7 +207,7 @@ class CoursesController {
 		$course->award_list	= $this->getCourseAwardList($course);
 		$course->award_list_linked = $this->getCourseAwardListLinked($course);
 
-		return Flight::layout($course->programme_level.'/course', array('course'=> $course));
+		return Flight::layout($course->programme_level.'/course', array('course'=> $course, 'years' => $years));
 	}
 
 	/**
