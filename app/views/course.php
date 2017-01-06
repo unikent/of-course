@@ -7,7 +7,7 @@ use \unikent\kent_theme\kentThemeHelper;
 		<div class="card-media-wrap">
 			<?php if(isset($course->banner_image) && !empty($course->banner_image)){
 				$banner_image = $course->banner_image->sizes->full->url;
-				$banner_image_alt = $course->banner_image->alt_text;
+				$banner_image_alt = !empty($course->banner_image->alt_text) ? $course->banner_image->alt_text : "Image representing {$course->programme_title}";
 			}else{
 				$banner_image = Flight::asset('images/default-profile-feature.jpg');
 				$banner_image_alt = 'Students preparing for their graduation ceremony at Canterbury Cathedral';
