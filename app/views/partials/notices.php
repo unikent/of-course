@@ -1,6 +1,6 @@
 <?php if(isset($preview) && $preview == true):?>
 	<div class="alert alert-warning">
-		You are currently viewing a preview of revision <strong><?php echo $course->revision_id; ?></strong>. This is preview data ONLY and is not representative of any course offered by this institution.
+		You are currently viewing a preview of revision <?php echo $course->revision_id; ?>. This is preview data ONLY and is not representative of any course offered by this institution.
 	</div>
 <?php endif; ?>
 <?php if ( defined('CLEARING') && CLEARING && $level == 'undergraduate' ): ?>
