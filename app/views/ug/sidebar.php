@@ -31,4 +31,11 @@
 			<?php endif; ?>
 		</ul>
 	</li>
+	<?php if(!empty($course->accredited_by)):?>
+		<li><i class="kf-kent-vision"></i> Accreditation
+			<ul>
+				<li><?php echo $course->accredited_by ;?></li>
+			</ul>
+		</li>
+	<?php endif; ?>
 </ul>

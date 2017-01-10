@@ -97,6 +97,20 @@ if(!empty($profile->video)){
 			<h3>See also</h3>
 			<?php echo $profile->links; ?>
 		</nav>
+		<?php }else { ?>
+			<nav>
+				<h3>See also</h3>
+				<ul>
+					<li><a href="/courses/visit/index.html">Visit us</a></li>
+					<?php if($level == 'undergraduate'): ?>
+						<li><a href="/courses/undergraduate/why/experience.html">Student experience</a></li>
+						<li><a href="https://blogs.kent.ac.uk/kentstudents/">Kent student blog</a></li>
+					<?php else: ?>
+						<li><a href="/courses/postgraduate/types/index.html">Types of degree</a></li>
+						<li><a href="/courses/funding/postgraduate/index.html">Funding</a></li>
+					<?php endif; ?>
+				</ul>
+			</nav>
 		<?php } ?>
 	</aside>
 </div>
