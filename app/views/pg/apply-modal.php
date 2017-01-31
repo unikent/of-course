@@ -146,10 +146,9 @@ foreach($course->deliveries as $delivery){
 									echo $course->how_to_apply_supplementary;
 								}
 								?>
-								<p>Learn more about <a href="//www.kent.ac.uk/courses/postgraduate/apply/">the application process</a> or begin your application below by registering.</p>
-								<p>You don't need to complete your application all in one go - simply begin by registering. You can save and come back to your application at any time.
-									<?php if (count($course->deliveries) > 1 ){ ?>You'll need to select your course options below:<?php } ?>
-								</p>
+
+								<p>Learn more about the <a href="//www.kent.ac.uk/courses/postgraduate/apply/">applications process</a> or begin your application. You can save and return to your application at any time.</p>
+
 								<?php /* one award but lots of deliveries - edge case  OR $noneUniqueDeliveries are found which means they could no normally be selected */
 								if ($noneUniqueDeliveryFound){ ?>
 									<div>
