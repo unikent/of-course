@@ -109,7 +109,7 @@
 								</div>
 							<?php endif; ?>
 
-							<h3 class="mt-2">General Enquiries</h3>
+							<h3 class="mt-2">General enquiries</h3>
 
 							<?php if(!empty($course->admissions_enquiries)):
 								$enquiries = str_replace('&nbsp;','',$course->admissions_enquiries);
