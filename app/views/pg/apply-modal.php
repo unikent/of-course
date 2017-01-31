@@ -91,7 +91,7 @@ foreach($course->deliveries as $delivery){
 													}
 													if($has_fulltime){
 														?>
-														<option value="full-time selected">Full-time - <?php echo $course->year; ?></option>
+														<option value="full-time" selected="selected">Full-time - <?php echo $course->year; ?></option>
 														<?php
 													}
 													if($has_parttime){
