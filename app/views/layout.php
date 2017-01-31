@@ -23,6 +23,7 @@ $undergraduate = array(
 		'How to apply' => '/courses/undergraduate/how-to-apply',
 		'Accommodation' => '/courses/undergraduate/accommodation',
 		'Visit us' => '/courses/visit',
+		'International' => '/courses/international/',
 		'Fees and funding' => '/courses/undergraduate/fees-and-funding',
 
 	),
@@ -37,6 +38,9 @@ $postgraduate = array(
 		'Why Kent?' => '/courses/postgraduate/why-kent/',
 		'Taught / Master\'s' => '/courses/postgraduate/taught-masters/',
 		'Research / PhDs' => '/courses/postgraduate/research-phds/',
+		'How to apply' => '/courses/postgraduate/how-to-apply',
+		'Accommodation' => '/accommodation',
+		'International' => '/courses/international/',
 		'Funding' => '/courses/postgraduate/fees-and-funding/',
 	),
 	'theme' => 'postgraduate'
