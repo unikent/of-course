@@ -61,7 +61,7 @@
 					<?php endif; ?>
 					</ul>
 				<?php endif; ?>
-			<h3>General Enquiries</h3>
+			<h3>General enquiries</h3>
 			<?php echo $course->enquiries ?>
 						</div>
 					</div>
