@@ -5,7 +5,6 @@
 <tr>
 	<th width="70%">Possible modules may include</th>
 	<th class="text-xs-center">Credits</th>
-	<th class="text-xs-center">ECTS Credits</th>
 </tr>
 </thead>
 <tbody>
@@ -17,7 +16,6 @@
                     <tr class="module-row collapsed" data-toggle="collapse" data-target="#<?php echo $module->sds_code; ?>-more">
                         <td><span id="<?php echo $module->sds_code ?>" class="module-title"><?php echo $module->sds_code ?> - <?php echo $module->module_title ?></span></td>
 						<td class="text-xs-center"><?php echo $module->credit_amount; ?></td>
-                        <td class="text-xs-center"><?php echo $module->ects_credit ?></td>
                     </tr>
 					<tr id="<?php echo $module->sds_code; ?>-more" class="collapse">
 						<td class="more" colspan="3">
@@ -39,7 +37,6 @@
 					<tr class="module-row collapsed" data-toggle="collapse" data-target="#<?php echo $module->sds_code; ?>-more">
 						<td><span id="<?php echo $module->sds_code ?>" class="module-title"><?php echo $module->sds_code ?> - <?php echo $module->module_title ?></span></td>
 						<td class="text-xs-center"><?php echo $module->credit_amount; ?></td>
-						<td class="text-xs-center"><?php echo $module->ects_credit ?></td>
 					</tr>
 					<tr id="<?php echo $module->sds_code; ?>-more" class="collapse">
 						<td class="more" colspan="3" >
