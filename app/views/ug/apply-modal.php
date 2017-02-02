@@ -71,7 +71,7 @@ if (empty($course->deliveries)) {
 			</div>
 			<div class="modal-body container-fluid">
 				<div class="row">
-					<div class="col-lg-8">
+					<div class="col-lg-8 px-2">
 						<?php if ($course->how_to_apply_atypical_courses != ''){
 							echo $course->how_to_apply_atypical_courses;
 						} elseif (!$has_parttime && !$has_fulltime) {

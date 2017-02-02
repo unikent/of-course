@@ -129,7 +129,7 @@ foreach($course->deliveries as $delivery){
 			</div>
 			<div class="modal-body container-fluid py-1">
 				<div class="row">
-					<div class="col-lg-8">
+					<div class="col-lg-8 px-2">
 						<?php
 						// How to apply 53 is "How to apply (atypical courses)".
 						// When this field is populated, show only its contents, not the standard apply text.
