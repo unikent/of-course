@@ -289,3 +289,17 @@
 			)
 		);
 	}
+
+	// Attempt to deal with questionable markup & chars provided via import
+	Flight::map('textDeMangler', function($text){
+		// Fix weird unicode stuff a little
+		$text = mb_convert_encoding($text, "HTML-ENTITIES", "UTF-8"); 
+
+		// Swap out the dodgy bullet points & wrap stuff in li's (No ul for now)
+		preg_match_all( '/&#149;(.*?)(?:<br>|<br \/>|<br\/>|\Z)/i', $text, $matches);
+		foreach($matches[0] as $k => $val){
+			$text = str_replace( $val, "<li>{$matches[1][$k]}</li>",$text);
+		}
+
+		return $text;
+	});

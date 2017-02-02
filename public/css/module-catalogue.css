@@ -64,3 +64,17 @@ a[data-toggle="popover"]::after {
 	font-family: "kentfont";
 	margin-left: .3rem;
 }
+
+.content-full.key-info {
+	margin-bottom:2rem;
+}
+.content-full.key-info h3 { 
+		font-weight:bold;
+		font-size: 1.2rem;
+}
+.content-full.key-info h3::before {
+	color: #937227;
+	line-height: 1.2rem;
+	padding-bottom: 3px;
+	padding-right: 6px;
+}

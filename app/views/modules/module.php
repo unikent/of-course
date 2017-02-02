@@ -53,8 +53,24 @@
 					</div>
 				</div>
 
-				<div class="content-full">
-					<p class="kf-exclamation-circle session-info"><em>Information below is for the <strong><?php echo $module->year-1 . '-' . substr($module->year, 2);  ?></strong> session.</em></p>
+				<style>
+
+				</style>
+
+				<div class="content-full key-info">
+					<div class="col-md-3">
+						<h3 class="kf-check-circle">Pre-requisites</h3>
+						<p><?php echo empty($module->pre_requisite)?'None':$module->pre_requisite; ?></p>
+					</div>
+					<div class="col-md-3">
+						<h3 class="kf-exclamation-circle bold">Restrictions</h3>
+						<p><?php echo empty($module->restrictions)?'None':$module->restrictions; ?></p>
+						</div>
+					<div class="col-md-3">
+						<h3 class="kf-exclamation-circle">Session</h3>
+						<p><em>Information below is for the <strong><?php echo $module->year-1 . '-' . substr($module->year, 2);  ?></strong> session.</em></p>
+					</div>
+					
 				</div>
 			</div>
 			<div class="content-container relative">
@@ -110,13 +126,6 @@
 						
 						?>
 					</div>
-				</div>
-				<div class="content-aside" style="margin-top:17rem;">
-					<h3 class="kf-check-circle">Pre-requisites</h3>
-					<p><?php echo empty($module->pre_requisite)?'None':$module->pre_requisite; ?></p>
-			
-					<h3 class="kf-exclamation-circle">Restrictions</h3>
-					<p><?php echo empty($module->restrictions)?'None':$module->restrictions; ?></p>
 				</div>
 		</div>
 
