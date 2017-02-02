@@ -87,8 +87,6 @@ if (empty($course->deliveries)) {
 								<fieldset class="highlight-fieldset indent">
 
 									<div class="full-time-text">
-										asda
-
 										<?php
 										if (trim($course->mode_of_study) != 'Part-time only') {
 											echo $course->how_to_apply;
