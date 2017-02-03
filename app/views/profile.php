@@ -63,8 +63,7 @@ if(!empty($profile->video)){
 	<div class="content-full">
 		<?php
 		KentThemeHelper::breadcrumb(array(
-										'Student Profiles'=>'/profiles',
-										ucfirst($level) =>Flight::url('profiles/'.$level),
+			"Courses" => "/courses/", ucfirst($level). ' profiles' =>Flight::url('profiles/'.$level),
 										$profile->name . ' - ' . $profile->course =>''
 									));
 		?>

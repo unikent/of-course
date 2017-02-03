@@ -1,6 +1,6 @@
 <div class="container">
 
-	<?php \unikent\kent_theme\kentThemeHelper::breadcrumb(array("Profiles"=>"/profiles/", $level_pretty=>"")); ?>
+	<?php \unikent\kent_theme\kentThemeHelper::breadcrumb(array("Courses" => "/courses/",  $level_pretty. ' profiles' => '')); ?>
 
 	<h1><?php echo $level_pretty; ?> student profiles</h1>
 
@@ -43,7 +43,7 @@ usort($profiles, function($a,$b){ return $a->name > $b->name;});
 ?>
 <div class="card-panel cards-list cards-backed card-panel-secondary course-listing">
 	<div class="card-panel-body standard-output" id="quickspot-output">
-		<?php foreach($profiles as $p):?>
+		<?php foreach($profiles as $p): if($p->type ==' alumni'){ continue; } ?>
 			<div class="card card-linked chevron-link">
 
 				<a href="<?php echo Flight::url("profiles/{$level}/{$p->slug}"); ?>" class="card-title-link ">

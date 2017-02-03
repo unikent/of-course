@@ -85,6 +85,8 @@ Flight::route('/@level:undergrad|postgrad|ug|pg/@year:[0-9]+/@id:[0-9]+/@slug', 
 });
 
 
+
+Flight::route('/profiles/', array($courses, 'profiles'));
 Flight::route('/profiles/@level:undergraduate|postgraduate/', array($courses, 'profiles'));
 Flight::route('/profiles/@level:undergraduate|postgraduate/@slug', array($courses, 'profile'));
 

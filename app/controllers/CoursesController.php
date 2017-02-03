@@ -905,7 +905,7 @@ class CoursesController {
 		return rtrim($award_list, ', ');
 	}
 
-	public function profiles($level){
+	public function profiles($level = 'undergraduate'){
 		try{
 			$profiles = static::$pp->make_request($level . '/profile');
 			$cats = static::$pp->get_subjectcategories($level);
