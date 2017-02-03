@@ -1,7 +1,9 @@
 <div class="container">
-
-	<?php \unikent\kent_theme\kentThemeHelper::breadcrumb(array("Courses" => "/courses/",  $level_pretty. ' profiles' => '')); ?>
-
+	<?php \unikent\kent_theme\kentThemeHelper::breadcrumb(array(
+		"Courses" => "/courses/",
+		"Student profiles" => "/courses/profiles",
+		$level_pretty => ''
+	)); ?>
 	<h1><?php echo $level_pretty; ?> student profiles</h1>
 
 	<ul class="nav nav-tabs  pt-1">
