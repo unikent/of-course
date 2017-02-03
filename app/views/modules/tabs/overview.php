@@ -1,6 +1,6 @@
 <?php if (isset($module->synopsis) && !empty($module->synopsis)): ?>
 	<h2>Overview</h2>
-	<?php echo $module->synopsis; ?>
+	<?php echo Flight::textDeMangler($module->synopsis); ?>
 <?php endif; ?>
 
 
