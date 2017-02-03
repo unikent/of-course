@@ -142,10 +142,12 @@
 		
 
 	</script>
-		<div class="content-container pt-3">
-			<small class="content-full">
-				University of Kent makes every effort to ensure that module information is accurate for the relevant academic session and to provide educational services as described. However, courses, services and other matters may be subject to change. <a href="https://www.kent.ac.uk/termsandconditions/">Please read our full disclaimer</a>.
-			</small>
+		<div class="content-container pt-1">
+			<div class="content-full">
+				<small>
+					University of Kent makes every effort to ensure that module information is accurate for the relevant academic session and to provide educational services as described. However, courses, services and other matters may be subject to change. <a href="https://www.kent.ac.uk/termsandconditions/">Please read our full disclaimer</a>.
+				</small>
+			</div>
 
 		</div>
 </div>

@@ -78,3 +78,9 @@ a[data-toggle="popover"]::after {
 	padding-bottom: 3px;
 	padding-right: 6px;
 }
+
+@media (min-width: 992px){
+	div.content-main {
+		min-height: 280px;
+	}
+}
