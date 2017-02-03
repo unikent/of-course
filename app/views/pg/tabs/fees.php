@@ -59,6 +59,10 @@
 		?>
 	<?php } ?>
 <?php endif; ?>
+<?php if(!empty($course->additional_costs)): ?>
+	<h2>Additional costs</h2>
+	<?php echo $course->additional_costs; ?>
+<?php endif; ?>
 <?php if(!empty($course->fees_and_funding)){ ?>
 <h2>Funding</h2>
 	<?php echo $course->fees_and_funding; ?>

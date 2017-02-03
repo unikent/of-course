@@ -157,8 +157,10 @@ foreach($course->deliveries as $delivery){
 											<div class="form-group">
 												<?php foreach ($course->deliveries as $delivery){ ?>
 													<div class="form-check">
-														<input id="delivery<?php echo $delivery->id; ?>" type="radio" class="form-check-input" name="delivery" value="delivery<?php echo $delivery->id; ?>">
-														<?php echo str_ireplace(array('part-time', 'full-time'), array('<strong>part-time</strong>', '<strong>full-time</strong>'), $delivery->description); ?>
+														<label>
+															<input id="delivery<?php echo $delivery->id; ?>" type="radio" class="form-check-input" name="delivery" value="delivery<?php echo $delivery->id; ?>">
+															<?php echo str_ireplace(array('part-time', 'full-time'), array('<strong>part-time</strong>', '<strong>full-time</strong>'), $delivery->description); ?>
+														</label>
 													</div>
 												<?php } ?>
 											</div>
