@@ -91,6 +91,11 @@ a[data-toggle="popover"]::after {
 	padding-top: 0.8rem;
 }
 
+.module-search + .breadcrumb {
+	padding: 0 0 1.5rem 0;
+}
+
+
 @media (max-width:992px) {
 	.module-search {
 		padding-top: 0;

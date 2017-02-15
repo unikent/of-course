@@ -16,6 +16,11 @@
                     <div aria-live="assertive" aria-relevant="additions" class="screenreader" style="position: absolute!important; clip: rect(1px 1px 1px 1px); clip: rect(1px,1px,1px,1px);"></div></div>
                     <div id="quickspot-results-container" tabindex="100" class="quickspot-results-container quickspot-results-container" style="display: none;" aria-hidden="true"><div class="quickspot-results"></div></div>
 				</div>
+
+				<div class="inline-links text-xs-center text-sm-right">
+					<a href="/courses/modules">View full modules A-Z</a>
+				</div>
+
             </form>
         </div>
 
