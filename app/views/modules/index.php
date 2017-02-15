@@ -20,11 +20,11 @@ use \unikent\kent_theme\kentThemeHelper;
 <div class="panel-secondary">
 		<div class="container form-inline pt-2 pb-2 filter-box" id="filter_box">
 			<div class="module-filter-container">
-				<input 
-					id="module-filter" 
-					class="form-control" 
-					type="text" 
-					placeholder="Search courses"
+				<input
+					id="module-filter"
+					class="form-control"
+					type="text"
+					placeholder="Search modules"
 					data-quickspot-config="modules_inline"
 					data-quickspot-target="quickspot-output"
 					data-quickspot-filters="filter_box"
@@ -46,5 +46,5 @@ use \unikent\kent_theme\kentThemeHelper;
 </div>
 <div class="card-panel cards-list cards-backed card-panel-secondary module-listing">
 	<div class="card-panel-body quickspot-output" id="quickspot-output">
-	</div>			 
+	</div>
 </div>
