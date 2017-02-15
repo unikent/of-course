@@ -1,4 +1,4 @@
-<?php 
+<?php
 use \unikent\kent_theme\kentThemeHelper;
 
 $banner_image = (empty($profile->banner_image_id)) ? Flight::asset('images/default-profile-feature.jpg') : $profile->banner_image_id->sizes->full->url;
@@ -63,9 +63,9 @@ if(!empty($profile->video)){
 	<div class="content-full">
 		<?php
 		KentThemeHelper::breadcrumb(array(
-			"Courses" => "/courses/", 
+			"Courses" => "/courses/",
 			'Student profiles' =>Flight::url('profiles'),
-			ucfirst($level) => Flight::url('profiles/'.$level), 
+			ucfirst($level) => Flight::url('profiles/'.$level),
 			$profile->name . ' - ' . $profile->course =>''
 		));
 		?>
@@ -104,8 +104,8 @@ if(!empty($profile->video)){
 				<ul>
 					<li><a href="/courses/visit/index.html">Visit us</a></li>
 					<?php if($level == 'undergraduate'): ?>
-						<li><a href="/courses/undergraduate/why/experience.html">Student experience</a></li>
-						<li><a href="https://blogs.kent.ac.uk/kentstudents/">Kent student blog</a></li>
+						<li><a href="/courses/undergraduate/student-experience/">Student experience</a></li>
+						<li><a href="https://blogs.kent.ac.uk/kentstudents/">Kent students blog</a></li>
 					<?php else: ?>
 						<li><a href="/courses/postgraduate/types/index.html">Types of degree</a></li>
 						<li><a href="/courses/funding/postgraduate/index.html">Funding</a></li>
@@ -115,4 +115,3 @@ if(!empty($profile->video)){
 		<?php } ?>
 	</aside>
 </div>
-
