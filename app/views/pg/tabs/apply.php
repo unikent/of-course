@@ -58,7 +58,7 @@ $has_fulltime = (strpos(strtolower($course->mode_of_study), 'full-time') !== fal
 
 		 	// Generate event trackers
 		 	$tracking_name = "[{$course->instance_id} in {$course->year}] {$course->programme_title} - {$award} {$description} - {$mode} [{$mcr}] at {$schoolName}";
-			$apply_event[$key][$mode] = 'onClick="_pat.event(\'course-page\', \'apply-pg\', \''.$tracking_name .'\');"';
+			$apply_event[$key][$mode] = 'onClick="window.KENT.kat.event(\'course-page\', \'apply-pg\', \''.$tracking_name .'\');"';
 		}
 		?>
 

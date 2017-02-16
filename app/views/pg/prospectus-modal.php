@@ -71,7 +71,7 @@
 							$prospectus_link[$key][$mode] = sprintf($link, $ari_code, 'PRO');
 
 							// Generate event trackers
-							$eventjs = "onClick=\"_pat.event('course-page', '%s', '%s');\"";
+							$eventjs = "onClick=\"window.KENT.kat.event('course-page', '%s', '%s');\"";
 							$event = "$course_name_fortracking - $award" . "$description - $mode [$mcr]";
 							$prospectus_event[$key][$mode] = sprintf($eventjs, 'order-prospectus-pg', $event);
 						}
