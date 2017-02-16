@@ -10,8 +10,8 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 					<div class="spaced-links-container">
 						<div class="spaced-links-inner-container links">
 							<span class="text-accent spaced-links-item"><i class="kf-pin"></i> <?php echo $course->locations_str_linked; ?></span>
-							<a href="#contact-modal" class="spaced-links-item text-accent" id="contactButton" data-toggle="modal" data-target="#contact-modal"><i class="kf-comment"></i> Contact Us</a>
-							<a href="#prospectus-modal" class="spaced-links-item text-accent" id="prospectusButton" data-toggle="modal" data-target="#prospectus-modal"><i class="kf-user"></i> Prospectus</a>
+							<a href="#contact-modal" class="spaced-links-item text-accent" id="contactButton" data-toggle="modal" data-target="#contact-modal" onclick="window.KENT.kat.event('course-page', 'contact-ug-modal', '[<?php echo $course->instance_id ?>] <?php echo $course->programme_title; ?> (<?php echo $course->year ?>)');"><i class="kf-comment"></i> Contact Us</a>
+							<a href="#prospectus-modal" class="spaced-links-item text-accent" id="prospectusButton" data-toggle="modal" data-target="#prospectus-modal" onclick="window.KENT.kat.event('course-page', 'prospectus-ug-modal', '[<?php echo $course->instance_id ?>] <?php echo $course->programme_title; ?> (<?php echo $course->year ?>)');"><i class="kf-user"></i> Prospectus</a>
 							<span class="spaced-links-item text-accent hidden-lg-up">
 								<span class="year-of-entry"><?php echo $course->year; ?></span>
 								<?php
@@ -48,6 +48,7 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 										id="applyButton"
 										data-toggle="modal"
 										data-target="#apply-modal"
+										onclick="window.KENT.kat.event('course-page', 'apply-ug-modal', '[<?php echo $course->instance_id ?>] <?php echo $course->programme_title; ?> (<?php echo $course->year ?>)');"
 								>Apply now</button>
 							<?php endif; ?>
 						</div>
