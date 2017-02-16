@@ -14,6 +14,7 @@ if (empty($course->deliveries)) {
 		} else {
 			$has_fulltime = $has_fulltime && true;
 			$full_type = (substr($delivery->mcr, -2) == 'FD') ? 'direct' : 'ucas';
+			$fulltime_delivery = $delivery;
 		}
 	}
 }
@@ -147,7 +148,7 @@ if (empty($course->deliveries)) {
 						   tabindex="0"
 						   role="button"
 						   title="UCAS"
-						   onclick="window.KENT.kat.event('course-page', 'apply-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>] at <?php echo $schoolName ?>');">Apply
+						   onclick="window.KENT.kat.event('course-page', 'apply-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $fulltime_delivery->description ?> [<?php echo $fulltime_delivery->mcr ?>] at <?php echo $schoolName ?>');">Apply
 							through UCAS
 							<i class="icon-chevron-right icon-white"></i>
 						</a>
