@@ -5,12 +5,11 @@ KentThemeHelper::header(
 	array(
 		'title' => "Module Catalogue",
 		'menu' => array(
-			'Home' => 'https://beta-test.kent.ac.uk/courses/',
-			'Modules listing' => 'https://beta-test.kent.ac.uk/courses/modules',
-			'Choosing your modules' => 'https://beta-test.kent.ac.uk',
-			'How to apply' => 'https://beta-test.kent.ac.uk',
-			'Planning your career' => 'https://beta-test.kent.ac.uk',
-			'Student Profiles' => 'https://beta-test.kent.ac.uk',
+			'Modules' => '/courses/modules/',
+			'Choosing your modules' => '/gettingstarted/modules.html',
+			'How to apply' => '/courses/undergraduate/how-to-apply/',
+			'Planning your career' => 'https://www.kent.ac.uk/ces/',
+			'Student profiles' => '/courses/profiles/',
 
 		),
 		'meta' => array(
@@ -28,7 +27,7 @@ KentThemeHelper::header(
 ?>
 		<?php echo $content; ?>
 
-	
+
 <?php KentThemeHelper::footer('  <a href="#bodycontent" tabindex="0" class="scroll-to-top" style="cursor: pointer;">
 		<i class="icon-chevron-up icon-white"></i>
 	  </a>
