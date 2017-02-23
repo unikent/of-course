@@ -4,26 +4,27 @@
 	<div class="content-container">
 		<div class="content-full">
 			<span class="current-year hidden-lg-up">
-						<svg width="2rem" height="3rem" xmlns="http://www.w3.org/2000/svg">
-							<path fill="none" stroke="#937227" d="M30, 0L0,100Z" stroke-width="1" opacity="1"></path>
-						</svg>
-						<span class="entry-year"><?php echo $course->year; ?></span>
+				<svg width="2rem" height="3rem" xmlns="http://www.w3.org/2000/svg">
+					<path fill="none" stroke="#937227" d="M30, 0L0,100Z" stroke-width="1" opacity="1"></path>
+				</svg>
+				<div class="entry-year"><?php echo $course->year; ?></div>
 				<?php
-				if (sizeof($years->years) > 1):
-					if (isset($course) && $course->current_year > $course->year):?>
-						<span class="current">
-											<a href='<?php echo $meta['active_instance']; ?>'><?php echo $course->current_year; ?> entry</a>
-										</span>
+				$other_year = array_diff($years->years, array($course->current_year));
+				$other_year = $other_year[0];
+				if(sizeof($years->years) > 1):
+					if(isset($course) && $course->current_year > $course->year):
+						?>
+						<div class="current">
+									<a href='<?php echo $meta['active_instance']; ?>'> See <?php echo $course->current_year;?> entry</a>
+								</div>
 					<?php else: ?>
-						<span class="current">
-											<?php
-											$y = array_diff($years->years, array($course->current_year));
-											$y = $y[0] ?>
-							<a href="<?php echo "/courses/$y/$course->level/$course->id"; ?>">See<?php echo $y; ?>entry</a>
-										</span>
-					<?php endif ?>
+						<div class="current">
+									<a href='<?php echo "/courses/$level/$other_year/$course->instance_id"; ?>'> See <?php echo $other_year?> entry</a>
+								</div>
+					<?php endif?>
 				<?php endif ?>
-							</span>
+
+			</span>
 			<div class="spaced-links-container">
 				<div class="spaced-links-inner-container links">
 					<span class="text-accent spaced-links-item"><i class="kf-pin"></i> <?php echo $course->locations_str_linked; ?></span>
