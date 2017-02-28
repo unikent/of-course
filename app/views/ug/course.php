@@ -74,12 +74,11 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 								<path fill="none" stroke="#937227" d="M30, 0L0,100Z" stroke-width="2" opacity="1"></path>
 							</svg>
 							<div class="current-year">
-
-									<div class="entry-year"> <?php echo $course->year ?></div>
 									<?php
 									$other_year = array_diff($years->years, array($course->current_year));
 									$other_year = $other_year[0];
 									if (sizeof($years->years) > 1 && defined("SHOW_UG_PREVIOUS_YEAR_BANNER") && SHOW_UG_PREVIOUS_YEAR_BANNER == true ):
+										?><div class="entry-year"> <?php echo $course->year ?></div><?php
 										if(isset($course) && $course->current_year > $course->year):
 											?>
 											<div class="current">
