@@ -11,22 +11,23 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 						<svg width="2rem" height="3rem" xmlns="http://www.w3.org/2000/svg">
 							<path fill="none" stroke="#937227" d="M30, 0L0,100Z" stroke-width="1" opacity="1"></path>
 						</svg>
-						<div class="entry-year"><?php echo $course->year; ?></div>
-						<?php
-						$other_year = array_diff($years->years, array($course->current_year));
-						$other_year = $other_year[0];
-						if(sizeof($years->years) > 1):
-							if(isset($course) && $course->current_year > $course->year):
-								?>
-								<div class="current">
-											<a href='<?php echo $meta['active_instance']; ?>'> See <?php echo $course->current_year;?> entry</a>
-										</div>
+							<?php if (sizeof($years->years) > 1 && defined("SHOW_UG_PREVIOUS_YEAR_BANNER") && SHOW_UG_PREVIOUS_YEAR_BANNER == true ): ?>
+								<span class="entry-year"><?php echo $course->year; ?></span>
+									<?php if (isset($course) && $course->current_year > $course->year): ?>
+										<span class="current">
+											<a href='<?php echo $meta['active_instance']; ?>'>See <?php echo $course->current_year; ?> entry</a>
+										</span>
+									<?php else: ?>
+										<span class="current">
+											<?php
+											$y = array_diff($years->years, array($course->current_year));
+											$y = $y[0] ?>
+											<a href="<?php echo "/courses/$y/$course->level/$course->id"; ?>">See <?php echo $y; ?> entry</a>
+										</span>
+									<?php endif ?>
 							<?php else: ?>
-								<div class="current">
-											<a href='<?php echo "/courses/$level/$other_year/$course->instance_id"; ?>'> See <?php echo $other_year?> entry</a>
-										</div>
-							<?php endif?>
-						<?php endif ?>
+								<span class="entry-year entry-year-single"><?php echo $course->year; ?></span>
+							<?php endif ?>
 					</span>
 					<div class="spaced-links-container">
 						<div class="spaced-links-inner-container links">
@@ -73,22 +74,25 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 								<path fill="none" stroke="#937227" d="M30, 0L0,100Z" stroke-width="2" opacity="1"></path>
 							</svg>
 							<div class="current-year">
-								<div class="entry-year"> <?php echo $course->year ?></div>
-								<?php
-								$other_year = array_diff($years->years, array($course->current_year));
-								$other_year = $other_year[0];
-								if(sizeof($years->years) > 1):
-									if(isset($course) && $course->current_year > $course->year):
-										?>
-										<div class="current">
-											<a href='<?php echo $meta['active_instance']; ?>'> See <?php echo $course->current_year;?> entry</a>
-										</div>
+									<?php
+									$other_year = array_diff($years->years, array($course->current_year));
+									$other_year = $other_year[0];
+									if (sizeof($years->years) > 1 && defined("SHOW_UG_PREVIOUS_YEAR_BANNER") && SHOW_UG_PREVIOUS_YEAR_BANNER == true ):
+										?><div class="entry-year"> <?php echo $course->year ?></div><?php
+										if(isset($course) && $course->current_year > $course->year):
+											?>
+											<div class="current">
+												<a href='<?php echo $meta['active_instance']; ?>'>See <?php echo $course->current_year;?> entry</a>
+											</div>
+										<?php else: ?>
+											<div class="current">
+												<a href='<?php echo "/courses/$level/$other_year/$course->instance_id"; ?>'>See <?php echo $other_year?> entry</a>
+											</div>
+										<?php endif?>
+
 									<?php else: ?>
-										<div class="current">
-											<a href='<?php echo "/courses/$level/$other_year/$course->instance_id"; ?>'> See <?php echo $other_year?> entry</a>
-										</div>
-									<?php endif?>
-								<?php endif ?>
+									<span class="entry-year entry-year-single"><?php echo $course->year; ?></span>
+									<?php endif ?>
 							</div>
 						</div>
 					</div>

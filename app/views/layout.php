@@ -21,7 +21,7 @@ $undergraduate = array(
 		'Academic life' => '/courses/undergraduate/academic-life',
 		'Student experience' => '/courses/undergraduate/student-experience',
 		'How to apply' => '/courses/undergraduate/how-to-apply',
-		'Accommodation' => '/courses/undergraduate/accommodation',
+		'Accommodation' => '/accommodation',
 		'Visit us' => '/courses/visit',
 		'International' => '/courses/international/',
 		'Fees and funding' => '/courses/undergraduate/fees-and-funding',
@@ -56,7 +56,7 @@ if(isset($profile) && !empty($profile)){
 			'Academic life' => '/courses/undergraduate/academic-life',
 			'Student experience' => '/courses/undergraduate/student-experience',
 			'How to apply' => '/courses/undergraduate/how-to-apply',
-			'Accommodation' => '/courses/undergraduate/accommodation',
+			'Accommodation' => '/accommodation',
 			'Visit us' => '/courses/visit',
 			'Fees and funding' => '/courses/undergraduate/fees-and-funding',
 
