@@ -68,8 +68,8 @@ foreach($course->deliveries as $delivery){
 					<div class="row">
 						<div class="col-xs-10">
 							<h2 class="modal-title">Apply Now</h2>
-							<?php if (!$noneUniqueDeliveryFound){ ?>
-									<?php
+							<?php if (!$noneUniqueDeliveryFound && empty($course->how_to_apply)){ ?>
+								<?php
 									if (!$has_parttime){
 										?>
 										<input type="hidden" id="type" value="full-time">
@@ -195,32 +195,35 @@ foreach($course->deliveries as $delivery){
 							</noscript>
 						<?php } ?>
 					</div>
-					<div class="col-lg-4">
+					<?php if(empty($course->how_to_apply)):?>
+						<div class="col-lg-4">
+
 							<a type="button" id="apply-link-dummy" class="btn btn-large btn-secondary chevron-link next-btn apply-link-courses disabled"
 							   tabindex="0" role="button" data-toggle="tooltip" data-placement="right"
 							   title="Please select your course options above">Apply </a>
 
-						<?php foreach ($course->deliveries as $delivery){ ?>
-							<a
-								id="apply-link-<?php echo strtolower(str_replace(' ', '', $delivery->award_name)) ?>-<?php echo $delivery->attendance_pattern ?>-<?php echo $course->year ?>"
-								class="btn btn-large btn-primary chevron-link next-btn apply-link-courses" tabindex="0" role="button"
-								title="Apply for <?php echo $delivery->description ?>"
-								href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=<?php echo $delivery->current_ipo ?>"
-								onclick="window.KENT.kat.event('course-page', 'apply-pg', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>] at <?php echo $schoolName ?>');">Apply
-							</a>
-						<?php } ?>
+							<?php foreach ($course->deliveries as $delivery){ ?>
+								<a
+										id="apply-link-<?php echo strtolower(str_replace(' ', '', $delivery->award_name)) ?>-<?php echo $delivery->attendance_pattern ?>-<?php echo $course->year ?>"
+										class="btn btn-large btn-primary chevron-link next-btn apply-link-courses" tabindex="0" role="button"
+										title="Apply for <?php echo $delivery->description ?>"
+										href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=<?php echo $delivery->current_ipo ?>"
+										onclick="window.KENT.kat.event('course-page', 'apply-pg', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>] at <?php echo $schoolName ?>');">Apply
+								</a>
+							<?php } ?>
 
-						<?php foreach ($course->deliveries as $delivery){ ?>
-							<a id="apply-link-delivery<?php echo $delivery->id ?>"
-							   class="btn btn-large btn-primary chevron-link next-btn apply-link-courses" tabindex="0"
-							   title="Apply for <?php echo $delivery->description ?>"
-							   href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=<?php echo $delivery->current_ipo ?>"
-							   onclick="window.KENT.kat.event('course-page', 'apply-pg', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>] at <?php echo $schoolName ?>');">Apply
-							</a>
-						<?php } ?>
+							<?php foreach ($course->deliveries as $delivery){ ?>
+								<a id="apply-link-delivery<?php echo $delivery->id ?>"
+								   class="btn btn-large btn-primary chevron-link next-btn apply-link-courses" tabindex="0"
+								   title="Apply for <?php echo $delivery->description ?>"
+								   href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=<?php echo $delivery->current_ipo ?>"
+								   onclick="window.KENT.kat.event('course-page', 'apply-pg', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>] at <?php echo $schoolName ?>');">Apply
+								</a>
+							<?php } ?>
 
-						<p>Our application system (Kent Vision) allows you to save and return to your application at any time.</p>
-					</div>
+							<p>Our application system (Kent Vision) allows you to save and return to your application at any time.</p>
+						</div>
+					<?php endif; ?>
 				</div>
 			</div>
 		</div>
