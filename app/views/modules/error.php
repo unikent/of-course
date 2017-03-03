@@ -1,25 +1,43 @@
-<style>
-	.qs-search-box .quickspot-container .quickspot-results{
-		width: 95%;
-	}
-</style>
 <div class="container">
+	<?php \unikent\kent_theme\kentThemeHelper::breadcrumb(array("Courses"=>"/courses/", "Modules"=>"")); ?>
 
 	<h1><?php echo $error; ?></h1>
 
 	<?php if (empty($collections)){ ?>
 	<h2>Search all Modules</h2>
-
-	<div class="qs-search-box">
-		<div class="quickspot-container">
-			<label for="modulesearch" class="screenreader-only">Search modules by code or keyword</label>
-			<input class="input-xlarge" style="width: 95%" id="modulesearch" type="text" name="search" placeholder="Search modules by code or keyword" autocomplete="off" tabindex="0">
-			<button class="btn" name="quick-spot-search">search</button>
-		</div>
-		<div class="text-right">
-			<a href="<?php echo Flight::url("modules/");?>">Browse all modules</a>
-		</div>
 	</div>
+		<div class="panel-secondary">
+			<div class="container form-inline pt-2 pb-2 filter-box" id="filter_box">
+				<div class="module-filter-container">
+					<input
+							id="module-filter"
+							class="form-control"
+							type="text"
+							placeholder="Search modules"
+							data-quickspot-config="modules_inline"
+							data-quickspot-target="quickspot-output"
+							data-quickspot-filters="filter_box"
+					>
+				</div>
+
+				<div class="search-select module-options-search-div">
+					<select class="subject-search form-control "  data-filter-col="sds_code">
+						<option value="">All subjects</option>
+						<?php foreach ($subjects as $k => $v){ ?>
+							<option value="<?php echo $k; ?>"><?php echo $v; ?> - (<?php echo $k; ?>)</option>
+						<?php }?>
+					</select>
+				</div>
+
+				<input type="hidden" name="quickspot_result_count" />
+				<input type="hidden" name="qucikspot_return_to_scroll_position" />
+			</div>
+		</div>
+		<div class="card-panel cards-list cards-backed card-panel-secondary module-listing">
+			<div class="card-panel-body quickspot-output" id="quickspot-output">
+			</div>
+		</div>
+
 	<?php }else{ ?>
 		<h2>Collections</h2>
 
@@ -30,58 +48,3 @@
 		</ul>
 	<?php } ?>
 </div>
-<kentScripts>
-	<script src='//static.kent.ac.uk/pantheon/javascript/daedalus/quickspot.min.js' type='text/javascript'></script>
-	<script>
-		/** Quick search  */
-		var qs = quickspot.attach({
-			// Basic
-			"url":"<?php echo API_URL; ?>v1/modules/collection/all",
-			"target":"modulesearch",
-			"search_on": ["title", "sds_code"],
-			"disable_occurrence_weighting": true,
-			"prevent_headers":              true,
-			"key_value": "title",
-			"screenreader": true,
-			"auto_highlight":true,
-			"max_results": 60,
-			// Extend
-			"click_handler":function(itm){
-				//Send em to page
-				document.location = '<?php echo Flight::url("modules/module/"); ?>'+itm.sds_code;
-			},
-			"display_handler": function(itm,qs){
-				// Highlight searched word
-				return itm.title + "<br/><span>" + itm.sds_code +"</span>";
-			},
-			"no_results": function (qs, val){
-				return "<a class='quickspot-result selected'>Press enter to search...</a>";
-			},
-			"no_results_click": function (value, qs){
-				var url = "<?php echo Flight::url('modules/');?>?search=" + value;
-				window.location.href = url;
-			},
-			"data_pre_parse": function(data, options){
-				return data.modules;
-			},
-			"loaded":function(){
-				qs.datastore.filter(function(o){return o.running===true});
-			}
-		});
-
-		// Handle button
-		$('.quickspot-container button.btn').click(function(){
-			window.location.href = "<?php echo Flight::url('modules/');?>?search=" + $("#modulesearch").val();
-		});
-
-		$('#level-info, .credits-help').popover({
-			placement:'top',
-			html:true
-		}).click(function(e){
-			e.preventDefault();
-			$('#level-info, .credits-help').not(this).popover('hide');
-		});
-
-
-	</script>
-</kentScripts>

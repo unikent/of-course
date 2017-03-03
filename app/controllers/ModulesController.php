@@ -124,8 +124,9 @@ class ModulesController {
 	 *
 	 */
 	protected function module_404($error){
+		$subjects = $this->getSubjectsList();
 		Flight::response()->status(404);
-		return Flight::layout("modules/error", array('error'=> $error), "modules/layout");
+		return Flight::layout("modules/error", array('error'=> $error, 'subjects' => $subjects), "modules/layout");
 	}
 
 
@@ -137,7 +138,7 @@ class ModulesController {
 		$data = Cache::load(API_URL . "/v1/modules/module/" . $code,15);
 
 		if($data == false){
-			return (object) array("error" => "Unable to find specified module.");
+			return (object) array("error" => "Sorry, unable to find module.");
 		}
 
 		return json_decode($data['data']);
@@ -163,7 +164,7 @@ class ModulesController {
 		$data = Cache::load(API_URL . "/v1/modules/collection/" . $collection, 15);
 
 		if($data == false){
-			return (object) array("error" => "Unable to find specified collection.");
+			return (object) array("error" => "Sorry, unable to find collection");
 		}
 
 		return json_decode($data['data']);
