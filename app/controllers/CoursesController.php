@@ -309,24 +309,38 @@ class CoursesController {
 			return Flight::notFound();
 		}
 
-		switch($level){
-			case 'postgraduate':
+		// get all the years on offer, most recent first
+		$years_data = static::$pp->make_request("$level/year");
+		$years = array_reverse($years_data->years);
+
+		// this is used in the search results listing, so we can output the correct year for each course in the link, if needed
+		$year_for_url = ($year == 'current' || $year == static::$current_year ? '' : $year . '/');
+
+		// set default meta info
+		$title = 'Courses A-Z';
+		$template = 'ug/search';
+		$meta = array(
+			'title' => 'Courses A-Z | Undergraduate courses | The University of Kent',
+			'description' => 'Search all of the undergraduate courses offered by the University of Kent',
+		);
+
+		// if we have multiple years the meta info needs changing
+		if ( $level != 'postgraduate' && $year != 'current' && sizeof($years) > 1 && defined("SHOW_UG_PREVIOUS_YEAR_BANNER") && SHOW_UG_PREVIOUS_YEAR_BANNER == true ) {
+			$title = 'Courses A-Z '. $year;
+			$template = 'ug/search';
+			$meta = array(
+				'title' => 'Courses A-Z | Undergraduate courses ' . $year . ' | The University of Kent',
+				'description' => 'Search all of the undergraduate courses for ' . $year . ' offered by the University of Kent',
+			);
+		}
+		// pg meta info
+		elseif ( $level == 'postgraduate' ) {
 			$title = 'Courses A-Z';
 			$template = 'pg/search';
 			$meta = array(
 				'title' => 'Courses A-Z | Postgraduate courses | The University of Kent',
 				'description' => 'Search all of the postgraduate courses offered by the University of Kent',
 			);
-			break;
-
-			default:
-			$title = 'Courses A-Z';
-			$template = 'ug/search';
-			$meta = array(
-				'title' => 'Courses A-Z | Undergraduate courses | The University of Kent',
-				'description' => 'Search all of the undergraduate courses offered by the University of Kent',
-			);
-			break;
 		}
 
 		Flight::setup($year, $level);
@@ -354,7 +368,7 @@ class CoursesController {
 		if(isset($_GET['debug_performance'])){ Log::warning($programmes); }
 
 		//Render full page
-		return Flight::layout($template, array('meta' => $meta, 'programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'search_type' => $search_type, 'search_string' => $search_string, 'awards' => $award_names, 'disable_search_bar' => true, 'title' => $title));
+		return Flight::layout($template, array('meta' => $meta, 'programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'search_type' => $search_type, 'search_string' => $search_string, 'awards' => $award_names, 'disable_search_bar' => true, 'title' => $title, 'years' => $years, 'year_for_url' => $year_for_url));
 
 	}
 	/**
@@ -928,9 +942,9 @@ class CoursesController {
 			'description' => ''
 		);
 
-		return Flight::layout('profiles', array('meta' => $meta, 
+		return Flight::layout('profiles', array('meta' => $meta,
 				'profiles'=> $profiles,
-			 	'level' => $level, 
+			 	'level' => $level,
 			 	'level_code'=>$level_code,
 			 	'level_pretty'=>$level_pretty,
 			  	'categories' => $cats
