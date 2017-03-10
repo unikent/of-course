@@ -49,7 +49,7 @@
 
 				</select>
 			</div>
-			
+
 		<div class="search-select course-options-search-div">
 			<select class="custom-select course-options-search form-control <?php if ( $search_type == 'programme_type' || $search_type == 'course_options' ) echo 'highlighted'; ?>" data-filter-col="programme_type">
 				<option value="">All options</option>
@@ -67,10 +67,10 @@
 		<h2><span id="filter_title">All</span> courses</h2>
 
 		<div id="course-filter-container">
-			<input 
-				id="course-filter" 
-				class="form-control" 
-				type="text" 
+			<input
+				id="course-filter"
+				class="form-control"
+				type="text"
 				placeholder="Search courses"
 				data-quickspot-config="ug_courses_inline"
 				data-quickspot-target="quickspot-output"
@@ -85,7 +85,7 @@
 
 
 
-<?php 
+<?php
 $programmes = (array)$programmes;
 usort($programmes, function($a,$b){ return $a->name > $b->name;});
 ?>
@@ -97,15 +97,12 @@ usort($programmes, function($a,$b){ return $a->name > $b->name;});
 				<a href="<?php echo Flight::url("{$level}/{$year_for_url}{$p->id}/{$p->slug}"); ?>" class="card-title-link ">
 					<h3 style="display:inline;"><?php echo $p->name;?> <?php echo $p->programmme_status_text; ?> - <span class="advanced-search-award"><?php echo $p->award;?></span></h3>
 				</a>
-				
+
 				<span class="kf-clock tag text-accent"> <?php echo $p->mode_of_study;?></span>
-				<span class="kf-pin tag text-accent"> <?php echo $p->campus;?></span> 
-				
+				<span class="kf-pin tag text-accent"> <?php echo $p->campus . ( ' ,' . $p->additional_locations ? $p->additional_locations : '');?></span> 
+
 				<a href="<?php echo Flight::url("{$level}/{$year_for_url}{$p->id}/{$p->slug}"); ?>" class="faux-link-overlay" aria-hidden="true"><?php echo $p->name;?></a>
 			</div>
 		<?php endforeach; ?>
-	</div>					 
+	</div>
 </div>
-
-
-
