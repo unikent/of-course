@@ -311,7 +311,9 @@ class CoursesController {
 
 		// get all the years on offer, most recent first
 		$years_data = static::$pp->make_request("$level/year");
-		$years = array_reverse($years_data->years);
+
+		// make sure the most recent year is first
+		rsort($years_data->years);
 
 		// this is used in the search results listing, so we can output the correct year for each course in the link, if needed
 		$year_for_url = ($year == 'current' || $year == static::$current_year ? '' : $year . '/');
@@ -368,7 +370,7 @@ class CoursesController {
 		if(isset($_GET['debug_performance'])){ Log::warning($programmes); }
 
 		//Render full page
-		return Flight::layout($template, array('meta' => $meta, 'programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'search_type' => $search_type, 'search_string' => $search_string, 'awards' => $award_names, 'disable_search_bar' => true, 'title' => $title, 'years' => $years, 'year_for_url' => $year_for_url));
+		return Flight::layout($template, array('meta' => $meta, 'programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'search_type' => $search_type, 'search_string' => $search_string, 'awards' => $award_names, 'disable_search_bar' => true, 'title' => $title, 'years' => $years_data->years, 'year_for_url' => $year_for_url));
 
 	}
 	/**

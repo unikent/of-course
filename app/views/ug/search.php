@@ -4,7 +4,7 @@
 
 	<?php if (sizeof($years) > 1 && defined("SHOW_UG_PREVIOUS_YEAR_BANNER") && SHOW_UG_PREVIOUS_YEAR_BANNER == true ): ?>
 
-		<h1>Undergraduate courses <?php echo $year !== 'current' ? $year : '' ?></h1>
+		<h1>Undergraduate courses <?php echo $year !== 'current' ? $year : $years[0] ?></h1>
 		<ul class="nav nav-tabs  pt-1">
 			<?php foreach ($years as $key=>$study_year): ?>
 				<li class="nav-item">
