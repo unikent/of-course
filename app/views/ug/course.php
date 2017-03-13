@@ -11,23 +11,31 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 						<svg width="2rem" height="3rem" xmlns="http://www.w3.org/2000/svg">
 							<path fill="none" stroke="#937227" d="M30, 0L0,100Z" stroke-width="1" opacity="1"></path>
 						</svg>
-							<?php if (sizeof($years->years) > 1 && defined("SHOW_UG_PREVIOUS_YEAR_BANNER") && SHOW_UG_PREVIOUS_YEAR_BANNER == true ): ?>
-								<span class="entry-year"><?php echo $course->year; ?></span>
-									<?php if (isset($course) && $course->current_year > $course->year): ?>
-										<span class="current">
-											<a href='<?php echo $meta['active_instance']; ?>'>See <?php echo $course->current_year; ?> entry</a>
-										</span>
-									<?php else: ?>
-										<span class="current">
-											<?php
-											$y = array_diff($years->years, array($course->current_year));
-											$y = $y[0] ?>
-											<a href="<?php echo "/courses/$y/$course->level/$course->id"; ?>">See <?php echo $y; ?> entry</a>
-										</span>
-									<?php endif ?>
-							<?php else: ?>
+							<?php
+
+							if(!defined("SHOW_UG_PREVIOUS_YEAR_BANNER") || SHOW_UG_PREVIOUS_YEAR_BANNER == false ): ?>
 								<span class="entry-year entry-year-single"><?php echo $course->year; ?></span>
-							<?php endif ?>
+							<?php else: ?>
+								<div class="entry-year"> <?php echo $course->year ?></div>
+							<?php endif;
+
+							//If it's the current year
+							if($course->year == $years->current):
+								$previous_year = $course->year-1;
+								// If the course existed in the previous year and if you are still able to apply for the previous year
+								if(in_array($previous_year, $course->years) && in_array($previous_year, $years->years)) :?>
+									<div class="current">
+										<a href='<?php echo "/courses/$level/$previous_year/$course->instance_id"; ?>'>See <?php echo $course->year-1?> entry</a>
+									</div>
+								<?php endif;
+							else:
+								// If the year being looked at is before the current year and the course is running in the current year
+								if($course->year < $years->current && in_array($years->current, $course->years)) :?>
+									<div class="current">
+										<a href='<?php echo $meta['active_instance']; ?>'>See <?php echo $years->current;?> entry</a>
+									</div>
+								<?php endif;
+							endif; ?>
 					</span>
 					<div class="spaced-links-container">
 						<div class="spaced-links-inner-container links">
@@ -75,24 +83,31 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 							</svg>
 							<div class="current-year">
 									<?php
-									$other_year = array_diff($years->years, array($course->current_year));
-									$other_year = $other_year[0];
-									if (sizeof($years->years) > 1 && defined("SHOW_UG_PREVIOUS_YEAR_BANNER") && SHOW_UG_PREVIOUS_YEAR_BANNER == true ):
-										?><div class="entry-year"> <?php echo $course->year ?></div><?php
-										if(isset($course) && $course->current_year > $course->year):
-											?>
-											<div class="current">
-												<a href='<?php echo $meta['active_instance']; ?>'>See <?php echo $course->current_year;?> entry</a>
-											</div>
-										<?php else: ?>
-											<div class="current">
-												<a href='<?php echo "/courses/$level/$other_year/$course->instance_id"; ?>'>See <?php echo $other_year?> entry</a>
-											</div>
-										<?php endif?>
 
+									if(!defined("SHOW_UG_PREVIOUS_YEAR_BANNER") || SHOW_UG_PREVIOUS_YEAR_BANNER == false ): ?>
+										<span class="entry-year entry-year-single"><?php echo $course->year; ?></span>
 									<?php else: ?>
-									<span class="entry-year entry-year-single"><?php echo $course->year; ?></span>
-									<?php endif ?>
+										<div class="entry-year"> <?php echo $course->year ?></div>
+									<?php endif;
+
+										//If it's the current year
+									if($course->year == $years->current):
+										$previous_year = $course->year-1;
+										// If the course existed in the previous year and if you are still able to apply for the previous year
+										if(in_array($previous_year, $course->years) && in_array($previous_year, $years->years)) :?>
+											<div class="current">
+												<a href='<?php echo "/courses/$level/$previous_year/$course->instance_id"; ?>'>See <?php echo $course->year-1?> entry</a>
+											</div>
+										<?php endif;
+									else:
+										// If the year being looked at is before the current year and the course is running in the current year
+										if($course->year < $years->current && in_array($years->current, $course->years)) :?>
+											<div class="current">
+												<a href='<?php echo $meta['active_instance']; ?>'>See <?php echo $years->current;?> entry</a>
+											</div>
+										<?php endif;
+									endif; ?>
+
 							</div>
 						</div>
 					</div>
