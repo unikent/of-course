@@ -113,8 +113,7 @@ usort($programmes, function($a,$b){ return $a->name > $b->name;});
 				</a>
 
 				<span class="kf-clock tag text-accent"> <?php echo $p->mode_of_study;?></span>
-				<?php print_r($p->campus) ?>
-				<span class="kf-pin tag text-accent"> <?php echo $p->campus . ( $p->additional_locations != '' ? ' ,' . $p->additional_locations : '' );?></span>
+				<span class="kf-pin tag text-accent"> <?php echo $p->campus . ( $p->additional_locations != '' ? ', ' . $p->additional_locations : '' );?></span>
 
 				<a href="<?php echo Flight::url("{$level}/{$year_for_url}{$p->id}/{$p->slug}"); ?>" class="faux-link-overlay" aria-hidden="true"><?php echo $p->name;?></a>
 			</div>
