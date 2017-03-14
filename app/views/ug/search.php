@@ -85,7 +85,8 @@
 		</div>
 
 		<input type="hidden" name="quickspot_result_count" />
-		<input type="hidden" name="qucikspot_return_to_scroll_position" />
+		<input type="hidden" name="quickspot_return_to_scroll_position" />
+		<input type="hidden" name="quickspot_year" value="<?php echo $year ?>" />
 	</div>
 
 	<div class="search-filter container form-inline">
@@ -124,7 +125,7 @@ usort($programmes, function($a,$b){ return $a->name > $b->name;});
 				</a>
 
 				<span class="kf-clock tag text-accent"> <?php echo $p->mode_of_study;?></span>
-				<span class="kf-pin tag text-accent"> <?php echo $p->campus;?></span>
+				<span class="kf-pin tag text-accent"> <?php echo $p->campus . (', ' . $p->additional_locations ? $p->additional_locations != '' : ''); ?></span>
 
 				<a href="<?php echo Flight::url("{$level}/{$year_for_url}{$p->id}/{$p->slug}"); ?>" class="faux-link-overlay" aria-hidden="true"><?php echo $p->name;?></a>
 			</div>

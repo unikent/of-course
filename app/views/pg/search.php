@@ -1,7 +1,7 @@
 <div class="container">
 	<?php \unikent\kent_theme\kentThemeHelper::breadcrumb(array("Courses"=>"/courses/", "Postgraduate" . ($year!=='current'? ' ' . $year : '')=>"")); ?>
 
-	
+
 	<?php if (sizeof($years) > 1 && defined("SHOW_UG_PREVIOUS_YEAR_BANNER") && SHOW_UG_PREVIOUS_YEAR_BANNER == true ): ?>
 
 		<h1>Postgraduate courses</h1>
@@ -139,7 +139,7 @@ usort($programmes, function($a,$b){ return $a->name > $b->name;});
 				</a>
 
 				<span class="kf-clock tag text-accent"> <?php echo $p->mode_of_study;?></span>
-				<span class="kf-pin tag text-accent"> <?php echo $p->campus;?></span>
+				<span class="kf-pin tag text-accent"> <?php echo $p->campus . (', ' . $p->additional_locations ? $p->additional_locations != '' : ''); ?></span>
 
 				<a href="<?php echo Flight::url("{$level}/{$year_for_url}{$p->id}/{$p->slug}"); ?>" class="faux-link-overlay" aria-hidden="true"><?php echo $p->name;?></a>
 			</div>
