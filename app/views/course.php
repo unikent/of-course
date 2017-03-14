@@ -1,5 +1,5 @@
-<?php 
-use \unikent\kent_theme\kentThemeHelper; 
+<?php
+use \unikent\kent_theme\kentThemeHelper;
 ?>
 
 <div class="card card-overlay header-card-overlay">
@@ -111,12 +111,23 @@ use \unikent\kent_theme\kentThemeHelper;
 		</div>
 		<div class="card-panel-body kent-slider" data-slider-config="card_panel">
 			<?php foreach ($course->related_courses as $related_course): ?>
-
+				<?php
+					// additional courses is a string, where 'and' or ',' is used as a delimiter for multiple cases
+					// do we have multiple additional courses? In which case 'A, B and C'
+					// or a single additional course, in which case 'A and B'.
+					$locations_str = $related_course->campus;
+					if ($related_course->additional_locations != '') {
+						$locations_str = $related_course->campus . " and " . $related_course->additional_locations;
+						if (strpos($related_course->additional_locations, " and ")) {
+							$locations_str = $related_course->campus . ", " . $related_course->additional_locations;
+						}
+					}
+				?>
 				<div class="card card-linked kent-slide ">
 					<a href="<?php echo Flight::url("{$level}/{$related_course->id}/{$related_course->slug}"); ?>" class="card-title-link"><h3 class="card-title"><?php echo $related_course->name ?> <?php echo !empty($related_course->programmme_status_text) ? $related_course->programmme_status_text : ''; ?> <?php echo $related_course->award; ?></h3></a>
 					<a href="<?php echo Flight::url("{$level}/{$related_course->id}/{$related_course->slug}"); ?>" class="faux-link-overlay" aria-hidden="true"><?php echo $related_course->name ?> <?php echo !empty($related_course->programmme_status_text) ? $related_course->programmme_status_text : ''; ?> <?php echo $related_course->award; ?></a>
 					<p class="card-meta text-accent"><i class="kf-clock kf-fw"></i> <?php echo $related_course->mode_of_study; ?></p>
-					<p class="card-meta text-accent"><i class="kf-pin kf-fw"></i> <?php echo $related_course->campus; ?></p>
+					<p class="card-meta text-accent"><i class="kf-pin kf-fw"></i> <?php echo $locations_str; ?></p>
 				</div>
 			<?php endforeach; ?>
 
@@ -135,4 +146,3 @@ use \unikent\kent_theme\kentThemeHelper;
 	</div>
 </footer>
 <?php endif; ?>
-
