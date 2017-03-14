@@ -60,7 +60,7 @@
 			</div>
 
 			<div class="search-select" >
-				<select class="custom-select campus-search form-control <?php if(strcmp($search_type, 'campus')  == 0) echo 'highlighted'; ?>" data-filter-col="campus">
+				<select class="custom-select campus-search form-control <?php if(strcmp($search_type, 'campus')  == 0) echo 'highlighted'; ?>" data-filter-col="locations">
 					<option value="">All locations</option>
 					<option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Canterbury'))  == 0) echo 'selected'; ?>>Canterbury</option>
 					<option <?php if(strcmp($search_type, 'campus')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Medway'))  == 0) echo 'selected'; ?>>Medway</option>
@@ -125,7 +125,7 @@ usort($programmes, function($a,$b){ return $a->name > $b->name;});
 				</a>
 
 				<span class="kf-clock tag text-accent"> <?php echo $p->mode_of_study;?></span>
-				<span class="kf-pin tag text-accent"> <?php echo $p->campus . (', ' . $p->additional_locations ? $p->additional_locations != '' : ''); ?></span>
+				<span class="kf-pin tag text-accent"> <?php echo $p->campus . ( $p->additional_locations != '' ? ', ' . $p->additional_locations : '' );?></span>
 
 				<a href="<?php echo Flight::url("{$level}/{$year_for_url}{$p->id}/{$p->slug}"); ?>" class="faux-link-overlay" aria-hidden="true"><?php echo $p->name;?></a>
 			</div>
