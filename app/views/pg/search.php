@@ -1,16 +1,42 @@
 <div class="container">
 	<?php \unikent\kent_theme\kentThemeHelper::breadcrumb(array("Courses"=>"/courses/", "Postgraduate" . ($year!=='current'? ' ' . $year : '')=>"")); ?>
 
-	<h1>Postgraduate courses</h1>
 
-	<ul class="nav nav-tabs  pt-1">
-		<li class="nav-item">
-			<a class="nav-link" href="<?php echo Flight::url("undergraduate/search"); ?>">Undergraduate</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link  active">Postgraduate</a>
-		</li>
-	</ul>
+	<?php if (sizeof($years) > 1 && defined("SHOW_UG_PREVIOUS_YEAR_BANNER") && SHOW_UG_PREVIOUS_YEAR_BANNER == true ): ?>
+
+		<h1>Postgraduate courses</h1>
+		<ul class="nav nav-tabs  pt-1">
+			<?php foreach ($years as $key=>$study_year): ?>
+				<li class="nav-item">
+
+					<a class="nav-link"<?php if ($key != 0): ?> href="<?php echo Flight::url("undergraduate/".$study_year."/search/") ?>"
+
+					<?php else: ?>href="<?php echo Flight::url("undergraduate/search/")?>"
+
+					<?php endif ?>>Undergraduate <?php echo $study_year ?></a>
+				</li>
+			<?php endforeach; ?>
+			<li class="nav-item">
+				<a class="nav-link active">Postgraduate</a>
+			</li>
+		</ul>
+
+	<?php else: ?>
+
+		<h1>Postgraduate courses</h1>
+		<ul class="nav nav-tabs  pt-1">
+			<li class="nav-item">
+				<a class="nav-link" href="<?php echo Flight::url("undergraduate/search"); ?>">Undergraduate</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active">Postgraduate</a>
+			</li>
+		</ul>
+	<?php endif; ?>
+
+
+
+
 </div>
 <div class="panel-secondary ">
 		<div class="container form-inline pt-2 pb-2 filter-box" id="filter_box">

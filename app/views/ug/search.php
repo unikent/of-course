@@ -2,17 +2,42 @@
 
 	<?php \unikent\kent_theme\kentThemeHelper::breadcrumb(array("Courses"=>"/courses/", "Undergraduate" . ($year!=='current'? ' ' . $year : '')=>"")); ?>
 
-	<h1>Undergraduate courses</h1>
+	<?php if (sizeof($years) > 1 && defined("SHOW_UG_PREVIOUS_YEAR_BANNER") && SHOW_UG_PREVIOUS_YEAR_BANNER == true ): ?>
 
-	<ul class="nav nav-tabs  pt-1">
-		<li class="nav-item">
-			<a class="nav-link active">Undergraduate</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link" href="<?php echo Flight::url("postgraduate/search"); ?>">Postgraduate</a>
-		</li>
-	</ul>
+		<h1>Undergraduate courses <?php echo $year !== 'current' ? $year : $years[0] ?></h1>
+		<ul class="nav nav-tabs  pt-1">
+			<?php foreach ($years as $key=>$study_year): ?>
+				<li class="nav-item">
+
+					<a class="nav-link<?php if ( $year == $study_year || ($year == 'current' && $key == 0) ): ?> active"
+
+					<?php elseif ($key != 0): ?>" href="<?php echo Flight::url("undergraduate/".$study_year."/search/") ?>"
+
+					<?php else: ?>" href="<?php echo Flight::url("undergraduate/search/")?>"
+
+					<?php endif ?>>Undergraduate <?php echo $study_year ?></a>
+				</li>
+			<?php endforeach; ?>
+			<li class="nav-item">
+				<a class="nav-link" href="<?php echo Flight::url("postgraduate/search"); ?>">Postgraduate</a>
+			</li>
+		</ul>
+
+	<?php else: ?>
+
+		<h1>Undergraduate courses</h1>
+		<ul class="nav nav-tabs  pt-1">
+			<li class="nav-item">
+				<a class="nav-link active">Undergraduate</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="<?php echo Flight::url("postgraduate/search"); ?>">Postgraduate</a>
+			</li>
+		</ul>
+	<?php endif; ?>
+
 </div>
+
 <div class="panel-secondary ">
 		<div class="container form-inline pt-2 pb-2 filter-box" id="filter_box">
 			<div class="search-select subject-categories-search-div">
@@ -60,7 +85,8 @@
 		</div>
 
 		<input type="hidden" name="quickspot_result_count" />
-		<input type="hidden" name="qucikspot_return_to_scroll_position" />
+		<input type="hidden" name="quickspot_return_to_scroll_position" />
+		<input type="hidden" name="quickspot_year" value="<?php echo $year ?>" />
 	</div>
 
 	<div class="search-filter container form-inline">
@@ -99,7 +125,7 @@ usort($programmes, function($a,$b){ return $a->name > $b->name;});
 				</a>
 
 				<span class="kf-clock tag text-accent"> <?php echo $p->mode_of_study;?></span>
-				<span class="kf-pin tag text-accent"> <?php echo $p->campus . ( $p->additional_locations != '' ? ' ,' . $p->additional_locations : '' );?></span>
+				<span class="kf-pin tag text-accent"> <?php echo $p->campus . ( $p->additional_locations != '' ? ', ' . $p->additional_locations : '' );?></span>
 
 				<a href="<?php echo Flight::url("{$level}/{$year_for_url}{$p->id}/{$p->slug}"); ?>" class="faux-link-overlay" aria-hidden="true"><?php echo $p->name;?></a>
 			</div>
