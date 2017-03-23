@@ -172,43 +172,48 @@ class CoursesController {
 		return Flight::layout('course', $data);
 	}
 
-	/**
-	* Display a preview page
-	*
-	* @param string $hash of preview
-	*/
-	public function preview($level, $hash)
-	{
-		try
+
+		/**
+		* Display a preview page
+		*
+		* @param string $hash of preview
+		*/
+		public function preview($level, $hash)
 		{
-			$course = static::$pp->get_preview_programme($level, $hash);
+			try
+			{
+				$course = static::$pp->get_preview_programme($level, $hash);
+			}
+			catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
+			{
+				// We dont know enough to help the 404 out really
+				return Flight::notFound(array('error'=> $e));
+			}
+			catch(\Exception $e)
+			{
+				// Another error. Pretend it was a 404.
+				return Flight::error($e);
+			}
+
+			$years = static::$pp->make_request("$level/year");
+
+			Flight::cachecheck();
+
+			// Debug option
+			if(isset($_GET['debug_performance'])){Log::warning($course); }
+
+			Flight::setup($course->year, $level, true);
+
+			$course->locations_str = $this->getCourseLocations($course);
+			$course->locations_str_linked = $this->getCourseLocationsLinked($course);
+			$course->award_list	= $this->getCourseAwardList($course);
+			$course->award_list_linked = $this->getCourseAwardListLinked($course);
+			$course->years = $years->years;
+			$course->current_year = static::$current_year;
+			$course->programmme_status_text = '';
+
+			return Flight::layout($course->programme_level.'/course', array('course'=> $course, 'years' => $years));
 		}
-		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
-		{
-			// We dont know enough to help the 404 out really
-			return Flight::notFound(array('error'=> $e));
-		}
-		catch(\Exception $e)
-		{
-			// Another error. Pretend it was a 404.
-			return Flight::error($e);
-		}
-
-		$years = static::$pp->make_request("$level/year");
-
-		Flight::cachecheck();
-
-		// Debug option
-		if(isset($_GET['debug_performance'])){Log::warning($course); }
-
-		Flight::setup($course->year, null, true);
-
-		$course->locations_str = $this->getCourseLocations($course);
-		$course->award_list	= $this->getCourseAwardList($course);
-		$course->award_list_linked = $this->getCourseAwardListLinked($course);
-
-		return Flight::layout($course->programme_level.'/course', array('course'=> $course, 'years' => $years));
-	}
 
 	/**
 	* Display a simpleview page
@@ -237,7 +242,7 @@ class CoursesController {
 		// Debug option
 		if(isset($_GET['debug_performance'])){ Log::warning($course); }
 
-		Flight::setup($course->year, null, false, true);
+		Flight::setup($course->year, $level, false, true);
 
 		return Flight::render('simpleview_course_page', array('course'=> $course));
 	}
