@@ -59,7 +59,7 @@
 					<select class="custom-select study-mode-search form-control <?php if(strcmp($search_type, 'study_mode')  == 0) echo 'highlighted'; ?>" data-filter-col="mode_of_study">
 						<option value="">All study modes</option>
 						<option <?php if(strcmp($search_type, 'study_mode')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Full-time'))  == 0) echo 'selected'; ?>>Full-time</option>
-						<option <?php if(strcmp($search_type, 'study_mode')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Part-time'))  == 0) echo 'selected'; ?>>Part-time</option>
+						<option <?php if(strcmp($search_type, 'study_mode')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Part-time'))  == 0) echo 'selected'; ?> value="a">Part-time</option>
 						<option value="Distance" data-filter-col="attendance_mode" <?php if(strcmp($search_type, 'study_mode')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('Distance learning'))  == 0) echo 'selected'; ?>>Distance learning</option>
 					</select>
 				</div>

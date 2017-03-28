@@ -68,7 +68,7 @@
 			</div>
 			<div class="search-select"  >
 				<select class="custom-select attendance-mode-search form-control <?php if ( $search_type == 'study_mode' || $search_type == 'attendance_mode' ) echo 'highlighted'; ?>" data-filter-col="mode_of_study">
-					<option value="">Full / Part time</option>
+					<option value="">All study modes</option>
 					<option <?php if ( ($search_type == 'study_mode' || $search_type == 'attendance_mode') && urldecode(strtolower($search_string)) == strtolower('Full-time') ) echo 'selected'; ?>>Full-time</option>
 					<option value="art-time" <?php if ( ($search_type == 'study_mode' || $search_type == 'attendance_mode') && urldecode(strtolower($search_string)) == strtolower('Part-time') ) echo 'selected'; ?>>Part-time</option>
 
