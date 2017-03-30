@@ -47,9 +47,14 @@ tr.collapse.in td{
 	left: 10px;
 	top: 4px;
 	color: #A5A5A5;
+	padding:10px;
 }
 #course-filter-container input {
-	padding-left:35px;
+	padding-left:55px;
+}
+
+#course-filter {
+	height:60px;
 }
 
 @media (min-width: 768px){
@@ -61,6 +66,7 @@ tr.collapse.in td{
 	}
 	#course-filter-container input {
 		width:50%;
+		margin: 30px 0;
 	}
 }
 

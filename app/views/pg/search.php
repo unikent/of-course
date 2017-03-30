@@ -111,7 +111,7 @@
 				id="course-filter"
 				class="advanced-text-search form-control"
 				type="text"
-				placeholder="Search courses"
+				placeholder="Filter course list by keyword"
 				data-quickspot-config="pg_courses_inline"
 				data-quickspot-target="quickspot-output"
 				data-quickspot-filters="filter_box"
