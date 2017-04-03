@@ -60,7 +60,7 @@ use \unikent\kent_theme\kentThemeHelper;
                 <div class="form-group">
                     <label for="course-search" class="sr-only">Search courses</label>
                     <div class="input-group input-group-lg">
-                        <input type="search" name="q" class="form-control" id="course-search" placeholder="Search courses..." autocomplete="off" data-quickspot-config="<?php if($level == 'postgraduate'){echo 'pg';}else{echo'ug';} ?>_courses" data-quickspot-target="quickspot-results-container">
+                        <input type="search" name="q" class="form-control" id="course-search" placeholder="Search courses" autocomplete="off" data-quickspot-config="<?php if($level == 'postgraduate'){echo 'pg';}else{echo'ug';} ?>_courses" data-quickspot-target="quickspot-results-container">
                         <span class="input-group-btn">
 							<button type="submit" class="btn btn-accent btn-icon">
 								<span class="sr-only">Search courses</span>
