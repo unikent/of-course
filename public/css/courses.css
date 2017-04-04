@@ -65,8 +65,8 @@ tr.collapse.in td{
 		width: 19%;
 	}
 	#course-filter-container input {
-		width:50%;
-		margin: 30px 0;
+		width: 30%;
+		margin: 0rem 0 1.5rem 0;
 	}
 }
 
@@ -113,4 +113,3 @@ tr.collapse.in td{
 .related-courses .kent-slide {
 	padding: 0 2rem;
 }
-
