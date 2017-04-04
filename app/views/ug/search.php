@@ -92,7 +92,7 @@
 				id="course-filter"
 				class="form-control"
 				type="text"
-				placeholder="Search courses"
+				placeholder="Filter course list by keyword"
 				data-quickspot-config="ug_courses_inline"
 				data-quickspot-target="quickspot-output"
 				data-quickspot-filters="filter_box"

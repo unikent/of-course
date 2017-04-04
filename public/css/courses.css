@@ -47,9 +47,14 @@ tr.collapse.in td{
 	left: 10px;
 	top: 4px;
 	color: #A5A5A5;
+	padding:10px;
 }
 #course-filter-container input {
-	padding-left:35px;
+	padding-left:55px;
+}
+
+#course-filter {
+	height:60px;
 }
 
 @media (min-width: 768px){
@@ -60,7 +65,8 @@ tr.collapse.in td{
 		width: 19%;
 	}
 	#course-filter-container input {
-		width:50%;
+		width: 30%;
+		margin: 0rem 0 1.5rem 0;
 	}
 }
 
@@ -102,4 +108,8 @@ tr.collapse.in td{
 .download-links a {
 	display:block;
 	margin-bottom:.5rem;
+}
+
+.related-courses .kent-slider {
+	padding: 0 2rem;
 }
