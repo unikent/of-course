@@ -1,6 +1,4 @@
-.course-listing {
-	padding-top:1rem;
-}
+
 
 tr.module-row{
     cursor: pointer;
@@ -30,7 +28,13 @@ tr.collapse.in td{
     border-top:0;
 }
 
-.filter-box .search-select select, #course-filter-container input{
+
+/*
+
+.course-listing {
+	padding-top:1rem;
+}
+.filter-box .search-select select {
 	width: 100%;
 }
 .filter-box .search-select select {
@@ -49,11 +53,11 @@ tr.collapse.in td{
 	color: #A5A5A5;
 	padding:10px;
 }
-#course-filter-container input {
+#course-filter-container input, #profile-filter-container input {
 	padding-left:55px;
 }
 
-#course-filter {
+#course-filter, #profile-filter {
 	height:60px;
 }
 
@@ -64,11 +68,12 @@ tr.collapse.in td{
 	.filter-box .search-select select{
 		width: 19%;
 	}
-	#course-filter-container input {
+	#course-filter-container input, #profile-filter-container input {
 		width: 30%;
 		margin: 0rem 0 1.5rem 0;
 	}
 }
+*/
 
 .sidebar li i{
     line-height: 1.5rem;
@@ -83,10 +88,6 @@ tr.collapse.in td{
 .student-profiles .slick-track
 {
     overflow: visible;
-}
-
-.profile-filter-box #profile-filter-container input {
-	padding-left:35px;
 }
 
 @media (min-width: 768px){
