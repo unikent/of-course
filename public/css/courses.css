@@ -28,53 +28,6 @@ tr.collapse.in td{
     border-top:0;
 }
 
-
-/*
-
-.course-listing {
-	padding-top:1rem;
-}
-.filter-box .search-select select {
-	width: 100%;
-}
-.filter-box .search-select select {
-	margin-bottom:.5rem;
-}
-#course-filter-container, #profile-filter-container {
-	position: relative;
-}
-#course-filter-container::before, #profile-filter-container::before {
-	content: "";
-	font-family: "kentfont", sans-serif;
-	font-size: 20px;
-	position: absolute;
-	left: 10px;
-	top: 4px;
-	color: #A5A5A5;
-	padding:10px;
-}
-#course-filter-container input, #profile-filter-container input {
-	padding-left:55px;
-}
-
-#course-filter, #profile-filter {
-	height:60px;
-}
-
-@media (min-width: 768px){
-	.filter-box .search-select {
-		display: inline;
-	}
-	.filter-box .search-select select{
-		width: 19%;
-	}
-	#course-filter-container input, #profile-filter-container input {
-		width: 30%;
-		margin: 0rem 0 1.5rem 0;
-	}
-}
-*/
-
 .sidebar li i{
     line-height: 1.5rem;
 }
