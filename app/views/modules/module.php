@@ -73,20 +73,28 @@
 
 				</style>
 
-				<div class="content-full key-info">
-					<div class="col-md-4">
-						<h3 class="kf-check-circle">Pre-requisites</h3>
-						<p><?php echo empty($module->pre_requisite)?'None':$module->pre_requisite; ?></p>
-					</div>
-					<div class="col-md-4">
-						<h3 class="kf-exclamation-circle">Restrictions</h3>
-						<p><?php echo empty($module->restrictions)?'None':$module->restrictions; ?></p>
+				<div class="content-full">
+					<div class="row key-info">
+						<div class="col-md-4 key-info-text">
+							<h3 class="kf-check-circle">Pre-requisites</h3>
+							<p><?php echo empty($module->pre_requisite)?'None':$module->pre_requisite; ?></p>
 						</div>
-					<div class="col-md-4">
-						<h3 class="kf-info-circle">Session</h3>
-						<p><em>Information below is for the <strong><?php echo $module->year-1 . '-' . substr($module->year, 2);  ?></strong> session.</em></p>
-					</div>
+						<div class="col-md-4 key-info-text">
+							<h3 class="kf-exclamation-circle">Restrictions</h3>
+							<p><?php echo empty($module->restrictions)?'None':$module->restrictions; ?></p>
+							</div>
+						<div class="col-md-3 offset-md-1">
 
+							<div class="key-info-year">
+								<svg width="2rem" height="5rem" xmlns="http://www.w3.org/2000/svg">
+									<path fill="none" stroke="#937227" d="M30, 0L0,100Z" stroke-width="1" opacity="1"></path>
+								</svg>
+								<div class="current-year">
+									<div class="entry-year"><?php echo $module->year-1 . '-' . substr($module->year, 2);  ?></div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="content-container relative">

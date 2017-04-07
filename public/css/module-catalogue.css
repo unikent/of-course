@@ -65,20 +65,46 @@ a[data-toggle="popover"]::after {
 	margin-left: .3rem;
 }
 
-.content-full.key-info {
+.content-full .key-info {
 	margin-bottom:2rem;
 	margin-top:2rem;
-	text-align: center;
+	border-bottom: 1px solid #e6e6e6;
+	padding: 1rem;
 }
-.content-full.key-info h3 {
+.content-full .key-info h3 {
 		font-weight:bold;
 		font-size: 1.2rem;
 }
-.content-full.key-info h3::before {
+.content-full .key-info h3::before {
 	color: #937227;
 	line-height: 1.2rem;
 	padding-bottom: 3px;
 	padding-right: 6px;
+}
+
+.panel-primary-tint {
+	background-color: #f1f4f9;
+}
+
+.current-year {
+	position:relative;
+	top:0.5rem;
+}
+
+@media (max-width:767px) {
+	.content-full .key-info {
+		padding: 1rem 0;
+	}
+	.key-info-text {
+		padding: 0.5rem 2rem;
+	}
+	.key-info-year {
+		padding: 0.5rem 0;
+	}
+	.current-year {
+		top:1rem;
+		left: 0;
+	}
 }
 
 @media (min-width: 992px){
