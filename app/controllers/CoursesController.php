@@ -886,7 +886,7 @@ class CoursesController {
 
 		$locations_str = '';
 		foreach($locations as $key => $loc){
-			$locations_str .= $loc->url;
+			$locations_str .= $loc->name;
 			$locations_str .= ($key === $locations_count-2) ? ' and ' : (($key === $locations_count-1) ? '' : ', ');
 		}
 
