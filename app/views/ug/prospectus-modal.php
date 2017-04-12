@@ -73,7 +73,7 @@
 							$file = 'https://www.kent.ac.uk/courses/undergraduate/prospectus/' . $course->year . '/prospectus-full.pdf';
 							?>
 							<nav class="download-links">
-								
+
 									<a class="kf-download" href="https://www.kent.ac.uk/courses/undergraduate/prospectus/<?php echo $course->year; ?>/prospectus-full.pdf"
 										<?php echo sprintf($eventjs, 'download-prospectus-ug', $course_name_fortracking); ?>>
 										Download a prospectus (PDF)
@@ -81,30 +81,34 @@
 									<?php if (!empty($course->delveries)): ?>
 										or order one below.
 									<?php endif; ?>
-								
+
 
 								<?php if(!empty($course->subject_leaflet[0])):
 									$file = $course->subject_leaflet[0]->tracking_code;
 									$pathParts = pathinfo($file);
 									$fileType = strtoupper($pathParts['extension']);
 									?>
-									
-										<a class="kf-download" href="<?php echo $course->subject_leaflet[0]->tracking_code ?>"> Download a
+
+										<a class="kf-download" href="<?php echo $course->subject_leaflet[0]->tracking_code ?>"
+											<?php echo sprintf($eventjs, 'download-subject-leaflet-ug', $course_name_fortracking); ?>>
+											Download a
 											<?php echo $course->subject_leaflet[0]->name ?>
 											subject leaflet (<?php echo $fileType ?>)
 										</a>
-									
+
 									<?php if(!empty($course->subject_leaflet_2[0])):
 									$file = $course->subject_leaflet_2[0]->tracking_code;
 									$pathParts = pathinfo($file);
 									$fileType = strtoupper($pathParts['extension']);
 									?>
-									
-										<a class="kf-download" href="<?php echo $course->subject_leaflet_2[0]->tracking_code ?>"> Download a
+
+										<a class="kf-download" href="<?php echo $course->subject_leaflet_2[0]->tracking_code ?>"
+											<?php echo sprintf($eventjs, 'download-subject-leaflet-ug', $course_name_fortracking); ?>>
+											Download a
 											<?php echo $course->subject_leaflet_2[0]->name ?>
 											subject leaflet (<?php echo $fileType ?>)
 										</a>
-									
+
 								<?php endif; ?>
 
 								<?php endif; ?>
@@ -116,5 +120,3 @@
         </div>
     </div>
 </div>
-
-
