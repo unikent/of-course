@@ -212,7 +212,20 @@ class CoursesController {
 			$course->current_year = static::$current_year;
 			$course->programmme_status_text = '';
 
-			return Flight::layout($course->programme_level.'/course', array('course'=> $course, 'years' => $years));
+			// Additional data
+			$data = array(
+				"school_name" => $course->administrative_school[0]->name,
+				"has_parttime" => (strpos(strtolower($course->mode_of_study), 'part-time') !== false),
+				"has_fulltime" => (strpos(strtolower($course->mode_of_study), 'full-time') !== false),
+				'meta' => $meta,
+				'layout' => $level === 'postgraduate' ? 'pg' : 'ug',
+				'years' => $years
+			);
+
+			// Course object should be global for views
+			Flight::view()->set('course', $course);
+
+			return Flight::layout('course', $data);
 		}
 
 	/**
@@ -873,7 +886,7 @@ class CoursesController {
 
 		$locations_str = '';
 		foreach($locations as $key => $loc){
-			$locations_str .= $loc->url;
+			$locations_str .= $loc->name;
 			$locations_str .= ($key === $locations_count-2) ? ' and ' : (($key === $locations_count-1) ? '' : ', ');
 		}
 
