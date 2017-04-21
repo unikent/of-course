@@ -1,10 +1,12 @@
 <div class="container">
 
-	<?php \unikent\kent_theme\kentThemeHelper::breadcrumb(array("Courses"=>"/courses/", "Undergraduate" . ($year!=='current'? ' ' . $year : '')=>"")); ?>
-
 	<?php if (sizeof($years) > 1 && defined("SHOW_UG_PREVIOUS_YEAR_BANNER") && SHOW_UG_PREVIOUS_YEAR_BANNER == true ): ?>
 
-		<h1>Undergraduate courses <?php echo $year !== 'current' ? $year : $years[0] ?></h1>
+		<header class="content-header">
+			<?php \unikent\kent_theme\kentThemeHelper::breadcrumb(array("Courses"=>"/courses/", "Undergraduate" . ($year!=='current'? ' ' . $year : '')=>"")); ?>
+			<h1>Undergraduate courses - <?php echo $year !== 'current' ? $year : $years[0] ?> entry</h1>
+		</header>
+
 		<ul class="nav nav-tabs  pt-1">
 			<?php foreach ($years as $key=>$study_year): ?>
 				<li class="nav-item">
@@ -15,25 +17,18 @@
 
 					<?php else: ?>" href="<?php echo Flight::url("undergraduate/search/")?>"
 
-					<?php endif ?>>Undergraduate <?php echo $study_year ?></a>
+					<?php endif ?>>Undergraduate <?php echo $study_year ?> entry</a>
 				</li>
 			<?php endforeach; ?>
-			<li class="nav-item">
-				<a class="nav-link" href="<?php echo Flight::url("postgraduate/search"); ?>">Postgraduate</a>
-			</li>
 		</ul>
 
 	<?php else: ?>
 
-		<h1>Undergraduate courses</h1>
-		<ul class="nav nav-tabs  pt-1">
-			<li class="nav-item">
-				<a class="nav-link active">Undergraduate</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="<?php echo Flight::url("postgraduate/search"); ?>">Postgraduate</a>
-			</li>
-		</ul>
+		<header class="content-header">
+			<?php \unikent\kent_theme\kentThemeHelper::breadcrumb(array("Courses"=>"/courses/", "Undergraduate" . ($year!=='current'? ' ' . $year : '')=>"")); ?>
+			<h1>Undergraduate courses - <?php echo $year !== 'current' ? $year : $years[0] ?> entry</h1>
+		</header>
+
 	<?php endif; ?>
 
 </div>
@@ -70,7 +65,6 @@
 				<option value="">All study modes</option>
 				<option <?php if ( ($search_type == 'study_mode' || $search_type == 'attendance_mode') && urldecode(strtolower($search_string)) == strtolower('Full-time') ) echo 'selected'; ?>>Full-time</option>
 				<option value="art-time" <?php if ( ($search_type == 'study_mode' || $search_type == 'attendance_mode') && urldecode(strtolower($search_string)) == strtolower('Part-time') ) echo 'selected'; ?>>Part-time</option>
-
 			</select>
 		</div>
 		<div class="filter-select">
