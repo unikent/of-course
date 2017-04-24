@@ -73,11 +73,10 @@
 
 	<div class="filter-text container form-inline">
 		<h2><span id="filter_title">All</span> courses</h2>
-
-		<div id="course-filter-container">
+		<div class="filter-container">
 			<input
 				id="course-filter"
-				class="advanced-text-search form-control"
+				class="form-control"
 				type="text"
 				placeholder="Filter course list by keyword"
 				data-quickspot-config="pg_courses_inline"
