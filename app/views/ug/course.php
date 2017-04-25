@@ -8,7 +8,7 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 			<div class="content-container">
 				<div class="content-full">
 					<span class="current-year hidden-lg-up">
-						<svg width="2rem" height="3rem" xmlns="http://www.w3.org/2000/svg">
+						<svg width="2em" height="3em" xmlns="http://www.w3.org/2000/svg">
 							<path fill="none" stroke="#937227" d="M30, 0L0,100Z" stroke-width="1" opacity="1"></path>
 						</svg>
 							<?php
@@ -78,7 +78,7 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 							<?php echo $course->programme_synopsis  ?>
 						<?php endif; ?>
 						<div class="wrapper">
-							<svg width="2rem" height="6rem" xmlns="http://www.w3.org/2000/svg">
+							<svg width="2em" height="6em" xmlns="http://www.w3.org/2000/svg">
 								<path fill="none" stroke="#937227" d="M30, 0L0,100Z" stroke-width="2" opacity="1"></path>
 							</svg>
 							<div class="current-year">

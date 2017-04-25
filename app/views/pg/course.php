@@ -4,7 +4,7 @@
 	<div class="content-container">
 		<div class="content-full">
 			<span class="current-year hidden-lg-up">
-				<svg width="2rem" height="3rem" xmlns="http://www.w3.org/2000/svg">
+				<svg width="2em" height="3em" xmlns="http://www.w3.org/2000/svg">
 					<path fill="none" stroke="#937227" d="M30, 0L0,100Z" stroke-width="1" opacity="1"></path>
 				</svg>
 				<span class="entry-year entry-year-single"><?php echo $course->year; ?></span>
@@ -52,7 +52,7 @@
 				<?php endif; ?>
 
 				<div class="wrapper">
-					<svg width="2rem" height="6rem" xmlns="http://www.w3.org/2000/svg">
+					<svg width="2em" height="6em" xmlns="http://www.w3.org/2000/svg">
 						<path fill="none" stroke="#937227" d="M30, 0L0,100Z" stroke-width="2" opacity="1"></path>
 					</svg>
 					<div class="current-year">

@@ -86,7 +86,7 @@
 						<div class="col-md-3 offset-md-1">
 
 							<div class="key-info-year">
-								<svg width="2rem" height="5rem" xmlns="http://www.w3.org/2000/svg">
+								<svg width="2em" height="5em" xmlns="http://www.w3.org/2000/svg">
 									<path fill="none" stroke="#937227" d="M30, 0L0,100Z" stroke-width="1" opacity="1"></path>
 								</svg>
 								<div class="current-year">
