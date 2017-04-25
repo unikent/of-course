@@ -5,16 +5,17 @@
             <form class="quickspot-container" action="/search">
                 <div class="form-group">
                     <label for="module-search" class="sr-only">Search modules</label>
-                    <div class="input-group input-group-lg">
-                        <input type="search" name="q" class="form-control" id="module-search" placeholder="Search modules" autocomplete="off" data-quickspot-config="modules" data-quickspot-target="quickspot-results-container">
-                        <span class="input-group-btn">
+					<div class="input-group input-group-lg">
+						<input type="search" name="q" class="form-control" id="module-search" placeholder="Search modules" autocomplete="off" data-quickspot-config="modules" data-quickspot-target="quickspot-results-container">
+						<span class="input-group-btn">
 							<button type="submit" class="btn btn-accent btn-icon">
 								<span class="sr-only">Search modules</span>
 								<span class="kf-fw kf-search"></span>
 							</button>
 						</span>
-                    <div aria-live="assertive" aria-relevant="additions" class="screenreader" style="position: absolute!important; clip: rect(1px 1px 1px 1px); clip: rect(1px,1px,1px,1px);"></div></div>
-                    <div id="quickspot-results-container" tabindex="100" class="quickspot-results-container quickspot-results-container" style="display: none;" aria-hidden="true"><div class="quickspot-results"></div></div>
+						<div aria-live="assertive" aria-relevant="additions" class="screenreader" style="position: absolute!important; clip: rect(1px 1px 1px 1px); clip: rect(1px,1px,1px,1px);"></div>
+					</div>
+                    <div id="quickspot-results-container" tabindex="100" class="quickspot-results-container" style="display: none;" aria-hidden="true"><div class="quickspot-results"></div></div>
 				</div>
 
 				<div class="inline-links text-xs-center text-sm-right">
