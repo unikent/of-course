@@ -6,7 +6,7 @@
                 <div class="form-group">
                     <label for="module-search" class="sr-only">Search modules</label>
                     <div class="input-group input-group-lg">
-                        <input type="search" name="q" class="form-control" id="module-search" placeholder="Search modules..." autocomplete="off" data-quickspot-config="modules" data-quickspot-target="quickspot-results-container">
+                        <input type="search" name="q" class="form-control" id="module-search" placeholder="Search modules" autocomplete="off" data-quickspot-config="modules" data-quickspot-target="quickspot-results-container">
                         <span class="input-group-btn">
 							<button type="submit" class="btn btn-accent btn-icon">
 								<span class="sr-only">Search modules</span>
