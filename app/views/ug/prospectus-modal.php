@@ -41,19 +41,19 @@
 							<div class="panel">
 								<?php if ($has_fulltime): ?>
 								<p><a class=""
-									title="Order a prospectus for <?php echo $course->award[0]->name;?> Full time"
+									title="Order a prospectus for <?php echo $course->award[0]->name;?> (full-time)"
 									href='<?php echo $prospectus_link['fulltime'];?>'
 									<?php echo $prospectus_event['fulltime'];?>
-								> Order a printed prospectus (full-time) <i class="kf-external-link"></i>
-								</a></p>
+								> Order a full prospectus (full-time) <i class="kf-external-link"></i>
+							</a></p>
 								<?php endif; ?>
 
 								<?php if($has_parttime): ?>
 									<p><a class=""
-										title="Order a prospectus for <?php echo $course->award[0]->name;?> Part time"
+										title="Order a prospectus for <?php echo $course->award[0]->name;?> (part-time)"
 										href='<?php echo $prospectus_link['parttime'];?>'
 										<?php echo $prospectus_event['parttime'];?>
-									> Order a printed prospectus (part-time) <i class="kf-external-link"></i>
+									> Order a full prospectus (part-time) <i class="kf-external-link"></i>
 								</a></p>
 								<?php endif; ?>
 							</div>
@@ -62,10 +62,10 @@
 
 
 						<div class="panel">
-							<p><a class="" href="https://www.kent.ac.uk/courses/undergraduate/prospectus/<?php echo $course->year; ?>/prospectus-full.pdf"
+							<a class="" href="https://www.kent.ac.uk/courses/undergraduate/prospectus/<?php echo $course->year; ?>/prospectus-full.pdf"
 								<?php echo sprintf($eventjs, 'download-prospectus-ug', $course_name_fortracking); ?>>
-								Download a prospectus (PDF) <i class="kf-download"></i>
-							</a></p>
+								Download a full prospectus (PDF) <i class="kf-download"></i>
+							</a>
 						</div>
 
 

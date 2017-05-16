@@ -29,6 +29,28 @@
 			<?php endif; ?>
 		</ul>
 	</li>
+
+
+	<?php if(!empty($course->programme_leaflet)): ?>
+
+		<li><i class="kf-download"></i> Subject leaflets
+			<ul>
+
+				<?php foreach ($course->programme_leaflet as $leaflet):
+					$file = $leaflet->tracking_code;
+					$pathParts = pathinfo($file);
+					$fileType = strtoupper($pathParts['extension']);
+					?>
+					<a href="<?php echo $leaflet->tracking_code ?>"
+						<?php echo sprintf($eventjs, 'download-subject-leaflet-pg', $course_name_fortracking); ?>>
+						<?php echo $leaflet->name ?> subject leaflet (<?php echo $fileType ?>)</a>
+				<?php endforeach; ?>
+
+			</ul>
+		</li>
+	<?php endif; ?>
+
+
 	<?php if(!empty($course->accredited_by)):?>
 		<li><i class="kf-kent-vision"></i> Accreditation
 			<ul>
