@@ -31,6 +31,44 @@
 			<?php endif; ?>
 		</ul>
 	</li>
+
+	<?php if(!empty($course->subject_leaflet[0])):
+		$file = $course->subject_leaflet[0]->tracking_code;
+		$pathParts = pathinfo($file);
+		$fileType = strtoupper($pathParts['extension']);
+		?>
+
+		<li><i class="kf-download"></i> Subject leaflets
+			<ul>
+
+			<li>
+				<a href="<?php echo $course->subject_leaflet[0]->tracking_code ?>"
+				<?php echo sprintf($eventjs, 'download-subject-leaflet-ug', $course_name_fortracking); ?>>
+				<?php echo $course->subject_leaflet[0]->name ?>
+				subject leaflet (<?php echo $fileType ?>)
+				</a>
+			</li>
+
+			<?php if(!empty($course->subject_leaflet_2[0])):
+			$file = $course->subject_leaflet_2[0]->tracking_code;
+			$pathParts = pathinfo($file);
+			$fileType = strtoupper($pathParts['extension']);
+			?>
+			<li>
+				<a href="<?php echo $course->subject_leaflet_2[0]->tracking_code ?>"
+					<?php echo sprintf($eventjs, 'download-subject-leaflet-ug', $course_name_fortracking); ?>>
+					<?php echo $course->subject_leaflet_2[0]->name ?>
+					subject leaflet (<?php echo $fileType ?>)
+				</a>
+			</li>
+			<?php endif; ?>
+
+			</ul>
+		</li>
+
+	<?php endif; ?>
+
+
 	<?php if(!empty($course->accredited_by)):?>
 		<li><i class="kf-kent-vision"></i> Accreditation
 			<ul>
