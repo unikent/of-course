@@ -9,7 +9,7 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-xs-10">
-							<h3 class="modal-title">Order a prospectus</h3>
+							<h3 class="modal-title">Prospectus</h3>
 						</div>
 					</div>
 				</div>
@@ -38,82 +38,37 @@
 							}
 							?>
 
-
-							<h3><?php echo $course->award[0]->name; ?></h3>
-							<ul>
+							<div class="panel">
 								<?php if ($has_fulltime): ?>
-									<li>
-										<strong>Full-time</strong> - <a
-											title="Order prospectus for <?php echo $course->award[0]->name;?> Full time"
-											href='<?php echo $prospectus_link['fulltime'];?>'
-											<?php echo $prospectus_event['fulltime'];?>
-										>Order a prospectus
-										</a>
-									</li>
+								<p><a class=""
+									title="Order a prospectus for <?php echo $course->award[0]->name;?> (full-time)"
+									href='<?php echo $prospectus_link['fulltime'];?>'
+									<?php echo $prospectus_event['fulltime'];?>
+								> Order a full prospectus (full-time) <i class="kf-external-link"></i>
+							</a></p>
 								<?php endif; ?>
 
 								<?php if($has_parttime): ?>
-									<li>
-										<strong>Part-time</strong> - <a
-											title="Order prospectus for <?php echo $course->award[0]->name;?> Part time"
-											href='<?php echo $prospectus_link['parttime'];?>'
-											<?php echo $prospectus_event['parttime'];?>
-										>Order a prospectus
-										</a>
-									</li>
+									<p><a class=""
+										title="Order a prospectus for <?php echo $course->award[0]->name;?> (part-time)"
+										href='<?php echo $prospectus_link['parttime'];?>'
+										<?php echo $prospectus_event['parttime'];?>
+									> Order a full prospectus (part-time) <i class="kf-external-link"></i>
+								</a></p>
 								<?php endif; ?>
-							</ul>
+							</div>
 
 						<?php endif; ?>
 
 
-						<div class="panel panel-outline-primary">
-							<h3>Resources</h3>
-							<?php
-							$file = 'https://www.kent.ac.uk/courses/undergraduate/prospectus/' . $course->year . '/prospectus-full.pdf';
-							?>
-							<nav class="download-links">
-
-									<a class="kf-download" href="https://www.kent.ac.uk/courses/undergraduate/prospectus/<?php echo $course->year; ?>/prospectus-full.pdf"
-										<?php echo sprintf($eventjs, 'download-prospectus-ug', $course_name_fortracking); ?>>
-										Download a prospectus (PDF)
-									</a>
-									<?php if (!empty($course->delveries)): ?>
-										or order one below.
-									<?php endif; ?>
-
-
-								<?php if(!empty($course->subject_leaflet[0])):
-									$file = $course->subject_leaflet[0]->tracking_code;
-									$pathParts = pathinfo($file);
-									$fileType = strtoupper($pathParts['extension']);
-									?>
-
-										<a class="kf-download" href="<?php echo $course->subject_leaflet[0]->tracking_code ?>"
-											<?php echo sprintf($eventjs, 'download-subject-leaflet-ug', $course_name_fortracking); ?>>
-											Download a
-											<?php echo $course->subject_leaflet[0]->name ?>
-											subject leaflet (<?php echo $fileType ?>)
-										</a>
-
-									<?php if(!empty($course->subject_leaflet_2[0])):
-									$file = $course->subject_leaflet_2[0]->tracking_code;
-									$pathParts = pathinfo($file);
-									$fileType = strtoupper($pathParts['extension']);
-									?>
-
-										<a class="kf-download" href="<?php echo $course->subject_leaflet_2[0]->tracking_code ?>"
-											<?php echo sprintf($eventjs, 'download-subject-leaflet-ug', $course_name_fortracking); ?>>
-											Download a
-											<?php echo $course->subject_leaflet_2[0]->name ?>
-											subject leaflet (<?php echo $fileType ?>)
-										</a>
-
-								<?php endif; ?>
-
-								<?php endif; ?>
-							</nav>
+						<div class="panel">
+							<a class="" href="https://www.kent.ac.uk/courses/undergraduate/prospectus/<?php echo $course->year; ?>/prospectus-full.pdf"
+								<?php echo sprintf($eventjs, 'download-prospectus-ug', $course_name_fortracking); ?>>
+								Download a full prospectus (PDF) <i class="kf-download"></i>
+							</a>
 						</div>
+
+
 					</div>
 				</div>
             </div>

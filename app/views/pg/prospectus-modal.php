@@ -9,7 +9,7 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-xs-10">
-							<h3 class="modal-title">Order a prospectus</h3>
+							<h3 class="modal-title">Prospectus</h3>
 						</div>
 					</div>
 				</div>
@@ -74,66 +74,55 @@
 							$eventjs = "onClick=\"window.KENT.kat.event('course-page', '%s', '%s');\"";
 							$event = "$course_name_fortracking - $award" . "$description - $mode [$mcr]";
 							$prospectus_event[$key][$mode] = sprintf($eventjs, 'order-prospectus-pg', $event);
-						}
-						if ($show !== null && in_array(true, $show)):
-							foreach($enquire_link as $key => $details):
-								if ($show[$key]): ?>
+						}?>
+						<?php if ($show !== null && in_array(true, $show)): ?>
 
+
+
+							<?php foreach($enquire_link as $key => $details): ?>
+								<?php if ($show[$key]): ?>
+
+									<div class="panel">
 									<h3><?php echo $awards[$key]. ' '.$descriptions[$key]; ?></h3>
 
-									<ul>
+
 										<?php if($has_fulltime): ?>
-											<li>
-												<strong>Full-time</strong> - <a
-													title="Order prospectus for <?php echo $awards[$key]. ' '.$descriptions[$key];?> Full time"
+											<p>
+												<a
+													title="Order prospectus for <?php echo $awards[$key]. ' '.$descriptions[$key];?> (full-time)"
 													href='<?php echo $prospectus_link[$key]['full-time'];?>'
 													<?php echo $prospectus_event[$key]['full-time'];?>
-												>Order a prospectus
+												>Order a full prospectus (full-time) <i class="kf-external-link"></i>
 												</a>
-											</li>
+										</p>
 										<?php endif; ?>
 
 										<?php if($has_parttime): ?>
-											<li>
-												<strong>Part-time</strong> - <a
-													title="Order prospectus for <?php echo $awards[$key]. ' '.$descriptions[$key];?> Part time"
+											<p>
+												<a
+													title="Order prospectus for <?php echo $awards[$key]. ' '.$descriptions[$key];?> (part-time)"
 													href='<?php echo $prospectus_link[$key]['part-time'];?>'
 													<?php echo $prospectus_event[$key]['part-time'];?>
-												>Order a prospectus
+												>Order a full prospectus (part-time) <i class="kf-external-link"></i>
 												</a>
-											</li>
+											</p>
 										<?php endif; ?>
-									</ul>
-								<?php endif;
-							endforeach;
-						endif; ?>
-						<?php
-						$file = 'https://www.kent.ac.uk/courses/postgraduate/pdf/prospectus.pdf';
-						?>
 
-						<div class="panel panel-outline-primary">
-							<h3>Resources</h3>
-							<nav class="download-links">
+									</div>
 
-									<a class="kf-download" href="https://www.kent.ac.uk/courses/postgraduate/pdf/prospectus.pdf"
-										<?php echo sprintf($eventjs, 'download-prospectus-pg', $course_name_fortracking); ?>>
-										Download a full prospectus (PDF)
-									</a>
+								<?php endif; ?>
+							<?php endforeach; ?>
 
-								<?php if(!empty($course->programme_leaflet)): ?>
-							<?php foreach ($course->programme_leaflet as $leaflet):
-								$file = $leaflet->tracking_code;
-								$pathParts = pathinfo($file);
-								$fileType = strtoupper($pathParts['extension']);
-								?>
 
-									<a class="kf-download" href="<?php echo $leaflet->tracking_code ?>"
-										<?php echo sprintf($eventjs, 'download-subject-leaflet-pg', $course_name_fortracking); ?>>
-										Download a <?php echo $leaflet->name ?> subject leaflet (<?php echo $fileType ?>)</a>
-								<?php endforeach; ?>
-							<?php endif; ?>
-							</nav>
+						<?php endif; ?>
+						<div class="panel">
+							<a href="https://www.kent.ac.uk/courses/postgraduate/pdf/prospectus.pdf"
+								<?php echo sprintf($eventjs, 'download-prospectus-pg', $course_name_fortracking); ?>>
+								Download a full prospectus (PDF) <i class="kf-download"></i>
+							</a>
 						</div>
+
+
 					</div>
 				</div>
 			</div>

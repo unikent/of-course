@@ -13,7 +13,7 @@
 				<div class="spaced-links-inner-container links">
 					<span class="text-accent spaced-links-item"><i class="kf-pin"></i> <?php echo $course->locations_str_linked; ?></span>
 					<a href="#contact-modal" class="spaced-links-item text-accent" id="contactButton" data-toggle="modal" data-target="#contact-modal" onclick="window.KENT.kat.event('course-page', 'contact-pg-modal', '[<?php echo $course->instance_id ?>] <?php echo $course->programme_title; ?> (<?php echo $course->year ?>)');"><i class="kf-info-circle"></i> Contact Us</a>
-					<a href="#prospectus-modal" class="spaced-links-item text-accent" id="prospectusButton" data-toggle="modal" data-target="#prospectus-modal" onclick="window.KENT.kat.event('course-page', 'prospectus-pg-modal', '[<?php echo $course->instance_id ?>] <?php echo $course->programme_title; ?> (<?php echo $course->year ?>)');"><i class="kf-user"></i> Prospectus</a>
+					<a href="#prospectus-modal" class="spaced-links-item text-accent" id="prospectusButton" data-toggle="modal" data-target="#prospectus-modal" onclick="window.KENT.kat.event('course-page', 'prospectus-pg-modal', '[<?php echo $course->instance_id ?>] <?php echo $course->programme_title; ?> (<?php echo $course->year ?>)');"><i class="kf-book"></i> Prospectus</a>
 
 				</div>
 				<div class="spaced-links-inner-container buttons">
