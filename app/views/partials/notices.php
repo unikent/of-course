@@ -9,12 +9,25 @@
 		  <strong>These pages are for undergraduate programmes starting in September <?php echo date('Y') + 1;?>.</strong>
 		  <br>If you are a <strong>Clearing</strong>, <strong>Adjustment</strong> or <strong>part-time</strong> applicant wishing to start this September, go to our <a href="/courses/undergraduate/<?php echo date('Y');?>/search/"><?php echo date('Y');?> search page</a>.
 		</div>
-	<?php elseif ( isset($course) && $course->current_year == $course->year ): ?>
-		<div class="alert alert-warning">
-		  <strong>Applying through clearing?</strong>
-		  <br>Clearing applicants and others planning to start in 2016 should view
-		  <a href="/courses/undergraduate/<?php echo $course->current_year - 1;?>/<?php echo $course->instance_id ?>/<?php echo $course->slug ?>"><?php echo $course->programme_title;?> for <?php echo $course->current_year - 1;?> entry.</a>
+	<?php elseif ( isset($course) && $course->current_year > $course->year ): ?>
+		<div class="card card-backed-tertiary">
+			<div class="clearing-banner-container card-block">
+				<h2 class="col-lg-3 clearing-banner-title">CLEARING 2017</h2>
+				<div class="col-lg-5 clearing-banner-text">We may still have full-time vacancies available for this course.</div>
+				<a class="col-lg-3" href="https://evision.kent.ac.uk/ipp/ClearingVacancyList.htm"><button type="button" class="btn btn-primary clearing-banner-search-button">Search Vacancies</button></a>
+			</div>
 		</div>
+	<?php elseif(isset($course) && $course->current_year == $course->year):
+		$previous_year = $course->year-1;
+
+		?>
+		<div class="card card-backed-tertiary">
+			<div class="clearing-banner-container card-block">
+				<h2 class="col-lg-3 clearing-banner-title">CLEARING 2017</h2>
+				<div class="col-lg-8 clearing-banner-text">Planning to start this September? We may still have full-time vacancies available for this course. <a href="<?php echo "/courses/$level/$previous_year/$course->instance_id"; ?>">View 2017 course details.</a> </div>
+			</div>
+		</div>
+
 	<?php endif; ?>
 
 <?php endif;?>

@@ -7,6 +7,9 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 		<div class="content-body">
 			<div class="content-container">
 				<div class="content-full">
+
+					<?php Flight::render("partials/notices"); ?>
+
 					<span class="current-year hidden-lg-up">
 						<svg width="2em" height="3em" xmlns="http://www.w3.org/2000/svg">
 							<path fill="none" stroke="#937227" d="M30, 0L0,100Z" stroke-width="1" opacity="1"></path>
@@ -51,6 +54,16 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 								   type="button"
 								   role="button"
 								>View <?php echo $course->current_year ?> programme</a>
+							<?php elseif($course->year < $years->current):?>
+								<button class="btn btn-secondary spaced-links-item-btn"
+										type="button"
+										role="button"
+										aria-controls="apply"
+										id="applyButton"
+										data-toggle="modal"
+										data-target="#apply-modal"
+										onclick="window.KENT.kat.event('course-page', 'apply-ug-modal', '[<?php echo $course->instance_id ?>] <?php echo $course->programme_title; ?> (<?php echo $course->year ?>)');"
+								>Part-time applicants</button>
 							<?php else:?>
 								<button class="btn btn-primary spaced-links-item-btn"
 										type="button"
@@ -111,7 +124,6 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 							</div>
 						</div>
 					</div>
-					<?php Flight::render("partials/notices"); ?>
 				</div>
 			</div>
 			<div class="content-container relative">
