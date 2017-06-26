@@ -13,7 +13,7 @@
             <?php foreach ($cluster->modules->module as $module): ?>
                 <?php if ( ! empty($module->sds_code) && ! empty($module->module_title) && ! in_array($module->sds_code, $module_codes) ): ?>
                     <?php $module_codes[$module->sds_code] = $module->sds_code ?>
-                    <tr>
+                    <tr class="module-row">
                         <td class="module-text">
 							<span data-toggle="collapse" data-target="#<?php echo $module->sds_code; ?>-more" id="<?php echo $module->sds_code ?>" class="module-row collapsed module-title"><?php echo $module->sds_code ?> - <?php echo $module->module_title ?></span>
 							<div class="collapse" id="<?php echo $module->sds_code; ?>-more">
@@ -34,7 +34,7 @@
             <?php foreach ($cluster->modules->module as $module): ?>
                 <?php if ( ! empty($module->sds_code) && ! in_array($module->sds_code, $module_codes) ): ?>
                     <?php $module_codes[$module->sds_code] = $module->sds_code ?>
-					<tr>
+					<tr class="module-row">
 						<td class="module-text">
 							<span data-toggle="collapse" data-target="#<?php echo $module->sds_code; ?>-more" id="<?php echo $module->sds_code ?>" class="module-row collapsed module-title"><?php echo $module->sds_code ?> - <?php echo $module->module_title ?></span>
 							<div id="<?php echo $module->sds_code; ?>-more" class="collapse">

@@ -29,26 +29,25 @@ foreach ($course->modules as $module) {
 		<tr>
 			<th width="70%">Possible modules may include</th>
 			<th class="text-xs-center">Credits</th>
-			<th class="text-xs-center">ECTS Credits</th>
 		</tr>
 		</thead>
 		<tbody>
 		<?php
 		$course->module_list = empty($course->module_list)?array():$course->module_list;
 		foreach ($course->module_list as $module): ?>
-			<tr class="module-row collapsed" data-toggle="collapse" data-target="#<?php echo $module->sds_code; ?>-more">
-				<td><span id="<?php echo $module->sds_code ?>" class="module-title"><?php echo $module->sds_code ?> - <?php echo $module->module_title ?></span></td>
-				<td class="text-xs-center"><?php echo $module->credit_amount; ?></td>
-				<td class="text-xs-center"><?php echo $module->ects_credit ?></td>
-			</tr>
-			<tr id="<?php echo $module->sds_code; ?>-more" class="collapse">
-				<td class="more" colspan="3">
-					<div data-toggle="collapse" data-target="#<?php echo $module->sds_code; ?>-more">
+
+		<tr class="module-row">
+			<td class="module-text">
+				<span data-toggle="collapse" data-target="#<?php echo $module->sds_code; ?>-more" id="<?php echo $module->sds_code ?>" class="module-row collapsed module-title"><?php echo $module->sds_code ?> - <?php echo $module->module_title ?></span>
+				<div class="collapse" id="<?php echo $module->sds_code; ?>-more">
+					<div class="more">
 						<p><?php echo preg_replace("/\n/",'</p><p>',preg_replace('/[\r\n]+/', "\n", preg_replace('/<br\s*\/?>/',"\n",$module->synopsis))); ?></p>
+						<a aria-labelledby="#<?php echo $module->sds_code ?>" class="chevron-link" href="/courses/modules/module/<?php echo $module->sds_code ?>">Read more</a>
 					</div>
-					<a aria-labelledby="#<?php echo $module->sds_code ?>" class="chevron-link" href="/courses/modules/module/<?php echo $module->sds_code ?>">Read more</a>
-				</td>
-			</tr>
+				</div>
+			</td>
+			<td class="text-xs-center"><?php echo $module->credit_amount; ?></td>
+		</tr>
 	<?php endforeach; ?>
 		</tbody>
 	</table>
