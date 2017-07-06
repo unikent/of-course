@@ -47,19 +47,32 @@ if (empty($course->deliveries)) {
 								<div class="form-group type">
 									<label class="sr-only" for="type">Mode of study</label>
 									<div class="controls">
+
+
+
 										<select class="custom-select" name="type" id="type" required="required">
-											<?php if ($has_fulltime && $has_parttime) { ?>
-												<option value="pleaseselect">Please select</option>
-											<?php } ?>
-											<?php if ($has_fulltime) { ?>
-												<option value="full-time-ug-<?php echo $full_type ?>" selected>Full-time
-													- <?php echo $course->year ?></option>
-											<?php } ?>
-											<?php if ($has_parttime) { ?>
+
+											<?php if (defined('CLEARING') && CLEARING && $course->year < $years->current && $has_parttime): ?>
 												<option value="part-time"
 														<?php if (isset($_GET['part_time'])){ ?>selected<?php } ?>>
 													Part-time - <?php echo $course->year ?></option>
-											<?php } ?>
+
+											<?php else: ?>
+
+												<?php if ($has_fulltime && $has_parttime) { ?>
+													<option value="pleaseselect">Please select</option>
+												<?php } ?>
+												<?php if ($has_fulltime) { ?>
+													<option value="full-time-ug-<?php echo $full_type ?>" selected>Full-time
+														- <?php echo $course->year ?></option>
+												<?php } ?>
+												<?php if ($has_parttime) { ?>
+													<option value="part-time"
+															<?php if (isset($_GET['part_time'])){ ?>selected<?php } ?>>
+														Part-time - <?php echo $course->year ?></option>
+												<?php } ?>
+
+											<?php endif; ?>
 										</select>
 									</div>
 								</div>

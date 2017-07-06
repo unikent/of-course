@@ -54,16 +54,27 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 								   type="button"
 								   role="button"
 								>View <?php echo $course->current_year ?> programme</a>
-							<?php elseif($course->year < $years->current):?>
-								<button class="btn btn-secondary spaced-links-item-btn"
-										type="button"
-										role="button"
-										aria-controls="apply"
-										id="applyButton"
-										data-toggle="modal"
-										data-target="#apply-modal"
-										onclick="window.KENT.kat.event('course-page', 'apply-ug-modal', '[<?php echo $course->instance_id ?>] <?php echo $course->programme_title; ?> (<?php echo $course->year ?>)');"
-								>Part-time applicants</button>
+							<?php elseif( defined('CLEARING') && CLEARING && $course->year < $years->current):?>
+								<?php if ($has_parttime): ?>
+
+								<?php foreach ($course->deliveries as $delivery): ?>
+
+									<?php if ($delivery->attendance_pattern == 'part-time'): ?>
+									<a
+											id="apply-link-<?php echo strtolower(str_replace(array('/', ' ', '(', ')'), '', $delivery->award_name)) ?>-<?php echo $delivery->attendance_pattern ?>-<?php echo $course->year ?>"
+											class="btn btn-secondary spaced-links-item-btn"
+											tabindex="0" role="button"
+											title="Part-time applicants"
+											href="https://evision.kent.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&amp;code1=<?php echo $delivery->mcr ?>&amp;code2=<?php echo $delivery->current_ipo ?>"
+											onclick="window.KENT.kat.event('course-page', 'apply-ug', '[<?php echo $course->instance_id ?> in <?php echo $course->year ?>] <?php echo $delivery->description ?> [<?php echo $delivery->mcr ?>] at <?php echo $schoolName ?>');">
+											Part-time applicants
+									</a>
+									<?php endif; ?>
+
+								<?php endforeach; ?>
+
+
+								<?php endif; ?>
 							<?php else:?>
 								<button class="btn btn-primary spaced-links-item-btn"
 										type="button"
