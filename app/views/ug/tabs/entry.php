@@ -1,10 +1,13 @@
+ <h2>Entry requirements</h2>
+
+ <?php if(!empty($course->entry_profile)): ?>
+   	<?php echo $course->entry_profile;?>
+   <?php endif; ?>
+   <!-- <?php echo $course->entry_requirements_overriding_text;?> -->
 
 <section class="info-section">
-	<h3>Home/EU students </h3>
-	<?php echo $course->homeeu_students_intro_text;?>
-
-
-	<?php if(defined('CLEARING') && CLEARING): ?>
+	<?php if(defined('CLEARING') && CLEARING && $course->current_year-1 == $course->year): ?>
+		<h3>Clearing entry</h3>
 		<p>
 			Typical entry requirements for 2017 entry courses remain published on the UCAS course search website and apply to applications received during the main UCAS application cycle. These provide a rough guide to our likely entry requirements for Clearing and Adjustment applicants.
 		</p>
@@ -12,10 +15,17 @@
 			However during Clearing (after 5 July), our entry requirements change in real time to reflect the supply and demand of remaining course vacancies and so may be higher or lower than those published on UCAS as typical entry grades.
 		</p>
 		<p>
-			Our Clearing vacancy list [link] will be updated regularly as courses move in and out of Clearing, so please check regularly to see if we have any places available. You can submit an application via our online Clearing application form as soon as your full results are known. [either link to the form or explain how they can navigate to it]. See our Clearing website [link] for more details on how Clearing works at Kent.
+			Our <a href="https://evision.kent.ac.uk/ipp/clearingvacancylist.htm">Clearing vacancy list</a> will be updated regularly as courses move in and out of Clearing, so please check regularly to see if we have any places available. You can submit an application via our online Clearing application form as soon as your full results are known.
+			See our <a href="https://www.kent.ac.uk/clearing/index.html">Clearing website</a> for more details on how Clearing works at Kent.
 		</p>
-	<?php else: ?>
+	<?php endif; ?>
 
+	<section class="info-section">
+		<h3>Home/EU students </h3>
+		<?php echo $course->homeeu_students_intro_text;?>
+	</section>
+
+	<?php if( $course->current_year == $course->year ): ?>
 	<table class="table table-responsive table-striped ug-entry-requirements">
 		<thead>
 		<tr>
@@ -69,16 +79,12 @@
 
 		</tbody>
 	</table>
-</section>
-<?php if(!empty($course->entry_profile)): ?>
-  	<?php echo $course->entry_profile;?>
-  <?php endif; ?>
-  <!-- <?php echo $course->entry_requirements_overriding_text;?> -->
 
- <h2>Entry requirements</h2>
 	<?php endif; ?>
 
-	<section class="info-section">
+</section>
+
+<section class="info-section">
     <h3>International students<a href="/courses/undergrad/apply/entry.html"></a></h3>
     <?php echo $course->international_students_intro_text ?>
 
@@ -87,9 +93,9 @@
 		<?php echo $course->english_language_requirements ?>
 	<?php endif; ?>
 
-	</section>
+</section>
 
-	<section class="info-section">
-		<h3>General entry requirements</h3>
-		<?php echo $course->globals->ug_general_entry_requirements ?>
-	</section>
+<section class="info-section">
+	<h3>General entry requirements</h3>
+	<?php echo $course->globals->ug_general_entry_requirements ?>
+</section>
