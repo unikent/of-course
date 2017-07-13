@@ -3,7 +3,7 @@
 <table class="table">
 <thead>
 <tr>
-	<th width="70%">Possible modules may include</th>
+	<th width="70%">Modules may include</th>
 	<th class="text-xs-center">Credits</th>
 </tr>
 </thead>
