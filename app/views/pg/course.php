@@ -116,7 +116,7 @@
 
 						Flight::render("partials/tab", array("title"=>"Staff research", "id" => "staff-research",  "selected" => false, "content" => Flight::fetch("pg/tabs/staff-research")));
 
-                        if (!(isset($course->no_fee_output) && $course->no_fee_output === 'true')) {
+
                             Flight::render("partials/tab",
                                 array(
                                     "title" => "Fees and funding",
@@ -124,7 +124,6 @@
                                     "selected" => false,
                                     "content" => Flight::fetch("pg/tabs/fees")
                                 ));
-                        }
 					?>
 				</div>
 		</div>
