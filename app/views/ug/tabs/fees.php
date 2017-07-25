@@ -61,9 +61,6 @@
 		<?php endif; ?>
     <?php endif; ?>
 
-
-	general_additional_costs
-
 	<h2>Funding</h2>
 	<?php echo $course->funding;?>
 </section>
