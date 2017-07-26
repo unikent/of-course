@@ -58,6 +58,10 @@
         <?php echo $course->additional_costs; ?>
     <?php endif; ?>
 
+	<?php if(!empty($course->general_additional_costs)): ?>
+		<?php echo $course->general_additional_costs; ?>
+	<?php endif; ?>
+
 	<h2>Funding</h2>
 	<?php echo $course->funding;?>
 </section>
