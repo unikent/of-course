@@ -56,10 +56,11 @@
     <?php if(!empty($course->additional_costs)): ?>
         <h2>Additional costs</h2>
         <?php echo $course->additional_costs; ?>
-		<?php if(!empty($course->general_additional_costs)): ?>
-			<?php echo $course->general_additional_costs; ?>
-		<?php endif; ?>
     <?php endif; ?>
+
+	<?php if(!empty($course->general_additional_costs)): ?>
+		<?php echo $course->general_additional_costs; ?>
+	<?php endif; ?>
 
 	<h2>Funding</h2>
 	<?php echo $course->funding;?>
