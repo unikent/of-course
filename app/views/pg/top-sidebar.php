@@ -15,7 +15,5 @@
         <li class="nav-item"><a href="#research-areas" data-toggle="tab" role="tab" class="nav-link" onclick="window.KENT.kat.event('course-page', 'research-areas-pg', '<?php echo $course_name_fortracking ?>')">Research areas</a></li>
     <?php endif; ?>
     <li class="nav-item"><a href="#staff-research" data-toggle="tab" role="tab" class="nav-link" onclick="window.KENT.kat.event('course-page', 'staff-research-pg', '<?php echo $course_name_fortracking ?>')">Staff research</a></li>
-    <?php if (!(isset($course->no_fee_output) && $course->no_fee_output === 'true')){ ?>
-        <li class="nav-item"><a href="#fees" data-toggle="tab" role="tab" class="nav-link" onclick="window.KENT.kat.event('course-page', 'fees-funding-pg', '<?php echo $course_name_fortracking ?>')">Fees and funding</a></li>
-	<?php } ?>
+    <li class="nav-item"><a href="#fees" data-toggle="tab" role="tab" class="nav-link" onclick="window.KENT.kat.event('course-page', 'fees-funding-pg', '<?php echo $course_name_fortracking ?>')">Fees and funding</a></li>
 </ul>
