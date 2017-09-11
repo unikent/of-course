@@ -135,22 +135,6 @@ use \unikent\kent_theme\kentThemeHelper;
 	</div>
 <?php endif; ?>
 
-<?php if( $level == 'undergraduate' && !empty($course->globals->tef_title) && !empty($course->globals->tef_text)): ?>
-<div class="content-container py-6 my-2">
-	<div class="content-main">
-		<h2><?php echo $course->globals->tef_title ?></h2>
-		<p><?php echo $course->globals->tef_text ?></p>
-	</div>
-	<aside class="content-aside">
-		<figure>
-			<div class="media-wrap">
-				<img src="//kent.ac.uk/courses/images/tef-gold.png" alt="TEF Gold logo">
-			</div>
-		</figure>
-	</aside>
-</div>
-<?php endif; ?>
-
 <?php if (!empty($course->globals->general_disclaimer)): ?>
 <footer class="content-container mt-1">
 	<div class="content-full">

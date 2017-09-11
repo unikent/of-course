@@ -20,3 +20,14 @@
 	<?php echo $course->did_you_know_fact_box ?>
 </div>
 <?php endif; ?>
+
+
+<?php if( $level == 'undergraduate' && !empty($course->globals->tef_title) && !empty($course->globals->tef_text)): ?>
+<div class="content-container tef py-2 my-2">
+	<div class="tef__text">
+		<h2><?php echo $course->globals->tef_title ?></h2>
+		<p><?php echo $course->globals->tef_text ?></p>
+	</div>
+	<img class="tef__image" src="https://kent.ac.uk/courses/images/tef-gold-logo.jpg" alt="TEF Gold logo">
+</div>
+<?php endif; ?>
