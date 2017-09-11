@@ -92,3 +92,18 @@
 	display: flex;
 	flex-wrap: wrap;
 }
+
+.tef {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.tef__text {
+	flex: 0 0 66%;
+}
+
+.tef__image {
+	max-width: 200px;
+	margin-left: 2rem;
+}
