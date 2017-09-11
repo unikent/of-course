@@ -1,3 +1,8 @@
+<?php 
+// Generate event trackers
+$eventjs = "onClick=\"window.KENT.kat.event('course-page', '%s', '%s');\"";
+$course_name_fortracking = "[{$course->instance_id} in {$course->year}] {$course->programme_title} ";
+?>
 <ul class="sidebar pg">
 	<?php if(!empty($course->programme_type)): ?>
 	<li><i class="kf-book"></i> Study options
