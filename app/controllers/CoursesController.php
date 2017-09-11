@@ -939,10 +939,10 @@ class CoursesController {
 		return rtrim($award_list, ', ');
 	}
 
-	public function profiles($level = 'undergraduate'){
+	public function profiles($level = 'undergraduate', $search_string = ''){
 		try{
 			$profiles = static::$pp->make_request($level . '/profile');
-			$cats = static::$pp->get_subjectcategories($level);
+			$subject_categories = static::$pp->get_subjectcategories($level);
 		}catch(\Exception $e){
 			return Flight::notFound();
 		}
@@ -967,7 +967,9 @@ class CoursesController {
 			 	'level' => $level,
 			 	'level_code'=>$level_code,
 			 	'level_pretty'=>$level_pretty,
-			  	'categories' => $cats
+				'subject_categories' => $subject_categories,
+				'search_type' => 'subject_category',
+				'search_string' => $search_string
 		));
 	}
 

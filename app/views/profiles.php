@@ -21,9 +21,21 @@
 			<div class="filter-select">
 				<select class="custom-select subject-search form-control" data-filter-col="__subjects">
 					<option value="">All subjects</option>
-					<?php foreach ($categories as $v){ ?>
-						<option value="<?php echo $v->name; ?>"><?php echo $v->name; ?></option>
-					<?php }?>
+					<?php
+
+					$subject_categories = (array) $subject_categories;
+					usort($subject_categories, function ($a, $b){
+						if ($a->name == $b->name) {
+							return 0;
+						}
+						return ($a->name < $b->name) ? -1 : 1;
+					});
+
+					foreach($subject_categories as $sc): ?>
+					<option <?php if(strcmp($search_type, 'subject_category')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower(slug_escape($sc->name))) == 0) echo 'selected'; ?>><?php echo $sc->name?></option>
+					<?php endforeach; ?>
+
+					?>
 				</select>
 			</div>
 	</div>
