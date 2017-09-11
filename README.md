@@ -62,6 +62,12 @@ This app uses [Siege](https://www.joedog.org/siege-home/) to load test the frint
   * -t is the time to run the load test for (S=seconds, M=minutes)
   * -i randomises the URL the test grabs from the text file, simulating real traffic
 
+## Clearing 
+
+Set the following to true / false in config.php to enable / disable:
+
+1. Clearing banner on course pages ``const CLEARING = false;``
+2. Link to previous year on undergraduate search page: ``const SHOW_UG_PREVIOUS_YEAR_BANNER = false;``
 
 ## Licensing
 
