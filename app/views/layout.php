@@ -4,7 +4,7 @@ use \unikent\kent_theme\kentThemeHelper;
 $shared = array(
 		'meta' => array(
 			'title' => (isset($meta) && isset($meta['title']) ? $meta['title'] : 'University of kent courses'),
-			'description' => $meta['description'],
+			'description' => $meta['description']
 		),
 		'head_markup'=> '<link rel="feed" type="application/xcri+xml" href="/courses/xcri"/><link rel="canonical" href="'.$meta['canonical'].'" />
 		<link media="screen" type="text/css" rel="stylesheet" href="'.Flight::asset("css/courses.css").'" />',
@@ -12,7 +12,13 @@ $shared = array(
 		'slim'=> true,
 		'brand_header' => true,
 	);
-
+	/*
+	 * Ask search engines not to index this page if it is for a course which is more than two years old
+	 * (ie we only have the page for CMA purposes)
+	 */
+	if($course && $years && $course->year < $years->current -1) {
+		$shared['meta']['robots'] = "NOINDEX, FOLLOW";
+	}
 $undergraduate = array(
 	'title' => "Undergraduate courses " . (isset($course) ? $course->year : ''),
     'title_link' => Flight::url('undergraduate'),
