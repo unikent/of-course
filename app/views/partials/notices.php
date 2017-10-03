@@ -36,6 +36,17 @@
 		You are currently viewing a programme for an upcoming academic year. This data is preview ONLY and may not be representative of any course offered by this institution.
 	</div>
 <?php endif;?>
+<?php
+	/*
+	 * If current course year being viewed is over 2 years ago then display a message saying that it is archived.
+	 */
+	if(isset($course) && $course->year < $years->current -1): ?>
+	<div class="card card-backed-tertiary">
+		<div class="card-block">
+			<h2 class=" clearing-banner-title">This is an archived page and for reference purposes only</h2>
+		</div>
+	</div>
+<?php endif;?>
 
 <?php if (defined('SHOW_UG_PREVIOUS_YEAR_BANNER') && SHOW_UG_PREVIOUS_YEAR_BANNER && $level == 'undergraduate' && isset($course) && $course->year > ($course->current_year)): ?>
 	<div class="alert alert-warning">
