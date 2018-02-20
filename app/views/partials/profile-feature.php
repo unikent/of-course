@@ -16,9 +16,13 @@
 				<img src="<?php echo $banner_image ?>" class="card-img<?php echo (!empty($profile->banner_image_id) && in_array($profile->banner_image_id->focus, array('top','bottom')))? '-' . $profile->banner_image_id->focus : ''; ?>" alt="<?php echo $banner_image_alt; ?>">
 			</div>
 			<?php if(!empty($profile->quote)){ ?>
-			<div class="card-img-overlay-bottom-shaded card-overlay-inline-md">
-				<p class="card-subtitle quote"><?php echo strip_tags($profile->quote); ?></p>
+			<div class="card-img-overlay-link card-img-overlay-bottom-shaded card-overlay-inline-md">
+				<a class="card-title-link" href="<?php echo Flight::url('profiles/'. $level .'/'. $profile->slug); ?>" tabindex="0">
+					<p class="card-subtitle chevron-link">&ldquo;<span class="quote-text"><?php echo strip_tags($profile->quote); ?></span>&rdquo;</p>
+				</a>
+				<a class="faux-link-overlay" href="<?php echo Flight::url('profiles/'. $level .'/'. $profile->slug); ?>" aria-hidden="true" tabindex="0"><?php echo strip_tags($profile->quote); ?></a>
 			</div>
+
 			<?php } ?>
 		</div>
 		<?php } ?>
