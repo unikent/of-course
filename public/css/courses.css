@@ -25,7 +25,7 @@
     line-height: 1.5rem;
 }
 
-.card.card-overlay.student-profiles{
+.card.card-overlay.student-profiles {
     margin-top:4rem;
     margin-bottom: 1.5rem;
 }
@@ -33,7 +33,19 @@
 .student-profiles .slick-list,
 .student-profiles .slick-track
 {
-    overflow: visible;
+	overflow: hidden;
+}
+
+.student-profiles .chevron-link::after {
+	position: relative;
+	top: 0.4rem;
+}
+
+.student-profiles .card-title-wrap.card-title-wrap-link {
+	top: 2rem;
+}
+.student-profiles .quote-text {
+	padding: 0 7px;
 }
 
 @media (min-width: 768px){
