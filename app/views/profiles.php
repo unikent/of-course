@@ -1,10 +1,10 @@
 <div class="container">
 	<?php \unikent\kent_theme\kentThemeHelper::breadcrumb(array(
 		"Courses" => "/courses/",
-		"Student profiles" => "/courses/profiles",
+		"Profiles" => "/courses/profiles",
 		$level_pretty => ''
 	)); ?>
-	<h1><?php echo $level_pretty; ?> student profiles</h1>
+	<h1><?php echo $level_pretty; ?> profiles</h1>
 
 	<ul class="nav nav-tabs  pt-1">
 		<li class="nav-item">
@@ -37,6 +37,13 @@
 
 					?>
 				</select>
+
+				<select class="custom-select type-search form-control" data-filter-col="type">
+					<option value="">Students and alumni</option>
+					<option value="student" <?php if(strcmp($search_type, 'type')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('student')) == 0) echo 'selected'; ?>>Students only</option>
+					<option value="alumni" <?php if(strcmp($search_type, 'type')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('alumni')) == 0) echo 'selected'; ?>>Alumni only</option>
+				</select>
+
 			</div>
 	</div>
 
@@ -47,7 +54,7 @@
 				id="profile-filter"
 				class="form-control"
 				type="text"
-				placeholder="Filter student profiles by keyword"
+				placeholder="Filter profiles by keyword"
 				data-quickspot-config="<?php echo $level_code;?>_profiles_inline"
 				data-quickspot-target="quickspot-output"
 				data-quickspot-filters="filter_categories"
