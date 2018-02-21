@@ -52,7 +52,7 @@ if(!empty($profile->video)){
 			?>
 		</div>
 		<div class="card-title-wrap force-block content-contained pull-bottom ">
-			<h1 class="card-title">Student Profile
+			<h1 class="card-title"><?php echo $profile->type == 'alumni' ? 'Alumni' : 'Student' ?> profile
 				<div class="text-white"><?php echo $profile->name; ?></div>
 			</h1>
 			<p class="card-text"><?php echo $profile->course; ?></p>
