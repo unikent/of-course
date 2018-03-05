@@ -37,7 +37,9 @@
 
 					?>
 				</select>
-
+			</div>
+			
+			<div class="filter-select">
 				<select class="custom-select type-search form-control" data-filter-col="type">
 					<option value="">Students and alumni</option>
 					<option value="student" <?php if(strcmp($search_type, 'type')  == 0  && strcmp(urldecode(strtolower($search_string)), strtolower('student')) == 0) echo 'selected'; ?>>Students only</option>
