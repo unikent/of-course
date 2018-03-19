@@ -93,13 +93,11 @@ if(!empty($profile->video)){
 		</blockquote>
 		<?php } ?>
 
-		<?php if(!empty($profile->links)){ ?>
-		<nav>
-			<h3>See also</h3>
-			<?php echo $profile->links; ?>
-		</nav>
-		<?php }else { ?>
 			<nav>
+				<?php if(!empty($profile->links)): ?>
+				<h3>Related courses</h3>
+				<?php echo $profile->links ?>
+				<?php endif; ?>
 				<h3>See also</h3>
 				<ul>
 					<li><a href="/courses/visit/index.html">Visit us</a></li>
@@ -112,6 +110,6 @@ if(!empty($profile->video)){
 					<?php endif; ?>
 				</ul>
 			</nav>
-		<?php } ?>
+
 	</aside>
 </div>
