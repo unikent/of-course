@@ -44,7 +44,6 @@
 								<th>Credits <a class="credits-help" href="#" data-toggle="popover" data-trigger="focus" tabindex="0" role="button" data-content="ECTS credits are recognised throughout the EU and allow you to transfer credit easily from one university to another">(ECTS)</a></th>
 								<th><a class="convenor-help" href="#" data-toggle="popover" data-trigger="focus" tabindex="0" role="button" data-content="This is the convenor for the current academic session">Current Convenor</a></th>
 								<th><?php echo $module->year-1 . '-' . substr($module->year, 2);  ?></th>
-								<th><?php echo $module->year . '-' . substr($module->year+1, 2);  ?></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -59,7 +58,6 @@
 										<td><?php echo $delivery->credit_amount; ?></td>
 										<td><?php echo $delivery->convenor; ?></td>
 										<td class="text-center"><i class="kf-<?php echo in_array($module->year,$delivery->delivery_sessions)?'check':'close';?>"></i></td>
-										<td class="text-center"><i class="kf-<?php echo in_array($module->year+1,$delivery->delivery_sessions)?'check':'close';?>"></i></td>
 									</tr>
 									<?php
 								}
