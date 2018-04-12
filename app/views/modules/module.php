@@ -138,7 +138,7 @@
 								Flight::render("partials/tab", array("title"=>"Method Of Assessment", "id" => "method_of_assessment", "selected" => false, "content" => Flight::fetch("modules/tabs/method")));
 							}
 							if ((isset($module->preliminary_reading) && !empty($module->preliminary_reading)) || (isset($module->reading_lists))){
-								Flight::render("partials/tab", array("title"=>"Preliminary reading", "id" => "preliminary_reading", "selected" => false, "content" => Flight::fetch("modules/tabs/reading")));
+								Flight::render("partials/tab", array("title"=>"Indicative reading", "id" => "preliminary_reading", "selected" => false, "content" => Flight::fetch("modules/tabs/reading")));
 							}
 							if (isset($module->learning_outcome) && !empty($module->learning_outcome)){
 							 Flight::render("partials/tab", array("title"=>"Learning outcomes", "id" => "learning_outcomes", "selected" => false, "content" => Flight::fetch("modules/tabs/learning")));
