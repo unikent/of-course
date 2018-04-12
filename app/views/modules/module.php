@@ -112,7 +112,7 @@
 						<li class="nav-item"><a href="#method_of_assessment"  data-toggle="tab" role="tab" class="nav-link">Method of assessment</a></li>
 						<?php } ?>
 						<?php if (isset($module->preliminary_reading) && !empty($module->preliminary_reading)){ $data_found = true; ?>
-						<li class="nav-item"><a href="#preliminary_reading" data-toggle="tab" role="tab" class="nav-link">Preliminary reading</a></li>
+						<li class="nav-item"><a href="#preliminary_reading" data-toggle="tab" role="tab" class="nav-link">Indicative reading</a></li>
 						<?php } ?>
 						<?php if (isset($module->learning_outcome) && !empty($module->learning_outcome)){ $data_found = true; ?>
 						<li class="nav-item"><a href="#learning_outcomes" data-toggle="tab" role="tab" class="nav-link">Learning outcomes</a></li>
