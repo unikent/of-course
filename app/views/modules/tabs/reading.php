@@ -1,4 +1,4 @@
-<h2>Preliminary reading</h2>
+<h2>Indicative reading</h2>
 						<?php if (isset($module->preliminary_reading) && !empty($module->preliminary_reading)): ?>
 							<p><?php echo $module->preliminary_reading; ?></p>
 						<?php endif; ?>
