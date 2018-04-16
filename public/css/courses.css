@@ -119,3 +119,12 @@
 	max-width: 200px;
 	margin-left: 2rem;
 }
+
+@media (max-width: 992px) {
+	.tef {
+		display: block;
+	}
+	.tef__image {
+		margin: 0;
+	}
+}
