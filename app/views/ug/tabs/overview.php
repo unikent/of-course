@@ -23,7 +23,7 @@
 
 
 <?php if( $level == 'undergraduate' && !empty($course->globals->tef_title) && !empty($course->globals->tef_text)): ?>
-<div class="content-container tef py-2 my-2">
+<div class="tef py-2 my-2">
 	<div class="tef__text">
 		<h2><?php echo $course->globals->tef_title ?></h2>
 		<p><?php echo $course->globals->tef_text ?></p>
