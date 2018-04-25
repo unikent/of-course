@@ -25,7 +25,6 @@
 		<?php echo $course->homeeu_students_intro_text;?>
 	</section>
 
-	<?php if( $course->current_year == $course->year ): ?>
 	<table class="table table-responsive table-striped ug-entry-requirements">
 		<thead>
 		<tr>
@@ -79,8 +78,6 @@
 
 		</tbody>
 	</table>
-
-	<?php endif; ?>
 
 </section>
 
