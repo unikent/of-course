@@ -49,7 +49,7 @@
 						<tbody>
 							<?php
 							foreach ($module->deliveries as $delivery){
-								if (!empty($delivery->delivery_sessions)){
+								if (!empty($delivery->delivery_sessions) && in_array($module->year,$delivery->delivery_sessions)){
 									?>
 									<tr>
 										<td><span><?php echo $delivery->campus; ?><?php if ($delivery->module_version > 1 ){ ?><br>(version <?php echo $delivery->module_version; ?>)<?php } ?></span></td>
