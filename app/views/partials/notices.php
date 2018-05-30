@@ -12,7 +12,7 @@
 	<?php elseif ( isset($course) && $course->current_year > $course->year ): ?>
 		<div class="card card-backed-tertiary">
 			<div class="clearing-banner-container card-block">
-				<h2 class="col-lg-3 clearing-banner-title">CLEARING 2017</h2>
+				<h2 class="col-lg-3 clearing-banner-title">CLEARING 2018</h2>
 				<div class="col-lg-5 clearing-banner-text">We may still have full-time vacancies available for this course.</div>
 				<a class="col-lg-3" href="https://evision.kent.ac.uk/ipp/ClearingVacancyList.htm"><button type="button" class="btn btn-primary clearing-banner-search-button">Search Vacancies</button></a>
 			</div>
@@ -23,8 +23,8 @@
 		?>
 		<div class="card card-backed-tertiary">
 			<div class="clearing-banner-container card-block">
-				<h2 class="col-lg-3 clearing-banner-title">CLEARING 2017</h2>
-				<div class="col-lg-8 clearing-banner-text">Planning to start this September? We may still have full-time vacancies available for this course. <a href="<?php echo "/courses/$level/$previous_year/$course->instance_id"; ?>">View 2017 course details.</a> </div>
+				<h2 class="col-lg-3 clearing-banner-title">CLEARING 2018</h2>
+				<div class="col-lg-8 clearing-banner-text">Planning to start this September? We may still have full-time vacancies available for this course. <a href="<?php echo "/courses/$level/$previous_year/$course->instance_id"; ?>">View 2018 course details.</a> </div>
 			</div>
 		</div>
 
