@@ -176,5 +176,9 @@
 </div>
 
 	<?php } else { ?>
-		<p>Sorry, this module isn't running currently.</p>
+		<div class="content-container pt-1">
+			<div class="content-full">
+				<p>Sorry, this module is not currently running.</p>
+			</div>
+		</div>
 	<?php } ?>
