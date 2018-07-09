@@ -9,10 +9,10 @@
 	<?php if(defined('CLEARING') && CLEARING && $course->current_year-1 == $course->year): ?>
 		<h3>Clearing entry</h3>
 		<p>
-			Typical entry requirements for 2017 entry courses remain published on the UCAS course search website and apply to applications received during the main UCAS application cycle. These provide a rough guide to our likely entry requirements for Clearing and Adjustment applicants.
+			Typical entry requirements for 2018 entry courses remain published on the UCAS course search website and apply to applications received during the main UCAS application cycle. These provide a rough guide to our likely entry requirements for Clearing and Adjustment applicants.
 		</p>
 		<p>
-			However during Clearing (after 5 July), our entry requirements change in real time to reflect the supply and demand of remaining course vacancies and so may be higher or lower than those published on UCAS as typical entry grades.
+			However during Clearing (after 4 July), our entry requirements change in real time to reflect the supply and demand of remaining course vacancies and so may be higher or lower than those published on UCAS as typical entry grades.
 		</p>
 		<p>
 			Our <a href="https://evision.kent.ac.uk/ipp/clearingvacancylist.htm">Clearing vacancy list</a> will be updated regularly as courses move in and out of Clearing, so please check regularly to see if we have any places available. You can submit an application via our online Clearing application form as soon as your full results are known.
