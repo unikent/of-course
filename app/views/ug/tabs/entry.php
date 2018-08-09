@@ -14,8 +14,11 @@
 		<p>
 			However during Clearing (after 4 July), our entry requirements change in real time to reflect the supply and demand of remaining course vacancies and so may be higher or lower than those published on UCAS as typical entry grades.
 		</p>
+		
 		<p>
+		<?php if(!(defined('CLEARING_EMBARGO') && CLEARING_EMBARGO)):?>
 			Our <a href="https://evision.kent.ac.uk/ipp/clearingvacancylist.htm">Clearing vacancy list</a> will be updated regularly as courses move in and out of Clearing, so please check regularly to see if we have any places available. You can submit an application via our online Clearing application form as soon as your full results are known.
+		<?php endif;?>
 			See our <a href="https://www.kent.ac.uk/clearing/index.html">Clearing website</a> for more details on how Clearing works at Kent.
 		</p>
 	<?php endif; ?>
