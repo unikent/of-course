@@ -17,7 +17,7 @@
 			<div class="modal-body container-fluid">
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-						<h3>United Kingdon/EU enquiries</h3>
+						<h3>United Kingdom/EU enquiries</h3>
 						<?php
 						$year_for_url = empty($year) ? '' : ((strcmp($year, CoursesController::$current_year) == 0) ? '' : $year . '/');
 						$has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
