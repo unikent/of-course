@@ -1,22 +1,23 @@
 <!-- contact modal -->
 <div class="modal modal-course fade" id="contact-modal" tabindex="-1" role="dialog" aria-labelledby="#contactButton" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">×</span>
 				</button>
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-xs-10">
-               				 <h3 class="modal-title">Contact us</h3>
-							</div>
+							 <h3 class="modal-title">Contact us</h3>
+						</div>
 					</div>
 				</div>
-            </div>
-            <div class="modal-body container-fluid">
+			</div>
+			<div class="modal-body container-fluid">
 					<div class="row">
-						<div class="col-md-12">
+						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+							<h3>United Kingdom/EU enquiries</h3>
 							<?php
 							$year_for_url = empty($year) ? '' : ((strcmp($year, CoursesController::$current_year) == 0) ? '' : $year . '/');
 							$has_parttime = (strpos(strtolower($course->mode_of_study), 'part-time') !== false);
@@ -80,7 +81,7 @@
 
 									<?php foreach($enquire_link as $key => $details):
 										if ($show[$key]): ?>
-											<h3><?php echo $awards[$key]. ' '.$descriptions[$key]; ?></h3>
+											<h4><?php echo $awards[$key]. ' '.$descriptions[$key]; ?></h4>
 											<ul>
 												<?php if($has_fulltime): ?>
 													<li>
@@ -108,8 +109,8 @@
 									?>
 								</div>
 							<?php endif; ?>
-
-							<h3 class="mt-2">General enquiries</h3>
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 
 							<?php if(!empty($course->admissions_enquiries)):
 								$enquiries = str_replace('&nbsp;','',$course->admissions_enquiries);
@@ -143,8 +144,23 @@
 							<?php endif; ?>
 						</div>
 					</div>
+
+					<hr>
+					
+					<h3>International student enquiries</h3>
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+							<p><a href="https://www.kent.ac.uk/internationalstudent/countries/enquire.html">Enquire online</a></p>
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+							<p>
+								T: +44 (0)1227 823254 <br>
+								E: <a href="mailto:internationalstudent@kent.ac.uk">internationalstudent@kent.ac.uk</a>
+							</p>
+						</div>
+					</div>
 				</div>
-            </div>
-        </div>
-    </div>
+			</div>
+		</div>
+	</div>
 </div>

@@ -128,3 +128,7 @@
 		margin: 0;
 	}
 }
+
+#contact-modal .modal-body {
+	padding: 40px;
+}
