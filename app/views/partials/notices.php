@@ -48,10 +48,26 @@
 	/*
 	 * If current course year being viewed is over 2 years ago then display a message saying that it is archived.
 	 */
-	if(isset($course) && $course->year < $years->current -1): ?>
+	if (isset($course) && $course->year < $years->current -1) :?>
 	<div class="card card-backed-tertiary">
 		<div class="card-block">
 			<h2 class=" clearing-banner-title">This is an archived page and for reference purposes only</h2>
+		</div>
+	</div>
+	
+	<?php
+	/*
+	 * If current course year being viewed is 1 year ago and that course is not avaliable in the current academic year
+	*/
+	elseif (isset($course) && !in_array($course->current_year, $course->years) && ($course->year == $years->current -1)): ?>
+	<div class="card card-backed-tertiary">
+		<div class="card-block">
+			<h2 class="clearing-banner-title">
+				This is a programme page for the academic year <?php echo format_academic_year($course->year)?>.
+			</h2>
+			<h2 class="clearing-banner-title">
+				We are not accepting applications for this programme for the academic year <?php echo format_academic_year($years->current) ?>.
+			</h2>
 		</div>
 	</div>
 <?php endif;?>

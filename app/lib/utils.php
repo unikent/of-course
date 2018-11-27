@@ -303,3 +303,23 @@
 
 		return $text;
 	});
+
+
+	/**
+	 * Format a year for display as an academic year
+	 *
+	 * @param int $year - such as 2027
+	 * @return string - formatted academic year such as 2027-28 
+	 * 					or empty string if year appers not to be in correct format
+	 */
+	function format_academic_year($year)
+	{
+		if (4 !== strlen((string)($year))) {
+			return '';
+		};
+		
+		$year = (int) $year;
+		$nextYear = substr((string)($year +1), 2);
+
+		return "$year-$nextYear";
+	}
