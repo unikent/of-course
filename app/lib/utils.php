@@ -323,3 +323,22 @@
 
 		return "$year-$nextYear";
 	}
+
+	/**
+	 * Is a module cluster made up of optional modules or not
+	 *
+	 * a cluster is made from compulsory modules if
+	 * - Cluster size = modules required
+	 * - and compulsory flag is Y
+	 * If any other circumstance than have them appear under the optional list
+	 *
+	 * @param object - a module cluser
+	 * @return bool - true if the cluster is made from optional modules
+	 */
+	function cluster_contains_opional_modules($cluster)
+	{
+		if ("Y" !== $cluser->compulsory) {
+			return true;
+		}
+		return $cluster->cluter_size === $cluster->modules_required;
+	}
