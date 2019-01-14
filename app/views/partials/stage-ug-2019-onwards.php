@@ -1,5 +1,3 @@
-<h2>@TODO 2019 Onwards</h2>
-
 <?php if ( ! empty($stage->clusters->compulsory) || ! empty($stage->clusters->optional) ): ?>
 
 <?php
