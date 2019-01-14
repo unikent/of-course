@@ -1,8 +1,18 @@
 <?php
 $show_modules = (strtolower($course->module_session) != 'none');
 $modules = $course->modules;
-if(!empty($modules)) {
+if (!empty($modules)) {
 	$modules = $modules[0];
+}
+
+/*
+for 2019 onwards we use different display logic modules at a given stage to be more
+CMA compliant
+*/
+if ($course->year >= '2019') {
+	$stage_template = 'partials/stage-ug-2019-onwards';
+} else {
+	$stage_template = 'partials/stage';
 }
 ?>
 
@@ -24,20 +34,20 @@ if(!empty($modules)) {
 	<?php if (empty($course->foundation_year)): ?>
 	<h3 class="mt-2">Foundation year</h3>
 	<?php endif; ?>
-	<?php Flight::render('partials/stage', array('stage' => $modules->stages->{"foundation"}, 'stage_id' => '0')); ?>
+	<?php Flight::render($stage_template, array('stage' => $modules->stages->{"foundation"}, 'stage_id' => '0')); ?>
 <?php endif; ?>
 
 <?php if (isset($modules->stages->{1})  && $show_modules ): ?>
 <section class="info-section">
 	<h3 class="mt-2">Stage 1</h3>
-	<?php Flight::render('partials/stage', array('stage' => $modules->stages->{1}, 'stage_id' => '1')); ?>
+	<?php Flight::render($stage_template, array('stage' => $modules->stages->{1}, 'stage_id' => '1')); ?>
 </section>
 <?php endif; ?>
 
 <?php if (isset($modules->stages->{2})  && $show_modules ): ?>
 <section class="info-section">
 	<h3 class="mt-2">Stage 2</h3>
-	<?php Flight::render('partials/stage', array('stage' => $modules->stages->{2}, 'stage_id' => '2')); ?>
+	<?php Flight::render($stage_template, array('stage' => $modules->stages->{2}, 'stage_id' => '2')); ?>
 </section>
 <?php endif; ?>
 
@@ -53,7 +63,7 @@ if(!empty($modules)) {
 			<?php if (empty($course->year_in_industry)): ?>
 				<h3 class="mt-2">Year in industry</h3>
 			<?php endif; ?>
-			<?php Flight::render('partials/stage', array('stage' => $modules->stages->{"S"}, 'stage_id' => 's')); ?>
+			<?php Flight::render($stage_template, array('stage' => $modules->stages->{"S"}, 'stage_id' => 's')); ?>
 		<?php endif; ?>
 	</section>
 <?php endif; ?>
@@ -71,15 +81,15 @@ if(!empty($modules)) {
 				<?php if (empty($course->year_abroad)): ?>
 					<h3 class="mt-2">Year abroad</h3>
 				<?php endif; ?>
-				<?php Flight::render('partials/stage', array('stage' => $modules->stages->{"A"}, 'stage_id' => 'a')); ?>
+				<?php Flight::render($stage_template, array('stage' => $modules->stages->{"A"}, 'stage_id' => 'a')); ?>
 			<?php endif; ?>
 			<?php if (isset($modules->stages->{"A1"})): ?>
 				<h3 class="mt-2">1st year abroad</h3>
-				<?php Flight::render('partials/stage', array('stage' => $modules->stages->{"A1"}, 'stage_id' => 'a1')); ?>
+				<?php Flight::render($stage_template, array('stage' => $modules->stages->{"A1"}, 'stage_id' => 'a1')); ?>
 			<?php endif; ?>
 			<?php if (isset($modules->stages->{"A2"})): ?>
 				<h3 class="mt-2">2nd year abroad</h3>
-				<?php Flight::render('partials/stage', array('stage' => $modules->stages->{"A2"}, 'stage_id' => 'a2')); ?>
+				<?php Flight::render($stage_template, array('stage' => $modules->stages->{"A2"}, 'stage_id' => 'a2')); ?>
 			<?php endif; ?>
 		<?php endif; ?>
 	</section>
@@ -90,21 +100,21 @@ if(!empty($modules)) {
 	<?php if (isset($modules->stages->{3})): ?>
 	<section class="info-section">
 		<h3 class="mt-2">Stage 3</h3>
-		<?php Flight::render('partials/stage', array('stage' => $modules->stages->{3}, 'stage_id' => '3')); ?>
+		<?php Flight::render($stage_template, array('stage' => $modules->stages->{3}, 'stage_id' => '3')); ?>
 	</section>
 	<?php endif; ?>
 
 	<?php if (isset($modules->stages->{4})): ?>
 	<section class="info-section">
 		<h3 class="mt-2">Stage 4</h3>
-		<?php Flight::render('partials/stage', array('stage' => $modules->stages->{4}, 'stage_id' => '4')); ?>
+		<?php Flight::render($stage_template, array('stage' => $modules->stages->{4}, 'stage_id' => '4')); ?>
 	</section>
 	<?php endif; ?>
 
 	<?php if (isset($modules->stages->{5})): ?>
 	<section class="info-section">
 		<h3 class="mt-2">Stage 5</h3>
-		<?php Flight::render('partials/stage', array('stage' => $modules->stages->{5}, 'stage_id' => '5')); ?>
+		<?php Flight::render($stage_template, array('stage' => $modules->stages->{5}, 'stage_id' => '5')); ?>
 	</section>
 	<br />
 	<?php endif; ?>
