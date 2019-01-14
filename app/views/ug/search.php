@@ -26,7 +26,7 @@
 
 		<header class="content-header">
 			<?php \unikent\kent_theme\kentThemeHelper::breadcrumb(array("Courses"=>"/courses/", "Undergraduate" . ($year!=='current'? ' ' . $year : '')=>"")); ?>
-			<h1>Undergraduate courses - <?php echo $year !== 'current' ? $year : $years[1] ?> entry</h1>
+			<h1>Undergraduate courses - <?php echo $year !== 'current' ? $year : $years[0] ?> entry</h1>
 		</header>
 
 	<?php endif; ?>
