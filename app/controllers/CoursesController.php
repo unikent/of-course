@@ -73,6 +73,7 @@ class CoursesController {
 			return Flight::error($e, $data);
 		}
 
+		$years = static::$pp->make_request("$level/year");
 		// Attempt to cache responce with browser + debug some extra information.
 		Flight::cachecheck();
 
@@ -93,6 +94,7 @@ class CoursesController {
 		// Render programme page
 		Flight::setup($year, $level);
 		$course->locations_str = $this->getCourseLocations($course);
+		$course->locations_str_linked = $this->getCourseLocationsLinked($course);
 		$course->award_list	= $this->getCourseAwardList($course);
 		$course->award_list_linked = $this->getCourseAwardListLinked($course);
 
@@ -109,7 +111,6 @@ class CoursesController {
 
 		switch($level){
 			case 'postgraduate':
-			$template = 'pg_course_page';
 			if($year && ($year !== static::$current_year)){
 				$meta['title'] = "{$course->programme_title} | Postgraduate Programmes {$year} | The University of Kent";
 			}
@@ -147,51 +148,85 @@ class CoursesController {
 			break;
 
 			default:
-			$template = 'ug_course_page';
+
 			if($year && ($year !== static::$current_year)){
 				$meta['title'] = "{$course->programme_title} ($course->ucas_code) | Undergraduate Programmes {$year} | The University of Kent";
 			}
 			break;
 		}
 
-		return Flight::layout($template, array('meta' => $meta, 'course' => $course));
+		// Additional data
+		$data = array(
+			"school_name" => $course->administrative_school[0]->name,
+			"has_parttime" => (strpos(strtolower($course->mode_of_study), 'part-time') !== false),
+			"has_fulltime" => (strpos(strtolower($course->mode_of_study), 'full-time') !== false),
+			'meta' => $meta,
+			'layout' => $level === 'postgraduate' ? 'pg' : 'ug',
+			'years' => $years
+		);
+
+		// Course object should be global for views
+		Flight::view()->set('course', $course);
+
+		// Pass additional data
+		return Flight::layout('course', $data);
 	}
 
-	/**
-	* Display a preview page
-	*
-	* @param string $hash of preview
-	*/
-	public function preview($level, $hash)
-	{
-		try
+
+		/**
+		* Display a preview page
+		*
+		* @param string $hash of preview
+		*/
+		public function preview($level, $hash)
 		{
-			$course = static::$pp->get_preview_programme($level, $hash);
+			try
+			{
+				$course = static::$pp->get_preview_programme($level, $hash);
+			}
+			catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
+			{
+				// We dont know enough to help the 404 out really
+				return Flight::notFound(array('error'=> $e));
+			}
+			catch(\Exception $e)
+			{
+				// Another error. Pretend it was a 404.
+				return Flight::error($e);
+			}
+
+			$years = static::$pp->make_request("$level/year");
+
+			Flight::cachecheck();
+
+			// Debug option
+			if(isset($_GET['debug_performance'])){Log::warning($course); }
+
+			Flight::setup($course->year, $level, true);
+
+			$course->locations_str = $this->getCourseLocations($course);
+			$course->locations_str_linked = $this->getCourseLocationsLinked($course);
+			$course->award_list	= $this->getCourseAwardList($course);
+			$course->award_list_linked = $this->getCourseAwardListLinked($course);
+			$course->years = $years->years;
+			$course->current_year = static::$current_year;
+			$course->programmme_status_text = '';
+
+			// Additional data
+			$data = array(
+				"school_name" => $course->administrative_school[0]->name,
+				"has_parttime" => (strpos(strtolower($course->mode_of_study), 'part-time') !== false),
+				"has_fulltime" => (strpos(strtolower($course->mode_of_study), 'full-time') !== false),
+				'meta' => $meta,
+				'layout' => $level === 'postgraduate' ? 'pg' : 'ug',
+				'years' => $years
+			);
+
+			// Course object should be global for views
+			Flight::view()->set('course', $course);
+
+			return Flight::layout('course', $data);
 		}
-		catch(ProgrammesPlant\ProgrammesPlantNotFoundException $e)
-		{
-			// We dont know enough to help the 404 out really
-			return Flight::notFound(array('error'=> $e));
-		}
-		catch(\Exception $e)
-		{
-			// Another error. Pretend it was a 404.
-			return Flight::error($e);
-		}
-
-		Flight::cachecheck();
-
-		// Debug option
-		if(isset($_GET['debug_performance'])){Log::warning($course); }
-
-		Flight::setup($course->year, null, true);
-
-		$course->locations_str = $this->getCourseLocations($course);
-		$course->award_list	= $this->getCourseAwardList($course);
-		$course->award_list_linked = $this->getCourseAwardListLinked($course);
-
-		return Flight::layout($course->programme_level.'_course_page', array('course'=> $course));
-	}
 
 	/**
 	* Display a simpleview page
@@ -220,7 +255,7 @@ class CoursesController {
 		// Debug option
 		if(isset($_GET['debug_performance'])){ Log::warning($course); }
 
-		Flight::setup($course->year, null, false, true);
+		Flight::setup($course->year, $level, false, true);
 
 		return Flight::render('simpleview_course_page', array('course'=> $course));
 	}
@@ -292,30 +327,47 @@ class CoursesController {
 			return Flight::notFound();
 		}
 
-		switch($level){
-			case 'postgraduate':
-			$title = 'Courses A-Z';
-			$template = 'pg_search';
+		// get all the years on offer, most recent first
+		$years_data = static::$pp->make_request("$level/year");
+
+		// make sure the most recent year is first
+		rsort($years_data->years);
+
+		// this is used in the search results listing, so we can output the correct year for each course in the link, if needed
+		$year_for_url = ($year == 'current' || $year == static::$current_year ? '' : $year . '/');
+
+		// set default meta info
+		$title = 'Courses A-Z';
+		$template = 'ug/search';
+		$meta = array(
+			'title' => 'Courses A-Z | Undergraduate courses | The University of Kent',
+			'description' => 'Search all of the undergraduate courses offered by the University of Kent',
+		);
+
+		// if we have multiple years the meta info needs changing
+		if ( $level != 'postgraduate' && $year != 'current' && sizeof($years) > 1 && defined("SHOW_UG_PREVIOUS_YEAR_BANNER") && SHOW_UG_PREVIOUS_YEAR_BANNER == true ) {
+			$title = 'Courses A-Z '. $year;
+			$template = 'ug/search';
 			$meta = array(
-				'title' => 'Courses A-Z | Postgraduate Courses | The University of Kent',
+				'title' => 'Courses A-Z | Undergraduate courses ' . $year . ' | The University of Kent',
+				'description' => 'Search all of the undergraduate courses for ' . $year . ' offered by the University of Kent',
+			);
+		}
+		// pg meta info
+		elseif ( $level == 'postgraduate' ) {
+			$title = 'Courses A-Z';
+			$template = 'pg/search';
+			$meta = array(
+				'title' => 'Courses A-Z | Postgraduate courses | The University of Kent',
 				'description' => 'Search all of the postgraduate courses offered by the University of Kent',
 			);
-			break;
-
-			default:
-			$title = 'Courses A-Z';
-			$template = 'ug_search';
-			$meta = array(
-				'title' => 'Courses A-Z | Undergraduate Courses | The University of Kent',
-				'description' => 'Search all of the undergraduate courses offered by the University of Kent',
-			);
-			break;
 		}
 
 		Flight::setup($year, $level);
 
 		try {
 			$programmes = static::$pp->get_programmes_index($year, $level);//5 minute cache
+
 			$campuses = static::$pp->get_campuses();
 			$subject_categories = static::$pp->get_subjectcategories($level);
 			$awards = static::$pp->get_awards($level);
@@ -336,7 +388,7 @@ class CoursesController {
 		if(isset($_GET['debug_performance'])){ Log::warning($programmes); }
 
 		//Render full page
-		return Flight::layout($template, array('meta' => $meta, 'programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'search_type' => $search_type, 'search_string' => $search_string, 'awards' => $award_names, 'disable_search_bar' => true, 'title' => $title));
+		return Flight::layout($template, array('meta' => $meta, 'programmes' => $programmes, 'campuses' => $campuses, 'subject_categories' => $subject_categories, 'search_type' => $search_type, 'search_string' => $search_string, 'awards' => $award_names, 'disable_search_bar' => true, 'title' => $title, 'years' => $years_data->years, 'year_for_url' => $year_for_url));
 
 	}
 	/**
@@ -359,7 +411,7 @@ class CoursesController {
 			case 'postgraduate':
 			$template = 'new_courses';
 			$meta = array(
-				'title' => 'New Courses A-Z | Postgraduate Courses | The University of Kent',
+				'title' => 'New Courses A-Z | Postgraduate courses | The University of Kent',
 				'description' => 'Search all of the new postgraduate courses offered by the University of Kent',
 			);
 			break;
@@ -367,7 +419,7 @@ class CoursesController {
 			default:
 			$template = 'new_courses';
 			$meta = array(
-				'title' => 'New Courses A-Z | Undergraduate Courses | The University of Kent',
+				'title' => 'New Courses A-Z | Undergraduate courses | The University of Kent',
 				'description' => 'Search all of the new undergraduate courses offered by the University of Kent',
 			);
 			break;
@@ -414,7 +466,7 @@ class CoursesController {
 		$title = 'Postgraduate courses with international study';
 		$template = 'pg_search';
 		$meta = array(
-			'title' => 'Postgraduate courses with international study | Postgraduate Courses | The University of Kent',
+			'title' => 'Postgraduate courses with international study | Postgraduate courses | The University of Kent',
 			'description' => 'Search all of the study abroad option courses offered by the University of Kent',
 		);
 
@@ -841,6 +893,22 @@ class CoursesController {
 		return $locations_str;
 	}
 
+	//to display locations under course heading
+	private function getCourseLocationsLinked($course)
+	{
+		$additional_locations =  is_array($course->additional_locations) ? $course->additional_locations : array();
+		$locations = array_merge($course->location, $additional_locations);
+		$locations_count = sizeof($locations);
+
+		$locations_str = '';
+		foreach($locations as $key => $loc){
+			$locations_str .= '<a class="text-accent" href="' .$loc->url . '">' . $loc->name . '</a>';
+			$locations_str .= ($key === $locations_count-2) ? ' and ' : (($key === $locations_count-1) ? '' : ', ');
+		}
+
+		return $locations_str;
+	}
+
 	private function getCourseAwardList($course)
 	{
 		// no award - should this be possible?
@@ -869,6 +937,55 @@ class CoursesController {
 		}
 
 		return rtrim($award_list, ', ');
+	}
+
+	public function profiles($level = 'undergraduate', $search_string = ''){
+		try{
+			$profiles = static::$pp->make_request($level . '/profile');
+			$subject_categories = static::$pp->get_subjectcategories($level);
+		}catch(\Exception $e){
+			return Flight::notFound();
+		}
+
+		switch ($level) {
+			case "undergraduate":
+				$level_pretty = 'Undergraduate';
+				$level_code = 'ug';
+			break;
+			default:
+				$level_pretty = 'Postgraduate';
+				$level_code = 'pg';
+		}
+
+		$meta = array(
+			'title' => $level_pretty  . ' Student Profiles | The University of Kent',
+			'description' => ''
+		);
+
+		return Flight::layout('profiles', array('meta' => $meta,
+				'profiles'=> $profiles,
+			 	'level' => $level,
+			 	'level_code'=>$level_code,
+			 	'level_pretty'=>$level_pretty,
+				'subject_categories' => $subject_categories,
+				'search_type' => 'subject_category',
+				'search_string' => $search_string
+		));
+	}
+
+	public function profile($level,$idOrSlug){
+		try{
+			$profile = static::$pp->make_request( $level . '/profile/' . $idOrSlug);
+		}catch(\Exception $e){
+			return Flight::notFound();
+		}
+
+		$meta = array(
+			'title' => 'Student Profile | ' . $profile->name . ' | The University of Kent',
+			'description' => $profile->lead,
+		);
+
+		return Flight::layout('profile', array('meta' => $meta, 'level'=> $level, 'profile'=> $profile));
 	}
 
 

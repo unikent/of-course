@@ -11,7 +11,9 @@ require 'config.php';
 // Load Composer & other utils
 require '../vendor/autoload.php';
 require 'shared/autoloader.php';
+require THEME_LIBS .'/theme-helper.php';
 require 'lib/utils.php';
+
 
 // Configure cache
 Config::set("cachedir", CACHE_DIRECTORY);

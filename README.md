@@ -1,7 +1,7 @@
 # Of Course!
 
 A [Flight](http://flightphp.com/) based front-end application for the data produced by the [Programmes Plant](http://github.com/unikent/).
-The application communicates with the back end system via the [programmes-plant-api-php](https://github.com/unikent/programmes-plant-api-php) library (A thin wrapper around [guzzle}(https://github.com/guzzle/guzzle) ). After pulling the data, the application then renders the data in a variety of views, before passing it through the pantheon templating engine in order to produce finalized markup for the University of Kent course pages.
+The application communicates with the back end system via the [programmes-plant-api-php](https://github.com/unikent/programmes-plant-api-php) library (A thin wrapper around [guzzle](https://github.com/guzzle/guzzle) ). After pulling the data, the application then renders the data in a variety of views, before passing it through the pantheon templating engine in order to produce finalized markup for the University of Kent course pages.
 
 ![of-course sample course page screenshot](https://raw.github.com/unikent/of-course/develop/screenshot.jpg "of-course sample course page screenshot")
 
@@ -51,7 +51,7 @@ the url structure is:
 eg  http://www.kent.ac.uk/courses/postgraduate/search/subject_category/testtest/
 
 ## Load Testing 
-This app uses [Siege](https://www.joedog.org/siege-home/) to load test the frintend and (some )API endpoints. The endpoints have been statically generated into the tests/siege folder. To use:
+This app uses [Siege](https://www.joedog.org/siege-home/) to load test the frontend and (some )API endpoints. The endpoints have been statically generated into the tests/siege folder. To use:
 
 1. Install by running `sudo apt-get install siege`
    * Alternatively via Homebrew: `brew install siege`
@@ -62,7 +62,17 @@ This app uses [Siege](https://www.joedog.org/siege-home/) to load test the frint
   * -t is the time to run the load test for (S=seconds, M=minutes)
   * -i randomises the URL the test grabs from the text file, simulating real traffic
 
+## Clearing 
 
+Set the following to true / false in config.php to enable / disable:
+
+1. Clearing banner on course pages ``const CLEARING = false;``
+2. Link to previous year on undergraduate search page: ``const SHOW_UG_PREVIOUS_YEAR_BANNER = false;``
+
+### Annual Rollover
+
+In the Programmes Plant there's an immutable field called _Disable Apply_. If this is set to true then we display a link to the previous year of entry for that course. This should be done during clearing. 
+ 
 ## Licensing
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or any later version.
