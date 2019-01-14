@@ -4,16 +4,16 @@ use unikent\libs\Cache;
 
 /**
  * Module controller
- * runs logic for module catalogue replacement 
+ * runs logic for module catalogue replacement
  */
 class ModulesController {
 
 	/**
 	 * Home
-	 *  
+	 *
 	 */
 	public function index()
-	{	
+	{
 		$list = $this->getModuleList();
 
  		// Home page collections
@@ -24,7 +24,7 @@ class ModulesController {
 			"postgraduate" => array("name" => "Postgraduate", "collection" => "PG"),
 			"brussels" => array("name" => "Brussels", "collection" => "B"),
 			"paris" => array("name" => "Paris", "collection" => "P"),
-			"wild" => array("name" => "Wild Modules", "collection" => "W")
+			"wild" => array("name" => "Wild modules", "collection" => "W")
 		);
 
 		$subjects = $this->getSubjectsList();
@@ -34,7 +34,7 @@ class ModulesController {
 
 	/**
 	 * Show modules in a collection
-	 *  
+	 *
 	 */
 	public function collection($collection = 'all'){
 		$list = $this->getModuleList($collection);
@@ -51,7 +51,7 @@ class ModulesController {
 
 	/**
 	 * Collections list
-	 *  
+	 *
 	 */
 	public function collections(){
 		$list = $this->getCollectionList();
@@ -61,7 +61,7 @@ class ModulesController {
 
 	/**
 	 * View a module
-	 *  
+	 *
 	 */
 	public function view($module_code)
 	{
@@ -85,7 +85,7 @@ class ModulesController {
 
 	/**
 	 * handle legacy URL
-	 *  
+	 *
 	 */
 	public function legacy_url($module_code = null)
 	{
@@ -111,7 +111,7 @@ class ModulesController {
 
 	/**
 	 * 404 helper for bad module catalogue.
-	 *  
+	 *
 	 */
 	protected function collection_404($error){
 		$list = $this->getCollectionList();
@@ -124,20 +124,21 @@ class ModulesController {
 	 *
 	 */
 	protected function module_404($error){
+		$subjects = $this->getSubjectsList();
 		Flight::response()->status(404);
-		return Flight::layout("modules/error", array('error'=> $error), "modules/layout");
+		return Flight::layout("modules/error", array('error'=> $error, 'subjects' => $subjects), "modules/layout");
 	}
 
 
 	/**
 	 * Get module data from API
-	 *  
+	 *
 	 */
 	protected function getModule($code){
-		$data = Cache::load(KENT_API_URL . "v1/modules/module/" . $code,15);
+		$data = Cache::load(API_URL . "/v1/modules/module/" . $code,15);
 
 		if($data == false){
-			return (object) array("error" => "Unable to find specified module.");
+			return (object) array("error" => "Sorry, unable to find module.");
 		}
 
 		return json_decode($data['data']);
@@ -145,32 +146,32 @@ class ModulesController {
 
 	/**
 	 * Get collection list data from API
-	 *  
+	 *
 	 */
 	protected function getCollectionList(){
 
 		// Grab first page of datatable
-		$data = Cache::load(KENT_API_URL . "v1/modules/collection/", 15);
+		$data = Cache::load(API_URL . "/v1/modules/collection/", 15);
 		return json_decode($data['data']);
 	}
 
 	/**
 	 * Get module list data from API
-	 *  
+	 *
 	 */
 	protected function getModuleList($collection = 'all'){
 		// Grab first page of datatable
-		$data = Cache::load(KENT_API_URL . "v1/modules/collection/" . $collection, 15);
+		$data = Cache::load(API_URL . "/v1/modules/collection/" . $collection, 15);
 
 		if($data == false){
-			return (object) array("error" => "Unable to find specified collection.");
+			return (object) array("error" => "Sorry, unable to find collection");
 		}
 
 		return json_decode($data['data']);
 	}
 
 	protected function getSubjectsList($group = 'all'){
-		$data = Cache::load(KENT_API_URL . "v1/modules/subjects/" . $group, 15);
+		$data = Cache::load(API_URL . "/v1/modules/subjects/" . $group, 15);
 
 		if($data == false){
 			return (object) array("error" => "Unable to find specified subject group.");

@@ -1,5 +1,6 @@
 <?php
 	use unikent\libs\Log;
+	use unikent\kent_theme\KentThemeHelper;
 
 	/**
 	 * Layout: applies layout wrapper to content
@@ -11,59 +12,14 @@
 	Flight::map('layout', function($view, $params = array(), $layout = 'layout'){
 		Flight::render($view, $params, 'content');
 		// allow alternate layout to be passed as param
-		Flight::pantheon_render($layout, $params);
+		Flight::render($layout, $params);
 	});
 
-	/**
-	 * Render using pantheon
-	 */
-	Flight::map('pantheon_render', function($outer_view, $params){
-
-		// define $template as a closure for getting the pantheon wrapper
-		$template = function() use ($outer_view, $params)
-		{
-			if (defined("TEMPLATING_ENGINE"))
-			{
-				// Overwrite pantheon route with "URL route"
-				// Remove any spaces that may cause issues for the pantheon renderer
-				if(!LOCAL) define("RELATIVE_SITE_ROOT", str_replace(array(' ','%20',','),'_', parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH)) . '/');
-
-				// call pantheon
-				require TEMPLATING_ENGINE . '/template.loader.php';
-
-				// workaround for pantheon setting get and post to null if they're empty
-				if ($_GET === null) $_GET = array();
-				if ($_POST === null) $_POST = array();
-
-				// Shim logging data
-				
-				$logs = unikent\libs\Log::get();
-				foreach($logs as $log){
-					// only log debugs when debug is enabled.
-					if($log->level == 'debug' && !isset($_GET['debug_performance'])) continue;
-					// Pass logs to pantheon
-					inspect("[".strtoupper($log->level)."]".$log->message, $log->file, $log->line);
-				}
-
-				// run pantheon and store its output in a buffer
-				ob_start();
-
-				Flight::render($outer_view, $params);
-
-				require TEMPLATING_ENGINE . '/run.php';
-				$content = ob_get_contents();
-				ob_end_clean();
-
-				// Render with correct headers
-				Flight::response()->write($content)->send();
-			}else{
-				Flight::render($outer_view);
-			}
-		};
-
-		// go go gadget pantheon
-		return $template();
+	Flight::map("fetch", function($view, $params = array()){
+		return Flight::view()->fetch($view, $params);
 	});
+
+	
 
 	/**
 	 * URL: generate url with base path appended.
@@ -207,35 +163,12 @@
 	// 404 handler
 	// Use data to try and figure out best 404 info
 	Flight::map('notFound', function($data = array()){
-		/*
-		$pantheon_config = Util::getConfig();
-		if($pantheon_config["theme"] != "Daedalus"){
 
-			$page404 = Cache::get("courses-daedalus-chronos-error-page", function(){
-				$ch = curl_init();
-				curl_setopt($ch, CURLOPT_URL, "http://kent.ac.uk/404.html");//url
-				curl_setopt($ch, CURLOPT_HEADER, 0);
-				curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-				curl_setopt($ch, CURLOPT_TIMEOUT, 2);
-
-				$data = curl_exec($ch);
-
-				curl_close($ch);
-
-				return $data;
-			}, 120);
-
-			$page404 .= '<!-- loaded via chronos -->';
-
-			// Avoid WSOD
-			Flight::halt('404', $page404);
-		}*/
-		
 		// Attempt to resolve URL details, location, path and other stuff
 		// that will allow us to be more helpful.
 		$data = validate_404_data($data);
 
+		/*
 		// Attempt to get programmes so we can make some suggestions
 		try {
 			$data['programmes'] = CoursesController::$pp->get_programmes_index($data['year'], $data['level']);
@@ -243,12 +176,10 @@
 			$data['programmes'] = array();
 		}
 
-		// Set data & open views
-	  	Flight::setup($data['year'], $data['level']);
-	  	Flight::response()->status(404);
+		*/
+		$_GET['q'] = $data['slug'];
+		KentThemeHelper::_404();
 
-
-		return Flight::layout('404', $data);
 	});
 
 	// 500 error handler
@@ -259,9 +190,7 @@
 		// that will allow us to be more helpful.
 		$data = validate_404_data($data);
 
-		// Fail mode action. Email for help?
-		if(defined("FAIL_ALERT_EMAIL") && trim(FAIL_ALERT_EMAIL) != ''){
-			$message = "
+		$message = "
 				500 error generated from: {$data["url"]}
 				At: ".date(DATE_RFC822)."
 				On server: ".$_SERVER["HTTP_HOST"]."
@@ -273,15 +202,16 @@
 				". get_class($error) . " '{$error->getMessage()}' in {$error->getFile()}({$error->getLine()})\n
 			";
 
+		// Log the error to the error_log
+		error_log(get_class($error) . " '{$error->getMessage()}' in {$error->getFile()}({$error->getLine()})\n");
+
+		// Fail mode action. Email for help?
+		if(defined("FAIL_ALERT_EMAIL") && trim(FAIL_ALERT_EMAIL) != ''){
 			mail(FAIL_ALERT_EMAIL, "Of-Course: 500 error", $message);
 		}
 
-		// Pass error message along
-		$data['error'] = $error;
+		KentThemeHelper::_500('',$message);
 
-		// Handle error
-		Flight::response()->status(500);
-		return Flight::layout('500', $data);
 	});
 
 	/**
@@ -352,10 +282,44 @@
 	* @param $string
 	* @return string
 	*/
-	function pantheon_escape($string) {
+	function slug_escape($string) {
 		return urlencode(
 			str_replace(' ', '-',
 				str_replace(',', '', $string)
 			)
 		);
+	}
+
+	// Attempt to deal with questionable markup & chars provided via import
+	Flight::map('textDeMangler', function($text){
+		// Fix weird unicode stuff a little
+		$text = mb_convert_encoding($text, "HTML-ENTITIES", "UTF-8"); 
+
+		// Swap out the dodgy bullet points & wrap stuff in li's (No ul for now)
+		preg_match_all( '/&#149;(.*?)(?:<br>|<br \/>|<br\/>|\Z)/i', $text, $matches);
+		foreach($matches[0] as $k => $val){
+			$text = str_replace( $val, "<li>{$matches[1][$k]}</li>",$text);
+		}
+
+		return $text;
+	});
+
+
+	/**
+	 * Format a year for display as an academic year
+	 *
+	 * @param int $year - such as 2027
+	 * @return string - formatted academic year such as 2027-28 
+	 * 					or empty string if year appers not to be in correct format
+	 */
+	function format_academic_year($year)
+	{
+		if (4 !== strlen((string)($year))) {
+			return '';
+		};
+		
+		$year = (int) $year;
+		$nextYear = substr((string)($year +1), 2);
+
+		return "$year-$nextYear";
 	}

@@ -7,7 +7,7 @@
 
 	foreach ($subjects as $subject):
 		//pantheon escaping for the subject categories on the nav
-		$url = "{$level}/{$year_for_url}search/subject_category/" . pantheon_escape($subject->name);
+		$url = "{$level}/{$year_for_url}search/subject_category/" . slug_escape($subject->name);
 		$mod = $counter % $quarter;
 ?>
 

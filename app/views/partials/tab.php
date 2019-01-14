@@ -1,0 +1,1 @@
+<section id="<?php echo $id; ?>" class="p-0 tab-pane fade <?php if(isset($selected) && $selected === true): ?>in active<?php endif; ?>" role="tabpanel"><?php echo $content; ?></section>
