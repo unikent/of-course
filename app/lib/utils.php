@@ -332,13 +332,18 @@
 	 * - and compulsory flag is Y
 	 * If any other circumstance than have them appear under the optional list
 	 *
-	 * @param object - a module cluster
+	 * @param array - a module cluster
 	 * @return bool - true if the cluster is made from optional modules
 	 */
-	function cluster_contains_opional_modules($cluster)
+	function cluster_modules_are_optional($cluster)
 	{
-		if ("Y" !== $cluster->compulsory) {
+		if ("Y" !== $cluster['compulsory']) {
 			return true;
 		}
-		return !($cluster->cluster_size === $cluster->modules_required);
+		return !($cluster['cluster_size'] === $cluster['modules_required']);
+	}
+
+	function cluster_contains_modules($cluster)
+	{
+		return count($cluster['modules']['module']) != 0;
 	}

@@ -24,6 +24,47 @@ foreach ($course->modules as $module) {
 	<?php
 	if ($show_modules):
 		?>
+	<?php
+
+//  course->modules->stages->1->clusters->compulsory
+// course->modules is an array of deliveries when we have multiple deliveries...
+// when we have a single delivery it is an array with a single delivery
+
+	// echo '<h1>All Course</h1>';
+	// echo '<pre>';
+	// var_export($course);
+	// echo '</pre>';
+	if ($course->year >= '2019') {
+		foreach ($course->modules as $delivery) {
+
+			// echo 'a';
+			foreach ($delivery as $stage) {
+				// echo 'b';
+				foreach ($stage as $clusterName => $cluster) {
+					// echo 'c';
+					// echo ('<pre>');
+					// var_dump($clusterName);
+					// var_dump($cluster);
+					// echo ('</pre>');
+				// echo '<p>Cluster details</p>';
+				// echo '<pre>';
+				// var_dump($cluster->clusters);
+				// echo '</pre>';
+				Flight::render(
+					'partials/stage-ug-2019-onwards',
+					array('stage' => $cluster, 
+						'stage_id' => $clusterName)
+				);
+					
+				}
+			}
+		}
+
+	} 
+
+	?>
+
+	<h1>Current Display Logic...</h1>
 	<table class="table">
 		<thead>
 		<tr>
