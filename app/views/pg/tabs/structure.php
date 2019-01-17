@@ -21,78 +21,67 @@ foreach ($course->modules as $module) {
 	<h3>Modules</h3>
 
 	<?php echo $course->modules_intro; ?>
-	<?php
-	if ($show_modules):
-		?>
-	<?php
+	<?php if ($show_modules): ?>
 
-//  course->modules->stages->1->clusters->compulsory
-// course->modules is an array of deliveries when we have multiple deliveries...
-// when we have a single delivery it is an array with a single delivery
+			<?php
 
-	// echo '<h1>All Course</h1>';
-	// echo '<pre>';
-	// var_export($course);
-	// echo '</pre>';
-	if ($course->year >= '2019') {
-		foreach ($course->modules as $delivery) {
-
-			// echo 'a';
-			foreach ($delivery as $stage) {
-				// echo 'b';
-				foreach ($stage as $clusterName => $cluster) {
-					// echo 'c';
-					// echo ('<pre>');
-					// var_dump($clusterName);
-					// var_dump($cluster);
-					// echo ('</pre>');
-				// echo '<p>Cluster details</p>';
-				// echo '<pre>';
-				// var_dump($cluster->clusters);
-				// echo '</pre>';
-				Flight::render(
-					'partials/stage-ug-2019-onwards',
-					array('stage' => $cluster, 
-						'stage_id' => $clusterName)
-				);
-					
-				}
+			$modules = $course->modules;
+			if (!empty($modules)) {
+				// a course can have multiple deliveries
+				// so assume that the first delivery is the true course structure
+				$modules = $modules[0];
 			}
-		}
 
-	} 
+			// pre 2019 display the modules in $course->module_list
+			// otherwise construct a list of compulsory and optional modules
+			if ($course->year >= '2019') {
+				foreach ($modules as $stage) {
+					foreach ($stage as $clusterName => $cluster) {
+						Flight::render(
+							'partials/stage-2019-onwards',
+							array('stage' => $cluster, 
+								'stage_id' => $clusterName)
+						);
+					}
+				}
+			} else {
+				// pre-2019 display logic
+				// TODO make this mixture of php styles here more consistent
+				?>
+					<table class="table">
+					<thead>
+						<tr>
+							<th width="70%">Modules may include</th>
+							<th class="text-xs-center">Credits</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+						$course->module_list = empty($course->module_list)?array():$course->module_list;
+						foreach ($course->module_list as $module): ?>
 
-	?>
+							<tr class="module-row">
+								<td class="module-text">
+									<span data-toggle="collapse" data-target="#<?php echo $module->sds_code; ?>-more" id="<?php echo $module->sds_code ?>" class="module-row collapsed module-title"><?php echo $module->sds_code ?> - <?php echo $module->module_title ?></span>
+									<div class="collapse" id="<?php echo $module->sds_code; ?>-more">
+										<div class="more">
+											<p><?php echo preg_replace("/\n/",'</p><p>',preg_replace('/[\r\n]+/', "\n", preg_replace('/<br\s*\/?>/',"\n",$module->synopsis))); ?></p>
+											<a aria-labelledby="#<?php echo $module->sds_code ?>" class="chevron-link" href="/courses/modules/module/<?php echo $module->sds_code ?>">Read more</a>
+										</div>
+									</div>
+								</td>
+								<td class="text-xs-center"><?php echo $module->credit_amount; ?></td>
+							</tr>
+						<?php endforeach; ?>
+					</tbody>
+				</table>
 
-	<h1>Current Display Logic...</h1>
-	<table class="table">
-		<thead>
-		<tr>
-			<th width="70%">Modules may include</th>
-			<th class="text-xs-center">Credits</th>
-		</tr>
-		</thead>
-		<tbody>
-		<?php
-		$course->module_list = empty($course->module_list)?array():$course->module_list;
-		foreach ($course->module_list as $module): ?>
+				<?php
+			}
+		?>
 
-		<tr class="module-row">
-			<td class="module-text">
-				<span data-toggle="collapse" data-target="#<?php echo $module->sds_code; ?>-more" id="<?php echo $module->sds_code ?>" class="module-row collapsed module-title"><?php echo $module->sds_code ?> - <?php echo $module->module_title ?></span>
-				<div class="collapse" id="<?php echo $module->sds_code; ?>-more">
-					<div class="more">
-						<p><?php echo preg_replace("/\n/",'</p><p>',preg_replace('/[\r\n]+/', "\n", preg_replace('/<br\s*\/?>/',"\n",$module->synopsis))); ?></p>
-						<a aria-labelledby="#<?php echo $module->sds_code ?>" class="chevron-link" href="/courses/modules/module/<?php echo $module->sds_code ?>">Read more</a>
-					</div>
-				</div>
-			</td>
-			<td class="text-xs-center"><?php echo $module->credit_amount; ?></td>
-		</tr>
-	<?php endforeach; ?>
-		</tbody>
-	</table>
-	<?php endif; ?>
+
+	<?php endif; // show modules ?>
 </section>
 <section class="info-section">
 

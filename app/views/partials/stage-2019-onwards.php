@@ -4,11 +4,6 @@
 
 	// make the stage data into an array make it easier to parse
 	$stageData = json_decode(json_encode($stage), true);
-
-	// echo '<h1>Is this more useful?</h1>';
-	// echo '<pre>';
-	// var_dump($stageData);
-	// echo '</pre><hr>';
 ?>
 
 <?php if ( ! empty($stageData['clusters']['compulsory']) || ! empty($stageData['clusters']['optional']) ): ?>
@@ -47,7 +42,7 @@
 ?>
 <?php $module_codes = array(); ?>
 
-<p>TODO: Optional free text here for the stage here</p>
+<p>TODO: Optional free text here for the award here</p>
 
 	<?php if (!empty($required_clusters)): ?>
 

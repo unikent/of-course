@@ -1,7 +1,10 @@
 <?php
 $show_modules = (strtolower($course->module_session) != 'none');
+
 $modules = $course->modules;
 if (!empty($modules)) {
+	// a course can have multiple deliveries
+	// so assume that the first delivery is the true course structure
 	$modules = $modules[0];
 }
 
@@ -10,7 +13,7 @@ for 2019 onwards we use different display logic modules at a given stage to be m
 CMA compliant
 */
 if ($course->year >= '2019') {
-	$stage_template = 'partials/stage-ug-2019-onwards';
+	$stage_template = 'partials/stage-2019-onwards';
 } else {
 	$stage_template = 'partials/stage';
 }
