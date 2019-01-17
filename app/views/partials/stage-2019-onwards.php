@@ -31,15 +31,6 @@
 	}
 ?>
 
-
-<?php
-// echo '<p>Processed Cluster</p>';
-// echo '<pre>';
-// var_dump('required', $required_clusters);
-// echo '<hr>';
-// var_dump('optional', $optional_clusters);
-// echo '</pre>';
-?>
 <?php $module_codes = array(); ?>
 
 <p>TODO: Optional free text here for the award here</p>
