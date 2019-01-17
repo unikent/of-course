@@ -325,6 +325,12 @@
 	}
 
 	/**
+	 * Helper functions for 2019 module
+	 * logic
+	 * 
+	 */
+	 
+	/**
 	 * Is a module cluster made up of optional modules or not
 	 *
 	 * a cluster is made from compulsory modules if
@@ -343,6 +349,12 @@
 		return !($cluster['cluster_size'] === $cluster['modules_required']);
 	}
 
+	/**
+	 * Does a given module cluster contain modules
+	 * 
+	 * @param array - a module cluster
+	 * @return bool - true if the cluster contains modules
+	 */
 	function cluster_contains_modules($cluster)
 	{
 		return count($cluster['modules']['module']) != 0;
