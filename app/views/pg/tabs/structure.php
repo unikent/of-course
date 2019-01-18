@@ -1,4 +1,15 @@
-<?php $show_modules = (strtolower($course->module_session) != 'none'); ?>
+<?php 
+/* 
+this deals with the display of the PG Course Structure Section
+
+Note: we are deliberatly using modified logic for the display of courses 2019 and onwards 
+to be more CMA compliant without affecting the display of course information for courses
+which are already in progress or complete
+*/
+
+$show_modules = (strtolower($course->module_session) != 'none'); 
+
+?>
 
 <h2>Course structure</h2>
 
@@ -35,6 +46,9 @@ foreach ($course->modules as $module) {
 			// pre 2019 display the modules in $course->module_list
 			// otherwise construct a list of compulsory and optional modules
 			if ($course->year >= '2019') {
+				if (isset($course->module_description)) {
+					echo $course->module_description;
+				}
 				foreach ($modules as $stage) {
 					foreach ($stage as $clusterName => $cluster) {
 						Flight::render(

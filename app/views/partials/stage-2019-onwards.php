@@ -33,8 +33,6 @@
 
 <?php $module_codes = array(); ?>
 
-<p>TODO: Optional free text here for the award here</p>
-
 	<?php if (!empty($required_clusters)): ?>
 
 		<table class="table">

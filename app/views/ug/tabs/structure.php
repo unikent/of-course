@@ -1,4 +1,11 @@
 <?php
+/*
+this deals with the display of the UG Course Structure Section
+
+Note: we are deliberatly using modified logic for the display of courses 2019 and onwards 
+to be more CMA compliant without affecting the display of course information for courses
+which are already in progress or complete
+*/
 $show_modules = (strtolower($course->module_session) != 'none');
 
 $modules = $course->modules;
@@ -8,10 +15,6 @@ if (!empty($modules)) {
 	$modules = $modules[0];
 }
 
-/*
-for 2019 onwards we use different display logic modules at a given stage to be more
-CMA compliant
-*/
 if ($course->year >= '2019') {
 	$stage_template = 'partials/stage-2019-onwards';
 } else {
@@ -37,12 +40,18 @@ if ($course->year >= '2019') {
 	<?php if (empty($course->foundation_year)): ?>
 	<h3 class="mt-2">Foundation year</h3>
 	<?php endif; ?>
+		<?php if (($course->year >= '2019') && (isset($course->stage_0_module_description))): ?>
+			<?php echo $course->stage_0_module_description ?>
+		<?php endif; ?>
 	<?php Flight::render($stage_template, array('stage' => $modules->stages->{"foundation"}, 'stage_id' => '0')); ?>
 <?php endif; ?>
 
 <?php if (isset($modules->stages->{1})  && $show_modules ): ?>
 <section class="info-section">
 	<h3 class="mt-2">Stage 1</h3>
+		<?php if (($course->year >= '2019') && (isset($course->stage_1_module_description))): ?>
+			<?php echo $course->stage_1_module_description ?>
+		<?php endif; ?>
 	<?php Flight::render($stage_template, array('stage' => $modules->stages->{1}, 'stage_id' => '1')); ?>
 </section>
 <?php endif; ?>
@@ -50,6 +59,9 @@ if ($course->year >= '2019') {
 <?php if (isset($modules->stages->{2})  && $show_modules ): ?>
 <section class="info-section">
 	<h3 class="mt-2">Stage 2</h3>
+	<?php if (($course->year >= '2019') && (isset($course->stage_2_module_description))): ?>
+		<?php echo $course->stage_2_module_description ?>
+	<?php endif; ?>
 	<?php Flight::render($stage_template, array('stage' => $modules->stages->{2}, 'stage_id' => '2')); ?>
 </section>
 <?php endif; ?>
@@ -103,6 +115,9 @@ if ($course->year >= '2019') {
 	<?php if (isset($modules->stages->{3})): ?>
 	<section class="info-section">
 		<h3 class="mt-2">Stage 3</h3>
+		<?php if (($course->year >= '2019') && (isset($course->stage_3_module_description))): ?>
+			<?php echo $course->stage_3_module_description ?>
+		<?php endif; ?>
 		<?php Flight::render($stage_template, array('stage' => $modules->stages->{3}, 'stage_id' => '3')); ?>
 	</section>
 	<?php endif; ?>
@@ -110,6 +125,9 @@ if ($course->year >= '2019') {
 	<?php if (isset($modules->stages->{4})): ?>
 	<section class="info-section">
 		<h3 class="mt-2">Stage 4</h3>
+		<?php if (($course->year >= '2019') && (isset($course->stage_4_module_description))): ?>
+			<?php echo $course->stage_4_module_description ?>
+		<?php endif; ?>
 		<?php Flight::render($stage_template, array('stage' => $modules->stages->{4}, 'stage_id' => '4')); ?>
 	</section>
 	<?php endif; ?>
@@ -117,6 +135,9 @@ if ($course->year >= '2019') {
 	<?php if (isset($modules->stages->{5})): ?>
 	<section class="info-section">
 		<h3 class="mt-2">Stage 5</h3>
+		<?php if (($course->year >= '2019') && (isset($course->stage_5_module_description))): ?>
+			<?php echo $course->stage_5_module_description ?>
+		<?php endif; ?>
 		<?php Flight::render($stage_template, array('stage' => $modules->stages->{5}, 'stage_id' => '5')); ?>
 	</section>
 	<br />
