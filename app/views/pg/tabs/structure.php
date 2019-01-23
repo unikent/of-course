@@ -36,21 +36,71 @@ foreach ($course->modules as $module) {
 
 			<?php
 
-			$modules = $course->modules;
-			if (!empty($modules)) {
-				// a course can have multiple deliveries
-				// so assume that the first delivery is the true course structure
-				$modules = $modules[0];
-			}
 
 			// pre 2019 display the modules in $course->module_list
 			// otherwise construct a list of compulsory and optional modules
 			if ($course->year >= '2019') {
+		
+				$sets_of_modules = $course->modules;
+
+				/*
+					within the module
+						["attendance_pattern"]=>
+						string(9) "full-time"
+						["award_name"]=>
+						string(3) "MSc"
+						["mcr"]=>
+						string(15) "PCSC000101MS-FD"
+						["pos_code"]=>
+						string(13) "COMPSCI:MSC-T"
+
+					within the course
+						"display_course_structure_award": "PhD",
+						"display_course_structure_attendance_pattern": "full-time",
+						"display_course_structure_mcr": "RACC000101PH-FD",
+				*/
+				
+				// default to showing no structure
+				$modules = array();
+
+				// search the sets of modules to find a match
+				foreach ($sets_of_modules as $modules_set) {
+					// mcr override
+					if ($course->display_course_structure_mcr === $modules_set->mcr) {
+						$modules = $modules_set;
+						break;
+					}
+
+					// match attendance_pattern and award_name
+					if (($course->display_course_structure_award === $modules_set->award_name)
+						&& ($course->display_course_structure_attendance_pattern === $modules_set->attendance_pattern)) {
+						$modules = $modules_set;
+						break;
+					}
+					// otherwise we have no modules
+				}
+
 				if (isset($course->module_description)) {
 					echo $course->module_description;
 				}
-				foreach ($modules as $stage) {
+
+				// todo
+				// there's an issue here with the foreach seee
+				// http://kent.test/courses/postgraduate/243/computer-science#structure?iuiuahauhsfaf
+				echo '<pre>';
+				echo 'argggggggghhhhhh';
+				print_r($modules->stages);
+				echo 'argggggggghhhhhh-end';
+				echo '</pre>';
+				foreach ($modules->stages as $stage) {
+
+					echo '<pre>';
+					// var_dump($stage);
+					echo '</pre>';
+
 					foreach ($stage as $clusterName => $cluster) {
+
+
 						Flight::render(
 							'partials/stage-2019-onwards',
 							array('stage' => $cluster, 

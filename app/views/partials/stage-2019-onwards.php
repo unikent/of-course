@@ -31,6 +31,8 @@
 	}
 ?>
 
+<?php //var_dump($stageData) ?>
+
 <?php $module_codes = array(); ?>
 
 	<?php if (!empty($required_clusters)): ?>
