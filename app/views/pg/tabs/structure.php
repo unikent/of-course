@@ -34,115 +34,103 @@ foreach ($course->modules as $module) {
 	<?php echo $course->modules_intro; ?>
 	<?php if ($show_modules): ?>
 
-			<?php
+		<?php
+		// pre 2019 display the modules in $course->module_list
+		// otherwise construct a list of compulsory and optional modules
+		if ($course->year >= '2019') {
 
+			$sets_of_modules = $course->modules;
 
-			// pre 2019 display the modules in $course->module_list
-			// otherwise construct a list of compulsory and optional modules
-			if ($course->year >= '2019') {
-		
-				$sets_of_modules = $course->modules;
+			/*
+				within the module
+					["attendance_pattern"]=>
+					string(9) "full-time"
+					["award_name"]=>
+					string(3) "MSc"
+					["mcr"]=>
+					string(15) "PCSC000101MS-FD"
+					["pos_code"]=>
+					string(13) "COMPSCI:MSC-T"
 
-				/*
-					within the module
-						["attendance_pattern"]=>
-						string(9) "full-time"
-						["award_name"]=>
-						string(3) "MSc"
-						["mcr"]=>
-						string(15) "PCSC000101MS-FD"
-						["pos_code"]=>
-						string(13) "COMPSCI:MSC-T"
+				within the course
+					"display_course_structure_award": "PhD",
+					"display_course_structure_attendance_pattern": "full-time",
+					"display_course_structure_mcr": "RACC000101PH-FD",
+			*/
 
-					within the course
-						"display_course_structure_award": "PhD",
-						"display_course_structure_attendance_pattern": "full-time",
-						"display_course_structure_mcr": "RACC000101PH-FD",
-				*/
-				
-				// default to showing no structure
-				$modules = array();
+			// default to showing no structure
+			$modules = array();
 
-				// search the sets of modules to find a match
-				foreach ($sets_of_modules as $modules_set) {
-					// mcr override
+			// search the sets of modules to find a match
+			foreach ($sets_of_modules as $modules_set) {
+				// mcr override - if value is set then we only want things that match that mcr
+				if($course->display_course_structure_mcr) {
 					if ($course->display_course_structure_mcr === $modules_set->mcr) {
 						$modules = $modules_set;
 						break;
 					}
-
+				}
+				else {
 					// match attendance_pattern and award_name
 					if (($course->display_course_structure_award === $modules_set->award_name)
-						&& ($course->display_course_structure_attendance_pattern === $modules_set->attendance_pattern)) {
+						&& ($course->display_course_structure_attendance_pattern === $modules_set->attendance_pattern)
+					) {
 						$modules = $modules_set;
 						break;
 					}
-					// otherwise we have no modules
 				}
-
-				if (isset($course->module_description)) {
-					echo $course->module_description;
-				}
-
-				// todo
-				// there's an issue here with the foreach seee
-				// http://kent.test/courses/postgraduate/243/computer-science#structure?iuiuahauhsfaf
-				echo '<pre>';
-				echo 'argggggggghhhhhh';
-				print_r($modules->stages);
-				echo 'argggggggghhhhhh-end';
-				echo '</pre>';
-				foreach ($modules->stages as $stage) {
-
-					echo '<pre>';
-					// var_dump($stage);
-					echo '</pre>';
-
-					foreach ($stage as $clusterName => $cluster) {
-
-
-						Flight::render(
-							'partials/stage-2019-onwards',
-							array('stage' => $cluster, 
-								'stage_id' => $clusterName)
-						);
-					}
-				}
-			} else {
-				// pre-2019 display logic
-				// TODO make this mixture of php styles here more consistent
-				?>
-					<table class="table">
-					<thead>
-						<tr>
-							<th width="70%">Modules may include</th>
-							<th class="text-xs-center">Credits</th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php
-						$course->module_list = empty($course->module_list)?array():$course->module_list;
-						foreach ($course->module_list as $module): ?>
-
-							<tr class="module-row">
-								<td class="module-text">
-									<span data-toggle="collapse" data-target="#<?php echo $module->sds_code; ?>-more" id="<?php echo $module->sds_code ?>" class="module-row collapsed module-title"><?php echo $module->sds_code ?> - <?php echo $module->module_title ?></span>
-									<div class="collapse" id="<?php echo $module->sds_code; ?>-more">
-										<div class="more">
-											<p><?php echo preg_replace("/\n/",'</p><p>',preg_replace('/[\r\n]+/', "\n", preg_replace('/<br\s*\/?>/',"\n",$module->synopsis))); ?></p>
-											<a aria-labelledby="#<?php echo $module->sds_code ?>" class="chevron-link" href="/courses/modules/module/<?php echo $module->sds_code ?>">View full module details</a>
-										</div>
-									</div>
-								</td>
-								<td class="text-xs-center"><?php echo $module->credit_amount; ?></td>
-							</tr>
-						<?php endforeach; ?>
-					</tbody>
-				</table>
-
-				<?php
+				// otherwise we have no modules
 			}
-		?>
+
+			if (isset($course->module_description)) {
+				echo $course->module_description;
+			}
+
+			if($modules) {
+				foreach ($modules->stages as $stage_id => $stage) {
+					Flight::render(
+						'partials/stage-2019-onwards',
+						array('stage' => $stage,
+							'stage_id' => $stage_id)
+					);
+				}
+			}
+		}
+		else {
+			// pre-2019 display logic
+			// TODO make this mixture of php styles here more consistent
+			?>
+				<table class="table">
+				<thead>
+					<tr>
+						<th width="70%">Modules may include</th>
+						<th class="text-xs-center">Credits</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+					$course->module_list = empty($course->module_list)?array():$course->module_list;
+					foreach ($course->module_list as $module): ?>
+
+						<tr class="module-row">
+							<td class="module-text">
+								<span data-toggle="collapse" data-target="#<?php echo $module->sds_code; ?>-more" id="<?php echo $module->sds_code ?>" class="module-row collapsed module-title"><?php echo $module->sds_code ?> - <?php echo $module->module_title ?></span>
+								<div class="collapse" id="<?php echo $module->sds_code; ?>-more">
+									<div class="more">
+										<p><?php echo preg_replace("/\n/",'</p><p>',preg_replace('/[\r\n]+/', "\n", preg_replace('/<br\s*\/?>/',"\n",$module->synopsis))); ?></p>
+										<a aria-labelledby="#<?php echo $module->sds_code ?>" class="chevron-link" href="/courses/modules/module/<?php echo $module->sds_code ?>">View full module details</a>
+									</div>
+								</div>
+							</td>
+							<td class="text-xs-center"><?php echo $module->credit_amount; ?></td>
+						</tr>
+					<?php endforeach; ?>
+				</tbody>
+			</table>
+
+			<?php
+		}
+	?>
 
 
 	<?php endif; // show modules ?>
