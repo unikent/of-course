@@ -30,41 +30,45 @@
 		<h1><?php echo $module->title; ?>&nbsp;-&nbsp;<?php echo $module->sds_code; ?></h1>
 	</header>
 	<div class="content-body ">
-		<?php if(!empty($module->deliveries)){ ?>
 
 			<div class="content-container">
 				<div class="content-full">
 					<div class="panel panel-primary-tint mb-2 table-responsive">
-					<table class="table">
-						<thead>
-							<tr>
-								<th>Location</th>
-								<th>Term</th>
-								<th>Level</th>
-								<th>Credits <a class="credits-help" href="#" data-toggle="popover" data-trigger="focus" tabindex="0" role="button" data-content="ECTS credits are recognised throughout the EU and allow you to transfer credit easily from one university to another">(ECTS)</a></th>
-								<th><a class="convenor-help" href="#" data-toggle="popover" data-trigger="focus" tabindex="0" role="button" data-content="This is the convenor for the current academic session">Current Convenor</a></th>
-								<th><?php echo $module->year-1 . '-' . substr($module->year, 2);  ?></th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php
-							foreach ($module->deliveries as $delivery){
-								if (!empty($delivery->delivery_sessions) && in_array($module->year,$delivery->delivery_sessions)){
-									?>
-									<tr>
-										<td><span><?php echo $delivery->campus; ?><?php if ($delivery->module_version > 1 ){ ?><br>(version <?php echo $delivery->module_version; ?>)<?php } ?></span></td>
-										<td><?php echo $delivery->term; ?><br><a href="<?php echo $delivery->delivery_url; ?>" title="View Timetable"><small>View Timetable</small></a></td>
-										<td><a href="#" data-toggle="popover" data-trigger="focus" tabindex="0" role="button" data-content="<?php echo $delivery->credit_level_desc; ?>" id="level-info"><?php echo $delivery->credit_level; ?></a></td>
-										<td><?php echo $delivery->credit_amount; ?></td>
-										<td><?php echo $delivery->convenor; ?></td>
-										<td class="text-center"><i class="kf-<?php echo in_array($module->year,$delivery->delivery_sessions)?'check':'close';?>"></i></td>
-									</tr>
-									<?php
+						<?php if(empty($module->deliveries)){ ?>
+									<p>Sorry, this module is not currently running in <?php echo $module->year-1 . '-' . substr($module->year, 2);  ?>.</p>
+						<?php }else{?>
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Location</th>
+									<th>Term</th>
+									<th>Level</th>
+									<th>Credits <a class="credits-help" href="#" data-toggle="popover" data-trigger="focus" tabindex="0" role="button" data-content="ECTS credits are recognised throughout the EU and allow you to transfer credit easily from one university to another">(ECTS)</a></th>
+									<th><a class="convenor-help" href="#" data-toggle="popover" data-trigger="focus" tabindex="0" role="button" data-content="This is the convenor for the current academic session">Current Convenor</a></th>
+									<th><?php echo $module->year-1 . '-' . substr($module->year, 2);  ?></th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<?php
+								foreach ($module->deliveries as $delivery){
+									if (!empty($delivery->delivery_sessions) && in_array($module->year,$delivery->delivery_sessions)){
+										?>
+										<tr>
+											<td><span><?php echo $delivery->campus; ?><?php if ($delivery->module_version > 1 ){ ?><br>(version <?php echo $delivery->module_version; ?>)<?php } ?></span></td>
+											<td><?php echo $delivery->term; ?><br><a href="<?php echo $delivery->delivery_url; ?>" title="View Timetable"><small>View Timetable</small></a></td>
+											<td><a href="#" data-toggle="popover" data-trigger="focus" tabindex="0" role="button" data-content="<?php echo $delivery->credit_level_desc; ?>" id="level-info"><?php echo $delivery->credit_level; ?></a></td>
+											<td><?php echo $delivery->credit_amount; ?></td>
+											<td><?php echo $delivery->convenor; ?></td>
+											<td class="text-center"><i class="kf-<?php echo in_array($module->year,$delivery->delivery_sessions)?'check':'close';?>"></i></td>
+										</tr>
+										<?php
+									}
 								}
-							}
-							?>
-						</tbody>
-					</table>
+								?>
+							</tbody>
+						</table>
+						<?php } ?>
 					</div>
 				</div>
 
@@ -174,11 +178,3 @@
 
 		</div>
 </div>
-
-	<?php } else { ?>
-		<div class="content-container pt-1">
-			<div class="content-full">
-				<p>Sorry, this module is not currently running.</p>
-			</div>
-		</div>
-	<?php } ?>
