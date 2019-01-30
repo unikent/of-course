@@ -70,7 +70,8 @@ foreach ($course->modules as $module) {
 			}
 			
 			// is it possible that the chosen delivery does not actually have any modules
-			if ($modules && is_object($modules) && isset($modules->stages)) {
+			// so check that $modules is what we expect
+			if ($modules && is_object($modules) && isset($modules->stages) && is_object($modules->stages)) {
 				foreach ($modules->stages as $stage_id => $stage) {
 					Flight::render(
 						'partials/stage-2019-onwards',
