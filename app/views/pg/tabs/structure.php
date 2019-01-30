@@ -41,30 +41,13 @@ foreach ($course->modules as $module) {
 
 			$sets_of_modules = $course->modules;
 
-			/*
-				within the module
-					["attendance_pattern"]=>
-					string(9) "full-time"
-					["award_name"]=>
-					string(3) "MSc"
-					["mcr"]=>
-					string(15) "PCSC000101MS-FD"
-					["pos_code"]=>
-					string(13) "COMPSCI:MSC-T"
-
-				within the course
-					"display_course_structure_award": "PhD",
-					"display_course_structure_attendance_pattern": "full-time",
-					"display_course_structure_mcr": "RACC000101PH-FD",
-			*/
-
 			// default to showing no structure
-			$modules = array();
+			$modules = false;
 
 			// search the sets of modules to find a match
 			foreach ($sets_of_modules as $modules_set) {
 				// mcr override - if value is set then we only want things that match that mcr
-				if($course->display_course_structure_mcr) {
+				if ($course->display_course_structure_mcr) {
 					if ($course->display_course_structure_mcr === $modules_set->mcr) {
 						$modules = $modules_set;
 						break;
@@ -79,14 +62,16 @@ foreach ($course->modules as $module) {
 						break;
 					}
 				}
-				// otherwise we have no modules
+				// otherwise we have no modules selected
 			}
 
 			if (isset($course->module_description)) {
 				echo $course->module_description;
 			}
-
-			if($modules) {
+			
+			// is it possible that the chosen delivery does not actually have any modules
+			// so check that $modules is what we expect
+			if ($modules && is_object($modules) && isset($modules->stages) && is_object($modules->stages)) {
 				foreach ($modules->stages as $stage_id => $stage) {
 					Flight::render(
 						'partials/stage-2019-onwards',
@@ -94,9 +79,12 @@ foreach ($course->modules as $module) {
 							'stage_id' => $stage_id)
 					);
 				}
+			} else {
+				?>
+				<p>No modules information available for this delivery.</p>
+				<?php
 			}
-		}
-		else {
+		} else {
 			// pre-2019 display logic
 			// TODO make this mixture of php styles here more consistent
 			?>
