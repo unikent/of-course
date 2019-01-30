@@ -42,7 +42,7 @@ foreach ($course->modules as $module) {
 			$sets_of_modules = $course->modules;
 
 			// default to showing no structure
-			$modules = array();
+			$modules = false;
 
 			// search the sets of modules to find a match
 			foreach ($sets_of_modules as $modules_set) {
@@ -68,9 +68,9 @@ foreach ($course->modules as $module) {
 			if (isset($course->module_description)) {
 				echo $course->module_description;
 			}
-
+			
 			// is it possible that the chosen delivery does not actually have any modules
-			if ($modules && isset($modules->stages)) {
+			if ($modules && is_object($modules) && isset($modules->stages)) {
 				foreach ($modules->stages as $stage_id => $stage) {
 					Flight::render(
 						'partials/stage-2019-onwards',
