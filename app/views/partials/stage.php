@@ -19,7 +19,7 @@
 							<div class="collapse" id="<?php echo $stage_id . '-' . $module->sds_code; ?>-more">
 								<div class="more">
 									<p><?php echo preg_replace("/\n/",'</p><p>',preg_replace('/[\r\n]+/', "\n", preg_replace('/<br\s*\/?>/',"\n",$module->synopsis))); ?></p>
-									<a aria-labelledby="#<?php echo $module->sds_code ?>" class="chevron-link" href="/courses/modules/module/<?php echo $module->sds_code ?>">Read more</a>
+									<a aria-labelledby="#<?php echo $module->sds_code ?>" class="chevron-link" href="/courses/modules/module/<?php echo $module->sds_code ?>">View full module details</a>
 								</div>
 							</div>
 						</td>
@@ -40,7 +40,7 @@
 							<div id="<?php echo $stage_id . '-' . $module->sds_code; ?>-more" class="collapse">
 								<div class="more">
 									<p><?php echo preg_replace("/\n/",'</p><p>',preg_replace('/[\r\n]+/', "\n", preg_replace('/<br\s*\/?>/',"\n",$module->synopsis))); ?></p>
-									<a aria-labelledby="#<?php echo $module->sds_code ?>" class="chevron-link" href="/courses/modules/module/<?php echo $module->sds_code ?>">Read more</a>
+									<a aria-labelledby="#<?php echo $module->sds_code ?>" class="chevron-link" href="/courses/modules/module/<?php echo $module->sds_code ?>">View full module details</a>
 								</div>
 							</div>
 						</td>

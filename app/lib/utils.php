@@ -323,3 +323,39 @@
 
 		return "$year-$nextYear";
 	}
+
+	/**
+	 * Helper functions for 2019 module
+	 * logic
+	 * 
+	 */
+	 
+	/**
+	 * Is a module cluster made up of optional modules or not
+	 *
+	 * a cluster is made from compulsory modules if
+	 * - Cluster size = modules required
+	 * - and compulsory flag is Y
+	 * If any other circumstance than have them appear under the optional list
+	 *
+	 * @param array - a module cluster
+	 * @return bool - true if the cluster is made from optional modules
+	 */
+	function cluster_modules_are_optional($cluster)
+	{
+		if ("Y" !== $cluster['compulsory']) {
+			return true;
+		}
+		return !($cluster['cluster_size'] === $cluster['modules_required']);
+	}
+
+	/**
+	 * Does a given module cluster contain modules
+	 * 
+	 * @param array - a module cluster
+	 * @return bool - true if the cluster contains modules
+	 */
+	function cluster_contains_modules($cluster)
+	{
+		return count($cluster['modules']['module']) != 0;
+	}

@@ -1,6 +1,13 @@
 <h2>Teaching and assessment</h2>
 <?php echo $course->teaching_and_assessment; ?>
 
+<?php if(!empty($course->contact_hours)): ?>
+    <section class="info-section">
+        <h3>Contact Hours</h3>
+		<?php echo $course->contact_hours; ?>
+    </section>
+<?php endif; ?>
+
 <?php if(!empty($course->programme_aims)): ?>
 <section class="info-section">
 	<h3>Programme aims</h3>
