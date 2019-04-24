@@ -209,7 +209,7 @@ class CoursesController {
 			$course->award_list	= $this->getCourseAwardList($course);
 			$course->award_list_linked = $this->getCourseAwardListLinked($course);
 			$course->years = $years->years;
-			$course->current_year = static::$current_year;
+			$course->current_year = $years->current;
 			$course->programmme_status_text = '';
 
 			// Additional data
