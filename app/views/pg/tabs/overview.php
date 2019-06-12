@@ -21,3 +21,13 @@ if(empty($syn)){
 		<?php echo $course->did_you_know_fact_box ?>
 	</div>
 <?php endif; ?>
+
+<?php if( $level == 'postgraduate' && !empty($course->globals->researchintensity_title) && !empty($course->globals->researchintensity_text)): ?>
+<div class="tef py-2 my-2">
+	<div class="tef__text">
+		<h2><?php echo $course->globals->researchintensity_title ?></h2>
+		<p><?php echo $course->globals->researchintensity_text ?></p>
+	</div>
+	<img class="tef__image" src="https://kent.ac.uk/courses/images/research-intensity-logo.jpg" alt="Complete University Guide Research Intensity">
+</div>
+<?php endif; ?>
