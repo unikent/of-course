@@ -14,7 +14,7 @@
 			<div class="clearing-banner-container card-block">
 				<h2 class="col-lg-3 clearing-banner-title">CLEARING <?php echo $course->year;?></h2>
 				<?php if (defined('CLEARING_EMBARGO') && CLEARING_EMBARGO):?>
-					<div class="col-lg-8 clearing-banner-text">The Clearing vacancies list will be available from 06.00 on Thursday 16 August.</div>
+					<div class="col-lg-8 clearing-banner-text">Planning to start this September? Our updated clearing vacancy list will be available from 06.00 on Thursday 15 August, A-Level results publication day, following the end of the exam board embargo period.</div>
 				<?php else:?>
 					<div class="col-lg-5 clearing-banner-text">We may still have full-time vacancies available for this course.</div>
 					<a class="col-lg-3" href="https://evision.kent.ac.uk/ipp/ClearingVacancyList.htm"><button type="button" class="btn btn-primary clearing-banner-search-button">Search Vacancies</button></a>
@@ -29,9 +29,9 @@
 			<div class="clearing-banner-container card-block">
 				<h2 class="col-lg-3 clearing-banner-title">CLEARING <?php echo $previous_year;?></h2>
 				<?php if (defined('CLEARING_EMBARGO') && CLEARING_EMBARGO):?>
-					<div class="col-lg-8 clearing-banner-text">Planning to start this September? The Clearing vacancies list will be available from 06.00 on Thursday 16 August.</div>
+					<div class="col-lg-8 clearing-banner-text">Planning to start this September? Our updated clearing vacancy list will be available from 06.00 on Thursday 15 August, A-Level results publication day, following the end of the exam board embargo period.</div>
 				<?php else:?>
-					<div class="col-lg-8 clearing-banner-text">Planning to start this September? We may still have full-time vacancies available for this course. <a href="<?php echo "/courses/$level/$previous_year/$course->instance_id"; ?>">View 2018 course details.</a></div>
+					<div class="col-lg-8 clearing-banner-text">Planning to start this September? We may still have full-time vacancies available for this course. <a href="<?php echo "/courses/$level/$previous_year/$course->instance_id"; ?>">View 2019 course details.</a></div>
 				<?php endif; ?>
 			</div>
 		</div>
