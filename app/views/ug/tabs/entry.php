@@ -8,12 +8,9 @@
 <section class="info-section">
 	<?php if(defined('CLEARING') && CLEARING && $course->current_year-1 == $course->year): ?>
 		<h3>Clearing entry</h3>
-		<p>
-			Typical entry requirements for 2018 entry courses remain published on the UCAS course search website and apply to applications received during the main UCAS application cycle. These provide a rough guide to our likely entry requirements for Clearing and Adjustment applicants.
-		</p>
-		<p>
-			However during Clearing (after 4 July), our entry requirements change in real time to reflect the supply and demand of remaining course vacancies and so may be higher or lower than those published on UCAS as typical entry grades.
-		</p>
+		<p>Typical entry requirements for 2019 entry courses remain published on the UCAS course search website and apply to applications received during the main UCAS application cycle. These provide a rough guide to our likely entry requirements for Clearing and Adjustment applicants.</p>
+		
+		<p>However during Clearing (after 5 July), our entry requirements change in real time to reflect the supply and demand of remaining course vacancies and so may be higher or lower than those published on UCAS as typical entry grades.</p>
 		
 		<p>
 		<?php if(!(defined('CLEARING_EMBARGO') && CLEARING_EMBARGO)):?>
