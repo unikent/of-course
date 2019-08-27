@@ -33,7 +33,7 @@
         <?php endif; ?>
         </tbody>
     </table>
-	<p>For details on when and how to pay fees and charges, please see our <a href="/finance-student/student-finance-guide/">Student Finance Guide</a>.</p>
+	<p>For details of when and how to pay fees and charges, please see our <a href="/finance-student/student-finance-guide/">Student Finance Guide</a>.</p>
     <div class="mb-2">
             <?php
             if (isset($course->globals->fees_exception_text_ug)) echo $course->globals->fees_exception_text_ug;

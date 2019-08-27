@@ -45,7 +45,7 @@
 				</table>
 				<?php $pos_codes[] = $delivery->pos_code; endif; ?>
 		<?php endforeach; ?>
-		<p>For details on when and how to pay fees and charges, please see our <a href="/finance-student/student-finance-guide/">Student Finance Guide</a>.</p>
+		<p>For details of when and how to pay fees and charges, please see our <a href="/finance-student/student-finance-guide/">Student Finance Guide</a>.</p>
 		<?php
 		if (
 			isset($course->globals->fees_year_in_industryabroad_text_pg) && // If YII/YA text is set AND
