@@ -3,6 +3,7 @@
 <?php else: ?>
 	<h2>Fees</h2>
     <?php if (isset($course->globals->fees_caveat_text_ug) && !empty($course->globals->fees_caveat_text_ug)) echo ' <h3 class="card-title">'.$course->globals->fees_caveat_text_ug.'</h3>' ?>
+	
     <table class="table">
         <thead>
         <tr>
@@ -32,6 +33,7 @@
         <?php endif; ?>
         </tbody>
     </table>
+	<p>For details of when and how to pay fees and charges, please see our <a href="/finance-student/student-finance-guide/">Student Finance Guide</a>.</p>
     <div class="mb-2">
             <?php
             if (isset($course->globals->fees_exception_text_ug)) echo $course->globals->fees_exception_text_ug;

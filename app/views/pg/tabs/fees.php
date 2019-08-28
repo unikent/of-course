@@ -9,6 +9,7 @@
 		?>
 
 		<?php if (isset($course->globals->fees_caveat_text_pg) && !empty($course->globals->fees_caveat_text_pg)) echo ' <h3>'.$course->globals->fees_caveat_text_pg.'</h3>' ?>
+		
 
 		<?php $pos_codes = array(); foreach ($course->deliveries as $delivery): ?>
 			<?php if (!in_array($delivery->pos_code, $pos_codes)): ?>
@@ -44,6 +45,7 @@
 				</table>
 				<?php $pos_codes[] = $delivery->pos_code; endif; ?>
 		<?php endforeach; ?>
+		<p>For details of when and how to pay fees and charges, please see our <a href="/finance-student/student-finance-guide/">Student Finance Guide</a>.</p>
 		<?php
 		if (
 			isset($course->globals->fees_year_in_industryabroad_text_pg) && // If YII/YA text is set AND
