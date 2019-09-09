@@ -164,7 +164,7 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 <?php Flight::render("partials/profile-feature"); ?>
 	<div class="content-container">
 		<div class="content-full">
-			<?php if ($course->kiscourseid != '' && $course->programme_suspended != 'true'): ?>
+			<?php if ($course->kiscourseid != '' && $course->programme_suspended != 'true' && (SHOW_UNISTATS_WIDGET == true)): ?>
 				<section class="panel tertiary-tier highlighted no-border kiss-widget-section">
 					<div class="row">
 					<?php if ($has_fulltime){ ?>
