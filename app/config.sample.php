@@ -15,4 +15,7 @@ const CLEARING_EMBARGO = false;
 const CACHE_DIRECTORY = '/tmp';
 const API_URL = 'https://api.kent.ac.uk/api';
 const DISABLE_CURL_PROXY = true;
-const SHOW_UG_PREVIOUS_YEAR_BANNER true;
+const SHOW_UG_PREVIOUS_YEAR_BANNER = true;
+
+// show KIS / Discover UNI widget
+const SHOW_UNISTATS_WIDGET = true;
