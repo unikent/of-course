@@ -105,6 +105,33 @@
 	flex-wrap: wrap;
 }
 
+
+.open-days-banner-title {
+	margin-top: 0;
+}
+
+.open-days-banner-text {
+	width: 67%;
+	float: left;
+	margin: 0 2rem 0 0;
+}
+
+.open-days-banner-button {
+	width: calc(33% - 2rem);
+}
+
+@media (max-width: 992px) {
+	.open-days-banner-text {
+		width: 100%;
+		float: none;
+		margin: 0 0 1rem 0;
+	}
+
+	.open-days-banner-button {
+		width: auto;
+	}
+}
+
 .tef {
 	display: flex;
 	align-items: center;
