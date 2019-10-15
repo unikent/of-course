@@ -105,6 +105,9 @@
 	flex-wrap: wrap;
 }
 
+.open-days-banner-container {
+	padding: 2rem;
+}
 
 .open-days-banner-title {
 	margin-top: 0;
