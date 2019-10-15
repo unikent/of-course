@@ -81,13 +81,13 @@
 
 <?php if (isset($course) && ("true" == $course->globals->open_day_banner_display_banner)) : ?>
 	<div class="card card-backed-tertiary">
-		<div class="card-block">
-			<h2><?php echo $course->globals->open_day_banner_heading?></h2>
+		<div class="card-block open-days-banner-container">
+			<h2 class="open-days-banner-title"><?php echo $course->globals->open_day_banner_heading?></h2>
 			
-			<div><?php echo $course->globals->open_day_banner_text ?></div>
+			<div class="open-days-banner-text"><?php echo $course->globals->open_day_banner_text ?></div>
 			
 			<a href="<?php echo $course->globals->open_day_banner_target_url?>">
-				<button type="button" class="btn btn-primary">
+				<button type="button" class="btn btn-primary open-days-banner-button">
 					<?php echo $course->globals->open_day_banner_call_to_action_button_text?>
 				</button>
 			</a>
