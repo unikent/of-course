@@ -126,6 +126,9 @@
 }
 
 @media (max-width: 992px) {
+	.open-days-banner-container {
+		padding: 1rem;
+	}
 	.open-days-banner-text {
 		width: 100%;
 	}
