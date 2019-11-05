@@ -78,3 +78,19 @@
 		This is a <?php echo $course->year;?> entry programme. Would you like to <a href='<?php echo $previousYear; ?>'> view <?php echo $course->programme_title;?> for <?php echo $course->current_year-1;?> entry?</a>
 	</div>
 <?php endif;?>
+
+<?php if (isset($course) && ("true" == $course->globals->open_day_banner_display_banner)) : ?>
+	<div class="card card-backed-tertiary">
+		<div class="card-block open-days-banner-container">
+			<h2 class="open-days-banner-title"><?php echo $course->globals->open_day_banner_heading?></h2>
+			
+			<div class="open-days-banner-text"><?php echo $course->globals->open_day_banner_text ?></div>
+			
+			<a href="<?php echo $course->globals->open_day_banner_target_url?>">
+				<button type="button" class="btn btn-primary open-days-banner-button">
+					<?php echo $course->globals->open_day_banner_call_to_action_button_text?>
+				</button>
+			</a>
+		</div>
+	</div>
+<?php endif; ?>
