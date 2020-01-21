@@ -170,21 +170,24 @@ $course->pos_code = isset($course->deliveries[0]) ? $course->deliveries[0]->pos_
 					<?php if ($has_fulltime){ ?>
 
 
-						<div class="col-xs-12 col-sm-6 col-lg-12">
+						<div class="col-xs-12 col-sm-12 col-lg-12">
 							<?php if ($has_parttime){ ?>
 								<h4>Full-time</h4>
 							<?php } ?>
 							<?php $ukprn = (isset($course->kis_institution_id) && $course->kis_institution_id != '') ? $course->kis_institution_id : $course->globals->ukprn; ?>
-							<iframe id="unistats-widget-frame-ft" title="Unistats KIS Widget" src="//widget.unistats.ac.uk/Widget/<?php echo $ukprn ?>/<?php echo str_replace(array('/', '|', ':', '&', '.', '>', '+', '#', ';', '?', '@', '='), '_', $course->kiscourseid); ?>/horizontal/small/en-GB/Full%20Time" scrolling="no" style="overflow: hidden; border: 0px none transparent; width: 615px; height: 150px;"> </iframe>
+							
+							<iframe id="unistats-widget-frame" title="Unistats KIS Widget" src="https://discoveruni.gov.uk/widget/<?php echo $ukprn ?>/<?php echo str_replace(array('/', '|', ':', '&', '.', '>', '+', '#', ';', '?', '@', '='), '_', $course->kiscourseid); ?>/responsive/small/en-GB/FullTime" scrolling="no" style="overflow: hidden; border: 0px none transparent; width: 100%;"></iframe>
+								
 						</div>
 					<?php } ?>
 					<?php if ($has_parttime){ ?>
-						<div class="col-xs-12 col-sm-6 col-lg-12">
+						<div class="col-xs-12 col-sm-12 col-lg-12">
 							<?php if ($has_fulltime){ ?>
 								<h4>Part-time</h4>
 							<?php } ?>
 							<?php $ukprn = (isset($course->kis_institution_id) && $course->kis_institution_id != '') ? $course->kis_institution_id : $course->globals->ukprn; ?>
-							<iframe id="unistats-widget-frame-pt" title="Unistats KIS Widget" src="//widget.unistats.ac.uk/Widget/<?php echo $ukprn ?>/<?php echo str_replace(array('/', '|', ':', '&', '.', '>', '+', '#', ';', '?', '@', '='), '_', $course->kiscourseid); ?>/horizontal/small/en-GB/Part%20Time" scrolling="no" style="overflow: hidden; border: 0px none transparent; width: 615px; height: 150px;"> </iframe>
+							
+							<iframe id="unistats-widget-frame" title="Unistats KIS Widget" src="https://discoveruni.gov.uk/widget/<?php echo $ukprn ?>/<?php echo str_replace(array('/', '|', ':', '&', '.', '>', '+', '#', ';', '?', '@', '='), '_', $course->kiscourseid); ?>/responsive/small/en-GB/PartTime" scrolling="no" style="overflow: hidden; border: 0px none transparent; width: 100%;"></iframe>
 						</div>
 
 					<?php } ?>
