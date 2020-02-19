@@ -17,7 +17,7 @@
 
 				</div>
 				<div class="spaced-links-inner-container buttons">
-					<a href="<?php echo $course->globals->open_days_button_link; ?>" class="btn btn-tertiary spaced-links-item-btn"><?php echo $course->globals->open_days_button_text; ?></a>
+					<a href="<?php echo $course->globals->open_days_button_link_pg; ?>" class="btn btn-tertiary spaced-links-item-btn"><?php echo $course->globals->open_days_button_text_pg; ?></a>
 					<?php if (isset($course->globals->disable_apply) && $course->globals->disable_apply=='true'): ?>
 						<?php if($course->year < $years->current && in_array($years->current, $course->years)) :?>
 						<a href="<?php echo Flight::request()->base; ?>/<?php echo $level; ?>/<?php echo $course->instance_id ?>/"
